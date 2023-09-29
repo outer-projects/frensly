@@ -29,14 +29,14 @@ export default NextAuth({
                     authSecret: account.oauth_token_secret,
                 }
             }
-            return token
+            return {token, user, account, profile}
         },
         async session({session, token, user}) {
             // Send properties to the client, like an access_token from a provider.
             console.log(user, token);
             let userData = JSON.parse(JSON.stringify(token.userProfile))
             //@ts-ignore
-            session.twitter = {user, token, session};
+            session.twitter = {user: user, token: token, session: session};
             return session;
         }
     },
