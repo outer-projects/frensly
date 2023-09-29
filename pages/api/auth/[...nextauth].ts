@@ -36,7 +36,7 @@ export default NextAuth({
             console.log(user, token);
             let userData = JSON.parse(JSON.stringify(token.userProfile))
             //@ts-ignore
-            session.twitter = userData;
+            session.twitter = {user, token, session};
             return session;
         }
     },
