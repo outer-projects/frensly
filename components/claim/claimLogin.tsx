@@ -2,29 +2,53 @@ import style from "./claim.module.scss";
 import header from "../layout/header.module.scss";
 import faq from "../faq/faq.module.scss";
 import { innerBackend, token } from "../hooks/useTwitterOauth";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { signIn, signOut, useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 const ClaimLogin = () => {
   const [id, setId] = useState<any>(undefined);
+  const [twitterData, setTwitterData] = useState<any>(undefined);
   const router = useRouter();
   const { data, status } = useSession();
-  
+
   const connect = async () => {
     await signIn("twitter");
   };
-  console.log(id);
+  useEffect(() => {
+    if (data) {
+      setTwitterData(data);
+    }
+  }, [data]);
   return (
-    <div className={style.claim__login}>
-      <div className={faq.title}>Claim/Stake FREN tokens</div>
-      <img src="../claim.svg" onClick={()=>console.log(data, status, router.pathname)}/>
-      <div className={style.claim__text}>
-        Sign in to capitalise your FT points
-      </div>
-      <button className={header.connect__button} onClick={connect}>
-        Twitter (X)
-      </button>
-    </div>
+    <>
+      {!twitterData ? (
+        <div className={style.claim__login}>
+          <div className={faq.title}>Claim/Stake FREN tokens</div>
+          <img
+            src="../claim.svg"
+            onClick={() => console.log(data, status, router.pathname)}
+          />
+          <div className={style.claim__text}>
+            Sign in to capitalise your FT points
+          </div>
+          <button className={header.connect__button} onClick={connect}>
+            Twitter (X)
+          </button>
+        </div>
+      ) : (
+        <div className={style.claim__account}>
+          <div className={faq.title}>Available tokens</div>
+          <div className={style.claim__tokens}>
+            0 <span>$FRENS</span>
+          </div>
+          <div className={style.claim__row}>
+            <button className={header.connect__button}>Claim</button>
+            <img src={twitterData?.user?.name || "../../empty_avatar.svg"} />
+            <div>{twitterData?.user?.name || "username123"}</div>
+          </div>
+        </div>
+      )}
+    </>
   );
 };
 export default ClaimLogin;
