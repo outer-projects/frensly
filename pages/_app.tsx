@@ -24,7 +24,6 @@ import { bscTestnet, goerli } from "wagmi/chains";
 import { publicProvider } from "wagmi/providers/public";
 import { ToastContainer } from "react-toastify";
 import Wrapper from "../components/layout/wrapper";
-import Rotate from "../components/layout/rotate";
 import "../components/polyfills";
 import { SessionProvider } from "next-auth/react";
 const { chains, publicClient, webSocketPublicClient } = configureChains(
