@@ -33,8 +33,8 @@ export default NextAuth({
         },
         async session({session, token, user}) {
             // Send properties to the client, like an access_token from a provider.
+            console.log(user, token);
             let userData = JSON.parse(JSON.stringify(token.userProfile))
-            delete userData.userID;
             //@ts-ignore
             session.twitter = userData;
             return session;
