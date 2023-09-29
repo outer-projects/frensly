@@ -7,7 +7,6 @@ import { observer } from "mobx-react";
 import { useRouter } from "next/router";
 import style from "./wrapper.module.scss";
 const Wrapper = observer(({ children }: any) => {
-  const { opacity } = useInjection(UserStore);
 
   return (
     <div className={style.page__container}>
