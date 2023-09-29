@@ -1,6 +1,4 @@
 import {
-  ReactChild,
-  ReactFragment,
   ReactPortal,
   useEffect,
   useState,
@@ -13,8 +11,6 @@ import { UserStore } from "../../stores/UserStore";
 interface PaginationProps {
   children:
     | boolean
-    | ReactChild
-    | ReactFragment
     | ReactPortal
     | null
     | undefined;
