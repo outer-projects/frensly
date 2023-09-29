@@ -1,0 +1,36 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  width: 95vw;
+  margin-top: 24px;
+  align-items: center;
+  max-width: 1160px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+.header__container {
+    display: flex;
+    justify-content: center;
+}
+.header__row {
+    display: flex;
+    justify-content: space-between;
+    div {
+        color: #777E90;
+        margin-left: 10px;
+        margin-right: 10px;
+        cursor: pointer;
+        &:hover {
+            color: #638a4e;
+        }
+    }
+}
+.connect__button {
+  background-color: #638a4e;
+  width: 170px;
+  height: 40px;
+  outline: none;
+  border: none;
+  border-radius: 12px;
+  color: white;
+}

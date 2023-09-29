@@ -6,17 +6,12 @@ import Web3Store from "../../stores/Web3Store";
 import { SeparatedConnect } from "./separatedConnect";
 import { useDisconnect, usePublicClient } from "wagmi";
 import { useWalletClient } from "wagmi";
-
+import style from "./header.module.scss";
 const ConnectButtonCustom = observer(() => {
   const { disconnect } = useDisconnect();
   const [_balance, setBalance] = useState(0);
-  const {
-    setConnected,
-    setUser,
-    setSigner,
-    disconnected,
-    balance,
-  } = useInjection(Web3Store);
+  const { setConnected, setUser, setSigner, disconnected, balance } =
+    useInjection(Web3Store);
 
   useEffect(() => {
     if (balance) {
@@ -25,7 +20,7 @@ const ConnectButtonCustom = observer(() => {
   }, [balance]);
   const publicClient = usePublicClient({
     chainId: 97,
-  })
+  });
   return (
     <ConnectButton.Custom>
       {({
@@ -35,7 +30,6 @@ const ConnectButtonCustom = observer(() => {
         openChainModal,
         authenticationStatus,
         mounted,
-        
       }) => {
         const { data: walletClient } = useWalletClient({
           onSuccess(data) {
@@ -86,7 +80,7 @@ const ConnectButtonCustom = observer(() => {
                   <button
                     onClick={openChainModal}
                     type="button"
-                    className="connect__button"
+                    className={style.connect__button}
                   >
                     Wrong network
                   </button>
@@ -94,18 +88,24 @@ const ConnectButtonCustom = observer(() => {
               }
 
               return (
-                
-                  <div className="header--wrapper__block">
-                    <div className="header--wrapper__balance"onClick={openAccountModal}>
-                      <img src="img/header-icons/balance-ico.png" alt="#" />
-                      <span>{_balance}</span>
-                    </div>
-                    <div className="header--wrapper__sound">
-                      <img src="img/header-icons/icons-sound.png" alt="" />
-                    </div>
-                    <div className="header--wrapper__log" onClick={()=>disconnect()}>Logout</div>
+                <div className="header--wrapper__block">
+                  <div
+                    className="header--wrapper__balance"
+                    onClick={openAccountModal}
+                  >
+                    <img src="img/header-icons/balance-ico.png" alt="#" />
+                    <span>{_balance}</span>
                   </div>
-               
+                  <div className="header--wrapper__sound">
+                    <img src="img/header-icons/icons-sound.png" alt="" />
+                  </div>
+                  <div
+                    className="header--wrapper__log"
+                    onClick={() => disconnect()}
+                  >
+                    Logout
+                  </div>
+                </div>
               );
             })()}
           </div>

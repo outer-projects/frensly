@@ -1,5 +1,5 @@
 import { useConnectModal } from "@rainbow-me/rainbowkit";
-
+import style from "./header.module.scss";
 export const SeparatedConnect = () => {
   const { openConnectModal } = useConnectModal();
 
@@ -7,8 +7,7 @@ export const SeparatedConnect = () => {
     <button
       onClick={openConnectModal}
       type="button"
-      className="connect__button"
-      style={{ padding: "14px" }}
+      className={style.connect__button}
     >
       Connect
     </button>

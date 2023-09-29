@@ -1,31 +1,27 @@
-import { useEffect } from "react";
+
 import ConnectButtonCustom from "./connectButtonCustom";
 import { observer } from "mobx-react";
-import { useInjection } from "inversify-react";
-import Web3Store from "../../stores/Web3Store";
-import { NFTStore } from "../../stores/NFTStore";
-import { network } from "../../utils/config";
+import style from "./header.module.scss";
+
+const headerText = ["Airdrop", "Staking", "Docs"];
 
 const Header = observer(() => {
-  const { getCharacters, getPlanets, setInit, init } = useInjection(NFTStore);
-  const { address } = useInjection(Web3Store);
-  useEffect(() => {
-    if (address && !init) {
-      setInit(true);
-      getCharacters(address as string, network);
-      getPlanets(address as string, network);
-    }
-  }, [address]);
   return (
-    <header className="header">
-      <div className="container">
-        <div className="row">
-          <div className="header--wrapper">
-            <ConnectButtonCustom />
-          </div>
+    <div className={style.header__container}>
+      <header className={style.header}>
+        <img src="../logo.svg" />
+        <div  className={style.header__row}>
+          {headerText.map((el, i)=>{
+            return (
+              <div key={i}>{el}</div>
+            )
+          })}
         </div>
-      </div>
-    </header>
+        <div className="row">
+          <ConnectButtonCustom />
+        </div>
+      </header>
+    </div>
   );
 });
 export default Header;
