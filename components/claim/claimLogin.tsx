@@ -3,17 +3,18 @@ import header from "../layout/header.module.scss";
 import faq from "../faq/faq.module.scss";
 import { innerBackend, token } from "../hooks/useTwitterOauth";
 import { useState } from "react";
+import { signIn, signOut, useSession } from "next-auth/react";
+import { useRouter } from "next/router";
 const ClaimLogin = () => {
   const [id, setId] = useState<any>(undefined);
-  console.log(token);
+  const router = useRouter();
+  const { data, status } = useSession();
+  console.log(data, status);
   const connect = async () => {
-    try {
-      const res = await innerBackend.post("/oauth2/token");
-      console.log(res);
-      setId(res);
-    } catch (e) {
-      console.log(e);
-    }
+    await signIn("twitter", {
+      redirect: false,
+      callbackUrl: `${router.pathname}`,
+    });
   };
   console.log(id);
   return (
@@ -23,7 +24,9 @@ const ClaimLogin = () => {
       <div className={style.claim__text}>
         Sign in to capitalise your FT points
       </div>
-      <button className={header.connect__button} onClick={connect}>Twitter (X)</button>
+      <button className={header.connect__button} onClick={connect}>
+        Twitter (X)
+      </button>
     </div>
   );
 };

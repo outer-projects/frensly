@@ -13,38 +13,40 @@ import {
   argentWallet,
   trustWallet,
   ledgerWallet,
-} from '@rainbow-me/rainbowkit/wallets';
-import { connectorsForWallets, getDefaultWallets, RainbowKitProvider } from "@rainbow-me/rainbowkit";
-import { configureChains, createConfig, WagmiConfig } from "wagmi";
+} from "@rainbow-me/rainbowkit/wallets";
 import {
-  bscTestnet,
-  goerli,
-} from "wagmi/chains";
+  connectorsForWallets,
+  getDefaultWallets,
+  RainbowKitProvider,
+} from "@rainbow-me/rainbowkit";
+import { configureChains, createConfig, WagmiConfig } from "wagmi";
+import { bscTestnet, goerli } from "wagmi/chains";
 import { publicProvider } from "wagmi/providers/public";
 import { ToastContainer } from "react-toastify";
 import Wrapper from "../components/layout/wrapper";
 import Rotate from "../components/layout/rotate";
 import "../components/polyfills";
-const { chains,publicClient, webSocketPublicClient } = configureChains(
+import { SessionProvider } from "next-auth/react";
+const { chains, publicClient, webSocketPublicClient } = configureChains(
   [
     bscTestnet,
     ...(process.env.NEXT_PUBLIC_ENABLE_TESTNETS === "true" ? [goerli] : []),
   ],
   [publicProvider()]
 );
-const projectId = '8271a5dee2c5981640ad5d12b20132af';
+const projectId = "8271a5dee2c5981640ad5d12b20132af";
 const { wallets } = getDefaultWallets({
-  appName: 'zoo',
+  appName: "zoo",
   projectId,
   chains,
 });
 const demoAppInfo = {
-  appName: 'zoo',
+  appName: "zoo",
 };
 const connectors = connectorsForWallets([
   ...wallets,
   {
-    groupName: 'Other',
+    groupName: "Other",
     wallets: [
       argentWallet({ projectId, chains }),
       trustWallet({ projectId, chains }),
@@ -70,18 +72,20 @@ function MyApp({ Component, pageProps }: AppProps) {
     <>
       {loading ? (
         <Provider container={container}>
-          <WagmiConfig  config={wagmiConfig}>
-            <RainbowKitProvider appInfo={demoAppInfo} chains={chains}>
-              <Suspense fallback={<h1>Loading posts...</h1>}>
-                {/* <Rotate /> */}
-                <Wrapper>
-                  <AnyComponent {...pageProps} />
-                </Wrapper>
-                <ToastContainer style={{ zIndex: 10000000000 }} />
-                <ModalsContainer />
-              </Suspense>
-            </RainbowKitProvider>
-          </WagmiConfig>
+          <SessionProvider session={pageProps.session}>
+            <WagmiConfig config={wagmiConfig}>
+              <RainbowKitProvider appInfo={demoAppInfo} chains={chains}>
+                <Suspense fallback={<h1>Loading posts...</h1>}>
+                  {/* <Rotate /> */}
+                  <Wrapper>
+                    <AnyComponent {...pageProps} />
+                  </Wrapper>
+                  <ToastContainer style={{ zIndex: 10000000000 }} />
+                  <ModalsContainer />
+                </Suspense>
+              </RainbowKitProvider>
+            </WagmiConfig>
+          </SessionProvider>
         </Provider>
       ) : (
         <div>Loading...</div>

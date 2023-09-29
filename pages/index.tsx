@@ -6,7 +6,6 @@ import { UserStore } from "../stores/UserStore";
 import ClaimLogin from "../components/claim/claimLogin";
 import style from "./home.module.scss";
 import Faq from "../components/faq/faq";
-import useTwitterOauth from "../components/hooks/useTwitterOauth";
 
 const Home: NextPage = observer((props) => {
 
