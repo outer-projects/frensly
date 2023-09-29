@@ -9,11 +9,11 @@ const ClaimLogin = () => {
   const [id, setId] = useState<any>(undefined);
   const router = useRouter();
   const { data, status } = useSession();
-  console.log(data, status);
+  console.log(data, status, router.pathname);
   const connect = async () => {
     await signIn("twitter", {
       redirect: false,
-      callbackUrl: `https://frensly.vercel.app`,
+      callbackUrl: `/`,
     });
   };
   console.log(id);
