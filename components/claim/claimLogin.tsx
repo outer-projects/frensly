@@ -43,7 +43,7 @@ const ClaimLogin = () => {
           </div>
           <div className={style.claim__row}>
             <button className={header.connect__button}>Claim</button>
-            <img src={twitterData?.user?.name || "../../empty_avatar.svg"} />
+            <img src={twitterData?.user?.image || "../../empty_avatar.svg"} />
             <div>{twitterData?.user?.name || "username123"}</div>
           </div>
         </div>
