@@ -26,5 +26,4 @@ export class UserStore {
   @action clearFilter = () => {
     this.filterGlobal = { rangeFrom: 0, rangeTo: 8 };
   };
-  //get user data
 }
