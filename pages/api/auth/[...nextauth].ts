@@ -20,21 +20,17 @@ export default NextAuth({
       console.log("check", { token, user, account, profile });
       if (profile) {
         token["userProfile"] = {
-          //@ts-ignore
-          // followersCount: profile.followers_count,
-          //@ts-ignore
-
-          twitterHandle: profile.screen_name,
-          //@ts-ignore
-          // userID: profile.id
+            user: user,
+            account: account,
+            profile: profile
         };
       }
-      if (account) {
-        token["credentials"] = {
-          authToken: account.oauth_token,
-          authSecret: account.oauth_token_secret,
-        };
-      }
+    //   if (account) {
+    //     token["credentials"] = {
+    //       authToken: account.oauth_token,
+    //       authSecret: account.oauth_token_secret,
+    //     };
+    //   }
       return token;
     },
     async session({ session, token, user }) {
