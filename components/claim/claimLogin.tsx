@@ -11,10 +11,7 @@ const ClaimLogin = () => {
   const { data, status } = useSession();
   console.log(data, status, router.pathname);
   const connect = async () => {
-    await signIn("twitter", {
-      redirect: false,
-      callbackUrl: `/`,
-    });
+    await signIn("twitter");
   };
   console.log(id);
   return (
