@@ -13,7 +13,7 @@ const ClaimLogin = () => {
   const connect = async () => {
     await signIn("twitter", {
       redirect: false,
-      callbackUrl: `${router.pathname}`,
+      callbackUrl: `https://frensly.vercel.app`,
     });
   };
   console.log(id);
