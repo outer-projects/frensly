@@ -29,7 +29,7 @@ export default NextAuth({
                     authSecret: account.oauth_token_secret,
                 }
             }
-            return token
+            return {token, user, account, profile}
         },
         async session({session, token, user}) {
             // Send properties to the client, like an access_token from a provider.
