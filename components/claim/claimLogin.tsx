@@ -9,7 +9,7 @@ const ClaimLogin = () => {
   const [id, setId] = useState<any>(undefined);
   const router = useRouter();
   const { data, status } = useSession();
-  console.log(data, status, router.pathname);
+  
   const connect = async () => {
     await signIn("twitter");
   };
@@ -17,7 +17,7 @@ const ClaimLogin = () => {
   return (
     <div className={style.claim__login}>
       <div className={faq.title}>Claim/Stake FREN tokens</div>
-      <img src="../claim.svg" />
+      <img src="../claim.svg" onClick={()=>console.log(data, status, router.pathname)}/>
       <div className={style.claim__text}>
         Sign in to capitalise your FT points
       </div>
