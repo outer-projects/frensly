@@ -19,6 +19,7 @@ const ClaimLogin = () => {
       setTwitterData(data);
     }
   }, [data]);
+  console.log(twitterData);
   return (
     <>
       {!twitterData ? (
