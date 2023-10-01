@@ -8,11 +8,11 @@ const ClaimLogin = () => {
   const [id, setId] = useState<any>(undefined);
   const [twitterData, setTwitterData] = useState<any>(undefined);
   const router = useRouter();
+  let cookieValue = document.cookie;
   // const { data, status } = useSession();
 
   const connect = async () => {
-    window.location.href =
-      "https://frensly.adev.co/api/v1/auth/twitter";
+    window.location.href = "https://frensly.adev.co/api/v1/auth/twitter";
   };
   // useEffect(() => {
   //   if (data) {
@@ -25,10 +25,7 @@ const ClaimLogin = () => {
       {!twitterData ? (
         <div className={style.claim__login}>
           <div className={faq.title}>Claim/Stake FREN tokens</div>
-          <img
-            src="../claim.svg"
-
-          />
+          <img src="../claim.svg" onClick={() => console.log(cookieValue)} />
           <div className={style.claim__text}>
             Sign in to capitalise your FT points
           </div>
