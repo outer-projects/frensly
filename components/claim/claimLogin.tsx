@@ -3,7 +3,6 @@ import header from "../layout/header.module.scss";
 import faq from "../faq/faq.module.scss";
 import { innerBackend, token } from "../hooks/useTwitterOauth";
 import { useEffect, useState } from "react";
-import { signIn, signOut, useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 const ClaimLogin = () => {
   const [id, setId] = useState<any>(undefined);

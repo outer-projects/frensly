@@ -25,7 +25,6 @@ import { publicProvider } from "wagmi/providers/public";
 import { ToastContainer } from "react-toastify";
 import Wrapper from "../components/layout/wrapper";
 import "../components/polyfills";
-import { SessionProvider } from "next-auth/react";
 const { chains, publicClient, webSocketPublicClient } = configureChains(
   [
     bscTestnet,
@@ -71,7 +70,6 @@ function MyApp({ Component, pageProps }: AppProps) {
     <>
       {loading ? (
         <Provider container={container}>
-          <SessionProvider session={pageProps.session}>
             <WagmiConfig config={wagmiConfig}>
               <RainbowKitProvider appInfo={demoAppInfo} chains={chains}>
                 <Suspense fallback={<h1>Loading posts...</h1>}>
@@ -84,7 +82,6 @@ function MyApp({ Component, pageProps }: AppProps) {
                 </Suspense>
               </RainbowKitProvider>
             </WagmiConfig>
-          </SessionProvider>
         </Provider>
       ) : (
         <div>Loading...</div>
