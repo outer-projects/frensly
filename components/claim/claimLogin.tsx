@@ -9,16 +9,17 @@ const ClaimLogin = () => {
   const [id, setId] = useState<any>(undefined);
   const [twitterData, setTwitterData] = useState<any>(undefined);
   const router = useRouter();
-  const { data, status } = useSession();
+  // const { data, status } = useSession();
 
   const connect = async () => {
-    await signIn("twitter");
+    window.location.href =
+      "https://frensly.adev.co/api/v1/auth/twitter";
   };
-  useEffect(() => {
-    if (data) {
-      setTwitterData(data);
-    }
-  }, [data]);
+  // useEffect(() => {
+  //   if (data) {
+  //     setTwitterData(data);
+  //   }
+  // }, [data]);
   console.log(twitterData);
   return (
     <>
@@ -27,7 +28,7 @@ const ClaimLogin = () => {
           <div className={faq.title}>Claim/Stake FREN tokens</div>
           <img
             src="../claim.svg"
-            onClick={() => console.log(data, status, router.pathname)}
+
           />
           <div className={style.claim__text}>
             Sign in to capitalise your FT points
