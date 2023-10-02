@@ -7,6 +7,7 @@ import { SeparatedConnect } from "./separatedConnect";
 import { useDisconnect, usePublicClient } from "wagmi";
 import { useWalletClient } from "wagmi";
 import style from "./header.module.scss";
+import { addressSlice } from "../../utils/utilities";
 const ConnectButtonCustom = observer(() => {
   const { disconnect } = useDisconnect();
   const [_balance, setBalance] = useState(0);
@@ -18,9 +19,7 @@ const ConnectButtonCustom = observer(() => {
       setBalance(balance);
     }
   }, [balance]);
-  const publicClient = usePublicClient({
-    chainId: 97,
-  });
+
   return (
     <ConnectButton.Custom>
       {({
@@ -74,7 +73,6 @@ const ConnectButtonCustom = observer(() => {
               if (!connected) {
                 return <SeparatedConnect />;
               }
-
               if (chain.unsupported) {
                 return (
                   <button
@@ -89,22 +87,20 @@ const ConnectButtonCustom = observer(() => {
 
               return (
                 <div className="header--wrapper__block">
-                  <div
-                    className="header--wrapper__balance"
-                    onClick={openAccountModal}
-                  >
-                    <img src="img/header-icons/balance-ico.png" alt="#" />
-                    <span>{_balance}</span>
+                  <div className={style.account} onClick={openAccountModal}>
+                    <img src="../../fren_balance.svg" alt="#" />
+                    <div style={{marginLeft:'5px'}}>
+                      <div className={style.balance} >{account.displayBalance}</div>
+                      <div className={style.address} >{addressSlice(account.address)}</div>
+                    </div>
                   </div>
-                  <div className="header--wrapper__sound">
-                    <img src="img/header-icons/icons-sound.png" alt="" />
-                  </div>
-                  <div
+
+                  {/* <div
                     className="header--wrapper__log"
                     onClick={() => disconnect()}
                   >
                     Logout
-                  </div>
+                  </div> */}
                 </div>
               );
             })()}

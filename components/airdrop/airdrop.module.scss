@@ -1,0 +1,124 @@
+.airdrop {
+  font-family: "Manrope";
+  font-size: 16px;
+  font-weight: 600;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 160px;
+  margin-bottom: 100px;
+  border-radius: 40px;
+  max-width: 100vw;
+  background: #fcfcfd;
+  box-shadow: 0px 12px 24px 0px rgba(31, 47, 70, 0.1);
+  backdrop-filter: blur(49px);
+  @media (max-width: 700px) {
+    margin-top: 106px;
+  }
+}
+.airdrop__soon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-image: url("../../public/bottom.png");
+  padding-bottom: 10px;
+  width: 90%;
+  background-size: contain;
+  background-position: bottom;
+  background-repeat: no-repeat;
+  @media (max-width: 700px) {
+    width: 100%;
+  }
+}
+.airdrop__socials {
+  display: flex;
+  justify-content: space-between;
+  .airdrop__media {
+    display: flex;
+    cursor: pointer;
+    justify-content: center;
+    align-items: center;
+    margin-right: 5px;
+    margin-left: 5px;
+    width: 32px;
+    height: 32px;
+    border-radius: 4px;
+    &:hover {
+      background-color: black;
+    }
+  }
+}
+.airdrop__title {
+  color: #23262f;
+  font-family: "DMSans";
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 40px;
+  margin-bottom: 27px;
+  span {
+    color: #4a673b;
+  }
+}
+.airdrop__image__mob {
+    display: none;
+    margin-bottom: 11px;
+    @media (max-width: 700px) {
+      display: block;
+    }
+  }
+.airdrop__image {
+  margin-bottom: 11px;
+  @media (max-width: 700px) {
+    display: none;
+  }
+}
+.airdrop__text {
+  color: #777e90;
+  text-align: center;
+  font-style: normal;
+  max-width: 484px;
+  font-weight: 400;
+  line-height: normal;
+  margin-bottom: 31px;
+  @media (max-width: 700px) {
+    max-width: 340px;
+  }
+}
+.airdrop__input {
+  border-radius: 40px;
+  background: #fcfcfd;
+  color: black;
+  text-align: center;
+  font-family: "Manrope";
+  outline: none;
+  border: none;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 20px;
+  background: #fcfcfd;
+  box-shadow: 0px 12px 24px 0px rgba(31, 47, 70, 0.1);
+  backdrop-filter: blur(49px);
+  width: 90vw;
+  max-width: 490px;
+  height: 56px;
+  margin-bottom: 45px;
+  &::placeholder {
+    color: #c8c8c8;
+  }
+  @media (max-width: 700px) {
+    max-width: 340px;
+  }
+}
+
+.airdrop__button {
+  width: 286px;
+  height: 48px;
+  margin-bottom: 51px;
+}
+.airdrop__button__disabled {
+  width: 286px;
+  height: 48px;
+  background-color: #9b9b9b;
+  pointer-events: none;
+}

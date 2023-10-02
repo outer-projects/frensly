@@ -20,14 +20,13 @@ import {
   RainbowKitProvider,
 } from "@rainbow-me/rainbowkit";
 import { configureChains, createConfig, WagmiConfig } from "wagmi";
-import { bscTestnet, goerli } from "wagmi/chains";
+import { bscTestnet, mainnet, goerli } from "wagmi/chains";
 import { publicProvider } from "wagmi/providers/public";
 import { ToastContainer } from "react-toastify";
 import Wrapper from "../components/layout/wrapper";
 import "../components/polyfills";
 const { chains, publicClient, webSocketPublicClient } = configureChains(
-  [
-    bscTestnet,
+  [mainnet,
     ...(process.env.NEXT_PUBLIC_ENABLE_TESTNETS === "true" ? [goerli] : []),
   ],
   [publicProvider()]

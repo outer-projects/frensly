@@ -7,30 +7,98 @@
   max-width: 1160px;
   margin-left: 10px;
   margin-right: 10px;
+  font-family: "Manrope";
+  font-weight: 600;
+  font-size: 16px;
+  @media (max-width: 700px) {
+    justify-content: center;
+    .account {
+      display: none;
+    }
+    .connect__button {
+      display: none;
+    }
+    .header__row {
+      display: none;
+    }
+  }
 }
 .header__container {
-    display: flex;
-    justify-content: center;
+  display: flex;
+  justify-content: center;
 }
 .header__row {
-    display: flex;
-    justify-content: space-between;
-    div {
-        color: #777E90;
-        margin-left: 10px;
-        margin-right: 10px;
-        cursor: pointer;
-        &:hover {
-            color: #638a4e;
-        }
+  display: flex;
+  justify-content: space-between;
+  .header__el {
+    color: #777e90;
+    margin-left: 50px;
+    margin-right: 50px;
+    cursor: pointer;
+    &:hover {
+      color: #638a4e;
     }
+  }
+  .header__el__disabled {
+    pointer-events: none;
+    opacity: 0.8;
+    font-weight: 500;
+  }
+  .header__el__active {
+    color: #638a4e;
+    &:hover {
+      color: #638a4e;
+    }
+    &::before {
+      position: absolute;
+      content: "";
+      margin-top: 50px;
+      margin-left: -18px;
+      width: 93px;
+      border-bottom: 1px solid #638a4e;
+    }
+  }
+}
+.header__soon {
+  pointer-events: none;
+  position: absolute;
+  transform: translateY(-30px) translateX(60px);
+  background-color: #d9d9d9;
+  padding: 5px;
+  padding-top: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 17px;
+  border-radius: 5px;
+  color: #fff;
+}
+.account {
+  display: flex;
+  cursor: pointer;
+  align-items: center;
+  .balance {
+    font-weight: 400;
+  }
+  .address {
+    color: #76809d;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 200;
+    line-height: 10px; /* 83.333% */
+    letter-spacing: 0.4px;
+  }
 }
 .connect__button {
   background-color: #638a4e;
   width: 170px;
   height: 40px;
   outline: none;
+  font-family: "Manrope";
+  font-weight: 700;
+  font-size: 14px;
   border: none;
+  cursor: pointer;
   border-radius: 12px;
   color: white;
 }

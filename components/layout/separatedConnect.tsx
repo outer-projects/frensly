@@ -9,7 +9,7 @@ export const SeparatedConnect = () => {
       type="button"
       className={style.connect__button}
     >
-      Connect
+      Connect wallet
     </button>
   );
 };

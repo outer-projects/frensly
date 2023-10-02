@@ -6,13 +6,14 @@ import { UserStore } from "../stores/UserStore";
 import ClaimLogin from "../components/claim/claimLogin";
 import style from "./home.module.scss";
 import Faq from "../components/faq/faq";
+import AirdropBanner from "../components/airdrop/airdropBanner";
 
 const Home: NextPage = observer((props) => {
-
   return (
     <div className={style.main__page}>
-      <ClaimLogin />
-      <Faq/>
+      <AirdropBanner />
+      {/* <ClaimLogin />
+      <Faq/> */}
     </div>
   );
 });
