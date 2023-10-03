@@ -35,7 +35,7 @@ const AirdropBanner = () => {
   };
   return (
     <div className={style.airdrop}>
-      <div className={style.airdrop__title}>$FREN Airdrop</div>
+      <div className={style.airdrop__title}>$FREN Airdrop test </div>
       <img className={style.airdrop__image} src="../airdrop.png" />
       <img className={style.airdrop__image__mob} src="../airdrop__mob.png" />
       <div className={style.airdrop__text}>
