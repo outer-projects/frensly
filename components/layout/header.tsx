@@ -3,7 +3,7 @@ import { observer } from "mobx-react";
 import style from "./header.module.scss";
 import classNames from "classnames";
 
-const headerText = ["Airdrop", "Staking"];
+const headerText = ["Feed", "Explore", "Chats"];
 
 const Header = observer(() => {
   return (

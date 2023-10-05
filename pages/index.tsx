@@ -8,20 +8,20 @@ import Faq from "../components/faq/faq";
 import AirdropBanner from "../components/airdrop/airdropBanner";
 import AuthBanner from "../components/authBanner/authBanner";
 import { useEffect } from "react";
-import axios, { AxiosResponse } from "axios";
+import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
+import { useRouter } from "next/router";
+import Rooms from "../components/rooms/rooms";
 
 const Home: NextPage = observer((props) => {
   const { setUser, user } = useInjection(UserStore);
   const getUser = async () => {
     try {
-      const res: AxiosResponse = await axios.get("https://frensly.adev.co/", {
-        withCredentials: true,
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-          "Access-Control-Allow-Credentials": true,
-        },
-      });
+      const res: AxiosRequestConfig = await axios.get(
+        "https://frensly.adev.co/",
+        {
+          withCredentials: true,
+        }
+      );
       setUser(res.data);
     } catch (e) {
       console.log(e);
@@ -33,6 +33,7 @@ const Home: NextPage = observer((props) => {
   console.log(user);
   return (
     <div className={style.main__page}>
+      {/* <Rooms/> */}
       <AuthBanner />
       {/* <AirdropBanner /> */}
       {/* <ClaimLogin />

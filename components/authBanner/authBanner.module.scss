@@ -30,12 +30,36 @@
   text-align: center;
   font-size: 76.88px;
 }
+.banner__early {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  img {
+    margin-top: -20px;
+    border-bottom: 1px solid #cdcdcd;
+  }
+}
+.banner__whitelist {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.banner__title__auth {
+  margin-bottom: 113px;
+}
+
+.banner__title__connection {
+  margin-bottom: 80px;
+}
+.banner__title__connected {
+  margin-bottom: 65px;
+}
 .banner__join {
   text-align: center;
   font-family: "Manrope";
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
-  margin-top: 113px;
   margin-bottom: 23px;
 }
