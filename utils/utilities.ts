@@ -1,7 +1,6 @@
 import { BigNumberish } from 'ethers'
 import BN from 'bignumber.js'
 import numeral from 'numeral'
-import axios from "axios";
 import { DateTime } from 'luxon';
 
 export function toBNJS(val: BigNumberish | number | string) {
@@ -28,15 +27,6 @@ export const addressSlice = (address: string | undefined) => {
         address.length
     )
 }
-export const convertBNBtoUSD = async (value: any) => {
-    if(!value || !Number(value)) return '';
-    else {
-        const res = await axios.get('https://api.coingecko.com/api/v3/simple/price?ids=binancecoin&vs_currencies=usd');
-        console.log(res.data, 'res data')
-        const price = res.data.binancecoin.usd;
-        return value*price
-    }
-}
 export const ipfsGateway = (cid?:string) => {
 	// console.log(cid)
     if(cid) {    
@@ -45,10 +35,6 @@ export const ipfsGateway = (cid?:string) => {
 	return `https://loot.mypinata.cloud/ipfs/${handleCid}?${com}pinataGatewayToken=tda9_4KZmY8KtgTMaz5LQ3fGHhh_WEfdRzJowpHsF_2t7VTU2zHsjskO7-PWCZoV`
     } else return ''
 
-}
-export const USDBNBpair = async () => {
-    const res = await axios.get('https://api.coingecko.com/api/v3/simple/price?ids=binancecoin&vs_currencies=usd');
-    return Number(res.data.binancecoin.usd);
 }
 export const getDate = (date: any) => {
     const dd = new Date(date).getTime();

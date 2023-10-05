@@ -4,7 +4,6 @@ import header from "../../components/layout/header.module.scss";
 import classNames from "classnames";
 import { isAddress } from "web3-validator";
 import { toast } from "react-toastify";
-import axios from "axios";
 import Twitter from "./twitter";
 import Discord from "./discord";
 import Telegram from "./telegram";
@@ -18,20 +17,20 @@ const AirdropBanner = () => {
   const [points, setPoints] = useState(0);
   const checkAddress = async () => {
     if (!isAddress(address)) return toast.error("Address is not valid");
-    try {
-      const res = await axios.get(
-        "https://prod-api.kosetto.com/points/" + address
-      );
-      console.log(res.data.totalPoints);
-      if (res?.data?.totalPoints) {
-        setPoints(res.data.totalPoints);
-      } else {
-        toast.error("This address is not included in the airdrop");
-      }
-    } catch (e) {
-      console.log(e);
-      return toast.error("Server error");
-    }
+    // try {
+    //   const res = await axios.get(
+    //     "https://prod-api.kosetto.com/points/" + address
+    //   );
+    //   console.log(res.data.totalPoints);
+    //   if (res?.data?.totalPoints) {
+    //     setPoints(res.data.totalPoints);
+    //   } else {
+    //     toast.error("This address is not included in the airdrop");
+    //   }
+    // } catch (e) {
+    //   console.log(e);
+    //   return toast.error("Server error");
+    // }
   };
   return (
     <div className={style.airdrop}>
