@@ -14,13 +14,15 @@ const Home: NextPage = observer((props) => {
   const { setUser, user } = useInjection(UserStore);
   const getUser = async () => {
     try {
-      const res: AxiosResponse = await axios.get(
-        "https://frensly.adev.co/",
-        {
-          withCredentials: true,
-        }
-      );
-      setUser(res.data)
+      const res: AxiosResponse = await axios.get("https://frensly.adev.co/", {
+        withCredentials: true,
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Credentials": true,
+        },
+      });
+      setUser(res.data);
     } catch (e) {
       console.log(e);
     }
