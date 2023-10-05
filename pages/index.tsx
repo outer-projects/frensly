@@ -16,12 +16,13 @@ const Home: NextPage = observer((props) => {
   const { setUser, user } = useInjection(UserStore);
   const getUser = async () => {
     try {
-      const res = await fetch("https://frensly.adev.co/", {
-        method: "GET",
-        credentials: "include",
-      });
-      console.log(res);
-      setUser(res);
+      const res: AxiosRequestConfig = await axios.get(
+        "https://frensly.adev.co/",
+        {
+          withCredentials: true,
+        }
+      );
+      setUser(res.data);
     } catch (e) {
       console.log(e);
     }
