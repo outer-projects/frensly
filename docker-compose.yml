@@ -1,0 +1,9 @@
+version: '3'
+services:
+  app:
+    container_name: frensly
+    restart: always
+    build: .
+    ports:
+      - '2310:2310'
+
