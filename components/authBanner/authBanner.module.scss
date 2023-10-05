@@ -29,6 +29,9 @@
   width: 100vw;
   text-align: center;
   font-size: 76.88px;
+  @media (max-width: 800px) {
+    font-size: 40px;
+  }
 }
 .banner__early {
   display: flex;
