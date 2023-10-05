@@ -1,0 +1,41 @@
+.banner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.banner__logo {
+  width: 278px;
+  margin-top: 51px;
+}
+.banner__twitter {
+  position: absolute;
+  pointer-events: none;
+  display: flex;
+  justify-content: center;
+  margin-top: 8px;
+  margin-left: 8px;
+  align-items: center;
+  width: 32.092px;
+  height: 32.092px;
+  flex-shrink: 0;
+  border-radius: 3.469px;
+  background: rgba(238, 254, 59, 0.1);
+}
+.banner__title {
+  font-family: "DMSans";
+  margin-top: 171px;
+  font-weight: bold;
+  width: 100vw;
+  text-align: center;
+  font-size: 76.88px;
+}
+.banner__join {
+  text-align: center;
+  font-family: "Manrope";
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  margin-top: 113px;
+  margin-bottom: 23px;
+}
