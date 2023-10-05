@@ -11,6 +11,7 @@ import { useEffect } from "react";
 import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
 import { useRouter } from "next/router";
 import Rooms from "../components/rooms/rooms";
+import ClaimMenu from "../components/claimMenu/claimMenu";
 
 const Home: NextPage = observer((props) => {
   const { setUser, user } = useInjection(UserStore);
@@ -34,6 +35,7 @@ const Home: NextPage = observer((props) => {
   return (
     <div className={style.main__page}>
       {/* <Rooms/> */}
+      {/* <ClaimMenu/> */}
       <AuthBanner />
       {/* <AirdropBanner /> */}
       {/* <ClaimLogin />

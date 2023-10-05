@@ -1,3 +1,4 @@
+import classNames from "classnames";
 import style from "./rooms.module.scss"
 
 const roomsMock = [
@@ -5,7 +6,28 @@ const roomsMock = [
     nickname: "@nickname",
     text: "Twitter name: Last message in this room, but not so long...... ",
     date: "3d",
+    unread: false,
+    img: "../empty_avatar.svg",
+  },
+  {
+    nickname: "@nickname",
+    text: "Twitter name: Last message in this room, but not so long...... ",
+    date: "3d",
     unread: true,
+    img: "../empty_avatar.svg",
+  },
+  {
+    nickname: "@nickname",
+    text: "Twitter name: Last message in this room, but not so long...... ",
+    date: "3d",
+    unread: false,
+    img: "../empty_avatar.svg",
+  },
+  {
+    nickname: "@nickname",
+    text: "Twitter name: Last message in this room, but not so long...... ",
+    date: "3d",
+    unread: false,
     img: "../empty_avatar.svg",
   },
 ];
@@ -23,7 +45,7 @@ const Rooms = () => {
                 {el.nickname}
                 <span>{el.date}</span>
               </div>
-              <div className={style.rooms__message__text}>{el.text}</div>
+              <div className={classNames(style.rooms__message__text, el.unread && style.rooms__message__unread) }>{el.text}</div>
             </div>
           </div>
         );

@@ -9,7 +9,7 @@ const Wrapper = observer(({ children }: any) => {
   const userStore = useInjection(UserStore)
   return (
     <div className={style.page__container}>
-      {/* {!userStore.user && <Header />} */}
+      {/* {userStore.user && <Header />} */}
       {children}
     </div>
   );
