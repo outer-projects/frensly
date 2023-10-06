@@ -1,7 +1,7 @@
 FROM node:18-alpine
 RUN apk add --no-cache git libc6-compat
 COPY package*.json yarn.lock* ./ 
-RUN apt-get update
+# RUN apt-get update
 RUN yarn install
 COPY . ./
 RUN yarn build
