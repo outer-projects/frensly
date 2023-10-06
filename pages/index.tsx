@@ -9,9 +9,6 @@ import AirdropBanner from "../components/airdrop/airdropBanner";
 import AuthBanner from "../components/authBanner/authBanner";
 import { useEffect } from "react";
 import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
-import { useRouter } from "next/router";
-import Rooms from "../components/rooms/rooms";
-import ClaimMenu from "../components/claimMenu/claimMenu";
 
 const Home: NextPage = observer((props) => {
   const { setUser, user } = useInjection(UserStore);
