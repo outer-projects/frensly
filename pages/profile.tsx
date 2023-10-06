@@ -17,8 +17,8 @@ const AirdropPage: NextPage = observer((props) => {
   return (
     <div className={style.main__page}>
       {/* <Rooms/> */}
-      {/* <Profile/> */}
-      <AuthBanner />
+      <Profile/>
+      {/* <AuthBanner /> */}
       {/* <AirdropBanner /> */}
       {/* <ClaimLogin />
       <Faq/> */}
