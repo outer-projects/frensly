@@ -28,7 +28,7 @@ const Wrapper = observer(({ children }: any) => {
   console.log(user);
   return (
     <div className={style.page__container}>
-      {!userStore.user && <Header />}
+      {/* {!userStore.user && <Header />} */}
       {children}
     </div>
   );
