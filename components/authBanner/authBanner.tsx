@@ -8,21 +8,25 @@ import { observer } from "mobx-react";
 import { useEffect, useState } from "react";
 import classNames from "classnames";
 import { socials } from "../airdrop/airdropBanner";
+import { SeparatedConnect } from "../layout/separatedConnect";
+import Web3Store from "../../stores/Web3Store";
+import ConnectButtonCustom from "../layout/connectButtonCustom";
 const AuthBanner = observer(() => {
+  const { address,connected } = useInjection(Web3Store);
   const { user } = useInjection(UserStore);
-  const [isWhitelist, setWhitelist] = useState(false);
   const [title, setTitle] = useState("");
   const [subtitle, setSubTitle] = useState("");
   const [stage, setStage] = useState("");
   useEffect(() => {
     if (!user) {
       setStage("Authorization");
-    } else if (user && !isWhitelist) {
+    } else if (user && !connected) {
       setStage("Connect");
-    } else if (user && isWhitelist) {
+    } else if (user && connected) {
       setStage("Connected");
     }
-  }, [user, isWhitelist]);
+  }, [user, connected]);
+  console.log(address,connected);
   useEffect(() => {
     switch (stage) {
       case "Authorization":
@@ -43,9 +47,7 @@ const AuthBanner = observer(() => {
         return;
     }
   }, [stage]);
-  const connect = async () => {
-    // window.location.href = "https://frensly.adev.co/api/v1/auth/twitter";
-  };
+
   return (
     <div className={style.banner}>
       <img src="../logo.svg" className={style.banner__logo} />
@@ -61,31 +63,26 @@ const AuthBanner = observer(() => {
       >
         {title}
       </div>
-      <div>
+      <div className={style.banner__text}>
         <div className={style.banner__join}>{subtitle}</div>
         {stage == "Authorization" && (
           <div>
             <div className={style.banner__twitter}>
               <Twitter />
             </div>
-            <a href="https://frensly.adev.co/api/v1/auth/twitter"><button
-              className={header.connect__button}
-            
-              style={{ width: "286px", height: "48px" }}
-            >
-              Authorise
-            </button></a>
+            <a href="https://frensly.adev.co/api/v1/auth/twitter">
+              <button
+                className={header.connect__button}
+                style={{ width: "286px", height: "48px" }}
+              >
+                Authorise
+              </button>
+            </a>
           </div>
         )}
         {stage == "Connect" && (
           <div className={style.banner__early}>
-            <button
-              className={header.connect__button}
-              // onClick={connect}
-              style={{ width: "286px", height: "48px" }}
-            >
-              Connect
-            </button>
+            <ConnectButtonCustom/>
             <img src="../../bottom.png" />
           </div>
         )}

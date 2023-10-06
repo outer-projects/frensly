@@ -1,15 +1,23 @@
 import { useConnectModal } from "@rainbow-me/rainbowkit";
 import style from "./header.module.scss";
-export const SeparatedConnect = () => {
+import classNames from "classnames";
+export const SeparatedConnect = ({
+  cssClassProps,
+}: {
+  cssClassProps?: any;
+}) => {
   const { openConnectModal } = useConnectModal();
 
   return (
     <button
       onClick={openConnectModal}
       type="button"
-      className={style.connect__button}
+      className={classNames(
+        style.connect__button,
+        cssClassProps && cssClassProps
+      )}
     >
-      Connect wallet
+      Connect
     </button>
   );
 };

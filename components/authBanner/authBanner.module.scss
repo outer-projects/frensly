@@ -8,6 +8,11 @@
   width: 278px;
   margin-top: 51px;
 }
+.banner__text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 .banner__twitter {
   position: absolute;
   pointer-events: none;
@@ -43,10 +48,18 @@
     border-bottom: 1px solid #cdcdcd;
   }
 }
+.banner__button {
+  width: 286px;
+  height: 48px;
+}
 .banner__whitelist {
   display: flex;
   flex-direction: column;
   align-items: center;
+  img {
+    margin-top: 58px;
+    border-bottom: 1px solid #cdcdcd;
+  }
 }
 .banner__title__auth {
   margin-bottom: 113px;
@@ -56,13 +69,14 @@
   margin-bottom: 80px;
 }
 .banner__title__connected {
-  margin-bottom: 65px;
+  margin-bottom: 35px;
 }
 .banner__join {
   text-align: center;
   font-family: "Manrope";
   font-size: 16px;
   font-style: normal;
+  max-width: 400px;
   font-weight: 400;
   margin-bottom: 23px;
 }

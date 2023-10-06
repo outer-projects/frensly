@@ -20,7 +20,7 @@ const Home: NextPage = observer((props) => {
           withCredentials: true,
         }
       );
-      setUser(res.data);
+      setUser(res?.data?.user);
     } catch (e) {
       console.log(e);
     }
