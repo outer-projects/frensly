@@ -1,5 +1,4 @@
-# FROM node:18-alpine AS base
-# FROM base AS deps
+# FROM node:18-alpine
 # RUN apk add --no-cache libc6-compat
 # COPY package*.json yarn.lock* ./ 
 # RUN apt-get update
