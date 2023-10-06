@@ -18,7 +18,7 @@ const Home: NextPage = observer((props) => {
   const getUser = async () => {
     try {
       const res: AxiosRequestConfig = await axios.get(
-        "https://frensly.adev.co/",
+        "https://frensly.adev.co/api/v1",
         {
           withCredentials: true,
         }
