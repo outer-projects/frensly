@@ -22,7 +22,8 @@ const Header = observer(() => {
             );
           })}
         </div>
-        <div className="row">
+        <div className={style.header__user}>
+          <img src="../../icons/notification.svg"style={{marginRight:'37px'}}/>
           <ConnectButtonCustom />
         </div>
       </header>

@@ -1,21 +1,86 @@
-.claim__container {
+.profile__container {
   display: flex;
   flex-direction: column;
   align-items: center;
   font-family: "Manrope";
   margin-bottom: 70px;
 }
-
-.claim {
+.profile__page {
+  display: flex;
+}
+.profile__side {
+  margin-top: 149px;
+  margin-right: 49px;
+  margin-left: -220px;
+}
+.profile__posts {
+  margin-top: 26px;
+}
+.profile__separator {
+  width: 100%;
+  height: 1px;
+  background-color: #E1E1E1;
+  margin-top: 32px;
+}
+.profile__earn {
+  color: #374957;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 24px;
+  margin-top: 23px;
+}
+.profile__ep {
+  color: #374957;
+  font-family: "Manrope";
+  font-size: 14px;
+  font-style: normal;
+  font-weight: bold;
+  line-height: 24px;
+}
+.profile__money {
+  line-height: 24px;
+}
+.profile__link {
+  width: 178px;
+  color: #374957;
+  font-family: "Manrope";
+  font-size: 16px;
+  font-style: normal;
+  font-weight: bold;
+  line-height: 24px;
+  height: 60px;
+  border-radius: 32px;
+  background: #fcfcfd;
+  box-shadow: 0px 12px 24px 0px rgba(31, 47, 70, 0.1);
+  backdrop-filter: blur(49px);
+  display: flex;
+  justify-content: center;
+  margin-bottom: 13px;
+  align-items: center;
+  img {
+    margin-right: 5px;
+  }
+}
+.profile__row {
+  display: flex;
+  justify-content: space-between;
+}
+.profile__balance {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+.profile {
   width: 522px;
   padding: 23px;
   border-radius: 32px;
   background: #fcfcfd;
   box-shadow: 0px 12px 24px 0px rgba(31, 47, 70, 0.1);
   backdrop-filter: blur(49px);
-  margin-top: 87px;
+  margin-top: 34px;
 }
-.claim__title {
+.profile__title {
   color: #23262f;
   font-family: "DMSans";
   font-size: 32px;
@@ -24,10 +89,10 @@
   align-items: center;
   line-height: 40px;
   img {
-    margin-left: 17px;
+    margin-right: 11px;
   }
 }
-.claim__subtitle {
+.profile__subtitle {
   color: #777e90;
   font-size: 14px;
   margin-top: -3px;
@@ -35,13 +100,13 @@
   font-weight: 400;
   line-height: 24px;
 }
-.claim__tech {
+.profile__tech {
   margin-top: 40px;
 }
-.claim__fees {
+.profile__fees {
   margin-bottom: 30px;
 }
-.claim__stat {
+.profile__stat {
   display: flex;
   justify-content: space-between;
   padding: 24px;
@@ -50,30 +115,36 @@
   background: #fff;
   margin-top: 8px;
 }
-.claim__stat__name {
+.profile__stat__name {
   color: #23262f;
   font-size: 16px;
   font-style: normal;
   font-weight: 500;
   line-height: 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
-.claim__stat__value {
+.profile__stat__value {
   color: #23262f;
   text-align: center;
   font-weight: bold;
   line-height: 16px; /* 114.286% */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
-.claim__stats {
+.profile__stats {
   margin-bottom: 34px;
 }
-.claim__face {
+.profile__face {
   display: flex;
   align-items: center;
   img {
     margin-right: 5px;
   }
 }
-.claim__user {
+.profile__user {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -83,7 +154,7 @@
   padding: 6px;
   padding-left: 12px;
 }
-.claim__name {
+.profile__name {
   color: #000;
   text-align: center;
   font-size: 14px;
@@ -91,7 +162,7 @@
   font-weight: bold;
   line-height: 16px; /* 114.286% */
 }
-.claim__nick {
+.profile__nick {
   color: #424242;
   text-align: center;
   font-size: 14px;
@@ -99,7 +170,7 @@
   font-weight: 500;
   line-height: 16px; /* 114.286% */
 }
-.claim__price {
+.profile__price {
   width: 110px;
   height: 40px;
   background-color: #ffffff;
@@ -113,7 +184,7 @@
   font-weight: bold;
   line-height: 16px;
 }
-.claim__button {
+.profile__button {
   display: flex;
   width: 110px;
   cursor: pointer;
@@ -134,7 +205,16 @@
   line-height: 16px;
   margin-left: 9px;
 }
-.claim__logout {
+.profile__title__main {
+  color: #374957;
+  font-family: "DMSans";
+  margin-top: 75px;
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 40px;
+}
+.profile__logout {
   margin-top: 27px;
   color: #b23030;
   cursor: pointer;

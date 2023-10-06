@@ -10,14 +10,15 @@ import AuthBanner from "../components/authBanner/authBanner";
 import { useEffect } from "react";
 import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
 import Profile from "../components/profile/profile";
+import Airdrop from "../components/profile/airdrop";
 
-const Home: NextPage = observer((props) => {
+const AirdropPage: NextPage = observer((props) => {
 
   return (
     <div className={style.main__page}>
       {/* <Rooms/> */}
-      <Profile/>
-      {/* <AuthBanner /> */}
+      {/* <Profile/> */}
+      <AuthBanner />
       {/* <AirdropBanner /> */}
       {/* <ClaimLogin />
       <Faq/> */}
@@ -25,4 +26,4 @@ const Home: NextPage = observer((props) => {
   );
 });
 
-export default Home;
+export default AirdropPage;
