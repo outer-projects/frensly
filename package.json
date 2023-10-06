@@ -5,7 +5,7 @@
     "dev": "next dev",
     "build": "next build",
     "export": "--EXPORT=true next export",
-    "start": "next start"
+    "start": "next start -p 2310"
   },
   "dependencies": {
     "@metamask/providers": "^11.1.1",
