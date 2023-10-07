@@ -12,18 +12,6 @@ const AuthProvider = observer(({ children }: any) => {
   const { address, authStatus, web3 } = useInjection(Web3Store);
   const authenticationAdapter = createAuthenticationAdapter({
     getNonce: async () => {
-      return "";
-    },
-
-    createMessage: () => {
-      return "";
-    },
-
-    getMessageBody: () => {
-      return "";
-    },
-
-    verify: async () => {
       const res = await fetch(
         `https://frensly.adev.co/api/v1/eauth/${address}`,
         {
@@ -31,16 +19,27 @@ const AuthProvider = observer(({ children }: any) => {
         }
       );
       const text = await res.text();
+      return text;
+    },
 
+    createMessage: () => {
+      return "";
+    },
+
+    getMessageBody: ({ message }) => {
+      return message;
+    },
+
+    verify: async ({ message }) => {
       const sign = await web3?.eth.personal.sign(
         web3?.utils.utf8ToHex(
-          `For login to the site, I sign this random data: ${text}`
+          `For login to the site, I sign this random data: ${message}`
         ) as string,
         address as string,
-        text
+        message
       );
       const verifyRes = await fetch(
-        `https://frensly.adev.co/api/v1/eauth/${text}/${sign}`,
+        `https://frensly.adev.co/api/v1/eauth/${message}/${sign}`,
         {
           headers: { "Content-Type": "application/json" },
           credentials: "include",
