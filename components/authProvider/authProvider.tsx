@@ -22,8 +22,14 @@ const AuthProvider = observer(({ children }: any) => {
       return text;
     },
 
-    createMessage: ({nonce}) => {
-      return `For login to the site, I sign this random data: ${nonce}`;
+    createMessage: ({ nonce }) => {
+      return (
+        `${web3?.utils.utf8ToHex(
+          "For login to the site, I sign this random data: " + nonce
+        )}` +
+        address +
+        nonce
+      );
     },
 
     getMessageBody: ({ message }) => {
@@ -31,13 +37,13 @@ const AuthProvider = observer(({ children }: any) => {
     },
 
     verify: async ({ message, signature }) => {
-    //   const sign = await web3?.eth.personal.sign(
-    //     web3?.utils.utf8ToHex(
-    //       `For login to the site, I sign this random data: ${message}`
-    //     ) as string,
-    //     address as string,
-    //     message
-    //   );
+      //   const sign = await web3?.eth.personal.sign(
+      //     web3?.utils.utf8ToHex(
+      //       `For login to the site, I sign this random data: ${message}`
+      //     ) as string,
+      //     address as string,
+      //     message
+      //   );
       const verifyRes = await fetch(
         `https://frensly.adev.co/api/v1/eauth/${message}/${signature}`,
         {
