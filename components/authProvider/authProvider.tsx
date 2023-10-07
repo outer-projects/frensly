@@ -21,7 +21,7 @@ const AuthProvider = observer(({ children }: any) => {
       return await response.text();
     },
 
-    createMessage: async ({ nonce, address, chainId }) => {
+    createMessage: ({ nonce, address, chainId }) => {
       const hexMsg = web3?.utils.utf8ToHex(
         `For login to the site, I sign this random data: ${nonce}`
       ) as string;
@@ -34,24 +34,20 @@ const AuthProvider = observer(({ children }: any) => {
     },
     //@ts-ignore
     verify: async ({ message, signature }) => {
-      message
-        .then((result) => {
-          console.log(result);
-          return web3?.eth.personal
-            ?.sign(result.hexMsg, result.address, result.nonce)
-            .then(async (res) => {
-              const verifyRes = await fetch(
-                `https://frensly.adev.co/api/v1/eauth/${res}/${signature}`,
-                {
-                  headers: { "Content-Type": "application/json" },
-                  credentials: "include",
-                }
-              );
-              console.log(verifyRes);
-              return Boolean(verifyRes.ok);
-            });
-        })
-        .catch((err) => {});
+      console.log(message);
+      return web3?.eth.personal
+        ?.sign(message.hexMsg, message.address, message.nonce)
+        .then(async (res) => {
+          const verifyRes = await fetch(
+            `https://frensly.adev.co/api/v1/eauth/${res}/${signature}`,
+            {
+              headers: { "Content-Type": "application/json" },
+              credentials: "include",
+            }
+          );
+          console.log(verifyRes);
+          return Boolean(verifyRes.ok);
+        });
     },
 
     signOut: async () => {},
