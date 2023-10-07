@@ -22,8 +22,8 @@ const AuthProvider = observer(({ children }: any) => {
       return text;
     },
 
-    createMessage: () => {
-      return "";
+    createMessage: ({nonce}) => {
+      return nonce;
     },
 
     getMessageBody: ({ message }) => {
