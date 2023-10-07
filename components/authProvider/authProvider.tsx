@@ -35,7 +35,8 @@ const AuthProvider = observer(({ children }: any) => {
     //@ts-ignore
     verify: async ({ message, signature }) => {
       message
-        .then((result: any) => {
+        .then((result) => {
+          console.log(result);
           return web3?.eth.personal
             ?.sign(result.hexMsg, result.address, result.nonce)
             .then(async (res) => {
