@@ -24,12 +24,13 @@ const AuthProvider = observer(({ children }: any) => {
 
     createMessage: ({ nonce, address, chainId }) => {
       return new SiweMessage({
-        statement: `For login to the site, I sign this random data: ${nonce}`,
+        domain: window.location.host,
         address,
-        nonce,
-        chainId: chainId,
+        statement: `For login to the site, I sign this random data: ${nonce}`,
         uri: window.location.origin,
-        domain: window.location.origin
+        version: "1",
+        chainId,
+        nonce,
       });
     },
 
@@ -38,7 +39,6 @@ const AuthProvider = observer(({ children }: any) => {
     },
 
     verify: async ({ message, signature }) => {
-
       const verifyRes = await fetch(
         `https://frensly.adev.co/api/v1/eauth/${message}/${signature}`,
         {
