@@ -41,7 +41,7 @@ const AuthProvider = observer(({ children }: any) => {
     verify: async ({ message, signature }) => {
       console.log(message, signature);
       const verifyRes = await fetch(
-        `https://frensly.adev.co/api/v1/eauth/${message}/${signature}`,
+        `https://frensly.adev.co/api/v1/eauth/${message.nonce}/${signature}`,
         {
           headers: { "Content-Type": "application/json" },
           credentials: "include",
