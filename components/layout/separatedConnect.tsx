@@ -17,7 +17,8 @@ export const SeparatedConnect = ({
         cssClassProps && cssClassProps
       )}
     >
-      Connect
+      <img src="../../icons/MetaMask.svg"style={{marginTop:'0px'}} />
+      Sign the message
     </button>
   );
 };

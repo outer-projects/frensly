@@ -1,53 +1,63 @@
 import { useInjection } from "inversify-react";
 import header from "../../components/layout/header.module.scss";
-import Twitter from "../airdrop/twitter";
+import Twitter from "../socials/twitter";
 import style from "./authBanner.module.scss";
-import airdrop from "../airdrop/airdrop.module.scss";
+import socialsCss from "../socials/socials.module.scss";
 import { UserStore } from "../../stores/UserStore";
 import { observer } from "mobx-react";
 import { useEffect, useState } from "react";
 import classNames from "classnames";
-import { socials } from "../airdrop/airdropBanner";
+import { socials } from "../socials/socials";
 import { SeparatedConnect } from "../layout/separatedConnect";
 import Web3Store from "../../stores/Web3Store";
 import ConnectButtonCustom from "../layout/connectButtonCustom";
+import ProgressBar from "../progressBar/progressBar";
+import { toWei } from "web3-utils";
 const AuthBanner = observer(() => {
-  const { address,connected } = useInjection(Web3Store);
-  const { user } = useInjection(UserStore);
+  const { address, connected, frensly } = useInjection(Web3Store);
+  const { user, setActive, setInit } = useInjection(UserStore);
   const [title, setTitle] = useState("");
-  const [subtitle, setSubTitle] = useState("");
   const [stage, setStage] = useState("");
   useEffect(() => {
-    if (!user) {
+    if (user) {
       setStage("Authorization");
-    } else if (user && !connected) {
+    } else if (!user && !connected) {
       setStage("Connect");
-    } else if (user && connected) {
+    } else if (!user && connected) {
       setStage("Connected");
     }
   }, [user, connected]);
-  console.log(address,connected);
+  console.log(address, connected);
   useEffect(() => {
     switch (stage) {
       case "Authorization":
-        setTitle("Creator Economy built Onchain");
-        setSubTitle("Join our BETA today");
+        setTitle("Creative economy onchain");
+        setActive(0);
         return;
       case "Connect":
         setTitle("You are early!");
-        setSubTitle("Connect your wallet to join whitelist");
+        setTitle("Creative economy onchain");
+        setActive(1);
         return;
       case "Connected":
-        setTitle("Welcome to whitelist");
-        setSubTitle(
-          "We are still in development but beta is almost here. Follow us on social to keep up with the news"
-        );
+        setTitle("Create my pond");
+        setActive(2);
         return;
       default:
         return;
     }
   }, [stage]);
-
+  const init = async () => {
+    try {
+      await frensly.methods.initShares(toWei(0.05, "ether"), toWei(0.02, "ether")).send({
+        from: address,
+      });
+      const isInit = await frensly.methods.isSharesSubject(address).call();
+      setInit(isInit);
+    } catch (e) {
+      console.log(e);
+    }
+  };
   return (
     <div className={style.banner}>
       <img src="../logo.svg" className={style.banner__logo} />
@@ -56,55 +66,96 @@ const AuthBanner = observer(() => {
           style.banner__title,
           stage == "Authorization"
             ? style.banner__title__auth
-            : stage == "Connection"
+            : stage == "Connect"
             ? style.banner__title__connection
             : style.banner__title__connected
         )}
       >
+        <img src="../banner_img.svg" className={style.banner__img} />
         {title}
       </div>
       <div className={style.banner__text}>
-        <div className={style.banner__join}>{subtitle}</div>
+        {stage == "Connect" && (
+          <>
+            <div
+              className={classNames(style.banner__join, style.banner__select)}
+            >
+              Your wallet is your face.
+              <br /> Select the wallet that will represent your onchain history.
+            </div>
+          </>
+        )}
+        {stage == "Connected" && (
+          <>
+            <div className={style.banner__join}>
+              To enter a pond, you need to buy your first share
+            </div>
+            <div
+              className={classNames(style.banner__join, style.button__buy)}
+              style={{ marginTop: "56px" }}
+            >
+              Buy for 0.0001 ETH 1 share of twitter name
+            </div>
+          </>
+        )}
         {stage == "Authorization" && (
           <div>
-            <div className={style.banner__twitter}>
-              <Twitter />
-            </div>
-            <a href="https://frensly.adev.co/api/v1/auth/twitter">
+            <a
+              href="https://frensly.adev.co/api/v1/auth/twitter"
+              style={{ textDecoration: "none" }}
+            >
               <button
                 className={header.connect__button}
-                style={{ width: "286px", height: "48px" }}
+                style={{ width: "200px", height: "64px" }}
               >
+                <Twitter color={"black"} />
                 Authorise
               </button>
             </a>
           </div>
         )}
-        {stage == "Connect" && (
-          <div className={style.banner__early}>
-            <ConnectButtonCustom/>
-            <img src="../../bottom.png" />
+
+        <div
+          className={style.banner__early}
+          style={{ display: stage == "Connect" ? "flex" : "none" }}
+        >
+          <ConnectButtonCustom />
+          <div className={style.banner__small__text}>
+            The wallet can't be changed
           </div>
-        )}
+        </div>
+
         {stage == "Connected" && (
-          <div className={style.banner__whitelist}>
-            <div className={airdrop.airdrop__socials}>
-              {socials.map((el, i) => {
-                return (
-                  <a
-                    href={el.link}
-                    target="_blank"
-                    className={airdrop.airdrop__media}
-                    key={i}
-                  >
-                    {el.logo}
-                  </a>
-                );
-              })}
-            </div>{" "}
-            <img src="../../bottom.png" />
+          <div className={style.banner__early}>
+            <button
+              className={header.connect__button}
+              style={{ width: "221px", height: "64px" }}
+              onClick={() => init()}
+            >
+              Initialize
+            </button>
           </div>
         )}
+      </div>
+      <ProgressBar />
+      <div className={classNames(style.banner__join, style.banner__bottom)}>
+        Follow us to keep up with the news
+      </div>
+      <div className={style.banner__whitelist}>
+        <div className={socialsCss.airdrop__socials}>
+          {socials.map((el, i) => {
+            return (
+              <a
+                href={el.link}
+                target="_blank"
+                className={socialsCss.airdrop__media}
+                key={i}
+              >
+                {el.logo}
+              </a>
+            );
+          })}
+        </div>{" "}
       </div>
     </div>
   );

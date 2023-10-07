@@ -4,21 +4,25 @@
   align-items: center;
   justify-content: center;
 }
+.banner__select {
+  margin-bottom: 56px !important;
+}
 .banner__logo {
-  width: 278px;
-  margin-top: 51px;
+  width: 125px;
+  margin-top: 25px;
 }
 .banner__text {
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-top: -10px;
 }
 .banner__twitter {
   position: absolute;
   pointer-events: none;
   display: flex;
   justify-content: center;
-  margin-top: 8px;
+  margin-top: 16px;
   margin-left: 8px;
   align-items: center;
   width: 32.092px;
@@ -28,15 +32,23 @@
   background: rgba(238, 254, 59, 0.1);
 }
 .banner__title {
-  font-family: "DMSans";
+  font-family: "Syne";
   margin-top: 171px;
-  font-weight: bold;
   width: 100vw;
+  max-width: 568px;
   text-align: center;
-  font-size: 76.88px;
+  font-size: 56px;
+  display: flex;
+  flex-direction: column;
+  letter-spacing: -1.12px;
+  align-items: center;
+  color: #151614;
   @media (max-width: 800px) {
     font-size: 40px;
   }
+}
+.banner__bottom {
+  color: #676766!important;
 }
 .banner__early {
   display: flex;
@@ -62,21 +74,39 @@
   }
 }
 .banner__title__auth {
-  margin-bottom: 113px;
+  margin-bottom: 56px;
 }
-
+.banner__small__text {
+  color: #676766;
+  text-align: center;
+  font-family: "DMSans";
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px;
+  margin-top: 16px;
+}
 .banner__title__connection {
-  margin-bottom: 80px;
+  margin-top: 187px;
+  margin-bottom: 25px;
 }
 .banner__title__connected {
-  margin-bottom: 35px;
+  margin-top: 187px;
+  margin-bottom: 25px;
+}
+.button__buy {
+  margin-top: 33px !important;
+  margin-bottom: 15px !important;
 }
 .banner__join {
   text-align: center;
-  font-family: "Manrope";
+  font-family: "DMSans";
   font-size: 16px;
   font-style: normal;
-  max-width: 400px;
+  color: #151614;
+  max-width: 420px;
+  line-height: 24px;
   font-weight: 400;
   margin-bottom: 23px;
+  letter-spacing: -0.16px;
 }

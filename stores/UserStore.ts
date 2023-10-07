@@ -5,9 +5,10 @@ import { RootStore } from "./RootStore";
 
 @injectable()
 export class UserStore {
-  @observable menu: boolean = false;
+  @observable init: boolean = false;
   @observable user: any = undefined;
   @observable opacity: boolean = false;
+  @observable active: number = 0
   @observable filterGlobal: { rangeFrom: number; rangeTo: number } = {
     rangeFrom: 0,
     rangeTo: 8,
@@ -21,8 +22,11 @@ export class UserStore {
   @action setUser = (user:any) =>{
     this.user = user
   }
-  @action setVolume = (menu: boolean) => {
-    this.menu = menu;
+  @action setInit = (init: boolean) => {
+    this.init = init;
+  };
+  @action setActive = (active: number) => {
+    this.active = active;
   };
   @action setFilter = (filter: { rangeFrom: number; rangeTo: number }) => {
     this.filterGlobal = filter;

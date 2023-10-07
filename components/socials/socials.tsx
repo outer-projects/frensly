@@ -1,0 +1,8 @@
+import Twitter from "./twitter";
+import Discord from "./discord";
+import Telegram from "./telegram";
+export const socials = [
+  { link: "https://twitter.com/frenslytech", logo: <Twitter/> },
+  { link: "https://twitter.com/frenslytech", logo: <Discord/> },
+  { link: "https://twitter.com/frenslytech", logo: <Telegram/> },
+];

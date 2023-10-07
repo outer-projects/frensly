@@ -11,8 +11,15 @@ import { addressSlice } from "../../utils/utilities";
 const ConnectButtonCustom = observer(() => {
   const { disconnect } = useDisconnect();
   const [_balance, setBalance] = useState(0);
-  const { setConnected, setUser, setSigner, disconnected, balance } =
-    useInjection(Web3Store);
+  const {
+    setConnected,
+    setUser,
+    setSigner,
+    disconnected,
+    balance,
+    setAuthStatus,
+    setAddress,
+  } = useInjection(Web3Store);
 
   useEffect(() => {
     if (balance) {
@@ -57,7 +64,11 @@ const ConnectButtonCustom = observer(() => {
             disconnected();
           }
         }, [connected]);
-
+        useEffect(() => {
+          if (account?.address) {
+            setAddress(account?.address);
+          }
+        }, [account]);
         return (
           <div
             {...(!ready && {
@@ -89,9 +100,13 @@ const ConnectButtonCustom = observer(() => {
                 <div className="header--wrapper__block">
                   <div className={style.account} onClick={openAccountModal}>
                     <img src="../../fren_balance.svg" alt="#" />
-                    <div style={{marginLeft:'5px'}}>
-                      <div className={style.balance} >{account.displayBalance}</div>
-                      <div className={style.address} >{addressSlice(account.address)}</div>
+                    <div style={{ marginLeft: "5px" }}>
+                      <div className={style.balance}>
+                        {account.displayBalance}
+                      </div>
+                      <div className={style.address}>
+                        {addressSlice(account.address)}
+                      </div>
                     </div>
                   </div>
 

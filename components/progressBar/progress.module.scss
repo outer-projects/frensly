@@ -1,0 +1,22 @@
+.progress {
+  display: flex;
+  width: 616px;
+  margin-bottom: 29px;
+  margin-top: 330px;
+}
+.progress1 {
+  margin-top: 230px;
+}
+.progress2 {
+  margin-top: 314px;
+}
+.progress__part {
+  height: 8px;
+  width: 200px;
+  border-radius: 100px;
+  background: #f1f1f1;
+  margin-right: 5px;
+}
+.active {
+  background: #a6d000;
+}

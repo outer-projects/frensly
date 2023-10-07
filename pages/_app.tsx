@@ -2,7 +2,7 @@ import "../styles/main.sass";
 import type { AppProps } from "next/app";
 import { useEffect, useState } from "react";
 import { RootStore } from "../stores/RootStore";
-import { Provider } from "inversify-react";
+import { Provider, useInjection } from "inversify-react";
 import { ModalsContainer } from "../modals";
 import "react-toastify/dist/ReactToastify.css";
 import React, { Suspense } from "react";
@@ -25,8 +25,10 @@ import { publicProvider } from "wagmi/providers/public";
 import { ToastContainer } from "react-toastify";
 import Wrapper from "../components/layout/wrapper";
 import "../components/polyfills";
+import AuthProvider from "../components/authProvider/authProvider";
 const { chains, publicClient, webSocketPublicClient } = configureChains(
-  [mainnet,
+  [
+    bscTestnet,
     ...(process.env.NEXT_PUBLIC_ENABLE_TESTNETS === "true" ? [goerli] : []),
   ],
   [publicProvider()]
@@ -40,6 +42,7 @@ const { wallets } = getDefaultWallets({
 const demoAppInfo = {
   appName: "zoo",
 };
+
 const connectors = connectorsForWallets([
   ...wallets,
   {
@@ -69,7 +72,8 @@ function MyApp({ Component, pageProps }: AppProps) {
     <>
       {loading ? (
         <Provider container={container}>
-            <WagmiConfig config={wagmiConfig}>
+          <WagmiConfig config={wagmiConfig}>
+            <AuthProvider>
               <RainbowKitProvider appInfo={demoAppInfo} chains={chains}>
                 <Suspense fallback={<h1>Loading posts...</h1>}>
                   {/* <Rotate /> */}
@@ -80,7 +84,8 @@ function MyApp({ Component, pageProps }: AppProps) {
                   <ModalsContainer />
                 </Suspense>
               </RainbowKitProvider>
-            </WagmiConfig>
+            </AuthProvider>
+          </WagmiConfig>
         </Provider>
       ) : (
         <div>Loading...</div>

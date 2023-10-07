@@ -1,7 +1,7 @@
 import classNames from "classnames";
 import style from "./profile.module.scss";
 import Link from "next/link";
-import { links } from "./profile";
+import { links } from "./claimMenu";
 const Airdrop = () => {
   return (
     <div className={style.profile__page}>

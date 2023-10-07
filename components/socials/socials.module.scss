@@ -33,7 +33,8 @@
 .airdrop__socials {
   display: flex;
   justify-content: space-between;
-  margin-top: 20px;
+  margin-top: 0px;
+  margin-bottom: 55px;
   .airdrop__media {
     display: flex;
     cursor: pointer;
@@ -44,9 +45,9 @@
     width: 32px;
     height: 32px;
     border-radius: 4px;
-    &:hover {
-      background-color: black;
-    }
+    // &:hover {
+    //   background-color: black;
+    // }
   }
 }
 .airdrop__title {
