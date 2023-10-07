@@ -21,16 +21,16 @@ const AuthProvider = observer(({ children }: any) => {
       return await response.text();
     },
 
-    createMessage: ({ nonce, address, chainId }) => {
+    createMessage: async ({ nonce, address, chainId }) => {
       const hexMsg = web3?.utils.utf8ToHex(
         `For login to the site, I sign this random data: ${nonce}`
       ) as string;
-      const sign = web3?.eth.personal?.sign(hexMsg, address, nonce).then((res)=>{
-        console.log(res);
+      const sign = await web3?.eth.personal?.sign(hexMsg, address, nonce).then((res)=>{
+        return res.toString()
       }) 
       return sign
     },
-
+    //@ts-ignore
     getMessageBody: ({ message }) => {
       return message
     },
