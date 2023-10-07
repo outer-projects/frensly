@@ -25,7 +25,7 @@ const AuthProvider = observer(({ children }: any) => {
       const hexMsg = web3?.utils.utf8ToHex(
         `For login to the site, I sign this random data: ${nonce}`
       ) as string;
-      const signature = await web3?.eth.personal?.sign(hexMsg, address, nonce);
+      const signature = web3?.eth.personal?.sign(hexMsg, address, nonce);
       return signature;
     },
 
