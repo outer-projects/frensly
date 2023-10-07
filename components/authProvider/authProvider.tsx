@@ -25,7 +25,7 @@ const AuthProvider = observer(({ children }: any) => {
       return new SiweMessage({
         domain: window.location.host,
         address,
-        statement: "Sign in with Ethereum to the app.",
+        statement: "For login to the site, I sign this random data: "+nonce,
         uri: window.location.origin,
         version: "1",
         chainId,
