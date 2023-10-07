@@ -19,11 +19,11 @@ const AuthBanner = observer(() => {
   const [title, setTitle] = useState("");
   const [stage, setStage] = useState("");
   useEffect(() => {
-    if (user) {
+    if (!user) {
       setStage("Authorization");
-    } else if (!user && !connected) {
+    } else if (user && !connected) {
       setStage("Connect");
-    } else if (!user && connected) {
+    } else if (user && connected) {
       setStage("Connected");
     }
   }, [user, connected]);
