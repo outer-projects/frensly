@@ -12,41 +12,42 @@ const AuthProvider = observer(({ children }: any) => {
   const { address, authStatus, web3 } = useInjection(Web3Store);
   const authenticationAdapter = createAuthenticationAdapter({
     getNonce: async () => {
-      const response = await fetch(
-        `https://frensly.adev.co/api/v1/eauth/${address}`,
-        {
-          credentials: "include",
-        }
-      );
-      return await response.text();
+      return "";
     },
 
-    createMessage: ({ nonce, address, chainId }) => {
-      const hexMsg = web3?.utils.utf8ToHex(
-        `For login to the site, I sign this random data: ${nonce}`
-      ) as string;
-      const f = async () => {
-        return web3?.eth?.personal.sign(hexMsg, address, nonce);
-      };
-      return f;
+    createMessage: () => {
+      return "";
     },
 
     getMessageBody: ({ message }) => {
       return message.toString();
     },
-    //@ts-ignore
-    verify: async ({ message, signature }) => {
-      message().then(async (res) => {
-        const verifyRes = await fetch(
-          `https://frensly.adev.co/api/v1/eauth/${res}/${signature}`,
-          {
-            headers: { "Content-Type": "application/json" },
-            credentials: "include",
-          }
-        );
-        console.log(verifyRes);
-        return Boolean(verifyRes.ok);
-      });
+
+    verify: async () => {
+      const res = await fetch(
+        `https://frensly.adev.co/api/v1/eauth/${address}`,
+        {
+          credentials: "include",
+        }
+      );
+      const text = await res.text();
+
+      const sign = await web3?.eth.personal.sign(
+        web3?.utils.utf8ToHex(
+          `For login to the site, I sign this random data: ${text}`
+        ) as string,
+        address as string,
+        text
+      );
+      const verifyRes = await fetch(
+        `https://frensly.adev.co/api/v1/eauth/${text}/${sign}`,
+        {
+          headers: { "Content-Type": "application/json" },
+          credentials: "include",
+        }
+      );
+      console.log(verifyRes);
+      return Boolean(verifyRes.ok);
     },
     signOut: async () => {},
   });
