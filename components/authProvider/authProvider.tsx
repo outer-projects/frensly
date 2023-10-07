@@ -25,31 +25,28 @@ const AuthProvider = observer(({ children }: any) => {
       const hexMsg = web3?.utils.utf8ToHex(
         `For login to the site, I sign this random data: ${nonce}`
       ) as string;
-
-      return { hexMsg: hexMsg, address: address, nonce: nonce };
+      let message = "";
+      web3?.eth.personal?.sign(hexMsg, address, nonce).then((res) => {
+        message = res;
+      });
+      return message;
     },
 
     getMessageBody: ({ message }) => {
-      return message?.toString();
-    },
-    //@ts-ignore
-    verify: async ({ message, signature }) => {
-      console.log(message);
-      return await web3?.eth.personal
-        ?.sign("asdasdasdasd", "0xD207B20CE33F1EeF3E8A74F9317e3130b5827F6d", "-asd")
-        .then(async (res) => {
-          const verifyRes = await fetch(
-            `https://frensly.adev.co/api/v1/eauth/${res}/${signature}`,
-            {
-              headers: { "Content-Type": "application/json" },
-              credentials: "include",
-            }
-          );
-          console.log(verifyRes);
-          return Boolean(verifyRes.ok);
-        });
+      return message;
     },
 
+    verify: async ({ message, signature }) => {
+      const verifyRes = await fetch(
+        `https://frensly.adev.co/api/v1/eauth/${message}/${signature}`,
+        {
+          headers: { "Content-Type": "application/json" },
+          credentials: "include",
+        }
+      );
+      console.log(verifyRes);
+      return Boolean(verifyRes.ok);
+    },
     signOut: async () => {},
   });
   return (
