@@ -20,17 +20,21 @@ const AuthProvider = observer(({ children }: any) => {
   const authenticationAdapter = createAuthenticationAdapter({
     getNonce: getnonce,
 
-    createMessage: ({nonce}) => {
-      return `For login to the site, I sign this random data: ${nonce}`
-    },
+    createMessage: ({ nonce }) =>
+      web3?.eth.personal.sign(
+        `For login to the site, I sign this random data: ${nonce}`,
+        address as string,
+        nonce
+      ),
 
     getMessageBody: ({ message }) => {
+      //@ts-ignore
       return message.toString();
     },
 
     verify: async ({ message, signature }) => {
       console.log(message, signature);
-      const n = await getnonce()
+      const n = await getnonce();
       const verifyRes = await fetch(
         `https://frensly.adev.co/api/v1/eauth/${n}/${signature}`,
         {
