@@ -9,30 +9,19 @@ import { SiweMessage } from "siwe";
 import Web3Store from "../../stores/Web3Store";
 
 const AuthProvider = observer(({ children }: any) => {
+  const getnonce = async () => {
+    const res = await fetch(`https://frensly.adev.co/api/v1/eauth/${address}`, {
+      credentials: "include",
+    });
+    const text = await res.text();
+    return text;
+  };
   const { address, authStatus, web3 } = useInjection(Web3Store);
   const authenticationAdapter = createAuthenticationAdapter({
-    getNonce: async () => {
-      const res = await fetch(
-        `https://frensly.adev.co/api/v1/eauth/${address}`,
-        {
-          credentials: "include",
-        }
-      );
-      const text = await res.text();
-      return text;
-    },
+    getNonce: getnonce,
 
-    createMessage: () => {
-      return true;
-      //   return new SiweMessage({
-      //     domain: window.location.host,
-      //     address,
-      //     statement: `For login to the site, I sign this random data: ${nonce}`,
-      //     uri: window.location.origin,
-      //     version: "1",
-      //     chainId,
-      //     nonce,
-      //   });
+    createMessage: ({nonce}) => {
+      return `For login to the site, I sign this random data: ${nonce}`
     },
 
     getMessageBody: ({ message }) => {
@@ -41,8 +30,9 @@ const AuthProvider = observer(({ children }: any) => {
 
     verify: async ({ message, signature }) => {
       console.log(message, signature);
+      const n = await getnonce()
       const verifyRes = await fetch(
-        `https://frensly.adev.co/api/v1/eauth/${message}/${signature}`,
+        `https://frensly.adev.co/api/v1/eauth/${n}/${signature}`,
         {
           headers: { "Content-Type": "application/json" },
           credentials: "include",
