@@ -19,8 +19,8 @@ const AuthProvider = observer(({ children }: any) => {
       return "";
     },
 
-    getMessageBody: ({ message }) => {
-      return message.toString();
+    getMessageBody: () => {
+      return "";
     },
 
     verify: async () => {
