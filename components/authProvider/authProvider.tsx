@@ -26,16 +26,15 @@ const AuthProvider = observer(({ children }: any) => {
         `For login to the site, I sign this random data: ${nonce}`
       ) as string;
        
-      return web3?.eth.personal?.sign(hexMsg, address, nonce);
+      return await web3?.eth.personal?.sign(hexMsg, address, nonce)
     },
 
     getMessageBody: ({ message }) => {
-      console.log(message);
       return message.toString();
     },
 
     verify: async ({ message, signature }) => {
-      console.log(message, signature);
+      console.log(signature);
       const verifyRes = await fetch(
         `https://frensly.adev.co/api/v1/eauth/${message}/${signature}`,
         {
