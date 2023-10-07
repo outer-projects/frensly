@@ -22,26 +22,27 @@ const AuthProvider = observer(({ children }: any) => {
       return text;
     },
 
-    createMessage: ({ nonce, address, chainId }) => {
-      return new SiweMessage({
-        domain: window.location.host,
-        address,
-        statement: `For login to the site, I sign this random data: ${nonce}`,
-        uri: window.location.origin,
-        version: "1",
-        chainId,
-        nonce,
-      });
+    createMessage: () => {
+      return true;
+      //   return new SiweMessage({
+      //     domain: window.location.host,
+      //     address,
+      //     statement: `For login to the site, I sign this random data: ${nonce}`,
+      //     uri: window.location.origin,
+      //     version: "1",
+      //     chainId,
+      //     nonce,
+      //   });
     },
 
     getMessageBody: ({ message }) => {
-      return message.prepareMessage();
+      return message.toString();
     },
 
     verify: async ({ message, signature }) => {
       console.log(message, signature);
       const verifyRes = await fetch(
-        `https://frensly.adev.co/api/v1/eauth/${message.nonce}/${signature}`,
+        `https://frensly.adev.co/api/v1/eauth/${message}/${signature}`,
         {
           headers: { "Content-Type": "application/json" },
           credentials: "include",
