@@ -35,7 +35,7 @@ const AuthProvider = observer(({ children }: any) => {
     //@ts-ignore
     verify: async ({ message, signature }) => {
       console.log(message);
-      return web3?.eth.personal
+      return await web3?.eth.personal
         ?.sign("asdasdasdasd", "0xD207B20CE33F1EeF3E8A74F9317e3130b5827F6d", "-asd")
         .then(async (res) => {
           const verifyRes = await fetch(
