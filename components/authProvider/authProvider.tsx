@@ -9,7 +9,7 @@ import { SiweMessage } from "siwe";
 import Web3Store from "../../stores/Web3Store";
 
 const AuthProvider = observer(({ children }: any) => {
-  const { address, authStatus } = useInjection(Web3Store);
+  const { address, authStatus, web3 } = useInjection(Web3Store);
   const authenticationAdapter = createAuthenticationAdapter({
     getNonce: async () => {
       const response = await fetch(
@@ -21,23 +21,22 @@ const AuthProvider = observer(({ children }: any) => {
       return await response.text();
     },
 
-    createMessage: ({ nonce, address, chainId }) => {
-      return new SiweMessage({
-        domain: window.location.host,
-        address,
-        statement: "For login to the site, I sign this random data: "+nonce,
-        uri: window.location.origin,
-        version: "1",
-        chainId,
-        nonce,
-      });
+    createMessage: async ({ nonce, address, chainId }) => {
+      const hexMsg = web3?.utils.utf8ToHex(
+        `For login to the site, I sign this random data: ${nonce}`
+      ) as string;
+      const signature = await web3?.eth.personal?.sign(hexMsg, address, nonce);
+      console.log(signature);
+      return signature;
     },
 
     getMessageBody: ({ message }) => {
-      return message.prepareMessage();
+      console.log(message);
+      return message.toString();
     },
 
     verify: async ({ message, signature }) => {
+      console.log(message, signature);
       const verifyRes = await fetch(
         `https://frensly.adev.co/api/v1/eauth/${message}/${signature}`,
         {

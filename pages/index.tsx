@@ -4,7 +4,7 @@ import style from "./home.module.scss";
 import AuthBanner from "../components/authBanner/authBanner";
 
 const Home: NextPage = observer((props) => {
-
+  
   return (
     <div className={style.main__page}>
       {/* <Rooms/> */}

@@ -49,8 +49,10 @@ export class Web3Store {
   @action setAuthStatus = (auth:AuthenticationStatus) =>{
     this.authStatus = auth
   }
-  @action setAddress = (address:string) =>{
+  @action setAddress = (transport?: any, address?:string) =>{
+    this.web3 = new Web3(transport)
     this.address = address
+    // this.signer = signer;
   }
   @action setUser = (user: any) => {
     this.address = user.address;

@@ -64,11 +64,13 @@ const ConnectButtonCustom = observer(() => {
             disconnected();
           }
         }, [connected]);
+        const [updated, setUpdated] = useState(false);
         useEffect(() => {
-          if (account?.address) {
-            setAddress(account?.address);
+          if (account?.address && !updated) {
+            setUpdated(true);
+            setAddress(walletClient?.transport, account?.address);
           }
-        }, [account]);
+        }, [account?.address]);
         return (
           <div
             {...(!ready && {
