@@ -21,31 +21,32 @@ const AuthProvider = observer(({ children }: any) => {
       return await response.text();
     },
 
-    createMessage: async ({ nonce, address, chainId }) => {
+    createMessage: ({ nonce, address, chainId }) => {
       const hexMsg = web3?.utils.utf8ToHex(
         `For login to the site, I sign this random data: ${nonce}`
       ) as string;
-      let message = "";
-      await web3?.eth?.personal.sign(hexMsg, address, nonce).then((res) => {
-        message = res;
-      });
-      return message;
+      const f = async () => {
+        return web3?.eth?.personal.sign(hexMsg, address, nonce);
+      };
+      return f;
     },
 
     getMessageBody: ({ message }) => {
       return message.toString();
     },
-
+    //@ts-ignore
     verify: async ({ message, signature }) => {
-      const verifyRes = await fetch(
-        `https://frensly.adev.co/api/v1/eauth/123/${signature}`,
-        {
-          headers: { "Content-Type": "application/json" },
-          credentials: "include",
-        }
-      );
-      console.log(verifyRes);
-      return Boolean(verifyRes.ok);
+      message().then(async (res) => {
+        const verifyRes = await fetch(
+          `https://frensly.adev.co/api/v1/eauth/${res}/${signature}`,
+          {
+            headers: { "Content-Type": "application/json" },
+            credentials: "include",
+          }
+        );
+        console.log(verifyRes);
+        return Boolean(verifyRes.ok);
+      });
     },
     signOut: async () => {},
   });
