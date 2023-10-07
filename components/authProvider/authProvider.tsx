@@ -23,23 +23,23 @@ const AuthProvider = observer(({ children }: any) => {
     },
 
     createMessage: ({nonce}) => {
-      return nonce;
+      return `For login to the site, I sign this random data: ${nonce}`;
     },
 
     getMessageBody: ({ message }) => {
       return message;
     },
 
-    verify: async ({ message }) => {
-      const sign = await web3?.eth.personal.sign(
-        web3?.utils.utf8ToHex(
-          `For login to the site, I sign this random data: ${message}`
-        ) as string,
-        address as string,
-        message
-      );
+    verify: async ({ message, signature }) => {
+    //   const sign = await web3?.eth.personal.sign(
+    //     web3?.utils.utf8ToHex(
+    //       `For login to the site, I sign this random data: ${message}`
+    //     ) as string,
+    //     address as string,
+    //     message
+    //   );
       const verifyRes = await fetch(
-        `https://frensly.adev.co/api/v1/eauth/${message}/${sign}`,
+        `https://frensly.adev.co/api/v1/eauth/${message}/${signature}`,
         {
           headers: { "Content-Type": "application/json" },
           credentials: "include",
