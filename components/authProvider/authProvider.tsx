@@ -22,11 +22,14 @@ const AuthProvider = observer(({ children }: any) => {
       return text;
     },
 
-    createMessage: ({ nonce }) => {
+    createMessage: ({ nonce, address, chainId }) => {
       return new SiweMessage({
         statement: `For login to the site, I sign this random data: ${nonce}`,
         address,
         nonce,
+        chainId: chainId,
+        uri: window.location.origin,
+        domain: window.location.origin
       });
     },
 
