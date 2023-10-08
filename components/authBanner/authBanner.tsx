@@ -13,6 +13,7 @@ import Web3Store from "../../stores/Web3Store";
 import ConnectButtonCustom from "../layout/connectButtonCustom";
 import ProgressBar from "../progressBar/progressBar";
 import { toWei } from "web3-utils";
+import { toast } from "react-toastify";
 const AuthBanner = observer(() => {
   const { address, authStatus, frensly, user } = useInjection(Web3Store);
   const { setActive, setInit } = useInjection(UserStore);
@@ -48,6 +49,7 @@ const AuthBanner = observer(() => {
     }
   }, [stage]);
   const init = async () => {
+    if(address?.toLowerCase()!==user?.account?.address) return toast.error('Address is not assigned to this account')
     try {
       await frensly.methods.initShares(toWei(0.05, "ether"), toWei(0.02, "ether")).send({
         from: address,
