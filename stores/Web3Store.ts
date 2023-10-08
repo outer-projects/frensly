@@ -5,9 +5,11 @@ import { RootStore } from "./RootStore";
 import { Signer, ethers } from "ethers";
 import Web3 from "web3";
 import { frenslyAbi, frenslyContract } from "../utils/contracts/frensly";
-
+import jwtDecode from "jwt-decode";
 import { WalletClient } from "wagmi";
 import { AuthenticationStatus } from "@rainbow-me/rainbowkit";
+import axios from "axios";
+import { innerBackend, setAuthToken } from "../utils/utilities";
 
 @injectable()
 export class Web3Store {
@@ -36,24 +38,17 @@ export class Web3Store {
         ? (this.signer.transport as any)
         : process.env.NEXT_PUBLIC_NODE
     );
-    this.socketWeb3 = new Web3(
-      process.env.NEXT_PUBLIC_SOCKET_NODE
-    );
+    this.socketWeb3 = new Web3(process.env.NEXT_PUBLIC_SOCKET_NODE);
 
     this.frensly = new this.web3.eth.Contract(
       frenslyAbi as any,
       frenslyContract
     );
-
   };
-  @action setAuthStatus = (auth:AuthenticationStatus) =>{
-    this.authStatus = auth
-  }
-  @action setAddress = (transport?: any, address?:string) =>{
-    this.web3 = new Web3(transport)
-    this.address = address
-    // this.signer = signer;
-  }
+  @action setAuthStatus = (auth: AuthenticationStatus) => {
+    this.authStatus = auth;
+  };
+
   @action setUser = (user: any) => {
     this.address = user.address;
   };
@@ -68,7 +63,66 @@ export class Web3Store {
       this.getBalance();
     }
   };
+  @action auth = async () => {
+    try {
+      const { data } = await axios.get(
+        `https://frensly.adev.co/api/v1/eauth/${this.address}`,
+        {
+          withCredentials: true,
+        }
+      );
+      this.setAuthStatus("loading");
+      const jwtTTL = localStorage.getItem("jwtTTL");
+      const isTokenExpired = parseInt(`${jwtTTL}`) < Date.now();
+      if (
+        (this.web3 && isTokenExpired) ||
+        !localStorage.getItem("jwt") ||
+        this.address != localStorage.getItem("address")
+      ) {
+        const signature = await this.web3?.eth.personal.sign(
+          this.web3?.utils.utf8ToHex(
+            `By signing this transaction, I confirm that I have read and fully accept the agreement and the project policy and understand all possible risks described in the disclaimer at https://minebarons.io/dis.txt ${data}`
+          ),
+          this.address as string,
+          data
+        );
+        // console.log(message, signature);
+        const res = await axios.get(
+          `https://frensly.adev.co/api/v1/eauth/${data
+            ?.toString()
+            .trim()}/${signature?.toString().trim()}`,
+          { withCredentials: true }
+        );
 
+        localStorage.setItem("jwt", res.data.token);
+        localStorage.setItem("address", this.address as string);
+        const decodedData = jwtDecode<{ exp: number }>(res.data.token);
+
+        localStorage.setItem("jwtTTL", (decodedData.exp * 1000).toString());
+        this.setAuthStatus("authenticated");
+        return res.data.token;
+      } else {
+        this.setAuthStatus("authenticated");
+      }
+    } catch (error) {
+      console.error(error);
+      this.setAuthStatus("unauthenticated");
+    }
+  };
+  @action checkAuth = async () => {
+    try {
+      setAuthToken();
+      const res = await innerBackend.get("user", {
+        withCredentials: true,
+      });
+      this.setAuthStatus("authenticated");
+      return true;
+    } catch (e) {
+      console.log(e);
+      this.setAuthStatus("unauthenticated");
+      return false;
+    }
+  };
   @action getBalance = async () => {
     try {
       this.web3 = new Web3(
@@ -80,7 +134,11 @@ export class Web3Store {
         frenslyAbi as any,
         frenslyContract
       );
-
+      this.checkAuth().then((res) => {
+        if (!res) {
+          this.auth();
+        }
+      });
       // let hexbalance =
       //   this.erc20 && (await this.erc20.methods.balanceOf(this.address).call());
       // console.log(Math.floor(Number(ethers.formatEther(hexbalance))));

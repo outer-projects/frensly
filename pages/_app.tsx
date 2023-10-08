@@ -73,18 +73,16 @@ function MyApp({ Component, pageProps }: AppProps) {
       {loading ? (
         <Provider container={container}>
           <WagmiConfig config={wagmiConfig}>
-            <AuthProvider>
-              <RainbowKitProvider appInfo={demoAppInfo} chains={chains}>
-                <Suspense fallback={<h1>Loading posts...</h1>}>
-                  {/* <Rotate /> */}
-                  <Wrapper>
-                    <AnyComponent {...pageProps} />
-                  </Wrapper>
-                  <ToastContainer style={{ zIndex: 10000000000 }} />
-                  <ModalsContainer />
-                </Suspense>
-              </RainbowKitProvider>
-            </AuthProvider>
+            <RainbowKitProvider appInfo={demoAppInfo} chains={chains}>
+              <Suspense fallback={<h1>Loading posts...</h1>}>
+                {/* <Rotate /> */}
+                <Wrapper>
+                  <AnyComponent {...pageProps} />
+                </Wrapper>
+                <ToastContainer style={{ zIndex: 10000000000 }} />
+                <ModalsContainer />
+              </Suspense>
+            </RainbowKitProvider>
           </WagmiConfig>
         </Provider>
       ) : (

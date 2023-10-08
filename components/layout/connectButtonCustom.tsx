@@ -18,7 +18,6 @@ const ConnectButtonCustom = observer(() => {
     disconnected,
     balance,
     setAuthStatus,
-    setAddress,
   } = useInjection(Web3Store);
 
   useEffect(() => {
@@ -39,7 +38,7 @@ const ConnectButtonCustom = observer(() => {
       }) => {
         const { data: walletClient } = useWalletClient({
           onSuccess(data) {
-            console.log("Success", data, walletClient);
+            console.log("Success", data);
             setSigner(data, chain?.unsupported);
           },
         });
@@ -64,11 +63,11 @@ const ConnectButtonCustom = observer(() => {
             disconnected();
           }
         }, [connected]);
-        useEffect(() => {
-          if (account?.address ) {
-            setAddress(walletClient?.transport, account?.address);
-          }
-        }, [account?.address]);
+        // useEffect(() => {
+        //   if (account?.address ) {
+        //     setAddress(walletClient?.transport, account?.address);
+        //   }
+        // }, [account?.address]);
         return (
           <div
             {...(!ready && {
