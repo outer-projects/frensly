@@ -81,7 +81,7 @@ export class Web3Store {
       ) {
         const signature = await this.web3?.eth.personal.sign(
           this.web3?.utils.utf8ToHex(
-            `By signing this transaction, I confirm that I have read and fully accept the agreement and the project policy and understand all possible risks described in the disclaimer at https://minebarons.io/dis.txt ${data}`
+            `For login to the site, I sign this random data: ${data}`,
           ),
           this.address as string,
           data
