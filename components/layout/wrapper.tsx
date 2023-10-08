@@ -13,7 +13,7 @@ const Wrapper = observer(({ children }: any) => {
   const { web3, frensly, address, user, setUser } = useInjection(Web3Store);
   const isInit = async () => {
     console.log(address,user?.account?.address); 
-    if(address!==user?.account?.address) return toast.error('Address is not assigned to this account')
+    if(address?.toLowerCase()!==user?.account?.address) return toast.error('Address is not assigned to this account')
     try {
       const res = await frensly.methods.isSharesSubject(address).call();
       setInit(res)
