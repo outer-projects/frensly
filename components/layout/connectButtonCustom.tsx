@@ -8,6 +8,7 @@ import { useDisconnect, usePublicClient } from "wagmi";
 import { useWalletClient } from "wagmi";
 import style from "./header.module.scss";
 import { addressSlice } from "../../utils/utilities";
+import classNames from "classnames";
 const ConnectButtonCustom = observer(() => {
   const { disconnect } = useDisconnect();
   const [_balance, setBalance] = useState(0);
@@ -17,7 +18,8 @@ const ConnectButtonCustom = observer(() => {
     setSigner,
     disconnected,
     balance,
-    setAddress
+    setAddress,
+    user,
   } = useInjection(Web3Store);
 
   useEffect(() => {
@@ -57,14 +59,13 @@ const ConnectButtonCustom = observer(() => {
 
         useEffect(() => {
           setConnected(connected as boolean);
-          console.log('object');
+          console.log("object");
           if (connected) {
-            
             setAddress(account);
           } else {
             disconnected();
           }
-        }, [connected,account?.address]);
+        }, [connected, account?.address]);
         // useEffect(() => {
         //   if (account?.address ) {
         //     setAddress(walletClient?.transport, account?.address);
@@ -90,9 +91,16 @@ const ConnectButtonCustom = observer(() => {
                   <button
                     onClick={openChainModal}
                     type="button"
-                    className={style.connect__button}
+                    className={classNames(
+                      style.connect__button,
+                      user?.account && style.connect__light
+                    )}
                   >
-                    Wrong network
+                    <img
+                      src="../../icons/MetaMask.svg"
+                      style={{ marginTop: "0px" }}
+                    />
+                    {"Sign the message"}
                   </button>
                 );
               }

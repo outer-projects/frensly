@@ -19,7 +19,7 @@ const Twitter = ({ color }: { color?: string }) => {
       <path
         d="M15.1525 19.5803L0.835976 0.437948L6.12841 0.420423L20.4832 19.5803H15.1525Z"
         fill={color ? color : hover ? "none" : "#BBBEC7"}
-        stroke={hover ? "#BBBEC7" : "transparent"}
+        stroke={color ? 'transparent' : hover ? "#BBBEC7" : "transparent"}
         strokeWidth={hover ? "1" : "0"}
       />
     </svg>
