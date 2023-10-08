@@ -6,7 +6,6 @@ import { RootStore } from "./RootStore";
 @injectable()
 export class UserStore {
   @observable init: boolean = false;
-  @observable user: any = undefined;
   @observable opacity: boolean = false;
   @observable active: number = 0
   @observable filterGlobal: { rangeFrom: number; rangeTo: number } = {
@@ -19,9 +18,6 @@ export class UserStore {
   @action setOpacity = (opacity:boolean) => {
     this.opacity = opacity
   };
-  @action setUser = (user:any) =>{
-    this.user = user
-  }
   @action setInit = (init: boolean) => {
     this.init = init;
   };

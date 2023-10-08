@@ -1,14 +1,13 @@
 import { observer } from "mobx-react";
 import type { NextPage } from "next";
 import style from "./home.module.scss";
-import Profile from "../components/claimMenu/claimMenu";
+import Profile from "../components/profile/profile";
 
 const AirdropPage: NextPage = observer((props) => {
-
   return (
-    <div className={style.main__page}>
+    <div className={style.explore__page}>
       {/* <Rooms/> */}
-      <Profile/>
+      <Profile />
       {/* <AuthBanner /> */}
       {/* <AirdropBanner /> */}
       {/* <ClaimLogin />

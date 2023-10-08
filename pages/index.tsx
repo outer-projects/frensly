@@ -8,13 +8,13 @@ import { UserStore } from "../stores/UserStore";
 import { useEffect } from "react";
 
 const Home: NextPage = observer((props) => {
-  const { init, user } = useInjection(UserStore);
-
+  const { init } = useInjection(UserStore);
+  const { user } = useInjection(Web3Store);
   return (
     <div className={style.main__page}>
       {/* <Rooms/> */}
       {/* <Profile/> */}
-      {(!init || !user) && <AuthBanner />}
+      {(!init || !user.account) && <AuthBanner />}
       {/* <AirdropBanner /> */}
       {/* <ClaimLogin />
       <Faq/> */}

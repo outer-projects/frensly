@@ -5,7 +5,6 @@ import { RootStore } from "./RootStore";
 import { Signer, ethers } from "ethers";
 import Web3 from "web3";
 import { frenslyAbi, frenslyContract } from "../utils/contracts/frensly";
-import jwtDecode from "jwt-decode";
 import { WalletClient } from "wagmi";
 import { AuthenticationStatus } from "@rainbow-me/rainbowkit";
 import axios from "axios";
@@ -17,6 +16,7 @@ export class Web3Store {
   @observable connected: boolean = false;
   @observable provider: any = undefined;
   @observable unsupported?: boolean;
+  @observable user?: any;
   @observable signer?: WalletClient | null = undefined;
   @observable balance: number = 0;
   @observable web3?: Web3;
@@ -48,9 +48,11 @@ export class Web3Store {
   @action setAuthStatus = (auth: AuthenticationStatus) => {
     this.authStatus = auth;
   };
-
-  @action setUser = (user: any) => {
+  @action setAddress = (user: any) => {
     this.address = user.address;
+  };
+  @action setUser = (user: any) => {
+    this.user = user;
   };
 
   disconnected = () => {
@@ -72,16 +74,10 @@ export class Web3Store {
         }
       );
       this.setAuthStatus("loading");
-      const jwtTTL = localStorage.getItem("jwtTTL");
-      const isTokenExpired = parseInt(`${jwtTTL}`) < Date.now();
-      if (
-        (this.web3 && isTokenExpired) ||
-        !localStorage.getItem("jwt") ||
-        this.address != localStorage.getItem("address")
-      ) {
+      if (this.web3) {
         const signature = await this.web3?.eth.personal.sign(
           this.web3?.utils.utf8ToHex(
-            `For login to the site, I sign this random data: ${data}`,
+            `For login to the site, I sign this random data: ${data}`
           ),
           this.address as string,
           data
@@ -93,14 +89,13 @@ export class Web3Store {
             .trim()}/${signature?.toString().trim()}`,
           { withCredentials: true }
         );
-
-        localStorage.setItem("jwt", res.data);
-        localStorage.setItem("address", this.address as string);
-        const decodedData = jwtDecode<{ exp: number }>(res.data);
-
-        localStorage.setItem("jwtTTL", (decodedData.exp * 1000).toString());
-        this.setAuthStatus("authenticated");
-        return res.data;
+        console.log(res.data);
+        if (res.data.includes("Succesful")) {
+          this.setAuthStatus("authenticated");
+          return res.data;
+        } else {
+          this.setAuthStatus("unauthenticated");
+        }
       } else {
         this.setAuthStatus("authenticated");
       }
@@ -116,7 +111,8 @@ export class Web3Store {
         withCredentials: true,
       });
       this.setAuthStatus("authenticated");
-      return true;
+      this.user = res.data
+      return res.data.account;
     } catch (e) {
       console.log(e);
       this.setAuthStatus("unauthenticated");
@@ -135,7 +131,7 @@ export class Web3Store {
         frenslyContract
       );
       this.checkAuth().then((res) => {
-        if (!res || !localStorage.getItem('jwt')) {
+        if (!res) {
           this.auth();
         }
       });

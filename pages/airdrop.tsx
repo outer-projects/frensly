@@ -1,7 +1,7 @@
 import { observer } from "mobx-react";
 import type { NextPage } from "next";
 import style from "./home.module.scss";
-import Airdrop from "../components/claimMenu/airdrop";
+import Airdrop from "../components/claimMenu old/airdrop";
 
 const AirdropPage: NextPage = observer((props) => {
 

@@ -1,3 +1,5 @@
+@import "../../styles/_vars.sass";
+
 .banner {
   display: flex;
   flex-direction: column;
@@ -42,13 +44,13 @@
   flex-direction: column;
   letter-spacing: -1.12px;
   align-items: center;
-  color: #151614;
+  color: $black;
   @media (max-width: 800px) {
     font-size: 40px;
   }
 }
 .banner__bottom {
-  color: #676766!important;
+  color: $grey!important;
 }
 .banner__early {
   display: flex;
@@ -77,7 +79,7 @@
   margin-bottom: 56px;
 }
 .banner__small__text {
-  color: #676766;
+  color: $grey;
   text-align: center;
   font-family: "DMSans";
   font-size: 14px;
@@ -103,7 +105,7 @@
   font-family: "DMSans";
   font-size: 16px;
   font-style: normal;
-  color: #151614;
+  color: $black;
   max-width: 420px;
   line-height: 24px;
   font-weight: 400;

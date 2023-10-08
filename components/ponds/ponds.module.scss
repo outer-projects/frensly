@@ -1,0 +1,269 @@
+@import "../../styles/_vars.sass";
+
+.ponds {
+  margin-top: 32px;
+  width: 616px;
+  font-family: "DMSans";
+}
+.ponds__search {
+  margin-top: 24px;
+  margin-bottom: 48px;
+}
+.ponds__total {
+  color: $black;
+  display: flex;
+  justify-content: space-between;
+
+  letter-spacing: -0.2px;
+  border-bottom: 1px solid #f1f1f1;
+}
+.chat__text {
+  color: $grey;
+  font-size: 14px;
+  line-height: 20px; /* 142.857% */
+  letter-spacing: -0.14px;
+  span {
+    font-size: 12px;
+    line-height: 18px;
+    margin-left: 4px;
+  }
+}
+.ponds__total__text {
+  color: $grey;
+  font-size: 16px;
+  line-height: 24px; /* 150% */
+  letter-spacing: -0.16px;
+  padding-bottom: 24px;
+}
+.chat__dollar {
+  color: $grey;
+  text-align: right;
+  font-size: 12px;
+  line-height: 18px; /* 150% */
+  letter-spacing: -0.12px;
+}
+.ponds__chat {
+  margin-top: 24px;
+  margin-bottom: 50px;
+}
+.chat__value {
+  color: $black;
+  font-size: 16px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  line-height: 24px; /* 150% */
+  letter-spacing: -0.16px;
+}
+.chat__item {
+  display: flex;
+  border-radius: 16px;
+  cursor: pointer;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #f8f8f8;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 16px;
+  padding-right: 16px;
+  margin-bottom: 8px;
+  &:hover {
+    background-color: #f1f1f1;
+  }
+}
+.chat__info {
+  display: flex;
+}
+.chat__avatar {
+  margin-right: 8px;
+}
+.chat__name {
+  color: $black;
+  font-size: 16px;
+  font-weight: bold;
+  line-height: 24px; /* 150% */
+  letter-spacing: -0.16px;
+}
+.openchat__avatar {
+  width: 40px;
+  height: 40px;
+  margin-right: 8px;
+}
+.openchat__status {
+  color: $grey;
+  font-size: 14px;
+  line-height: 20px; /* 142.857% */
+  letter-spacing: -0.14px;
+}
+.openchat__info {
+  margin-top: 24px;
+  padding-top: 24px;
+  border-radius: 32px;
+  background: #fff;
+}
+.openchat__row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 32px;
+  margin-left: 24px;
+  margin-right: 24px;
+}
+.openchat__val {
+  display: flex;
+  align-items: center;
+}
+.openchat {
+  font-family: "DMSans";
+  margin-top: 32px;
+  width: 616px;
+}
+.openchat__messages {
+  display: flex;
+  flex-direction: column;
+  padding-top: 5px;
+  border-top: 2px solid #f1f1f1;
+  border-bottom: 2px solid #f1f1f1;
+  margin-left: 24px;
+  margin-top: 24px;
+  margin-right: 24px;
+  color: $black;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px; /* 150% */
+  letter-spacing: -0.16px;
+}
+.openchat__time {
+  color: $grey;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 18px; /* 150% */
+  letter-spacing: -0.12px;
+  margin-left: 16px;
+  align-self: flex-end;
+}
+.openchat__my_message {
+  align-self: flex-end;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  max-width: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: left;
+  border-radius: 24px 8px 0px 24px;
+  min-height: 40px;
+  padding-left: 16px;
+  padding-right: 16px;
+  background: #effdde;
+  margin-bottom: 16px;
+}
+.openchat__message_to_me {
+  align-self: flex-start;
+  max-width: 400px;
+  display: flex;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  align-items: center;
+  justify-content: center;
+  text-align: left;
+  min-height: 40px;
+  padding-left: 16px;
+  padding-right: 16px;
+  border-radius: 16px 24px 24px 8px;
+  background: #f1f1f1;
+  margin-bottom: 16px;
+}
+.openchat__holders {
+  display: flex;
+  align-items: center;
+}
+.openchat__shares {
+  color: $grey;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: -0.16px;
+  span {
+    color: $black;
+    font-weight: bold;
+  }
+}
+.openchat__share__value {
+  display: flex;
+  color: $black;
+  font-size: 18px;
+  font-weight: bold;
+  line-height: 26px; /* 144.444% */
+  letter-spacing: -0.18px;
+  margin-right: 8px;
+}
+.openchat__user {
+  display: flex;
+  justify-content: space-between;
+  margin-left: 24px;
+  margin-right: 24px;
+}
+.openchat__button {
+  width: 121px;
+  height: 48px;
+}
+.openchat__user__left {
+  display: flex;
+  align-items: center;
+}
+.openchat__user__name {
+  color: $black;
+  font-size: 20px;
+  font-weight: bold;
+  line-height: 28px; /* 140% */
+  letter-spacing: -0.2px;
+}
+.chat__share {
+  display: flex;
+  align-items: center;
+  color: $grey;
+  font-size: 12px;
+  line-height: 18px; /* 150% */
+  letter-spacing: -0.12px;
+
+  div {
+    border-radius: 100px;
+    height: 22px;
+    padding-left: 8px;
+    padding-right: 8px;
+    display: flex;
+    align-items: center;
+    background: #f1f1f1;
+  }
+}
+.ponds__total__value {
+  color: $black;
+  font-size: 16px;
+  font-weight: bold;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  line-height: 28px; /* 150% */
+  letter-spacing: -0.16px;
+}
+.write {
+  margin-left: 16px;
+  margin-right: 24px;
+  font-family: 'DMSans';
+  display: flex;
+  margin-bottom: 16px;
+}
+.write__input {
+  color: $black;
+  height: 56px;
+  width: 100%;
+  border: none;
+  font-size: 16px;
+  outline: none;
+  line-height: 24px; /* 150% */
+  letter-spacing: -0.16px;
+  margin-left: 16px;
+  &::placeholder {
+    color: #b4b4b3;
+  }
+}

@@ -17,7 +17,7 @@ const ConnectButtonCustom = observer(() => {
     setSigner,
     disconnected,
     balance,
-    setAuthStatus,
+    setAddress
   } = useInjection(Web3Store);
 
   useEffect(() => {
@@ -58,7 +58,7 @@ const ConnectButtonCustom = observer(() => {
         useEffect(() => {
           setConnected(connected as boolean);
           if (connected) {
-            setUser(account);
+            setAddress(account);
           } else {
             disconnected();
           }
@@ -98,8 +98,8 @@ const ConnectButtonCustom = observer(() => {
               return (
                 <div className="header--wrapper__block">
                   <div className={style.account} onClick={openAccountModal}>
-                    <img src="../../fren_balance.svg" alt="#" />
-                    <div style={{ marginLeft: "5px" }}>
+                    <img src="../../Avatar.svg" alt="#" />
+                    <div style={{ marginLeft: "8px" }}>
                       <div className={style.balance}>
                         {account.displayBalance}
                       </div>

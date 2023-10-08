@@ -1,0 +1,314 @@
+@import "../../styles/_vars.sass";
+
+.profile {
+  margin-top: 32px;
+  width: 616px;
+}
+.profile__info {
+  border-top-left-radius: 32px;
+  border-top-right-radius: 32px;
+  background: #fff;
+  padding: 24px;
+}
+.profile__row {
+  display: flex;
+  justify-content: space-between;
+}
+.profile__buttons {
+  display: flex;
+}
+.profile__light__button {
+  border-radius: 100px;
+  border: 1px solid $green;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  padding-left: 24px;
+  padding-right: 24px;
+  height: 36px;
+  color: $black;
+  font-family: "DMSans";
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px; /* 150% */
+  letter-spacing: -0.16px;
+}
+.profile__type {
+  color: $grey;
+  text-align: center;
+  font-family: "DMSans";
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  padding-left: 16px;
+  padding-right: 16px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  margin-right: 8px;
+  cursor: pointer;
+  border-radius: 100px;
+  margin-right: 8px;
+  line-height: 20px; /* 142.857% */
+  letter-spacing: -0.14px;
+}
+.profile__type__active {
+  border-radius: 100px;
+  background: #f1f1f1;
+  font-weight: bold;
+  color: $black;
+}
+.profile__buy {
+  width: 568px;
+  height: 48px;
+}
+.profile__stats__row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.profile__stats__line {
+  display: flex;
+  padding-left: 16px;
+  padding-right: 16px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  width: 49%;
+  align-items: center;
+  justify-content: space-between;
+  background: #f8f8f8;
+  margin-top: -2px;
+}
+.profile__stats__follows {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 24px;
+  padding-left: 16px;
+  padding-right: 16px;
+}
+.profile__button {
+  margin-top: 16px;
+  margin-bottom: 26px;
+}
+.profile__share {
+  border-radius: 16px;
+  background: #f8f8f8;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  padding-left: 16px;
+}
+.profile__text {
+  color: $grey;
+  font-family: "DMSans";
+  font-size: 16px;
+  font-style: normal;
+  line-height: 24px; /* 150% */
+  letter-spacing: -0.16px;
+  display: flex;
+  align-items: center;
+  span {
+    font-weight: bold;
+    color: $black;
+    margin-right: 5px;
+  }
+  img {
+    margin-right: 5px;
+  }
+}
+.black {
+  color: $black;
+}
+.profile__stats__follow {
+  display: flex;
+  align-items: center;
+}
+.profile__stats {
+  margin-top: 10px;
+}
+.profile__balance {
+  color: $black;
+  display: flex;
+  align-items: center;
+  text-align: right;
+  font-family: "DMSans";
+  font-size: 20px;
+  font-style: normal;
+  font-weight: bold;
+  line-height: 28px; /* 140% */
+  letter-spacing: -0.2px;
+  img {
+    width: 24px;
+    height: 24px;
+  }
+}
+.twitter__feed {
+  padding-top: 24px;
+  background: #fff;
+}
+.twitter__add {
+  margin-left: 36px;
+  width: 50px;
+  transform: translateY(-52px);
+}
+.twitter__post {
+  width: 81px;
+  height: 40px;
+  align-self: flex-end;
+  transform: translateY(-58px);
+}
+.twitter__button {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  margin-top: -30px;
+  padding-right: 40px;
+}
+.twitter__textarea {
+  margin-left: 24px;
+  margin-right: 24px;
+  width: 100%;
+  border-radius: 16px;
+  width: 568px;
+  padding: 16px;
+  padding-left: 65px;
+  padding-right: 100px;
+  min-height: 72px;
+  border: 1px solid $green;
+  outline: none;
+  background: var(--Black-3, #f8f8f8);
+  color: $black;
+  font-family: "DMSans";
+  font-size: 16px;
+  line-height: 36px; /* 150% */
+  letter-spacing: -0.16px;
+}
+.profile__bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 36px;
+  margin-top: 49px;
+}
+.profile__types {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  height: 36px;
+}
+.profile__name {
+  display: flex;
+  align-items: center;
+  img {
+    margin-left: 5px;
+  }
+  span {
+    color: $grey;
+    /* Paragraphs/P4 */
+    font-family: "DMSans";
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 20px; /* 142.857% */
+    letter-spacing: -0.14px;
+  }
+}
+.profile__title {
+  color: #23262f;
+  font-family: "DMSans";
+  font-size: 20px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  line-height: 28px;
+  .avatar {
+    margin-right: 8px;
+    width: 56px;
+    height: 56px;
+  }
+}
+.twitter__avatar {
+  margin-right: 8px;
+}
+.twitter__row {
+  display: flex;
+  align-items: center;
+  font-family: "DMSans";
+}
+.twitter__name {
+  color: $black;
+  font-size: 16px;
+  font-weight: bold;
+  line-height: 24px;
+  margin-right: 5px;
+  letter-spacing: -0.16px;
+}
+.twitter__nickname {
+  color: $grey;
+  font-size: 14px;
+  line-height: 20px; /* 142.857% */
+  letter-spacing: -0.14px;
+}
+.twitter__interact {
+  display: flex;
+  align-items: center;
+  color: $grey;
+  font-family: "DMSans";
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px; /* 142.857% */
+  letter-spacing: -0.14px;
+  margin-top: 16px;
+  margin-bottom: 50px;
+}
+.twitter__icon {
+  display: flex;
+  align-items: center;
+  margin-right: 48px;
+}
+.twitter__text {
+  color: $grey;
+  /* Paragraphs/P4 */
+  font-family: "DMSans";
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px; /* 142.857% */
+  letter-spacing: -0.14px;
+  max-width: 488px;
+}
+.twitter__time {
+  color: #b4b4b3;
+  font-size: 14px;
+  margin-left: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px; /* 142.857% */
+  letter-spacing: -0.14px;
+  &::before {
+    content: "·";
+    margin-right: 12px;
+    font-weight: bold;
+    line-height: 3px;
+    transform: translateY(-10px);
+  }
+}
+.profile__subtitle {
+  color: #777e90;
+  font-size: 14px;
+  margin-top: -3px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
+}
+.twitter__one__post {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-left: 24px;
+  margin-right: 24px;
+}

@@ -1,3 +1,5 @@
+@import "../../styles/_vars.sass";
+
 .progress {
   display: flex;
   width: 616px;
@@ -18,5 +20,5 @@
   margin-right: 5px;
 }
 .active {
-  background: #a6d000;
+  background: $green;
 }
