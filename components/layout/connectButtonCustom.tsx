@@ -57,12 +57,14 @@ const ConnectButtonCustom = observer(() => {
 
         useEffect(() => {
           setConnected(connected as boolean);
+          console.log('object');
           if (connected) {
+            
             setAddress(account);
           } else {
             disconnected();
           }
-        }, [connected]);
+        }, [connected,account?.address]);
         // useEffect(() => {
         //   if (account?.address ) {
         //     setAddress(walletClient?.transport, account?.address);
