@@ -19,6 +19,7 @@ const AuthBanner = observer(() => {
   const { setActive, setInit } = useInjection(UserStore);
   const [title, setTitle] = useState("");
   const [stage, setStage] = useState("");
+  const [opacity, setOpacity] = useState(false)
   useEffect(() => {
     if (!user) {
       setStage("Authorization");
@@ -57,9 +58,15 @@ const AuthBanner = observer(() => {
       const isInit = await frensly.methods.isSharesSubject(address).call();
       setInit(isInit);
     } catch (e) {
+      toast.error('Provider error')
       console.log(e);
     }
   };
+  useEffect(()=>{
+    let tt = setTimeout(()=>{
+      setOpacity(true)
+    },1000)
+  },[])
   return (
     <div className={style.banner}>
       <img src="../logo.svg" className={style.banner__logo} />

@@ -14,13 +14,13 @@ const Twitter = ({ color }: { color?: string }) => {
     >
       <path
         d="M1.78384 19.958H0L18.426 0.0209961H20.2938L1.78384 19.958Z"
-        fill={color ? color : hover ? "none" : "#D9D9D9"}
+        fill={color ? color : "#D9D9D9"}
       />
       <path
         d="M15.1525 19.5803L0.835976 0.437948L6.12841 0.420423L20.4832 19.5803H15.1525Z"
         fill={color ? color : hover ? "none" : "#BBBEC7"}
-        stroke={color ? color : "#BBBEC7"}
-        stroke-width="0.839454"
+        stroke={hover ? "#BBBEC7" : "transparent"}
+        strokeWidth={hover ? "1" : "0"}
       />
     </svg>
   );
