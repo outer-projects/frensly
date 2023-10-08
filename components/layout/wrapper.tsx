@@ -12,8 +12,8 @@ const Wrapper = observer(({ children }: any) => {
   const { init, setInit } = useInjection(UserStore);
   const { web3, frensly, address, user, setUser } = useInjection(Web3Store);
   const isInit = async () => {
-    console.log(address,user.account.address); 
-    if(address!==user.account.address) return toast.error('Address is not assigned to this account')
+    console.log(address,user?.account?.address); 
+    if(address!==user?.account?.address) return toast.error('Address is not assigned to this account')
     try {
       const res = await frensly.methods.isSharesSubject(address).call();
       setInit(res)
@@ -22,7 +22,7 @@ const Wrapper = observer(({ children }: any) => {
     }
   };
   useEffect(() => {
-    if (web3 && address && user.account) {
+    if (web3 && address && user?.account) {
       isInit();
     }
   }, [web3, address, user]);
@@ -43,10 +43,9 @@ const Wrapper = observer(({ children }: any) => {
   useEffect(() => {
     getUser();
   }, []);
-  console.log(user);
   return (
     <div className={style.page__container}>
-      {(init && user.account) &&<Header />}
+      {(init && user?.account) &&<Header />}
       {children}
     </div>
   );

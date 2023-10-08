@@ -14,7 +14,7 @@ const Home: NextPage = observer((props) => {
     <div className={style.main__page}>
       {/* <Rooms/> */}
       {/* <Profile/> */}
-      {(!init || !user.account) && <AuthBanner />}
+      {(!init || !user?.account) && <AuthBanner />}
       {/* <AirdropBanner /> */}
       {/* <ClaimLogin />
       <Faq/> */}
