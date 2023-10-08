@@ -135,7 +135,7 @@ export class Web3Store {
         frenslyContract
       );
       this.checkAuth().then((res) => {
-        if (!res) {
+        if (!res && !localStorage.getItem('jwt')) {
           this.auth();
         }
       });
