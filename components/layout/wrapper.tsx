@@ -5,10 +5,25 @@ import style from "./wrapper.module.scss";
 import { useInjection } from "inversify-react";
 import { UserStore } from "../../stores/UserStore";
 import axios, { AxiosRequestConfig } from "axios";
+import Web3Store from "../../stores/Web3Store";
 
 const Wrapper = observer(({ children }: any) => {
-  const userStore = useInjection(UserStore);
-  const { setUser, user } = useInjection(UserStore);
+  const { init, setInit, setUser, user } = useInjection(UserStore);
+  const { web3, frensly, address } = useInjection(Web3Store);
+  const isInit = async () => {
+    try {
+      const res = await frensly.methods.isSharesSubject(address).call();
+      setInit(res)
+    } catch (e) {
+      console.log(e);
+    }
+  };
+  useEffect(() => {
+    if (web3) {
+      isInit();
+    }
+  }, [web3]);
+
   const getUser = async () => {
     try {
       const res: AxiosRequestConfig = await axios.get(
@@ -28,7 +43,7 @@ const Wrapper = observer(({ children }: any) => {
   console.log(user);
   return (
     <div className={style.page__container}>
-      {/* {!userStore.user && <Header />} */}
+      {init && <Header />}
       {children}
     </div>
   );

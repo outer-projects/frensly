@@ -14,19 +14,19 @@ import ConnectButtonCustom from "../layout/connectButtonCustom";
 import ProgressBar from "../progressBar/progressBar";
 import { toWei } from "web3-utils";
 const AuthBanner = observer(() => {
-  const { address, connected, frensly } = useInjection(Web3Store);
+  const { address, authStatus, frensly } = useInjection(Web3Store);
   const { user, setActive, setInit } = useInjection(UserStore);
   const [title, setTitle] = useState("");
   const [stage, setStage] = useState("");
   useEffect(() => {
     if (!user) {
       setStage("Authorization");
-    } else if (user && !connected) {
+    } else if (user && authStatus == 'unauthenticated') {
       setStage("Connect");
-    } else if (user && connected) {
+    } else if (user && authStatus == 'authenticated') {
       setStage("Connected");
     }
-  }, [user, connected]);
+  }, [user, authStatus]);
   // console.log(address, connected);
   useEffect(() => {
     switch (stage) {

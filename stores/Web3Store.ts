@@ -94,13 +94,13 @@ export class Web3Store {
           { withCredentials: true }
         );
 
-        localStorage.setItem("jwt", res.data.token);
+        localStorage.setItem("jwt", res.data);
         localStorage.setItem("address", this.address as string);
-        const decodedData = jwtDecode<{ exp: number }>(res.data.token);
+        const decodedData = jwtDecode<{ exp: number }>(res.data);
 
         localStorage.setItem("jwtTTL", (decodedData.exp * 1000).toString());
         this.setAuthStatus("authenticated");
-        return res.data.token;
+        return res.data;
       } else {
         this.setAuthStatus("authenticated");
       }
