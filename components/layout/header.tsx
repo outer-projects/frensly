@@ -43,12 +43,13 @@ const Header = observer(() => {
         <img src="../logo.svg" />
         <div className={style.header__row}>
           {headerText.map((el, i) => {
+            console.log(el.link == "/profile");
             return (
               <Link
                 href={
-                  "../../" + el.link == "/profile"
-                    ? el.link + user?.twitterId
-                    : el.link
+                  "../../" + (el.link == "/profile"
+                    ? el.link +'/'+ user?.twitterId
+                    : el.link)
                 }
                 style={{ textDecoration: "none", color: "auto" }}
               >
