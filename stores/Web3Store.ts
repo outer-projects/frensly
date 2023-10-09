@@ -91,6 +91,7 @@ export class Web3Store {
         );
         console.log(res.data);
         if (res.data.includes("Succesful")) {
+          this.checkAuth()
           this.setAuthStatus("authenticated");
           return res.data;
         } else {
