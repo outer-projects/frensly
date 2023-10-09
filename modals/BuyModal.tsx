@@ -64,7 +64,7 @@ export const BuyModal = observer(({ key, data, idx }: modalProps) => {
   }, [frensly]);
   useEffect(() => {
     if (numberOfShares) {
-      checkPrice(numberOfShares!=="" ? Number(numberOfShares) : 0).then(
+      checkPrice(numberOfShares !== "" ? Number(numberOfShares) : 0).then(
         (res) => {
           setCurrentPrice(res);
         }
@@ -104,7 +104,7 @@ export const BuyModal = observer(({ key, data, idx }: modalProps) => {
                 className={style.buy__user__name}
                 style={{ textAlign: "right" }}
               >
-                {Number(fromWei(priceOfOne, "szabo")).toFixed(3)} ETH
+                {Number(Number(fromWei(priceOfOne, "szabo")).toFixed(3))} ETH
               </div>
               <div className={style.buy__status}>
                 Key price <img src="../icons/Info.svg" />
@@ -129,7 +129,7 @@ export const BuyModal = observer(({ key, data, idx }: modalProps) => {
           <div className={style.buy__amount}>
             <div className={style.buy__amount__title}>Total ETH</div>
             <div className={style.buy__amount__value}>
-              {fromWei(currentPrice, "szabo")} ETH
+              {Number(Number(fromWei(currentPrice, "szabo")).toFixed(6))} ETH
             </div>
           </div>
         </div>
