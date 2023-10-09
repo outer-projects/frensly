@@ -25,7 +25,7 @@ const AuthBanner = observer(() => {
       setStage("Connect wallet");
     } else if (!user) {
       setStage("Authorization");
-    } else if (user?.account && authStatus == "unauthenticated") {
+    } else if (user && authStatus == "unauthenticated") {
       setStage("Connect");
     } else if (user?.account && authStatus == "authenticated") {
       setStage("Connected");
