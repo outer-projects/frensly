@@ -118,7 +118,7 @@ const Profile = observer(() => {
             <div className={style.profile__stats__line}>
               <div className={style.profile__text}>Volume</div>
               <div className={classNames(style.profile__text, style.black)}>
-                {fromWei(Number(profileUser?.account?.totalVolume), "szabo")}{" "}
+                {Number(Number(fromWei(Number(profileUser?.account?.totalVolume), "szabo")).toFixed(5))}{" "}
                 ETH
               </div>
             </div>

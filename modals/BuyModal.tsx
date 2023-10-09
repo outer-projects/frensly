@@ -37,6 +37,7 @@ export const BuyModal = observer(({ key, data, idx }: modalProps) => {
           value: currentPrice * 10 ** 6,
         });
       console.log(res);
+      modalStore.hideAllModals();
       checkAuth();
     } catch (e) {
       console.log(e);
