@@ -35,7 +35,7 @@ const Wrapper = observer(({ children }: any) => {
           withCredentials: true,
         }
       );
-      setUser(res?.data?.user);
+      setUser(res?.data);
     } catch (e) {
       console.log(e);
     }

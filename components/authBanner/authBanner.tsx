@@ -31,7 +31,7 @@ const AuthBanner = observer(() => {
       setStage("Connected");
     } 
   }, [user, authStatus]);
-  console.log(stage,address);
+  console.log(user,stage,address);
   useEffect(() => {
     switch (stage) {
       case "Authorization":
