@@ -21,7 +21,7 @@ export class ExploreStore {
   }
   @action getNewUsers = async () => {
     const query = new URLSearchParams({
-      offset: "1",
+      offset: "0",
       limit: "10",
     }).toString();
     try {
@@ -35,15 +35,14 @@ export class ExploreStore {
   @action searchUsers = async (search: string) => {
     try {
       const res = await axios.get(prefix + "user/search/" + search);
-      this.topUsersList = res.data;
-      this.currentUserList = res.data;
+      this.topUsersList = res.data ? (res.data.byAddress).concat(res.data.byNames) : []
     } catch (e) {
       console.log(e);
     }
   };
   @action getTopUsers = async () => {
     const query = new URLSearchParams({
-      offset: "1",
+      offset: "0",
       limit: "10",
     }).toString();
     try {
