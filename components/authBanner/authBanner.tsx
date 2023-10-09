@@ -21,17 +21,17 @@ const AuthBanner = observer(() => {
   const [stage, setStage] = useState("");
   const [opacity, setOpacity] = useState(false);
   useEffect(() => {
-    if (!user) {
+    if (user?.account && !address) {
+      setStage("Connect wallet");
+    } else if (!user) {
       setStage("Authorization");
     } else if (user?.account && authStatus == "unauthenticated") {
       setStage("Connect");
     } else if (user?.account && authStatus == "authenticated") {
       setStage("Connected");
-    } else if (user.account && !address) {
-      setStage("Connect wallet");
-    }
+    } 
   }, [user, authStatus]);
-  // console.log(address, connected);
+  console.log(stage,address);
   useEffect(() => {
     switch (stage) {
       case "Authorization":
