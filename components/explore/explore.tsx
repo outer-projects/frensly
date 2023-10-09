@@ -41,11 +41,12 @@ const Explore = observer(() => {
       getNewUsers();
     }
   }, [active]);
+  console.log(searchResult)
   return (
     <div className={style.explore}>
       <div className={style.explore__title}>Explore</div>
       <div className={style.explore__users__wrapper}>
-        {/* <img className={style.explore__swipe} src="../icons/swipe.svg" /> */}
+        
         <div className={style.explore__users__row}>
           {searchResult.map((el, i) => {
             if (i <= 4) {
@@ -109,7 +110,7 @@ const Explore = observer(() => {
                 <div className={style.explore__user__left__text}>
                   <div className={style.explore__user__share}>
                     <img src="../icons/Key.svg" />
-                    <div>{(Number(el.account.sharesAmount))/(10 ** 6)} share</div>
+                    <div>{(Number(el?.account?.sharesAmount))/(10 ** 6)} share</div>
                   </div>
                   <div className={style.explore__user__name}>
                     {el.twitterName}
@@ -119,7 +120,7 @@ const Explore = observer(() => {
               <div className={style.explore__user__right}>
                 <div className={style.explore__user__name}>
                   <img src="../icons/Ethereum.svg" />
-                  {fromWei(el.account.totalVolume, 'ether')} ETH
+                  {fromWei(el?.account?.totalVolume, 'szabo')} ETH
                 </div>
                 <div className={style.explore__user__balance__usd}>$0</div>
               </div>
