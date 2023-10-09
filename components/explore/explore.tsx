@@ -4,6 +4,7 @@ import classNames from "classnames";
 import { observer } from "mobx-react";
 import { useInjection } from "inversify-react";
 import { ExploreStore } from "../../stores/ExploreStore";
+import Link from "next/link";
 const types = ["Top", "New Users", "Trending"];
 const Explore = observer(() => {
   const [active, setActive] = useState(0);
@@ -100,6 +101,7 @@ const Explore = observer(() => {
         {currentUserList?.map((el, i) => {
           console.log(el);
           return (
+            <Link href={'/profile/'+el.twitterId}>
             <div className={style.explore__user} key={i}>
               <div className={style.explore__user__left}>
                 <img src={el.avatar} />
@@ -121,6 +123,7 @@ const Explore = observer(() => {
                 <div className={style.explore__user__balance__usd}>$0</div>
               </div>
             </div>
+            </Link>
           );
         })}
       </div>

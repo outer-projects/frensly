@@ -45,16 +45,16 @@ const Profile = observer(() => {
                   src="../icons/twitter_black.svg"
                   style={{ marginRight: "5px" }}
                 />{" "}
-                <span>{profileUser?.twitterHandle}</span>
+                <span>@{profileUser?.twitterHandle}</span>
               </div>
               <div className={style.profile__subtitle}>
-                {addressSlice(profileUser?.account.address)}
+                {addressSlice(profileUser?.account?.address)}
               </div>
             </div>
           </div>
         </div>{" "}
         <div className={style.profile__buttons}>
-          {isMyProfile && (
+          {!isMyProfile && (
             <button
               className={classNames(
                 header.connect__button,
@@ -72,15 +72,15 @@ const Profile = observer(() => {
             className={classNames(
               header.connect__button,
               style.profile__buy,
-              isMyProfile && style.profile__half
+              !isMyProfile && style.profile__half
             )}
-            onClick={() => modalStore.showModal(ModalsEnum.Buy)}
+            onClick={() => modalStore.showModal(ModalsEnum.Buy, {user: profileUser})}
           >
             Buy
           </button>
         </div>
         <div className={classNames(style.profile__text, style.profile__share)}>
-          You own {0} share
+          {(isMyProfile ? "You" : profileUser?.twitterName) +` own ${profileUser?.account?.othersShares.length} share`}
         </div>
         <div className={style.profile__stats}>
           <div className={style.profile__stats__row}>
@@ -114,7 +114,7 @@ const Profile = observer(() => {
             <div className={style.profile__stats__line}>
               <div className={style.profile__text}>Volume</div>
               <div className={classNames(style.profile__text, style.black)}>
-                {profileUser?.account.totalVolume} ETH
+                {profileUser?.account?.totalVolume} ETH
               </div>
             </div>
           </div>

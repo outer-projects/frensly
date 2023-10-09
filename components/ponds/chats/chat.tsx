@@ -38,7 +38,7 @@ const Chat = observer(() => {
                 header.connect__button,
                 style.openchat__button
               )}
-              onClick={() => modalStore.showModal(ModalsEnum.Buy)}
+              // onClick={() => modalStore.showModal(ModalsEnum.Buy)}
             >
               Buy
             </button>
