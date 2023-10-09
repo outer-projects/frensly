@@ -53,6 +53,10 @@
   margin-right: 8px;
   line-height: 20px; /* 142.857% */
   letter-spacing: -0.14px;
+  &:hover {
+    color: $black;
+    font-weight: bold;
+  }
 }
 .profile__type__active {
   border-radius: 100px;

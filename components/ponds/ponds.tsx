@@ -4,6 +4,7 @@ import profile from "../profile/profile.module.scss";
 import classNames from "classnames";
 import { useState } from "react";
 import ChatItem from "./chats/chatItem";
+import TypesList from "../common/typesList";
 const types = ["My ponds", "My activity", "My holders", "My holdings"];
 const Ponds = () => {
   const [active, setActive] = useState(0);
@@ -12,21 +13,7 @@ const Ponds = () => {
     <div className={style.ponds}>
       {" "}
       <div className={explore.explore__title}>My ponds</div>
-      <div className={profile.profile__types}>
-        {types.map((el, i) => (
-          <div
-            className={classNames(
-              profile.profile__type,
-              active == i && profile.profile__type__active
-            )}
-            onClick={() => {
-              setActive(i);
-            }}
-          >
-            {el}
-          </div>
-        ))}
-      </div>
+      <TypesList active={active} setActive={setActive} types={types}/>
       <div
         className={classNames(
           explore.explore__search,
@@ -50,7 +37,7 @@ const Ponds = () => {
           <div className={style.ponds__total__text}>Total shares</div>
           <div className={style.ponds__total__value}>
             <img
-              src="../icons/Etherium.svg"
+              src="../icons/Ethereum.svg"
               style={{ width: "24px", height: "24px" }}
             />
             0.0121 ETH

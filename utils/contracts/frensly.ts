@@ -1,4 +1,4 @@
-export const frenslyContract = "0x2977Db61dB3dc77978Ff93bDB1514caf47ccD258";
+export const frenslyContract = "0x8052929718D4a2D1ADCEa420A55C3A57b778C017";
 export const frenslyAbi = [
   {
     inputs: [
@@ -33,6 +33,37 @@ export const frenslyAbi = [
       },
     ],
     name: "Claim",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: false,
+        internalType: "address",
+        name: "oldHolder",
+        type: "address",
+      },
+      {
+        indexed: false,
+        internalType: "address",
+        name: "holder",
+        type: "address",
+      },
+      {
+        indexed: false,
+        internalType: "address",
+        name: "subject",
+        type: "address",
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "shares",
+        type: "uint256",
+      },
+    ],
+    name: "NewEligibleHolder",
     type: "event",
   },
   {

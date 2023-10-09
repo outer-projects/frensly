@@ -18,7 +18,7 @@ export const SeparatedConnect = observer(
           user?.account && style.connect__light
         )}
       >
-        <img src="../../icons/MetaMask.svg" style={{ marginTop: "0px" }} />
+        {!user?.account && <img src="../../icons/MetaMask.svg" style={{ marginTop: "0px" }} />}
         {user?.account ? "Connect wallet" : "Sign the message"}
       </button>
     );

@@ -3,6 +3,7 @@ import { UserStore } from './UserStore'
 import { ModalStore } from './ModalStore'
 import { useMemo } from 'react'
 import WalletStore from "./Web3Store";
+import { ExploreStore } from './ExploreStore';
 
 
 export class RootStore {
@@ -10,14 +11,17 @@ export class RootStore {
     public container: Container
     public modalStore: ModalStore
     public walletStore: WalletStore;
+    public exploreStore: ExploreStore;
     public constructor() {
         this.userStore = new UserStore(this)
         this.modalStore = new ModalStore(this)
         this.walletStore = new WalletStore(this);
+        this.exploreStore = new ExploreStore(this);
         this.container = new Container()
         this.container.bind(UserStore).toConstantValue(this.userStore)
         this.container.bind(ModalStore).toConstantValue(this.modalStore)
         this.container.bind(WalletStore).toConstantValue(this.walletStore);
+        this.container.bind(ExploreStore).toConstantValue(this.exploreStore);
         this.container.bind(Container).toConstantValue(this.container)
     }
 }

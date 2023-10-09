@@ -56,7 +56,7 @@ const Profile = observer(() => {
                   style.profile__balance
                 )}
               >
-                <img src="../icons/Etherium.svg" />
+                <img src="../icons/Ethereum.svg" />
                 1.22 ETH
               </div>
             </div>

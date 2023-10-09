@@ -1,10 +1,39 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import style from "./explore.module.scss";
 import classNames from "classnames";
+import { observer } from "mobx-react";
+import { useInjection } from "inversify-react";
+import { ExploreStore } from "../../stores/ExploreStore";
 const types = ["Top", "New Users", "Trending"];
-const Explore = () => {
+const Explore = observer(() => {
   const [active, setActive] = useState(0);
+  const [search, setSearch] = useState("");
   const [outline, setOutline] = useState(false);
+  const { getNewUsers, currentUserList, getTopUsers, searchUsers } =
+    useInjection(ExploreStore);
+  const saveInput = ()=> {
+    searchUsers(search)
+  }
+  const [tt, updateTimeout] = useState<any>(undefined);
+  const searchDeb = (fn: any, ms: number) => {
+    const clear = () => {
+      clearTimeout(tt);
+      updateTimeout(setTimeout(fn, ms));
+    };
+    return clear();
+  };
+
+  useEffect(() => {
+    searchDeb(saveInput, 700);
+  }, [search]);
+  useEffect(() => {
+    if (active == 0) {
+      getTopUsers();
+    }
+    if (active == 1) {
+      getNewUsers();
+    }
+  }, [active]);
   return (
     <div className={style.explore}>
       <div className={style.explore__title}>Explore</div>
@@ -36,6 +65,10 @@ const Explore = () => {
           onFocus={() => {
             setOutline(true);
           }}
+          value={search}
+          onChange={(e) => {
+            setSearch(e.target.value);
+          }}
         />
       </div>
       <div className={style.explore__types__row}>
@@ -57,7 +90,8 @@ const Explore = () => {
         })}
       </div>
       <div className={style.explore__users__col}>
-        {Array.from({ length: 10 }).map((el, i) => {
+        {currentUserList?.map((el, i) => {
+          console.log(el);
           return (
             <div className={style.explore__user} key={i}>
               <div className={style.explore__user__left}>
@@ -72,7 +106,7 @@ const Explore = () => {
               </div>
               <div className={style.explore__user__right}>
                 <div className={style.explore__user__name}>
-                  <img src="../icons/Etherium.svg" />
+                  <img src="../icons/Ethereum.svg" />
                   15,34 ETH
                 </div>
                 <div className={style.explore__user__balance__usd}>$14000</div>
@@ -83,5 +117,5 @@ const Explore = () => {
       </div>
     </div>
   );
-};
+});
 export default Explore;

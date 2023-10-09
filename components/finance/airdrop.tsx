@@ -1,0 +1,49 @@
+import classNames from "classnames";
+import style from "./finance.module.scss";
+import Link from "next/link";
+import { links } from "./finance";
+import explore from "../explore/explore.module.scss";
+import User from "./user";
+import header from "../layout/header.module.scss";
+import { useInjection } from "inversify-react";
+import { useRouter } from "next/router";
+const Airdrop = () => {
+  const router = useRouter()
+  return (
+    <div className={style.finance__page}>
+      <div className={style.finance__side}>
+        {links.map((el, i) => {
+          return (
+            <Link href={el.link} style={{ textDecoration: "none" }}>
+              <div key={i} className={classNames(style.finance__link,
+                  el.link == router.asPath && style.finance__link__active)}>
+                <img src={el.img} />
+                {el.title}
+              </div>
+            </Link>
+          );
+        })}
+      </div>
+      <div className={style.finance__container}>
+        <div className={explore.explore__title}>Airdrop</div>
+        <div className={style.finance}>
+          <User />
+          <div className={style.finance__points}>
+            Your friend.tech points count: 121,234
+          </div>
+          <div className={style.finance__gain}>100.000 $FREN</div>
+          <div className={style.finance__total}>Total claimable</div>
+          <button
+            className={classNames(
+              header.connect__button,
+              style.airdrop__claim__button
+            )}
+          >
+            Claim
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+};
+export default Airdrop;

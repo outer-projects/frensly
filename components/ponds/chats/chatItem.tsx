@@ -20,7 +20,7 @@ const ChatItem = () => {
         </div>
         <div>
           <div className={style.chat__value}>
-            <img src="../icons/Etherium.svg" />
+            <img src="../icons/Ethereum.svg" />
             15,34 ETH
           </div>
           <div className={style.chat__dollar}>{"14400$"}</div>

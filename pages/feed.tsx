@@ -2,13 +2,14 @@ import { observer } from "mobx-react";
 import type { NextPage } from "next";
 import style from "./home.module.scss";
 import Explore from "../components/explore/explore";
+import TwitterFeed from "../components/profile/twitterFeed";
 
-const ExplorePage: NextPage = observer((props) => {
+const FeedPage: NextPage = observer((props) => {
   return (
     <div className={style.explore__page}>
-      <Explore />
+      <TwitterFeed />
     </div>
   );
 });
 
-export default ExplorePage;
+export default FeedPage;

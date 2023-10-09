@@ -8,7 +8,6 @@ import { observer } from "mobx-react";
 import { ModalStore } from "../../../stores/ModalStore";
 import { useInjection } from "inversify-react";
 import { ModalsEnum } from "../../../modals";
-const types = ["My ponds", "My activity", "My holders", "My holdings"];
 const Chat = observer(() => {
   const [active, setActive] = useState(0);
   useEffect(() => {}, []);
@@ -50,7 +49,7 @@ const Chat = observer(() => {
           <div className={style.openchat__val}>
             {" "}
             <div className={style.openchat__share__value}>
-              <img src="../../icons/Etherium.svg" />
+              <img src="../../icons/Ethereum.svg" />
               1.22 ETH
             </div>
             <div className={style.openchat__shares}> per 1 share</div>
