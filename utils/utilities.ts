@@ -13,18 +13,7 @@ export function fd(val: number | string | BN) {
   if (!val) return "";
   return numeral(val?.toString()).format("0,0[.][000000000000000000]");
 }
-export const innerBackend = axios.create({
-  baseURL: backend + prefix,
-  headers: {
-    accept: "application/json",
-  },
-});
-export const setAuthToken = () => {
-  let token = localStorage.getItem("jwt");
-  if (token) {
-    innerBackend.defaults.headers.common["Authorization"] = "Bearer " + token;
-  }
-};
+
 BN.config({ EXPONENTIAL_AT: 100 });
 
 export const isServer = typeof window === "undefined";

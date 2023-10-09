@@ -25,7 +25,7 @@ export class ExploreStore {
       limit: "10",
     }).toString();
     try {
-      const res = await axios.get(prefix + "newest/?" + query);
+      const res = await axios.get("newest/?" + query);
       this.topUsersList = res.data;
       this.currentUserList = res.data;
     } catch (e) {
@@ -34,7 +34,7 @@ export class ExploreStore {
   };
   @action searchUsers = async (search: string) => {
     try {
-      const res = await axios.get(prefix + "search/" + search);
+      const res = await axios.get("search/" + search);
       this.topUsersList = res.data;
       this.currentUserList = res.data;
     } catch (e) {
@@ -47,7 +47,7 @@ export class ExploreStore {
       limit: "10",
     }).toString();
     try {
-      const res = await axios.get(prefix + "top/?" + query);
+      const res = await axios.get("top/?" + query);
       this.topUsersList = res.data;
       this.currentUserList = res.data;
     } catch (e) {
