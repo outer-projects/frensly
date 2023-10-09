@@ -46,7 +46,7 @@ export const BuyModal = observer(({ key, data, idx }: modalProps) => {
   const checkPrice = async (num: number) => {
     try {
       const res = await frensly.methods
-        .getBuyPrice(data.user?.account?.address, num * 10 ** 6)
+        .getBuyPrice(data.user?.account?.address, Number(num) * 10 ** 6)
         .call();
       console.log(res);
       return Number(res);
@@ -64,7 +64,7 @@ export const BuyModal = observer(({ key, data, idx }: modalProps) => {
   }, [frensly]);
   useEffect(() => {
     if (numberOfShares) {
-      checkPrice(typeof numberOfShares == "number" ? numberOfShares : 0).then(
+      checkPrice(numberOfShares!=="" ? Number(numberOfShares) : 0).then(
         (res) => {
           setCurrentPrice(res);
         }
