@@ -1,32 +1,37 @@
+import { observer } from "mobx-react";
 import style from "./finance.module.scss";
+import { useInjection } from "inversify-react";
+import Web3Store from "../../stores/Web3Store";
+import { addressSlice } from "../../utils/utilities";
 
-const User = () => {
+const User = observer(() => {
+  const { user, balance} = useInjection(Web3Store);
   return (
     <div className={style.finance__row}>
       <div className={style.finance__title}>
-        <img src="../avatar.svg" />
+        <img src={user?.avatar} />
         <div>
           <div className={style.finance__name}>
-            0xRacer{" "}
+            {user?.twitterName}{" "}
             <img
               src="../icons/twitter_black.svg"
               style={{ marginRight: "5px" }}
             />{" "}
-            <span>@0xRacer</span>
+            <span>@{user?.twitterHandle}</span>
           </div>
-          <div className={style.finance__subtitle}>0xFakf...39f40</div>
+          <div className={style.finance__subtitle}>{addressSlice(user?.account?.address)}</div>
         </div>
       </div>
       <div className={style.finance__title}>
         <div className={style.finance__balance}>
           <div className={style.finance__balance__value}>
             <img src="../icons/Ethereum.svg" />
-            0.0121 ETH
+            {balance} ETH
           </div>
           <div className={style.finance__subtitle}>Wallet balance</div>
         </div>
       </div>
     </div>
   );
-};
+});
 export default User;

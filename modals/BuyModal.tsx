@@ -9,6 +9,7 @@ import { ModalStore } from "../stores/ModalStore";
 import { useEffect, useState } from "react";
 import Web3Store from "../stores/Web3Store";
 import { fromWei } from "web3-utils";
+import { toast } from "react-toastify";
 
 interface modalProps {
   key: ModalsEnum;
@@ -22,19 +23,26 @@ export const BuyModal = observer(({ key, data, idx }: modalProps) => {
   const [numberOfShares, setNumberOfShares] = useState<number | string>(0);
   const [currentPrice, setCurrentPrice] = useState(0);
   const [priceOfOne, setPriceOfOne] = useState(0);
-  const buy = async() =>{
+  const buy = async () => {
+    if (Number(numberOfShares) < 0.000001)
+      return toast.error("Amount is too low");
     try {
-      const res = await frensly.methods.buyShares(data.user?.account?.address, Number(numberOfShares) * 10 ** 6).send({
-        from: address,
-        value: currentPrice * 10 ** 6,
-      })
+      const res = await frensly.methods
+        .buyShares(
+          data.user?.account?.address,
+          Number(numberOfShares) * 10 ** 6
+        )
+        .send({
+          from: address,
+          value: currentPrice * 10 ** 6,
+        });
       console.log(res);
-      checkAuth()
-    } catch(e) {
+      checkAuth();
+    } catch (e) {
       console.log(e);
     }
-    
-  }
+  };
+
   const checkPrice = async (num: number) => {
     try {
       const res = await frensly.methods
@@ -56,13 +64,14 @@ export const BuyModal = observer(({ key, data, idx }: modalProps) => {
   }, [frensly]);
   useEffect(() => {
     if (numberOfShares) {
-      checkPrice(
-        typeof numberOfShares == "number" ? numberOfShares : 0
-      ).then((res) => {
-        setCurrentPrice(res);
-      });
+      checkPrice(typeof numberOfShares == "number" ? numberOfShares : 0).then(
+        (res) => {
+          setCurrentPrice(res);
+        }
+      );
     }
   }, [numberOfShares]);
+
   return (
     <ModalContainer heading={""} modalKey={key} idx={idx}>
       <div className={style.buy}>
@@ -91,7 +100,12 @@ export const BuyModal = observer(({ key, data, idx }: modalProps) => {
               </div>
             </div>
             <div className={style.buy__user__left__text}>
-              <div className={style.buy__user__name}>{Number(fromWei(priceOfOne, 'szabo'))} ETH</div>
+              <div
+                className={style.buy__user__name}
+                style={{ textAlign: "right" }}
+              >
+                {Number(fromWei(priceOfOne, "szabo"))} ETH
+              </div>
               <div className={style.buy__status}>
                 Key price <img src="../icons/Info.svg" />
               </div>
@@ -102,19 +116,21 @@ export const BuyModal = observer(({ key, data, idx }: modalProps) => {
             <input
               className={style.buy__amount__value}
               value={numberOfShares}
+              type="text"
               onChange={(e) => {
-                if (Number(e.target.value) >= 0.000001) {
-                  setNumberOfShares(Number(e.target.value));
-                } else {
+                if (!isNaN(Number(e.target.value))) {
+                  setNumberOfShares(e.target.value);
+                } else if (e.target.value == "") {
                   setNumberOfShares("");
                 }
               }}
-              type="number"
             />
           </div>
           <div className={style.buy__amount}>
             <div className={style.buy__amount__title}>Total ETH</div>
-            <div className={style.buy__amount__value}>{fromWei(currentPrice, "szabo")} ETH</div>
+            <div className={style.buy__amount__value}>
+              {fromWei(currentPrice, "szabo")} ETH
+            </div>
           </div>
         </div>
         <div className={style.buy__buttons}>
@@ -125,7 +141,7 @@ export const BuyModal = observer(({ key, data, idx }: modalProps) => {
           </button> */}
           <button
             className={classNames(header.connect__button, style.buy__button)}
-            disabled={numberOfShares == 0 || numberOfShares == ''}
+            disabled={numberOfShares == 0 || numberOfShares == ""}
             onClick={buy}
           >
             Buy

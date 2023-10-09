@@ -10,23 +10,15 @@ import style from "./header.module.scss";
 import { addressSlice } from "../../utils/utilities";
 import classNames from "classnames";
 const ConnectButtonCustom = observer(() => {
-  const { disconnect } = useDisconnect();
-  const [_balance, setBalance] = useState(0);
   const {
     setConnected,
-    setUser,
     setSigner,
     disconnected,
-    balance,
     setAddress,
+    setUserBalance,
     user,
   } = useInjection(Web3Store);
 
-  useEffect(() => {
-    if (balance) {
-      setBalance(balance);
-    }
-  }, [balance]);
 
   return (
     <ConnectButton.Custom>
@@ -44,7 +36,7 @@ const ConnectButtonCustom = observer(() => {
             setSigner(data, chain?.unsupported);
           },
         });
-
+        
         const ready = mounted && authenticationStatus !== "loading";
         const connected =
           ready &&
@@ -62,6 +54,7 @@ const ConnectButtonCustom = observer(() => {
           console.log("object");
           if (connected) {
             setAddress(account);
+            setUserBalance(account.displayBalance as string)
           } else {
             disconnected();
           }

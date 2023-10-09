@@ -19,7 +19,7 @@ export class Web3Store {
   @observable unsupported?: boolean;
   @observable user?: IProfile;
   @observable signer?: WalletClient | null = undefined;
-  @observable balance: number = 0;
+  @observable balance: string = '0';
   @observable web3?: Web3;
   @observable socketWeb3?: Web3;
   @observable fee: number = 0;
@@ -52,6 +52,9 @@ export class Web3Store {
   @action setAddress = (user: any) => {
     this.address = user.address;
   };
+  @action setUserBalance = (b:string) =>{
+    this.balance = b
+  }
   @action setUser = (user: any) => {
     this.user = user;
   };
