@@ -41,7 +41,7 @@ export const BuyModal = observer(({ key, data, idx }: modalProps) => {
         .getBuyPrice(data.user?.account?.address, num)
         .call();
       console.log(res);
-      return Number(res) * 10 ** 6;
+      return Number(res);
     } catch (e) {
       console.log(e);
       return 0;
