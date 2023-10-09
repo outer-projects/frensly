@@ -19,14 +19,16 @@ const AuthBanner = observer(() => {
   const { setActive, setInit } = useInjection(UserStore);
   const [title, setTitle] = useState("");
   const [stage, setStage] = useState("");
-  const [opacity, setOpacity] = useState(false)
+  const [opacity, setOpacity] = useState(false);
   useEffect(() => {
     if (!user) {
       setStage("Authorization");
-    } else if (user?.account && authStatus == 'unauthenticated') {
+    } else if (user?.account && authStatus == "unauthenticated") {
       setStage("Connect");
-    } else if (user?.account && authStatus == 'authenticated') {
+    } else if (user?.account && authStatus == "authenticated") {
       setStage("Connected");
+    } else if (user.account && !address) {
+      setStage("Connect wallet");
     }
   }, [user, authStatus]);
   // console.log(address, connected);
@@ -50,123 +52,141 @@ const AuthBanner = observer(() => {
     }
   }, [stage]);
   const init = async () => {
-    if(address?.toLowerCase()!==user?.account?.address) return toast.error('Address is not assigned to this account')
+    if (address?.toLowerCase() !== user?.account?.address)
+      return toast.error("Address is not assigned to this account");
     try {
-      await frensly.methods.initShares(toWei(0.05, "ether"), toWei(0.02, "ether")).send({
-        from: address,
-      });
+      await frensly.methods
+        .initShares(toWei(0.05, "ether"), toWei(0.02, "ether"))
+        .send({
+          from: address,
+        });
       const isInit = await frensly.methods.isSharesSubject(address).call();
       setInit(isInit);
     } catch (e) {
-      toast.error('Provider error')
+      toast.error("Provider error");
       console.log(e);
     }
   };
-  useEffect(()=>{
-    let tt = setTimeout(()=>{
-      setOpacity(true)
-    },1000)
-  },[])
+  useEffect(() => {
+    let tt = setTimeout(() => {
+      setOpacity(true);
+    }, 1000);
+    return () => {
+      clearTimeout(tt);
+    };
+  }, []);
   return (
-    <div className={style.banner}>
-      <img src="../logo.svg" className={style.banner__logo} />
-      <div
-        className={classNames(
-          style.banner__title,
-          stage == "Authorization"
-            ? style.banner__title__auth
-            : stage == "Connect"
-            ? style.banner__title__connection
-            : style.banner__title__connected
-        )}
-      >
-        <img src="../banner_img.svg" className={style.banner__img} />
-        {title}
-      </div>
-      <div className={style.banner__text}>
-        {stage == "Connect" && (
-          <>
-            <div
-              className={classNames(style.banner__join, style.banner__select)}
-            >
-              Your wallet is your face.
-              <br /> Select the wallet that will represent your onchain history.
-            </div>
-          </>
-        )}
-        {stage == "Connected" && (
-          <>
-            <div className={style.banner__join}>
-              To enter a pond, you need to buy your first share
-            </div>
-            <div
-              className={classNames(style.banner__join, style.button__buy)}
-              style={{ marginTop: "56px" }}
-            >
-              Buy for 0.0001 ETH 1 share of twitter name
-            </div>
-          </>
-        )}
-        {stage == "Authorization" && (
-          <div>
-            <a
-              href="https://frensly.adev.co/api/v1/auth/twitter"
-              style={{ textDecoration: "none" }}
-            >
-              <button
-                className={header.connect__button}
-                style={{ width: "200px", height: "64px" }}
-              >
-                <Twitter color={"black"} />
-                Authorise
-              </button>
-            </a>
+    <>
+      {stage !== "Connect wallet" ? (
+        <div className={style.banner}>
+          <img src="../logo.svg" className={style.banner__logo} />
+          <div
+            className={classNames(
+              style.banner__title,
+              stage == "Authorization"
+                ? style.banner__title__auth
+                : stage == "Connect"
+                ? style.banner__title__connection
+                : style.banner__title__connected
+            )}
+          >
+            <img src="../banner_img.svg" className={style.banner__img} />
+            {title}
           </div>
-        )}
+          <div className={style.banner__text}>
+            {stage == "Connect" && (
+              <>
+                <div
+                  className={classNames(
+                    style.banner__join,
+                    style.banner__select
+                  )}
+                >
+                  Your wallet is your face.
+                  <br /> Select the wallet that will represent your onchain
+                  history.
+                </div>
+              </>
+            )}
+            {stage == "Connected" && (
+              <>
+                <div className={style.banner__join}>
+                  To enter a pond, you need to buy your first share
+                </div>
+                <div
+                  className={classNames(style.banner__join, style.button__buy)}
+                  style={{ marginTop: "56px" }}
+                >
+                  Buy for 0.0001 ETH 1 share of twitter name
+                </div>
+              </>
+            )}
+            {stage == "Authorization" && (
+              <div>
+                <a
+                  href="https://frensly.adev.co/api/v1/auth/twitter"
+                  style={{ textDecoration: "none" }}
+                >
+                  <button
+                    className={header.connect__button}
+                    style={{ width: "200px", height: "64px" }}
+                  >
+                    <Twitter color={"black"} />
+                    Authorise
+                  </button>
+                </a>
+              </div>
+            )}
 
-        <div
-          className={style.banner__early}
-          style={{ display: stage == "Connect" ? "flex" : "none" }}
-        >
-          <ConnectButtonCustom />
-          <div className={style.banner__small__text}>
-            The wallet can't be changed
+            <div
+              className={style.banner__early}
+              style={{ display: stage == "Connect" ? "flex" : "none" }}
+            >
+              <ConnectButtonCustom />
+              <div className={style.banner__small__text}>
+                The wallet can't be changed
+              </div>
+            </div>
+
+            {stage == "Connected" && (
+              <div className={style.banner__early}>
+                <button
+                  className={header.connect__button}
+                  style={{ width: "221px", height: "64px" }}
+                  onClick={() => init()}
+                >
+                  Initialize
+                </button>
+              </div>
+            )}
+          </div>
+          <ProgressBar />
+          <div className={classNames(style.banner__join, style.banner__bottom)}>
+            Follow us to keep up with the news
+          </div>
+          <div className={style.banner__whitelist}>
+            <div className={socialsCss.airdrop__socials}>
+              {socials.map((el, i) => {
+                return (
+                  <a
+                    href={el.link}
+                    target="_blank"
+                    className={socialsCss.airdrop__media}
+                    key={i}
+                  >
+                    {el.logo}
+                  </a>
+                );
+              })}
+            </div>{" "}
           </div>
         </div>
-
-        {stage == "Connected" && (
-          <div className={style.banner__early}>
-            <button
-              className={header.connect__button}
-              style={{ width: "221px", height: "64px" }}
-              onClick={() => init()}
-            >
-              Initialize
-            </button>
-          </div>
-        )}
-      </div>
-      <ProgressBar />
-      <div className={classNames(style.banner__join, style.banner__bottom)}>
-        Follow us to keep up with the news
-      </div>
-      <div className={style.banner__whitelist}>
-        <div className={socialsCss.airdrop__socials}>
-          {socials.map((el, i) => {
-            return (
-              <a
-                href={el.link}
-                target="_blank"
-                className={socialsCss.airdrop__media}
-                key={i}
-              >
-                {el.logo}
-              </a>
-            );
-          })}
-        </div>{" "}
-      </div>
-    </div>
+      ) : (
+        <div className={style.banner__center}>
+          <ConnectButtonCustom />
+        </div>
+      )}
+    </>
   );
 });
 export default AuthBanner;

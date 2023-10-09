@@ -9,6 +9,13 @@
 .banner__select {
   margin-bottom: 56px !important;
 }
+.banner__center {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 .banner__logo {
   width: 125px;
   margin-top: 25px;
@@ -35,11 +42,12 @@
 }
 .banner__title {
   font-family: "Syne";
-  margin-top: 171px;
+  margin-top: 185px;
   width: 100vw;
   max-width: 568px;
   text-align: center;
   font-size: 56px;
+  line-height: 64px;
   display: flex;
   flex-direction: column;
   letter-spacing: -1.12px;
@@ -50,7 +58,7 @@
   }
 }
 .banner__bottom {
-  color: $grey!important;
+  color: $grey !important;
 }
 .banner__early {
   display: flex;
@@ -76,7 +84,7 @@
   }
 }
 .banner__title__auth {
-  margin-bottom: 56px;
+  margin-bottom: 65px;
 }
 .banner__small__text {
   color: $grey;
