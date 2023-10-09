@@ -129,7 +129,7 @@ export const BuyModal = observer(({ key, data, idx }: modalProps) => {
           <div className={style.buy__amount}>
             <div className={style.buy__amount__title}>Total ETH</div>
             <div className={style.buy__amount__value}>
-              {Number(Number(fromWei(currentPrice, "szabo")).toFixed(6))} ETH
+              {Number(Number(fromWei(currentPrice, "szabo")).toFixed(8))} ETH
             </div>
           </div>
         </div>
