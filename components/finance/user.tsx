@@ -26,7 +26,7 @@ const User = observer(() => {
         <div className={style.finance__balance}>
           <div className={style.finance__balance__value}>
             <img src="../icons/Ethereum.svg" />
-            {balance} ETH
+            {balance}
           </div>
           <div className={style.finance__subtitle}>Wallet balance</div>
         </div>

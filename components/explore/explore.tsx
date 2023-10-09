@@ -5,6 +5,7 @@ import { observer } from "mobx-react";
 import { useInjection } from "inversify-react";
 import { ExploreStore } from "../../stores/ExploreStore";
 import Link from "next/link";
+import { fromWei } from "web3-utils";
 const types = ["Top", "New Users", "Trending"];
 const Explore = observer(() => {
   const [active, setActive] = useState(0);
@@ -108,7 +109,7 @@ const Explore = observer(() => {
                 <div className={style.explore__user__left__text}>
                   <div className={style.explore__user__share}>
                     <img src="../icons/Key.svg" />
-                    <div>{el.account.sharesAmount} share</div>
+                    <div>{(Number(el.account.sharesAmount))/(10 ** 6)} share</div>
                   </div>
                   <div className={style.explore__user__name}>
                     {el.twitterName}
@@ -118,7 +119,7 @@ const Explore = observer(() => {
               <div className={style.explore__user__right}>
                 <div className={style.explore__user__name}>
                   <img src="../icons/Ethereum.svg" />
-                  {el.account.totalVolume} ETH
+                  {fromWei(el.account.totalVolume, 'ether')} ETH
                 </div>
                 <div className={style.explore__user__balance__usd}>$0</div>
               </div>
