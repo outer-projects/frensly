@@ -91,7 +91,7 @@ export const BuyModal = observer(({ key, data, idx }: modalProps) => {
               </div>
             </div>
             <div className={style.buy__user__left__text}>
-              <div className={style.buy__user__name}>{fromWei(priceOfOne, 'ether')} ETH</div>
+              <div className={style.buy__user__name}>{fromWei(priceOfOne, 'tether')} ETH</div>
               <div className={style.buy__status}>
                 Key price <img src="../icons/Info.svg" />
               </div>
@@ -114,7 +114,7 @@ export const BuyModal = observer(({ key, data, idx }: modalProps) => {
           </div>
           <div className={style.buy__amount}>
             <div className={style.buy__amount__title}>Total ETH</div>
-            <div className={style.buy__amount__value}>{fromWei(currentPrice, 'ether')} ETH</div>
+            <div className={style.buy__amount__value}>{fromWei(currentPrice, "tether")} ETH</div>
           </div>
         </div>
         <div className={style.buy__buttons}>
