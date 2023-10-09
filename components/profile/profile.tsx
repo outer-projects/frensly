@@ -12,6 +12,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { UserStore } from "../../stores/UserStore";
 import { addressSlice } from "../../utils/utilities";
+import { fromWei } from "web3-utils";
 const Profile = observer(() => {
   const modalStore = useInjection(ModalStore);
   const { user } = useInjection(Web3Store);
@@ -74,13 +75,16 @@ const Profile = observer(() => {
               style.profile__buy,
               !isMyProfile && style.profile__half
             )}
-            onClick={() => modalStore.showModal(ModalsEnum.Buy, {user: profileUser})}
+            onClick={() =>
+              modalStore.showModal(ModalsEnum.Buy, { user: profileUser })
+            }
           >
             Buy
           </button>
         </div>
         <div className={classNames(style.profile__text, style.profile__share)}>
-          {(isMyProfile ? "You" : profileUser?.twitterName) +` own ${profileUser?.account?.othersShares.length} share`}
+          {(isMyProfile ? "You" : profileUser?.twitterName) +
+            ` own ${profileUser?.account?.othersShares.length} share`}
         </div>
         <div className={style.profile__stats}>
           <div className={style.profile__stats__row}>
@@ -114,7 +118,7 @@ const Profile = observer(() => {
             <div className={style.profile__stats__line}>
               <div className={style.profile__text}>Volume</div>
               <div className={classNames(style.profile__text, style.black)}>
-                {profileUser?.account?.totalVolume} ETH
+                {fromWei(profileUser?.account?.totalVolume as string, "szabo")} ETH
               </div>
             </div>
           </div>
