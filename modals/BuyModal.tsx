@@ -26,7 +26,7 @@ export const BuyModal = observer(({ key, data, idx }: modalProps) => {
     try {
       const res = await frensly.methods.buyShares(data.user?.account?.address, Number(numberOfShares) * 10 ** 6).send({
         from: address,
-        value: currentPrice * 10 ** 6,
+        value: currentPrice,
       })
       console.log(res);
       checkAuth()
@@ -38,7 +38,7 @@ export const BuyModal = observer(({ key, data, idx }: modalProps) => {
   const checkPrice = async (num: number) => {
     try {
       const res = await frensly.methods
-        .getBuyPrice(data.user?.account?.address, num)
+        .getBuyPrice(data.user?.account?.address, num * 10 ** 6)
         .call();
       console.log(res);
       return Number(res);
@@ -91,7 +91,7 @@ export const BuyModal = observer(({ key, data, idx }: modalProps) => {
               </div>
             </div>
             <div className={style.buy__user__left__text}>
-              <div className={style.buy__user__name}>{Number(fromWei(priceOfOne, "mwei"))} ETH</div>
+              <div className={style.buy__user__name}>{Number(fromWei(priceOfOne, "ether"))} ETH</div>
               <div className={style.buy__status}>
                 Key price <img src="../icons/Info.svg" />
               </div>
@@ -114,7 +114,7 @@ export const BuyModal = observer(({ key, data, idx }: modalProps) => {
           </div>
           <div className={style.buy__amount}>
             <div className={style.buy__amount__title}>Total ETH</div>
-            <div className={style.buy__amount__value}>{fromWei(currentPrice, "mwei")} ETH</div>
+            <div className={style.buy__amount__value}>{fromWei(currentPrice, "ether")} ETH</div>
           </div>
         </div>
         <div className={style.buy__buttons}>
