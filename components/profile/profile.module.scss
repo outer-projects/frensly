@@ -16,6 +16,20 @@
 }
 .profile__buttons {
   display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 16px;
+}
+.profile__half {
+  width: 49%!important;
+}
+.profile__follow {
+  width: 49%;
+  height: 48px;
+  background: transparent!important;
+  font-weight: 400!important;
+  border-radius: 100px;
+  border: 1px solid $green;
 }
 .profile__light__button {
   border-radius: 100px;

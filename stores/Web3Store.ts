@@ -9,6 +9,7 @@ import { WalletClient } from "wagmi";
 import { AuthenticationStatus } from "@rainbow-me/rainbowkit";
 import axios from "axios";
 import { prefix } from "../utils/config";
+import { IProfile } from "../types/users";
 
 @injectable()
 export class Web3Store {
@@ -16,7 +17,7 @@ export class Web3Store {
   @observable connected: boolean = false;
   @observable provider: any = undefined;
   @observable unsupported?: boolean;
-  @observable user?: any;
+  @observable user?: IProfile;
   @observable signer?: WalletClient | null = undefined;
   @observable balance: number = 0;
   @observable web3?: Web3;

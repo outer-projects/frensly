@@ -2,16 +2,16 @@ import { injectable } from "inversify";
 import { action, makeObservable, observable } from "mobx";
 import "reflect-metadata";
 import { RootStore } from "./RootStore";
-import { IAccount } from "../types/users";
+import { IAccount, IProfile } from "../types/users";
 import axios from "axios";
 import { prefix } from "../utils/config";
 
 @injectable()
 export class ExploreStore {
-  @observable topUsersList: IAccount[] = [];
-  @observable currentUserList: IAccount[] = [];
-  @observable newUsersList: IAccount[] = [];
-  @observable searchResult: IAccount[] = [];
+  @observable topUsersList: IProfile[] = [];
+  @observable currentUserList: IProfile[] = [];
+  @observable newUsersList: IProfile[] = [];
+  @observable searchResult: IProfile[] = [];
   @observable filterGlobal: { rangeFrom: number; rangeTo: number } = {
     rangeFrom: 0,
     rangeTo: 8,
@@ -22,7 +22,7 @@ export class ExploreStore {
   @action getNewUsers = async () => {
     const query = new URLSearchParams({
       offset: "0",
-      limit: "10",
+      limit: "20",
     }).toString();
     try {
       const res = await axios.get(prefix + "user/newest/?" + query);
@@ -43,7 +43,7 @@ export class ExploreStore {
   @action getTopUsers = async () => {
     const query = new URLSearchParams({
       offset: "0",
-      limit: "10",
+      limit: "20",
     }).toString();
     try {
       const res = await axios.get(prefix + "user/top/?" + query);

@@ -9,11 +9,16 @@ const Explore = observer(() => {
   const [active, setActive] = useState(0);
   const [search, setSearch] = useState("");
   const [outline, setOutline] = useState(false);
-  const { getNewUsers, currentUserList, getTopUsers, searchUsers } =
-    useInjection(ExploreStore);
-  const saveInput = ()=> {
-    searchUsers(search)
-  }
+  const {
+    getNewUsers,
+    currentUserList,
+    getTopUsers,
+    searchUsers,
+    searchResult,
+  } = useInjection(ExploreStore);
+  const saveInput = () => {
+    searchUsers(search);
+  };
   const [tt, updateTimeout] = useState<any>(undefined);
   const searchDeb = (fn: any, ms: number) => {
     const clear = () => {
@@ -38,15 +43,17 @@ const Explore = observer(() => {
     <div className={style.explore}>
       <div className={style.explore__title}>Explore</div>
       <div className={style.explore__users__wrapper}>
-        <img className={style.explore__swipe} src="../icons/swipe.svg" />
+        {/* <img className={style.explore__swipe} src="../icons/swipe.svg" /> */}
         <div className={style.explore__users__row}>
-          {Array.from({ length: 10 }).map((el, i) => {
-            return (
-              <div className={style.explore__topuser}>
-                <img src="../icons/AvatarBlue.svg" />
-                John
-              </div>
-            );
+          {searchResult.map((el, i) => {
+            if (i <= 4) {
+              return (
+                <div key={i} className={style.explore__topuser}>
+                  <img src={el.avatar} />
+                  {el.twitterName}
+                </div>
+              );
+            }
           })}
         </div>
       </div>
@@ -95,21 +102,23 @@ const Explore = observer(() => {
           return (
             <div className={style.explore__user} key={i}>
               <div className={style.explore__user__left}>
-                <img src="../icons/AvatarBlue.svg" />
+                <img src={el.avatar} />
                 <div className={style.explore__user__left__text}>
                   <div className={style.explore__user__share}>
                     <img src="../icons/Key.svg" />
-                    <div>2.41 share</div>
+                    <div>{el.account.sharesAmount} share</div>
                   </div>
-                  <div className={style.explore__user__name}>UserName</div>
+                  <div className={style.explore__user__name}>
+                    {el.twitterName}
+                  </div>
                 </div>
               </div>
               <div className={style.explore__user__right}>
                 <div className={style.explore__user__name}>
                   <img src="../icons/Ethereum.svg" />
-                  15,34 ETH
+                  {el.account.totalVolume} ETH
                 </div>
-                <div className={style.explore__user__balance__usd}>$14000</div>
+                <div className={style.explore__user__balance__usd}>$0</div>
               </div>
             </div>
           );

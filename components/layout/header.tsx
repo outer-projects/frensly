@@ -8,13 +8,20 @@ import Link from "next/link";
 import Bell from "../svgs/bell";
 import Notifications from "./notifications";
 import { useDetectClickOutside } from "react-detect-click-outside";
-
-const headerText = ["Ponds", "Feed", "Profile", "Explore", "Finance"];
+import { useInjection } from "inversify-react";
+import Web3Store from "../../stores/Web3Store";
 
 const Header = observer(() => {
   const router = useRouter();
   const [active, setActive] = useState("");
   const [nots, setNots] = useState(false);
+  const headerText = [
+    { name: "Ponds", link: "/ponds" },
+    { name: "Feed", link: "/feed" },
+    { name: "Profile", link: "/profile" },
+    { name: "Explore", link: "/explore" },
+    { name: "Finance", link: "/finance" },
+  ];
   useEffect(() => {
     if (router.asPath) {
       console.log(router.asPath);
@@ -29,6 +36,7 @@ const Header = observer(() => {
       }
     },
   });
+  const { user } = useInjection(Web3Store);
   return (
     <div className={style.header__container}>
       <header className={style.header}>
@@ -37,19 +45,23 @@ const Header = observer(() => {
           {headerText.map((el, i) => {
             return (
               <Link
-                href={"../../"+el.toLowerCase()}
+                href={
+                  "../../" + el.link == "/profile"
+                    ? el.link + user?.twitterId
+                    : el.link
+                }
                 style={{ textDecoration: "none", color: "auto" }}
               >
                 <div
                   key={i}
                   className={classNames(
                     style.header__el,
-                    active.includes(el.toLowerCase()) &&
+                    active.includes(el.name.toLowerCase()) &&
                       style.header__el__active
                   )}
                 >
-                  {el}
-                  {el == "Staking" && (
+                  {el.name}
+                  {el.name == "Staking" && (
                     <div className={style.header__soon}>soon</div>
                   )}
                 </div>

@@ -18,7 +18,7 @@ export interface IAccount {
   }[];
 }
 export interface IProfile { //тут все очевидно вроде
-  account: IAccount[];
+  account: IAccount;
   twitterId: string;
   avatar: string;
   twitterName: string;
