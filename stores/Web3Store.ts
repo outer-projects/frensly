@@ -8,7 +8,7 @@ import { frenslyAbi, frenslyContract } from "../utils/contracts/frensly";
 import { WalletClient } from "wagmi";
 import { AuthenticationStatus } from "@rainbow-me/rainbowkit";
 import axios from "axios";
-import { innerBackend, setAuthToken } from "../utils/utilities";
+import { prefix } from "../utils/config";
 
 @injectable()
 export class Web3Store {
@@ -106,8 +106,7 @@ export class Web3Store {
   };
   @action checkAuth = async () => {
     try {
-      setAuthToken();
-      const res = await innerBackend.get("user", {
+      const res = await axios.get(prefix+"user", {
         withCredentials: true,
       });
       this.setAuthStatus("authenticated");
