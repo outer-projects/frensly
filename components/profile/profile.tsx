@@ -16,10 +16,18 @@ import { fromWei } from "web3-utils";
 const Profile = observer(() => {
   const modalStore = useInjection(ModalStore);
   const { user } = useInjection(Web3Store);
-  const { profileUser, getProfileUser } = useInjection(UserStore);
+  const { profileUser, getProfileUser, clearProfileUser } = useInjection(UserStore);
   const router = useRouter();
   const [isMyProfile, setIsMyProfile] = useState(false);
   console.log(router);
+  useEffect(() => {
+    if (user) {
+      getProfileUser(router.query.id as string);
+    }
+    return ()=>{
+      clearProfileUser()
+    }
+  }, []);
   useEffect(() => {
     if (user) {
       getProfileUser(router.query.id as string);
@@ -28,6 +36,8 @@ const Profile = observer(() => {
   useEffect(() => {
     if (profileUser?.twitterId == user?.twitterId) {
       setIsMyProfile(true);
+    } else {
+      setIsMyProfile(false)
     }
   }, [profileUser]);
   return (
@@ -84,7 +94,7 @@ const Profile = observer(() => {
         </div>
         <div className={classNames(style.profile__text, style.profile__share)}>
           {(isMyProfile ? "You" : profileUser?.twitterName) +
-            ` own ${profileUser?.account?.othersShares.length} share`}
+            ` own ${(Number(profileUser?.account?.sharesAmount))/(10 ** 6)} share`}
         </div>
         <div className={style.profile__stats}>
           <div className={style.profile__stats__row}>

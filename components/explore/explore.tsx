@@ -101,7 +101,6 @@ const Explore = observer(() => {
       </div>
       <div className={style.explore__users__col}>
         {currentUserList?.map((el, i) => {
-          console.log(el);
           return (
             <Link href={'/profile/'+el.twitterId}>
             <div className={style.explore__user} key={i}>

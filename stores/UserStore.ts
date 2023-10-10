@@ -27,6 +27,9 @@ export class UserStore {
       console.log(e);
     }
   };
+  @action clearProfileUser = () =>{
+    this.profileUser = undefined
+  }
   @action setOpacity = (opacity: boolean) => {
     this.opacity = opacity;
   };
