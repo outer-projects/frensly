@@ -34,7 +34,7 @@ export const BuyModal = observer(({ key, data, idx }: modalProps) => {
         )
         .send({
           from: address,
-          value: currentPrice * 10 ** 6,
+          value: currentPrice,
         });
       console.log(res);
       modalStore.hideAllModals();
@@ -47,7 +47,7 @@ export const BuyModal = observer(({ key, data, idx }: modalProps) => {
   const checkPrice = async (num: number) => {
     try {
       const res = await frensly.methods
-        .getBuyPrice(data.user?.account?.address, Number(num) * 10 ** 6)
+        .getBuyPriceAfterFee(data.user?.account?.address, Number(num) * 10 ** 6)
         .call();
       console.log(res);
       return Number(res);
@@ -105,7 +105,7 @@ export const BuyModal = observer(({ key, data, idx }: modalProps) => {
                 className={style.buy__user__name}
                 style={{ textAlign: "right" }}
               >
-                {Number(Number(fromWei(priceOfOne, "szabo")).toFixed(3))} ETH
+                {Number(Number(fromWei(priceOfOne, "ether")).toFixed(3))} ETH
               </div>
               <div className={style.buy__status}>
                 Key price <img src="../icons/Info.svg" />
@@ -130,7 +130,7 @@ export const BuyModal = observer(({ key, data, idx }: modalProps) => {
           <div className={style.buy__amount}>
             <div className={style.buy__amount__title}>Total ETH</div>
             <div className={style.buy__amount__value}>
-              {Number(Number(fromWei(currentPrice, "szabo")).toFixed(8))} ETH
+              {Number(Number(fromWei(currentPrice, "ether")).toFixed(8))} ETH
             </div>
           </div>
         </div>
