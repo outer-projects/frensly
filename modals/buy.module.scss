@@ -12,20 +12,32 @@
   flex-direction: column;
   justify-content: space-between;
 }
+.trade {
+  width: 418px;
+  height: 399px;
+  border-radius: 32px;
+  background: #fff;
+  padding: 24px;
+  padding-left: 0px;
+  padding-right: 0px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
 .buy__buttons {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 .buy__button {
-  width: 370px!important;
+  width: 370px !important;
   height: 56px;
 }
 .update__button {
-  width: 370px!important;
-  height: 48px!important;
-  background-color: transparent!important;
-  border: 1px solid $green!important;
+  width: 370px !important;
+  height: 48px !important;
+  background-color: transparent !important;
+  border: 1px solid $green !important;
   margin-bottom: 8px;
 }
 .buy__title {
@@ -80,6 +92,12 @@
 .buy__status {
   display: flex;
   align-items: center;
+}
+.sell__button {
+  width: 370px !important;
+  height: 56px;
+  background-color: #EF5DA8!important;
+  color: white!important;
 }
 .buy__avatar {
   width: 40px;

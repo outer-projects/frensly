@@ -17,18 +17,19 @@ interface modalProps {
   idx: ModalsEnum;
 }
 
-export const BuyModal = observer(({ key, data, idx }: modalProps) => {
+export const SellModal = observer(({ key, data, idx }: modalProps) => {
   const modalStore = useInjection(ModalStore);
   const { frensly, address, checkAuth } = useInjection(Web3Store);
   const [numberOfShares, setNumberOfShares] = useState<number | string>(0);
   const [currentPrice, setCurrentPrice] = useState(0);
   const [priceOfOne, setPriceOfOne] = useState(0);
-  const buy = async () => {
+  const [count, setCount] = useState(0);
+  const sell = async () => {
     if (Number(numberOfShares) < 0.000001)
       return toast.error("Amount is too low");
     try {
       const res = await frensly.methods
-        .buyShares(
+        .sellShares(
           data.user?.account?.address,
           Number(numberOfShares) * 10 ** 6
         )
@@ -47,7 +48,7 @@ export const BuyModal = observer(({ key, data, idx }: modalProps) => {
   const checkPrice = async (num: number) => {
     try {
       const res = await frensly.methods
-        .getBuyPriceAfterFee(data.user?.account?.address, Number(num) * 10 ** 6)
+        .getSellPriceAfterFee(data.user?.account?.address, Number(num) * 10 ** 6)
         .call();
       console.log(res);
       return Number(res);
@@ -59,8 +60,20 @@ export const BuyModal = observer(({ key, data, idx }: modalProps) => {
   useEffect(() => {
     if (frensly) {
       checkAndUpdatePriceOfOne();
+      ownCount();
     }
   }, [frensly]);
+  const ownCount = async () => {
+    try {
+      const res = await frensly.methods
+        .sharesBalance(data?.user?.account?.address, address)
+        .call();
+      console.log(res);
+      setCount(Number(res));
+    } catch (e) {
+      console.log(e);
+    }
+  };
   const checkAndUpdatePriceOfOne = () => {
     checkPrice(1).then((res) => {
       setPriceOfOne(res);
@@ -84,7 +97,7 @@ export const BuyModal = observer(({ key, data, idx }: modalProps) => {
       <div className={style.buy}>
         <div className={style.buy__info}>
           <div className={style.buy__title}>
-            Buy a keys
+            Sell a keys
             <img
               src="../icons/Close.svg"
               style={{ cursor: "pointer" }}
@@ -103,7 +116,7 @@ export const BuyModal = observer(({ key, data, idx }: modalProps) => {
                 <div className={style.buy__user__name}>
                   {data.user?.twitterName}
                 </div>
-                <div className={style.buy__status}>You own 0 keys</div>
+                <div className={style.buy__status}>You own {count} keys</div>
               </div>
             </div>
             <div className={style.buy__user__left__text}>
@@ -143,19 +156,19 @@ export const BuyModal = observer(({ key, data, idx }: modalProps) => {
         <div className={style.buy__buttons}>
           <button
             className={classNames(header.connect__button, style.update__button)}
-            onClick={()=>{
-              checkAndUpdateExactPrice()
-              checkAndUpdatePriceOfOne()
+            onClick={() => {
+              checkAndUpdateExactPrice();
+              checkAndUpdatePriceOfOne();
             }}
           >
             Update the price
           </button>
           <button
-            className={classNames(header.connect__button, style.buy__button)}
+            className={classNames(header.connect__button, style.sell__button)}
             disabled={numberOfShares == 0 || numberOfShares == ""}
-            onClick={buy}
+            onClick={sell}
           >
-            Buy
+            Sell a key
           </button>
         </div>
       </div>
