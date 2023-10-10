@@ -34,11 +34,11 @@ const Finance = observer(() => {
   const claim = async () => {
     try {
       const res = await frensly.methods.claim().send({
-        from: address
+        from: address,
       });
       setClaimValue(Number(res));
-      checkAuth()
-      getClaim()
+      checkAuth();
+      getClaim();
     } catch (e) {
       console.log(e);
     }
@@ -97,7 +97,11 @@ const Finance = observer(() => {
               <div>
                 <div className={style.finance__stat__name}>Fees Earned</div>
                 <div className={style.finance__stat__value}>
-                  {fromWeiToEth(user?.account.subjectFeeClaimed as string)} ETH
+                  {fromWeiToEth(
+                    Number(user?.account.subjectFeeClaimed) +
+                      Number(user?.account.holderFeeClaimed)
+                  )}{" "}
+                  ETH
                 </div>
               </div>
             </div>
