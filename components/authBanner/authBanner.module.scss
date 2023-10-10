@@ -1,0 +1,122 @@
+@import "../../styles/_vars.sass";
+
+.banner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.banner__select {
+  margin-bottom: 56px !important;
+}
+.banner__center {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.banner__logo {
+  width: 125px;
+  margin-top: 25px;
+}
+.banner__text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: -10px;
+}
+.banner__twitter {
+  position: absolute;
+  pointer-events: none;
+  display: flex;
+  justify-content: center;
+  margin-top: 16px;
+  margin-left: 8px;
+  align-items: center;
+  width: 32.092px;
+  height: 32.092px;
+  flex-shrink: 0;
+  border-radius: 3.469px;
+  background: rgba(238, 254, 59, 0.1);
+}
+.banner__title {
+  font-family: "Syne";
+  margin-top: 185px;
+  width: 100vw;
+  max-width: 568px;
+  text-align: center;
+  font-size: 56px;
+  line-height: 64px;
+  display: flex;
+  flex-direction: column;
+  letter-spacing: -1.12px;
+  align-items: center;
+  color: $black;
+  @media (max-width: 800px) {
+    font-size: 40px;
+  }
+}
+.banner__bottom {
+  color: $grey !important;
+}
+.banner__early {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  img {
+    margin-top: -20px;
+    border-bottom: 1px solid #cdcdcd;
+  }
+}
+.banner__button {
+  width: 286px;
+  height: 48px;
+}
+.banner__whitelist {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  img {
+    margin-top: 58px;
+    border-bottom: 1px solid #cdcdcd;
+  }
+}
+.banner__title__auth {
+  margin-bottom: 65px;
+}
+.banner__small__text {
+  color: $grey;
+  text-align: center;
+  font-family: "DMSans";
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px;
+  margin-top: 16px;
+}
+.banner__title__connection {
+  margin-top: 187px;
+  margin-bottom: 25px;
+}
+.banner__title__connected {
+  margin-top: 187px;
+  margin-bottom: 25px;
+}
+.button__buy {
+  margin-top: 33px !important;
+  margin-bottom: 15px !important;
+}
+.banner__join {
+  text-align: center;
+  font-family: "DMSans";
+  font-size: 16px;
+  font-style: normal;
+  color: $black;
+  max-width: 420px;
+  line-height: 24px;
+  font-weight: 400;
+  margin-bottom: 23px;
+  letter-spacing: -0.16px;
+}
