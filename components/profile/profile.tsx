@@ -40,7 +40,7 @@ const Profile = observer(() => {
         .sharesBalance(profileUser?.account?.address, address)
         .call();
       console.log(res);
-      setCount(Number(res)/(10 ** 6));
+      setCount(Number(res) / 10 ** 6);
     } catch (e) {
       console.log(e);
     }
@@ -48,7 +48,6 @@ const Profile = observer(() => {
   useEffect(() => {
     if (user) {
       getProfileUser(router.query.id as string);
-      
     }
     return () => {
       clearProfileUser();
@@ -61,9 +60,9 @@ const Profile = observer(() => {
     }
   }, [user]);
   useEffect(() => {
-    if(profileUser) {
+    if (profileUser) {
       checkPrice();
-      ownCount()
+      ownCount();
     }
     if (profileUser?.twitterId == user?.twitterId) {
       setIsMyProfile(true);
@@ -124,9 +123,7 @@ const Profile = observer(() => {
           </button>
         </div>
         <div className={classNames(style.profile__text, style.profile__share)}>
-          {`You own ${
-            Number(count) / 10 ** 6
-          } share`}
+          {`You own ${Number(count) / 10 ** 6} share`}
         </div>
         <div className={style.profile__stats}>
           <div className={style.profile__stats__row}>
@@ -190,7 +187,18 @@ const Profile = observer(() => {
               <span>115</span> Holders
             </div>
             <div className={style.profile__text}>
-              <span>{profileUser?.account?.othersShares.length}</span> Holding
+              <span>
+                {
+                  profileUser?.account?.othersShares.filter(
+                    (value: any, index: number, self: any) =>
+                      index ===
+                      self.findIndex(
+                        (t: any) => t.subject === value.subject
+                      )
+                  ).length
+                }
+              </span>{" "}
+              Holding
             </div>
           </div>
         </div>

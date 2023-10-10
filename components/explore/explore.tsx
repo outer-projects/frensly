@@ -17,6 +17,7 @@ const Explore = observer(() => {
     getTopUsers,
     searchUsers,
     searchResult,
+    topUsersList
   } = useInjection(ExploreStore);
   const saveInput = () => {
     searchUsers(search);
@@ -48,7 +49,7 @@ const Explore = observer(() => {
       <div className={style.explore__users__wrapper}>
         
         <div className={style.explore__users__row}>
-          {searchResult.map((el, i) => {
+          {topUsersList.map((el, i) => {
             if (i <= 4) {
               return (
                 <div key={i} className={style.explore__topuser}>

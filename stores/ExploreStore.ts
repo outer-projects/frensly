@@ -36,15 +36,16 @@ export class ExploreStore {
     try {
       const res = await axios.get(prefix + "user/search/" + search);
       console.log(res.data.byAddress.concat(res.data.byNames));
-      this.searchResult = res.data
-        ? res.data.byAddress
-            .concat(res.data.byNames)
-            .filter(
-              (value: any, index: number, self: any) =>
-                index ===
-                self.findIndex((t: any) => t.twitterId === value.twitterId)
-            )
-        : [];
+      const result = res.data
+      ? res.data.byAddress
+          .concat(res.data.byNames)
+          .filter(
+            (value: any, index: number, self: any) =>
+              index ===
+              self.findIndex((t: any) => t.twitterId === value.twitterId)
+          )
+      : [];
+      this.searchResult = result
     } catch (e) {
       console.log(e);
     }
