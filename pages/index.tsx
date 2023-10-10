@@ -6,12 +6,16 @@ import { useInjection } from "inversify-react";
 import Web3Store from "../stores/Web3Store";
 import { UserStore } from "../stores/UserStore";
 import { useEffect } from "react";
+import Head from "next/head";
 
 const Home: NextPage = observer((props) => {
   const { init } = useInjection(UserStore);
   const { user } = useInjection(Web3Store);
   return (
     <div className={style.main__page}>
+      <Head>
+        <title>Frensly</title>
+      </Head>
       {/* <Rooms/> */}
       {/* <Profile/> */}
       {(!init || !user?.account) && <AuthBanner />}

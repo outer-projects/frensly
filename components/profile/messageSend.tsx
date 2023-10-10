@@ -6,12 +6,16 @@ import TextareaAutosize from "react-textarea-autosize";
 
 const MessageSend = () => {
   const [message, setMessage] = useState("");
+  const [focus, setFocus] = useState(false)
   return (
     <div>
       <TextareaAutosize
         value={message}
         style={{ resize: "none" }}
-        className={style.twitter__textarea}
+        placeholder="What is happening?"
+        className={classNames(style.twitter__textarea, focus && style.twitter__active)}
+        onBlur={()=>{setFocus(false)}}
+        onFocus={()=>{setFocus(true)}}
         onChange={(e: any) => {
           setMessage(e.target.value);
         }}
@@ -23,6 +27,7 @@ const MessageSend = () => {
       <div className={style.twitter__button}>
         <button
           className={classNames(header.connect__button, style.twitter__post)}
+          disabled={message.length == 0}
         >
           Post
         </button>

@@ -142,7 +142,7 @@ const Profile = observer(() => {
                 )}
               >
                 <img src="../icons/Ethereum.svg" />
-                {fromWeiToEth(pricePerShade, 8)} ETH
+                {fromWeiToEth(pricePerShade, 5)} ETH
               </div>
             </div>
           </div>
@@ -157,8 +157,7 @@ const Profile = observer(() => {
             <div className={style.profile__stats__line}>
               <div className={style.profile__text}>Volume</div>
               <div className={classNames(style.profile__text, style.black)}>
-                {fromWeiToEth(profileUser?.account?.totalVolume as string)}{" "}
-                ETH
+                {fromWeiToEth(profileUser?.account?.totalVolume as string)} ETH
               </div>
             </div>
           </div>
@@ -167,30 +166,31 @@ const Profile = observer(() => {
           <div className={style.profile__stats__follow}>
             <div
               className={style.profile__text}
-              style={{ marginRight: "17px" }}
+              style={{ paddingRight: "9px", borderRight: '1px solid #E2E3E2' }}
             >
-              <span>{profileUser?.isFollowedBy?.length}</span> Following
+              <span>{profileUser?.isFollowedBy?.length||0}</span> Following
             </div>
-            <div className={style.profile__text}>
-              <span>{profileUser?.isFollowing?.length}</span> Followers
+            <div
+              className={style.profile__text}
+              style={{ marginLeft: "8px" }}
+            >
+              <span>{profileUser?.isFollowing?.length||0}</span> Followers
             </div>
           </div>
           <div className={style.profile__stats__follow}>
             <div
               className={style.profile__text}
-              style={{ marginRight: "17px" }}
+              style={{ paddingRight: "9px", borderRight: '1px solid #E2E3E2' }}
             >
               <span>115</span> Holders
             </div>
-            <div className={style.profile__text}>
+            <div className={style.profile__text} style={{ marginLeft: "8px" }}>
               <span>
                 {
                   profileUser?.account?.othersShares.filter(
                     (value: any, index: number, self: any) =>
                       index ===
-                      self.findIndex(
-                        (t: any) => t.subject === value.subject
-                      )
+                      self.findIndex((t: any) => t.subject === value.subject)
                   ).length
                 }
               </span>{" "}
@@ -209,7 +209,7 @@ const Profile = observer(() => {
               Posts
             </div>
           </div>
-          <div className={style.profile__buttons}>
+          <div className={style.profile__buttons__bottom}>
             <button
               className={style.profile__light__button}
               style={{ marginRight: "7px" }}

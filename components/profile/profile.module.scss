@@ -8,17 +8,30 @@
   border-top-left-radius: 32px;
   border-top-right-radius: 32px;
   background: #fff;
-  padding: 24px;
+  padding-top: 24px;
+
 }
 .profile__row {
   display: flex;
   justify-content: space-between;
+  margin-left: 24px;
+  margin-right: 24px;
+}
+.twitter__active {
+  border: 1px solid $green!important;
 }
 .profile__buttons {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-top: 16px;
+  margin-left: 24px;
+}
+.profile__buttons__bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
 }
 .profile__half {
   width: 49%!important;
@@ -106,6 +119,8 @@
   margin-top: 24px;
   padding-left: 16px;
   padding-right: 16px;
+  margin-left: 24px;
+  margin-right: 24px;
 }
 .profile__button {
   margin-top: 16px;
@@ -114,10 +129,13 @@
 .profile__share {
   border-radius: 16px;
   background: #f8f8f8;
-  height: 40px;
   display: flex;
+  height: 40px;
   align-items: center;
   padding-left: 16px;
+  margin-top: 24px;
+  margin-left: 24px;
+  margin-right: 24px;
 }
 .profile__text {
   color: $grey;
@@ -146,6 +164,8 @@
 }
 .profile__stats {
   margin-top: 10px;
+  margin-left: 24px;
+  margin-right: 24px;
 }
 .profile__balance {
   color: $black;
@@ -177,6 +197,10 @@
   height: 40px;
   align-self: flex-end;
   transform: translateY(-58px);
+  &:disabled {
+    opacity: 0.5;
+    cursor: default;
+  }
 }
 .twitter__button {
   width: 100%;
@@ -195,7 +219,7 @@
   padding-left: 65px;
   padding-right: 100px;
   min-height: 72px;
-  border: 1px solid $green;
+  border: 1px solid transparent;
   outline: none;
   background: var(--Black-3, #f8f8f8);
   color: $black;
@@ -203,13 +227,19 @@
   font-size: 16px;
   line-height: 36px; /* 150% */
   letter-spacing: -0.16px;
+  &::placeholder {
+    color: #B4B4B3;
+  }
 }
 .profile__bottom {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 36px;
-  margin-top: 49px;
+  margin-top: 25px;
+  border-top: 1px solid #F1F1F1;
+  padding-top: 25px;
+  padding-left: 24px;
+  padding-right: 24px;
 }
 .profile__types {
   display: flex;
