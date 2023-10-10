@@ -8,10 +8,14 @@ import style from "./home.module.scss";
 import Faq from "../components/faq/faq";
 import AirdropBanner from "../components/airdrop/airdropBanner";
 import AuthBanner from "../components/authBanner/authBanner";
+import Head from "next/head";
 
 const Home: NextPage = observer((props) => {
   return (
     <div className={style.main__page}>
+      <Head>
+        <title>Frensly</title>
+      </Head>
       <AuthBanner />
       {/* <ClaimLogin />
       <Faq/> */}
