@@ -17,11 +17,13 @@ export const links = [
     title: "My funds",
     link: "/finance",
     img: "../icons/profile.svg",
+    active: true
   },
   {
-    title: "Airdrop",
+    title: "Airdrop (soon)",
     link: "/finance/airdrop",
     img: "../icons/airdrop.svg",
+    active: false
   },
 ];
 
@@ -62,9 +64,10 @@ const Finance = observer(() => {
       <div className={style.finance__side}>
         {links.map((el, i) => {
           return (
-            <Link href={el.link} style={{ textDecoration: "none" }}>
+            <Link href={el.active ? el.link: ''} style={{ textDecoration: "none" }}>
               <div
                 key={i}
+                style={{color: !el.active ?  "grey": ''}}
                 className={classNames(
                   style.finance__link,
                   el.link == router.asPath && style.finance__link__active
