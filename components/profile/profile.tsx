@@ -100,7 +100,7 @@ const Profile = observer(() => {
               !isMyProfile && style.profile__half
             )}
             onClick={() =>
-              modalStore.showModal(ModalsEnum.Buy, { user: profileUser })
+              modalStore.showModal(ModalsEnum.Trade, { user: profileUser })
             }
           >
             Buy
