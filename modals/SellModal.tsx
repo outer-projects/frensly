@@ -165,7 +165,7 @@ export const SellModal = observer(({ key, data, idx }: modalProps) => {
           </button>
           <button
             className={classNames(header.connect__button, style.sell__button)}
-            disabled={numberOfShares == 0 || numberOfShares == ""}
+            disabled={currentPrice == 0 || numberOfShares == ""}
             onClick={sell}
           >
             Sell a key

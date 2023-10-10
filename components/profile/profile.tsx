@@ -27,6 +27,7 @@ const Profile = observer(() => {
       const res = await frensly.methods
         .getBuyPriceAfterFee(profileUser?.account?.address, Number(1) * 10 ** 6)
         .call();
+        console.log(res);
       setPricePerShade(Number(res));
     } catch (e) {
       console.log(e);

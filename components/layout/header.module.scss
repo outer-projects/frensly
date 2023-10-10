@@ -127,4 +127,8 @@
   gap: 8px;
   border-radius: 100px;
   background: var(--Accent-Green, $green);
+  &:disabled {
+    opacity: 0.6;
+    cursor: default;
+  }
 }
