@@ -120,7 +120,7 @@ const Explore = observer(() => {
               <div className={style.explore__user__right}>
                 <div className={style.explore__user__name}>
                   <img src="../icons/Ethereum.svg" />
-                  {Number(Number(fromWei(Number(el?.account?.totalVolume), "ether")).toFixed(8))} ETH
+                  {'??'} ETH
                 </div>
                 <div className={style.explore__user__balance__usd}>$0</div>
               </div>

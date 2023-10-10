@@ -10,6 +10,7 @@ import { useRouter } from "next/router";
 import { useInjection } from "inversify-react";
 import Web3Store from "../../stores/Web3Store";
 import { fromWei } from "web3-utils";
+import { fromWeiToEth } from "../../utils/utilities";
 export const links = [
   {
     title: "My funds",
@@ -58,14 +59,14 @@ const Finance = () => {
               <img src="../icons/Ethereum__grey.svg" />
               <div>
                 <div className={style.finance__stat__name}>Portfolio value</div>
-                <div className={style.finance__stat__value}>{Number(Number(fromWei(Number(user?.account.totalVolume), 'ether')).toFixed(5))} ETH</div>
+                <div className={style.finance__stat__value}>{fromWeiToEth(user?.account.totalVolume as string)} ETH</div>
               </div>
             </div>
             <div className={style.finance__stat}>
               <img src="../icons/Ethereum__grey.svg" />
               <div>
                 <div className={style.finance__stat__name}>Fees Earned</div>
-                <div className={style.finance__stat__value}>0,34 ETH</div>
+                <div className={style.finance__stat__value}>{fromWeiToEth(user?.account.subjectFeeClaimed as string)} ETH</div>
               </div>
             </div>
           </div>

@@ -11,7 +11,7 @@ import Web3Store from "../../stores/Web3Store";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { UserStore } from "../../stores/UserStore";
-import { addressSlice } from "../../utils/utilities";
+import { addressSlice, fromWeiToEth } from "../../utils/utilities";
 import { fromWei } from "web3-utils";
 const Profile = observer(() => {
   const modalStore = useInjection(ModalStore);
@@ -157,11 +157,7 @@ const Profile = observer(() => {
             <div className={style.profile__stats__line}>
               <div className={style.profile__text}>Volume</div>
               <div className={classNames(style.profile__text, style.black)}>
-                {Number(
-                  Number(
-                    fromWei(Number(profileUser?.account?.totalVolume), "ether")
-                  ).toFixed(5)
-                )}{" "}
+                {fromWeiToEth(profileUser?.account?.totalVolume as string)}{" "}
                 ETH
               </div>
             </div>
