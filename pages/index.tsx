@@ -7,11 +7,12 @@ import ClaimLogin from "../components/claim/claimLogin";
 import style from "./home.module.scss";
 import Faq from "../components/faq/faq";
 import AirdropBanner from "../components/airdrop/airdropBanner";
+import AuthBanner from "../components/authBanner/authBanner";
 
 const Home: NextPage = observer((props) => {
   return (
     <div className={style.main__page}>
-      <AirdropBanner />
+      <AuthBanner />
       {/* <ClaimLogin />
       <Faq/> */}
     </div>

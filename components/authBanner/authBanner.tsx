@@ -1,13 +1,13 @@
 import { useInjection } from "inversify-react";
 import header from "../../components/layout/header.module.scss";
-// import Twitter from "../socials/twitter";
+import Twitter from "../socials/twitter";
 import style from "./authBanner.module.scss";
 import socialsCss from "../socials/socials.module.scss";
 import { UserStore } from "../../stores/UserStore";
 import { observer } from "mobx-react";
 import { useEffect, useState } from "react";
 import classNames from "classnames";
-// import { socials } from "../socials/socials";
+import { socials } from "../socials/socials";
 import { SeparatedConnect } from "../layout/separatedConnect";
 import Web3Store from "../../stores/Web3Store";
 import ConnectButtonCustom from "../layout/connectButtonCustom";
@@ -68,42 +68,18 @@ const AuthBanner = observer(() => {
             )}
             {stage == "Authorization" && (
               <div>
-                <a
-                  // href="https://frensly.adev.co/api/v1/auth/twitter"
-                  style={{ textDecoration: "none" }}
-                >
+                
                   <button
                     className={header.connect__button}
-                    style={{ width: "200px", height: "64px" }}
+                    style={{ width: "200px", height: "64px", backgroundColor: '#B4B4B4', cursor:'default' }}
                   >
-                    {/* <Twitter color={"black"} /> */}
-                    Authorise
+                    <Twitter color={"black"} />
+                    Authorise (soon)
                   </button>
-                </a>
+                
               </div>
             )}
 
-            <div
-              className={style.banner__early}
-              style={{ display: stage == "Connect" ? "flex" : "none" }}
-            >
-              <ConnectButtonCustom />
-              <div className={style.banner__small__text}>
-                The wallet can't be changed
-              </div>
-            </div>
-
-            {stage == "Connected" && (
-              <div className={style.banner__early}>
-                <button
-                  className={header.connect__button}
-                  style={{ width: "221px", height: "64px" }}
-                  // onClick={() => init()}
-                >
-                  Initialize
-                </button>
-              </div>
-            )}
           </div>
           <ProgressBar />
           <div className={classNames(style.banner__join, style.banner__bottom)}>
@@ -111,7 +87,7 @@ const AuthBanner = observer(() => {
           </div>
           <div className={style.banner__whitelist}>
             <div className={socialsCss.airdrop__socials}>
-              {/* {socials.map((el, i) => {
+              {socials.map((el, i) => {
                 return (
                   <a
                     href={el.link}
@@ -122,7 +98,7 @@ const AuthBanner = observer(() => {
                     {el.logo}
                   </a>
                 );
-              })} */}
+              })}
             </div>{" "}
           </div>
         </div>

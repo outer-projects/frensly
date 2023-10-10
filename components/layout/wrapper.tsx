@@ -6,7 +6,7 @@ import style from "./wrapper.module.scss";
 const Wrapper = observer(({ children }: any) => {
   return (
     <div className={style.page__container}>
-      <Header />
+      {/* <Header /> */}
       {children}
     </div>
   );
