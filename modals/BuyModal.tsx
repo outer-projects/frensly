@@ -105,7 +105,7 @@ export const BuyModal = observer(({ key, data, idx }: modalProps) => {
                 className={style.buy__user__name}
                 style={{ textAlign: "right" }}
               >
-                {Number(Number(fromWei(priceOfOne, "ether")).toFixed(3))} ETH
+                {Number(Number(fromWei(priceOfOne, "ether")).toFixed(8))} ETH
               </div>
               <div className={style.buy__status}>
                 Key price <img src="../icons/Info.svg" />
