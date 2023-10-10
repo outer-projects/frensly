@@ -59,7 +59,7 @@ export const TradeModal = observer(({ key, data, idx }: modalProps) => {
         .sharesBalance(data?.user?.account?.address, address)
         .call();
       console.log(res);
-      setCount(Number(res));
+      setCount(Number(res)/(10 ** 6));
     } catch (e) {
       console.log(e);
     }
