@@ -33,7 +33,9 @@ const Finance = observer(() => {
   const { user, frensly, address, checkAuth } = useInjection(Web3Store);
   const claim = async () => {
     try {
-      const res = await frensly.methods.claim().call();
+      const res = await frensly.methods.claim().send({
+        from: address
+      });
       setClaimValue(Number(res));
       checkAuth()
       getClaim()
@@ -44,6 +46,7 @@ const Finance = observer(() => {
   const getClaim = async () => {
     try {
       const res = await frensly.methods.availableToClaim(address).call();
+      console.log(res);
       setClaimValue(Number(res));
     } catch (e) {
       console.log(e);
