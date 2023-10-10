@@ -20,17 +20,15 @@ interface modalProps {
 export const TradeModal = observer(({ key, data, idx }: modalProps) => {
   const modalStore = useInjection(ModalStore);
   const { frensly, address, checkAuth } = useInjection(Web3Store);
-  const [numberOfShares, setNumberOfShares] = useState<number | string>(0);
-  const [currentPrice, setCurrentPrice] = useState(0);
   const [priceOfOne, setPriceOfOne] = useState(0);
   const [count, setCount] = useState(0);
   const sell = async () => {
-    modalStore.hideModal(ModalsEnum.Trade)
-    modalStore.showModal(ModalsEnum.Sell, {user: data.user})
+    modalStore.hideModal(ModalsEnum.Trade);
+    modalStore.showModal(ModalsEnum.Sell, { user: data.user });
   };
   const buy = async () => {
-    modalStore.hideModal(ModalsEnum.Trade)
-    modalStore.showModal(ModalsEnum.Buy, {user: data.user})
+    modalStore.hideModal(ModalsEnum.Trade);
+    modalStore.showModal(ModalsEnum.Buy, { user: data.user });
   };
   const checkPrice = async (num: number) => {
     try {
@@ -59,7 +57,7 @@ export const TradeModal = observer(({ key, data, idx }: modalProps) => {
         .sharesBalance(data?.user?.account?.address, address)
         .call();
       console.log(res);
-      setCount(Number(res)/(10 ** 6));
+      setCount(Number(res) / 10 ** 6);
     } catch (e) {
       console.log(e);
     }
@@ -69,25 +67,13 @@ export const TradeModal = observer(({ key, data, idx }: modalProps) => {
       setPriceOfOne(res);
     });
   };
-  const checkAndUpdateExactPrice = () => {
-    checkPrice(numberOfShares !== "" ? Number(numberOfShares) : 0).then(
-      (res) => {
-        setCurrentPrice(res);
-      }
-    );
-  };
-  useEffect(() => {
-    if (numberOfShares) {
-      checkAndUpdateExactPrice();
-    }
-  }, [numberOfShares]);
 
   return (
     <ModalContainer heading={""} modalKey={key} idx={idx}>
       <div className={style.trade}>
         <div className={style.buy__info}>
           <div className={style.buy__title}>
-            Sell a keys
+            Trade keys
             <img
               src="../icons/Close.svg"
               style={{ cursor: "pointer" }}
@@ -125,14 +111,13 @@ export const TradeModal = observer(({ key, data, idx }: modalProps) => {
         <div className={style.buy__buttons}>
           <button
             className={classNames(header.connect__button, style.buy__button)}
-            disabled={numberOfShares == 0 || numberOfShares == ""}
             onClick={buy}
+            style={{ marginBottom: "16px" }}
           >
             Buy a key
           </button>
           <button
             className={classNames(header.connect__button, style.sell__button)}
-            disabled={numberOfShares == 0 || numberOfShares == ""}
             onClick={sell}
           >
             Sell a key
