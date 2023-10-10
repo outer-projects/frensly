@@ -21,14 +21,26 @@ const Profile = observer(() => {
   const router = useRouter();
   const [isMyProfile, setIsMyProfile] = useState(false);
   const [pricePerShade, setPricePerShade] = useState(0);
+  const [count, setCount] = useState(0);
   console.log(router);
   const checkPrice = async () => {
     try {
       const res = await frensly.methods
         .getBuyPriceAfterFee(profileUser?.account?.address, Number(1) * 10 ** 6)
         .call();
-        console.log(res);
+      console.log(res);
       setPricePerShade(Number(res));
+    } catch (e) {
+      console.log(e);
+    }
+  };
+  const ownCount = async () => {
+    try {
+      const res = await frensly.methods
+        .sharesBalance(profileUser?.account?.address, address)
+        .call();
+      console.log(res);
+      setCount(Number(res)/(10 ** 6));
     } catch (e) {
       console.log(e);
     }
@@ -36,7 +48,7 @@ const Profile = observer(() => {
   useEffect(() => {
     if (user) {
       getProfileUser(router.query.id as string);
-      checkPrice();
+      
     }
     return () => {
       clearProfileUser();
@@ -49,6 +61,10 @@ const Profile = observer(() => {
     }
   }, [user]);
   useEffect(() => {
+    if(profileUser) {
+      checkPrice();
+      ownCount()
+    }
     if (profileUser?.twitterId == user?.twitterId) {
       setIsMyProfile(true);
     } else {
@@ -108,10 +124,9 @@ const Profile = observer(() => {
           </button>
         </div>
         <div className={classNames(style.profile__text, style.profile__share)}>
-          {(isMyProfile ? "You" : profileUser?.twitterName) +
-            ` own ${
-              Number(profileUser?.account?.sharesAmount) / 10 ** 6
-            } share`}
+          {`You own ${
+            Number(count) / 10 ** 6
+          } share`}
         </div>
         <div className={style.profile__stats}>
           <div className={style.profile__stats__row}>

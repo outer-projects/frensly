@@ -48,6 +48,7 @@
   font-weight: 400;
   line-height: 24px; /* 150% */
   letter-spacing: -0.16px;
+  background-color: none;
 }
 .profile__type {
   color: $grey;
@@ -69,7 +70,6 @@
   letter-spacing: -0.14px;
   &:hover {
     color: $black;
-    font-weight: bold;
   }
 }
 .profile__type__active {
