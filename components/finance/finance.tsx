@@ -36,6 +36,7 @@ const Finance = observer(() => {
       const res = await frensly.methods.claim().call();
       setClaimValue(Number(res));
       checkAuth()
+      getClaim()
     } catch (e) {
       console.log(e);
     }
