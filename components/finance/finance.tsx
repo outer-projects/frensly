@@ -4,13 +4,14 @@ import Link from "next/link";
 import explore from "../explore/explore.module.scss";
 import header from "../layout/header.module.scss";
 import TypesList from "../common/typesList";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import User from "./user";
 import { useRouter } from "next/router";
 import { useInjection } from "inversify-react";
 import Web3Store from "../../stores/Web3Store";
 import { fromWei } from "web3-utils";
 import { fromWeiToEth } from "../../utils/utilities";
+import { observer } from "mobx-react";
 export const links = [
   {
     title: "My funds",
@@ -25,10 +26,33 @@ export const links = [
 ];
 
 const types = ["Activity", "Holders", "Holdings"];
-const Finance = () => {
+const Finance = observer(() => {
   const [active, setActive] = useState(0);
   const router = useRouter();
-  const {user} = useInjection(Web3Store)
+  const [claimValue, setClaimValue] = useState(0);
+  const { user, frensly, address, checkAuth } = useInjection(Web3Store);
+  const claim = async () => {
+    try {
+      const res = await frensly.methods.claim().call();
+      setClaimValue(Number(res));
+      checkAuth()
+    } catch (e) {
+      console.log(e);
+    }
+  };
+  const getClaim = async () => {
+    try {
+      const res = await frensly.methods.availableToClaim(address).call();
+      setClaimValue(Number(res));
+    } catch (e) {
+      console.log(e);
+    }
+  };
+  useEffect(() => {
+    if (frensly) {
+      getClaim();
+    }
+  }, [frensly]);
   return (
     <div className={style.finance__page}>
       <div className={style.finance__side}>
@@ -59,14 +83,18 @@ const Finance = () => {
               <img src="../icons/Ethereum__grey.svg" />
               <div>
                 <div className={style.finance__stat__name}>Portfolio value</div>
-                <div className={style.finance__stat__value}>{fromWeiToEth(user?.account.totalVolume as string)} ETH</div>
+                <div className={style.finance__stat__value}>
+                  {fromWeiToEth(user?.account.totalVolume as string)} ETH
+                </div>
               </div>
             </div>
             <div className={style.finance__stat}>
               <img src="../icons/Ethereum__grey.svg" />
               <div>
                 <div className={style.finance__stat__name}>Fees Earned</div>
-                <div className={style.finance__stat__value}>{fromWeiToEth(user?.account.subjectFeeClaimed as string)} ETH</div>
+                <div className={style.finance__stat__value}>
+                  {fromWeiToEth(user?.account.subjectFeeClaimed as string)} ETH
+                </div>
               </div>
             </div>
           </div>
@@ -81,13 +109,14 @@ const Finance = () => {
           <div className={style.finance__row}>
             <div className={style.finance__claim__value}>
               <img src="../icons/Ethereum.svg" />
-              113.934 ETH
+              {fromWeiToEth(claimValue, 8)} ETH
             </div>
             <button
               className={classNames(
                 header.connect__button,
                 style.finance__claim__button
               )}
+              onClick={claim}
             >
               Claim
             </button>
@@ -96,5 +125,5 @@ const Finance = () => {
       </div>
     </div>
   );
-};
+});
 export default Finance;

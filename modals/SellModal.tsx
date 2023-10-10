@@ -10,6 +10,7 @@ import { useEffect, useState } from "react";
 import Web3Store from "../stores/Web3Store";
 import { fromWei } from "web3-utils";
 import { toast } from "react-toastify";
+import { fromWeiToEth } from "../utils/utilities";
 
 interface modalProps {
   key: ModalsEnum;
@@ -124,7 +125,7 @@ export const SellModal = observer(({ key, data, idx }: modalProps) => {
                 className={style.buy__user__name}
                 style={{ textAlign: "right" }}
               >
-                {Number(Number(fromWei(priceOfOne, "ether")).toFixed(8))} ETH
+                {fromWeiToEth(priceOfOne, 8)} ETH
               </div>
               <div className={style.buy__status}>
                 Key price <img src="../icons/Info.svg" />
@@ -149,7 +150,7 @@ export const SellModal = observer(({ key, data, idx }: modalProps) => {
           <div className={style.buy__amount}>
             <div className={style.buy__amount__title}>Total ETH</div>
             <div className={style.buy__amount__value}>
-              {Number(Number(fromWei(currentPrice, "ether")).toFixed(8))} ETH
+              {fromWeiToEth(currentPrice, 8)} ETH
             </div>
           </div>
         </div>

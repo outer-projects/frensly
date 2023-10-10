@@ -142,7 +142,7 @@ const Profile = observer(() => {
                 )}
               >
                 <img src="../icons/Ethereum.svg" />
-                {Number(Number(fromWei(pricePerShade, "ether")).toFixed(8))} ETH
+                {fromWeiToEth(pricePerShade, 8)} ETH
               </div>
             </div>
           </div>

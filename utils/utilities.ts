@@ -14,8 +14,8 @@ export function fd(val: number | string | BN) {
   if (!val) return "";
   return numeral(val?.toString()).format("0,0[.][000000000000000000]");
 }
-export const fromWeiToEth = (num: number | string) => {
-  return Number(Number(fromWei(Number(num), "ether")).toFixed(5));
+export const fromWeiToEth = (num: number | string, fixed?:number) => {
+  return Number(Number(fromWei(Number(num), "ether")).toFixed(fixed || 5));
 };
 BN.config({ EXPONENTIAL_AT: 100 });
 
