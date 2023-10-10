@@ -15,29 +15,43 @@ import { addressSlice } from "../../utils/utilities";
 import { fromWei } from "web3-utils";
 const Profile = observer(() => {
   const modalStore = useInjection(ModalStore);
-  const { user } = useInjection(Web3Store);
-  const { profileUser, getProfileUser, clearProfileUser } = useInjection(UserStore);
+  const { user, frensly, address } = useInjection(Web3Store);
+  const { profileUser, getProfileUser, clearProfileUser } =
+    useInjection(UserStore);
   const router = useRouter();
   const [isMyProfile, setIsMyProfile] = useState(false);
+  const [pricePerShade, setPricePerShade] = useState(0);
   console.log(router);
+  const checkPrice = async () => {
+    try {
+      const res = await frensly.methods
+        .getBuyPriceAfterFee(profileUser?.account?.address, Number(1) * 10 ** 6)
+        .call();
+      setPricePerShade(Number(res));
+    } catch (e) {
+      console.log(e);
+    }
+  };
   useEffect(() => {
     if (user) {
       getProfileUser(router.query.id as string);
+      checkPrice();
     }
-    return ()=>{
-      clearProfileUser()
-    }
+    return () => {
+      clearProfileUser();
+    };
   }, []);
   useEffect(() => {
     if (user) {
       getProfileUser(router.query.id as string);
+      checkPrice();
     }
   }, [user]);
   useEffect(() => {
     if (profileUser?.twitterId == user?.twitterId) {
       setIsMyProfile(true);
     } else {
-      setIsMyProfile(false)
+      setIsMyProfile(false);
     }
   }, [profileUser]);
   return (
@@ -94,7 +108,9 @@ const Profile = observer(() => {
         </div>
         <div className={classNames(style.profile__text, style.profile__share)}>
           {(isMyProfile ? "You" : profileUser?.twitterName) +
-            ` own ${(Number(profileUser?.account?.sharesAmount))/(10 ** 6)} share`}
+            ` own ${
+              Number(profileUser?.account?.sharesAmount) / 10 ** 6
+            } share`}
         </div>
         <div className={style.profile__stats}>
           <div className={style.profile__stats__row}>
@@ -113,7 +129,7 @@ const Profile = observer(() => {
                 )}
               >
                 <img src="../icons/Ethereum.svg" />
-                ?? ETH
+                {Number(pricePerShade.toFixed(8))} ETH
               </div>
             </div>
           </div>
@@ -128,7 +144,11 @@ const Profile = observer(() => {
             <div className={style.profile__stats__line}>
               <div className={style.profile__text}>Volume</div>
               <div className={classNames(style.profile__text, style.black)}>
-                {Number(Number(fromWei(Number(profileUser?.account?.totalVolume), "szabo")).toFixed(5))}{" "}
+                {Number(
+                  Number(
+                    fromWei(Number(profileUser?.account?.totalVolume), "szabo")
+                  ).toFixed(5)
+                )}{" "}
                 ETH
               </div>
             </div>

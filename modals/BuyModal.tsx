@@ -23,6 +23,7 @@ export const BuyModal = observer(({ key, data, idx }: modalProps) => {
   const [numberOfShares, setNumberOfShares] = useState<number | string>(0);
   const [currentPrice, setCurrentPrice] = useState(0);
   const [priceOfOne, setPriceOfOne] = useState(0);
+  const [count, setCount] = useState(0);
   const buy = async () => {
     if (Number(numberOfShares) < 0.000001)
       return toast.error("Amount is too low");
@@ -56,9 +57,21 @@ export const BuyModal = observer(({ key, data, idx }: modalProps) => {
       return 0;
     }
   };
+  const ownCount = async () => {
+    try {
+      const res = await frensly.methods
+        .sharesBalance(data?.user?.account?.address, address)
+        .call();
+      console.log(res);
+      setCount(Number(res));
+    } catch (e) {
+      console.log(e);
+    }
+  };
   useEffect(() => {
     if (frensly) {
       checkAndUpdatePriceOfOne();
+      ownCount()
     }
   }, [frensly]);
   const checkAndUpdatePriceOfOne = () => {
@@ -103,7 +116,7 @@ export const BuyModal = observer(({ key, data, idx }: modalProps) => {
                 <div className={style.buy__user__name}>
                   {data.user?.twitterName}
                 </div>
-                <div className={style.buy__status}>You own 0 keys</div>
+                <div className={style.buy__status}>You own {count} keys</div>
               </div>
             </div>
             <div className={style.buy__user__left__text}>
