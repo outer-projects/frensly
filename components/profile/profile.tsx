@@ -123,7 +123,7 @@ const Profile = observer(() => {
           </button>
         </div>
         <div className={classNames(style.profile__text, style.profile__share)}>
-          {`You own ${Number(count) / 10 ** 6} share`}
+          {`You own ${Number(count)} share`}
         </div>
         <div className={style.profile__stats}>
           <div className={style.profile__stats__row}>
@@ -142,7 +142,7 @@ const Profile = observer(() => {
                 )}
               >
                 <img src="../icons/Ethereum.svg" />
-                {Number(pricePerShade.toFixed(8))} ETH
+                {Number(Number(fromWei(pricePerShade, "ether")).toFixed(8))} ETH
               </div>
             </div>
           </div>
