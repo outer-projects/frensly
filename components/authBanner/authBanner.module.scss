@@ -4,7 +4,13 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
+  height: 100vh;
+}
+.banner__top {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 .banner__select {
   margin-bottom: 56px !important;
@@ -55,6 +61,9 @@
   color: $black;
   @media (max-width: 800px) {
     font-size: 40px;
+  }
+  @media (max-height: 800px) {
+    margin-top: 85px;
   }
 }
 .banner__bottom {
