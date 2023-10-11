@@ -6,6 +6,7 @@ import { useInjection } from "inversify-react";
 import { ExploreStore } from "../../stores/ExploreStore";
 import Link from "next/link";
 import { fromWei } from "web3-utils";
+import TypesList from "../common/typesList";
 const types = ["Top", "New Users", "Trending"];
 const Explore = observer(() => {
   const [active, setActive] = useState(0);
@@ -84,22 +85,7 @@ const Explore = observer(() => {
         />
       </div>
       <div className={style.explore__types__row}>
-        {types.map((el, i) => {
-          return (
-            <div
-              className={classNames(
-                style.explore__type,
-                active == i && style.explore__active
-              )}
-              onClick={() => {
-                setActive(i);
-              }}
-              key={i}
-            >
-              {el}
-            </div>
-          );
-        })}
+        <TypesList types={types} setActive={setActive} active={active} />
       </div>
       <div className={style.explore__users__col}>
         {currentUserList?.map((el, i) => {

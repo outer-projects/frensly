@@ -3,7 +3,13 @@
 .finance__page {
   display: flex;
   margin-top: 32px;
-  margin-left: -200px;
+  margin-left: -270px;
+  @media (max-width: 1174px) {
+    margin-left: -70px;
+  }
+  @media (max-width: 925px) {
+    margin-left: 0px;
+  }
 }
 .finance__link {
   border-radius: 16px;
@@ -81,7 +87,7 @@
   font-weight: bold;
   line-height: 32px;
   letter-spacing: -0.48px;
-  margin-top: 32px;
+  margin-top: 40px;
 }
 .finance__claim__value {
   border-radius: 100px;

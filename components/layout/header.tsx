@@ -6,7 +6,7 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import Bell from "../svgs/bell";
-import Notifications from "./notifications";
+import Notifications from "../notifications/notifications";
 import { useDetectClickOutside } from "react-detect-click-outside";
 import { useInjection } from "inversify-react";
 import Web3Store from "../../stores/Web3Store";

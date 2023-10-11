@@ -7,15 +7,20 @@
 }
 .ponds__search {
   margin-top: 24px;
-  margin-bottom: 48px;
+  margin-bottom: 24px;
+}
+.ponds__bottom {
+  border-radius: 32px;
+  background: #fff;
 }
 .ponds__total {
   color: $black;
   display: flex;
   justify-content: space-between;
-
+  align-items: center;
   letter-spacing: -0.2px;
   border-bottom: 1px solid #f1f1f1;
+  padding: 24px;
 }
 .chat__text {
   color: $grey;
@@ -33,7 +38,6 @@
   font-size: 16px;
   line-height: 24px; /* 150% */
   letter-spacing: -0.16px;
-  padding-bottom: 24px;
 }
 .chat__dollar {
   color: $grey;
@@ -45,6 +49,9 @@
 .ponds__chat {
   margin-top: 24px;
   margin-bottom: 50px;
+  padding: 24px;
+  padding-bottom: 16px;
+  padding-top: 0px;
 }
 .chat__value {
   color: $black;
@@ -249,7 +256,7 @@
 .write {
   margin-left: 16px;
   margin-right: 24px;
-  font-family: 'DMSans';
+  font-family: "DMSans";
   display: flex;
   margin-bottom: 16px;
 }

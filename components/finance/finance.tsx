@@ -81,7 +81,7 @@ const Finance = observer(() => {
         })}
       </div>
       <div className={style.finance__container}>
-        <div className={explore.explore__title}>My Funds</div>
+        <div className={explore.explore__title}>My funds</div>
         <div className={style.finance}>
           <User />
           <TypesList active={active} setActive={setActive} types={types} />

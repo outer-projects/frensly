@@ -6,7 +6,7 @@ import Head from "next/head";
 
 const FinancePage: NextPage = observer((props) => {
   return (
-    <div className={style.explore__page}>
+    <div className={style.finance__page}>
       <Head>
         <title>Frensly</title>
       </Head>

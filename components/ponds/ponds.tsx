@@ -5,6 +5,7 @@ import classNames from "classnames";
 import { useState } from "react";
 import ChatItem from "./chats/chatItem";
 import TypesList from "../common/typesList";
+import OneActivity from "../notifications/oneActivity";
 const types = ["My ponds", "My activity", "My holders", "My holdings"];
 const Ponds = () => {
   const [active, setActive] = useState(0);
@@ -13,7 +14,7 @@ const Ponds = () => {
     <div className={style.ponds}>
       {" "}
       <div className={explore.explore__title}>My ponds</div>
-      <TypesList active={active} setActive={setActive} types={types}/>
+      <TypesList active={active} setActive={setActive} types={types} />
       <div
         className={classNames(
           explore.explore__search,
@@ -32,22 +33,29 @@ const Ponds = () => {
           }}
         />
       </div>
-      <div>
-        <div className={style.ponds__total}>
-          <div className={style.ponds__total__text}>Total shares</div>
-          <div className={style.ponds__total__value}>
-            <img
-              src="../icons/Ethereum.svg"
-              style={{ width: "24px", height: "24px" }}
-            />
-            0.0121 ETH
+      <div className={style.ponds__bottom}>
+        <div>
+          <div className={style.ponds__total}>
+            <div className={style.ponds__total__text}>Total shares</div>
+            <div className={style.ponds__total__value}>
+              <img
+                src="../icons/Ethereum__grey.svg"
+                style={{ width: "24px", height: "24px" }}
+              />
+              0.0121 ETH
+            </div>
           </div>
         </div>
-      </div>
-      <div className={style.ponds__chat}>
-        <ChatItem />
-        <ChatItem />
-        <ChatItem />
+        {active == 0 && <div className={style.ponds__chat}>
+          <ChatItem />
+          <ChatItem />
+          <ChatItem />
+        </div>}
+        {active == 1 && <div className={style.ponds__chat}>
+          <OneActivity/>
+          <OneActivity/>
+          <OneActivity/>
+        </div>}
       </div>
     </div>
   );
