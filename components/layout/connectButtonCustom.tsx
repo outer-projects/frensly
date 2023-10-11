@@ -101,7 +101,7 @@ const ConnectButtonCustom = observer(() => {
               return (
                 <div className="header--wrapper__block">
                   <div className={style.account} onClick={openAccountModal}>
-                    <img src="../../Avatar.svg" alt="#" />
+                    <img src={user?.avatar} alt="#" />
                     <div style={{ marginLeft: "8px" }}>
                       <div className={style.balance}>
                         {account.displayBalance}
