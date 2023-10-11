@@ -22,7 +22,6 @@ const Profile = observer(() => {
   const [isMyProfile, setIsMyProfile] = useState(false);
   const [pricePerShade, setPricePerShade] = useState(0);
   const [count, setCount] = useState(0);
-  console.log(router);
   const checkPrice = async () => {
     try {
       const res = await frensly.methods

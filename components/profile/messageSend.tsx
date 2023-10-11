@@ -67,14 +67,14 @@ const MessageSend = observer(() => {
           </button>
         </div>
       </div>
-      {image && <div className={style.twitter__image__name}>
+      {/* {image && <div className={style.twitter__image__name}>
         {image?.name}
         <img
           src="../icons/Close.svg"
           style={{ cursor: "pointer" }}
           onClick={()=>{setImage(null)}}
         />
-      </div>}
+      </div>} */}
     </div>
   );
 });
