@@ -1,7 +1,7 @@
 import { IProfile } from "./users";
 
 export interface IPost extends Document {
-  date: Date; //понятно
+  date: string; //понятно
   text: string; //отсутствует в репостах
   media: string; //тут ссылка на файл если есть
   user: IProfile; //кто создал
