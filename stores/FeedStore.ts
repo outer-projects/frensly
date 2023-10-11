@@ -13,7 +13,15 @@ export class FeedStore {
   constructor(private readonly rootStore: RootStore) {
     makeObservable(this);
   }
-
+  @action getPosts = async () => {
+    try {
+      const res = await axios.get(prefix + "social/posts");
+      console.log(res.data);
+      this.feed = res.data;
+    } catch (e) {
+      console.log(e);
+    }
+  };
   @action addPost = async (data: {
     text: string;
     originalPost?: string;
@@ -26,6 +34,7 @@ export class FeedStore {
     try {
       const res = await axios.post(prefix + "social/post", formdata);
       console.log(res);
+      this.getPosts()
       return true;
     } catch (e) {
       console.log(e);
