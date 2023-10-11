@@ -9,7 +9,15 @@ import { fromWei } from "web3-utils";
 export function toBNJS(val: BigNumberish | number | string) {
   return new BN(val.toString());
 }
-
+interface ITime {
+  year: number;
+  month: number;
+  week: number;
+  day: number;
+  hour: number;
+  minute: number;
+  second: number;
+}
 export function fd(val: number | string | BN) {
   if (!val) return "";
   return numeral(val?.toString()).format("0,0[.][000000000000000000]");
@@ -18,17 +26,24 @@ export const fromWeiToEth = (num: number | string, fixed?: number) => {
   return Number(Number(fromWei(Number(num), "ether")).toFixed(fixed || 5));
 };
 BN.config({ EXPONENTIAL_AT: 100 });
-export const timePassed = (time:string) => {
-  const from = Date.parse(time); 
-  const dateNow = Date.now()
-  var d = Math.abs(from - dateNow) / 1000; // delta
-  var r = {}; // result
-  var s = {
-    // structure
+export const timePassed = (time: string) => {
+  const from = Date.parse(time);
+  const dateNow = Date.now();
+  var d = Math.abs(from - dateNow) / 1000;
+  var r: ITime = {
+    year: 0,
+    month: 0,
+    week: 0,
+    day: 0,
+    hour: 0,
+    minute: 0,
+    second: 0,
+  };
+  var s: ITime = {
     year: 31536000,
     month: 2592000,
-    week: 604800, // uncomment row to ignore
-    day: 86400, // feel free to add your own row
+    week: 604800,
+    day: 86400,
     hour: 3600,
     minute: 60,
     second: 1,
@@ -37,13 +52,17 @@ export const timePassed = (time:string) => {
   Object.keys(s).forEach(function (key) {
     //@ts-ignore
     r[key] = Math.floor(d / s[key]);
-        //@ts-ignore
+    //@ts-ignore
     d -= r[key] * s[key];
   });
 
-  // for example: {year:0,month:0,week:1,day:2,hour:34,minute:56,second:7}
-  console.log(r);
-  return r
+  if (r.year !== 0) return r.year + "y";
+  if (r.month !== 0) return r.month + "m";
+  if (r.week !== 0) return r.week + "w";
+  if (r.day !== 0) return r.day + "d";
+  if (r.hour !== 0) return r.hour + "h";
+  if (r.minute !== 0) return r.minute + "m";
+  if (r.second !== 0) return r.second + "s";
 };
 
 export const isServer = typeof window === "undefined";

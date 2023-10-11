@@ -58,7 +58,6 @@ const TwitterPost = observer(({ post }: { post: IPost }) => {
       }
     });
   };
-  console.log(timePassed(post?.date));
   return (
     <div className={style.twitter__one__post}>
       <img className={style.twitter__avatar} src={post?.user?.avatar} />
@@ -68,7 +67,7 @@ const TwitterPost = observer(({ post }: { post: IPost }) => {
           <div className={style.twitter__nickname}>
             @{post?.user?.twitterHandle}
           </div>
-          <div className={style.twitter__time}>{post?.date}</div>
+          <div className={style.twitter__time}>{timePassed(post?.date)}</div>
         </div>
         <div className={style.twitter__text}>{post?.text}</div>
         <div className={style.twitter__interact}>
