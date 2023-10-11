@@ -22,6 +22,26 @@ export class FeedStore {
       console.log(e);
     }
   };
+  @action likePost = async (id:string) => {
+    try {
+      const res = await axios.post(prefix + "social/like/" + id);
+      console.log(res.data);
+      return true
+    } catch (e) {
+      console.log(e);
+      return false
+    }
+  };
+  @action repostPost = async (id:string) => {
+    try {
+      const res = await axios.post(prefix + "social/repost/" + id);
+      console.log(res.data);
+      return true
+    } catch (e) {
+      console.log(e);
+      return false
+    }
+  };
   @action addPost = async (data: {
     text: string;
     originalPost?: string;

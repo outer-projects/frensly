@@ -1,3 +1,5 @@
+import { IPost } from "./feed";
+
 export interface IAccount {
   address: string;
   isInitialized: boolean;
@@ -22,6 +24,7 @@ export interface IProfile { //тут все очевидно вроде
   twitterId: string;
   avatar: string;
   twitterName: string;
+  posts:string[]
   twitterHandle: string;
   twitterDescription: string;
   regDate: Date;

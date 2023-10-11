@@ -7,6 +7,7 @@ export interface IPost extends Document {
   user: IProfile; //кто создал
   isRepost: boolean; //понятно
   repostCount: number;
+  _id:string
   originalPost: IPost; //если isRepost - ссылка ог поста, если !isRepost - ссылка на пост к которому этот пост является комментом, если нет - ог пост
   likes: IProfile[]; //список людей которые лайкнули
   comments: IPost[]; //список комментов

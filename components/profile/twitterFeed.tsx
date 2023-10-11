@@ -7,10 +7,10 @@ import { useEffect } from "react";
 import { FeedStore } from "../../stores/FeedStore";
 
 const TwitterFeed = observer(() => {
-  const { feed } = useInjection(FeedStore);
-  // useEffect(() => {
-  //   getPosts();
-  // }, []);
+  const { feed,getPosts } = useInjection(FeedStore);
+  useEffect(() => {
+    getPosts();
+  }, []);
   return (
     <div className={style.twitter__feed}>
       <MessageSend />

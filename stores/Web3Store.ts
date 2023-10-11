@@ -19,7 +19,7 @@ export class Web3Store {
   @observable unsupported?: boolean;
   @observable user?: IProfile;
   @observable signer?: WalletClient | null = undefined;
-  @observable balance: string = '0';
+  @observable balance: string = "0";
   @observable web3?: Web3;
   @observable socketWeb3?: Web3;
   @observable fee: number = 0;
@@ -52,9 +52,9 @@ export class Web3Store {
   @action setAddress = (user: any) => {
     this.address = user.address;
   };
-  @action setUserBalance = (b:string) =>{
-    this.balance = b
-  }
+  @action setUserBalance = (b: string) => {
+    this.balance = b;
+  };
   @action setUser = (user: any) => {
     this.user = user;
   };
@@ -95,7 +95,7 @@ export class Web3Store {
         );
         console.log(res.data);
         if (res.data.includes("Succesful")) {
-          this.checkAuth()
+          this.checkAuth();
           this.setAuthStatus("authenticated");
           return res.data;
         } else {
@@ -111,11 +111,11 @@ export class Web3Store {
   };
   @action checkAuth = async () => {
     try {
-      const res = await axios.get(prefix+"user", {
+      const res = await axios.get(prefix + "user", {
         withCredentials: true,
       });
       this.setAuthStatus("authenticated");
-      this.user = res.data
+      this.user = res.data;
       return res.data.account;
     } catch (e) {
       console.log(e);
