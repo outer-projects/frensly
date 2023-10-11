@@ -47,7 +47,7 @@ const Header = observer(() => {
             return (
               <Link
                 href={
-                  "../../" + (el.link == "/profile"
+                  "../.." + (el.link == "/profile"
                     ? el.link +'/'+ user?.twitterId
                     : el.link)
                 }

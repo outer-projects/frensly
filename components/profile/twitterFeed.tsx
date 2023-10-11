@@ -8,9 +8,9 @@ import { useEffect } from "react";
 
 const TwitterFeed = observer(() => {
   const { getPosts } = useInjection(FeedPage);
-  useEffect(() => {
-    getPosts();
-  }, []);
+  // useEffect(() => {
+  //   getPosts();
+  // }, []);
   return (
     <div className={style.twitter__feed}>
       <MessageSend />
