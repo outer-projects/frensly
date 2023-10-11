@@ -7,7 +7,7 @@ import { useEffect } from "react";
 import { FeedStore } from "../../stores/FeedStore";
 
 const TwitterFeed = observer(() => {
-  const { getPosts } = useInjection(FeedStore);
+  const { getPosts, feed } = useInjection(FeedStore);
   useEffect(() => {
     getPosts();
   }, []);
@@ -15,7 +15,11 @@ const TwitterFeed = observer(() => {
     <div className={style.twitter__feed}>
       <MessageSend />
       <div>
-        <TwitterPost />
+        {feed.map((el,i)=>{
+          return (
+            <TwitterPost key={i} post={el}/>
+          )
+        })}
       </div>
     </div>
   );
