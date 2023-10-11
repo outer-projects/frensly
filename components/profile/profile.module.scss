@@ -11,6 +11,38 @@
   padding-top: 24px;
 
 }
+.twitter__send__img {
+  position: absolute;
+  width: 23px;
+  height: 23px;
+  opacity: 0;
+  cursor: pointer;
+}
+.twitter__image__name {
+  margin-top: -40px;
+  margin-left: 36px;
+  position: absolute;
+  color: $grey;
+  font-family: "DMSans";
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px; /* 150% */
+  letter-spacing: -0.16px;
+  display: flex;
+  align-items: center;
+  img {
+    margin-left: 10px;
+  }
+}
+.twitter__send__gif {
+  position: absolute;
+  width: 23px;
+  height: 23px;
+  opacity: 0;
+  cursor: pointer;
+  margin-left: 25px;
+}
 .profile__row {
   display: flex;
   justify-content: space-between;

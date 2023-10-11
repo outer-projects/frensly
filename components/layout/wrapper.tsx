@@ -45,7 +45,7 @@ const Wrapper = observer(({ children }: any) => {
   }, []);
   return (
     <div className={style.page__container}>
-      {<Header />}
+      {(init && user?.account) && <Header />}
       {/* {<Header />} */}
       {children}
     </div>
