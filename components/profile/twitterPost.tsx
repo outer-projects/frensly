@@ -20,7 +20,7 @@ const TwitterPost = observer(({ post }: { post: IPost }) => {
           <div className={style.twitter__nickname}>
             @{post?.user?.twitterHandle}
           </div>
-          <div className={style.twitter__time}>{post?.date?.getDate()}</div>
+          <div className={style.twitter__time}>{post?.date}</div>
         </div>
         <div className={style.twitter__text}>{post?.text}</div>
         <div className={style.twitter__interact}>
