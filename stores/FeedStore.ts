@@ -17,7 +17,7 @@ export class FeedStore {
     try {
       const res = await axios.get(prefix + "social/posts");
       console.log(res.data);
-      this.feed = res.data;
+      // this.feed = res.data;
     } catch (e) {
       console.log(e);
     }
