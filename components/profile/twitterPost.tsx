@@ -11,6 +11,7 @@ import { useEffect, useState } from "react";
 import { useInjection } from "inversify-react";
 import Web3Store from "../../stores/Web3Store";
 import { FeedStore } from "../../stores/FeedStore";
+import { timePassed } from "../../utils/utilities";
 
 const TwitterPost = observer(({ post }: { post: IPost }) => {
   const [isActiveLike, setIsActiveLike] = useState(false);
@@ -57,6 +58,7 @@ const TwitterPost = observer(({ post }: { post: IPost }) => {
       }
     });
   };
+  console.log(timePassed(post?.date));
   return (
     <div className={style.twitter__one__post}>
       <img className={style.twitter__avatar} src={post?.user?.avatar} />
@@ -83,7 +85,7 @@ const TwitterPost = observer(({ post }: { post: IPost }) => {
               >
                 <Swap isActive={isActiveRepost} />
               </div>
-              <div>{post?.repostCount}</div>
+              <div>{repostCount}</div>
             </div>
           
           <div className={style.twitter__icon}>
@@ -93,7 +95,7 @@ const TwitterPost = observer(({ post }: { post: IPost }) => {
             >
               <Heart isActive={isActiveLike} />
             </div>
-            <div>{post?.likes?.length || 0}</div>
+            <div>{likesCount}</div>
           </div>
         </div>
       </div>

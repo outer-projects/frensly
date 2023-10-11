@@ -14,10 +14,37 @@ export function fd(val: number | string | BN) {
   if (!val) return "";
   return numeral(val?.toString()).format("0,0[.][000000000000000000]");
 }
-export const fromWeiToEth = (num: number | string, fixed?:number) => {
+export const fromWeiToEth = (num: number | string, fixed?: number) => {
   return Number(Number(fromWei(Number(num), "ether")).toFixed(fixed || 5));
 };
 BN.config({ EXPONENTIAL_AT: 100 });
+export const timePassed = (time:string) => {
+  const from = Date.parse(time); 
+  const dateNow = Date.now()
+  var d = Math.abs(from - dateNow) / 1000; // delta
+  var r = {}; // result
+  var s = {
+    // structure
+    year: 31536000,
+    month: 2592000,
+    week: 604800, // uncomment row to ignore
+    day: 86400, // feel free to add your own row
+    hour: 3600,
+    minute: 60,
+    second: 1,
+  };
+
+  Object.keys(s).forEach(function (key) {
+    //@ts-ignore
+    r[key] = Math.floor(d / s[key]);
+        //@ts-ignore
+    d -= r[key] * s[key];
+  });
+
+  // for example: {year:0,month:0,week:1,day:2,hour:34,minute:56,second:7}
+  console.log(r);
+  return r
+};
 
 export const isServer = typeof window === "undefined";
 
