@@ -16,7 +16,7 @@ const TwitterPost = observer(({post}:{post:IPost}) => {
       img: <Message />,
     },
     {
-      count: 0,
+      count: post.repostCount,
       img: <Swap />,
     },
     {

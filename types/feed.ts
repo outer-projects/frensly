@@ -1,12 +1,13 @@
 import { IProfile } from "./users";
 
 export interface IPost extends Document {
-    date: Date; //понятно
-    text: string; //отсутствует в репостах
-    media: string; //тут ссылка на файл если есть
-    user: IProfile; //кто создал
-    isRepost: boolean; //понятно
-    originalPost: IPost; //если isRepost - ссылка ог поста, если !isRepost - ссылка на пост к которому этот пост является комментом, если нет - ог пост
-    likes: IProfile[]; //список людей которые лайкнули
-    comments: IPost[]; //список комментов
+  date: Date; //понятно
+  text: string; //отсутствует в репостах
+  media: string; //тут ссылка на файл если есть
+  user: IProfile; //кто создал
+  isRepost: boolean; //понятно
+  repostCount: number;
+  originalPost: IPost; //если isRepost - ссылка ог поста, если !isRepost - ссылка на пост к которому этот пост является комментом, если нет - ог пост
+  likes: IProfile[]; //список людей которые лайкнули
+  comments: IPost[]; //список комментов
 }
