@@ -15,7 +15,7 @@ import ProgressBar from "../progressBar/progressBar";
 import { toWei } from "web3-utils";
 import { toast } from "react-toastify";
 const AuthBanner = observer(() => {
-  const [title, setTitle] = useState("Creative economy onchain");
+  const [title, setTitle] = useState("Creator economy onchain");
   const [stage, setStage] = useState("Authorization");
   const [opacity, setOpacity] = useState(false);
 
