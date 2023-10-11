@@ -8,55 +8,44 @@ import ThreeDots from "../socials/twitterUI/threeDots";
 import style from "./profile.module.scss";
 import { IPost } from "../../types/feed";
 
-const TwitterPost = observer(({post}:{post:IPost}) => {
-  
-  const socials = [
-    {
-      count: post?.comments?.length || 0,
-      img: <Message />,
-    },
-    {
-      count: post.repostCount,
-      img: <Swap />,
-    },
-    {
-      count: post?.likes?.length || 0,
-      img: <Heart isActive />,
-    },
-    // {
-    //   count: 3,
-    //   img: <Stats />,
-    // },
-    // {
-    //   count: 0,
-    //   img: <Upload />,
-    // },
-  ];
+const TwitterPost = observer(({ post }: { post: IPost }) => {
+
+
   return (
     <div className={style.twitter__one__post}>
-      <img className={style.twitter__avatar} src={post.user.avatar} />
+      <img className={style.twitter__avatar} src={post?.user?.avatar} />
       <div>
         <div className={style.twitter__row}>
-          <div className={style.twitter__name}>{post.user.twitterName}</div>
-          <div className={style.twitter__nickname}>@{post.user.twitterHandle}</div>
-          <div className={style.twitter__time}>{post.date.getDate()}</div>
+          <div className={style.twitter__name}>{post?.user?.twitterName}</div>
+          <div className={style.twitter__nickname}>
+            @{post?.user?.twitterHandle}
+          </div>
+          <div className={style.twitter__time}>{post?.date?.getDate()}</div>
         </div>
-        <div className={style.twitter__text}>
-          {post?.text}
-        </div>
+        <div className={style.twitter__text}>{post?.text}</div>
         <div className={style.twitter__interact}>
-          {socials.map((el) => {
-            return (
-              <div className={style.twitter__icon}>
-                <div style={{width:'24px', height:'24px', marginRight:'4px'}}>{el.img}</div> 
-                <div>{el.count!==0 && el.count}</div>
-              </div>
-            );
-          })}
+          <div className={style.twitter__icon}>
+            <div style={{ width: "24px", height: "24px", marginRight: "4px" }}>
+              <Message />
+            </div>
+            <div>{post?.comments?.length || 0}</div>
+          </div>
+          <div className={style.twitter__icon}>
+            <div style={{ width: "24px", height: "24px", marginRight: "4px" }}>
+              <Swap />
+            </div>
+            <div>{post?.repostCount}</div>
+          </div>
+          <div className={style.twitter__icon}>
+            <div style={{ width: "24px", height: "24px", marginRight: "4px" }}>
+              <Heart isActive />
+            </div>
+            <div>{post?.likes?.length || 0}</div>
+          </div>
         </div>
       </div>
       <ThreeDots />
     </div>
   );
-})
+});
 export default TwitterPost;

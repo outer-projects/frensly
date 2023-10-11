@@ -13,7 +13,7 @@ const TwitterFeed = observer(() => {
   }, []);
   return (
     <div className={style.twitter__feed}>
-      <MessageSend />
+      {/* <MessageSend /> */}
       <div>
         {feed.map((el,i)=>{
           return (
