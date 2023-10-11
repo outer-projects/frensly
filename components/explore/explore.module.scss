@@ -88,8 +88,12 @@
   border-radius: 16px;
   padding: 8px 16px;
   margin-bottom: 16px;
+  transition: 500ms ease all;
+  background: #f8f8f8;
   &:hover {
-    background: #f8f8f8;
+    padding: 7px 16px;
+    margin-bottom: 18px;
+    background: #F1F1F1
   }
 }
 .explore__user__left {
@@ -158,10 +162,10 @@
   border: 1px solid  #e2e3e2;
   height: 56px;
   border-radius: 16px;
+  background: #fff;
   input {
     width: 100%;
     height: 100%;
-    background: var(--white-white, #fff);
     color: $black;
     font-family: "DMSans";
     font-size: 16px;

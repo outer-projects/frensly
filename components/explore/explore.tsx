@@ -17,7 +17,7 @@ const Explore = observer(() => {
     getTopUsers,
     searchUsers,
     searchResult,
-    topUsersList
+    topUsersList,
   } = useInjection(ExploreStore);
   const saveInput = () => {
     searchUsers(search);
@@ -42,20 +42,21 @@ const Explore = observer(() => {
       getNewUsers();
     }
   }, [active]);
-  console.log(searchResult)
+  console.log(searchResult);
   return (
     <div className={style.explore}>
       <div className={style.explore__title}>Explore</div>
       <div className={style.explore__users__wrapper}>
-        
         <div className={style.explore__users__row}>
           {topUsersList.map((el, i) => {
             if (i <= 4) {
               return (
-                <div key={i} className={style.explore__topuser}>
-                  <img src={el.avatar} />
-                  {el.twitterName}
-                </div>
+                <Link href={"/profile/" + el.twitterId}>
+                  <div key={i} className={style.explore__topuser}>
+                    <img src={el.avatar} />
+                    {el.twitterName}
+                  </div>
+                </Link>
               );
             }
           })}
@@ -103,28 +104,30 @@ const Explore = observer(() => {
       <div className={style.explore__users__col}>
         {currentUserList?.map((el, i) => {
           return (
-            <Link href={'/profile/'+el.twitterId}>
-            <div className={style.explore__user} key={i}>
-              <div className={style.explore__user__left}>
-                <img src={el.avatar} />
-                <div className={style.explore__user__left__text}>
-                  <div className={style.explore__user__share}>
-                    <img src="../icons/Key.svg" />
-                    <div>{(Number(el?.account?.sharesAmount))/(10 ** 6)} share</div>
+            <Link href={"/profile/" + el.twitterId}>
+              <div className={style.explore__user} key={i}>
+                <div className={style.explore__user__left}>
+                  <img src={el.avatar} />
+                  <div className={style.explore__user__left__text}>
+                    <div className={style.explore__user__share}>
+                      <img src="../icons/Key.svg" />
+                      <div>
+                        {Number(el?.account?.sharesAmount) / 10 ** 6} share
+                      </div>
+                    </div>
+                    <div className={style.explore__user__name}>
+                      {el.twitterName}
+                    </div>
                   </div>
+                </div>
+                <div className={style.explore__user__right}>
                   <div className={style.explore__user__name}>
-                    {el.twitterName}
+                    <img src="../icons/Ethereum.svg" />
+                    {"??"} ETH
                   </div>
+                  <div className={style.explore__user__balance__usd}>$0</div>
                 </div>
               </div>
-              <div className={style.explore__user__right}>
-                <div className={style.explore__user__name}>
-                  <img src="../icons/Ethereum.svg" />
-                  {'??'} ETH
-                </div>
-                <div className={style.explore__user__balance__usd}>$0</div>
-              </div>
-            </div>
             </Link>
           );
         })}
