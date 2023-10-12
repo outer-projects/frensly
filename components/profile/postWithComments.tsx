@@ -101,8 +101,8 @@ const PostWithComments = observer(() => {
       </div>
 
       {currentPost &&
-        currentPost?.comments.map((el, i) => {
-          return <TwitterPost key={i} post={el} isComment={true} />;
+        currentPost?.comments.map((el) => {
+          return <TwitterPost key={el._id} post={el} isComment={true} />;
         })}
     </div>
   );
