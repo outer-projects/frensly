@@ -94,7 +94,7 @@ export class Web3Store {
           { withCredentials: true }
         );
         console.log(res.data);
-        if (res.data.includes("Succesful")) {
+        if (res.data?.meta.message == "Succesful authentication") {
           this.checkAuth();
           this.setAuthStatus("authenticated");
           return res.data;
