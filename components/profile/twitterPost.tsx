@@ -16,7 +16,15 @@ import classNames from "classnames";
 import Link from "next/link";
 
 const TwitterPost = observer(
-  ({ post, isComment, isRepost }: { post: IPost; isComment?: boolean, isRepost?:boolean }) => {
+  ({
+    post,
+    isComment,
+    isRepost,
+  }: {
+    post: IPost;
+    isComment?: boolean;
+    isRepost?: boolean;
+  }) => {
     const [isActiveLike, setIsActiveLike] = useState(false);
     const [isActiveRepost, setIsActiveRepost] = useState(false);
     const [repostAvailable, setRepostAvailable] = useState(false);
@@ -79,15 +87,22 @@ const TwitterPost = observer(
                 isComment && style.twitter__one__comment
               )}
             >
-              <img className={style.twitter__avatar} src={post?.user?.avatar} />
+              <Link href={"/profile/" + post?.user.twitterId}>
+                <img
+                  className={style.twitter__avatar}
+                  src={post?.user?.avatar}
+                />
+              </Link>
               <div>
                 <div className={style.twitter__row}>
-                  <div className={style.twitter__name}>
-                    {post?.user?.twitterName}
-                  </div>
-                  <div className={style.twitter__nickname}>
+                  <Link href={"/profile/" + post?.user.twitterId}>
+                    <div className={style.twitter__name}>
+                      {post?.user?.twitterName}
+                    </div>
+                  </Link>
+                  <a target="_blank" rel="nereferrer" href={"https://twitter.com/"+post?.user?.twitterHandle}><div className={style.twitter__nickname}>
                     @{post?.user?.twitterHandle}
-                  </div>
+                  </div></a>
                   <div className={style.twitter__time}>
                     {timePassed(post?.date)}
                   </div>
