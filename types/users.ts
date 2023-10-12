@@ -29,8 +29,8 @@ export interface IProfile { //тут все очевидно вроде
   twitterDescription: string;
   regDate: Date;
   _id: string;
-  isFollowing:  IProfile[][];
-  isFollowedBy: IProfile[][];
+  isFollowing:  string[];
+  isFollowedBy: string[];
 }
 
 export enum HistoryTypes {

@@ -16,12 +16,20 @@ import { fromWei } from "web3-utils";
 const Profile = observer(() => {
   const modalStore = useInjection(ModalStore);
   const { user, frensly, address } = useInjection(Web3Store);
-  const { profileUser, getProfileUser, clearProfileUser } =
+  const { profileUser, getProfileUser, clearProfileUser, follow } =
     useInjection(UserStore);
   const router = useRouter();
   const [isMyProfile, setIsMyProfile] = useState(false);
+  const [isFollowed, setIsFollowed] = useState(false);
   const [pricePerShade, setPricePerShade] = useState(0);
   const [count, setCount] = useState(0);
+  const followUser = (isFollowed: boolean) => {
+    follow(profileUser?.twitterId as string, isFollowed).then(res =>{
+      if(res) {
+        setIsFollowed(!isFollowed)
+      }
+    })
+  };
   const checkPrice = async () => {
     try {
       const res = await frensly.methods
@@ -31,6 +39,13 @@ const Profile = observer(() => {
       setPricePerShade(Number(res));
     } catch (e) {
       console.log(e);
+    }
+  };
+  const checkIsFollowed = () => {
+    if(user?.isFollowing.includes(profileUser?._id as string)) {
+      setIsFollowed(true)
+    } else {
+      setIsFollowed(false)
     }
   };
   const ownCount = async () => {
@@ -62,6 +77,7 @@ const Profile = observer(() => {
     if (profileUser) {
       checkPrice();
       ownCount();
+      checkIsFollowed();
     }
     if (profileUser?.twitterId == user?.twitterId) {
       setIsMyProfile(true);
@@ -110,13 +126,18 @@ const Profile = observer(() => {
             <button
               className={classNames(
                 header.connect__button,
-                style.profile__follow
+                !isFollowed && style.profile__follow
               )}
               onClick={() => {
                 console.log("Follow");
+                followUser(isFollowed)
               }}
             >
-              <img src="../../icons/Plus.svg" />
+              <img
+                src={
+                  !isFollowed ? "../../icons/Plus.svg" : "../../icons/Close.svg"
+                }
+              />
               Follow
             </button>
           )}

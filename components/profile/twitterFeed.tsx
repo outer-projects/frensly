@@ -11,7 +11,8 @@ const posts = [
   {
     date: "2023-10-12T09:48:43.557Z",
     text: "123123123",
-    media: "https://pbs.twimg.com/profile_images/1711407146619858944/NTOqpjOQ_bigger.png",
+    media:
+      "https://pbs.twimg.com/profile_images/1711407146619858944/NTOqpjOQ_bigger.png",
     user: {
       avatar:
         "https://pbs.twimg.com/profile_images/1711407146619858944/NTOqpjOQ_bigger.png",
@@ -100,7 +101,7 @@ const TwitterFeed = observer(({ id }: { id?: string }) => {
     <div className={style.twitter__feed}>
       {(!id || id == user?.twitterId) && <MessageSend id={id} />}
       <div>
-        {posts?.map((el, i) => {
+        {(id ? userPosts : feed)?.map((el, i) => {
           if (!el.isRepost) {
             //@ts-ignore
             return <TwitterPost key={i} post={el} />;
@@ -108,7 +109,8 @@ const TwitterFeed = observer(({ id }: { id?: string }) => {
             return (
               <div>
                 <div className={style.twitter__repost}>
-                  <Swap isActive={false} />{el.user.twitterName} reposted
+                  <Swap isActive={false} />
+                  {el.user.twitterName} reposted
                 </div>
                 {/* @ts-ignore */}
                 <TwitterPost key={i} post={el.originalPost} />

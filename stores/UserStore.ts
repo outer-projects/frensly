@@ -27,9 +27,19 @@ export class UserStore {
       console.log(e);
     }
   };
-  @action clearProfileUser = () =>{
-    this.profileUser = undefined
-  }
+  @action follow = async (id: string, isFollowed:boolean) => {
+    try {
+      let res = await axios.get(prefix + `social/${isFollowed ? 'un' : ''}follow/` + id);
+      console.log(res.data)
+      return true
+    } catch (e) {
+      console.log(e);
+      return false
+    }
+  };
+  @action clearProfileUser = () => {
+    this.profileUser = undefined;
+  };
   @action setOpacity = (opacity: boolean) => {
     this.opacity = opacity;
   };
