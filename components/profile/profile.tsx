@@ -249,7 +249,7 @@ const Profile = observer(() => {
           </div>
         </div>
       </div>
-      <TwitterFeed id={user?._id} />
+      <TwitterFeed id={profileUser?._id} />
     </div>
   );
 });

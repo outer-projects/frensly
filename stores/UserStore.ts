@@ -29,7 +29,7 @@ export class UserStore {
   };
   @action follow = async (id: string, isFollowed:boolean) => {
     try {
-      let res = await axios.get(prefix + `social/${isFollowed ? 'un' : ''}follow/` + id);
+      let res = await axios.post(prefix + `social/${isFollowed ? 'un' : ''}follow/` + id);
       console.log(res.data)
       return true
     } catch (e) {
