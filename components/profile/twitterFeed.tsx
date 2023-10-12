@@ -6,7 +6,86 @@ import { useInjection } from "inversify-react";
 import { useEffect } from "react";
 import { FeedStore } from "../../stores/FeedStore";
 import Web3Store from "../../stores/Web3Store";
-
+import Swap from "../socials/twitterUI/Swap";
+const posts = [
+  {
+    date: "2023-10-12T09:48:43.557Z",
+    text: "123123123",
+    media: "https://pbs.twimg.com/profile_images/1711407146619858944/NTOqpjOQ_bigger.png",
+    user: {
+      avatar:
+        "https://pbs.twimg.com/profile_images/1711407146619858944/NTOqpjOQ_bigger.png",
+      twitterName: "twitterName",
+      twitterHandle: "123Qw62434",
+    },
+    isRepost: false, //понятно
+    reposts: [],
+    _id: "",
+    likes: [], //список людей которые лайкнули
+    comments: [
+      {
+        date: "2023-10-12T09:48:43.557Z",
+        text: "123123123",
+        user: {
+          avatar:
+            "https://pbs.twimg.com/profile_images/1711407146619858944/NTOqpjOQ_bigger.png",
+          twitterName: "twitterName",
+          twitterHandle: "123Qw62434",
+        },
+        isRepost: true, //понятно
+        reposts: [],
+        _id: "",
+        likes: [], //список людей которые лайкнули
+        comments: [], //список комментов
+      },
+      {
+        date: "2023-10-12T09:48:43.557Z",
+        text: "123123123",
+        user: {
+          avatar:
+            "https://pbs.twimg.com/profile_images/1711407146619858944/NTOqpjOQ_bigger.png",
+          twitterName: "twitterName",
+          twitterHandle: "123Qw62434",
+        },
+        isRepost: true, //понятно
+        reposts: [],
+        _id: "",
+        likes: [], //список людей которые лайкнули
+        comments: [], //список комментов
+      },
+    ], //список комментов
+  },
+  {
+    date: "2023-10-12T09:48:43.557Z",
+    text: "",
+    user: {
+      avatar:
+        "https://pbs.twimg.com/profile_images/1711407146619858944/NTOqpjOQ_bigger.png",
+      twitterName: "twitterName",
+      twitterHandle: "123Qw62434",
+    },
+    isRepost: true, //понятно
+    reposts: [],
+    _id: "",
+    originalPost: {
+      date: "2023-10-12T09:48:43.557Z",
+      text: "123123123",
+      user: {
+        avatar:
+          "https://pbs.twimg.com/profile_images/1711407146619858944/NTOqpjOQ_bigger.png",
+        twitterName: "twitterName",
+        twitterHandle: "123Qw62434",
+      },
+      isRepost: true, //понятно
+      reposts: [],
+      _id: "",
+      likes: [], //список людей которые лайкнули
+      comments: [], //список комментов
+    },
+    likes: [], //список людей которые лайкнули
+    comments: [], //список комментов
+  },
+];
 const TwitterFeed = observer(({ id }: { id?: string }) => {
   const { feed, getFeed, getUserPosts, userPosts } = useInjection(FeedStore);
   const { user } = useInjection(Web3Store);
@@ -21,11 +100,26 @@ const TwitterFeed = observer(({ id }: { id?: string }) => {
     <div className={style.twitter__feed}>
       {(!id || id == user?.twitterId) && <MessageSend id={id} />}
       <div>
-        {(id ? userPosts : feed)?.map((el, i) => {
-          return <TwitterPost key={i} post={el} />;
+        {posts?.map((el, i) => {
+          if (!el.isRepost) {
+            //@ts-ignore
+            return <TwitterPost key={i} post={el} />;
+          } else {
+            return (
+              <div>
+                <div className={style.twitter__repost}>
+                  <Swap isActive={false} />{el.user.twitterName} reposted
+                </div>
+                {/* @ts-ignore */}
+                <TwitterPost key={i} post={el.originalPost} />
+              </div>
+            );
+          }
         })}
       </div>
-      {(id ? userPosts.length == 0 : feed.length == 0) && <div className={style.twitter__empty}>No activity yet</div>}
+      {(id ? userPosts.length == 0 : feed.length == 0) && (
+        <div className={style.twitter__empty}>No activity yet</div>
+      )}
     </div>
   );
 });

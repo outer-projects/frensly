@@ -50,7 +50,11 @@ const MessageSend = observer(({ id }: { id?: string }) => {
           <img src="../../icons/ImageAdd.svg" />
           <img src="../../icons/gifAdd.svg" />
         </div>
-        <div className={style.twitter__button}>
+        <div
+          className={classNames(
+            style.twitter__button
+          )}
+        >
           <button
             className={classNames(header.connect__button, style.twitter__post)}
             disabled={message.length == 0}

@@ -81,11 +81,23 @@ const Profile = observer(() => {
             <div>
               <div className={style.profile__name}>
                 {profileUser?.twitterName}{" "}
-                <img
-                  src="../icons/twitter_black.svg"
-                  style={{ marginRight: "5px" }}
-                />{" "}
-                <span>@{profileUser?.twitterHandle}</span>
+                <a
+                  href={`https://twitter.com/${user?.twitterHandle}`}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  <img
+                    src="../icons/twitter_black.svg"
+                    style={{ marginRight: "5px" }}
+                  />{" "}
+                </a>
+                <a
+                  href={`https://twitter.com/${user?.twitterHandle}`}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  <span>@{profileUser?.twitterHandle}</span>
+                </a>
               </div>
               <div className={style.profile__subtitle}>
                 {addressSlice(profileUser?.account?.address)}
@@ -165,21 +177,18 @@ const Profile = observer(() => {
           <div className={style.profile__stats__follow}>
             <div
               className={style.profile__text}
-              style={{ paddingRight: "9px", borderRight: '1px solid #E2E3E2' }}
+              style={{ paddingRight: "9px", borderRight: "1px solid #E2E3E2" }}
             >
-              <span>{profileUser?.isFollowedBy?.length||0}</span> Following
+              <span>{profileUser?.isFollowedBy?.length || 0}</span> Following
             </div>
-            <div
-              className={style.profile__text}
-              style={{ marginLeft: "8px" }}
-            >
-              <span>{profileUser?.isFollowing?.length||0}</span> Followers
+            <div className={style.profile__text} style={{ marginLeft: "8px" }}>
+              <span>{profileUser?.isFollowing?.length || 0}</span> Followers
             </div>
           </div>
           <div className={style.profile__stats__follow}>
             <div
               className={style.profile__text}
-              style={{ paddingRight: "9px", borderRight: '1px solid #E2E3E2' }}
+              style={{ paddingRight: "9px", borderRight: "1px solid #E2E3E2" }}
             >
               <span>115</span> Holders
             </div>
@@ -219,7 +228,7 @@ const Profile = observer(() => {
           </div>
         </div>
       </div>
-      <TwitterFeed id={user?.twitterId}/>
+      <TwitterFeed id={user?.twitterId} />
     </div>
   );
 });

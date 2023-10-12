@@ -9,7 +9,6 @@
   border-top-right-radius: 32px;
   background: #fff;
   padding-top: 24px;
-
 }
 .twitter__empty {
   width: 100%;
@@ -20,6 +19,7 @@
   font-style: normal;
   font-weight: 400;
   margin-top: 24px;
+  margin-bottom: 24px;
 }
 .twitter__send__img {
   position: absolute;
@@ -60,7 +60,7 @@
   margin-right: 24px;
 }
 .twitter__active {
-  border: 1px solid $green!important;
+  border: 1px solid $green !important;
 }
 .profile__buttons {
   display: flex;
@@ -73,16 +73,15 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-
 }
 .profile__half {
-  width: 49%!important;
+  width: 49% !important;
 }
 .profile__follow {
   width: 49%;
   height: 48px;
-  background: transparent!important;
-  font-weight: 400!important;
+  background: transparent !important;
+  font-weight: 400 !important;
   border-radius: 100px;
   border: 1px solid $green;
 }
@@ -234,11 +233,27 @@
   width: 50px;
   transform: translateY(-52px);
 }
+.twitter__add__comment {
+  margin-left: 74px;
+  width: 50px;
+  align-self: flex-start;
+  transform: translateY(-49px);
+}
 .twitter__post {
   width: 81px;
   height: 40px;
   align-self: flex-end;
   transform: translateY(-58px);
+  &:disabled {
+    opacity: 0.5;
+    cursor: default;
+  }
+}
+.twitter__post__comment {
+  width: 81px;
+  height: 40px;
+  align-self: flex-end;
+  transform: translateY(-54px);
   &:disabled {
     opacity: 0.5;
     cursor: default;
@@ -250,6 +265,18 @@
   justify-content: flex-end;
   margin-top: -30px;
   padding-right: 40px;
+}
+.twitter__comments {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+.twitter__button__comment {
+  margin-right: 80px !important;
+}
+.twitter__textarea__comment {
+  width: 488px !important;
 }
 .twitter__textarea {
   margin-left: 24px;
@@ -270,7 +297,7 @@
   line-height: 36px; /* 150% */
   letter-spacing: -0.16px;
   &::placeholder {
-    color: #B4B4B3;
+    color: #b4b4b3;
   }
 }
 .profile__bottom {
@@ -278,7 +305,7 @@
   justify-content: space-between;
   align-items: center;
   margin-top: 25px;
-  border-top: 1px solid #F1F1F1;
+  border-top: 1px solid #f1f1f1;
   padding-top: 25px;
   padding-left: 24px;
   padding-right: 24px;
@@ -305,6 +332,26 @@
     line-height: 20px; /* 142.857% */
     letter-spacing: -0.14px;
   }
+}
+.twitter__repost {
+  display: flex;
+  align-items: center;
+  color: $grey;
+  margin-left: 48px;
+  margin-bottom: 16px;
+  font-family: "DMSans";
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px; /* 142.857% */
+  svg {
+    margin-right: 5px;
+  }
+}
+.twitter__post__container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 .profile__title {
   color: #23262f;
@@ -364,6 +411,10 @@
   margin-right: 48px;
   cursor: pointer;
 }
+.twitter__image {
+  width: 488px;
+  max-height: 500px;
+}
 .twitter__text {
   color: $grey;
   /* Paragraphs/P4 */
@@ -375,6 +426,10 @@
   letter-spacing: -0.14px;
   max-width: 488px;
   min-width: 488px;
+}
+.twitter__text__comm {
+  max-width: 400px !important;
+  min-width: 400px !important;
 }
 .twitter__time {
   color: #b4b4b3;
@@ -399,6 +454,16 @@
   font-style: normal;
   font-weight: 400;
   line-height: 24px;
+}
+.twitter__one__comment {
+  justify-content: center !important;
+}
+.twitter__interact__comment {
+  margin-bottom: 8px !important;
+  margin-top: 8px !important;
+}
+.twitter__interact__open__comment {
+  margin-bottom: 20px !important;
 }
 .twitter__one__post {
   display: flex;
