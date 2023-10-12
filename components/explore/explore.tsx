@@ -7,6 +7,7 @@ import { ExploreStore } from "../../stores/ExploreStore";
 import Link from "next/link";
 import { fromWei } from "web3-utils";
 import TypesList from "../common/typesList";
+import { USDEthPair } from "../../utils/utilities";
 const types = ["Top", "New Users", "Trending"];
 const Explore = observer(() => {
   const [active, setActive] = useState(0);
@@ -109,9 +110,9 @@ const Explore = observer(() => {
                 <div className={style.explore__user__right}>
                   <div className={style.explore__user__name}>
                     <img src="../icons/Ethereum.svg" />
-                    {"??"} ETH
+                    {el.account.currentPrice} ETH
                   </div>
-                  <div className={style.explore__user__balance__usd}>$0</div>
+                  <div className={style.explore__user__balance__usd}>${USDEthPair(el.account.currentPrice)}</div>
                 </div>
               </div>
             </Link>

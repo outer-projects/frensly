@@ -4,6 +4,7 @@ export interface IAccount {
   address: string;
   isInitialized: boolean;
   initDate: Date;
+  currentPrice: string;
   profile: IProfile[]; //профиль с неймами и прочей хуитой
   history: IHistory[][]; //все действия юзера
   sharesAmount: string; //сколько шеров этого юзера существует
@@ -13,23 +14,25 @@ export interface IAccount {
   subjectFeeClaimed: string; //сколько комсы с трейдов его шерами отправилось юзеру
   holderFeeDistributed: string; //сколько комсы с трейдов его шерами отправилось его акционерам
   totalVolume: string; //тотал вольюм трейдинга
-  othersShares: { //шеры которые холдит 
-      subject: IAccount[]; //кого холдит
-      amount: string; //сколько
-      isEligible: boolean; //получает ли акционерную комсу
+  othersShares: {
+    //шеры которые холдит
+    subject: IAccount[]; //кого холдит
+    amount: string; //сколько
+    isEligible: boolean; //получает ли акционерную комсу
   }[];
 }
-export interface IProfile { //тут все очевидно вроде
+export interface IProfile {
+  //тут все очевидно вроде
   account: IAccount;
   twitterId: string;
   avatar: string;
   twitterName: string;
-  posts:string[]
+  posts: string[];
   twitterHandle: string;
   twitterDescription: string;
   regDate: Date;
   _id: string;
-  isFollowing:  string[];
+  isFollowing: string[];
   isFollowedBy: string[];
 }
 
@@ -44,7 +47,8 @@ export enum HistoryTypes {
   NON_ELIGIBLE = "NON_ELIGIBLE",
 }
 
-export interface IHistory extends Document { //история хуйни
+export interface IHistory extends Document {
+  //история хуйни
   date: Date;
   type: HistoryTypes; //тип события
   price: string; //за сколько
