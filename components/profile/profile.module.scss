@@ -340,12 +340,14 @@
 .twitter__repost {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   color: $grey;
   margin-left: 48px;
   margin-bottom: 16px;
   font-family: "DMSans";
   font-size: 14px;
   font-style: normal;
+  width: 100%;
   font-weight: 400;
   line-height: 20px; /* 142.857% */
   svg {

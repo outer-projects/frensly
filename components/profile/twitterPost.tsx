@@ -129,7 +129,7 @@ const TwitterPost = observer(
                     <div
                       className={style.twitter__icon}
                       onClick={() => {
-                        repostAvailable && repost();
+                        !isActiveRepost && repostAvailable && repost();
                       }}
                     >
                       <div

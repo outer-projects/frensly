@@ -25,7 +25,7 @@ export class FeedStore {
   };
   @action getCurrentPost = async (id: string) => {
     try {
-      const res = await axios.get(prefix + "social/post/" + id);
+      const res = await axios.get("https://frensly.adev.co/api/v1/" + "social/post/" + id);
       console.log(res.data);
       this.currentPost = res.data;
     } catch (e) {

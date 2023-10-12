@@ -26,7 +26,7 @@ const PostWithComments = observer(() => {
     <div>
       {currentPost && <TwitterPost post={currentPost} />}
 
-      <div className={style.twitter__comments}>
+      <div>
         <TextareaAutosize
           value={message}
           style={{ resize: "none" }}
@@ -34,7 +34,7 @@ const PostWithComments = observer(() => {
           className={classNames(
             style.twitter__textarea,
             focus && style.twitter__active,
-            style.twitter__textarea__comment
+            // style.twitter__textarea__comment
           )}
           onBlur={() => {
             setFocus(false);
@@ -48,7 +48,7 @@ const PostWithComments = observer(() => {
         />
         <div
           className={classNames(
-            style.twitter__add__comment,
+            // style.twitter__add__comment,
             style.twitter__add
           )}
         >
@@ -70,20 +70,21 @@ const PostWithComments = observer(() => {
         <div
           className={classNames(
             style.twitter__button,
-            style.twitter__button__comment
+            // style.twitter__button__comment
           )}
         >
           <button
             className={classNames(
               header.connect__button,
               style.twitter__post,
-              style.twitter__post__comment
+              // style.twitter__post__comment
             )}
             disabled={message.length == 0}
             onClick={() => {
               addPost({
                 text: message,
                 media: image,
+                //@ts-ignore
                 originalPost: currentPost?.originalPost,
               }).then((res) => {
                 if (res) {
