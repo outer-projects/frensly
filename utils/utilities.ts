@@ -73,7 +73,7 @@ export const USDEthPair = async (price: string) => {
       "https://api.coingecko.com/api/v3/simple/price?ids=ethereum&vs_currencies=usd"
     );
     console.log(res.data);
-    return Number(res.data.ethereum.usd) * priceInEth;
+    return Number((Number(res.data.ethereum.usd) * priceInEth).toFixed(2));
   } catch (e) {
     console.log(e);
   }

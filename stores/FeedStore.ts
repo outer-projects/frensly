@@ -25,7 +25,7 @@ export class FeedStore {
   };
   @action getCurrentPost = async (id: string) => {
     try {
-      const res = await axios.get("https://frensly.adev.co/api/v1/" + "social/post/" + id);
+      const res = await axios.get(prefix + "social/post/" + id);
       console.log(res.data);
       this.currentPost = res.data;
     } catch (e) {
@@ -80,6 +80,7 @@ export class FeedStore {
     const formdata = new FormData();
     formdata.append("text", data.text);
     data.originalPost && formdata.append("originalPost", data.originalPost);
+    console.log(data.media);
     data.media && formdata.append("media", data.media);
     try {
       const res = await axios.post(prefix + "social/post", formdata);
@@ -89,7 +90,7 @@ export class FeedStore {
       } else {
         this.getFeed();
       }
-
+      data.originalPost && this.getCurrentPost(data.originalPost)
       return true;
     } catch (e) {
       console.log(e);

@@ -29,7 +29,7 @@ const PostWithComments = observer(() => {
       <div>
         <TextareaAutosize
           value={message}
-          style={{ resize: "none" }}
+          style={{ resize: "none", marginTop: '50px', marginBottom: '-30px' }}
           placeholder="What is happening?"
           className={classNames(
             style.twitter__textarea,
