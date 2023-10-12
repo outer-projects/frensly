@@ -212,7 +212,7 @@ const Profile = observer(() => {
               className={style.profile__text}
               style={{ paddingRight: "9px", borderRight: "1px solid #E2E3E2" }}
             >
-              <span>115</span> Holders
+              <span>{profileUser?.account?.myHolders?.length || 0}</span> Holders
             </div>
             <div className={style.profile__text} style={{ marginLeft: "8px" }}>
               <span>

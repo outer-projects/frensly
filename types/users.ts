@@ -4,6 +4,7 @@ export interface IAccount {
   address: string;
   isInitialized: boolean;
   initDate: Date;
+  myHolders: string[]
   currentPrice: string;
   profile: IProfile[]; //профиль с неймами и прочей хуитой
   history: IHistory[][]; //все действия юзера
