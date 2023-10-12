@@ -25,7 +25,7 @@ const PostWithComments = observer(() => {
   return (
     <div>
       <div style={{ marginTop: "30px", marginBottom: "-30px" }}>
-        {currentPost && <TwitterPost post={currentPost} />}
+        {currentPost && <TwitterPost post={currentPost} isOnePostPage/>}
       </div>
 
       <div>

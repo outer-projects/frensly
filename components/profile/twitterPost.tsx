@@ -14,20 +14,24 @@ import { FeedStore } from "../../stores/FeedStore";
 import { timePassed } from "../../utils/utilities";
 import classNames from "classnames";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 const TwitterPost = observer(
   ({
     post,
     isComment,
     isRepost,
+    isOnePostPage
   }: {
     post: IPost;
     isComment?: boolean;
     isRepost?: boolean;
+    isOnePostPage?: boolean
   }) => {
     const [isActiveLike, setIsActiveLike] = useState(false);
     const [isActiveRepost, setIsActiveRepost] = useState(false);
     const [repostAvailable, setRepostAvailable] = useState(false);
+    const router = useRouter()
     const { user } = useInjection(Web3Store);
     const { likePost, repostPost, deletePost } = useInjection(FeedStore);
     const [likesCount, setLikesCount] = useState(0);
@@ -64,6 +68,10 @@ const TwitterPost = observer(
         if (res) {
           setDeleted(true);
         }
+        if(res && isOnePostPage) {
+          router.push('../../profile'+post.user.twitterId)
+        }
+        
       });
     };
     const repost = () => {
