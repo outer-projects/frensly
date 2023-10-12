@@ -84,8 +84,7 @@ const PostWithComments = observer(() => {
               addPost({
                 text: message,
                 media: image,
-                //@ts-ignore
-                originalPost: currentPost?.originalPost,
+                originalPost: currentPost?._id,
               }).then((res) => {
                 if (res) {
                   setMessage("");

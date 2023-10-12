@@ -104,7 +104,7 @@ const TwitterFeed = observer(({ id }: { id?: string }) => {
   };
   return (
     <div className={style.twitter__feed}>
-      {(!id || id == user?._id) && <MessageSend />}
+      {(!id || id == user?._id) && <MessageSend id={id}/>}
       <div>
         {(id ? userPosts : feed)
           .filter((el) => !hideRow.includes(el._id))
