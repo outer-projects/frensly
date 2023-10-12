@@ -69,7 +69,8 @@ export const isServer = typeof window === "undefined";
 export const USDEthPair = async (price:string) => {
   const priceInEth = fromWeiToEth(price)
   const res = await axios.get('https://api.coingecko.com/api/v3/simple/price?ids=ethereum&vs_currencies=usd');
-  return Number(res.data.ethereum.usd * priceInEth);
+  console.log(res.data);
+  return Number(res.data.ethereum.usd) * priceInEth;
 }
 export const addressSlice = (address: string | undefined) => {
   if (!address) return "0000...0000";
