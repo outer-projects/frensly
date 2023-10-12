@@ -25,7 +25,6 @@ import { publicProvider } from "wagmi/providers/public";
 import { ToastContainer } from "react-toastify";
 import Wrapper from "../components/layout/wrapper";
 import "../components/polyfills";
-import AuthProvider from "../components/authProvider/authProvider";
 const { chains, publicClient, webSocketPublicClient } = configureChains(
   [
     bscTestnet,

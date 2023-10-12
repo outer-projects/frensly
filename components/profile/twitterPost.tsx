@@ -26,7 +26,7 @@ const TwitterPost = observer(({ post }: { post: IPost }) => {
     setRepostCount(post?.repostCount);
     setRepostAvailable(user?.twitterId !== post?.user?.twitterId);
     if (
-      post.likes.filter((el) => el.twitterId == user?.twitterId).length != 0
+      post.likes.filter((el) => el == user?._id).length != 0
     ) {
       setIsActiveLike(true);
     } else {

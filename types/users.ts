@@ -28,6 +28,7 @@ export interface IProfile { //тут все очевидно вроде
   twitterHandle: string;
   twitterDescription: string;
   regDate: Date;
+  _id: string;
   isFollowing:  IProfile[][];
   isFollowedBy: IProfile[][];
 }
