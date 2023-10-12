@@ -2,7 +2,7 @@ import Link from "next/link";
 import { IProfile } from "../../types/users";
 import style from "./explore.module.scss";
 import { useEffect, useState } from "react";
-import { USDEthPair } from "../../utils/utilities";
+import { USDEthPair, fromWeiToEth } from "../../utils/utilities";
 
 const ExploreRow = ({ el }: { el: IProfile }) => {
   const [usdPrice, setUsdPrice] = useState(0);
@@ -29,7 +29,7 @@ const ExploreRow = ({ el }: { el: IProfile }) => {
         <div className={style.explore__user__right}>
           <div className={style.explore__user__name}>
             <img src="../icons/Ethereum.svg" />
-            {el.account.currentPrice} ETH
+            {fromWeiToEth(el.account.currentPrice)} ETH
           </div>
           <div className={style.explore__user__balance__usd}>${usdPrice}</div>
         </div>
