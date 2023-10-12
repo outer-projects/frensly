@@ -17,6 +17,7 @@ const ConnectButtonCustom = observer(() => {
     setAddress,
     setUserBalance,
     user,
+    auth
   } = useInjection(Web3Store);
 
   return (
@@ -113,7 +114,7 @@ const ConnectButtonCustom = observer(() => {
                     </div>
                   ) : (
                     <button
-                      onClick={openChainModal}
+                      onClick={auth}
                       type="button"
                       className={classNames(
                         style.connect__button,
