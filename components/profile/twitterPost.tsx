@@ -69,7 +69,7 @@ const TwitterPost = observer(
           setDeleted(true);
         }
         if(res && isOnePostPage) {
-          router.push('../../profile'+post.user.twitterId)
+          router.push('../../profile/'+post.user.twitterId)
         }
         
       });

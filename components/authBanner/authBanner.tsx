@@ -78,7 +78,7 @@ const AuthBanner = observer(() => {
   return (
     <>
       {stage !== "Connect wallet" ? (
-        <div className={style.banner}>
+        <div className={style.banner} style={{opacity: opacity ? 1 : 0}}>
           <img src="../logo.svg" className={style.banner__logo} />
           <div
             className={classNames(
