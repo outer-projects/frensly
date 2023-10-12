@@ -13,7 +13,6 @@ import Web3Store from "../../stores/Web3Store";
 import { FeedStore } from "../../stores/FeedStore";
 import { timePassed } from "../../utils/utilities";
 import classNames from "classnames";
-import Comments from "./postWithComments";
 import Link from "next/link";
 
 const TwitterPost = observer(
