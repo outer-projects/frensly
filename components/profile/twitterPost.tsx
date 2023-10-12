@@ -21,13 +21,15 @@ const TwitterPost = observer(
     const [isActiveRepost, setIsActiveRepost] = useState(false);
     const [repostAvailable, setRepostAvailable] = useState(false);
     const { user } = useInjection(Web3Store);
-    const { likePost, repostPost } = useInjection(FeedStore);
+    const { likePost, repostPost, deletePost } = useInjection(FeedStore);
     const [likesCount, setLikesCount] = useState(0);
     const [repostCount, setRepostCount] = useState(0);
     const [openComments, setOpenComments] = useState(false);
+    const [deleted, setDeleted] = useState(false);
     useEffect(() => {
       setLikesCount(post?.likes?.length);
       setRepostCount(post?.reposts?.length);
+      setDeleted(post.isDeleted)
       setRepostAvailable(user?.twitterId !== post?.user?.twitterId);
       console.log(
         post.likes.filter((el) => el == user?._id).length,
@@ -61,6 +63,13 @@ const TwitterPost = observer(
         }
       });
     };
+    const _deletePost = () => {
+      deletePost(post._id).then((res) => {
+        if (res) {
+          setDeleted(true);
+        }
+      });
+    };
     const repost = () => {
       repostPost(post._id).then((res) => {
         if (res && isActiveRepost) {
@@ -73,101 +82,113 @@ const TwitterPost = observer(
       });
     };
     return (
-      <div className={style.twitter__post__container}>
-        <div
-          className={classNames(
-            style.twitter__one__post,
-            isComment && style.twitter__one__comment
-          )}
-        >
-          <img className={style.twitter__avatar} src={post?.user?.avatar} />
-          <div>
-            <div className={style.twitter__row}>
-              <div className={style.twitter__name}>
-                {post?.user?.twitterName}
-              </div>
-              <div className={style.twitter__nickname}>
-                @{post?.user?.twitterHandle}
-              </div>
-              <div className={style.twitter__time}>
-                {timePassed(post?.date)}
-              </div>
-            </div>
+      <>
+        {!deleted ? (
+          <div className={style.twitter__post__container}>
             <div
               className={classNames(
-                style.twitter__text,
-                isComment && style.twitter__text__comm
+                style.twitter__one__post,
+                isComment && style.twitter__one__comment
               )}
             >
-              {post?.text}
-            </div>
-            {post.media && (
-              <img src={post.media} className={style.twitter__image} />
-            )}
-            <div
-              className={classNames(
-                style.twitter__interact,
-                openComments && style.twitter__interact__open__comment,
-                isComment && style.twitter__interact__comment
-              )}
-            >
-              {!isComment && (
-                <div
-                  className={style.twitter__icon}
-                  onClick={() => setOpenComments(!openComments)}
-                >
-                  <div
-                    style={{
-                      width: "24px",
-                      height: "24px",
-                      marginRight: "4px",
-                    }}
-                  >
-                    <Message />
+              <img className={style.twitter__avatar} src={post?.user?.avatar} />
+              <div>
+                <div className={style.twitter__row}>
+                  <div className={style.twitter__name}>
+                    {post?.user?.twitterName}
                   </div>
-                  <div>{post?.comments?.length || 0}</div>
-                </div>
-              )}
-              {!isComment && (
-                <div
-                  className={style.twitter__icon}
-                  onClick={() => {
-                    repostAvailable && repost();
-                  }}
-                >
-                  <div
-                    style={{
-                      width: "24px",
-                      height: "24px",
-                      marginRight: "4px",
-                    }}
-                  >
-                    <Swap isActive={isActiveRepost} />
+                  <div className={style.twitter__nickname}>
+                    @{post?.user?.twitterHandle}
                   </div>
-                  <div>{repostCount}</div>
+                  <div className={style.twitter__time}>
+                    {timePassed(post?.date)}
+                  </div>
                 </div>
-              )}
+                <div
+                  className={classNames(
+                    style.twitter__text,
+                    isComment && style.twitter__text__comm
+                  )}
+                >
+                  {post?.text}
+                </div>
+                {post.media && (
+                  <img src={post.media} className={style.twitter__image} />
+                )}
+                <div
+                  className={classNames(
+                    style.twitter__interact,
+                    openComments && style.twitter__interact__open__comment,
+                    isComment && style.twitter__interact__comment
+                  )}
+                >
+                  {!isComment && (
+                    <div
+                      className={style.twitter__icon}
+                      onClick={() => setOpenComments(!openComments)}
+                    >
+                      <div
+                        style={{
+                          width: "24px",
+                          height: "24px",
+                          marginRight: "4px",
+                        }}
+                      >
+                        <Message />
+                      </div>
+                      <div>{post?.comments?.length || 0}</div>
+                    </div>
+                  )}
+                  {!isComment && (
+                    <div
+                      className={style.twitter__icon}
+                      onClick={() => {
+                        repostAvailable && repost();
+                      }}
+                    >
+                      <div
+                        style={{
+                          width: "24px",
+                          height: "24px",
+                          marginRight: "4px",
+                        }}
+                      >
+                        <Swap isActive={isActiveRepost} />
+                      </div>
+                      <div>{repostCount}</div>
+                    </div>
+                  )}
 
-              <div className={style.twitter__icon}>
-                <div
-                  onClick={like}
-                  style={{ width: "24px", height: "24px", marginRight: "4px" }}
-                >
-                  <Heart isActive={isActiveLike} />
+                  <div className={style.twitter__icon} onClick={like}>
+                    <div
+                      style={{
+                        width: "24px",
+                        height: "24px",
+                        marginRight: "4px",
+                      }}
+                    >
+                      <Heart isActive={isActiveLike} />
+                    </div>
+                    <div>{likesCount}</div>
+                  </div>
                 </div>
-                <div>{likesCount}</div>
               </div>
+              {user?.twitterId == post?.user?.twitterId && (
+                <img
+                  src="../icons/Close.svg"
+                  style={{ width: "20px", height: "20px" }}
+                  onClick={() => _deletePost()}
+                />
+              )}
             </div>
+            {!isComment && openComments && (
+              <Comments comments={post.comments} />
+            )}
           </div>
-          {user?.twitterId == post?.user?.twitterId && (
-            <img
-              src="../icons/Close.svg"
-              style={{ width: "20px", height: "20px" }}
-            />
-          )}
-        </div>
-        {!isComment && openComments && <Comments comments={post.comments} />}
-      </div>
+        ) : (
+          <></>
+        )}
+      </>
     );
   }
 );

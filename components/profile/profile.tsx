@@ -24,7 +24,7 @@ const Profile = observer(() => {
   const [pricePerShade, setPricePerShade] = useState(0);
   const [count, setCount] = useState(0);
   const followUser = (isFollowed: boolean) => {
-    follow(profileUser?.twitterId as string, isFollowed).then(res =>{
+    follow(profileUser?._id as string, isFollowed).then(res =>{
       if(res) {
         setIsFollowed(!isFollowed)
       }
@@ -249,7 +249,7 @@ const Profile = observer(() => {
           </div>
         </div>
       </div>
-      <TwitterFeed id={user?.twitterId} />
+      <TwitterFeed id={user?._id} />
     </div>
   );
 });

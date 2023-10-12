@@ -99,7 +99,7 @@ const TwitterFeed = observer(({ id }: { id?: string }) => {
   }, []);
   return (
     <div className={style.twitter__feed}>
-      {(!id || id == user?.twitterId) && <MessageSend id={id} />}
+      {(!id || id == user?._id) && <MessageSend />}
       <div>
         {(id ? userPosts : feed)?.map((el, i) => {
           if (!el.isRepost) {
