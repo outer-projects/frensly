@@ -102,18 +102,18 @@ const TwitterFeed = observer(({ id }: { id?: string }) => {
       {(!id || id == user?._id) && <MessageSend />}
       <div>
         {(id ? userPosts : feed)?.map((el, i) => {
-          if (!el.isRepost) {
+          if (!el.isRepost && !el.originalPost) {
             //@ts-ignore
-            return <TwitterPost key={i} post={el} />;
-          } else {
+            return <TwitterPost key={el._id} post={el} />;
+          } else if(el.isRepost) {
             return (
-              <div>
+              <div key={el._id} >
                 <div className={style.twitter__repost}>
                   <Swap isActive={false} />
                   {el.user.twitterName} reposted
                 </div>
                 {/* @ts-ignore */}
-                <TwitterPost key={i} post={el.originalPost} />
+                <TwitterPost post={el.originalPost} />
               </div>
             );
           }

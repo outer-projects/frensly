@@ -53,6 +53,7 @@ export class FeedStore {
   @action repostPost = async (id: string) => {
     try {
       const res = await axios.post(prefix + "social/repost/" + id);
+      this.getFeed()
       console.log(res.data);
       return true;
     } catch (e) {

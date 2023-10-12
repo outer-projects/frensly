@@ -173,13 +173,13 @@ const TwitterPost = observer(
                   </div>
                 </div>
               </div>
-              {user?.twitterId == post?.user?.twitterId && (
+              {user?.twitterId == post?.user?.twitterId ? (
                 <img
                   src="../icons/Close.svg"
                   style={{ width: "20px", height: "20px", cursor:'pointer' }}
                   onClick={() => _deletePost()}
                 />
-              )}
+              ) : <div style={{ width: "20px", height: "20px" }}/>}
             </div>
             {!isComment && openComments && (
               <Comments comments={post.comments} originalPost={post._id} />

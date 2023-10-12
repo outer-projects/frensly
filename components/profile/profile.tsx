@@ -24,11 +24,11 @@ const Profile = observer(() => {
   const [pricePerShade, setPricePerShade] = useState(0);
   const [count, setCount] = useState(0);
   const followUser = (isFollowed: boolean) => {
-    follow(profileUser?._id as string, isFollowed).then(res =>{
-      if(res) {
-        setIsFollowed(!isFollowed)
+    follow(profileUser?._id as string, isFollowed).then((res) => {
+      if (res) {
+        setIsFollowed(!isFollowed);
       }
-    })
+    });
   };
   const checkPrice = async () => {
     try {
@@ -42,10 +42,10 @@ const Profile = observer(() => {
     }
   };
   const checkIsFollowed = () => {
-    if(user?.isFollowing.includes(profileUser?._id as string)) {
-      setIsFollowed(true)
+    if (user?.isFollowing.includes(profileUser?._id as string)) {
+      setIsFollowed(true);
     } else {
-      setIsFollowed(false)
+      setIsFollowed(false);
     }
   };
   const ownCount = async () => {
@@ -101,6 +101,7 @@ const Profile = observer(() => {
                   href={`https://twitter.com/${user?.twitterHandle}`}
                   target="_blank"
                   rel="noreferrer"
+                  style={{ width: "24px", height: "24px" }}
                 >
                   <img
                     src="../icons/twitter_black.svg"
@@ -126,11 +127,11 @@ const Profile = observer(() => {
             <button
               className={classNames(
                 header.connect__button,
-                !isFollowed && style.profile__follow
+                !isFollowed ? style.profile__follow : style.profile__unfollow
               )}
               onClick={() => {
                 console.log("Follow");
-                followUser(isFollowed)
+                followUser(isFollowed);
               }}
             >
               <img
@@ -138,7 +139,7 @@ const Profile = observer(() => {
                   !isFollowed ? "../../icons/Plus.svg" : "../../icons/Close.svg"
                 }
               />
-              Follow
+              {!isFollowed ? "Follow" : "Unfollow"}
             </button>
           )}
           <button
@@ -200,10 +201,10 @@ const Profile = observer(() => {
               className={style.profile__text}
               style={{ paddingRight: "9px", borderRight: "1px solid #E2E3E2" }}
             >
-              <span>{profileUser?.isFollowedBy?.length || 0}</span> Following
+              <span>{profileUser?.isFollowing?.length || 0}</span> Following
             </div>
             <div className={style.profile__text} style={{ marginLeft: "8px" }}>
-              <span>{profileUser?.isFollowing?.length || 0}</span> Followers
+              <span>{profileUser?.isFollowedBy?.length || 0}</span> Followers
             </div>
           </div>
           <div className={style.profile__stats__follow}>
