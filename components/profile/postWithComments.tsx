@@ -24,16 +24,18 @@ const PostWithComments = observer(() => {
   }, [id]);
   return (
     <div>
-      {currentPost && <TwitterPost post={currentPost} />}
+      <div style={{ marginTop: "30px", marginBottom: "-30px" }}>
+        {currentPost && <TwitterPost post={currentPost} />}
+      </div>
 
       <div>
         <TextareaAutosize
           value={message}
-          style={{ resize: "none", marginTop: '50px', marginBottom: '-30px' }}
+          style={{ resize: "none" }}
           placeholder="What is happening?"
           className={classNames(
             style.twitter__textarea,
-            focus && style.twitter__active,
+            focus && style.twitter__active
             // style.twitter__textarea__comment
           )}
           onBlur={() => {
@@ -69,14 +71,14 @@ const PostWithComments = observer(() => {
         </div>
         <div
           className={classNames(
-            style.twitter__button,
+            style.twitter__button
             // style.twitter__button__comment
           )}
         >
           <button
             className={classNames(
               header.connect__button,
-              style.twitter__post,
+              style.twitter__post
               // style.twitter__post__comment
             )}
             disabled={message.length == 0}
@@ -99,10 +101,9 @@ const PostWithComments = observer(() => {
       </div>
 
       {currentPost &&
-        currentPost?.comments
-          .map((el, i) => {
-            return <TwitterPost key={i} post={el} isComment={true} />;
-          })}
+        currentPost?.comments.map((el, i) => {
+          return <TwitterPost key={i} post={el} isComment={true} />;
+        })}
     </div>
   );
 });
