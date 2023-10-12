@@ -23,7 +23,7 @@ const TwitterPost = observer(({ post }: { post: IPost }) => {
   const [repostCount, setRepostCount] = useState(0);
   useEffect(() => {
     setLikesCount(post?.likes?.length);
-    setRepostCount(post?.repostCount);
+    setRepostCount(post?.reposts?.length);
     setRepostAvailable(user?.twitterId !== post?.user?.twitterId);
     if (
       post.likes.filter((el) => el == user?._id).length != 0
@@ -32,7 +32,7 @@ const TwitterPost = observer(({ post }: { post: IPost }) => {
     } else {
       setIsActiveLike(false);
     }
-    if (user?.twitterId !== post?.user?.twitterId && user?.posts.includes(post._id)) {
+    if (post.reposts.filter((el) => el == user?._id).length != 0) {
       setIsActiveRepost(true)
     }
   }, []);

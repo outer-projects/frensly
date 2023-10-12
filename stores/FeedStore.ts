@@ -9,11 +9,11 @@ import { prefix } from "../utils/config";
 @injectable()
 export class FeedStore {
   @observable feed: IPost[] = [];
-
+  @observable userPosts: IPost[] = [];
   constructor(private readonly rootStore: RootStore) {
     makeObservable(this);
   }
-  @action getPosts = async () => {
+  @action getFeed = async () => {
     try {
       const res = await axios.get(prefix + "social/posts");
       console.log(res.data);
@@ -22,30 +22,40 @@ export class FeedStore {
       console.log(e);
     }
   };
-  @action likePost = async (id:string) => {
+  @action getUserPosts = async (id: string) => {
+    try {
+      const res = await axios.get(prefix + "social/posts/" + id);
+      console.log(res.data);
+      this.userPosts = res.data;
+    } catch (e) {
+      console.log(e);
+    }
+  };
+  @action likePost = async (id: string) => {
     try {
       const res = await axios.post(prefix + "social/like/" + id);
       console.log(res.data);
-      return true
+      return true;
     } catch (e) {
       console.log(e);
-      return false
+      return false;
     }
   };
-  @action repostPost = async (id:string) => {
+  @action repostPost = async (id: string) => {
     try {
       const res = await axios.post(prefix + "social/repost/" + id);
       console.log(res.data);
-      return true
+      return true;
     } catch (e) {
       console.log(e);
-      return false
+      return false;
     }
   };
   @action addPost = async (data: {
     text: string;
     originalPost?: string;
     media: File | null;
+    id?: string;
   }) => {
     const formdata = new FormData();
     formdata.append("text", data.text);
@@ -54,7 +64,12 @@ export class FeedStore {
     try {
       const res = await axios.post(prefix + "social/post", formdata);
       console.log(res);
-      this.getPosts()
+      if (data.id) {
+        this.getUserPosts(data.id)
+      } else {
+        this.getFeed();
+      }
+
       return true;
     } catch (e) {
       console.log(e);

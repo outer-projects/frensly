@@ -7,7 +7,7 @@ import { useInjection } from "inversify-react";
 import { FeedStore } from "../../stores/FeedStore";
 import { observer } from "mobx-react";
 
-const MessageSend = observer(() => {
+const MessageSend = observer(({ id }: { id?: string }) => {
   const [message, setMessage] = useState("");
   const [focus, setFocus] = useState(false);
   const [image, setImage] = useState<File | null>(null);
@@ -55,7 +55,7 @@ const MessageSend = observer(() => {
             className={classNames(header.connect__button, style.twitter__post)}
             disabled={message.length == 0}
             onClick={() => {
-              addPost({ text: message, media: image }).then((res) => {
+              addPost({ text: message, media: image, id: id }).then((res) => {
                 if (res) {
                   setMessage("");
                   setImage(null);
@@ -67,14 +67,18 @@ const MessageSend = observer(() => {
           </button>
         </div>
       </div>
-      {image && <div className={style.twitter__image__name}>
-        {image?.name}
-        <img
-          src="../icons/Close.svg"
-          style={{ cursor: "pointer" }}
-          onClick={()=>{setImage(null)}}
-        />
-      </div>}
+      {image && (
+        <div className={style.twitter__image__name}>
+          {image?.name}
+          <img
+            src="../icons/Close.svg"
+            style={{ cursor: "pointer" }}
+            onClick={() => {
+              setImage(null);
+            }}
+          />
+        </div>
+      )}
     </div>
   );
 });
