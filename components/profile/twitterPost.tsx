@@ -16,7 +16,7 @@ import classNames from "classnames";
 import Link from "next/link";
 
 const TwitterPost = observer(
-  ({ post, isComment }: { post: IPost; isComment?: boolean }) => {
+  ({ post, isComment, isRepost }: { post: IPost; isComment?: boolean, isRepost?:boolean }) => {
     const [isActiveLike, setIsActiveLike] = useState(false);
     const [isActiveRepost, setIsActiveRepost] = useState(false);
     const [repostAvailable, setRepostAvailable] = useState(false);
@@ -159,7 +159,7 @@ const TwitterPost = observer(
                   </div>
                 </div>
               </div>
-              {user?.twitterId == post?.user?.twitterId ? (
+              {!isRepost && user?.twitterId == post?.user?.twitterId ? (
                 <img
                   src="../icons/Close.svg"
                   style={{ width: "20px", height: "20px", cursor: "pointer" }}

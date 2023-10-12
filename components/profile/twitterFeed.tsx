@@ -143,7 +143,7 @@ const TwitterFeed = observer(({ id }: { id?: string }) => {
                         )}
                       </div>
                       {/* @ts-ignore */}
-                      <TwitterPost post={el?.originalPost} />
+                      <TwitterPost post={el?.originalPost} isRepost/>
                     </>
                   )}
                 </div>

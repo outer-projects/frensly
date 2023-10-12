@@ -250,7 +250,7 @@ const Profile = observer(() => {
           </div>
         </div>
       </div>
-      <TwitterFeed id={profileUser?._id} />
+      {profileUser && <TwitterFeed id={profileUser?._id} />}
     </div>
   );
 });
