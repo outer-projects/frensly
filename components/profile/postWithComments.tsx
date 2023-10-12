@@ -103,7 +103,7 @@ const PostWithComments = observer(() => {
       {currentPost &&
         currentPost?.comments.map((el) => {
           return <TwitterPost key={el._id} post={el} isComment={true} />;
-        })}
+        }).reverse()}
     </div>
   );
 });
