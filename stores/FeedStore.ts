@@ -81,7 +81,7 @@ export class FeedStore {
     formdata.append("text", data.text);
     data.originalPost && formdata.append("originalPost", data.originalPost);
     console.log(data.media);
-    data.media && formdata.append("media", data.media);
+    data.media && formdata.append("file", data.media);
     try {
       const res = await axios.post(prefix + "social/post", formdata);
       console.log(res);
