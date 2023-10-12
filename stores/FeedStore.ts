@@ -10,6 +10,7 @@ import { prefix } from "../utils/config";
 export class FeedStore {
   @observable feed: IPost[] = [];
   @observable userPosts: IPost[] = [];
+  @observable currentPost?: IPost = undefined;
   constructor(private readonly rootStore: RootStore) {
     makeObservable(this);
   }
@@ -18,6 +19,15 @@ export class FeedStore {
       const res = await axios.get(prefix + "social/posts");
       console.log(res.data);
       this.feed = res.data;
+    } catch (e) {
+      console.log(e);
+    }
+  };
+  @action getCurrentPost = async (id: string) => {
+    try {
+      const res = await axios.get(prefix + "social/post/" + id);
+      console.log(res.data);
+      this.currentPost = res.data;
     } catch (e) {
       console.log(e);
     }

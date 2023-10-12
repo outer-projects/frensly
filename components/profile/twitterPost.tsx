@@ -13,7 +13,8 @@ import Web3Store from "../../stores/Web3Store";
 import { FeedStore } from "../../stores/FeedStore";
 import { timePassed } from "../../utils/utilities";
 import classNames from "classnames";
-import Comments from "./comment";
+import Comments from "./postWithComments";
+import Link from "next/link";
 
 const TwitterPost = observer(
   ({ post, isComment }: { post: IPost; isComment?: boolean }) => {
@@ -24,25 +25,13 @@ const TwitterPost = observer(
     const { likePost, repostPost, deletePost } = useInjection(FeedStore);
     const [likesCount, setLikesCount] = useState(0);
     const [repostCount, setRepostCount] = useState(0);
-    const [openComments, setOpenComments] = useState(false);
     const [deleted, setDeleted] = useState(false);
     useEffect(() => {
       setLikesCount(post?.likes?.length);
       setRepostCount(post?.reposts?.length);
-      setDeleted(post.isDeleted)
+      setDeleted(post.isDeleted);
       setRepostAvailable(user?.twitterId !== post?.user?.twitterId);
-      console.log(
-        post.likes.filter((el) => el == user?._id).length,
-        "likes: ",
-        post.likes,
-        "user?._id: ",
-        user?._id,
-        post.reposts.filter((el) => el == user?._id).length,
-        "reposts: ",
-        post.reposts,
-        "user?._id: ",
-        user?._id
-      );
+
       if (post.likes.filter((el) => el == user?._id).length != 0) {
         setIsActiveLike(true);
       } else {
@@ -118,26 +107,24 @@ const TwitterPost = observer(
                 <div
                   className={classNames(
                     style.twitter__interact,
-                    openComments && style.twitter__interact__open__comment,
                     isComment && style.twitter__interact__comment
                   )}
                 >
                   {!isComment && (
-                    <div
-                      className={style.twitter__icon}
-                      onClick={() => setOpenComments(!openComments)}
-                    >
-                      <div
-                        style={{
-                          width: "24px",
-                          height: "24px",
-                          marginRight: "4px",
-                        }}
-                      >
-                        <Message />
+                    <Link href={`/posts/${post._id}`}>
+                      <div className={style.twitter__icon}>
+                        <div
+                          style={{
+                            width: "24px",
+                            height: "24px",
+                            marginRight: "4px",
+                          }}
+                        >
+                          <Message />
+                        </div>
+                        <div>{post?.comments?.length || 0}</div>
                       </div>
-                      <div>{post?.comments?.length || 0}</div>
-                    </div>
+                    </Link>
                   )}
                   {!isComment && (
                     <div
@@ -176,14 +163,13 @@ const TwitterPost = observer(
               {user?.twitterId == post?.user?.twitterId ? (
                 <img
                   src="../icons/Close.svg"
-                  style={{ width: "20px", height: "20px", cursor:'pointer' }}
+                  style={{ width: "20px", height: "20px", cursor: "pointer" }}
                   onClick={() => _deletePost()}
                 />
-              ) : <div style={{ width: "20px", height: "20px" }}/>}
+              ) : (
+                <div style={{ width: "20px", height: "20px" }} />
+              )}
             </div>
-            {!isComment && openComments && (
-              <Comments comments={post.comments} originalPost={post._id} />
-            )}
           </div>
         ) : (
           <></>
