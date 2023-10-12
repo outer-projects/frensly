@@ -43,8 +43,7 @@ export class FeedStore {
   };
   @action deletePost = async (id: string) => {
     try {
-      const res = await axios.delete(prefix + "social/post/" + id);
-      console.log(res.data);
+      await axios.delete(prefix + "social/post/" + id);
       return true;
     } catch (e) {
       console.log(e);

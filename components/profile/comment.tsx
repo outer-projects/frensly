@@ -10,7 +10,15 @@ import { IPost } from "../../types/feed";
 import TwitterPost from "./twitterPost";
 
 const Comments = observer(
-  ({ id, comments }: { id?: string; comments: IPost[] }) => {
+  ({
+    id,
+    comments,
+    originalPost,
+  }: {
+    originalPost?: string;
+    id?: string;
+    comments: IPost[];
+  }) => {
     const [message, setMessage] = useState("");
     const [focus, setFocus] = useState(false);
     const [image, setImage] = useState<File | null>(null);
@@ -21,7 +29,7 @@ const Comments = observer(
         {!isOpen && (
           <div
             className={style.twitter__empty}
-            style={{cursor:'pointer'}}
+            style={{ cursor: "pointer" }}
             onClick={() => {
               setIsOpen(true);
             }}
@@ -93,7 +101,12 @@ const Comments = observer(
               )}
               disabled={message.length == 0}
               onClick={() => {
-                addPost({ text: message, media: image, id: id }).then((res) => {
+                addPost({
+                  text: message,
+                  media: image,
+                  id: id,
+                  originalPost: originalPost,
+                }).then((res) => {
                   if (res) {
                     setMessage("");
                     setImage(null);
