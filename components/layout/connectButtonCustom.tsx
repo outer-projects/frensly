@@ -19,7 +19,6 @@ const ConnectButtonCustom = observer(() => {
     user,
   } = useInjection(Web3Store);
 
-
   return (
     <ConnectButton.Custom>
       {({
@@ -36,7 +35,7 @@ const ConnectButtonCustom = observer(() => {
             setSigner(data, chain?.unsupported);
           },
         });
-        
+
         const ready = mounted && authenticationStatus !== "loading";
         const connected =
           ready &&
@@ -54,7 +53,7 @@ const ConnectButtonCustom = observer(() => {
           console.log("object");
           if (connected) {
             setAddress(account);
-            setUserBalance(account.displayBalance as string)
+            setUserBalance(account.displayBalance as string);
           } else {
             disconnected();
           }
@@ -99,19 +98,35 @@ const ConnectButtonCustom = observer(() => {
               }
 
               return (
-                <div className="header--wrapper__block">
-                  <div className={style.account} onClick={openAccountModal}>
-                    <img src={user?.avatar} alt="#" />
-                    <div style={{ marginLeft: "8px" }}>
-                      <div className={style.balance}>
-                        {account.displayBalance}
-                      </div>
-                      <div className={style.address}>
-                        {addressSlice(account.address)}
+                <div>
+                  {user?.account ? (
+                    <div className={style.account} onClick={openAccountModal}>
+                      <img src={user?.avatar} alt="#" />
+                      <div style={{ marginLeft: "8px" }}>
+                        <div className={style.balance}>
+                          {account.displayBalance}
+                        </div>
+                        <div className={style.address}>
+                          {addressSlice(account.address)}
+                        </div>
                       </div>
                     </div>
-                  </div>
-
+                  ) : (
+                    <button
+                      onClick={openChainModal}
+                      type="button"
+                      className={classNames(
+                        style.connect__button,
+                        user?.account && style.connect__light
+                      )}
+                    >
+                      <img
+                        src="../../icons/MetaMask.svg"
+                        style={{ marginTop: "0px" }}
+                      />
+                      {"Sign the message"}
+                    </button>
+                  )}
                   {/* <div
                     className="header--wrapper__log"
                     onClick={() => disconnect()}
