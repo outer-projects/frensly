@@ -25,6 +25,7 @@ import { publicProvider } from "wagmi/providers/public";
 import { ToastContainer } from "react-toastify";
 import Wrapper from "../components/layout/wrapper";
 import "../components/polyfills";
+import { SocketContext, socket } from "../utils/socket";
 const { chains, publicClient, webSocketPublicClient } = configureChains(
   [
     bscTestnet,
@@ -70,20 +71,22 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
       {loading ? (
-        <Provider container={container}>
-          <WagmiConfig config={wagmiConfig}>
-            <RainbowKitProvider appInfo={demoAppInfo} chains={chains}>
-              <Suspense fallback={<h1>Loading posts...</h1>}>
-                {/* <Rotate /> */}
-                <Wrapper>
-                  <AnyComponent {...pageProps} />
-                </Wrapper>
-                <ToastContainer style={{ zIndex: 10000000000 }} />
-                <ModalsContainer />
-              </Suspense>
-            </RainbowKitProvider>
-          </WagmiConfig>
-        </Provider>
+        <SocketContext.Provider value={socket}>
+          <Provider container={container}>
+            <WagmiConfig config={wagmiConfig}>
+              <RainbowKitProvider appInfo={demoAppInfo} chains={chains}>
+                <Suspense fallback={<h1>Loading posts...</h1>}>
+                  {/* <Rotate /> */}
+                  <Wrapper>
+                    <AnyComponent {...pageProps} />
+                  </Wrapper>
+                  <ToastContainer style={{ zIndex: 10000000000 }} />
+                  <ModalsContainer />
+                </Suspense>
+              </RainbowKitProvider>
+            </WagmiConfig>
+          </Provider>
+        </SocketContext.Provider>
       ) : (
         <div>Loading...</div>
       )}
