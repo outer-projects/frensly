@@ -95,14 +95,14 @@ const UserActivity = observer(() => {
         {active == 0 && (
           <div className={style.ponds__chat}>
             {holders?.map((el) => {
-              return <FinanceRow key={el.user._id} el={el.user} />;
+              return <FinanceRow key={el.user._id} el={el.user} amount={el.amount}/>;
             })}
           </div>
         )}
         {active == 1 && (
           <div className={style.ponds__chat}>
             {shares?.map((el) => {
-              return <FinanceRow key={el.subject._id} el={el.subject} />;
+              return <FinanceRow key={el.subject._id} el={el.subject} amount={el.amount}/>;
             })}
           </div>
         )}
