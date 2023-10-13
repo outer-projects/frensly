@@ -266,7 +266,7 @@ const Profile = observer(() => {
             <Link href={`/activity/${profileUser?.twitterId}`}>
               <button
                 className={style.profile__light__button}
-                style={{ marginRight: "7px" }}
+                style={{ marginRight: "7px", cursor:'pointer' }}
               >
                 Activity
               </button>

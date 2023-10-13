@@ -26,14 +26,14 @@ const Header = observer(() => {
     { name: "Explore", link: "/explore" },
     { name: "Finance", link: "/finance" },
   ];
-  useEffect(()=>{
-    getEthCurrency()
-  },[])
+  useEffect(() => {
+    getEthCurrency();
+  }, []);
   useEffect(() => {
     if (router.asPath) {
       console.log(router.asPath);
       setActive(router.asPath);
-      checkAuth()
+      checkAuth();
     }
   }, [router.asPath]);
   const ref = useDetectClickOutside({
@@ -54,8 +54,9 @@ const Header = observer(() => {
             return (
               <Link
                 href={
-                  "../.." + (el.link == "/profile"
-                    ? el.link +'/'+ user?.twitterId
+                  "../.." +
+                  (el.link == "/profile"
+                    ? el.link + "/" + user?.twitterId
                     : el.link)
                 }
                 style={{ textDecoration: "none", color: "auto" }}
@@ -83,6 +84,7 @@ const Header = observer(() => {
             onClick={() => {
               setNots(!nots);
             }}
+            style={{ cursor: "pointer" }}
           >
             <Bell isActive={false} />
             {nots && <Notifications />}

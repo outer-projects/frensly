@@ -45,8 +45,8 @@ const UserActivity = observer(() => {
   }, [id]);
   useEffect(() => {
     if (profileUser) {
-      getHolders(profileUser.account._id as string);
-      getShares(profileUser.account._id as string);
+      getHolders(profileUser._id as string);
+      getShares(profileUser._id as string);
       getHistory(profileUser.account._id as string);
     }
   }, [profileUser]);
