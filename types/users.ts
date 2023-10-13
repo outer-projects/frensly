@@ -17,7 +17,7 @@ export interface IAccount {
   totalVolume: string; //тотал вольюм трейдинга
   othersShares: {
     //шеры которые холдит
-    subject: IAccount[]; //кого холдит
+    subject: string; //кого холдит
     amount: string; //сколько
     isEligible: boolean; //получает ли акционерную комсу
   }[];
