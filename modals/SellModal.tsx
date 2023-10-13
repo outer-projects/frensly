@@ -117,7 +117,7 @@ export const SellModal = observer(({ key, data, idx }: modalProps) => {
                 <div className={style.buy__user__name}>
                   {data.user?.twitterName}
                 </div>
-                <div className={style.buy__status}>You own {count} keys</div>
+                <div className={style.buy__own}>You own {count} keys</div>
               </div>
             </div>
             <div className={style.buy__user__left__text}>

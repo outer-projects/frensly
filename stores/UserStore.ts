@@ -28,7 +28,7 @@ export class UserStore {
   };
   @action getPriceInUsd = (price:string) => {
     const priceInEth = fromWeiToEth(price);
-    return this.ethCurrency * priceInEth
+    return Number((this.ethCurrency * priceInEth).toFixed(2))
   };
   @action getProfileUser = async (id: string) => {
     try {

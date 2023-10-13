@@ -21,7 +21,7 @@ interface modalProps {
 export const BuyModal = observer(({ key, data, idx }: modalProps) => {
   const modalStore = useInjection(ModalStore);
   const { frensly, address, checkAuth } = useInjection(Web3Store);
-  const [numberOfShares, setNumberOfShares] = useState<number | string>(0);
+  const [numberOfShares, setNumberOfShares] = useState<number | string>(1);
   const [currentPrice, setCurrentPrice] = useState(0);
   const [priceOfOne, setPriceOfOne] = useState(0);
   const [count, setCount] = useState(0);
@@ -117,7 +117,7 @@ export const BuyModal = observer(({ key, data, idx }: modalProps) => {
                 <div className={style.buy__user__name}>
                   {data.user?.twitterName}
                 </div>
-                <div className={style.buy__status}>You own {count} keys</div>
+                <div className={style.buy__own}>You own {count} keys</div>
               </div>
             </div>
             <div className={style.buy__user__left__text}>
@@ -150,7 +150,7 @@ export const BuyModal = observer(({ key, data, idx }: modalProps) => {
           <div className={style.buy__amount}>
             <div className={style.buy__amount__title}>Total ETH</div>
             <div className={style.buy__amount__value}>
-              {fromWeiToEth(priceOfOne, 8)} ETH
+              {fromWeiToEth(currentPrice, 8)} ETH
             </div>
           </div>
         </div>

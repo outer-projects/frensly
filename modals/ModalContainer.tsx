@@ -42,9 +42,9 @@ const ModalContainer: React.FC<P> = observer(
       <div
         className={styles.fade}
         ref={fade}
-        onClick={(e) =>
-          e.target === fade.current && closable && modalStore.hideModal(idx)
-        }
+        // onClick={(e) =>
+        //   e.target === fade.current && closable && modalStore.hideModal(idx)
+        // }
       >
         <div className={classNames(styles.modal)}>
           <h2 className={styles.heading}>
