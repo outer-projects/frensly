@@ -26,7 +26,7 @@ export class ExploreStore {
     }).toString();
     try {
       const res = await axios.get(prefix + "user/newest/?" + query);
-      this.topUsersList = res.data;
+      this.newUsersList = res.data;
       this.currentUserList = res.data;
     } catch (e) {
       console.log(e);

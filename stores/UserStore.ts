@@ -14,6 +14,14 @@ export class UserStore {
   @observable ethCurrency: number = 0;
   @observable active: number = 0;
   @observable profileUser?: IProfile = undefined;
+  @observable holders?: {
+    user: IProfile;
+    amount: string;
+  }[] = [];
+  @observable shares?: {
+    user: IProfile;
+    amount: string;
+  }[] = [];
   @observable filterGlobal: { rangeFrom: number; rangeTo: number } = {
     rangeFrom: 0,
     rangeTo: 8,
@@ -21,14 +29,31 @@ export class UserStore {
   public constructor(private readonly rootStore: RootStore) {
     makeObservable(this);
   }
+  @action getShares = async (id: string) => {
+    try {
+      const res = await axios.get(prefix + "user/shares/" + id);
+      console.log(res.data);
+      this.shares = res.data;
+    } catch (e) {
+      console.log(e);
+    }
+  };
+  @action getHolders = async (id: string) => {
+    try {
+      const res = await axios.get(prefix + "user/holders/" + id);
+      this.holders = res.data;
+    } catch (e) {
+      console.log(e);
+    }
+  };
   @action getEthCurrency = () => {
     USDEthPair().then((el) => {
       if (el) this.ethCurrency = el;
     });
   };
-  @action getPriceInUsd = (price:string) => {
+  @action getPriceInUsd = (price: string) => {
     const priceInEth = fromWeiToEth(price);
-    return Number((this.ethCurrency * priceInEth).toFixed(2))
+    return Number((this.ethCurrency * priceInEth).toFixed(2));
   };
   @action getProfileUser = async (id: string) => {
     try {

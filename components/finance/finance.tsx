@@ -12,18 +12,20 @@ import Web3Store from "../../stores/Web3Store";
 import { fromWei } from "web3-utils";
 import { fromWeiToEth } from "../../utils/utilities";
 import { observer } from "mobx-react";
+import { UserStore } from "../../stores/UserStore";
+import MyHold from "./myHold";
 export const links = [
   {
     title: "My funds",
     link: "/finance",
     img: "../icons/profile.svg",
-    active: true
+    active: true,
   },
   {
     title: "Airdrop (soon)",
     link: "/finance/airdrop",
     img: "../icons/airdrop.svg",
-    active: false
+    active: false,
   },
 ];
 
@@ -33,6 +35,7 @@ const Finance = observer(() => {
   const router = useRouter();
   const [claimValue, setClaimValue] = useState(0);
   const { user, frensly, address, checkAuth } = useInjection(Web3Store);
+  const { shares, holders, getShares, getHolders } = useInjection(UserStore);
   const claim = async () => {
     try {
       const res = await frensly.methods.claim().send({
@@ -55,6 +58,12 @@ const Finance = observer(() => {
     }
   };
   useEffect(() => {
+    if (user) {
+      getShares(user?._id as string);
+      getHolders(user?._id as string);
+    }
+  }, [user]);
+  useEffect(() => {
     if (frensly) {
       getClaim();
     }
@@ -64,10 +73,13 @@ const Finance = observer(() => {
       <div className={style.finance__side}>
         {links.map((el, i) => {
           return (
-            <Link href={el.active ? el.link: ''} style={{ textDecoration: "none" }}>
+            <Link
+              href={el.active ? el.link : ""}
+              style={{ textDecoration: "none" }}
+            >
               <div
                 key={i}
-                style={{color: !el.active ?  "grey": ''}}
+                style={{ color: !el.active ? "grey" : "" }}
                 className={classNames(
                   style.finance__link,
                   el.link == router.asPath && style.finance__link__active
@@ -85,30 +97,44 @@ const Finance = observer(() => {
         <div className={style.finance}>
           <User />
           <TypesList active={active} setActive={setActive} types={types} />
-          <div className={style.finance__stats}>
-            <div className={style.finance__stat}>
-              <img src="../icons/Ethereum__grey.svg" />
-              <div>
-                <div className={style.finance__stat__name}>Portfolio value</div>
-                <div className={style.finance__stat__value}>
-                  {fromWeiToEth(user?.account.totalVolume as string)} ETH
+          {active == 0 && (
+            <div className={style.finance__stats}>
+              <div className={style.finance__stat}>
+                <img src="../icons/Ethereum__grey.svg" />
+                <div>
+                  <div className={style.finance__stat__name}>
+                    Portfolio value
+                  </div>
+                  <div className={style.finance__stat__value}>
+                    {fromWeiToEth(user?.account.totalVolume as string)} ETH
+                  </div>
+                </div>
+              </div>
+              <div className={style.finance__stat}>
+                <img src="../icons/Ethereum__grey.svg" />
+                <div>
+                  <div className={style.finance__stat__name}>Fees Earned</div>
+                  <div className={style.finance__stat__value}>
+                    {fromWeiToEth(
+                      Number(user?.account.subjectFeeClaimed) +
+                        Number(user?.account.holderFeeClaimed)
+                    )}{" "}
+                    ETH
+                  </div>
                 </div>
               </div>
             </div>
-            <div className={style.finance__stat}>
-              <img src="../icons/Ethereum__grey.svg" />
-              <div>
-                <div className={style.finance__stat__name}>Fees Earned</div>
-                <div className={style.finance__stat__value}>
-                  {fromWeiToEth(
-                    Number(user?.account.subjectFeeClaimed) +
-                      Number(user?.account.holderFeeClaimed)
-                  )}{" "}
-                  ETH
-                </div>
-              </div>
+          )}
+          {active == 1 && (
+            <div className={style.finance__stats}>
+              <MyHold holds={holders}/>
             </div>
-          </div>
+          )}
+          {active == 2 && (
+            <div className={style.finance__stats}>
+              <MyHold holds={shares}/>
+            </div>
+          )}
           <div className={style.finance__title__second}>
             Available for claim
           </div>

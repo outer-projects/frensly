@@ -8,7 +8,7 @@ import Link from "next/link";
 import { fromWei } from "web3-utils";
 import TypesList from "../common/typesList";
 import ExploreRow from "./exploreRow";
-const types = ["Top", "New Users", "Trending"];
+const types = ["Top", "New Users"];
 const Explore = observer(() => {
   const [active, setActive] = useState(0);
   const [search, setSearch] = useState("");
