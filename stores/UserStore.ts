@@ -12,9 +12,10 @@ export class UserStore {
   @observable init: boolean = false;
   @observable opacity: boolean = false;
   @observable ethCurrency: number = 0;
-  @observable history:any[] = []
-  @observable activity:any[] = []
+  @observable history: any[] = [];
+  @observable activity: any[] = [];
   @observable active: number = 0;
+  @observable currentType: number = 2;
   @observable profileUser?: IProfile = undefined;
   @observable portfolioValue?: number = 0;
   @observable holders?: {
@@ -32,6 +33,9 @@ export class UserStore {
   public constructor(private readonly rootStore: RootStore) {
     makeObservable(this);
   }
+  @action setCurrentType = async (number: number) => {
+    this.currentType = number;
+  };
   @action getActivity = async (id: string) => {
     try {
       const res = await axios.get(prefix + "user/history/subject/" + id);

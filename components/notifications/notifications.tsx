@@ -14,7 +14,7 @@ const Notifications = observer(() => {
         {activity.map((el, i) => {
           console.log(el);
           if (i <= 4) {
-            return <OneNotification key={el._id}/>;
+            return <OneNotification key={el._id} activity={el} />;
           }
         })}
       </div>

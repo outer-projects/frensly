@@ -28,10 +28,16 @@ const UserActivity = observer(() => {
     shares,
     holders,
     history,
-    getHistory
+    getHistory,
+    currentType
   } = useInjection(UserStore);
   const router = useRouter();
   const { id } = router.query;
+  useEffect(()=>{
+    if(currentType) {
+      setActive(currentType)
+    }
+  },[currentType])
   useEffect(() => {
     if (id) {
       getProfileUser(id as string);

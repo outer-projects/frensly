@@ -40,7 +40,7 @@ const Ponds = observer(() => {
       {" "}
       <div className={explore.explore__title}>{"My ponds"}</div>
       <TypesList active={active} setActive={setActive} types={types} />
-      <div
+      {/* <div
         className={classNames(
           explore.explore__search,
           style.ponds__search,
@@ -57,7 +57,7 @@ const Ponds = observer(() => {
             setOutline(true);
           }}
         />
-      </div>
+      </div> */}
       <div className={style.ponds__bottom}>
         <div>
           <div className={style.ponds__total}>

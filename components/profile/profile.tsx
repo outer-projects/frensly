@@ -17,7 +17,7 @@ import Link from "next/link";
 const Profile = observer(() => {
   const modalStore = useInjection(ModalStore);
   const { user, frensly, address } = useInjection(Web3Store);
-  const { profileUser, getProfileUser, clearProfileUser, follow } =
+  const { profileUser, getProfileUser, clearProfileUser, follow, setCurrentType } =
     useInjection(UserStore);
   const router = useRouter();
   const [isMyProfile, setIsMyProfile] = useState(false);
@@ -209,25 +209,38 @@ const Profile = observer(() => {
             </div>
           </div>
           <div className={style.profile__stats__follow}>
-            <div
-              className={style.profile__text}
-              style={{ paddingRight: "9px", borderRight: "1px solid #E2E3E2" }}
-            >
-              <span>{profileUser?.account?.myHolders?.length || 0}</span>{" "}
-              Holders
-            </div>
-            <div className={style.profile__text} style={{ marginLeft: "8px" }}>
-              <span>
-                {
-                  profileUser?.account?.othersShares.filter(
-                    (value: any, index: number, self: any) =>
-                      index ===
-                      self.findIndex((t: any) => t.subject === value.subject)
-                  ).length
-                }
-              </span>{" "}
-              Holding
-            </div>
+            <Link href={"/activity/" + profileUser?._id}>
+              <div
+                className={style.profile__text}
+                style={{
+                  paddingRight: "9px",
+                  borderRight: "1px solid #E2E3E2",
+                  cursor: "pointer",
+                }}
+                onClick={()=>{setCurrentType(0)}}
+              >
+                <span>{profileUser?.account?.myHolders?.length || 0}</span>{" "}
+                Holders
+              </div>
+            </Link>
+            <Link href={"/activity/" + profileUser?._id}>
+              <div
+                className={style.profile__text}
+                style={{ marginLeft: "8px", cursor: "pointer" }}
+                onClick={()=>{setCurrentType(1)}}
+              >
+                <span>
+                  {
+                    profileUser?.account?.othersShares.filter(
+                      (value: any, index: number, self: any) =>
+                        index ===
+                        self.findIndex((t: any) => t.subject === value.subject)
+                    ).length
+                  }
+                </span>{" "}
+                Holding
+              </div>
+            </Link>
           </div>
         </div>
         <div className={style.profile__bottom}>
