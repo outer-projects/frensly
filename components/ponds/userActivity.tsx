@@ -100,7 +100,7 @@ const UserActivity = observer(() => {
           <div className={style.ponds__chat}>
             {history?.map((el) => {
               console.log(el);
-              return <OneActivity key={el._id}/>;
+              return <OneActivity key={el._id} activity={el}/>;
             })}
           </div>
         )}
