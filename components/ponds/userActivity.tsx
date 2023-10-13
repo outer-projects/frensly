@@ -34,7 +34,7 @@ const UserActivity = observer(() => {
   const router = useRouter();
   const { id } = router.query;
   useEffect(() => {
-    if (currentType) {
+    if (currentType!==undefined) {
       setActive(currentType);
     }
   }, [currentType]);
