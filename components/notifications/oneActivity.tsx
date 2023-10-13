@@ -10,7 +10,7 @@ const OneActivity = ({ activity }: { activity: any }) => {
         </div>
         <div>
           <div className={style.nots__one__text}>
-            {activity.account.profile.twitterName} bought 1{" "}
+            {activity.account.profile.twitterName} bought {Number(activity.amount)/(10 ** 6)}{" "}
             {activity.subject.profile.twitterName}
           </div>
           <div className={style.nots__one__info}>

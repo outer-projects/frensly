@@ -26,7 +26,7 @@ const Wrapper = observer(({ children }: any) => {
   useEffect(() => {
     if (web3 && address && user?.account) {
       isInit();
-      getActivity(user._id);
+      getActivity(user.account._id);
     }
   }, [web3, address, user]);
 
