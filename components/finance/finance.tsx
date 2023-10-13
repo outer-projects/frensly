@@ -131,14 +131,14 @@ const Finance = observer(() => {
           {active == 1 && (
             <div className={style.finance__stats}>
               {holders?.map((el) => {
-                return <FinanceRow el={el.user} />;
+                return <FinanceRow el={el.user} amount={el.amount}/>;
               })}
             </div>
           )}
           {active == 2 && (
             <div className={style.finance__stats}>
               {shares?.map((el) => {
-                return <FinanceRow el={el.subject} />;
+                return <FinanceRow el={el.subject} amount={el.amount}/>;
               })}
             </div>
           )}
