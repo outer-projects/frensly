@@ -4,12 +4,14 @@ import style from "./home.module.scss";
 import Explore from "../components/explore/explore";
 import Head from "next/head";
 import { useContext, useEffect } from "react";
-import { SocketContext, socket } from "../utils/socket";
+import { SocketContext } from "../utils/socket";
 
 const ExplorePage: NextPage = observer((props) => {
   const socket = useContext(SocketContext);
   const startListening = async () => {
-    socket.on("join", () => console.log("hi join"));
+    socket.on("join", () => {
+      console.log("hi join");
+    });
     socket.emit("join");
   };
   const stopListen = () => {
