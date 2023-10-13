@@ -17,9 +17,7 @@ const ExploreRow = observer(({ el }: { el: IProfile }) => {
       setUsdPrice(getPriceInUsd(el.account.currentPrice));
     }
   }, [el, ethCurrency]);
-  user?.account?.othersShares.map((u) => {
-    console.log(u.subject == el._id, u.subject && el._id);
-  });
+
   return (
     <Link href={"/profile/" + el.twitterId}>
       <div className={style.explore__user}>
@@ -29,7 +27,8 @@ const ExploreRow = observer(({ el }: { el: IProfile }) => {
             <div className={style.explore__user__share}>
               {/* @ts-ignore */}
               {user?.account?.othersShares.filter(
-                (u) => u.subject == user._id && Number(u.amount) >= 1000000
+                (u) =>
+                  u.subject == user.account._id && Number(u.amount) >= 1000000
               )?.length >= 1 && <img src="../icons/Key.svg" />}
               <div>{Number(el?.account?.sharesAmount) / 10 ** 6} share</div>
             </div>

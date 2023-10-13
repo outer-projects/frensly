@@ -4,7 +4,7 @@ export interface IAccount {
   address: string;
   isInitialized: boolean;
   initDate: Date;
-  myHolders: string[]
+  myHolders: string[];
   currentPrice: string;
   profile: IProfile[]; //профиль с неймами и прочей хуитой
   history: IHistory[][]; //все действия юзера
@@ -15,6 +15,7 @@ export interface IAccount {
   subjectFeeClaimed: string; //сколько комсы с трейдов его шерами отправилось юзеру
   holderFeeDistributed: string; //сколько комсы с трейдов его шерами отправилось его акционерам
   totalVolume: string; //тотал вольюм трейдинга
+  _id: string;
   othersShares: {
     //шеры которые холдит
     subject: string; //кого холдит
