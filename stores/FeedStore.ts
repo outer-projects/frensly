@@ -15,8 +15,12 @@ export class FeedStore {
     makeObservable(this);
   }
   @action getFeed = async () => {
+    const query = new URLSearchParams({
+      offset: "0",
+      limit: "100",
+    }).toString();
     try {
-      const res = await axios.get(prefix + "social/posts");
+      const res = await axios.get(prefix + "social/posts?" + query);
       console.log(res.data);
       this.feed = res.data;
     } catch (e) {
@@ -33,8 +37,12 @@ export class FeedStore {
     }
   };
   @action getUserPosts = async (id: string) => {
+    const query = new URLSearchParams({
+      offset: "0",
+      limit: "100",
+    }).toString();
     try {
-      const res = await axios.get(prefix + "social/posts/" + id);
+      const res = await axios.get(prefix + "social/posts/" + id + "?" + query);
       console.log(res.data);
       this.userPosts = res.data;
     } catch (e) {
@@ -63,7 +71,7 @@ export class FeedStore {
   @action repostPost = async (id: string) => {
     try {
       const res = await axios.post(prefix + "social/repost/" + id);
-      this.getFeed()
+      this.getFeed();
       console.log(res.data);
       return true;
     } catch (e) {
@@ -86,11 +94,11 @@ export class FeedStore {
       const res = await axios.post(prefix + "social/post", formdata);
       console.log(res);
       if (data.id) {
-        this.getUserPosts(data.id)
+        this.getUserPosts(data.id);
       } else {
         this.getFeed();
       }
-      data.originalPost && this.getCurrentPost(data.originalPost)
+      data.originalPost && this.getCurrentPost(data.originalPost);
       return true;
     } catch (e) {
       console.log(e);
