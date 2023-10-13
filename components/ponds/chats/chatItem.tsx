@@ -39,7 +39,7 @@ const ChatItem = observer(
             <img src="../icons/Ethereum.svg" />
             {fromWeiToEth(el.currentPrice)} ETH
           </div>
-          <div className={style.chat__dollar}>{usdPrice}</div>
+          <div className={style.chat__dollar}>${usdPrice}</div>
         </div>
       </div>
       // </Link>
