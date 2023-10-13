@@ -1,6 +1,6 @@
 import "../styles/main.sass";
 import type { AppProps } from "next/app";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { RootStore } from "../stores/RootStore";
 import { Provider, useInjection } from "inversify-react";
 import { ModalsContainer } from "../modals";
@@ -25,7 +25,7 @@ import { publicProvider } from "wagmi/providers/public";
 import { ToastContainer } from "react-toastify";
 import Wrapper from "../components/layout/wrapper";
 import "../components/polyfills";
-import { SocketContext, socket } from "../utils/socket";
+import { SocketContext } from "../utils/socket";
 const { chains, publicClient, webSocketPublicClient } = configureChains(
   [
     bscTestnet,
@@ -62,6 +62,7 @@ const wagmiConfig = createConfig({
 });
 function MyApp({ Component, pageProps }: AppProps) {
   const AnyComponent = Component as any;
+  const socket = useContext(SocketContext);
   const [loading, setLoading] = useState(false);
   // try reconnect to web3
   useEffect(() => {
