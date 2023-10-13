@@ -51,7 +51,10 @@ const Explore = observer(() => {
       <div className={style.explore__title}>Explore</div>
       <div className={style.explore__users__wrapper}>
         <div className={style.explore__users__row}>
-          {topUsersList.map((el, i) => {
+          {(search.length !== 0 && searchResult.length !== 0
+            ? searchResult
+            : topUsersList
+          ).map((el, i) => {
             if (i <= 4) {
               return (
                 <Link href={"/profile/" + el.twitterId}>

@@ -81,7 +81,7 @@ const Header = observer(() => {
           <div
             ref={ref}
             onClick={() => {
-              setNots(true);
+              setNots(!nots);
             }}
           >
             <Bell isActive={false} />
