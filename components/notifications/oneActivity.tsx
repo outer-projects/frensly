@@ -25,7 +25,7 @@ const OneActivity = ({ activity }: { activity: any }) => {
         <div>
           <div className={style.nots__one__text}>
             {activity.account.profile.twitterName} {getActivity(activity.type)}{" "}
-            {Number(activity.amount) / 10 ** 6}{" "}
+            {activity.type !=="INIT" && Number(activity.amount) / 10 ** 6}{" "}
             {activity.type !=="INIT" && activity.subject.profile.twitterName}
           </div>
           <div className={style.nots__one__info}>

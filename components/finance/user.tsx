@@ -17,6 +17,7 @@ const User = observer(() => {
               href={`https://twitter.com/${user?.twitterHandle}`}
               target="_blank"
               rel="noreferrer"
+              style={{ display: "flex", alignItems: "center" }}
             >
               <img
                 src="../icons/twitter_black.svg"
@@ -27,6 +28,7 @@ const User = observer(() => {
               href={`https://twitter.com/${user?.twitterHandle}`}
               target="_blank"
               rel="noreferrer"
+              style={{ display: "flex", alignItems: "center" }}
             >
               <span>@{user?.twitterHandle}</span>
             </a>

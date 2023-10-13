@@ -110,6 +110,7 @@ const TwitterPost = observer(
                   <a
                     target="_blank"
                     rel="nereferrer"
+                    style={{ display: "flex", alignItems: "center" }}
                     href={"https://twitter.com/" + post?.user?.twitterHandle}
                   >
                     <div className={style.twitter__nickname}>

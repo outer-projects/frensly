@@ -107,7 +107,12 @@ const Profile = observer(() => {
                   href={`https://twitter.com/${profileUser?.twitterHandle}`}
                   target="_blank"
                   rel="noreferrer"
-                  style={{ width: "24px", height: "24px" }}
+                  style={{
+                    width: "24px",
+                    height: "24px",
+                    display: "flex",
+                    alignItems: "center",
+                  }}
                 >
                   <img
                     src="../icons/twitter_black.svg"
@@ -118,6 +123,7 @@ const Profile = observer(() => {
                   href={`https://twitter.com/${profileUser?.twitterHandle}`}
                   target="_blank"
                   rel="noreferrer"
+                  style={{ display: "flex", alignItems: "center" }}
                 >
                   <span>@{profileUser?.twitterHandle}</span>
                 </a>
@@ -266,7 +272,7 @@ const Profile = observer(() => {
             <Link href={`/activity/${profileUser?.twitterId}`}>
               <button
                 className={style.profile__light__button}
-                style={{ marginRight: "7px", cursor:'pointer' }}
+                style={{ marginRight: "7px", cursor: "pointer" }}
               >
                 Activity
               </button>
