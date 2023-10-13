@@ -19,7 +19,7 @@ const ExploreRow = observer(({ el }: { el: IProfile }) => {
   }, [el, ethCurrency]);
   console.log(user?.account?.othersShares.filter(
     (u) =>
-      u.subject == user.account._id && Number(u.amount) >= 1000000
+      u.subject == el.account._id && Number(u.amount) >= 1000000
   )?.length);
   return (
     <Link href={"/profile/" + el.twitterId}>
@@ -31,7 +31,7 @@ const ExploreRow = observer(({ el }: { el: IProfile }) => {
               {/* @ts-ignore */}
               {user?.account?.othersShares.filter(
                 (u) =>
-                  u.subject == user.account._id && Number(u.amount) >= 1000000
+                  u.subject == el.account._id && Number(u.amount) >= 1000000
               )?.length >= 1 && <img src="../icons/Key.svg" />}
               <div>{Number(el?.account?.sharesAmount) / 10 ** 6} share</div>
             </div>
