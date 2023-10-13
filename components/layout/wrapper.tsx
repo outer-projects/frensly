@@ -7,9 +7,10 @@ import { UserStore } from "../../stores/UserStore";
 import axios, { AxiosRequestConfig } from "axios";
 import Web3Store from "../../stores/Web3Store";
 import { toast } from "react-toastify";
+import { prefix } from "../../utils/config";
 
 const Wrapper = observer(({ children }: any) => {
-  const { init, setInit } = useInjection(UserStore);
+  const { init, setInit, getActivity } = useInjection(UserStore);
   const { web3, frensly, address, user, setUser } = useInjection(Web3Store);
   const isInit = async () => {
     console.log(address,user?.account?.address); 
@@ -25,12 +26,13 @@ const Wrapper = observer(({ children }: any) => {
     if (web3 && address && user?.account) {
       isInit();
     }
+
   }, [web3, address, user]);
 
   const getUser = async () => {
     try {
       const res: AxiosRequestConfig = await axios.get(
-        "https://frensly.adev.co/api/v1/user",
+        prefix + "user",
         {
           withCredentials: true,
         }
