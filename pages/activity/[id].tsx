@@ -9,6 +9,7 @@ import { useInjection } from "inversify-react";
 import { UserStore } from "../../stores/UserStore";
 import { useEffect } from "react";
 import { useRouter } from "next/router";
+import UserActivity from "../../components/ponds/userActivity";
 
 const ActivityPage: NextPage = observer((props) => {
 
@@ -17,7 +18,7 @@ const ActivityPage: NextPage = observer((props) => {
       <Head>
         <title>Frensly</title>
       </Head>
-      <Ponds />
+      <UserActivity />
     </div>
   );
 });

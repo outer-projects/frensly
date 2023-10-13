@@ -111,6 +111,9 @@
 }
 .chat__avatar {
   margin-right: 8px;
+  width: 40px;
+  height: 40px;
+  border-radius: 100%;
 }
 .chat__name {
   color: $black;
