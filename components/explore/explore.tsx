@@ -7,7 +7,6 @@ import { ExploreStore } from "../../stores/ExploreStore";
 import Link from "next/link";
 import { fromWei } from "web3-utils";
 import TypesList from "../common/typesList";
-import { USDEthPair } from "../../utils/utilities";
 import ExploreRow from "./exploreRow";
 const types = ["Top", "New Users", "Trending"];
 const Explore = observer(() => {

@@ -21,17 +21,17 @@ const TwitterPost = observer(
     post,
     isComment,
     isRepost,
-    isOnePostPage
+    isOnePostPage,
   }: {
     post: IPost;
     isComment?: boolean;
     isRepost?: boolean;
-    isOnePostPage?: boolean
+    isOnePostPage?: boolean;
   }) => {
     const [isActiveLike, setIsActiveLike] = useState(false);
     const [isActiveRepost, setIsActiveRepost] = useState(false);
     const [repostAvailable, setRepostAvailable] = useState(false);
-    const router = useRouter()
+    const router = useRouter();
     const { user } = useInjection(Web3Store);
     const { likePost, repostPost, deletePost } = useInjection(FeedStore);
     const [likesCount, setLikesCount] = useState(0);
@@ -68,10 +68,9 @@ const TwitterPost = observer(
         if (res) {
           setDeleted(true);
         }
-        if(res && isOnePostPage) {
-          router.push('../../profile/'+post.user.twitterId)
+        if (res && isOnePostPage) {
+          router.push("../../profile/" + post.user.twitterId);
         }
-        
       });
     };
     const repost = () => {
@@ -108,9 +107,15 @@ const TwitterPost = observer(
                       {post?.user?.twitterName}
                     </div>
                   </Link>
-                  <a target="_blank" rel="nereferrer" href={"https://twitter.com/"+post?.user?.twitterHandle}><div className={style.twitter__nickname}>
-                    @{post?.user?.twitterHandle}
-                  </div></a>
+                  <a
+                    target="_blank"
+                    rel="nereferrer"
+                    href={"https://twitter.com/" + post?.user?.twitterHandle}
+                  >
+                    <div className={style.twitter__nickname}>
+                      @{post?.user?.twitterHandle}
+                    </div>
+                  </a>
                   <div className={style.twitter__time}>
                     {timePassed(post?.date)}
                   </div>
@@ -124,7 +129,13 @@ const TwitterPost = observer(
                   {post?.text}
                 </div>
                 {post.media && (
-                  <img src={post.media} className={style.twitter__image} />
+                  <img
+                    src={post.media}
+                    className={classNames(
+                      style.twitter__image,
+                      isComment && style.twitter__image__com
+                    )}
+                  />
                 )}
                 <div
                   className={classNames(

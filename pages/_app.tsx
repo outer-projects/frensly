@@ -71,7 +71,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
       {loading ? (
-        <SocketContext.Provider value={socket}>
+        // <SocketContext.Provider value={socket}>
           <Provider container={container}>
             <WagmiConfig config={wagmiConfig}>
               <RainbowKitProvider appInfo={demoAppInfo} chains={chains}>
@@ -86,7 +86,7 @@ function MyApp({ Component, pageProps }: AppProps) {
               </RainbowKitProvider>
             </WagmiConfig>
           </Provider>
-        </SocketContext.Provider>
+        // </SocketContext.Provider>
       ) : (
         <div>Loading...</div>
       )}

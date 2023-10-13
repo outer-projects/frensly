@@ -2,17 +2,19 @@ import Link from "next/link";
 import { IProfile } from "../../types/users";
 import style from "./explore.module.scss";
 import { useEffect, useState } from "react";
-import { USDEthPair, fromWeiToEth } from "../../utils/utilities";
+import { fromWeiToEth } from "../../utils/utilities";
+import { observer } from "mobx-react";
+import { useInjection } from "inversify-react";
+import { UserStore } from "../../stores/UserStore";
 
-const ExploreRow = ({ el }: { el: IProfile }) => {
+const ExploreRow = observer(({ el }: { el: IProfile }) => {
   const [usdPrice, setUsdPrice] = useState(0);
+  const { getPriceInUsd, ethCurrency } = useInjection(UserStore);
   useEffect(() => {
-    if (el) {
-      USDEthPair(el.account.currentPrice).then((el) => {
-        if (el) setUsdPrice(el);
-      });
+    if (el && ethCurrency !== 0) {
+      setUsdPrice(getPriceInUsd(el.account.currentPrice));
     }
-  }, [el]);
+  }, [el, ethCurrency]);
   return (
     <Link href={"/profile/" + el.twitterId}>
       <div className={style.explore__user}>
@@ -36,5 +38,5 @@ const ExploreRow = ({ el }: { el: IProfile }) => {
       </div>
     </Link>
   );
-};
+});
 export default ExploreRow;

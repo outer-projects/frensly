@@ -5,11 +5,13 @@ import { RootStore } from "./RootStore";
 import axios from "axios";
 import { prefix } from "../utils/config";
 import { IProfile } from "../types/users";
+import { USDEthPair, fromWeiToEth } from "../utils/utilities";
 
 @injectable()
 export class UserStore {
   @observable init: boolean = false;
   @observable opacity: boolean = false;
+  @observable ethCurrency: number = 0;
   @observable active: number = 0;
   @observable profileUser?: IProfile = undefined;
   @observable filterGlobal: { rangeFrom: number; rangeTo: number } = {
@@ -19,6 +21,15 @@ export class UserStore {
   public constructor(private readonly rootStore: RootStore) {
     makeObservable(this);
   }
+  @action getEthCurrency = () => {
+    USDEthPair().then((el) => {
+      if (el) this.ethCurrency = el;
+    });
+  };
+  @action getPriceInUsd = (price:string) => {
+    const priceInEth = fromWeiToEth(price);
+    return this.ethCurrency * priceInEth
+  };
   @action getProfileUser = async (id: string) => {
     try {
       let res = await axios.get(prefix + "user/" + id);
@@ -27,14 +38,16 @@ export class UserStore {
       console.log(e);
     }
   };
-  @action follow = async (id: string, isFollowed:boolean) => {
+  @action follow = async (id: string, isFollowed: boolean) => {
     try {
-      let res = await axios.post(prefix + `social/${isFollowed ? 'un' : ''}follow/` + id);
-      console.log(res.data)
-      return true
+      let res = await axios.post(
+        prefix + `social/${isFollowed ? "un" : ""}follow/` + id
+      );
+      console.log(res.data);
+      return true;
     } catch (e) {
       console.log(e);
-      return false
+      return false;
     }
   };
   @action clearProfileUser = () => {

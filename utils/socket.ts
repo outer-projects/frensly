@@ -4,6 +4,6 @@ import { io } from "socket.io-client";
 export const socket = io("wss://frensly.adev.co" as string, {
   transports: ["websocket"],
   withCredentials: true,
-  path: "/api/v1/socket.io/",
+  path: "/api/v1/ws/",
 });
 export const SocketContext = React.createContext(socket);

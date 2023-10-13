@@ -10,11 +10,15 @@ import Notifications from "../notifications/notifications";
 import { useDetectClickOutside } from "react-detect-click-outside";
 import { useInjection } from "inversify-react";
 import Web3Store from "../../stores/Web3Store";
+import { UserStore } from "../../stores/UserStore";
 
 const Header = observer(() => {
   const router = useRouter();
   const [active, setActive] = useState("");
   const [nots, setNots] = useState(false);
+  const { user, checkAuth } = useInjection(Web3Store);
+  const { getEthCurrency } = useInjection(UserStore);
+
   const headerText = [
     { name: "Ponds", link: "/ponds" },
     { name: "Feed", link: "/feed" },
@@ -22,10 +26,14 @@ const Header = observer(() => {
     { name: "Explore", link: "/explore" },
     { name: "Finance", link: "/finance" },
   ];
+  useEffect(()=>{
+    getEthCurrency()
+  },[])
   useEffect(() => {
     if (router.asPath) {
       console.log(router.asPath);
       setActive(router.asPath);
+      checkAuth()
     }
   }, [router.asPath]);
   const ref = useDetectClickOutside({
@@ -36,7 +44,6 @@ const Header = observer(() => {
       }
     },
   });
-  const { user } = useInjection(Web3Store);
   return (
     <div className={style.header__container}>
       <header className={style.header}>
