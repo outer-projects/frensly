@@ -29,23 +29,27 @@ const UserActivity = observer(() => {
     holders,
     history,
     getHistory,
-    currentType
+    currentType,
   } = useInjection(UserStore);
   const router = useRouter();
   const { id } = router.query;
-  useEffect(()=>{
-    if(currentType) {
-      setActive(currentType)
+  useEffect(() => {
+    if (currentType) {
+      setActive(currentType);
     }
-  },[currentType])
+  }, [currentType]);
   useEffect(() => {
     if (id) {
       getProfileUser(id as string);
-      getHolders(id as string);
-      getShares(id as string);
-      getHistory(id as string)
     }
   }, [id]);
+  useEffect(() => {
+    if (profileUser) {
+      getHolders(profileUser.account._id as string);
+      getShares(profileUser.account._id as string);
+      getHistory(profileUser.account._id as string);
+    }
+  }, [profileUser]);
   return (
     <div className={style.ponds}>
       {" "}
@@ -57,7 +61,7 @@ const UserActivity = observer(() => {
         </div>
       </div>
       <TypesList active={active} setActive={setActive} types={typesUser} />
-      <div
+      {/* <div
         className={classNames(
           explore.explore__search,
           style.ponds__search,
@@ -74,7 +78,7 @@ const UserActivity = observer(() => {
             setOutline(true);
           }}
         />
-      </div>
+      </div> */}
       <div className={style.ponds__bottom}>
         <div>
           <div className={style.ponds__total}>
@@ -91,14 +95,14 @@ const UserActivity = observer(() => {
         {active == 0 && (
           <div className={style.ponds__chat}>
             {holders?.map((el) => {
-              return <FinanceRow key={el.user._id} el={el.user}/>;
+              return <FinanceRow key={el.user._id} el={el.user} />;
             })}
           </div>
         )}
         {active == 1 && (
           <div className={style.ponds__chat}>
             {shares?.map((el) => {
-              return <FinanceRow key={el.subject._id} el={el.subject}/>;
+              return <FinanceRow key={el.subject._id} el={el.subject} />;
             })}
           </div>
         )}
@@ -106,7 +110,7 @@ const UserActivity = observer(() => {
           <div className={style.ponds__chat}>
             {history?.map((el) => {
               console.log(el);
-              return <OneActivity key={el._id} activity={el}/>;
+              return <OneActivity key={el._id} activity={el} />;
             })}
           </div>
         )}
