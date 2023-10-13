@@ -32,7 +32,7 @@ const Ponds = observer(() => {
     if (user) {
       getHolders(user._id as string);
       getShares(user._id as string);
-      getHistory(user._id as string);
+      getHistory(user.account._id as string);
     }
   }, [user]);
   return (
