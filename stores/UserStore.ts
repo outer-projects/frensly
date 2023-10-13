@@ -12,6 +12,7 @@ export class UserStore {
   @observable init: boolean = false;
   @observable opacity: boolean = false;
   @observable ethCurrency: number = 0;
+  @observable history:any[] = []
   @observable active: number = 0;
   @observable profileUser?: IProfile = undefined;
   @observable portfolioValue?: number = 0;
@@ -30,6 +31,15 @@ export class UserStore {
   public constructor(private readonly rootStore: RootStore) {
     makeObservable(this);
   }
+  @action getHistory = async (id: string) => {
+    try {
+      const res = await axios.get(prefix + "user/history/account/" + id);
+      console.log(res.data);
+      this.history = res.data;
+    } catch (e) {
+      console.log(e);
+    }
+  };
   @action getShares = async (id: string) => {
     try {
       const res = await axios.get(prefix + "user/shares/" + id);

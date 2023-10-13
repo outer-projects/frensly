@@ -1,18 +1,31 @@
 import Link from "next/link";
 import style from "../ponds.module.scss";
+import { IAccount, IProfile } from "../../../types/users";
+import { fromWeiToEth } from "../../../utils/utilities";
+import { observer } from "mobx-react";
+import { UserStore } from "../../../stores/UserStore";
+import { useInjection } from "inversify-react";
+import { useEffect, useState } from "react";
 
-const ChatItem = () => {
+const ChatItem = observer(({ el }: { el: IAccount }) => {
+  const [usdPrice, setUsdPrice] = useState(0);
+  const { getPriceInUsd, ethCurrency } = useInjection(UserStore);
+  useEffect(() => {
+    if (el && ethCurrency !== 0) {
+      setUsdPrice(getPriceInUsd(el.currentPrice));
+    }
+  }, [el, ethCurrency]);
   return (
     <Link href="/ponds/123">
       <div className={style.chat__item}>
         <div className={style.chat__info}>
-          <img className={style.chat__avatar} src="../../Avatar.svg" />
+          <img className={style.chat__avatar} src={el.profile.avatar} />
           <div>
             <div className={style.chat__share}>
               <img src="../icons/Key.svg" />
-              <div>2.41 share</div>
+              <div>{Number(el.sharesAmount) / 10 ** 6} share</div>
             </div>
-            <div className={style.chat__name}>My chat</div>
+            <div className={style.chat__name}>{el.profile.twitterName}</div>
             <div className={style.chat__text}>
               Blah Blah: who’s here?<span>7m</span>
             </div>
@@ -21,12 +34,12 @@ const ChatItem = () => {
         <div>
           <div className={style.chat__value}>
             <img src="../icons/Ethereum.svg" />
-            15,34 ETH
+            {fromWeiToEth(el.currentPrice)} ETH
           </div>
-          <div className={style.chat__dollar}>{"14400$"}</div>
+          <div className={style.chat__dollar}>{usdPrice}</div>
         </div>
       </div>
     </Link>
   );
-};
+});
 export default ChatItem;

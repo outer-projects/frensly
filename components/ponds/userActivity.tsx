@@ -14,32 +14,43 @@ import { UserStore } from "../../stores/UserStore";
 import { fromWeiToEth } from "../../utils/utilities";
 import { useRouter } from "next/router";
 import FinanceRow from "../finance/financeRow";
-const types = ["My Ponds", "My Activity", "My Holders", "My Holdings"];
-const Ponds = observer(() => {
-  const [active, setActive] = useState(0);
-  const { user } = useInjection(Web3Store);
+const typesUser = ["Holders", "Holdings", "Activity"];
+const UserActivity = observer(() => {
+  const [active, setActive] = useState(2);
+
   const [outline, setOutline] = useState(false);
   const {
     portfolioValue,
+    profileUser,
+    getProfileUser,
     getHolders,
     getShares,
     shares,
     holders,
     history,
-    getHistory,
+    getHistory
   } = useInjection(UserStore);
+  const router = useRouter();
+  const { id } = router.query;
   useEffect(() => {
-    if (user) {
-      getHolders(user._id as string);
-      getShares(user._id as string);
-      getHistory(user._id as string);
+    if (id) {
+      getProfileUser(id as string);
+      getHolders(id as string);
+      getShares(id as string);
+      getHistory(id as string)
     }
-  }, [user]);
+  }, [id]);
   return (
     <div className={style.ponds}>
       {" "}
-      <div className={explore.explore__title}>{"My ponds"}</div>
-      <TypesList active={active} setActive={setActive} types={types} />
+      <div className={explore.explore__title}>{"Pond info"}</div>
+      <div className={style.ponds__top}>
+        <div className={style.ponds__image}>
+          <img src={profileUser?.avatar} />
+          <div className={style.ponds__title}>{profileUser?.twitterName}</div>
+        </div>
+      </div>
+      <TypesList active={active} setActive={setActive} types={typesUser} />
       <div
         className={classNames(
           explore.explore__search,
@@ -73,30 +84,23 @@ const Ponds = observer(() => {
         </div>
         {active == 0 && (
           <div className={style.ponds__chat}>
-            {shares?.map((el) => {
-              return <ChatItem key={el.subject._id} el={el.subject} />;
+            {holders?.map((el) => {
+              return <FinanceRow key={el.user._id} el={el.user}/>;
             })}
           </div>
         )}
         {active == 1 && (
           <div className={style.ponds__chat}>
-            {history?.map((el) => {
-              console.log(el);
-              return <OneActivity key={el._id} />;
+            {shares?.map((el) => {
+              return <FinanceRow key={el.subject._id} el={el.subject}/>;
             })}
           </div>
         )}
         {active == 2 && (
           <div className={style.ponds__chat}>
-            {holders?.map((el) => {
-              return <FinanceRow key={el.user._id} el={el.user} />;
-            })}
-          </div>
-        )}
-        {active == 3 && (
-          <div className={style.ponds__chat}>
-            {shares?.map((el) => {
-              return <FinanceRow key={el.subject._id} el={el.subject} />;
+            {history?.map((el) => {
+              console.log(el);
+              return <OneActivity key={el._id}/>;
             })}
           </div>
         )}
@@ -104,4 +108,4 @@ const Ponds = observer(() => {
     </div>
   );
 });
-export default Ponds;
+export default UserActivity;

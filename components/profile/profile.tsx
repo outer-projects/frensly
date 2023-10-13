@@ -13,6 +13,7 @@ import { useRouter } from "next/router";
 import { UserStore } from "../../stores/UserStore";
 import { addressSlice, fromWeiToEth } from "../../utils/utilities";
 import { fromWei } from "web3-utils";
+import Link from "next/link";
 const Profile = observer(() => {
   const modalStore = useInjection(ModalStore);
   const { user, frensly, address } = useInjection(Web3Store);
@@ -98,7 +99,7 @@ const Profile = observer(() => {
               <div className={style.profile__name}>
                 {profileUser?.twitterName}{" "}
                 <a
-                  href={`https://twitter.com/${user?.twitterHandle}`}
+                  href={`https://twitter.com/${profileUser?.twitterHandle}`}
                   target="_blank"
                   rel="noreferrer"
                   style={{ width: "24px", height: "24px" }}
@@ -109,7 +110,7 @@ const Profile = observer(() => {
                   />{" "}
                 </a>
                 <a
-                  href={`https://twitter.com/${user?.twitterHandle}`}
+                  href={`https://twitter.com/${profileUser?.twitterHandle}`}
                   target="_blank"
                   rel="noreferrer"
                 >
@@ -212,7 +213,8 @@ const Profile = observer(() => {
               className={style.profile__text}
               style={{ paddingRight: "9px", borderRight: "1px solid #E2E3E2" }}
             >
-              <span>{profileUser?.account?.myHolders?.length || 0}</span> Holders
+              <span>{profileUser?.account?.myHolders?.length || 0}</span>{" "}
+              Holders
             </div>
             <div className={style.profile__text} style={{ marginLeft: "8px" }}>
               <span>
@@ -240,12 +242,14 @@ const Profile = observer(() => {
             </div>
           </div>
           <div className={style.profile__buttons__bottom}>
-            <button
-              className={style.profile__light__button}
-              style={{ marginRight: "7px" }}
-            >
-              Activity
-            </button>
+            <Link href={`/activity/${profileUser?._id}`}>
+              <button
+                className={style.profile__light__button}
+                style={{ marginRight: "7px" }}
+              >
+                Activity
+              </button>
+            </Link>
             <button className={style.profile__light__button}>Chat</button>
           </div>
         </div>
