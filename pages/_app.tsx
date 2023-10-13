@@ -25,7 +25,7 @@ import { publicProvider } from "wagmi/providers/public";
 import { ToastContainer } from "react-toastify";
 import Wrapper from "../components/layout/wrapper";
 import "../components/polyfills";
-import { SocketContext } from "../utils/socket";
+import { SocketContext, socket } from "../utils/socket";
 const { chains, publicClient, webSocketPublicClient } = configureChains(
   [
     bscTestnet,
@@ -62,7 +62,6 @@ const wagmiConfig = createConfig({
 });
 function MyApp({ Component, pageProps }: AppProps) {
   const AnyComponent = Component as any;
-  const socket = useContext(SocketContext);
   const [loading, setLoading] = useState(false);
   // try reconnect to web3
   useEffect(() => {
