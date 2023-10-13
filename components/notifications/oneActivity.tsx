@@ -1,6 +1,20 @@
 import { fromWeiToEth, getDate, timePassed } from "../../utils/utilities";
 import style from "./notifications.module.scss";
 const OneActivity = ({ activity }: { activity: any }) => {
+  const getActivity = (type: string) => {
+    switch (type) {
+      case "BUY":
+        return " bought";
+      case "OWN_BUY":
+        return " bought";
+      case "SELL":
+        return " sell";
+      case "INIT":
+        return " initialized successfully";
+      default:
+        return type.toLowerCase();
+    }
+  };
   return (
     <div className={style.activity__one}>
       <div className={style.activity__one__left}>
@@ -10,8 +24,9 @@ const OneActivity = ({ activity }: { activity: any }) => {
         </div>
         <div>
           <div className={style.nots__one__text}>
-            {activity.account.profile.twitterName} bought {Number(activity.amount)/(10 ** 6)}{" "}
-            {activity.subject.profile.twitterName}
+            {activity.account.profile.twitterName} {getActivity(activity.type)}{" "}
+            {Number(activity.amount) / 10 ** 6}{" "}
+            {activity.type !=="INIT" && activity.subject.profile.twitterName}
           </div>
           <div className={style.nots__one__info}>
             <div className={style.activiy__one__time}>
