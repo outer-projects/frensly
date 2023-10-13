@@ -13,7 +13,8 @@ import { fromWei } from "web3-utils";
 import { fromWeiToEth } from "../../utils/utilities";
 import { observer } from "mobx-react";
 import { UserStore } from "../../stores/UserStore";
-import MyHold from "./myHold";
+import ExploreRow from "../explore/exploreRow";
+import FinanceRow from "./financeRow";
 export const links = [
   {
     title: "My funds",
@@ -35,7 +36,8 @@ const Finance = observer(() => {
   const router = useRouter();
   const [claimValue, setClaimValue] = useState(0);
   const { user, frensly, address, checkAuth } = useInjection(Web3Store);
-  const { shares, holders, getShares, getHolders } = useInjection(UserStore);
+  const { shares, holders, getShares, getHolders, portfolioValue } =
+    useInjection(UserStore);
   const claim = async () => {
     try {
       const res = await frensly.methods.claim().send({
@@ -106,7 +108,8 @@ const Finance = observer(() => {
                     Portfolio value
                   </div>
                   <div className={style.finance__stat__value}>
-                    {fromWeiToEth(user?.account.totalVolume as string)} ETH
+                    {portfolioValue && fromWeiToEth(portfolioValue?.toString())}{" "}
+                    ETH
                   </div>
                 </div>
               </div>
@@ -127,12 +130,16 @@ const Finance = observer(() => {
           )}
           {active == 1 && (
             <div className={style.finance__stats}>
-              <MyHold holds={holders}/>
+              {holders?.map((el) => {
+                return <FinanceRow el={el.user} />;
+              })}
             </div>
           )}
           {active == 2 && (
             <div className={style.finance__stats}>
-              <MyHold holds={shares}/>
+              {shares?.map((el) => {
+                return <FinanceRow el={el.subject} />;
+              })}
             </div>
           )}
           <div className={style.finance__title__second}>

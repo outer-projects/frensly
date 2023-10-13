@@ -6,7 +6,7 @@ export interface IAccount {
   initDate: Date;
   myHolders: string[];
   currentPrice: string;
-  profile: IProfile[]; //профиль с неймами и прочей хуитой
+  profile: IProfile; //профиль с неймами и прочей хуитой
   history: IHistory[][]; //все действия юзера
   sharesAmount: string; //сколько шеров этого юзера существует
   subjectFee: number; //% комсы в юзера

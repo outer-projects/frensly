@@ -4,7 +4,7 @@ import "reflect-metadata";
 import { RootStore } from "./RootStore";
 import axios from "axios";
 import { prefix } from "../utils/config";
-import { IProfile } from "../types/users";
+import { IAccount, IProfile } from "../types/users";
 import { USDEthPair, fromWeiToEth } from "../utils/utilities";
 
 @injectable()
@@ -14,12 +14,13 @@ export class UserStore {
   @observable ethCurrency: number = 0;
   @observable active: number = 0;
   @observable profileUser?: IProfile = undefined;
+  @observable portfolioValue?: number = 0;
   @observable holders?: {
-    user: IProfile;
+    user: IAccount;
     amount: string;
   }[] = [];
   @observable shares?: {
-    user: IProfile;
+    subject: IAccount;
     amount: string;
   }[] = [];
   @observable filterGlobal: { rangeFrom: number; rangeTo: number } = {
@@ -33,6 +34,12 @@ export class UserStore {
     try {
       const res = await axios.get(prefix + "user/shares/" + id);
       console.log(res.data);
+      this.portfolioValue = res.data.reduce(
+        (partialSum: any, a: any) =>
+          partialSum +
+          Number(a.subject.currentPrice) * (Number(a.amount) / 1000000),
+        0
+      );
       this.shares = res.data;
     } catch (e) {
       console.log(e);
