@@ -48,6 +48,7 @@ export const BuyModal = observer(({ key, data, idx }: modalProps) => {
   };
 
   const checkPrice = async (num: number) => {
+    console.log("address: ", data.user?.account?.address, "num: ", num, "num*1kk", Number(num) * 10 ** 6);
     try {
       const res = await frensly.methods
         .getBuyPriceAfterFee(data.user?.account?.address, Number(num) * 10 ** 6)
