@@ -49,10 +49,27 @@ export class FeedStore {
       console.log(e);
     }
   };
-  @action likePost = async (id: string) => {
+  @action clearPosts = () => {
+    this.userPosts = [];
+  };
+  @action likePost = async (id: string, userId?: string) => {
     try {
       const res = await axios.post(prefix + "social/like/" + id);
       console.log(res.data);
+      const ind = this.feed.findIndex((el) => el._id == id);
+      const likeInd = this.feed[ind].likes.findIndex((el) => el == userId);
+      if (ind !== -1 && likeInd == -1) {
+        this.feed[ind] = {
+          ...this.feed[ind],
+          likes: [...this.feed[ind].likes, userId as string],
+        };
+      } else {
+        this.feed[ind] = {
+          ...this.feed[ind],
+          likes: [...this.feed[ind].likes.splice(likeInd, 1)],
+        };
+      }
+
       return true;
     } catch (e) {
       console.log(e);

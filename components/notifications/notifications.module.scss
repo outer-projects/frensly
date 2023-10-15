@@ -38,6 +38,7 @@
   padding-top: 4px;
   padding-bottom: 4px;
   padding-left: 8px;
+  white-space: nowrap;
   padding-right: 8px;
   color: $black;
   text-align: right;
@@ -110,6 +111,7 @@
   margin-left: 16px;
   margin-right: 12px;
   display: flex;
+  flex-wrap: nowrap;
   align-items: center;
   img {
     width: 40px;
@@ -123,6 +125,9 @@
 }
 .nots__one__users {
   margin-right: 16px;
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
   img {
     width: 40px;
     height: 40px;

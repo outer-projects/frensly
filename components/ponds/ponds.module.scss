@@ -265,11 +265,12 @@
   font-size: 12px;
   line-height: 18px; /* 150% */
   letter-spacing: -0.12px;
-
+  img {
+    margin-right: 8px;
+  }
   div {
     border-radius: 100px;
     height: 22px;
-    padding-left: 8px;
     padding-right: 8px;
     display: flex;
     align-items: center;

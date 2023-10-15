@@ -43,6 +43,7 @@ const Finance = observer(() => {
       const res = await frensly.methods.claim().send({
         from: address,
       });
+      console.log(res);
       setClaimValue(Number(res));
       checkAuth();
       getClaim();
@@ -53,7 +54,7 @@ const Finance = observer(() => {
   const getClaim = async () => {
     try {
       const res = await frensly.methods.availableToClaim(address).call();
-      console.log(res);
+      console.log("availableToClaim: ",res);
       setClaimValue(Number(res));
     } catch (e) {
       console.log(e);
@@ -154,6 +155,7 @@ const Finance = observer(() => {
             <div className={style.finance__claim__value}>
               <img src="../icons/Ethereum.svg" />
               {fromWeiToEth(claimValue, 8)} ETH
+              {claimValue}
             </div>
             <button
               className={classNames(

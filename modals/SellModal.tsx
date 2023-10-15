@@ -98,7 +98,7 @@ export const SellModal = observer(({ key, data, idx }: modalProps) => {
       <div className={style.buy}>
         <div className={style.buy__info}>
           <div className={style.buy__title}>
-            Sell a keys
+            Sell a shares
             <img
               src="../icons/Close.svg"
               style={{ cursor: "pointer" }}
@@ -117,7 +117,7 @@ export const SellModal = observer(({ key, data, idx }: modalProps) => {
                 <div className={style.buy__user__name}>
                   {data.user?.twitterName}
                 </div>
-                <div className={style.buy__own}>You own {count} keys</div>
+                <div className={style.buy__own}>You own {count} shares</div>
               </div>
             </div>
             <div className={style.buy__user__left__text}>

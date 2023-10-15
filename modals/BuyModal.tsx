@@ -29,6 +29,7 @@ export const BuyModal = observer(({ key, data, idx }: modalProps) => {
     if (Number(numberOfShares) < 0.000001)
       return toast.error("Amount is too low");
     try {
+      console.log("currentPrice: ", currentPrice);
       const res = await frensly.methods
         .buyShares(
           data.user?.account?.address,
@@ -51,10 +52,11 @@ export const BuyModal = observer(({ key, data, idx }: modalProps) => {
       const res = await frensly.methods
         .getBuyPriceAfterFee(data.user?.account?.address, Number(num) * 10 ** 6)
         .call();
-      console.log(res);
+      console.log("getBuyPriceAfterFee: ", res);
       return Number(res);
     } catch (e) {
-      console.log(e);
+      console.log("ERROR getBuyPriceAfterFee: ",e);
+
       return 0;
     }
   };
@@ -83,6 +85,7 @@ export const BuyModal = observer(({ key, data, idx }: modalProps) => {
   const checkAndUpdateExactPrice = () => {
     checkPrice(numberOfShares !== "" ? Number(numberOfShares) : 0).then(
       (res) => {
+        console.log("currentPrice:", res, numberOfShares);
         setCurrentPrice(res);
       }
     );
@@ -98,7 +101,7 @@ export const BuyModal = observer(({ key, data, idx }: modalProps) => {
       <div className={style.buy}>
         <div className={style.buy__info}>
           <div className={style.buy__title}>
-            Buy a keys
+            Buy a shares
             <img
               src="../icons/Close.svg"
               style={{ cursor: "pointer" }}
@@ -117,7 +120,7 @@ export const BuyModal = observer(({ key, data, idx }: modalProps) => {
                 <div className={style.buy__user__name}>
                   {data.user?.twitterName}
                 </div>
-                <div className={style.buy__own}>You own {count} keys</div>
+                <div className={style.buy__own}>You own {count} shares</div>
               </div>
             </div>
             <div className={style.buy__user__left__text}>
