@@ -9,7 +9,8 @@ import { ModalStore } from "../../../stores/ModalStore";
 import { useInjection } from "inversify-react";
 import { ModalsEnum } from "../../../modals";
 const Chat = observer(() => {
-  const [active, setActive] = useState(0);
+  const [newMsg, setNewMsg] = useState("");
+  const [newMsgList, setNewMsgList] = useState<string[]>([]);
   useEffect(() => {}, []);
   function isEven(n: number) {
     n = Number(n);
@@ -72,6 +73,20 @@ const Chat = observer(() => {
           </div>
         </div>
         <div className={style.openchat__messages}>
+          {newMsgList.map((el, i) => {
+            return (
+              <div
+                className={classNames(
+                  isEven(i)
+                    ? style.openchat__my_message
+                    : style.openchat__message_to_me
+                )}
+              >
+                <div>{el}</div>
+                <div className={style.openchat__time}>10:12</div>
+              </div>
+            );
+          }).reverse()}
           {Array.from({ length: 10 }).map((el, i) => {
             return (
               <div
@@ -87,7 +102,13 @@ const Chat = observer(() => {
             );
           })}
         </div>
-        <Write />
+        <Write
+          newMsg={newMsg}
+          setNewMsg={setNewMsg}
+          onSend={() => {
+            setNewMsgList([...newMsgList, newMsg]);
+          }}
+        />
       </div>
     </div>
   );

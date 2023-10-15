@@ -22,8 +22,8 @@ export const BuyModal = observer(({ key, data, idx }: modalProps) => {
   const modalStore = useInjection(ModalStore);
   const { frensly, address, checkAuth } = useInjection(Web3Store);
   const [numberOfShares, setNumberOfShares] = useState<number | string>(1);
-  const [currentPrice, setCurrentPrice] = useState(0);
-  const [priceOfOne, setPriceOfOne] = useState(0);
+  const [currentPrice, setCurrentPrice] = useState('0');
+  const [priceOfOne, setPriceOfOne] = useState('0');
   const [count, setCount] = useState(0);
   const buy = async () => {
     if (Number(numberOfShares) < 0.000001)
@@ -54,7 +54,7 @@ export const BuyModal = observer(({ key, data, idx }: modalProps) => {
         .getBuyPriceAfterFee(data.user?.account?.address, Number(num) * 10 ** 6)
         .call();
       console.log("getBuyPriceAfterFee: ", res);
-      return Number(res);
+      return res;
     } catch (e) {
       console.log("ERROR getBuyPriceAfterFee: ",e);
 

@@ -155,7 +155,6 @@ const Finance = observer(() => {
             <div className={style.finance__claim__value}>
               <img src="../icons/Ethereum.svg" />
               {fromWeiToEth(claimValue, 8)} ETH
-              {claimValue}
             </div>
             <button
               className={classNames(
