@@ -111,7 +111,7 @@ export class Web3Store {
   };
   @action subscribeProvider = () => {
     // @ts-ignore
-    this.web3?.on("accountsChanged", () => {
+    this.web3?.provider.on("accountsChanged", () => {
       console.log("accountsChanged");
       if (
         this.user?.account?.address?.toLowerCase() !==
@@ -158,7 +158,7 @@ export class Web3Store {
           this.auth();
         }
       });
-      // this.subscribeProvider();
+      this.subscribeProvider();
       // let hexbalance =
       //   this.erc20 && (await this.erc20.methods.balanceOf(this.address).call());
       // console.log(Math.floor(Number(ethers.formatEther(hexbalance))));
