@@ -26,7 +26,7 @@ export class Web3Store {
   @observable blockInterface: boolean = false;
   @observable frensly?: any = undefined;
   @observable authStatus: AuthenticationStatus = "unauthenticated";
-  @observable needToChangeWallet: boolean = false;
+
   public constructor(private readonly rootStore: RootStore) {
     makeObservable(this);
   }
@@ -109,25 +109,6 @@ export class Web3Store {
       this.setAuthStatus("unauthenticated");
     }
   };
-  @action subscribeProvider = () => {
-    // @ts-ignore
-    this.web3?.provider.on("accountsChanged", () => {
-      console.log("accountsChanged");
-      if (
-        this.user?.account?.address?.toLowerCase() !==
-        this.address?.toLowerCase()
-      ) {
-        this.needToChangeWallet = true;
-      } else {
-        this.needToChangeWallet = false;
-      }
-    });
-    // provider.on("chainChanged", (chainId: string) => {
-    //   setTimeout(() => {
-    //     this.setExactNetId(chainId);
-    //   }, 500);
-    // });
-  };
   @action checkAuth = async () => {
     try {
       const res = await axios.get(prefix + "user", {
@@ -158,7 +139,6 @@ export class Web3Store {
           this.auth();
         }
       });
-      // this.subscribeProvider();
       // let hexbalance =
       //   this.erc20 && (await this.erc20.methods.balanceOf(this.address).call());
       // console.log(Math.floor(Number(ethers.formatEther(hexbalance))));

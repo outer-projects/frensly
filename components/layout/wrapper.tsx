@@ -20,11 +20,11 @@ const Wrapper = observer(({ children }: any) => {
       const res = await frensly.methods.isSharesSubject(address).call();
       setInit(res);
     } catch (e) {
-      console.log(e);
+      console.log("ERRORR: ",e);
     }
   };
   useEffect(() => {
-    if (web3 && address && user?.account) {
+    if (web3 && address && user?.account && frensly) {
       isInit();
       getActivity(user.account._id);
     }
