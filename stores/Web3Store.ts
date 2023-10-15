@@ -26,7 +26,7 @@ export class Web3Store {
   @observable blockInterface: boolean = false;
   @observable frensly?: any = undefined;
   @observable authStatus: AuthenticationStatus = "unauthenticated";
-
+  @observable needToChangeWallet: boolean = false
   public constructor(private readonly rootStore: RootStore) {
     makeObservable(this);
   }
@@ -68,6 +68,22 @@ export class Web3Store {
     if (signer) {
       this.getBalance();
     }
+  };
+  @action subscribeProvider = (provider: any) => {
+    provider.on("accountsChanged", ()=>{
+      if(this.address?.toLowerCase() == this.user?.account?.address.toLowerCase()) {
+        console.log('wallet wrong?');
+        this.needToChangeWallet = false
+      } else {
+        console.log('wallet true?');
+        this.needToChangeWallet = true
+      }
+    });
+    // provider.on("chainChanged", (chainId: string) => {
+    //   setTimeout(() => {
+    //     this.setExactNetId(chainId);
+    //   }, 500);
+    // });
   };
   @action auth = async () => {
     try {
@@ -129,7 +145,7 @@ export class Web3Store {
         this.signer && !this.unsupported //@ts-ignore
           ? (this.signer.transport as any)
           : process.env.NEXT_PUBLIC_NODE
-      );
+      )
       this.frensly = new this.web3.eth.Contract(
         frenslyAbi as any,
         frenslyContract
