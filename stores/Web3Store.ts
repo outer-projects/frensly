@@ -30,7 +30,9 @@ export class Web3Store {
   public constructor(private readonly rootStore: RootStore) {
     makeObservable(this);
   }
-
+  @action setNeedChangeWallet = (ch: boolean) => {
+    this.needToChangeWallet = ch;
+  };
   @action setConnected = (connected: boolean) => {
     this.connected = connected;
 
@@ -70,17 +72,6 @@ export class Web3Store {
     }
   };
   @action subscribeProvider = () => {
-    console.log(
-      "web3: ",
-      this?.web3?.provider?.on,
-      this.web3?.currentProvider?.on,
-      this.web3?.givenProvider,
-      this.web3?.accountProvider,
-      this.web3?.defaultAccount,
-      this.web3?.on,
-      this.web3?.providers,
-      this.provider
-    );
     this.provider?.on("accountsChanged", () => {
       if (
         this.address?.toLowerCase() == this.user?.account?.address.toLowerCase()
@@ -159,11 +150,7 @@ export class Web3Store {
           ? (this.signer.transport as any)
           : process.env.NEXT_PUBLIC_NODE
       );
-      this.provider = this.web3.setProvider(
-        this.signer && !this.unsupported
-          ? (this.signer.transport as any)
-          : process.env.NEXT_PUBLIC_NODE
-      );
+
       this.frensly = new this.web3.eth.Contract(
         frenslyAbi as any,
         frenslyContract

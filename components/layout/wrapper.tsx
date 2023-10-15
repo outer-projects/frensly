@@ -11,12 +11,22 @@ import { prefix } from "../../utils/config";
 
 const Wrapper = observer(({ children }: any) => {
   const { init, setInit, getActivity } = useInjection(UserStore);
-  const { web3, frensly, address, user, setUser, needToChangeWallet } =
-    useInjection(Web3Store);
+  const {
+    web3,
+    frensly,
+    address,
+    user,
+    setUser,
+    needToChangeWallet,
+    setNeedChangeWallet,
+  } = useInjection(Web3Store);
   const isInit = async () => {
     console.log(address, user?.account?.address);
-    if (address?.toLowerCase() !== user?.account?.address)
-      return toast.error("Address is not assigned to this account");
+    if (address?.toLowerCase() !== user?.account?.address) {
+      setNeedChangeWallet(true);
+    } else {
+      setNeedChangeWallet(false);
+    }
     try {
       const res = await frensly.methods.isSharesSubject(address).call();
       setInit(res);
