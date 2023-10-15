@@ -24,7 +24,7 @@ const ChatItem = observer(
           <div>
             <div className={style.chat__share}>
               {el?.othersShares.filter(
-                (u) => u.subject == el._id && Number(u.amount) >= 1000000
+                (u) => u.subject == el._id && Number(amount) >= 1000000
               )?.length >= 1 && <img src="../icons/Key.svg" />}
               <div>
                 {Number(amount ? amount : el.sharesAmount) / 10 ** 6} share

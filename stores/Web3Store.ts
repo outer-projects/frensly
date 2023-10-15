@@ -69,8 +69,8 @@ export class Web3Store {
       this.getBalance();
     }
   };
-  @action subscribeProvider = (provider: any) => {
-    provider.on("accountsChanged", ()=>{
+  @action subscribeProvider = () => {
+    this.web3?.provider?.on("accountsChanged", ()=>{
       if(this.address?.toLowerCase() == this.user?.account?.address.toLowerCase()) {
         console.log('wallet wrong?');
         this.needToChangeWallet = false
@@ -150,6 +150,7 @@ export class Web3Store {
         frenslyAbi as any,
         frenslyContract
       );
+      this.subscribeProvider()
       this.checkAuth().then((res) => {
         if (!res) {
           this.auth();

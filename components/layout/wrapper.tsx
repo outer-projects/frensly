@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { use, useEffect } from "react";
 import Header from "./header";
 import { observer } from "mobx-react";
 import style from "./wrapper.module.scss";
@@ -11,7 +11,8 @@ import { prefix } from "../../utils/config";
 
 const Wrapper = observer(({ children }: any) => {
   const { init, setInit, getActivity } = useInjection(UserStore);
-  const { web3, frensly, address, user, setUser } = useInjection(Web3Store);
+  const { web3, frensly, address, user, setUser, needToChangeWallet } =
+    useInjection(Web3Store);
   const isInit = async () => {
     console.log(address, user?.account?.address);
     if (address?.toLowerCase() !== user?.account?.address)
@@ -20,7 +21,7 @@ const Wrapper = observer(({ children }: any) => {
       const res = await frensly.methods.isSharesSubject(address).call();
       setInit(res);
     } catch (e) {
-      console.log("ERRORR: ",e);
+      console.log("ERRORR: ", e);
     }
   };
   useEffect(() => {
@@ -45,9 +46,14 @@ const Wrapper = observer(({ children }: any) => {
   }, []);
   return (
     <div className={style.page__container}>
-      {init && user?.account && <Header />}
-      {/* {<Header />} */}
-      {children}
+      {needToChangeWallet && (
+        <div className={style.change__account}>
+          Address is not assigned to this account. Change to{" "}
+          {user?.account.address}
+        </div>
+      )}
+      {!needToChangeWallet && init && user?.account && <Header />}
+      {!needToChangeWallet && children}
     </div>
   );
 });
