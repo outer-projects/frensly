@@ -17,34 +17,34 @@ const ChatItem = observer(
       }
     }, [el, ethCurrency]);
     return (
-      // <Link href="/ponds/123">
-      <div className={style.chat__item}>
-        <div className={style.chat__info}>
-          <img className={style.chat__avatar} src={el.profile.avatar} />
-          <div>
-            <div className={style.chat__share}>
-              {el?.othersShares.filter(
-                (u) => u.subject == el._id && Number(amount) >= 1000000
-              )?.length >= 1 && <img src="../icons/Key.svg" />}
-              <div>
-                {Number(amount ? amount : el.sharesAmount) / 10 ** 6} share
+      <Link href={"/ponds/" + el.profile.twitterId}>
+        <div className={style.chat__item}>
+          <div className={style.chat__info}>
+            <img className={style.chat__avatar} src={el.profile.avatar} />
+            <div>
+              <div className={style.chat__share}>
+                {el?.othersShares.filter(
+                  (u) => u.subject == el._id && Number(amount) >= 1000000
+                )?.length >= 1 && <img src="../icons/Key.svg" />}
+                <div>
+                  {Number(amount ? amount : el.sharesAmount) / 10 ** 6} share
+                </div>
+              </div>
+              <div className={style.chat__name}>{el.profile.twitterName}</div>
+              <div className={style.chat__text}>
+                Blah Blah: who’s here?<span>7m</span>
               </div>
             </div>
-            <div className={style.chat__name}>{el.profile.twitterName}</div>
-            <div className={style.chat__text}>
-              Blah Blah: who’s here?<span>7m</span>
+          </div>
+          <div>
+            <div className={style.chat__value}>
+              <img src="../icons/Ethereum.svg" />
+              {fromWeiToEth(el.currentPrice)} ETH
             </div>
+            <div className={style.chat__dollar}>${usdPrice}</div>
           </div>
         </div>
-        <div>
-          <div className={style.chat__value}>
-            <img src="../icons/Ethereum.svg" />
-            {fromWeiToEth(el.currentPrice)} ETH
-          </div>
-          <div className={style.chat__dollar}>${usdPrice}</div>
-        </div>
-      </div>
-      // </Link>
+      </Link>
     );
   }
 );

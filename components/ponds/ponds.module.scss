@@ -159,6 +159,16 @@
   width: 616px;
   height: calc(100vh - 50px);
 }
+.openchat__close {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  font-family: "DMSans";
+  font-size: 20px;
+  font-weight: bold;
+}
 .openchat__messages {
   padding-top: 5px;
   border-top: 2px solid #f1f1f1;
