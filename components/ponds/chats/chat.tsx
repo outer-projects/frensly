@@ -28,13 +28,16 @@ const Chat = observer(() => {
   const modalStore = useInjection(ModalStore);
 
   const [newMsgList, setNewMsgList] = useState<string[]>([]);
-  const startListening = async () => {
+  const startListening = () => {
+    console.log('start listen 2');
+    socket.emit("join", { room: chat._id });
     socket.on("join", (chat) => {
       console.log(chat, "hi join");
     });
-    socket.emit("join", { room: chat._id });
+    
   };
   const stopListen = () => {
+    console.log('stop listen');
     socket.emit("leave", { room: chat._id });
     socket.off("join");
     socket.off("leave");
@@ -62,6 +65,7 @@ const Chat = observer(() => {
   }, [chat]);
   useEffect(() => {
     if (myHolds) {
+      console.log('start listen');
       startListening();
     }
   }, [myHolds]);

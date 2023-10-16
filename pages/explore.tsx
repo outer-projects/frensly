@@ -7,20 +7,20 @@ import { useContext, useEffect } from "react";
 import { SocketContext } from "../utils/socket";
 
 const ExplorePage: NextPage = observer((props) => {
-  const socket = useContext(SocketContext);
-  const startListening = async () => {
-    socket.on("join", () => {
-      console.log("hi join");
-    });
-    socket.emit("join");
-  };
-  const stopListen = () => {
-    socket.off("join");
-  };
-  useEffect(() => {
-    startListening();
-    return () => stopListen();
-  }, []);
+  // const socket = useContext(SocketContext);
+  // const startListening = async () => {
+  //   socket.on("join", () => {
+  //     console.log("hi join");
+  //   });
+  //   socket.emit("join");
+  // };
+  // const stopListen = () => {
+  //   socket.off("join");
+  // };
+  // useEffect(() => {
+  //   startListening();
+  //   return () => stopListen();
+  // }, []);
   return (
     <div className={style.explore__page}>
       <Head>
