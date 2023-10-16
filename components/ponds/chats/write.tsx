@@ -1,3 +1,4 @@
+import { useCallback, useEffect } from "react";
 import style from "../ponds.module.scss";
 
 const Write = ({
@@ -9,6 +10,20 @@ const Write = ({
   setNewMsg: (newm: string) => void;
   onSend: () => any;
 }) => {
+  const onKeyDown = (e: any) => {
+    console.log(e.key, e.key == "Enter", newMsg !== "");
+    if (e.key == "Enter" && newMsg !== "") {
+      setNewMsg("");
+      onSend();
+    }
+  }
+  useEffect(() => {
+    window.addEventListener("keydown", onKeyDown);
+
+    return () => {
+      window.removeEventListener("keydown", onKeyDown);
+    };
+  }, [newMsg]);
   return (
     <div className={style.write}>
       <img src="../icons/ImageAdd.svg" />
@@ -24,8 +39,10 @@ const Write = ({
         src="../icons/twitterUI/Send.svg"
         style={{ cursor: "pointer" }}
         onClick={() => {
-          setNewMsg('')
-          onSend();
+          if (newMsg !== "") {
+            setNewMsg("");
+            onSend();
+          }
         }}
       />
     </div>

@@ -15,11 +15,18 @@ import { observer } from "mobx-react";
 import { UserStore } from "../../stores/UserStore";
 import ExploreRow from "../explore/exploreRow";
 import FinanceRow from "./financeRow";
+import Sidebar from "./sidebar";
 export const links = [
   {
     title: "My funds",
     link: "/finance",
     img: "../icons/profile.svg",
+    active: true,
+  },
+  {
+    title: "Beta",
+    link: "/finance/invite",
+    img: "../icons/invite.svg",
     active: true,
   },
   {
@@ -73,28 +80,7 @@ const Finance = observer(() => {
   }, [frensly]);
   return (
     <div className={style.finance__page}>
-      <div className={style.finance__side}>
-        {links.map((el, i) => {
-          return (
-            <Link
-              href={el.active ? el.link : ""}
-              style={{ textDecoration: "none" }}
-            >
-              <div
-                key={i}
-                style={{ color: !el.active ? "grey" : "" }}
-                className={classNames(
-                  style.finance__link,
-                  el.link == router.asPath && style.finance__link__active
-                )}
-              >
-                <img src={el.img} />
-                {el.title}
-              </div>
-            </Link>
-          );
-        })}
-      </div>
+      <Sidebar/>
       <div className={style.finance__container}>
         <div className={explore.explore__title}>My funds</div>
         <div className={style.finance}>

@@ -7,22 +7,13 @@ import User from "./user";
 import header from "../layout/header.module.scss";
 import { useInjection } from "inversify-react";
 import { useRouter } from "next/router";
+import Sidebar from "./sidebar";
 const Airdrop = () => {
-  const router = useRouter()
+  const router = useRouter();
   return (
     <div className={style.finance__page}>
       <div className={style.finance__side}>
-        {links.map((el, i) => {
-          return (
-            <Link href={el.link} style={{ textDecoration: "none" }}>
-              <div key={i} className={classNames(style.finance__link,
-                  el.link == router.asPath && style.finance__link__active)}>
-                <img src={el.img} />
-                {el.title}
-              </div>
-            </Link>
-          );
-        })}
+        <Sidebar />
       </div>
       <div className={style.finance__container}>
         <div className={explore.explore__title}>Airdrop</div>

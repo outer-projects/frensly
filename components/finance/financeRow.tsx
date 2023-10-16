@@ -20,10 +20,10 @@ const FinanceRow = observer(
     }, [el, ethCurrency]);
 
     return (
-      <Link href={"/profile/" + el.profile.twitterId}>
+      <Link href={"/profile/" + el.profile?.twitterId}>
         <div className={style.explore__user}>
           <div className={style.explore__user__left}>
-            <img src={el.profile.avatar} />
+            <img src={el.profile?.avatar} />
             <div className={style.explore__user__left__text}>
               <div className={style.explore__user__share}>
                 {/* @ts-ignore */}
@@ -33,7 +33,7 @@ const FinanceRow = observer(
                 <div>{Number(amount ? amount : el?.sharesAmount) / 10 ** 6} share</div>
               </div>
               <div className={style.explore__user__name}>
-                {el.profile.twitterName}
+                {el.profile?.twitterName}
               </div>
             </div>
           </div>

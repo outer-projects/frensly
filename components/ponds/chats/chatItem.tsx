@@ -17,10 +17,10 @@ const ChatItem = observer(
       }
     }, [el, ethCurrency]);
     return (
-      <Link href={"/ponds/" + el.profile.twitterId}>
+      <Link href={"/ponds/" + el.profile?.twitterId}>
         <div className={style.chat__item}>
           <div className={style.chat__info}>
-            <img className={style.chat__avatar} src={el.profile.avatar} />
+            <img className={style.chat__avatar} src={el.profile?.avatar} />
             <div>
               <div className={style.chat__share}>
                 {el?.othersShares.filter(
@@ -30,7 +30,7 @@ const ChatItem = observer(
                   {Number(amount ? amount : el.sharesAmount) / 10 ** 6} share
                 </div>
               </div>
-              <div className={style.chat__name}>{el.profile.twitterName}</div>
+              <div className={style.chat__name}>{el.profile?.twitterName}</div>
               <div className={style.chat__text}>
                 Blah Blah: who’s here?<span>7m</span>
               </div>

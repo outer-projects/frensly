@@ -27,11 +27,14 @@ const Ponds = observer(() => {
     holders,
     history,
     getHistory,
+    getMyChats,
+    myChats
   } = useInjection(UserStore);
   useEffect(() => {
     if (user) {
       getHolders(user._id as string);
       getShares(user._id as string);
+      getMyChats();
       getHistory(user.account._id as string);
     }
   }, [user]);
@@ -73,8 +76,14 @@ const Ponds = observer(() => {
         </div>
         {active == 0 && (
           <div className={style.ponds__chat}>
-            {shares?.map((el) => {
-              return <ChatItem key={el.subject._id} el={el.subject} amount={el.amount}/>;
+            {myChats?.map((el) => {
+              return (
+                <ChatItem
+                  key={el.owner._id}
+                  el={el.owner}
+                  amount={'1000000'}
+                />
+              );
             })}
           </div>
         )}
@@ -89,14 +98,20 @@ const Ponds = observer(() => {
         {active == 2 && (
           <div className={style.ponds__chat}>
             {holders?.map((el) => {
-              return <FinanceRow key={el.user._id} el={el.user} amount={el.amount}/>;
+              console.log(el);
+              return (
+                <FinanceRow key={el.user._id} el={el.user} amount={el.amount} />
+              );
+              // return <></>;
             })}
           </div>
         )}
         {active == 3 && (
           <div className={style.ponds__chat}>
             {shares?.map((el) => {
-              return <FinanceRow key={el.subject._id} el={el.subject} amount={el.amount}/>;
+              console.log(el);
+              // return <FinanceRow key={el.subject._id} el={el.subject} amount={el.amount}/>;
+              return <></>;
             })}
           </div>
         )}

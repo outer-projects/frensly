@@ -15,7 +15,7 @@ import { fromWeiToEth } from "../../../utils/utilities";
 const Chat = observer(() => {
   const [newMsg, setNewMsg] = useState("");
   const [myHolds, setMyHolds] = useState<any>(undefined);
-  const messagesEndRef = useRef<any>(null)
+  const messagesEndRef = useRef<any>(null);
   const { getProfileUser, profileUser, getHolders, holders } =
     useInjection(UserStore);
   const { user } = useInjection(Web3Store);
@@ -61,7 +61,7 @@ const Chat = observer(() => {
   }, [holders, user]);
   return (
     <>
-      {myHolds ? (
+      {!myHolds ? (
         <div className={style.openchat}>
           {" "}
           <div className={explore.explore__title}>
@@ -136,7 +136,7 @@ const Chat = observer(() => {
                           : style.openchat__message_to_me
                       )}
                     >
-                      <div>{el}</div>
+                      {el}
                       <div className={style.openchat__time}>10:12</div>
                     </div>
                   );
@@ -161,8 +161,10 @@ const Chat = observer(() => {
               newMsg={newMsg}
               setNewMsg={setNewMsg}
               onSend={() => {
-                messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
                 setNewMsgList([...newMsgList, newMsg]);
+                setTimeout(() => {
+                  messagesEndRef.current?.scrollIntoView();
+                }, 10);
               }}
             />
           </div>

@@ -3,16 +3,17 @@ import type { NextPage } from "next";
 import style from "../home.module.scss";
 import Airdrop from "../../components/finance/airdrop";
 import Head from "next/head";
+import Invite from "../../components/finance/invite";
 
-const AirdropPage: NextPage = observer((props) => {
+const InvitePage: NextPage = observer((props) => {
   return (
     <div className={style.finance__page}>
       <Head>
         <title>Frensly</title>
       </Head>
-      <Airdrop />
+      <Invite />
     </div>
   );
 });
 
-export default AirdropPage;
+export default InvitePage;

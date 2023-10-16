@@ -13,6 +13,7 @@ export class UserStore {
   @observable opacity: boolean = false;
   @observable ethCurrency: number = 0;
   @observable history: any[] = [];
+  @observable myChats: any[] = [];
   @observable activity: any[] = [];
   @observable active: number = 0;
   @observable currentType: number = 2;
@@ -35,6 +36,15 @@ export class UserStore {
   }
   @action setCurrentType = async (number: number) => {
     this.currentType = number;
+  };
+  @action getMyChats = async () => {
+    try {
+      const res = await axios.get(prefix + "chat/available");
+      console.log("chats:",res.data);
+      this.myChats = res.data;
+    } catch (e) {
+      console.log(e);
+    }
   };
   @action getActivity = async (id: string) => {
     try {
