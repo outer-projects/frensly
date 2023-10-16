@@ -85,7 +85,7 @@ const Chat = observer(() => {
       holders,
       user && holders && holders?.length !== 0
     );
-    if (user && holders) {
+    if (user && holders && chat) {
       console.log(
         "is everything ok?",
         holders.filter((el) => el.user._id == user?.account._id)[0]
