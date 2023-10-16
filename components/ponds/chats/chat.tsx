@@ -2,7 +2,7 @@ import style from "../ponds.module.scss";
 import explore from "../../explore/explore.module.scss";
 import header from "../../layout/header.module.scss";
 import classNames from "classnames";
-import { useEffect, useState } from "react";
+import { ElementType, useEffect, useRef, useState } from "react";
 import Write from "./write";
 import { observer } from "mobx-react";
 import { ModalStore } from "../../../stores/ModalStore";
@@ -15,7 +15,7 @@ import { fromWeiToEth } from "../../../utils/utilities";
 const Chat = observer(() => {
   const [newMsg, setNewMsg] = useState("");
   const [myHolds, setMyHolds] = useState<any>(undefined);
-
+  const messagesEndRef = useRef<any>(null)
   const { getProfileUser, profileUser, getHolders, holders } =
     useInjection(UserStore);
   const { user } = useInjection(Web3Store);
@@ -53,7 +53,9 @@ const Chat = observer(() => {
         "is everything ok?",
         holders.filter((el) => el.user._id == user?.account._id)[0]
       );
-      let myholding = holders.filter((el) => el.user._id == user?.account._id)[0]
+      let myholding = holders.filter(
+        (el) => el.user._id == user?.account._id
+      )[0];
       setMyHolds(myholding);
     }
   }, [holders, user]);
@@ -123,7 +125,7 @@ const Chat = observer(() => {
                 <span>TVH</span> $??
               </div>
             </div>
-            <div className={style.openchat__messages}>
+            <div className={style.openchat__messages} ref={messagesEndRef}>
               {newMsgList
                 .map((el, i) => {
                   return (
@@ -159,6 +161,7 @@ const Chat = observer(() => {
               newMsg={newMsg}
               setNewMsg={setNewMsg}
               onSend={() => {
+                messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
                 setNewMsgList([...newMsgList, newMsg]);
               }}
             />
