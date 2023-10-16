@@ -29,19 +29,19 @@ const Chat = observer(() => {
   const [newMsgList, setNewMsgList] = useState<string[]>([]);
   const startListening = () => {
     console.log("start listen 2", chat._id);
-    socket.emit("join", { room: chat._id });
-    socket.on("join", (chat) => {
+    socket.emit("connect_error", { room: chat._id });
+    socket.on("connect_error", (chat) => {
       console.log(chat, "hi join");
     });
-    socket.on("message", (chat) => {
-      console.log(chat, "hi message");
-    });
+    // socket.on("message", (chat) => {
+    //   console.log(chat, "hi message");
+    // });
   };
   const stopListen = () => {
     console.log("stop listen");
     socket.emit("leave", { room: chat._id });
     socket.off("join");
-    socket.off("leave");
+    socket.off("connect_error");
     setMyHolds(undefined);
     removeChat();
   };
