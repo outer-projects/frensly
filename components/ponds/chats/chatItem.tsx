@@ -8,7 +8,17 @@ import { useInjection } from "inversify-react";
 import { useEffect, useState } from "react";
 
 const ChatItem = observer(
-  ({ el, amount }: { el: IProfile; amount?: string }) => {
+  ({
+    el,
+    amount,
+    chatId,
+    messages,
+  }: {
+    el: IProfile;
+    amount?: string;
+    chatId: string;
+    messages: any[];
+  }) => {
     const [usdPrice, setUsdPrice] = useState(0);
     const { getPriceInUsd, ethCurrency } = useInjection(UserStore);
     useEffect(() => {
@@ -17,7 +27,7 @@ const ChatItem = observer(
       }
     }, [el, ethCurrency]);
     return (
-      <Link href={"/ponds/" + el?.twitterId}>
+      <Link href={"/ponds/" + chatId}>
         <div className={style.chat__item}>
           <div className={style.chat__info}>
             <img className={style.chat__avatar} src={el?.avatar} />
@@ -27,13 +37,21 @@ const ChatItem = observer(
                   (u) => u.subject == el._id && Number(amount) >= 1000000
                 )?.length >= 1 && <img src="../icons/Key.svg" />}
                 <div>
-                  {Number(amount ? amount : el?.account?.sharesAmount) / 10 ** 6} share
+                  {Number(amount ? amount : el?.account?.sharesAmount) /
+                    10 ** 6}{" "}
+                  share
                 </div>
               </div>
               <div className={style.chat__name}>{el?.twitterName}</div>
-              <div className={style.chat__text}>
-                Blah Blah: who’s here?<span>7m</span>
-              </div>
+              {messages?.length > 0 ? (
+                <div className={style.chat__text}>
+                  {/* {messages}: who’s here?<span>7m</span> */}
+                  {/* @ts-ignore */}
+                  {console.log(messages)}
+                </div>
+              ) : (
+                <div className={style.chat__text}>No messages yet. Be first!</div>
+              )}
             </div>
           </div>
           <div>
