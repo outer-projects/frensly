@@ -42,11 +42,11 @@ const Chat = observer(() => {
     }
   };
   const stopListen = () => {
-    console.log("stop listen");
-    removeChat();
+    console.log("stop listen");    
     socket.emit("leave", { room: chat._id });
     socket.off("join");
     socket.off("leave");
+    removeChat();
   };
   useEffect(() => {
     return () => stopListen();
