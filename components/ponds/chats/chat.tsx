@@ -35,7 +35,7 @@ const Chat = observer(() => {
     socket.emit("join", { room: chat._id });
   };
   const stopListen = () => {
-    socket.emit("leave", { room: chat._id })
+    socket.emit("leave", { room: chat._id });
     socket.off("join");
     socket.off("leave");
   };
@@ -80,27 +80,32 @@ const Chat = observer(() => {
       let myholding = holders.filter(
         (el) => el.user._id == user?.account._id && Number(el.amount) >= 1000000
       )[0];
-      setMyHolds(myholding);
+      if (myholding) {
+        setMyHolds(myholding);
+      }
+      if (user._id == chat?.owner._id) {
+        setMyHolds({ amount: "1000000", user: user });
+      }
     }
   }, [holders, user]);
   return (
     <>
-      {!myHolds ? (
+      {myHolds ? (
         <div className={style.openchat}>
           {" "}
           <div className={explore.explore__title}>
-            {profileUser?.twitterName} pond
+            {chat.owner?.twitterName} pond
           </div>
           <div className={style.openchat__info}>
             <div className={style.openchat__user}>
               <div className={style.openchat__user__left}>
                 <img
                   className={style.openchat__avatar}
-                  src={profileUser?.avatar}
+                  src={chat.owner?.avatar}
                 />
                 <div className={style.openchat__user__left__text}>
                   <div className={style.openchat__user__name}>
-                    {profileUser?.twitterName}
+                    {chat.owner?.twitterName}
                   </div>
                   <div className={style.openchat__status}>Online</div>
                 </div>
@@ -111,7 +116,9 @@ const Chat = observer(() => {
                     header.connect__button,
                     style.openchat__button
                   )}
-                  onClick={() => modalStore.showModal(ModalsEnum.Trade)}
+                  onClick={() =>
+                    modalStore.showModal(ModalsEnum.Trade, { user: chat.owner })
+                  }
                 >
                   Buy
                 </button>
@@ -125,8 +132,8 @@ const Chat = observer(() => {
                 {" "}
                 <div className={style.openchat__share__value}>
                   <img src="../../icons/Ethereum.svg" />
-                  {profileUser?.account.currentPrice &&
-                    fromWeiToEth(profileUser?.account.currentPrice)}{" "}
+                  {chat.owner?.account.currentPrice &&
+                    fromWeiToEth(chat.owner?.account.currentPrice)}{" "}
                   ETH
                 </div>
                 <div className={style.openchat__shares}> per 1 share</div>
@@ -138,11 +145,10 @@ const Chat = observer(() => {
                   className={style.openchat__shares}
                   style={{ marginRight: "17px" }}
                 >
-                  <span>{profileUser?.account.myHolders.length}</span> Holders
+                  <span>{chat.owner?.account.myHolders.length}</span> Holders
                 </div>
                 <div className={style.openchat__shares}>
-                  <span>{profileUser?.account.othersShares.length}</span>{" "}
-                  Holding
+                  <span>{chat.owner?.account.othersShares.length}</span> Holding
                 </div>
               </div>
               <div className={style.openchat__shares}>
