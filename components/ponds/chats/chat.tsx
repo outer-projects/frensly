@@ -32,20 +32,32 @@ const Chat = observer(() => {
   const { id } = router.query;
   useEffect(() => {
     if (id) {
+      console.log("id is: ", id);
       getProfileUser(id as string);
     }
   }, [id]);
   useEffect(() => {
     if (profileUser) {
+      console.log("id is: ", profileUser._id);
       getHolders(profileUser._id as string);
     }
   }, [profileUser]);
   useEffect(() => {
+    console.log(
+      "user, holders: ",
+      user,
+      holders,
+      user && holders && holders?.length !== 0
+    );
     if (user && holders && holders.length !== 0) {
+      console.log(
+        "is everything ok?",
+        holders.filter((el) => el.user._id == user?.account._id)[0]
+      );
       setMyHolds(holders.filter((el) => el.user._id == user?.account._id)[0]);
       setVisible(true);
     }
-  }, [holders]);
+  }, [holders, user]);
   return (
     <>
       {!visible ? (
@@ -154,7 +166,9 @@ const Chat = observer(() => {
           </div>
         </div>
       ) : (
-        <div className={style.openchat__close}>You are not allowed to enter this chat</div>
+        <div className={style.openchat__close}>
+          You are not allowed to enter this chat
+        </div>
       )}
     </>
   );
