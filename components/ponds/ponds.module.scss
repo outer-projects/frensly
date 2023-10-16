@@ -190,11 +190,11 @@
   height: 30vh;
   flex: 1;
   overflow-y: auto;
-  ::-webkit-scrollbar {
+  &::-webkit-scrollbar {
     width: 15px;
     margin: 15px;
   }
-  ::-webkit-scrollbar-thumb {
+  &::-webkit-scrollbar-thumb {
     border: 5px solid rgba(0, 0, 0, 0);
     background-clip: padding-box;
     border-radius: 9999px;

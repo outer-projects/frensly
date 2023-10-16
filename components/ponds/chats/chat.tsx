@@ -48,7 +48,7 @@ const Chat = observer(() => {
   }, [holders]);
   return (
     <>
-      {visible ? (
+      {!visible ? (
         <div className={style.openchat}>
           {" "}
           <div className={explore.explore__title}>
@@ -82,7 +82,7 @@ const Chat = observer(() => {
             </div>
             <div className={style.openchat__row}>
               <div className={style.openchat__shares}>
-                You own {Number(myHolds.amount) / 10 ** 6} shares
+                You own {Number(myHolds?.amount) / 10 ** 6} shares
               </div>
               <div className={style.openchat__val}>
                 {" "}
