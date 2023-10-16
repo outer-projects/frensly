@@ -29,15 +29,14 @@ const Chat = observer(() => {
 
   const [newMsgList, setNewMsgList] = useState<string[]>([]);
   const startListening = () => {
-    console.log('start listen 2');
+    console.log("start listen 2", chat._id);
     socket.emit("join", { room: chat._id });
     socket.on("join", (chat) => {
       console.log(chat, "hi join");
     });
-    
   };
   const stopListen = () => {
-    console.log('stop listen');
+    console.log("stop listen");
     socket.emit("leave", { room: chat._id });
     socket.off("join");
     socket.off("leave");
@@ -65,7 +64,7 @@ const Chat = observer(() => {
   }, [chat]);
   useEffect(() => {
     if (myHolds) {
-      console.log('start listen');
+      console.log("start listen");
       startListening();
     }
   }, [myHolds]);
