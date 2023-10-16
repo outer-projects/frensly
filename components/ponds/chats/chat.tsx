@@ -28,7 +28,7 @@ const Chat = observer(() => {
   const [isLightning, setIsLightning] = useState(false)
   const [newMsgList, setNewMsgList] = useState<string[]>([]);
   const startListening = () => {
-    if (chat && isLightning) {
+    if (chat && !isLightning) {
       setIsLightning(true)
       console.log("start listen 2", chat._id);
       socket.emit("join", { room: chat._id });
@@ -97,6 +97,7 @@ const Chat = observer(() => {
         setMyHolds(myholding);
       }
       if (user._id == chat?.owner._id) {
+        console.log(user);
         setMyHolds({ amount: "1000000", user: user });
       }
     }
