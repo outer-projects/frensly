@@ -11,7 +11,7 @@ import { ModalsEnum } from "../../../modals";
 import { useRouter } from "next/router";
 import { UserStore } from "../../../stores/UserStore";
 import Web3Store from "../../../stores/Web3Store";
-import { fromWeiToEth } from "../../../utils/utilities";
+import { fromWeiToEth, getDate } from "../../../utils/utilities";
 import { SocketContext } from "../../../utils/socket";
 import { ChatStore } from "../../../stores/ChatStore";
 const Chat = observer(() => {
@@ -179,21 +179,30 @@ const Chat = observer(() => {
               {newMsgList
                 .map((el, i) => {
                   return (
-                    <div
-                      className={classNames(
-                        el.user.twitterId == user?.twitterId
-                          ? style.openchat__my_message
-                          : style.openchat__message_to_me
-                      )}
-                      key={el._id}
-                    >
-                      {el.text}
-                      <div className={style.openchat__time}>{el.date}</div>
+                    <div className={classNames(
+                      el.user.twitterId == user?.twitterId
+                        ? style.openchat__my_message__container
+                        : style.openchat__message_to_me__container
+                    )}>
+                      <div className={style.openchat__name}>{el.user.twitterName}</div>
+                      <div
+                        className={classNames(
+                          el.user.twitterId == user?.twitterId
+                            ? style.openchat__my_message
+                            : style.openchat__message_to_me
+                        )}
+                        key={el._id}
+                      >
+                        {el.text}
+                        <div className={style.openchat__time}>
+                          {getDate(el.date)}
+                        </div>
+                      </div>
                     </div>
                   );
                 })
                 .reverse()}
-              {Array.from({ length: 10 }).map((el, i) => {
+              {/* {Array.from({ length: 10 }).map((el, i) => {
                 return (
                   <div
                     className={classNames(
@@ -206,7 +215,7 @@ const Chat = observer(() => {
                     <div className={style.openchat__time}>10:12</div>
                   </div>
                 );
-              })}
+              })} */}
             </div>
             <Write
               newMsg={newMsg}

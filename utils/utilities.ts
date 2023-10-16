@@ -96,7 +96,7 @@ export const ipfsGateway = (cid?: string) => {
 export const getDate = (date: any) => {
   const dd = new Date(date).getTime();
   // console.log("%chelper.ts line:32 dd", "color: #007acc;", dd, date);
-  return DateTime.fromMillis(dd).toFormat("dd.LL.yyyy");
+  return DateTime.fromMillis(dd).toFormat("hh:mm a");
 };
 export function bigNumbersToString(x: any) {
   let num = x;
