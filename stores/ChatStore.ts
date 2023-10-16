@@ -22,6 +22,9 @@ export class ChatStore {
       console.log(e);
     }
   };
+  @action removeChat = () =>{
+    this.chat = undefined
+  }
   @action getChat = async (id:string) => {
     try {
       const res = await axios.get(prefix + "chat/room/" + id);
