@@ -25,11 +25,11 @@ const Chat = observer(() => {
   const { user } = useInjection(Web3Store);
   const { chat, getChat, sendMessage, removeChat } = useInjection(ChatStore);
   const modalStore = useInjection(ModalStore);
-  const [isLightning, setIsLightning] = useState(false)
-  const [newMsgList, setNewMsgList] = useState<string[]>([]);
+  const [isLightning, setIsLightning] = useState(false);
+  const [newMsgList, setNewMsgList] = useState<any[]>([]);
   const startListening = () => {
     if (chat && !isLightning) {
-      setIsLightning(true)
+      setIsLightning(true);
       console.log("start listen 2", chat._id);
       socket.emit("join", { room: chat._id });
       socket.on("join", (chat) => {
@@ -38,8 +38,9 @@ const Chat = observer(() => {
       socket.on("connect_error", (e) => {
         console.log(e, "hi connect_error");
       });
-      socket.on("message", (chat) => {
-        console.log(chat, "hi message");
+      socket.on("message", (msg) => {
+        console.log(msg, "hi message");
+        setNewMsgList([...newMsgList, msg]);
       });
     }
   };
@@ -48,8 +49,10 @@ const Chat = observer(() => {
     socket.emit("leave", { room: chat._id });
     socket.off("join");
     socket.off("leave");
+    socket.off("message");
+    socket.off("connect_error");
     setMyHolds(undefined);
-    setIsLightning(false)
+    setIsLightning(false);
     removeChat();
   };
   useEffect(() => {
@@ -70,6 +73,8 @@ const Chat = observer(() => {
   useEffect(() => {
     if (chat) {
       console.log("id is: ", chat.owner);
+      setNewMsgList([]);
+      setNewMsgList(chat.messages);
       getHolders(chat.owner._id as string);
     }
   }, [chat]);
@@ -176,13 +181,14 @@ const Chat = observer(() => {
                   return (
                     <div
                       className={classNames(
-                        isEven(i)
+                        el.user.twitterId == user?.twitterId
                           ? style.openchat__my_message
                           : style.openchat__message_to_me
                       )}
+                      key={el._id}
                     >
-                      {el}
-                      <div className={style.openchat__time}>10:12</div>
+                      {el.text}
+                      <div className={style.openchat__time}>{el.date}</div>
                     </div>
                   );
                 })
