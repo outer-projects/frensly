@@ -45,10 +45,11 @@ const Chat = observer(() => {
   };
   const stopListen = () => {
     console.log("stop listen");
-    // socket.emit("leave", { room: chat._id });
-    // socket.off("join");
+    socket.emit("leave", { room: chat._id });
+    socket.off("join");
     socket.off("leave");
     setMyHolds(undefined);
+    setIsLightning(false)
     removeChat();
   };
   useEffect(() => {
