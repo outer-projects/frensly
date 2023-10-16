@@ -21,29 +21,29 @@ const Chat = observer(() => {
 
   const [myHolds, setMyHolds] = useState<any>(undefined);
   const messagesEndRef = useRef<any>(null);
-  const { getProfileUser, profileUser, getHolders, holders } =
-    useInjection(UserStore);
+  const { getHolders, holders } = useInjection(UserStore);
   const { user } = useInjection(Web3Store);
-  const { chat, getChat, sendMessage } = useInjection(ChatStore);
+  const { chat, getChat, sendMessage, removeChat } = useInjection(ChatStore);
   const modalStore = useInjection(ModalStore);
 
   const [newMsgList, setNewMsgList] = useState<string[]>([]);
   const startListening = () => {
-    
     console.log("start listen 2", chat._id);
     socket.emit("join", { room: chat._id });
     socket.on("join", (chat) => {
       console.log(chat, "hi join");
     });
-    // socket.on("message", (chat) => {
-    //   console.log(chat, "hi message");
-    // });
+    socket.on("message", (chat) => {
+      console.log(chat, "hi message");
+    });
   };
   const stopListen = () => {
     console.log("stop listen");
     socket.emit("leave", { room: chat._id });
     socket.off("join");
     socket.off("leave");
+    setMyHolds(undefined);
+    removeChat();
   };
   useEffect(() => {
     return () => stopListen();
