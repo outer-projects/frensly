@@ -2,7 +2,7 @@ import style from "../ponds.module.scss";
 import explore from "../../explore/explore.module.scss";
 import header from "../../layout/header.module.scss";
 import classNames from "classnames";
-import { ElementType, useEffect, useRef, useState } from "react";
+import { ElementType, useContext, useEffect, useRef, useState } from "react";
 import Write from "./write";
 import { observer } from "mobx-react";
 import { ModalStore } from "../../../stores/ModalStore";
@@ -12,17 +12,36 @@ import { useRouter } from "next/router";
 import { UserStore } from "../../../stores/UserStore";
 import Web3Store from "../../../stores/Web3Store";
 import { fromWeiToEth } from "../../../utils/utilities";
+import { SocketContext } from "../../../utils/socket";
+import { ChatStore } from "../../../stores/ChatStore";
 const Chat = observer(() => {
+  const socket = useContext(SocketContext);
   const [newMsg, setNewMsg] = useState("");
+  const [file, setFile] = useState<File | undefined>(undefined);
+
   const [myHolds, setMyHolds] = useState<any>(undefined);
   const messagesEndRef = useRef<any>(null);
   const { getProfileUser, profileUser, getHolders, holders } =
     useInjection(UserStore);
   const { user } = useInjection(Web3Store);
+  const { chat, getChat, sendMessage } = useInjection(ChatStore);
   const modalStore = useInjection(ModalStore);
 
   const [newMsgList, setNewMsgList] = useState<string[]>([]);
-  useEffect(() => {}, []);
+  const startListening = async () => {
+    socket.on("join", (chat) => {
+      console.log(chat, "hi join");
+    });
+    socket.emit("join", { room: chat._id });
+  };
+  const stopListen = () => {
+    socket.emit("leave", { room: chat._id })
+    socket.off("join");
+    socket.off("leave");
+  };
+  useEffect(() => {
+    return () => stopListen();
+  }, []);
   function isEven(n: number) {
     n = Number(n);
     return n === 0 || !!(n && !(n % 2));
@@ -32,15 +51,20 @@ const Chat = observer(() => {
   useEffect(() => {
     if (id) {
       console.log("id is: ", id);
-      getProfileUser(id as string);
+      getChat(id as string);
     }
   }, [id]);
   useEffect(() => {
-    if (profileUser) {
-      console.log("id is: ", profileUser._id);
-      getHolders(profileUser._id as string);
+    if (chat) {
+      console.log("id is: ", chat.owner);
+      getHolders(chat.owner._id as string);
     }
-  }, [profileUser]);
+  }, [chat]);
+  useEffect(() => {
+    if (myHolds) {
+      startListening();
+    }
+  }, [myHolds]);
   useEffect(() => {
     console.log(
       "user, holders: ",
@@ -54,7 +78,7 @@ const Chat = observer(() => {
         holders.filter((el) => el.user._id == user?.account._id)[0]
       );
       let myholding = holders.filter(
-        (el) => el.user._id == user?.account._id
+        (el) => el.user._id == user?.account._id && Number(el.amount) >= 1000000
       )[0];
       setMyHolds(myholding);
     }
@@ -161,7 +185,7 @@ const Chat = observer(() => {
               newMsg={newMsg}
               setNewMsg={setNewMsg}
               onSend={() => {
-                setNewMsgList([...newMsgList, newMsg]);
+                sendMessage(id as string, newMsg, file);
                 setTimeout(() => {
                   messagesEndRef.current?.scrollIntoView();
                 }, 10);

@@ -14,6 +14,7 @@ import { UserStore } from "../../stores/UserStore";
 import { fromWeiToEth } from "../../utils/utilities";
 import { useRouter } from "next/router";
 import FinanceRow from "../finance/financeRow";
+import { ChatStore } from "../../stores/ChatStore";
 const types = ["My Ponds", "My Activity", "My Holders", "My Holdings"];
 const Ponds = observer(() => {
   const [active, setActive] = useState(0);
@@ -27,9 +28,8 @@ const Ponds = observer(() => {
     holders,
     history,
     getHistory,
-    getMyChats,
-    myChats
   } = useInjection(UserStore);
+  const { getMyChats, myChats } = useInjection(ChatStore);
   useEffect(() => {
     if (user) {
       getHolders(user._id as string);
@@ -78,11 +78,7 @@ const Ponds = observer(() => {
           <div className={style.ponds__chat}>
             {myChats?.map((el) => {
               return (
-                <ChatItem
-                  key={el.owner._id}
-                  el={el.owner}
-                  amount={'1000000'}
-                />
+                <ChatItem key={el.owner._id} el={el.owner} amount={"1000000"} />
               );
             })}
           </div>
