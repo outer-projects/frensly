@@ -29,9 +29,9 @@ const Chat = observer(() => {
   const [newMsgList, setNewMsgList] = useState<string[]>([]);
   const startListening = () => {
     console.log("start listen 2", chat._id);
-    socket.emit("connect_error", { room: chat._id });
+    socket.emit("connect_error");
     socket.on("connect_error", (chat) => {
-      console.log(chat, "hi join");
+      console.log(chat, "hi connect_error");
     });
     // socket.on("message", (chat) => {
     //   console.log(chat, "hi message");
