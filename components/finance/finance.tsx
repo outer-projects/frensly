@@ -43,7 +43,7 @@ const Finance = observer(() => {
   const router = useRouter();
   const [claimValue, setClaimValue] = useState(0);
   const { user, frensly, address, checkAuth } = useInjection(Web3Store);
-  const { shares, holders, getShares, getHolders, portfolioValue } =
+  const { shares, holders, getShares, getHolders, portfolioValue, getKeys, keys } =
     useInjection(UserStore);
   const claim = async () => {
     try {
@@ -71,6 +71,7 @@ const Finance = observer(() => {
     if (user) {
       getShares(user?._id as string);
       getHolders(user?._id as string);
+      getKeys()
     }
   }, [user]);
   useEffect(() => {
@@ -78,6 +79,7 @@ const Finance = observer(() => {
       getClaim();
     }
   }, [frensly]);
+  console.log(keys);
   return (
     <div className={style.finance__page}>
       <Sidebar/>
