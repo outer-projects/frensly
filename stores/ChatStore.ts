@@ -25,8 +25,8 @@ export class ChatStore {
   @action getChat = async (id:string) => {
     try {
       const res = await axios.get(prefix + "chat/room/" + id);
-      console.log("chats:", res.data);
-      this.chat = res.data.rooms;
+      console.log("chat:", res.data);
+      this.chat = res.data.room;
     } catch (e) {
       console.log(e);
     }
