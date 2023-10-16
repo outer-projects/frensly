@@ -15,7 +15,6 @@ import { fromWeiToEth } from "../../../utils/utilities";
 const Chat = observer(() => {
   const [newMsg, setNewMsg] = useState("");
   const [myHolds, setMyHolds] = useState<any>(undefined);
-  const [visible, setVisible] = useState<boolean>(false);
 
   const { getProfileUser, profileUser, getHolders, holders } =
     useInjection(UserStore);
@@ -54,13 +53,13 @@ const Chat = observer(() => {
         "is everything ok?",
         holders.filter((el) => el.user._id == user?.account._id)[0]
       );
-      setMyHolds(holders.filter((el) => el.user._id == user?.account._id)[0]);
-      setVisible(true);
+      let myholding = holders.filter((el) => el.user._id == user?.account._id)[0]
+      setMyHolds(myholding);
     }
   }, [holders, user]);
   return (
     <>
-      {!visible ? (
+      {myHolds ? (
         <div className={style.openchat}>
           {" "}
           <div className={explore.explore__title}>
