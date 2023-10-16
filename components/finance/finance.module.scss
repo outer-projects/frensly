@@ -11,6 +11,10 @@
     margin-left: 0px;
   }
 }
+.invite__code__used {
+  border: 1px solid $green;
+  color: $green!important;
+}
 .invite__code {
   color: $black;
   font-family: "DMSans";

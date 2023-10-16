@@ -34,6 +34,9 @@ const Chat = observer(() => {
     socket.on("join", (chat) => {
       console.log(chat, "hi join");
     });
+    socket.on("message", (chat) => {
+      console.log(chat, "hi join");
+    });
   };
   const stopListen = () => {
     console.log("stop listen");
