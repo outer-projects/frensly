@@ -29,7 +29,7 @@ const Chat = observer(() => {
   const [isListening, setIsListening] = useState(false);
   const [newMsgList, setNewMsgList] = useState<string[]>([]);
   const startListening = () => {
-    if (!isListening && chat) {
+    if (chat) {
       setIsListening(true);
       console.log("start listen 2", chat._id);
       socket.emit("join", { room: chat._id });
