@@ -212,15 +212,14 @@
   align-self: flex-end;
 }
 .openchat__name {
-  font-size: 14px;
+  font-size: 12px;
   font-family: "DMSans";
-  font-weight: bold;
   margin-bottom: 8px;
 }
 .openchat__my_message__container {
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
+  align-items: flex-start;
 }
 .openchat__my_message {
   align-self: flex-end;
@@ -241,7 +240,7 @@
 .openchat__my_message__container {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: flex-end;
 }
 .openchat__message_to_me {
   align-self: flex-start;
