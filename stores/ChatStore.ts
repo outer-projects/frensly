@@ -36,10 +36,11 @@ export class ChatStore {
   }
   sendMessage = async (id:string, text:string, file?:File) => {
     const formdata = new FormData();
+    
     formdata.append("text", text);
     file && formdata.append("file", file);
     try {
-      const res = await axios.post(prefix + "chat/message/" + id);
+      const res = await axios.post(prefix + "chat/message/" + id, formdata);
       console.log("message sent:", res.data);
       
     } catch (e) {
