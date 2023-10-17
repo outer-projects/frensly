@@ -15,9 +15,10 @@ import ProgressBar from "../progressBar/progressBar";
 import { toWei } from "web3-utils";
 import { toast } from "react-toastify";
 const AuthBanner = observer(() => {
-  const { address, authStatus, frensly, user } = useInjection(Web3Store);
-  const { setActive, setInit } = useInjection(UserStore);
+  const { address, authStatus, frensly, user, checkAuth } = useInjection(Web3Store);
+  const { setActive, setInit, sendInviteCode } = useInjection(UserStore);
   const [title, setTitle] = useState("");
+  const [invite, setInvite] = useState("");
   const [stage, setStage] = useState("");
   const [opacity, setOpacity] = useState(false);
   useEffect(() => {
@@ -27,11 +28,13 @@ const AuthBanner = observer(() => {
       setStage("Authorization");
     } else if (user && !user?.account) {
       setStage("Connect");
-    } else if (user?.account) {
+    } else if (user && user?.account && !user?.isKeyConfirmed) {
+      setStage("Invite");
+    } else if (user?.account && user?.isKeyConfirmed) {
       setStage("Connected");
-    } 
-  }, [user, authStatus]);
-  console.log(user,stage,address);
+    }
+  }, [user, authStatus, address]);
+  console.log(user, stage, address);
   useEffect(() => {
     switch (stage) {
       case "Authorization":
@@ -43,14 +46,26 @@ const AuthBanner = observer(() => {
         setTitle("Creative economy onchain");
         setActive(1);
         return;
+      case "Invite":
+        setTitle("Creative economy onchain");
+        setActive(1);
+        return;
       case "Connected":
         setTitle("Create my pond");
         setActive(2);
         return;
+
       default:
         return;
     }
   }, [stage]);
+  const postCode = () => {
+    sendInviteCode(invite).then((res)=>{
+      if(res) {
+        checkAuth()
+      }
+    })
+  };
   const init = async () => {
     if (address?.toLowerCase() !== user?.account?.address)
       return toast.error("Address is not assigned to this account");
@@ -78,7 +93,7 @@ const AuthBanner = observer(() => {
   return (
     <>
       {stage !== "Connect wallet" ? (
-        <div className={style.banner} style={{opacity: opacity ? 1 : 0}}>
+        <div className={style.banner} style={{ opacity: opacity ? 1 : 0 }}>
           <img src="../logo.svg" className={style.banner__logo} />
           <div
             className={classNames(
@@ -108,6 +123,20 @@ const AuthBanner = observer(() => {
                 </div>
               </>
             )}
+            {stage == "Invite" && (
+              <>
+                <div
+                  className={classNames(
+                    style.banner__join,
+                    style.banner__select
+                  )}
+                >
+                  We are still in closed beta.
+                  <br /> To join service please write your invite code
+                </div>
+              </>
+            )}
+            F
             {stage == "Connected" && (
               <>
                 <div className={style.banner__join}>
@@ -120,6 +149,21 @@ const AuthBanner = observer(() => {
                   Buy for 0.0001 ETH 1 share of twitter name
                 </div>
               </>
+            )}
+            {stage == "Invite" && (
+              <div className={style.banner__invite}>
+                <input
+                  className={style.banner__code}
+                  value={invite}
+                  placeholder="Your invite code"
+                  onChange={(e) => {
+                    setInvite(e.target.value);
+                  }}
+                />
+                <div className={style.banner__post} onClick={postCode}>
+                  Post
+                </div>
+              </div>
             )}
             {stage == "Authorization" && (
               <div>
@@ -137,7 +181,6 @@ const AuthBanner = observer(() => {
                 </a>
               </div>
             )}
-
             <div
               className={style.banner__early}
               style={{ display: stage == "Connect" ? "flex" : "none" }}
@@ -147,7 +190,6 @@ const AuthBanner = observer(() => {
                 The wallet can't be changed
               </div>
             </div>
-
             {stage == "Connected" && (
               <div className={style.banner__early}>
                 <button

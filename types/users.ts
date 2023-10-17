@@ -33,6 +33,7 @@ export interface IProfile {
   twitterHandle: string;
   twitterDescription: string;
   regDate: Date;
+  isKeyConfirmed?: boolean;
   _id: string;
   isFollowing: string[];
   isFollowedBy: string[];

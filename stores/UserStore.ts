@@ -41,9 +41,19 @@ export class UserStore {
     try {
       const res = await axios.get(prefix + "user/user/keys");
       console.log(res.data);
-      this.keys = res.data
+      this.keys = res.data;
     } catch (e) {
       console.log(e);
+    }
+  };
+  @action sendInviteCode = async (key:string) => {
+    try {
+      const res = await axios.post(prefix + "user/key/" + key);
+      console.log(res.data);
+      return true
+    } catch (e) {
+      console.log(e);
+      return false
     }
   };
   @action getActivity = async (id: string) => {

@@ -10,6 +10,47 @@
 .banner__select {
   margin-bottom: 56px !important;
 }
+.banner__invite {
+  width: 568px;
+  display: flex;
+  justify-content: flex-end;
+}
+.banner__code {
+  border-radius: 16px;
+  border: 1px solid $green;
+  width: 100%;
+  height: 72px;
+  display: flex;
+  align-items: center;
+  padding-left: 16px;
+  padding-right: 16px;
+  background: #f8f8f8;
+  font-family: "DMSans";
+  font-size: 16px;
+  color: $black;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
+  letter-spacing: -0.16px;
+  &::placeholder {
+    color: $grey;
+  }
+}
+.banner__post {
+  border-radius: 100px;
+  background: $green;
+  display: flex;
+  height: 40px;
+  padding: 16px 24px;
+  justify-content: center;
+  align-items: center;
+  color: $black;
+  font-family: 'DMSans';
+  font-size: 16px;
+  font-weight: bold;
+  letter-spacing: -0.16px;
+  margin-top: -56px;
+}
 .banner__center {
   width: 100vw;
   height: 100vh;
