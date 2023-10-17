@@ -13,6 +13,7 @@
 .banner__invite {
   width: 568px;
   display: flex;
+  flex-direction: column;
   justify-content: flex-end;
 }
 .banner__code {
