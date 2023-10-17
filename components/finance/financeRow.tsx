@@ -9,7 +9,7 @@ import { UserStore } from "../../stores/UserStore";
 import Web3Store from "../../stores/Web3Store";
 
 const FinanceRow = observer(
-  ({ el, amount }: { el: IAccount; amount?: string }) => {
+  ({ el, amount, price }: { el: IAccount; amount?: string, price:number }) => {
     const [usdPrice, setUsdPrice] = useState(0);
     const { user } = useInjection(Web3Store);
     const { getPriceInUsd, ethCurrency } = useInjection(UserStore);
@@ -40,7 +40,7 @@ const FinanceRow = observer(
           <div className={style.explore__user__right}>
             <div className={style.explore__user__name}>
               <img src="../icons/Ethereum.svg" />
-              {fromWeiToEth(el.currentPrice)} ETH
+              {fromWeiToEth(price ? price : el.currentPrice)} ETH
             </div>
             <div className={style.explore__user__balance__usd}>${usdPrice}</div>
           </div>

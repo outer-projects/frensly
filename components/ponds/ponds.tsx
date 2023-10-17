@@ -79,11 +79,11 @@ const Ponds = observer(() => {
             {myChats?.map((el) => {
               return (
                 <ChatItem
-                  messages={el.messages}
-                  key={el.owner._id}
-                  chatId={el._id}
-                  el={el.owner}
-                  amount={"1000000"}
+                  messages={el.room.messages}
+                  key={el.room.owner._id}
+                  chatId={el.room._id}
+                  el={el.room.owner}
+                  amount={el.ownerShareAmount}
                 />
               );
             })}
@@ -102,7 +102,15 @@ const Ponds = observer(() => {
             {holders?.map((el) => {
               console.log(el);
               return (
-                <FinanceRow key={el.user._id} el={el.user} amount={el.amount} />
+                <FinanceRow
+                  key={el.user._id}
+                  el={el.user}
+                  amount={el.amount}
+                  price={
+                    Number((Number(el.amount) / 10 ** 6).toFixed(2)) *
+                    Number(user?.account.currentPrice)
+                  }
+                />
               );
               // return <></>;
             })}
@@ -112,7 +120,17 @@ const Ponds = observer(() => {
           <div className={style.ponds__chat}>
             {shares?.map((el) => {
               console.log(el);
-              return <FinanceRow key={el.subject._id} el={el.subject} amount={el.amount}/>;
+              return (
+                <FinanceRow
+                  key={el.subject._id}
+                  el={el.subject}
+                  amount={el.amount}
+                  price={
+                    Number((Number(el.amount) / 10 ** 6).toFixed(2)) *
+                    Number(el.subject.currentPrice)
+                  }
+                />
+              );
               // return <></>;
             })}
           </div>

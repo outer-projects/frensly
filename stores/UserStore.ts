@@ -62,7 +62,9 @@ export class UserStore {
     query.append("types", "BUY");
     query.append("types", "INIT");
     try {
-      const res = await axios.get(prefix + "user/history/subject/" + id + "?" + query.toString());
+      const res = await axios.get(
+        prefix + "user/history/subject/" + id + "?" + query.toString()
+      );
       console.log(res.data);
       this.activity = res.data;
     } catch (e) {
