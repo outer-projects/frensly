@@ -21,7 +21,9 @@ const AuthBanner = observer(() => {
   const [title, setTitle] = useState("");
   const [invite, setInvite] = useState("");
   const [stage, setStage] = useState("");
-  const [opacity, setOpacity] = useState(false);
+  const [opacity, setOpacity] = useState(false);  
+  const [activeCode, setActiveCode] = useState(false);
+
   useEffect(() => {
     if (user?.account && !address) {
       setStage("Connect wallet");
@@ -64,6 +66,8 @@ const AuthBanner = observer(() => {
     sendInviteCode(invite).then((res) => {
       if (res) {
         checkAuth();
+      } else {
+        toast.error("Code is not correct")
       }
     });
   };
@@ -153,8 +157,10 @@ const AuthBanner = observer(() => {
             {stage == "Invite" && (
               <div className={style.banner__invite}>
                 <input
-                  className={style.banner__code}
+                  className={classNames(style.banner__code, activeCode && style.banner__code__active)}
                   value={invite}
+                  onFocus={()=>{setActiveCode(true)}}
+                  onBlur={()=>{setActiveCode(false)}}
                   placeholder="Your invite code"
                   onChange={(e) => {
                     setInvite(e.target.value);
