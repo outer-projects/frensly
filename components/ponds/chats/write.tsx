@@ -29,34 +29,49 @@ const Write = ({
     };
   }, [newMsg]);
   return (
-    <div className={style.write}>
-      <input
-        type="file"
-        accept=".jpg,.jpeg,.webm,.png, .gif"
-        className={profile.twitter__send__img}
-        onChange={(e) => e?.target?.files && setFile(e?.target?.files[0])}
-      />
-      <img src="../icons/ImageAdd.svg" style={{ cursor: "pointer" }} />
+    <>
+      <div className={style.write}>
+        <input
+          type="file"
+          accept=".jpg,.jpeg,.webm,.png, .gif"
+          className={profile.twitter__send__img}
+          style={{ transform: "translateY(20px)" }}
+          onChange={(e) => e?.target?.files && setFile(e?.target?.files[0])}
+        />
+        <img src="../icons/ImageAdd.svg" style={{ cursor: "pointer" }} />
 
-      <input
-        className={style.write__input}
-        value={newMsg}
-        onChange={(e) => {
-          setNewMsg(e.target.value);
-        }}
-        placeholder="Write something"
-      />
-      <img
-        src="../icons/twitterUI/Send.svg"
-        style={{ cursor: "pointer" }}
-        onClick={() => {
-          if (newMsg !== "") {
-            setNewMsg("");
-            onSend();
-          }
-        }}
-      />
-    </div>
+        <input
+          className={style.write__input}
+          value={newMsg}
+          onChange={(e) => {
+            setNewMsg(e.target.value);
+          }}
+          placeholder="Write something"
+        />
+        <img
+          src="../icons/twitterUI/Send.svg"
+          style={{ cursor: "pointer" }}
+          onClick={() => {
+            if (newMsg !== "") {
+              setNewMsg("");
+              onSend();
+            }
+          }}
+        />
+      </div>
+      {file && (
+        <div className={profile.twitter__image__name}>
+          {file?.name}
+          <img
+            src="../icons/Close.svg"
+            style={{ cursor: "pointer" }}
+            onClick={() => {
+              setFile(undefined);
+            }}
+          />
+        </div>
+      )}
+    </>
   );
 };
 export default Write;

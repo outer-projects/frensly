@@ -39,7 +39,7 @@ const MessageSend = observer(({ id }: { id?: string }) => {
             type="file"
             accept=".jpg,.jpeg,.webm,.png"
             className={style.twitter__send__img}
-            style={{transform:'translateY(20px)'}}
+            
             onChange={(e) => e?.target?.files && setImage(e?.target?.files[0])}
           />
           <input

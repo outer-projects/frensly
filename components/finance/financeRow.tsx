@@ -23,7 +23,7 @@ const FinanceRow = observer(
       <Link href={"/profile/" + el.profile?.twitterId}>
         <div className={style.explore__user}>
           <div className={style.explore__user__left}>
-            <img src={el.profile?.avatar} />
+            <img src={el?.profile?.avatar} />
             <div className={style.explore__user__left__text}>
               <div className={style.explore__user__share}>
                 {/* @ts-ignore */}

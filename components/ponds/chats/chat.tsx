@@ -40,7 +40,7 @@ const Chat = observer(() => {
       });
       socket.on("message", (msg) => {
         console.log(msg, "hi message");
-        setNewMsgList([...newMsgList, msg]);
+        setNewMsgList(oldArray => [...oldArray, msg]);
       });
     }
   };
@@ -203,6 +203,7 @@ const Chat = observer(() => {
                           {getDate(el.date)}
                         </div>
                       </div>
+                      {el.media && <img src={el.media} className={style.openchat__img}/>}
                     </div>
                   );
                 })
