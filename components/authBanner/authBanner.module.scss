@@ -14,6 +14,8 @@
   width: 568px;
   display: flex;
   flex-direction: column;
+  align-items: flex-end;
+  padding-right: 16px;
   justify-content: flex-end;
 }
 .banner__code {
