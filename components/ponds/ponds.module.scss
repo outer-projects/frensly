@@ -232,11 +232,13 @@
   letter-spacing: -0.12px;
   margin-left: 16px;
   align-self: flex-end;
+  white-space: nowrap;
 }
 .openchat__name {
   font-size: 12px;
   font-family: "DMSans";
   margin-bottom: 0px;
+  width: 240px;
 }
 .openchat__my_message__container {
   display: flex;

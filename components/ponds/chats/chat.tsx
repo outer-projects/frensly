@@ -124,7 +124,7 @@ const Chat = observer(() => {
                   <div className={style.openchat__user__name}>
                     {chat?.owner?.twitterName}
                   </div>
-                  <div className={style.openchat__status}>Online</div>
+                  <div className={style.openchat__status}></div>
                 </div>
               </div>
               <div className={style.openchat__user__right}>
@@ -185,28 +185,36 @@ const Chat = observer(() => {
                           ? style.openchat__my_message__container
                           : style.openchat__message_to_me__container
                       )}
+                      key={el._id}
                     >
                       {el.media && (
                         <img src={el.media} className={style.openchat__img} />
                       )}
-                      {el.user.twitterId !== user?.twitterId && (
-                        <div className={style.openchat__name}>
-                          {el.user.twitterName}
+                      <div className={style.openchat__name}>
+                        {el.user.twitterId !== user?.twitterId && (
+                          <div>{el.user.twitterName}</div>
+                        )}
+                        {el.text == "" && (
+                          <div className={style.openchat__time}>
+                            {getDate(el.date)}
+                          </div>
+                        )}
+                      </div>
+                      {el.text !== "" && (
+                        <div
+                          className={classNames(
+                            el.user.twitterId == user?.twitterId
+                              ? style.openchat__my_message
+                              : style.openchat__message_to_me
+                          )}
+                          key={el._id}
+                        >
+                          {el.text}
+                          <div className={style.openchat__time}>
+                            {getDate(el.date)}
+                          </div>
                         </div>
                       )}
-                      <div
-                        className={classNames(
-                          el.user.twitterId == user?.twitterId
-                            ? style.openchat__my_message
-                            : style.openchat__message_to_me
-                        )}
-                        key={el._id}
-                      >
-                        {el.text}
-                        <div className={style.openchat__time}>
-                          {getDate(el.date)}
-                        </div>
-                      </div>
                     </div>
                   );
                 })
@@ -234,7 +242,7 @@ const Chat = observer(() => {
               onSend={() => {
                 sendMessage(id as string, newMsg, file);
                 console.log(messagesEndRef);
-                setFile(undefined)
+                setFile(undefined);
                 setTimeout(() => {
                   messagesEndRef.current?.scrollTo(500, 0);
                 }, 10);

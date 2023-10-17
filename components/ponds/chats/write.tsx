@@ -52,7 +52,7 @@ const Write = ({
           src="../icons/twitterUI/Send.svg"
           style={{ cursor: "pointer" }}
           onClick={() => {
-            if (newMsg !== "") {
+            if (newMsg !== ""||file) {
               setNewMsg("");
               onSend();
             }
