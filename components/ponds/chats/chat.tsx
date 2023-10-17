@@ -122,12 +122,12 @@ const Chat = observer(() => {
                   src={chat?.owner?.avatar}
                 />
                 <div className={style.openchat__user__left__text}>
-                  <Link href={"../../profile/" + chat?.owner.twitterId}>
+                  
                     <div
                       className={style.openchat__user__name}
                       style={{ cursor: "pointer" }}
                     >
-                      {chat?.owner?.twitterName}
+                      <Link href={"../../profile/" + chat?.owner.twitterId}>{chat?.owner?.twitterName}</Link>
                       <span>
                         <a
                           href={
@@ -140,7 +140,7 @@ const Chat = observer(() => {
                         </a>
                       </span>
                     </div>
-                  </Link>
+                  
                   <div className={style.openchat__status}></div>
                 </div>
               </div>
