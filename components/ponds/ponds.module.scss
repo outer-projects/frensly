@@ -198,7 +198,7 @@
   align-items: flex-end;
   width: 100%;
   margin: 25px 10px;
-  height: 580px;
+  height: 630px;
   flex: 1;
   overflow-y: auto;
   &::-webkit-scrollbar {
@@ -211,17 +211,14 @@
     border-radius: 9999px;
     background-color: #aaaaaa;
   }
-  @media (max-height:1050px) {
+  @media (max-height:1080px) {
+    height: 550px;
+  }
+  @media (max-height:980px) {
     height: 450px;
   }
-  @media (max-height:950px) {
+  @media (max-height:870px) {
     height: 350px;
-  }
-  @media (max-height:850px) {
-    height: 250px;
-  }
-  @media (max-height:750px) {
-    height: 300px;
   }
 }
 .openchat__time {
@@ -234,11 +231,21 @@
   align-self: flex-end;
   white-space: nowrap;
 }
+.openchat__button__info {
+  border: 1px solid $green!important;
+  background: transparent!important;
+  width: 75px;
+  height: 48px;
+  margin-right: 8px;
+}
 .openchat__name {
   font-size: 12px;
   font-family: "DMSans";
   margin-bottom: 0px;
   width: 240px;
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
 }
 .openchat__my_message__container {
   display: flex;
@@ -324,8 +331,20 @@
   color: $black;
   font-size: 20px;
   font-weight: bold;
+  display: flex;
+  align-items: center;
   line-height: 28px; /* 140% */
   letter-spacing: -0.2px;
+  span {
+    color: $grey;
+    margin-left: 4px;
+    font-size: 14px;
+    font-weight: 400;
+    font-family: "DMSans";
+    line-height: 20px;
+    letter-spacing: -0.14px;
+    cursor: pointer;
+  }
 }
 .chat__share {
   display: flex;

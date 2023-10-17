@@ -5,6 +5,7 @@ import { RootStore } from "./RootStore";
 import { IAccount, IProfile } from "../types/users";
 import axios from "axios";
 import { prefix } from "../utils/config";
+import { toast } from "react-toastify";
 
 @injectable()
 export class ChatStore {
@@ -43,8 +44,10 @@ export class ChatStore {
       const res = await axios.post(prefix + "chat/message/" + id, formdata);
       console.log("message sent:", res.data);
       
-    } catch (e) {
-      console.log(e);
+    } catch (e:any) {
+      if(e?.responce.status == 413) {
+        toast.error("Image is too large. Max size is 2mb")
+      }
     }
   }
 }

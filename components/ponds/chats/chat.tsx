@@ -14,6 +14,7 @@ import Web3Store from "../../../stores/Web3Store";
 import { fromWeiToEth, getDate } from "../../../utils/utilities";
 import { SocketContext } from "../../../utils/socket";
 import { ChatStore } from "../../../stores/ChatStore";
+import Link from "next/link";
 const Chat = observer(() => {
   const socket = useContext(SocketContext);
   const [newMsg, setNewMsg] = useState("");
@@ -110,9 +111,9 @@ const Chat = observer(() => {
       {myHolds ? (
         <div className={style.openchat}>
           {" "}
-          <div className={explore.explore__title}>
+          {/* <div className={explore.explore__title}>
             {chat?.owner?.twitterName} pond
-          </div>
+          </div> */}
           <div className={style.openchat__info}>
             <div className={style.openchat__user}>
               <div className={style.openchat__user__left}>
@@ -121,13 +122,37 @@ const Chat = observer(() => {
                   src={chat?.owner?.avatar}
                 />
                 <div className={style.openchat__user__left__text}>
-                  <div className={style.openchat__user__name}>
-                    {chat?.owner?.twitterName}
-                  </div>
+                  <Link href={"../../profile/" + chat?.owner.twitterId}>
+                    <div
+                      className={style.openchat__user__name}
+                      style={{ cursor: "pointer" }}
+                    >
+                      {chat?.owner?.twitterName}
+                      <span>
+                        <a
+                          href={
+                            "http://twitter.com/" + chat?.owner?.twitterHandle
+                          }
+                        >
+                          @{chat?.owner?.twitterHandle}
+                        </a>
+                      </span>
+                    </div>
+                  </Link>
                   <div className={style.openchat__status}></div>
                 </div>
               </div>
               <div className={style.openchat__user__right}>
+                <Link href={"../../activity/" + chat.owner.twitterId}>
+                  <button
+                    className={classNames(
+                      header.connect__button,
+                      style.openchat__button__info
+                    )}
+                  >
+                    Info
+                  </button>
+                </Link>
                 <button
                   className={classNames(
                     header.connect__button,

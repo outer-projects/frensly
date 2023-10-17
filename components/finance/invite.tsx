@@ -18,11 +18,11 @@ import { getDate } from "../../utils/utilities";
 const Invite = observer(() => {
   const router = useRouter();
   const codes = ["fren-djjd89200", "fren-279891jsyu", "fren-279891jsyu"];
-  const {user} = useInjection(Web3Store)
-  const {getKeys, keys} = useInjection(UserStore)
+  const { user } = useInjection(Web3Store);
+  const { getKeys, keys } = useInjection(UserStore);
   useEffect(() => {
     if (user) {
-      getKeys()
+      getKeys();
     }
   }, [user]);
   return (
@@ -33,19 +33,30 @@ const Invite = observer(() => {
         <div className={explore.explore__title}>Invite codes</div>
         <div className={style.finance}>
           <User />
+
           {keys.map((el) => {
             return (
-              <div className={classNames(style.invite__code, el.isUsed && style.invite__code__used)}>
+              <div
+                className={classNames(
+                  style.invite__code,
+                  el.isUsed && style.invite__code__used
+                )}
+              >
                 {el.key}
-                {/* @ts-ignore */}
-                <CopyToClipboard
-                  text={el.key}
-                  onCopy={() => {
-                    toast.success("Code is copied successfully");
-                  }}
-                >
-                  {!el.isUsed && <img src="../icons/copy.svg" style={{cursor:'pointer'}} />}
-                </CopyToClipboard>
+
+                {!el.isUsed && (
+                  <CopyToClipboard
+                    text={el.key}
+                    onCopy={() => {
+                      toast.success("Code is copied successfully");
+                    }}
+                  >
+                    <img
+                      src="../icons/copy.svg"
+                      style={{ cursor: "pointer" }}
+                    />
+                  </CopyToClipboard>
+                )}
               </div>
             );
           })}
@@ -53,5 +64,5 @@ const Invite = observer(() => {
       </div>
     </div>
   );
-})
+});
 export default Invite;

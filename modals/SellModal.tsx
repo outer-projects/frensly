@@ -36,7 +36,7 @@ export const SellModal = observer(({ key, data, idx }: modalProps) => {
         )
         .send({
           from: address,
-          value: currentPrice,
+          // value: currentPrice,
         });
       console.log(res);
       modalStore.hideAllModals();

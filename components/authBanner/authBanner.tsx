@@ -171,7 +171,7 @@ const AuthBanner = observer(() => {
                   style={{ cursor: "pointer",transform:'translateX(-16px)' }}
                   onClick={postCode}
                 >
-                  Post
+                  Enter
                 </div>
               </div>
             )}
