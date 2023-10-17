@@ -160,7 +160,11 @@ const AuthBanner = observer(() => {
                     setInvite(e.target.value);
                   }}
                 />
-                <div className={style.banner__post} onClick={postCode}>
+                <div
+                  className={style.banner__post}
+                  style={{ cursor: "pointer",transform:'translateX(-16px)' }}
+                  onClick={postCode}
+                >
                   Post
                 </div>
               </div>
