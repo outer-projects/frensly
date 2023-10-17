@@ -153,6 +153,9 @@
   margin-top: 32px;
   margin-left: 24px;
   margin-right: 24px;
+  @media (max-height: 750px) {
+    display: none;
+  }
 }
 .openchat__val {
   display: flex;
@@ -162,7 +165,10 @@
   font-family: "DMSans";
   margin-top: 32px;
   width: 616px;
-  height: calc(100vh - 75px);
+  height: calc(100vh - 110px);
+  @media (max-height: 671px) {
+    height: 100vh;
+  }
 }
 .openchat__close {
   display: flex;
@@ -192,7 +198,7 @@
   align-items: flex-end;
   width: 100%;
   margin: 25px 10px;
-  height: 30vh;
+  height: 580px;
   flex: 1;
   overflow-y: auto;
   &::-webkit-scrollbar {
@@ -204,6 +210,18 @@
     background-clip: padding-box;
     border-radius: 9999px;
     background-color: #aaaaaa;
+  }
+  @media (max-height:1050px) {
+    height: 450px;
+  }
+  @media (max-height:950px) {
+    height: 350px;
+  }
+  @media (max-height:850px) {
+    height: 250px;
+  }
+  @media (max-height:750px) {
+    height: 300px;
   }
 }
 .openchat__time {
@@ -223,7 +241,8 @@
 .openchat__my_message__container {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: flex-end;
+  width: 100%;
 }
 .openchat__my_message {
   align-self: flex-end;
@@ -241,10 +260,11 @@
   background: #effdde;
   margin-bottom: 16px;
 }
-.openchat__my_message__container {
+.openchat__message_to_me__container {
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
+  align-items: flex-start;
+  width: 100%;
 }
 .openchat__message_to_me {
   align-self: flex-start;

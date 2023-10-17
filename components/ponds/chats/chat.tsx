@@ -234,6 +234,7 @@ const Chat = observer(() => {
               onSend={() => {
                 sendMessage(id as string, newMsg, file);
                 console.log(messagesEndRef);
+                setFile(undefined)
                 setTimeout(() => {
                   messagesEndRef.current?.scrollTo(500, 0);
                 }, 10);
