@@ -34,7 +34,7 @@ const UserActivity = observer(() => {
   const router = useRouter();
   const { id } = router.query;
   useEffect(() => {
-    if (currentType!==undefined) {
+    if (currentType !== undefined) {
       setActive(currentType);
     }
   }, [currentType]);
@@ -95,14 +95,34 @@ const UserActivity = observer(() => {
         {active == 0 && (
           <div className={style.ponds__chat}>
             {holders?.map((el) => {
-              return <FinanceRow key={el.user._id} el={el.user} amount={el.amount}/>;
+              return (
+                <FinanceRow
+                  key={el.user._id}
+                  el={el.user}
+                  amount={el.amount}
+                  price={
+                    Number((Number(el.amount) / 10 ** 6).toFixed(2)) *
+                    Number(profileUser?.account.currentPrice)
+                  }
+                />
+              );
             })}
           </div>
         )}
         {active == 1 && (
           <div className={style.ponds__chat}>
             {shares?.map((el) => {
-              return <FinanceRow key={el.subject._id} el={el.subject} amount={el.amount}/>;
+              return (
+                <FinanceRow
+                  key={el.subject._id}
+                  el={el.subject}
+                  amount={el.amount}
+                  price={
+                    Number((Number(el.amount) / 10 ** 6).toFixed(2)) *
+                    Number(el.subject.currentPrice)
+                  }
+                />
+              );
             })}
           </div>
         )}

@@ -47,7 +47,7 @@ const Header = observer(() => {
   return (
     <div className={style.header__container}>
       <header className={style.header}>
-        <img src="../logo.svg" />
+        <Link href={'../../feed'}><img src="../logo.svg" /></Link>
         <div className={style.header__row}>
           {headerText.map((el, i) => {
             console.log(el.link == "/profile");

@@ -120,14 +120,20 @@ const Finance = observer(() => {
           {active == 1 && (
             <div className={style.finance__stats}>
               {holders?.map((el) => {
-                return <FinanceRow el={el.user} amount={el.amount}/>;
+                return <FinanceRow el={el.user} amount={el.amount} price={
+                  Number((Number(el.amount) / 10 ** 6).toFixed(2)) *
+                  Number(user?.account.currentPrice)
+                }/>;
               })}
             </div>
           )}
           {active == 2 && (
             <div className={style.finance__stats}>
               {shares?.map((el) => {
-                return <FinanceRow el={el.subject} amount={el.amount}/>;
+                return <FinanceRow el={el.subject} amount={el.amount} price={
+                  Number((Number(el.amount) / 10 ** 6).toFixed(2)) *
+                  Number(el.subject.currentPrice)
+                }/>;
               })}
             </div>
           )}

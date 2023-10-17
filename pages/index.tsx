@@ -1,10 +1,6 @@
 import { observer } from "mobx-react";
 import type { NextPage } from "next";
 import style from "./home.module.scss";
-import AuthBanner from "../components/authBanner/authBanner";
-import { useInjection } from "inversify-react";
-import Web3Store from "../stores/Web3Store";
-import { UserStore } from "../stores/UserStore";
 import { useEffect } from "react";
 import Head from "next/head";
 import { useRouter } from "next/router";

@@ -211,13 +211,13 @@
     border-radius: 9999px;
     background-color: #aaaaaa;
   }
-  @media (max-height:1080px) {
+  @media (max-height: 1080px) {
     height: 550px;
   }
-  @media (max-height:980px) {
+  @media (max-height: 980px) {
     height: 450px;
   }
-  @media (max-height:870px) {
+  @media (max-height: 870px) {
     height: 350px;
   }
 }
@@ -236,8 +236,8 @@
   align-items: center;
 }
 .openchat__button__info {
-  border: 1px solid $green!important;
-  background: transparent!important;
+  border: 1px solid $green !important;
+  background: transparent !important;
   width: 75px;
   height: 48px;
   margin-right: 8px;
@@ -296,6 +296,17 @@
 }
 .openchat__holders {
   display: flex;
+  align-items: center;
+}
+.openchat__own {
+  padding-left: 16px;
+  padding-right: 16px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  border-radius: 16px;
+  background: #f8f8f8;
+  display: flex;
+  justify-content: center;
   align-items: center;
 }
 .openchat__shares {

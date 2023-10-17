@@ -19,15 +19,23 @@ const Chat = observer(() => {
   const socket = useContext(SocketContext);
   const [newMsg, setNewMsg] = useState("");
   const [file, setFile] = useState<File | undefined>(undefined);
-
+  const [opacity, setOpacity] = useState(false);
   const [myHolds, setMyHolds] = useState<any>(undefined);
   const messagesEndRef = useRef<any>(null);
-  const { getHolders, holders } = useInjection(UserStore);
+  const { getHolders, holders, setCurrentType } = useInjection(UserStore);
   const { user } = useInjection(Web3Store);
   const { chat, getChat, sendMessage, removeChat } = useInjection(ChatStore);
   const modalStore = useInjection(ModalStore);
   const [isLightning, setIsLightning] = useState(false);
   const [newMsgList, setNewMsgList] = useState<any[]>([]);
+  useEffect(() => {
+    let tt = setTimeout(() => {
+      setOpacity(true);
+    }, 1000);
+    return () => {
+      clearTimeout(tt);
+    };
+  }, []);
   const startListening = () => {
     if (chat && !isLightning) {
       setIsLightning(true);
@@ -122,25 +130,29 @@ const Chat = observer(() => {
                   src={chat?.owner?.avatar}
                 />
                 <div className={style.openchat__user__left__text}>
-                  
-                    <div
-                      className={style.openchat__user__name}
-                      style={{ cursor: "pointer" }}
+                  <div
+                    className={style.openchat__user__name}
+                    style={{ cursor: "pointer" }}
+                  >
+                    <Link
+                      href={"../../profile/" + chat?.owner.twitterId}
+                      style={{ color: "#151614" }}
                     >
-                      <Link href={"../../profile/" + chat?.owner.twitterId}>{chat?.owner?.twitterName}</Link>
-                      <span>
-                        <a
-                          href={
-                            "https://twitter.com/" + chat?.owner?.twitterHandle
-                          }
-                          rel="noreferrer"
-                          target="_blank"
-                        >
-                          @{chat?.owner?.twitterHandle}
-                        </a>
-                      </span>
-                    </div>
-                  
+                      {chat?.owner?.twitterName}
+                    </Link>
+                    <span>
+                      <a
+                        href={
+                          "https://twitter.com/" + chat?.owner?.twitterHandle
+                        }
+                        rel="noreferrer"
+                        target="_blank"
+                      >
+                        @{chat?.owner?.twitterHandle}
+                      </a>
+                    </span>
+                  </div>
+
                   <div className={style.openchat__status}></div>
                 </div>
               </div>
@@ -171,8 +183,10 @@ const Chat = observer(() => {
               </div>
             </div>
             <div className={style.openchat__row}>
-              <div className={style.openchat__shares}>
-                You own {Number(myHolds?.amount) / 10 ** 6} shares
+              <div className={style.openchat__own}>
+                <div className={style.openchat__shares}>
+                  You own {Number(myHolds?.amount) / 10 ** 6} shares
+                </div>
               </div>
               <div className={style.openchat__val}>
                 {" "}
@@ -189,11 +203,22 @@ const Chat = observer(() => {
               <div className={style.openchat__holders}>
                 <div
                   className={style.openchat__shares}
-                  style={{ marginRight: "17px" }}
+                  style={{ marginRight: "17px", cursor: "pointer" }}
+                  onClick={() => {
+                    setCurrentType(0);
+                    router.push("../../activity/" + chat?.owner?.twitterId);
+                  }}
                 >
                   <span>{chat?.owner?.account?.myHolders?.length}</span> Holders
                 </div>
-                <div className={style.openchat__shares}>
+                <div
+                  className={style.openchat__shares}
+                  style={{ cursor: "pointer" }}
+                  onClick={() => {
+                    setCurrentType(1);
+                    router.push("../../activity/" + chat?.owner?.twitterId);
+                  }}
+                >
                   <span>{chat?.owner?.account?.othersShares?.length}</span>{" "}
                   Holding
                 </div>
@@ -278,7 +303,10 @@ const Chat = observer(() => {
           </div>
         </div>
       ) : (
-        <div className={style.openchat__close}>
+        <div
+          className={style.openchat__close}
+          style={{ opacity: opacity ? 1 : 0 }}
+        >
           You are not allowed to enter this chat
         </div>
       )}

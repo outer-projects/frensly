@@ -15,7 +15,7 @@ const FinanceRow = observer(
     const { getPriceInUsd, ethCurrency } = useInjection(UserStore);
     useEffect(() => {
       if (el && ethCurrency !== 0) {
-        setUsdPrice(getPriceInUsd(el.currentPrice));
+        setUsdPrice(getPriceInUsd(price ? price.toString() : el.currentPrice));
       }
     }, [el, ethCurrency]);
 

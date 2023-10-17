@@ -37,7 +37,7 @@ const ChatItem = observer(
                 <div>
                   {Number(amount ? amount : el?.account?.sharesAmount) /
                     10 ** 6}{" "}
-                  share
+                  shares
                 </div>
               </div>
               <div className={style.chat__name}>{el?.twitterName}</div>
