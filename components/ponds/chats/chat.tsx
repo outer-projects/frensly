@@ -164,10 +164,10 @@ const Chat = observer(() => {
                   className={style.openchat__shares}
                   style={{ marginRight: "17px" }}
                 >
-                  <span>{chat?.owner?.account.myHolders.length}</span> Holders
+                  <span>{chat?.owner?.account?.myHolders?.length}</span> Holders
                 </div>
                 <div className={style.openchat__shares}>
-                  <span>{chat?.owner?.account.othersShares.length}</span>{" "}
+                  <span>{chat?.owner?.account?.othersShares?.length}</span>{" "}
                   Holding
                 </div>
               </div>

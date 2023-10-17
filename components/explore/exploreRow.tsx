@@ -17,10 +17,7 @@ const ExploreRow = observer(({ el }: { el: IProfile }) => {
       setUsdPrice(getPriceInUsd(el.account.currentPrice));
     }
   }, [el, ethCurrency]);
-  console.log(user?.account?.othersShares.filter(
-    (u) =>
-      u.subject == el.account._id && Number(u.amount) >= 1000000
-  )?.length);
+
   return (
     <Link href={"/profile/" + el.twitterId}>
       <div className={style.explore__user}>
