@@ -22,8 +22,8 @@ export const SellModal = observer(({ key, data, idx }: modalProps) => {
   const modalStore = useInjection(ModalStore);
   const { frensly, address, checkAuth } = useInjection(Web3Store);
   const [numberOfShares, setNumberOfShares] = useState<number | string>(0);
-  const [currentPrice, setCurrentPrice] = useState(0);
-  const [priceOfOne, setPriceOfOne] = useState(0);
+  const [currentPrice, setCurrentPrice] = useState('0');
+  const [priceOfOne, setPriceOfOne] = useState('0');
   const [count, setCount] = useState(0);
   const sell = async () => {
     if (Number(numberOfShares) < 0.000001)
@@ -52,7 +52,7 @@ export const SellModal = observer(({ key, data, idx }: modalProps) => {
         .getSellPriceAfterFee(data.user?.account?.address, Number(num) * 10 ** 6)
         .call();
       console.log(res);
-      return Number(res);
+      return res
     } catch (e) {
       console.log(e);
       return 0;
@@ -166,7 +166,7 @@ export const SellModal = observer(({ key, data, idx }: modalProps) => {
           </button>
           <button
             className={classNames(header.connect__button, style.sell__button)}
-            disabled={currentPrice == 0 || numberOfShares == ""}
+            disabled={currentPrice == '0' || numberOfShares == ""}
             onClick={sell}
           >
             Sell a key

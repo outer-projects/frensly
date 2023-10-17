@@ -78,7 +78,13 @@ const Ponds = observer(() => {
           <div className={style.ponds__chat}>
             {myChats?.map((el) => {
               return (
-                <ChatItem key={el.owner._id} chatId={el._id} el={el.owner} amount={"1000000"} />
+                <ChatItem
+                  messages={el.messages}
+                  key={el.owner._id}
+                  chatId={el._id}
+                  el={el.owner}
+                  amount={"1000000"}
+                />
               );
             })}
           </div>

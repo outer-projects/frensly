@@ -45,23 +45,22 @@ const Chat = observer(() => {
     }
   };
   const stopListen = () => {
-    console.log("stop listen");
-    socket.emit("leave", { room: chat._id });
-    socket.off("join");
-    socket.off("leave");
-    socket.off("message");
-    socket.off("connect_error");
-    setMyHolds(undefined);
-    setIsLightning(false);
-    removeChat();
+    if (chat) {
+      console.log("stop listen");
+      socket.emit("leave", { room: chat._id });
+      socket.off("join");
+      socket.off("leave");
+      socket.off("message");
+      socket.off("connect_error");
+      setMyHolds(undefined);
+      setIsLightning(false);
+      removeChat();
+    }
   };
   useEffect(() => {
     return () => stopListen();
   }, []);
-  function isEven(n: number) {
-    n = Number(n);
-    return n === 0 || !!(n && !(n % 2));
-  }
+
   const router = useRouter();
   const { id } = router.query;
   useEffect(() => {
@@ -110,22 +109,22 @@ const Chat = observer(() => {
   }, [holders, user]);
   return (
     <>
-      {myHolds ? (
+      {!myHolds ? (
         <div className={style.openchat}>
           {" "}
           <div className={explore.explore__title}>
-            {chat.owner?.twitterName} pond
+            {chat?.owner?.twitterName} pond
           </div>
           <div className={style.openchat__info}>
             <div className={style.openchat__user}>
               <div className={style.openchat__user__left}>
                 <img
                   className={style.openchat__avatar}
-                  src={chat.owner?.avatar}
+                  src={chat?.owner?.avatar}
                 />
                 <div className={style.openchat__user__left__text}>
                   <div className={style.openchat__user__name}>
-                    {chat.owner?.twitterName}
+                    {chat?.owner?.twitterName}
                   </div>
                   <div className={style.openchat__status}>Online</div>
                 </div>
@@ -137,7 +136,7 @@ const Chat = observer(() => {
                     style.openchat__button
                   )}
                   onClick={() =>
-                    modalStore.showModal(ModalsEnum.Trade, { user: chat.owner })
+                    modalStore.showModal(ModalsEnum.Trade, { user: chat?.owner })
                   }
                 >
                   Buy
@@ -152,7 +151,7 @@ const Chat = observer(() => {
                 {" "}
                 <div className={style.openchat__share__value}>
                   <img src="../../icons/Ethereum.svg" />
-                  {chat.owner?.account.currentPrice &&
+                  {chat?.owner?.account.currentPrice &&
                     fromWeiToEth(chat.owner?.account.currentPrice)}{" "}
                   ETH
                 </div>
@@ -165,10 +164,10 @@ const Chat = observer(() => {
                   className={style.openchat__shares}
                   style={{ marginRight: "17px" }}
                 >
-                  <span>{chat.owner?.account.myHolders.length}</span> Holders
+                  <span>{chat?.owner?.account.myHolders.length}</span> Holders
                 </div>
                 <div className={style.openchat__shares}>
-                  <span>{chat.owner?.account.othersShares.length}</span> Holding
+                  <span>{chat?.owner?.account.othersShares.length}</span> Holding
                 </div>
               </div>
               <div className={style.openchat__shares}>
@@ -179,12 +178,18 @@ const Chat = observer(() => {
               {newMsgList
                 .map((el, i) => {
                   return (
-                    <div className={classNames(
-                      el.user.twitterId == user?.twitterId
-                        ? style.openchat__my_message__container
-                        : style.openchat__message_to_me__container
-                    )}>
-                      <div className={style.openchat__name}>{el.user.twitterName}</div>
+                    <div
+                      className={classNames(
+                        el.user.twitterId == user?.twitterId
+                          ? style.openchat__my_message__container
+                          : style.openchat__message_to_me__container
+                      )}
+                    >
+                      {el.user.twitterId !== user?.twitterId && (
+                        <div className={style.openchat__name}>
+                          {el.user.twitterName}
+                        </div>
+                      )}
                       <div
                         className={classNames(
                           el.user.twitterId == user?.twitterId
@@ -220,10 +225,13 @@ const Chat = observer(() => {
             <Write
               newMsg={newMsg}
               setNewMsg={setNewMsg}
+              file={file}
+              setFile={setFile}
               onSend={() => {
                 sendMessage(id as string, newMsg, file);
+                console.log(messagesEndRef);
                 setTimeout(() => {
-                  messagesEndRef.current?.scrollIntoView();
+                  messagesEndRef.current?.scrollTo(500, 0);
                 }, 10);
               }}
             />

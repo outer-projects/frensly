@@ -1,14 +1,18 @@
 import { useCallback, useEffect } from "react";
 import style from "../ponds.module.scss";
-
+import profile from "../../profile/profile.module.scss";
 const Write = ({
   newMsg,
   setNewMsg,
   onSend,
+  file,
+  setFile,
 }: {
   newMsg: string;
   setNewMsg: (newm: string) => void;
   onSend: () => any;
+  file?: File;
+  setFile: (f?: File) => void;
 }) => {
   const onKeyDown = (e: any) => {
     console.log(e.key, e.key == "Enter", newMsg !== "");
@@ -16,7 +20,7 @@ const Write = ({
       setNewMsg("");
       onSend();
     }
-  }
+  };
   useEffect(() => {
     window.addEventListener("keydown", onKeyDown);
 
@@ -26,7 +30,14 @@ const Write = ({
   }, [newMsg]);
   return (
     <div className={style.write}>
-      <img src="../icons/ImageAdd.svg" />
+      <input
+        type="file"
+        accept=".jpg,.jpeg,.webm,.png, .gif"
+        className={profile.twitter__send__img}
+        onChange={(e) => e?.target?.files && setFile(e?.target?.files[0])}
+      />
+      <img src="../icons/ImageAdd.svg" style={{ cursor: "pointer" }} />
+
       <input
         className={style.write__input}
         value={newMsg}
