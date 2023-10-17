@@ -112,8 +112,8 @@ const Ponds = observer(() => {
           <div className={style.ponds__chat}>
             {shares?.map((el) => {
               console.log(el);
-              // return <FinanceRow key={el.subject._id} el={el.subject} amount={el.amount}/>;
-              return <></>;
+              return <FinanceRow key={el.subject._id} el={el.subject} amount={el.amount}/>;
+              // return <></>;
             })}
           </div>
         )}

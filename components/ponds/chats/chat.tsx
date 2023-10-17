@@ -40,22 +40,20 @@ const Chat = observer(() => {
       });
       socket.on("message", (msg) => {
         console.log(msg, "hi message");
-        setNewMsgList(oldArray => [...oldArray, msg]);
+        setNewMsgList((oldArray) => [...oldArray, msg]);
       });
     }
   };
   const stopListen = () => {
-    if (chat) {
-      console.log("stop listen");
-      socket.emit("leave", { room: chat._id });
-      socket.off("join");
-      socket.off("leave");
-      socket.off("message");
-      socket.off("connect_error");
-      setMyHolds(undefined);
-      setIsLightning(false);
-      removeChat();
-    }
+    console.log("stop listen");
+    socket.emit("leave", { room: chat?._id });
+    socket.off("join");
+    socket.off("leave");
+    socket.off("message");
+    socket.off("connect_error");
+    setMyHolds(undefined);
+    setIsLightning(false);
+    removeChat();
   };
   useEffect(() => {
     return () => stopListen();
@@ -136,7 +134,9 @@ const Chat = observer(() => {
                     style.openchat__button
                   )}
                   onClick={() =>
-                    modalStore.showModal(ModalsEnum.Trade, { user: chat?.owner })
+                    modalStore.showModal(ModalsEnum.Trade, {
+                      user: chat?.owner,
+                    })
                   }
                 >
                   Buy
@@ -167,7 +167,8 @@ const Chat = observer(() => {
                   <span>{chat?.owner?.account.myHolders.length}</span> Holders
                 </div>
                 <div className={style.openchat__shares}>
-                  <span>{chat?.owner?.account.othersShares.length}</span> Holding
+                  <span>{chat?.owner?.account.othersShares.length}</span>{" "}
+                  Holding
                 </div>
               </div>
               <div className={style.openchat__shares}>
@@ -185,6 +186,9 @@ const Chat = observer(() => {
                           : style.openchat__message_to_me__container
                       )}
                     >
+                      {el.media && (
+                        <img src={el.media} className={style.openchat__img} />
+                      )}
                       {el.user.twitterId !== user?.twitterId && (
                         <div className={style.openchat__name}>
                           {el.user.twitterName}
@@ -203,7 +207,6 @@ const Chat = observer(() => {
                           {getDate(el.date)}
                         </div>
                       </div>
-                      {el.media && <img src={el.media} className={style.openchat__img}/>}
                     </div>
                   );
                 })

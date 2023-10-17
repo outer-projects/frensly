@@ -60,7 +60,10 @@ const Write = ({
         />
       </div>
       {file && (
-        <div className={profile.twitter__image__name}>
+        <div
+          className={profile.twitter__image__name}
+          style={{ marginLeft: "20px", marginTop: "7px" }}
+        >
           {file?.name}
           <img
             src="../icons/Close.svg"
