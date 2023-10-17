@@ -18,7 +18,7 @@ export class ChatStore {
     try {
       const res = await axios.get(prefix + "chat/available");
       console.log("chats:", res.data);
-      this.myChats = res.data.rooms;
+      this.myChats = res.data;
     } catch (e) {
       console.log(e);
     }
