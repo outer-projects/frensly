@@ -131,8 +131,10 @@ const Chat = observer(() => {
                       <span>
                         <a
                           href={
-                            "http://twitter.com/" + chat?.owner?.twitterHandle
+                            "https://twitter.com/" + chat?.owner?.twitterHandle
                           }
+                          rel="noreferrer"
+                          target="_blank"
                         >
                           @{chat?.owner?.twitterHandle}
                         </a>

@@ -2,12 +2,15 @@ import { use, useEffect } from "react";
 import Header from "./header";
 import { observer } from "mobx-react";
 import style from "./wrapper.module.scss";
+import home from "../../pages/home.module.scss";
+
 import { useInjection } from "inversify-react";
 import { UserStore } from "../../stores/UserStore";
 import axios, { AxiosRequestConfig } from "axios";
 import Web3Store from "../../stores/Web3Store";
 import { toast } from "react-toastify";
 import { prefix } from "../../utils/config";
+import AuthBanner from "../authBanner/authBanner";
 
 const Wrapper = observer(({ children }: any) => {
   const { init, setInit, getActivity } = useInjection(UserStore);
@@ -56,6 +59,11 @@ const Wrapper = observer(({ children }: any) => {
   }, []);
   return (
     <div className={style.page__container}>
+      {(!init || !user?.account) && (
+        <div className={home.main__page}>
+          <AuthBanner />
+        </div>
+      )}
       {needToChangeWallet && (
         <div className={style.change__account}>
           Address is not assigned to this account. Change to{" "}
@@ -63,7 +71,7 @@ const Wrapper = observer(({ children }: any) => {
         </div>
       )}
       {!needToChangeWallet && init && user?.account && <Header />}
-      {!needToChangeWallet && children}
+      {!needToChangeWallet && init && user?.account && children}
     </div>
   );
 });

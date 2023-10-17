@@ -33,9 +33,7 @@ const ChatItem = observer(
             <img className={style.chat__avatar} src={el?.avatar} />
             <div>
               <div className={style.chat__share}>
-                {el?.account?.othersShares?.filter(
-                  (u) => u.subject == el._id && Number(amount) >= 1000000
-                )?.length >= 1 && <img src="../icons/Key.svg" />}
+                {<img src="../icons/Key.svg" />}
                 <div>
                   {Number(amount ? amount : el?.account?.sharesAmount) /
                     10 ** 6}{" "}
