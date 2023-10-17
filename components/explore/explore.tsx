@@ -60,7 +60,9 @@ const Explore = observer(() => {
                 <Link href={"/profile/" + el.twitterId}>
                   <div key={i} className={style.explore__topuser}>
                     <img src={el.avatar} />
-                    {el.twitterName}
+                    {el.twitterName.length > 15
+                      ? el.twitterName.slice(0, 15) + "..."
+                      : el.twitterName}
                   </div>
                 </Link>
               );

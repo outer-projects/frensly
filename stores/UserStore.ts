@@ -46,19 +46,23 @@ export class UserStore {
       console.log(e);
     }
   };
-  @action sendInviteCode = async (key:string) => {
+  @action sendInviteCode = async (key: string) => {
     try {
       const res = await axios.post(prefix + "user/key/" + key);
       console.log(res.data);
-      return true
+      return true;
     } catch (e) {
       console.log(e);
-      return false
+      return false;
     }
   };
   @action getActivity = async (id: string) => {
+    const query = new URLSearchParams();
+    query.append("types", "SELL");
+    query.append("types", "BUY");
+    query.append("types", "INIT");
     try {
-      const res = await axios.get(prefix + "user/history/subject/" + id);
+      const res = await axios.get(prefix + "user/history/subject/" + id + "?" + query.toString());
       console.log(res.data);
       this.activity = res.data;
     } catch (e) {
@@ -66,8 +70,14 @@ export class UserStore {
     }
   };
   @action getHistory = async (id: string) => {
+    const query = new URLSearchParams();
+    query.append("types", "SELL");
+    query.append("types", "BUY");
+    query.append("types", "INIT");
     try {
-      const res = await axios.get(prefix + "user/history/account/" + id);
+      const res = await axios.get(
+        prefix + "user/history/account/" + id + "?" + query.toString()
+      );
       console.log(res.data);
       this.history = res.data;
     } catch (e) {

@@ -231,6 +231,10 @@
   align-self: flex-end;
   white-space: nowrap;
 }
+.openchat__user__right {
+  display: flex;
+  align-items: center;
+}
 .openchat__button__info {
   border: 1px solid $green!important;
   background: transparent!important;
@@ -344,6 +348,9 @@
     line-height: 20px;
     letter-spacing: -0.14px;
     cursor: pointer;
+    a {
+      color: $grey;
+    }
   }
 }
 .chat__share {

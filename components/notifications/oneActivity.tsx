@@ -9,6 +9,8 @@ const OneActivity = ({ activity }: { activity: any }) => {
         return " bought";
       case "SELL":
         return " sell";
+      case "OWN_SELL":
+        return " sell";
       case "INIT":
         return " initialized successfully";
       default:
@@ -24,9 +26,15 @@ const OneActivity = ({ activity }: { activity: any }) => {
         </div>
         <div>
           <div className={style.nots__one__text}>
-            {activity?.account?.profile?.twitterName} {getActivity(activity?.type)}{" "}
-            {activity?.type !=="INIT" && Number(activity?.amount) / 10 ** 6}{" "}
-            {activity?.type !=="INIT" && activity.subject?.profile?.twitterName}
+            {activity?.account?.profile?.twitterName}{" "}
+            {getActivity(activity?.type)}{" "}
+            {activity?.type !== "INIT" && Number(activity?.amount) / 10 ** 6}{" "}
+            {activity?.type !== "INIT" &&
+              activity?.type !== "OWN_BUY" &&
+              activity?.type !== "OWN_SELL" &&
+              activity.subject?.profile?.twitterName}
+            {(activity?.type == "OWN_BUY" || activity?.type == "OWN_SELL") &&
+              "my shares"}
           </div>
           <div className={style.nots__one__info}>
             <div className={style.activiy__one__time}>
