@@ -15,7 +15,8 @@ import ProgressBar from "../progressBar/progressBar";
 import { toWei } from "web3-utils";
 import { toast } from "react-toastify";
 const AuthBanner = observer(() => {
-  const { address, authStatus, frensly, user, checkAuth } = useInjection(Web3Store);
+  const { address, authStatus, frensly, user, checkAuth } =
+    useInjection(Web3Store);
   const { setActive, setInit, sendInviteCode } = useInjection(UserStore);
   const [title, setTitle] = useState("");
   const [invite, setInvite] = useState("");
@@ -26,10 +27,10 @@ const AuthBanner = observer(() => {
       setStage("Connect wallet");
     } else if (!user) {
       setStage("Authorization");
-    } else if (user && !user?.account) {
-      setStage("Connect");
-    } else if (user && user?.account && !user?.isKeyConfirmed) {
+    } else if (user && !user?.isKeyConfirmed) {
       setStage("Invite");
+    } else if (user && user?.isKeyConfirmed && !user?.account) {
+      setStage("Connect");
     } else if (user?.account && user?.isKeyConfirmed) {
       setStage("Connected");
     }
@@ -60,11 +61,11 @@ const AuthBanner = observer(() => {
     }
   }, [stage]);
   const postCode = () => {
-    sendInviteCode(invite).then((res)=>{
-      if(res) {
-        checkAuth()
+    sendInviteCode(invite).then((res) => {
+      if (res) {
+        checkAuth();
       }
-    })
+    });
   };
   const init = async () => {
     if (address?.toLowerCase() !== user?.account?.address)
@@ -136,7 +137,6 @@ const AuthBanner = observer(() => {
                 </div>
               </>
             )}
-            F
             {stage == "Connected" && (
               <>
                 <div className={style.banner__join}>
