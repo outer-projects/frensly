@@ -45,7 +45,8 @@ export class ChatStore {
       console.log("message sent:", res.data);
       
     } catch (e:any) {
-      if(e?.responce.status == 413) {
+      console.log(e?.status);
+      if(e?.status == 413) {
         toast.error("Image is too large. Max size is 2mb")
       }
     }
