@@ -247,10 +247,10 @@ const Chat = observer(() => {
                         <img src={el.media} className={style.openchat__img} />
                       )}
                       <div className={style.openchat__left}>
-                        <img
+                        {el.user.twitterId !== user?.twitterId && <img
                           className={style.openchat__avatar}
                           src={el.user.avatar}
-                        />
+                        />}
                         <div>
                           <div className={style.openchat__name}>
                             {el.user.twitterId !== user?.twitterId && (

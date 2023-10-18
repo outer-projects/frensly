@@ -83,8 +83,9 @@ const Profile = observer(() => {
       let userChts = myChats.filter(
         (el) => el?.room?.owner?._id == profileUser?._id
       );
+      console.log(userChts[0]);
       setUserChat(
-        userChat && userChat.length !== 0 ? userChts[0]?.room : undefined
+        userChts && userChts.length !== 0 ? userChts[0]?.room : undefined
       );
     }
   }, [myChats]);
