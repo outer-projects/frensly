@@ -102,8 +102,14 @@
   letter-spacing: -1.12px;
   align-items: center;
   color: $black;
+  @media (max-height: 1080px) {
+    margin-top: 185px;
+  }
   @media (max-width: 800px) {
     font-size: 40px;
+  }
+  @media (max-height: 800px) {
+    margin-top: 85px;
   }
 }
 .banner__bottom {
