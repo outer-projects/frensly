@@ -334,6 +334,9 @@
   margin-left: 24px;
   margin-right: 24px;
 }
+.openchat__back {
+  margin-right: 8px;
+}
 .openchat__button {
   width: 121px;
   height: 48px;
@@ -347,10 +350,10 @@
   font-size: 20px;
   font-weight: bold;
   display: flex;
-  align-items: center;
+  flex-direction: column;
   line-height: 28px; /* 140% */
   letter-spacing: -0.2px;
-  span {
+  .twitter__redirect {
     color: $grey;
     margin-left: 4px;
     font-size: 14px;
@@ -359,9 +362,8 @@
     line-height: 20px;
     letter-spacing: -0.14px;
     cursor: pointer;
-    a {
-      color: $grey;
-    }
+
+    color: $grey;
   }
 }
 .chat__share {

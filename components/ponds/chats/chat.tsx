@@ -125,6 +125,12 @@ const Chat = observer(() => {
           <div className={style.openchat__info}>
             <div className={style.openchat__user}>
               <div className={style.openchat__user__left}>
+                <Link href={'../../ponds'}>
+                  <img
+                    className={style.openchat__back}
+                    src={"../../icons/arrow_back.svg"}
+                  />
+                </Link>
                 <img
                   className={style.openchat__avatar}
                   src={chat?.owner?.avatar}
@@ -140,17 +146,15 @@ const Chat = observer(() => {
                     >
                       {chat?.owner?.twitterName}
                     </Link>
-                    <span>
-                      <a
-                        href={
-                          "https://twitter.com/" + chat?.owner?.twitterHandle
-                        }
-                        rel="noreferrer"
-                        target="_blank"
-                      >
-                        @{chat?.owner?.twitterHandle}
-                      </a>
-                    </span>
+
+                    <a
+                      className={style.twitter__redirect}
+                      href={"https://twitter.com/" + chat?.owner?.twitterHandle}
+                      rel="noreferrer"
+                      target="_blank"
+                    >
+                      @{chat?.owner?.twitterHandle}
+                    </a>
                   </div>
 
                   <div className={style.openchat__status}></div>

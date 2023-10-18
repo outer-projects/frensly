@@ -45,10 +45,8 @@ const ChatItem = observer(
                 <div className={style.chat__text}>
                   {/* {messages}: who’s here?<span>7m</span> */}
                   {/* @ts-ignore */}
-                  {messages[0]?.user?.twitterName +
-                    ": " +
-                    messages[0]?.text?.length >
-                  10
+                  {messages[0]?.user?.twitterName + ": "} 
+                  {messages[0]?.text?.length > 10
                     ? messages[0].text.slice(0, 10) + "..."
                     : messages[0].text}
                 </div>

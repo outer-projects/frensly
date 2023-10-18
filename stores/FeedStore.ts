@@ -52,22 +52,28 @@ export class FeedStore {
   @action clearPosts = () => {
     this.userPosts = [];
   };
-  @action likePost = async (id: string, userId?: string) => {
+  @action likePost = async (
+    id: string,
+    userId?: string,
+    isProfile?: boolean
+  ) => {
     try {
       const res = await axios.post(prefix + "social/like/" + id);
       console.log(res.data);
-      const ind = this.feed.findIndex((el) => el._id == id);
-      const likeInd = this.feed[ind].likes.findIndex((el) => el == userId);
-      if (ind !== -1 && likeInd == -1) {
-        this.feed[ind] = {
-          ...this.feed[ind],
-          likes: [...this.feed[ind].likes, userId as string],
-        };
-      } else {
-        this.feed[ind] = {
-          ...this.feed[ind],
-          likes: [...this.feed[ind].likes.splice(likeInd, 1)],
-        };
+      if (!isProfile) {
+        const ind = this.feed.findIndex((el) => el._id == id);
+        const likeInd = this.feed[ind].likes.findIndex((el) => el == userId);
+        if (ind !== -1 && likeInd == -1) {
+          this.feed[ind] = {
+            ...this.feed[ind],
+            likes: [...this.feed[ind].likes, userId as string],
+          };
+        } else {
+          this.feed[ind] = {
+            ...this.feed[ind],
+            likes: [...this.feed[ind].likes.splice(likeInd, 1)],
+          };
+        }
       }
 
       return true;

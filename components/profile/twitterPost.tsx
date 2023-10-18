@@ -22,11 +22,13 @@ const TwitterPost = observer(
     isComment,
     isRepost,
     isOnePostPage,
+    isProfile,
   }: {
     post: IPost;
     isComment?: boolean;
     isRepost?: boolean;
     isOnePostPage?: boolean;
+    isProfile?: boolean;
   }) => {
     const [isActiveLike, setIsActiveLike] = useState(false);
     const [isActiveRepost, setIsActiveRepost] = useState(false);
@@ -53,7 +55,7 @@ const TwitterPost = observer(
       }
     }, []);
     const like = () => {
-      likePost(post._id, user?._id).then((res) => {
+      likePost(post._id, user?._id, isProfile).then((res) => {
         if (res && isActiveLike) {
           setIsActiveLike(false);
           setLikesCount(likesCount - 1);
