@@ -16,6 +16,16 @@
     margin-top: 106px;
   }
 }
+.social__bg {
+  display: flex;
+  width: 40px;
+  height: 40px;
+  padding: 8px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 100px;
+  background: #f1f1f1;
+}
 .airdrop__soon {
   display: flex;
   flex-direction: column;
@@ -42,12 +52,12 @@
     align-items: center;
     margin-right: 5px;
     margin-left: 5px;
-    width: 32px;
-    height: 32px;
-    border-radius: 4px;
-    // &:hover {
-    //   background-color: black;
-    // }
+    width: 40px;
+    height: 40px;
+    border-radius: 100px;
+    &:hover {
+      background: var(--Black-6, #f1f1f1);
+    }
   }
 }
 .airdrop__title {
@@ -63,12 +73,12 @@
   }
 }
 .airdrop__image__mob {
-    display: none;
-    margin-bottom: 11px;
-    @media (max-width: 700px) {
-      display: block;
-    }
+  display: none;
+  margin-bottom: 11px;
+  @media (max-width: 700px) {
+    display: block;
   }
+}
 .airdrop__image {
   margin-bottom: 11px;
   width: 490px;
