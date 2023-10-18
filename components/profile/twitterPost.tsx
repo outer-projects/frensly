@@ -55,7 +55,11 @@ const TwitterPost = observer(
       }
     }, []);
     const like = () => {
-      likePost(post._id, user?._id, isProfile).then((res) => {
+      likePost(
+        post._id,
+        user?._id,
+        isProfile || isComment || isOnePostPage
+      ).then((res) => {
         if (res && isActiveLike) {
           setIsActiveLike(false);
           setLikesCount(likesCount - 1);

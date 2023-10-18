@@ -15,8 +15,8 @@ const Write = ({
   setFile: (f?: File) => void;
 }) => {
   const onKeyDown = (e: any) => {
-    console.log(e.key, e.key == "Enter", newMsg !== "");
-    if (e.key == "Enter" && newMsg !== "") {
+    console.log(e.key, e.key == "Enter", newMsg !== "" || file);
+    if (e.key == "Enter" && (newMsg !== "" || file)) {
       setNewMsg("");
       onSend();
     }
@@ -52,7 +52,7 @@ const Write = ({
           src="../icons/twitterUI/Send.svg"
           style={{ cursor: "pointer" }}
           onClick={() => {
-            if (newMsg !== ""||file) {
+            if (newMsg !== "" || file) {
               setNewMsg("");
               onSend();
             }

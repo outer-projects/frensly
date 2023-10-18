@@ -5,6 +5,16 @@
   width: 616px;
   font-family: "DMSans";
 }
+.openchat__left {
+  display: flex;
+  align-items: center;
+}
+.openchat__avatar {
+  border-radius: 100%;
+  width: 40px;
+  height: 40px;
+  margin-right: 8px;
+}
 .openchat__img {
   width: 240px;
   object-fit: contain;

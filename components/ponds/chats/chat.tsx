@@ -125,7 +125,7 @@ const Chat = observer(() => {
           <div className={style.openchat__info}>
             <div className={style.openchat__user}>
               <div className={style.openchat__user__left}>
-                <Link href={'../../ponds'}>
+                <Link href={"../../ponds"}>
                   <img
                     className={style.openchat__back}
                     src={"../../icons/arrow_back.svg"}
@@ -246,31 +246,39 @@ const Chat = observer(() => {
                       {el.media && (
                         <img src={el.media} className={style.openchat__img} />
                       )}
-                      <div className={style.openchat__name}>
-                        {el.user.twitterId !== user?.twitterId && (
-                          <div>{el.user.twitterName}</div>
-                        )}
-                        {el.text == "" && (
-                          <div className={style.openchat__time}>
-                            {getDate(el.date)}
+                      <div className={style.openchat__left}>
+                        <img
+                          className={style.openchat__avatar}
+                          src={el.user.avatar}
+                        />
+                        <div>
+                          <div className={style.openchat__name}>
+                            {el.user.twitterId !== user?.twitterId && (
+                              <div>{el.user.twitterName}</div>
+                            )}
+                            {el.text == "" && (
+                              <div className={style.openchat__time}>
+                                {getDate(el.date)}
+                              </div>
+                            )}
                           </div>
-                        )}
-                      </div>
-                      {el.text !== "" && (
-                        <div
-                          className={classNames(
-                            el.user.twitterId == user?.twitterId
-                              ? style.openchat__my_message
-                              : style.openchat__message_to_me
+                          {el.text !== "" && (
+                            <div
+                              className={classNames(
+                                el.user.twitterId == user?.twitterId
+                                  ? style.openchat__my_message
+                                  : style.openchat__message_to_me
+                              )}
+                              key={el._id}
+                            >
+                              {el.text}
+                              <div className={style.openchat__time}>
+                                {getDate(el.date)}
+                              </div>
+                            </div>
                           )}
-                          key={el._id}
-                        >
-                          {el.text}
-                          <div className={style.openchat__time}>
-                            {getDate(el.date)}
-                          </div>
                         </div>
-                      )}
+                      </div>
                     </div>
                   );
                 })
