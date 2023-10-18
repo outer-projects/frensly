@@ -59,7 +59,7 @@ const Wrapper = observer(({ children }: any) => {
   }, []);
   return (
     <div className={style.page__container}>
-      {(!init || !user?.account) && (
+      {!needToChangeWallet && (!init || !user?.account) && (
         <div className={home.main__page}>
           <AuthBanner />
         </div>

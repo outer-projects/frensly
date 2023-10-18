@@ -14,9 +14,11 @@ import { UserStore } from "../../stores/UserStore";
 import { addressSlice, fromWeiToEth } from "../../utils/utilities";
 import { fromWei } from "web3-utils";
 import Link from "next/link";
+import { ChatStore } from "../../stores/ChatStore";
 const Profile = observer(() => {
   const modalStore = useInjection(ModalStore);
   const { user, frensly, address } = useInjection(Web3Store);
+  const { getMyChats, myChats } = useInjection(ChatStore);
   const {
     profileUser,
     getProfileUser,
@@ -68,11 +70,13 @@ const Profile = observer(() => {
   useEffect(() => {
     if (user) {
       getProfileUser(router.query.id as string);
+      getMyChats()
     }
     return () => {
       clearProfileUser();
     };
   }, []);
+  // useEffect
   useEffect(() => {
     if (user) {
       getProfileUser(router.query.id as string);
@@ -277,7 +281,9 @@ const Profile = observer(() => {
                 Activity
               </button>
             </Link>
-            <button className={style.profile__light__button}>Chat</button>
+            <Link href={`/ponds/${profileUser?.twitterId}`}>
+              <button className={style.profile__light__button}>Chat</button>
+            </Link>
           </div>
         </div>
       </div>

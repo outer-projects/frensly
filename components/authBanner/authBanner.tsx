@@ -21,7 +21,7 @@ const AuthBanner = observer(() => {
   const [title, setTitle] = useState("");
   const [invite, setInvite] = useState("");
   const [stage, setStage] = useState("");
-  const [opacity, setOpacity] = useState(false);  
+  const [opacity, setOpacity] = useState(false);
   const [activeCode, setActiveCode] = useState(false);
 
   useEffect(() => {
@@ -57,7 +57,10 @@ const AuthBanner = observer(() => {
         setTitle("Create my pond");
         setActive(2);
         return;
-
+      case "Connect wallet":
+        setTitle("Connect wallet");
+        setActive(2);
+        return;
       default:
         return;
     }
@@ -67,7 +70,7 @@ const AuthBanner = observer(() => {
       if (res) {
         checkAuth();
       } else {
-        toast.error("Code is not correct")
+        toast.error("Code is not correct");
       }
     });
   };
@@ -97,7 +100,7 @@ const AuthBanner = observer(() => {
   }, []);
   return (
     <>
-      {stage !== "Connect wallet" ? (
+      {
         <div className={style.banner} style={{ opacity: opacity ? 1 : 0 }}>
           <img src="../logo.svg" className={style.banner__logo} />
           <div
@@ -141,10 +144,23 @@ const AuthBanner = observer(() => {
                 </div>
               </>
             )}
-            {stage == "Connected" && (
+            {stage == "Invite" && (
+              <>
+                <div
+                  className={classNames(
+                    style.banner__join,
+                    style.banner__select
+                  )}
+                >
+                  We are still in closed beta.
+                  <br /> To join service please write your invite code
+                </div>
+              </>
+            )}
+            {stage == "Connect wallet" && (
               <>
                 <div className={style.banner__join}>
-                  To enter a pond, you need to buy your first share
+                  Connect wallet that linked in {user?.twitterHandle}
                 </div>
                 <div
                   className={classNames(style.banner__join, style.button__buy)}
@@ -157,10 +173,17 @@ const AuthBanner = observer(() => {
             {stage == "Invite" && (
               <div className={style.banner__invite}>
                 <input
-                  className={classNames(style.banner__code, activeCode && style.banner__code__active)}
+                  className={classNames(
+                    style.banner__code,
+                    activeCode && style.banner__code__active
+                  )}
                   value={invite}
-                  onFocus={()=>{setActiveCode(true)}}
-                  onBlur={()=>{setActiveCode(false)}}
+                  onFocus={() => {
+                    setActiveCode(true);
+                  }}
+                  onBlur={() => {
+                    setActiveCode(false);
+                  }}
                   placeholder="Your invite code"
                   onChange={(e) => {
                     setInvite(e.target.value);
@@ -168,7 +191,7 @@ const AuthBanner = observer(() => {
                 />
                 <div
                   className={style.banner__post}
-                  style={{ cursor: "pointer",transform:'translateX(-16px)' }}
+                  style={{ cursor: "pointer", transform: "translateX(-16px)" }}
                   onClick={postCode}
                 >
                   Enter
@@ -211,6 +234,11 @@ const AuthBanner = observer(() => {
                 </button>
               </div>
             )}
+            {stage == "Connect wallet" && (
+              <div className={style.banner__early}>
+                <ConnectButtonCustom />
+              </div>
+            )}
           </div>
           <ProgressBar />
           <div className={classNames(style.banner__join, style.banner__bottom)}>
@@ -233,11 +261,7 @@ const AuthBanner = observer(() => {
             </div>{" "}
           </div>
         </div>
-      ) : (
-        <div className={style.banner__center}>
-          <ConnectButtonCustom />
-        </div>
-      )}
+      }
     </>
   );
 });
