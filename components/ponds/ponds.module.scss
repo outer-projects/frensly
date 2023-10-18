@@ -73,9 +73,8 @@
   line-height: 20px; /* 142.857% */
   letter-spacing: -0.14px;
   span {
-    font-size: 12px;
-    line-height: 18px;
-    margin-left: 4px;
+    color: $black;
+    font-size: 14px;
   }
 }
 .ponds__total__text {
@@ -258,7 +257,7 @@
   font-size: 12px;
   font-family: "DMSans";
   margin-bottom: 0px;
-  width: 240px;
+  width: 288px;
   align-items: center;
   display: flex;
   justify-content: space-between;

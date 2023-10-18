@@ -295,7 +295,12 @@ const Profile = observer(() => {
             </Link>
             {userChat && (
               <Link href={`/ponds/${userChat?._id}`}>
-                <button className={style.profile__light__button}>Chat</button>
+                <button
+                  className={style.profile__light__button}
+                  style={{ cursor: "pointer" }}
+                >
+                  Chat
+                </button>
               </Link>
             )}
           </div>
