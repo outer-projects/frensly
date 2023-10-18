@@ -19,6 +19,7 @@ const Profile = observer(() => {
   const modalStore = useInjection(ModalStore);
   const { user, frensly, address } = useInjection(Web3Store);
   const { getMyChats, myChats } = useInjection(ChatStore);
+  const [userChat, setUserChat] = useState<any>(undefined);
   const {
     profileUser,
     getProfileUser,
@@ -70,13 +71,18 @@ const Profile = observer(() => {
   useEffect(() => {
     if (user) {
       getProfileUser(router.query.id as string);
-      getMyChats()
+      getMyChats();
     }
     return () => {
       clearProfileUser();
     };
   }, []);
-  // useEffect
+  useEffect(() => {
+    if (myChats) {
+      let userChts = myChats.filter((el) => el.owner._id == profileUser?._id);
+      setUserChat(userChts ? userChts[0].room : undefined);
+    }
+  }, [myChats]);
   useEffect(() => {
     if (user) {
       getProfileUser(router.query.id as string);
@@ -281,9 +287,11 @@ const Profile = observer(() => {
                 Activity
               </button>
             </Link>
-            <Link href={`/ponds/${profileUser?.twitterId}`}>
-              <button className={style.profile__light__button}>Chat</button>
-            </Link>
+            {userChat && (
+              <Link href={`/ponds/${userChat?._id}`}>
+                <button className={style.profile__light__button}>Chat</button>
+              </Link>
+            )}
           </div>
         </div>
       </div>
