@@ -103,162 +103,174 @@ const AuthBanner = observer(() => {
       {
         <div className={style.banner} style={{ opacity: opacity ? 1 : 0 }}>
           <img src="../logo.svg" className={style.banner__logo} />
-          <div
-            className={classNames(
-              style.banner__title,
-              stage == "Authorization"
-                ? style.banner__title__auth
-                : stage == "Connect"
-                ? style.banner__title__connection
-                : style.banner__title__connected
-            )}
-          >
-            <img src="../banner_img.svg" className={style.banner__img} />
-            {title}
-          </div>
-          <div className={style.banner__text}>
-            {stage == "Connect" && (
-              <>
-                <div
-                  className={classNames(
-                    style.banner__join,
-                    style.banner__select
-                  )}
-                >
-                  Your wallet is your face.
-                  <br /> Select the wallet that will represent your onchain
-                  history.
+          <div className={style.banner__col}>
+            <div
+              className={classNames(
+                style.banner__title,
+                stage == "Authorization"
+                  ? style.banner__title__auth
+                  : stage == "Connect"
+                  ? style.banner__title__connection
+                  : style.banner__title__connected
+              )}
+            >
+              <img src="../banner_img.svg" className={style.banner__img} />
+              {title}
+            </div>
+            <div className={style.banner__text}>
+              {stage == "Connect" && (
+                <>
+                  <div
+                    className={classNames(
+                      style.banner__join,
+                      style.banner__select
+                    )}
+                  >
+                    Your wallet is your face.
+                    <br /> Select the wallet that will represent your onchain
+                    history.
+                  </div>
+                </>
+              )}
+              {stage == "Invite" && (
+                <>
+                  <div
+                    className={classNames(
+                      style.banner__join,
+                      style.banner__select
+                    )}
+                  >
+                    We are still in closed beta.
+                    <br /> To join service please write your invite code
+                  </div>
+                </>
+              )}
+              {stage == "Invite" && (
+                <>
+                  <div
+                    className={classNames(
+                      style.banner__join,
+                      style.banner__select
+                    )}
+                  >
+                    We are still in closed beta.
+                    <br /> To join service please write your invite code
+                  </div>
+                </>
+              )}
+              {stage == "Connect wallet" && (
+                <>
+                  <div className={style.banner__join}>
+                    Connect wallet that linked in {user?.twitterHandle}
+                  </div>
+                  <div
+                    className={classNames(
+                      style.banner__join,
+                      style.button__buy
+                    )}
+                    style={{ marginTop: "56px" }}
+                  >
+                    Buy for 0.0001 ETH 1 share of twitter name
+                  </div>
+                </>
+              )}
+              {stage == "Invite" && (
+                <div className={style.banner__invite}>
+                  <input
+                    className={classNames(
+                      style.banner__code,
+                      activeCode && style.banner__code__active
+                    )}
+                    value={invite}
+                    onFocus={() => {
+                      setActiveCode(true);
+                    }}
+                    onBlur={() => {
+                      setActiveCode(false);
+                    }}
+                    placeholder="Your invite code"
+                    onChange={(e) => {
+                      setInvite(e.target.value);
+                    }}
+                  />
+                  <div
+                    className={style.banner__post}
+                    style={{
+                      cursor: "pointer",
+                      transform: "translateX(-16px)",
+                    }}
+                    onClick={postCode}
+                  >
+                    Enter
+                  </div>
                 </div>
-              </>
-            )}
-            {stage == "Invite" && (
-              <>
-                <div
-                  className={classNames(
-                    style.banner__join,
-                    style.banner__select
-                  )}
-                >
-                  We are still in closed beta.
-                  <br /> To join service please write your invite code
+              )}
+              {stage == "Authorization" && (
+                <div>
+                  <a
+                    href="https://frensly.adev.co/api/v1/auth/twitter"
+                    style={{ textDecoration: "none" }}
+                  >
+                    <button
+                      className={header.connect__button}
+                      style={{ width: "200px", height: "64px" }}
+                    >
+                      <Twitter color={"black"} />
+                      Authorise
+                    </button>
+                  </a>
                 </div>
-              </>
-            )}
-            {stage == "Invite" && (
-              <>
-                <div
-                  className={classNames(
-                    style.banner__join,
-                    style.banner__select
-                  )}
-                >
-                  We are still in closed beta.
-                  <br /> To join service please write your invite code
-                </div>
-              </>
-            )}
-            {stage == "Connect wallet" && (
-              <>
-                <div className={style.banner__join}>
-                  Connect wallet that linked in {user?.twitterHandle}
-                </div>
-                <div
-                  className={classNames(style.banner__join, style.button__buy)}
-                  style={{ marginTop: "56px" }}
-                >
-                  Buy for 0.0001 ETH 1 share of twitter name
-                </div>
-              </>
-            )}
-            {stage == "Invite" && (
-              <div className={style.banner__invite}>
-                <input
-                  className={classNames(
-                    style.banner__code,
-                    activeCode && style.banner__code__active
-                  )}
-                  value={invite}
-                  onFocus={() => {
-                    setActiveCode(true);
-                  }}
-                  onBlur={() => {
-                    setActiveCode(false);
-                  }}
-                  placeholder="Your invite code"
-                  onChange={(e) => {
-                    setInvite(e.target.value);
-                  }}
-                />
-                <div
-                  className={style.banner__post}
-                  style={{ cursor: "pointer", transform: "translateX(-16px)" }}
-                  onClick={postCode}
-                >
-                  Enter
+              )}
+              <div
+                className={style.banner__early}
+                style={{ display: stage == "Connect" ? "flex" : "none" }}
+              >
+                <ConnectButtonCustom />
+                <div className={style.banner__small__text}>
+                  The wallet can't be changed
                 </div>
               </div>
-            )}
-            {stage == "Authorization" && (
-              <div>
-                <a
-                  href="https://frensly.adev.co/api/v1/auth/twitter"
-                  style={{ textDecoration: "none" }}
-                >
+              {stage == "Connected" && (
+                <div className={style.banner__early}>
                   <button
                     className={header.connect__button}
-                    style={{ width: "200px", height: "64px" }}
+                    style={{ width: "221px", height: "64px" }}
+                    onClick={() => init()}
                   >
-                    <Twitter color={"black"} />
-                    Authorise
+                    Initialize
                   </button>
-                </a>
-              </div>
-            )}
-            <div
-              className={style.banner__early}
-              style={{ display: stage == "Connect" ? "flex" : "none" }}
-            >
-              <ConnectButtonCustom />
-              <div className={style.banner__small__text}>
-                The wallet can't be changed
-              </div>
+                </div>
+              )}
+              {stage == "Connect wallet" && (
+                <div className={style.banner__early}>
+                  <ConnectButtonCustom />
+                </div>
+              )}
             </div>
-            {stage == "Connected" && (
-              <div className={style.banner__early}>
-                <button
-                  className={header.connect__button}
-                  style={{ width: "221px", height: "64px" }}
-                  onClick={() => init()}
-                >
-                  Initialize
-                </button>
-              </div>
-            )}
-            {stage == "Connect wallet" && (
-              <div className={style.banner__early}>
-                <ConnectButtonCustom />
-              </div>
-            )}
           </div>
-          <ProgressBar />
-          <div className={classNames(style.banner__join, style.banner__bottom)}>
-            Follow us to keep up with the news
-          </div>
-          <div className={style.banner__whitelist}>
-            <div className={socialsCss.airdrop__socials}>
-              {socials.map((el, i) => {
-                return (
-                  <a
-                    href={el.link}
-                    target="_blank"
-                    className={socialsCss.airdrop__media}
-                    key={i}
-                  >
-                    {el.logo}
-                  </a>
-                );
-              })}
-            </div>{" "}
+          <div className={style.banner__col}>
+            <ProgressBar />
+            <div
+              className={classNames(style.banner__join, style.banner__bottom)}
+            >
+              Follow us to keep up with the news
+            </div>
+            <div className={style.banner__whitelist}>
+              <div className={socialsCss.airdrop__socials}>
+                {socials.map((el, i) => {
+                  return (
+                    <a
+                      href={el.link}
+                      target="_blank"
+                      className={socialsCss.airdrop__media}
+                      key={i}
+                    >
+                      {el.logo}
+                    </a>
+                  );
+                })}
+              </div>{" "}
+            </div>
           </div>
         </div>
       }

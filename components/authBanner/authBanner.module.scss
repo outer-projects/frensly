@@ -4,8 +4,14 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   transition: 500ms ease all;
+  height: 100vh;
+}
+.banner__col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 .banner__select {
   margin-bottom: 56px !important;

@@ -20,7 +20,7 @@ const Twitter = ({ color }: { color?: string }) => {
       />
       <path
         d="M15.1525 19.5803L0.835976 0.437948L6.12841 0.420423L20.4832 19.5803H15.1525Z"
-        fill={color ? "#B4B4B4" : "white"}
+        fill={color ? "#a6d000" : "white"}
         stroke={color ? color : "#151614"}
         strokeWidth={"1"}
       />
