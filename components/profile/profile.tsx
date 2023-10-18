@@ -79,8 +79,12 @@ const Profile = observer(() => {
   }, []);
   useEffect(() => {
     if (myChats) {
-      let userChts = myChats.filter((el) => el?.room?.owner?._id == profileUser?._id);
-      setUserChat(userChts ? userChts[0].room : undefined);
+      let userChts = myChats.filter(
+        (el) => el?.room?.owner?._id == profileUser?._id
+      );
+      setUserChat(
+        (userChts && userChat.length !== 0) ? userChts[0]?.room : undefined
+      );
     }
   }, [myChats]);
   useEffect(() => {
