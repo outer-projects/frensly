@@ -262,6 +262,10 @@
   display: flex;
   justify-content: space-between;
 }
+.openchat__mydate {
+  display: flex;
+  justify-content: flex-end!important;
+}
 .openchat__my_message__container {
   display: flex;
   flex-direction: column;
@@ -275,7 +279,7 @@
   max-width: 400px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-end;
   text-align: left;
   border-radius: 24px 8px 0px 24px;
 

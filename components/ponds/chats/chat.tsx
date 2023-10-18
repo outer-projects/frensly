@@ -252,7 +252,7 @@ const Chat = observer(() => {
                           src={el.user.avatar}
                         />}
                         <div>
-                          <div className={style.openchat__name}>
+                          <div className={classNames(style.openchat__name,el.user.twitterId == user?.twitterId && style.openchat__mydate)}>
                             {el.user.twitterId !== user?.twitterId && (
                               <div>{el.user.twitterName}</div>
                             )}
