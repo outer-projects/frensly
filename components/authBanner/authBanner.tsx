@@ -41,16 +41,16 @@ const AuthBanner = observer(() => {
   useEffect(() => {
     switch (stage) {
       case "Authorization":
-        setTitle("Creative economy onchain");
+        setTitle("Creator economy onchain");
         setActive(0);
         return;
       case "Connect":
         setTitle("You are early!");
-        setTitle("Creative economy onchain");
+        setTitle("Creator economy onchain");
         setActive(1);
         return;
       case "Invite":
-        setTitle("Creative economy onchain");
+        setTitle("Creator economy onchain");
         setActive(1);
         return;
       case "Connected":
