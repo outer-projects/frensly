@@ -154,6 +154,10 @@
 .chat__info {
   display: flex;
   align-items: center;
+  @media (max-width: 616px) {
+    width: 100%;
+    margin-bottom: 8px;
+  }
 }
 .chat__avatar {
   margin-right: 8px;
@@ -210,9 +214,9 @@
   width: 616px;
   height: calc(100vh - 110px);
   @media (max-width: 616px) {
-    width: calc(100% - 48px);
+    width: calc(100% - 16px);
     margin-top: 0px;
-    margin-left: 0px;
+    margin-left: 8px;
   }
   @media (max-height: 671px) {
     height: 100vh;
