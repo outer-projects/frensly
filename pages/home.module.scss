@@ -9,13 +9,12 @@
 .explore__page {
   display: flex;
   flex-direction: column;
-  max-width: 616px;
+  width: 616px;
   min-height: calc(100vh - 76px);
-  // @media (max-width: 616px) {
-  //   max-width: calc(100% - 48px);
-  //   margin-top: 24px;
-  //   margin-left: 24px;
-  // }
+  @media (max-width: 616px) {
+    max-width: calc(100%);
+    margin-top: 24px;
+  }
 }
 .finance__page {
   min-height: calc(100vh - 76px);

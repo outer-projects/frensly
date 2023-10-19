@@ -9,6 +9,14 @@
   padding-top: 24px;
   width: 444px;
   z-index: 200;
+  @media (max-width: 1000px) {
+    width: 100wv;
+    top: 0;
+    left: 0;
+    margin-left: 0px;
+    height: 100vh;
+    border-radius: 0px;
+  }
 }
 .nots__one__text {
   color: $black;
@@ -141,6 +149,7 @@
 .nots__title {
   color: $black;
   padding-left: 24px;
+  padding-right: 24px;
   /* Header/H4 */
   font-family: "Syne";
   font-size: 32px;
@@ -150,4 +159,7 @@
   letter-spacing: -0.64px;
   width: 100%;
   border-bottom: 1px solid #e2e3e2;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }

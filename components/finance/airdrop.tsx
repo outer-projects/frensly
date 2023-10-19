@@ -12,9 +12,8 @@ const Airdrop = () => {
   const router = useRouter();
   return (
     <div className={style.finance__page}>
-      <div className={style.finance__side}>
-        <Sidebar />
-      </div>
+      <Sidebar />
+
       <div className={style.finance__container}>
         <div className={explore.explore__title}>Airdrop</div>
         <div className={style.finance}>

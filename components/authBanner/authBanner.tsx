@@ -145,19 +145,7 @@ const AuthBanner = observer(() => {
                   </div>
                 </>
               )}
-              {stage == "Invite" && (
-                <>
-                  <div
-                    className={classNames(
-                      style.banner__join,
-                      style.banner__select
-                    )}
-                  >
-                    We are still in closed beta.
-                    <br /> To join service please write your invite code
-                  </div>
-                </>
-              )}
+              
               {stage == "Connect wallet" && (
                 <>
                   <div className={style.banner__join}>

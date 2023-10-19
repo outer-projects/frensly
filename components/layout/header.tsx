@@ -15,6 +15,7 @@ import { UserStore } from "../../stores/UserStore";
 const Header = observer(() => {
   const router = useRouter();
   const [active, setActive] = useState("");
+  const [menu, setMenu] = useState(false);
   const [nots, setNots] = useState(false);
   const { user, checkAuth } = useInjection(Web3Store);
   const { getEthCurrency } = useInjection(UserStore);
@@ -89,7 +90,7 @@ const Header = observer(() => {
             style={{ cursor: "pointer" }}
           >
             <Bell isActive={false} />
-            {nots && <Notifications />}
+            {nots && <Notifications setNots={setNots}/>}
           </div>
           <ConnectButtonCustom />
         </div>
@@ -105,9 +106,50 @@ const Header = observer(() => {
             style={{ cursor: "pointer" }}
           >
             <Bell isActive={false} />
-            {nots && <Notifications />}
+            {nots && <Notifications setNots={setNots}/>}
           </div>
-          <img src="../icons/Burger.svg" style={{height:'24px',marginLeft:'24px'}}/>
+          <img
+            src="../icons/Burger.svg"
+            style={{ height: "24px", marginLeft: "24px" }}
+            onClick={() => {
+              setMenu(!menu);
+            }}
+          />
+          <div
+            className={style.header__mobile__menu}
+            style={{ display: menu ? "flex" : "none" }}
+          >
+            <img className={style.header__mobile__menu__close} src="../../icons/Close.svg" onClick={()=>{setMenu(false)}}/>
+            {headerText.map((el, i) => {
+              console.log(el.link == "/profile");
+              return (
+                <Link
+                  href={
+                    "../.." +
+                    (el.link == "/profile"
+                      ? el.link + "/" + user?.twitterId
+                      : el.link)
+                  }
+                  style={{ textDecoration: "none", color: "auto" }}
+                  key={i}
+                  onClick={()=>{setMenu(false)}}
+                >
+                  <div
+                    className={classNames(
+                      style.header__mobile__menu__item,
+                      active.includes(el.name.toLowerCase()) &&
+                        style.header__mobile__menu__active
+                    )}
+                  >
+                    {el.name}
+                    {el.name == "Staking" && (
+                      <div className={style.header__soon}>soon</div>
+                    )}
+                  </div>
+                </Link>
+              );
+            })}
+          </div>
         </div>
       </header>
     </div>
