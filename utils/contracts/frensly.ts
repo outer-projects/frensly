@@ -1,4 +1,4 @@
-export const frenslyContract = "0x10EAb47A3812539e31e6b5C01CF57884A5e41eAe";
+export const frenslyContract = "0x0b5905d5fb98084380e272e502e429cc2c6ea978";
 export const frenslyAbi = [
   {
     inputs: [
