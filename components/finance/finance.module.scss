@@ -13,7 +13,7 @@
 }
 .invite__code__used {
   border: 1px solid $green;
-  color: $green!important;
+  color: $green !important;
 }
 .invite__code {
   color: $black;
@@ -55,12 +55,36 @@
 .finance__side {
   margin-right: 24px;
   margin-top: 80px;
+  @media (max-width: 870px) {
+    display: none;
+  }
+}
+.mob__link {
+  display: none;
+
+  margin-left: 4px;
+  width: 0;
+  margin-right: 4px;
+  a {
+    color: $grey;
+  }
+  @media (max-width: 870px) {
+    display: block;
+    width: auto;
+  }
+}
+.finance__titles {
+  display: flex;
+  justify-content: space-between;
 }
 .finance {
   padding: 24px;
   border-radius: 32px;
   background: #fff;
   width: 616px;
+  @media (max-width: 870px) {
+    width: calc(100vw - 48px);
+  }
 }
 .finance__title {
   display: flex;

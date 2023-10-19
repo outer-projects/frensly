@@ -15,7 +15,11 @@ const Airdrop = () => {
       <Sidebar />
 
       <div className={style.finance__container}>
-        <div className={explore.explore__title}>Airdrop</div>
+        <div className={style.finance__titles}>
+          <div className={classNames(explore.explore__title, style.mob__link)}><Link href={"/finance"}>My funds</Link></div>
+          <div className={classNames(explore.explore__title, style.mob__link)}><Link href={"/finance/invite"}>Beta</Link></div>
+          <div className={explore.explore__title}>Airdrop</div>
+        </div>
         <div className={style.finance}>
           <User />
           <div className={style.finance__points}>

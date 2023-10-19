@@ -43,8 +43,15 @@ const Finance = observer(() => {
   const router = useRouter();
   const [claimValue, setClaimValue] = useState(0);
   const { user, frensly, address, checkAuth } = useInjection(Web3Store);
-  const { shares, holders, getShares, getHolders, portfolioValue, getKeys, keys } =
-    useInjection(UserStore);
+  const {
+    shares,
+    holders,
+    getShares,
+    getHolders,
+    portfolioValue,
+    getKeys,
+    keys,
+  } = useInjection(UserStore);
   const claim = async () => {
     try {
       const res = await frensly.methods.claim().send({
@@ -61,7 +68,7 @@ const Finance = observer(() => {
   const getClaim = async () => {
     try {
       const res = await frensly.methods.availableToClaim(address).call();
-      console.log("availableToClaim: ",res);
+      console.log("availableToClaim: ", res);
       setClaimValue(Number(res));
     } catch (e) {
       console.log(e);
@@ -71,7 +78,7 @@ const Finance = observer(() => {
     if (user) {
       getShares(user?._id as string);
       getHolders(user?._id as string);
-      getKeys()
+      getKeys();
     }
   }, [user]);
   useEffect(() => {
@@ -82,9 +89,13 @@ const Finance = observer(() => {
   console.log(keys);
   return (
     <div className={style.finance__page}>
-      <Sidebar/>
+      <Sidebar />
       <div className={style.finance__container}>
-        <div className={explore.explore__title}>My funds</div>
+        <div className={style.finance__titles}>
+          <div className={explore.explore__title}>My funds</div>
+          <div className={classNames(explore.explore__title, style.mob__link)}><Link href={"/finance/invite"}>Beta</Link></div>
+          <div className={classNames(explore.explore__title, style.mob__link)}><Link href={"/finance/airdrop"}>Airdrop</Link></div>
+        </div>
         <div className={style.finance}>
           <User />
           <TypesList active={active} setActive={setActive} types={types} />
@@ -120,20 +131,32 @@ const Finance = observer(() => {
           {active == 1 && (
             <div className={style.finance__stats}>
               {holders?.map((el) => {
-                return <FinanceRow el={el.user} amount={el.amount} price={
-                  Number((Number(el.amount) / 10 ** 6).toFixed(2)) *
-                  Number(user?.account.currentPrice)
-                }/>;
+                return (
+                  <FinanceRow
+                    el={el.user}
+                    amount={el.amount}
+                    price={
+                      Number((Number(el.amount) / 10 ** 6).toFixed(2)) *
+                      Number(user?.account.currentPrice)
+                    }
+                  />
+                );
               })}
             </div>
           )}
           {active == 2 && (
             <div className={style.finance__stats}>
               {shares?.map((el) => {
-                return <FinanceRow el={el.subject} amount={el.amount} price={
-                  Number((Number(el.amount) / 10 ** 6).toFixed(2)) *
-                  Number(el.subject.currentPrice)
-                }/>;
+                return (
+                  <FinanceRow
+                    el={el.subject}
+                    amount={el.amount}
+                    price={
+                      Number((Number(el.amount) / 10 ** 6).toFixed(2)) *
+                      Number(el.subject.currentPrice)
+                    }
+                  />
+                );
               })}
             </div>
           )}

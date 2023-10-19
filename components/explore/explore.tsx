@@ -61,7 +61,7 @@ const Explore = observer(() => {
                   <div key={i} className={style.explore__topuser}>
                     <img src={el.avatar} />
                     {el.twitterName.length > 15
-                      ? el.twitterName.slice(0, 15) + "..."
+                      ? el.twitterName.slice(0, 13) + "..."
                       : el.twitterName}
                   </div>
                 </Link>

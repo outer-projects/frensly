@@ -59,21 +59,21 @@ const Wrapper = observer(({ children }: any) => {
   }, []);
   return (
     <div className={style.page__container}>
-      {!needToChangeWallet && (!init || !user?.account) && (
+      {/* {!needToChangeWallet && (!init || !user?.account) && (
         <div className={home.main__page}>
           <AuthBanner />
         </div>
-      )}
+      )} */}
       {needToChangeWallet && (
         <div className={style.change__account}>
           Address is not assigned to this account. Change to{" "}
           {user?.account.address}
         </div>
       )}
-      {!needToChangeWallet && init && user?.account && <Header />}
-      {/* <Header /> */}
-      {!needToChangeWallet && init && user?.account && children}
-      {/* {children} */}
+      {/* {!needToChangeWallet && init && user?.account && <Header />} */}
+      <Header />
+      {/* {!needToChangeWallet && init && user?.account && children} */}
+      {children}
     </div>
   );
 });

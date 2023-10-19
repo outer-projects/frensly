@@ -30,7 +30,11 @@ const Invite = observer(() => {
       <Sidebar />
 
       <div className={style.finance__container}>
-        <div className={explore.explore__title}>Invite codes</div>
+        <div className={style.finance__titles}>
+          <div className={classNames(explore.explore__title, style.mob__link)}><Link href={"/finance"}>My funds</Link></div>
+          <div className={explore.explore__title}>Beta</div>
+          <div className={classNames(explore.explore__title, style.mob__link)}><Link href={"/finance/airdrop"}>Airdrop</Link></div>
+        </div>
         <div className={style.finance}>
           <User />
 
