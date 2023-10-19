@@ -11,6 +11,11 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  @media (max-width:616px) {
+    width: 100vw;
+    height: 100vh;
+    border-radius: 0px;
+  }
 }
 .trade {
   width: 418px;
@@ -23,6 +28,11 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  @media (max-width:616px) {
+    width: 100vw;
+    height: 100vh;
+    border-radius: 0px;
+  }
 }
 .buy__buttons {
   display: flex;

@@ -111,6 +111,9 @@
   padding: 24px;
   padding-bottom: 16px;
   padding-top: 0px;
+  @media (max-width: 616px) {
+    padding: 4px;
+  }
 }
 .chat__value {
   color: $black;
@@ -120,6 +123,14 @@
   align-items: center;
   line-height: 24px; /* 150% */
   letter-spacing: -0.16px;
+}
+.chat__price {
+  display: block;
+  @media (max-width: 616px) {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
 }
 .chat__item {
   display: flex;
@@ -135,6 +146,9 @@
   margin-bottom: 8px;
   &:hover {
     background-color: #f1f1f1;
+  }
+  @media (max-width: 616px) {
+    flex-direction: column;
   }
 }
 .chat__info {
@@ -182,6 +196,9 @@
   @media (max-height: 750px) {
     display: none;
   }
+  @media (max-width: 750px) {
+    display: none;
+  }
 }
 .openchat__val {
   display: flex;
@@ -194,8 +211,8 @@
   height: calc(100vh - 110px);
   @media (max-width: 616px) {
     width: calc(100% - 48px);
-    margin-top: 24px;
-    margin-left: 24px;
+    margin-top: 0px;
+    margin-left: 0px;
   }
   @media (max-height: 671px) {
     height: 100vh;
@@ -272,6 +289,10 @@
   width: 75px;
   height: 48px;
   margin-right: 8px;
+  @media (max-width:616px) {
+    width: 57px;
+    height: 37px;
+  }
 }
 .openchat__name {
   font-size: 12px;
@@ -284,7 +305,7 @@
 }
 .openchat__mydate {
   display: flex;
-  justify-content: flex-end!important;
+  justify-content: flex-end !important;
 }
 .openchat__my_message__container {
   display: flex;
@@ -303,7 +324,7 @@
   text-align: left;
   border-radius: 24px 8px 0px 24px;
   width: fit-content;
-  
+
   padding-left: 16px;
   padding-right: 16px;
   background: #effdde;
@@ -367,6 +388,9 @@
   justify-content: space-between;
   margin-left: 24px;
   margin-right: 24px;
+  @media (max-width:616px) {
+    margin-left: 0px;
+  }
 }
 .openchat__back {
   margin-right: 8px;
@@ -374,6 +398,10 @@
 .openchat__button {
   width: 121px;
   height: 48px;
+  @media (max-width:616px) {
+    width: 57px;
+    height: 37px;
+  }
 }
 .openchat__user__left {
   display: flex;

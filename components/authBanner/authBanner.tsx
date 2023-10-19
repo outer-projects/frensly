@@ -145,6 +145,19 @@ const AuthBanner = observer(() => {
                   </div>
                 </>
               )}
+              {stage == "Connected" && (
+                <>
+                  <div
+                    className={classNames(
+                      style.banner__join,
+                      style.banner__select
+                    )}
+                  >
+                    To start using our app you need
+                    <br /> to initialise your account first
+                  </div>
+                </>
+              )}
               
               {stage == "Connect wallet" && (
                 <>

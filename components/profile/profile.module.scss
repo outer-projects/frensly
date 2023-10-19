@@ -63,6 +63,10 @@
   justify-content: space-between;
   margin-left: 24px;
   margin-right: 24px;
+  @media (max-width: 616px) {
+    margin-left: 0px;
+    margin-right: 0px;
+  }
 }
 .twitter__active {
   border: 1px solid $green !important;
@@ -73,6 +77,10 @@
   align-items: center;
   margin-top: 16px;
   margin-left: 24px;
+  @media (max-width: 616px) {
+    margin-left: 0px;
+    margin-right: 0px;
+  }
 }
 .profile__buttons__bottom {
   display: flex;
@@ -175,6 +183,10 @@
   padding-right: 16px;
   margin-left: 24px;
   margin-right: 24px;
+  @media (max-width: 616px) {
+    margin-left: 0px;
+    margin-right: 0px;
+  }
 }
 .profile__button {
   margin-top: 16px;
@@ -190,6 +202,10 @@
   margin-top: 24px;
   margin-left: 24px;
   margin-right: 24px;
+  @media (max-width: 616px) {
+    margin-left: 0px;
+    margin-right: 0px;
+  }
 }
 .profile__text {
   color: $grey;
@@ -220,6 +236,10 @@
   margin-top: 10px;
   margin-left: 24px;
   margin-right: 24px;
+  @media (max-width: 616px) {
+    margin-left: 0px;
+    margin-right: 0px;
+  }
 }
 .profile__balance {
   color: $black;
@@ -311,6 +331,10 @@
   letter-spacing: -0.16px;
   &::placeholder {
     color: #b4b4b3;
+  }
+  @media (max-width: 616px) {
+    margin-left: 0px;
+    margin-right: 0px;
   }
 }
 .profile__bottom {
@@ -498,4 +522,8 @@
   justify-content: space-between;
   margin-left: 24px;
   margin-right: 24px;
+  @media (max-width: 616px) {
+    margin-left: 0px;
+    margin-right: 0px;
+  }
 }
