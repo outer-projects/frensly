@@ -3,6 +3,11 @@
 .profile {
   margin-top: 32px;
   width: 616px;
+  @media (max-width: 616px) {
+    width: calc(100% - 48px);
+    margin-top: 24px;
+    margin-left: 24px;
+  }
 }
 .profile__info {
   border-top-left-radius: 32px;
@@ -123,6 +128,7 @@
   height: 36px;
   display: flex;
   align-items: center;
+  white-space: nowrap;
   margin-right: 8px;
   cursor: pointer;
   border-radius: 100px;
@@ -322,6 +328,9 @@
   justify-content: flex-start;
   align-items: center;
   height: 36px;
+  overflow-y: hidden;
+  max-width: 100vw;
+  overflow-x: auto;
 }
 .profile__name {
   display: flex;

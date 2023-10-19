@@ -47,7 +47,9 @@ const Header = observer(() => {
   return (
     <div className={style.header__container}>
       <header className={style.header}>
-        <Link href={'../../feed'}><img src="../logo.svg" /></Link>
+        <Link href={"../../feed"}>
+          <img src="../logo.svg" />
+        </Link>
         <div className={style.header__row}>
           {headerText.map((el, i) => {
             console.log(el.link == "/profile");
@@ -90,6 +92,22 @@ const Header = observer(() => {
             {nots && <Notifications />}
           </div>
           <ConnectButtonCustom />
+        </div>
+      </header>
+      <header className={style.header__mobile}>
+        <ConnectButtonCustom />
+        <div className={style.header__user}>
+          <div
+            ref={ref}
+            onClick={() => {
+              setNots(!nots);
+            }}
+            style={{ cursor: "pointer" }}
+          >
+            <Bell isActive={false} />
+            {nots && <Notifications />}
+          </div>
+          <img src="../icons/Burger.svg" style={{height:'24px',marginLeft:'24px'}}/>
         </div>
       </header>
     </div>

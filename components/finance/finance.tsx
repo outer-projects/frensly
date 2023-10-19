@@ -30,10 +30,10 @@ export const links = [
     active: true,
   },
   {
-    title: "Airdrop (soon)",
+    title: "Airdrop",
     link: "/finance/airdrop",
     img: "../icons/airdrop.svg",
-    active: false,
+    active: true,
   },
 ];
 

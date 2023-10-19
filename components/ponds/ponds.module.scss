@@ -4,6 +4,11 @@
   margin-top: 32px;
   width: 616px;
   font-family: "DMSans";
+  @media (max-width: 616px) {
+    width: calc(100% - 48px);
+    margin-top: 24px;
+    margin-left: 24px;
+  }
 }
 .openchat__left {
   display: flex;
@@ -187,6 +192,11 @@
   margin-top: 32px;
   width: 616px;
   height: calc(100vh - 110px);
+  @media (max-width: 616px) {
+    width: calc(100% - 48px);
+    margin-top: 24px;
+    margin-left: 24px;
+  }
   @media (max-height: 671px) {
     height: 100vh;
   }

@@ -71,7 +71,9 @@ const Wrapper = observer(({ children }: any) => {
         </div>
       )}
       {!needToChangeWallet && init && user?.account && <Header />}
+      {/* <Header /> */}
       {!needToChangeWallet && init && user?.account && children}
+      {/* {children} */}
     </div>
   );
 });

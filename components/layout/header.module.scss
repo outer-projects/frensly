@@ -13,24 +13,27 @@
   font-family: "DMSans";
   font-size: 16px;
   @media (max-width: 1000px) {
-    justify-content: center;
-    .account {
       display: none;
-    }
-    .connect__button {
-      display: none;
-    }
-    .header__row {
-      display: none;
-    }
-    .header__user {
-      display: none;
-    }
   }
+}
+.header__mobile {
+  display: none;
+  justify-content: space-between;
+  width: 95vw;
+  margin-top: 24px;
+  height: 31px;
+  align-items: center;
+  max-width: 1160px;
+  margin-left: 10px;
+  margin-right: 10px;
+  font-family: "DMSans";
+  font-size: 16px;
+  @media (max-width: 1000px) {
+    display: flex;
+}
 }
 .header__user {
   display: flex;
-  align-items: center;
 }
 .header__container {
   display: flex;
