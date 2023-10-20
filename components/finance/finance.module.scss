@@ -73,9 +73,14 @@
     width: auto;
   }
 }
+// .nots__col {
+//   max-height: ;
+// }
 .finance__titles {
   display: flex;
   justify-content: space-between;
+  padding-left: 4px;
+  padding-right: 4px;
 }
 .finance {
   padding: 24px;
@@ -83,7 +88,8 @@
   background: #fff;
   width: 616px;
   @media (max-width: 870px) {
-    width: calc(100vw - 48px);
+    width: 100vw;
+    border-radius: 0px;
   }
 }
 .finance__title {
@@ -113,6 +119,9 @@
     letter-spacing: -0.14px;
     &:hover {
       text-decoration: underline;
+    }
+    @media (max-width: 870px) {
+      display: none;
     }
   }
   img {

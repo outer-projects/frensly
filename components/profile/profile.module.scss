@@ -186,6 +186,7 @@
   @media (max-width: 616px) {
     margin-left: 0px;
     margin-right: 0px;
+    padding-left: 0px;
   }
 }
 .profile__button {
@@ -228,9 +229,16 @@
 .black {
   color: $black;
 }
+.right {
+  text-align: right;
+}
 .profile__stats__follow {
   display: flex;
   align-items: center;
+  @media (max-width: 616px) {
+    padding-right:4px;
+    padding-left: 4px;
+  }
 }
 .profile__stats {
   margin-top: 10px;

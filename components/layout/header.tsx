@@ -15,8 +15,9 @@ import { UserStore } from "../../stores/UserStore";
 const Header = observer(() => {
   const router = useRouter();
   const [active, setActive] = useState("");
-  const [menu, setMenu] = useState(false);
+  const [menuMob, setMenuMob] = useState(false);
   const [nots, setNots] = useState(false);
+  const [notsMob, setNotsMob] = useState(false);
   const { user, checkAuth } = useInjection(Web3Store);
   const { getEthCurrency } = useInjection(UserStore);
 
@@ -90,7 +91,7 @@ const Header = observer(() => {
             style={{ cursor: "pointer" }}
           >
             <Bell isActive={false} />
-            {nots && <Notifications setNots={setNots}/>}
+            {nots && <Notifications />}
           </div>
           <ConnectButtonCustom />
         </div>
@@ -99,27 +100,26 @@ const Header = observer(() => {
         <ConnectButtonCustom />
         <div className={style.header__user}>
           <div
-            ref={ref}
             onClick={() => {
-              setNots(!nots);
+              setNotsMob(!notsMob);
             }}
             style={{ cursor: "pointer" }}
           >
             <Bell isActive={false} />
-            {nots && <Notifications setNots={setNots}/>}
+            {notsMob && <Notifications setNots={setNotsMob}/>}
           </div>
           <img
             src="../icons/Burger.svg"
             style={{ height: "24px", marginLeft: "24px" }}
             onClick={() => {
-              setMenu(!menu);
+              setMenuMob(!menuMob);
             }}
           />
           <div
             className={style.header__mobile__menu}
-            style={{ display: menu ? "flex" : "none" }}
+            style={{ display: menuMob ? "flex" : "none" }}
           >
-            <img className={style.header__mobile__menu__close} src="../../icons/Close.svg" onClick={()=>{setMenu(false)}}/>
+            <img className={style.header__mobile__menu__close} src="../../icons/Close.svg" onClick={()=>{setMenuMob(false)}}/>
             {headerText.map((el, i) => {
               console.log(el.link == "/profile");
               return (
@@ -132,7 +132,7 @@ const Header = observer(() => {
                   }
                   style={{ textDecoration: "none", color: "auto" }}
                   key={i}
-                  onClick={()=>{setMenu(false)}}
+                  onClick={()=>{setMenuMob(false)}}
                 >
                   <div
                     className={classNames(

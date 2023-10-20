@@ -135,6 +135,31 @@
     }
   }
 }
+.nots__col {
+  max-height: 350px;
+  overflow-y: auto;
+  &::-webkit-scrollbar {
+    width: 15px;
+    margin: 15px;
+  }
+  &::-webkit-scrollbar-thumb {
+    border: 5px solid rgba(0, 0, 0, 0);
+    background-clip: padding-box;
+    border-radius: 9999px;
+    background-color: #aaaaaa;
+  }
+  @media (max-width: 1000px) {
+    max-height: calc(100vh - 160px);
+  }
+}
+.nots__close {
+  display: none;
+  width: 24px;
+  height: 24px;
+  @media (max-width: 1000px) {
+    display: block;
+  }
+}
 .nots__one__users {
   margin-right: 16px;
   display: flex;

@@ -210,7 +210,7 @@ const Profile = observer(() => {
           <div className={style.profile__stats__row}>
             <div className={style.profile__stats__line}>
               <div className={style.profile__text}>TVH</div>
-              <div className={classNames(style.profile__text, style.black)}>
+              <div className={classNames(style.profile__text, style.black, style.right)}>
                 <img src="../icons/Info.svg" />
                 $??
               </div>
