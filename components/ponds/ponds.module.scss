@@ -293,7 +293,7 @@
   width: 75px;
   height: 48px;
   margin-right: 8px;
-  @media (max-width:616px) {
+  @media (max-width: 616px) {
     width: 57px;
     height: 37px;
   }
@@ -392,7 +392,7 @@
   justify-content: space-between;
   margin-left: 24px;
   margin-right: 24px;
-  @media (max-width:616px) {
+  @media (max-width: 616px) {
     margin-left: 0px;
   }
 }
@@ -402,7 +402,7 @@
 .openchat__button {
   width: 121px;
   height: 48px;
-  @media (max-width:616px) {
+  @media (max-width: 616px) {
     width: 57px;
     height: 37px;
   }
@@ -467,6 +467,19 @@
   font-family: "DMSans";
   display: flex;
   margin-bottom: 16px;
+}
+.write__mentions {
+  position: absolute;
+  border-top-right-radius: 12px;
+  border-top-left-radius: 12px;
+  margin-top: -26px;
+  min-height: 100px;
+  max-height: 200px;
+  width: 100vw;
+  background-color: #f1f1f1;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column-reverse;
 }
 .write__input {
   color: $black;

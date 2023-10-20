@@ -1,6 +1,7 @@
-import { useCallback, useEffect } from "react";
+import { useCallback, useEffect, useState } from "react";
 import style from "../ponds.module.scss";
 import profile from "../../profile/profile.module.scss";
+const linst = ["123", "123", "123"];
 const Write = ({
   newMsg,
   setNewMsg,
@@ -14,11 +15,15 @@ const Write = ({
   file?: File;
   setFile: (f?: File) => void;
 }) => {
+  const [openMentions, setOpenMentions] = useState(false);
   const onKeyDown = (e: any) => {
-    // console.log(e.key, e.key == "Enter", newMsg !== "" || file);
+    console.log(e.key);
     if (e.key == "Enter" && (newMsg !== "" || file)) {
       setNewMsg("");
       onSend();
+    }
+    if (e.key == "@") {
+      setOpenMentions(true);
     }
   };
   useEffect(() => {
@@ -31,6 +36,11 @@ const Write = ({
   return (
     <>
       <div className={style.write}>
+        <div className={style.write__mentions}>
+          {/* {linst.map((el, i) => {
+            return <div className={style.write__mention} key={i}>{el}</div>;
+          })} */}
+        </div>
         <input
           type="file"
           accept=".jpg,.jpeg,.webm,.png, .gif"
