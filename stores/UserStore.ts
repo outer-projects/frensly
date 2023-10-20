@@ -19,14 +19,8 @@ export class UserStore {
   @observable currentType: number = 2;
   @observable profileUser?: IProfile = undefined;
   @observable portfolioValue?: number = 0;
-  @observable followings?: {
-    user: IAccount;
-    amount: string;
-  }[] = [];
-  @observable followers?: {
-    user: IAccount;
-    amount: string;
-  }[] = [];
+  @observable followings?: IProfile[] = [];
+  @observable followers?: IProfile[] = [];
   @observable holders?: {
     user: IAccount;
     amount: string;

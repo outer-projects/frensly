@@ -17,8 +17,8 @@ const types = [
   "My Activity",
   "My Holders",
   "My Holdings",
-  "My Followers",
-  "My Followings",
+  // "My Followers",
+  // "My Followings",
 ];
 const Ponds = observer(() => {
   const [active, setActive] = useState(0);
@@ -144,19 +144,14 @@ const Ponds = observer(() => {
             })}
           </div>
         )}
-        {active == 4 && (
+        {/* {active == 4 && (
           <div className={style.ponds__chat}>
             {followers?.map((el) => {
               console.log(el);
               return (
                 <FinanceRow
-                  key={el.user._id}
-                  el={el.user}
-                  amount={el.amount}
-                  price={
-                    Number((Number(el.amount) / 10 ** 6).toFixed(2)) *
-                    Number(el.user.currentPrice)
-                  }
+                  key={el._id}
+                  el={el}
                 />
               );
               // return <></>;
@@ -169,19 +164,14 @@ const Ponds = observer(() => {
               console.log(el);
               return (
                 <FinanceRow
-                  key={el.user._id}
-                  el={el.user}
-                  amount={el.amount}
-                  price={
-                    Number((Number(el.amount) / 10 ** 6).toFixed(2)) *
-                    Number(el.user.currentPrice)
-                  }
+                  key={el._id}
+                  el={el}
                 />
               );
               // return <></>;
             })}
           </div>
-        )}
+        )} */}
       </div>
     </div>
   );
