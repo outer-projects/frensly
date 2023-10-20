@@ -32,7 +32,7 @@ export class FeedStore {
     try {
       const res = await axios.get(prefix + "social/post/" + id);
       // console.log(res.data);
-      // this.currentPost = res.data;
+      this.currentPost = res.data;
     } catch (e) {
       console.log(e);
     }
