@@ -161,7 +161,7 @@ const Chat = observer(() => {
                 </div>
               </div>
               <div className={style.openchat__user__right}>
-                <Link href={"../../activity/" + chat.owner.twitterId}>
+                <Link href={"../../activity/" + chat?.owner?.twitterId}>
                   <button
                     className={classNames(
                       header.connect__button,

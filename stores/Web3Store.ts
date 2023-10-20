@@ -92,7 +92,7 @@ export class Web3Store {
   @action auth = async () => {
     try {
       const { data } = await axios.get(
-        `https://frensly.adev.co/api/v1/eauth/${this.address}`,
+        `https://frensly.io/api/v1/eauth/${this.address}`,
         {
           withCredentials: true,
         }
@@ -108,7 +108,7 @@ export class Web3Store {
         );
         // console.log(message, signature);
         const res = await axios.get(
-          `https://frensly.adev.co/api/v1/eauth/${data
+          `https://frensly.io/api/v1/eauth/${data
             ?.toString()
             .trim()}/${signature?.toString().trim()}`,
           { withCredentials: true }

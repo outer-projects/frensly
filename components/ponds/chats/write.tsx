@@ -17,7 +17,7 @@ const Write = ({
 }) => {
   const [openMentions, setOpenMentions] = useState(false);
   const onKeyDown = (e: any) => {
-    console.log(e.key);
+    console.log(e, e.key);
     if (e.key == "Enter" && (newMsg !== "" || file)) {
       setNewMsg("");
       onSend();
@@ -25,6 +25,7 @@ const Write = ({
     if (e.key == "@") {
       setOpenMentions(true);
     }
+    
   };
   useEffect(() => {
     window.addEventListener("keydown", onKeyDown);
@@ -36,11 +37,17 @@ const Write = ({
   return (
     <>
       <div className={style.write}>
-        <div className={style.write__mentions}>
-          {/* {linst.map((el, i) => {
-            return <div className={style.write__mention} key={i}>{el}</div>;
-          })} */}
-        </div>
+        {/* {openMentions && (
+          <div className={style.write__mentions}>
+            {linst.map((el, i) => {
+              return (
+                <div className={style.write__mention} key={i}>
+                  {el}
+                </div>
+              );
+            })}
+          </div>
+        )} */}
         <input
           type="file"
           accept=".jpg,.jpeg,.webm,.png, .gif"
@@ -54,6 +61,11 @@ const Write = ({
           className={style.write__input}
           value={newMsg}
           onChange={(e) => {
+            console.log(e);
+            // if (e == "Delete") {
+            //   console.log(newMsg);
+            //   setOpenMentions(true);
+            // }
             setNewMsg(e.target.value);
           }}
           placeholder="Write something"

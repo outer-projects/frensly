@@ -28,7 +28,7 @@ import "../components/polyfills";
 import { SocketContext, socket } from "../utils/socket";
 const { chains, publicClient, webSocketPublicClient } = configureChains(
   [
-    bscTestnet,
+    base,
     ...(process.env.NEXT_PUBLIC_ENABLE_TESTNETS === "true" ? [goerli] : []),
   ],
   [publicProvider()]
