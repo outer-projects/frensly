@@ -94,18 +94,6 @@ export const frenslyAbi = [
         name: "subject",
         type: "address",
       },
-      {
-        indexed: false,
-        internalType: "uint256",
-        name: "subjectFee",
-        type: "uint256",
-      },
-      {
-        indexed: false,
-        internalType: "uint256",
-        name: "shareHolderFee",
-        type: "uint256",
-      },
     ],
     name: "SubjectAdded",
     type: "event",
@@ -167,6 +155,12 @@ export const frenslyAbi = [
         name: "supply",
         type: "uint256",
       },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "price",
+        type: "uint256",
+      },
     ],
     name: "Trade",
     type: "event",
@@ -222,43 +216,6 @@ export const frenslyAbi = [
       {
         internalType: "uint256",
         name: "",
-        type: "uint256",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [],
-    name: "feeCap",
-    outputs: [
-      {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
-        internalType: "address",
-        name: "",
-        type: "address",
-      },
-    ],
-    name: "feeInfo",
-    outputs: [
-      {
-        internalType: "uint256",
-        name: "subjectFee",
-        type: "uint256",
-      },
-      {
-        internalType: "uint256",
-        name: "shareHolderFee",
         type: "uint256",
       },
     ],
@@ -386,18 +343,20 @@ export const frenslyAbi = [
     type: "function",
   },
   {
-    inputs: [
+    inputs: [],
+    name: "holderFeePercent",
+    outputs: [
       {
         internalType: "uint256",
-        name: "_subjectFee",
-        type: "uint256",
-      },
-      {
-        internalType: "uint256",
-        name: "_shareHolderFee",
+        name: "",
         type: "uint256",
       },
     ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
     name: "initShares",
     outputs: [],
     stateMutability: "nonpayable",
@@ -545,6 +504,19 @@ export const frenslyAbi = [
       },
     ],
     name: "sharesSupply",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "subjectFeePercent",
     outputs: [
       {
         internalType: "uint256",

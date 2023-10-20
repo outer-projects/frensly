@@ -79,7 +79,7 @@ const AuthBanner = observer(() => {
       return toast.error("Address is not assigned to this account");
     try {
       await frensly.methods
-        .initShares(toWei(0.05, "ether"), toWei(0.02, "ether"))
+        .initShares()
         .send({
           from: address,
         });
