@@ -19,6 +19,14 @@ export class UserStore {
   @observable currentType: number = 2;
   @observable profileUser?: IProfile = undefined;
   @observable portfolioValue?: number = 0;
+  @observable followings?: {
+    user: IAccount;
+    amount: string;
+  }[] = [];
+  @observable followers?: {
+    user: IAccount;
+    amount: string;
+  }[] = [];
   @observable holders?: {
     user: IAccount;
     amount: string;
@@ -97,6 +105,22 @@ export class UserStore {
         0
       );
       this.shares = res.data;
+    } catch (e) {
+      console.log(e);
+    }
+  };
+  @action getFollowers = async (id: string) => {
+    try {
+      const res = await axios.get(prefix + "user/followers/" + id);
+      this.followers = res.data;
+    } catch (e) {
+      console.log(e);
+    }
+  };
+  @action getFollowings = async (id: string) => {
+    try {
+      const res = await axios.get(prefix + "user/following/" + id);
+      this.followings = res.data;
     } catch (e) {
       console.log(e);
     }

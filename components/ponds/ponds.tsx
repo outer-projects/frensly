@@ -1,39 +1,48 @@
 import style from "./ponds.module.scss";
 import explore from "../explore/explore.module.scss";
-import profile from "../profile/profile.module.scss";
-import classNames from "classnames";
 import { useEffect, useState } from "react";
 import ChatItem from "./chats/chatItem";
 import TypesList from "../common/typesList";
 import OneActivity from "../notifications/oneActivity";
-import { IProfile } from "../../types/users";
 import { observer } from "mobx-react";
 import { useInjection } from "inversify-react";
 import Web3Store from "../../stores/Web3Store";
 import { UserStore } from "../../stores/UserStore";
 import { fromWeiToEth } from "../../utils/utilities";
-import { useRouter } from "next/router";
 import FinanceRow from "../finance/financeRow";
 import { ChatStore } from "../../stores/ChatStore";
-const types = ["My Ponds", "My Activity", "My Holders", "My Holdings"];
+
+const types = [
+  "My Ponds",
+  "My Activity",
+  "My Holders",
+  "My Holdings",
+  "My Followers",
+  "My Followings",
+];
 const Ponds = observer(() => {
   const [active, setActive] = useState(0);
   const { user } = useInjection(Web3Store);
-  const [outline, setOutline] = useState(false);
   const {
     portfolioValue,
     getHolders,
     getShares,
     shares,
     holders,
+    followers,
+    followings,
     history,
     getHistory,
+    getFollowers,
+    getFollowings
   } = useInjection(UserStore);
   const { getMyChats, myChats } = useInjection(ChatStore);
   useEffect(() => {
     if (user) {
       getHolders(user._id as string);
       getShares(user._id as string);
+      getFollowers(user._id as string);
+      getFollowings(user._id as string);
       getMyChats();
       getHistory(user.account._id as string);
     }
@@ -128,6 +137,44 @@ const Ponds = observer(() => {
                   price={
                     Number((Number(el.amount) / 10 ** 6).toFixed(2)) *
                     Number(el.subject.currentPrice)
+                  }
+                />
+              );
+              // return <></>;
+            })}
+          </div>
+        )}
+        {active == 4 && (
+          <div className={style.ponds__chat}>
+            {followers?.map((el) => {
+              console.log(el);
+              return (
+                <FinanceRow
+                  key={el.user._id}
+                  el={el.user}
+                  amount={el.amount}
+                  price={
+                    Number((Number(el.amount) / 10 ** 6).toFixed(2)) *
+                    Number(el.user.currentPrice)
+                  }
+                />
+              );
+              // return <></>;
+            })}
+          </div>
+        )}
+        {active == 5 && (
+          <div className={style.ponds__chat}>
+            {followings?.map((el) => {
+              console.log(el);
+              return (
+                <FinanceRow
+                  key={el.user._id}
+                  el={el.user}
+                  amount={el.amount}
+                  price={
+                    Number((Number(el.amount) / 10 ** 6).toFixed(2)) *
+                    Number(el.user.currentPrice)
                   }
                 />
               );
