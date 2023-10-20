@@ -93,11 +93,11 @@ const Header = observer(() => {
             <Bell isActive={false} />
             {nots && <Notifications />}
           </div>
-          <ConnectButtonCustom />
+          <ConnectButtonCustom isHeader/>
         </div>
       </header>
       <header className={style.header__mobile}>
-        <ConnectButtonCustom />
+        <ConnectButtonCustom isHeader/>
         <div className={style.header__user}>
           <div
             onClick={() => {

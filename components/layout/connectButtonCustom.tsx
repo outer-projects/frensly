@@ -9,7 +9,7 @@ import { useWalletClient } from "wagmi";
 import style from "./header.module.scss";
 import { addressSlice } from "../../utils/utilities";
 import classNames from "classnames";
-const ConnectButtonCustom = observer(() => {
+const ConnectButtonCustom = observer(({ isHeader }: { isHeader?: boolean }) => {
   const {
     setConnected,
     setSigner,
@@ -17,7 +17,7 @@ const ConnectButtonCustom = observer(() => {
     setAddress,
     setUserBalance,
     user,
-    auth
+    auth,
   } = useInjection(Web3Store);
 
   return (
@@ -89,11 +89,13 @@ const ConnectButtonCustom = observer(() => {
                       user?.account && style.connect__light
                     )}
                   >
-                    <img
-                      src="../../icons/MetaMask.svg"
-                      style={{ marginTop: "0px" }}
-                    />
-                    {"Sign the message"}
+                    {!isHeader && (
+                      <img
+                        src="../../icons/MetaMask.svg"
+                        style={{ marginTop: "0px" }}
+                      />
+                    )}
+                    {isHeader ? "Change Network" : "Sign the message"}
                   </button>
                 );
               }
