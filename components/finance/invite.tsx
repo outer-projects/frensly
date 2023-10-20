@@ -33,7 +33,7 @@ const Invite = observer(() => {
         <div className={style.finance__titles}>
           <div className={classNames(explore.explore__title, style.mob__link)}><Link href={"/finance"}>My funds</Link></div>
           <div className={explore.explore__title}>Beta</div>
-          <div className={classNames(explore.explore__title, style.mob__link)}><Link href={"/finance/airdrop"}>Airdrop</Link></div>
+          {/* <div className={classNames(explore.explore__title, style.mob__link)}><Link href={"/finance/airdrop"}>Airdrop</Link></div> */}
         </div>
         <div className={style.finance}>
           <User />

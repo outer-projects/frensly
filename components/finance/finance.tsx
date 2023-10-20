@@ -30,10 +30,10 @@ export const links = [
     active: true,
   },
   {
-    title: "Airdrop",
+    title: "Airdrop (soon)",
     link: "/finance/airdrop",
     img: "../icons/airdrop.svg",
-    active: true,
+    active: false,
   },
 ];
 
@@ -94,7 +94,7 @@ const Finance = observer(() => {
         <div className={style.finance__titles}>
           <div className={explore.explore__title}>My funds</div>
           <div className={classNames(explore.explore__title, style.mob__link)}><Link href={"/finance/invite"}>Beta</Link></div>
-          <div className={classNames(explore.explore__title, style.mob__link)}><Link href={"/finance/airdrop"}>Airdrop</Link></div>
+          {/* <div className={classNames(explore.explore__title, style.mob__link)}><Link href={"/finance/airdrop"}>Airdrop</Link></div> */}
         </div>
         <div className={style.finance}>
           <User />
