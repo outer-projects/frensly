@@ -16,12 +16,17 @@ const PostWithComments = observer(() => {
   const [message, setMessage] = useState("");
   const [focus, setFocus] = useState(false);
   const [image, setImage] = useState<File | null>(null);
-  const { addPost, getCurrentPost, currentPost } = useInjection(FeedStore);
+  const { addPost, getCurrentPost, currentPost,setCurrentPost } = useInjection(FeedStore);
   useEffect(() => {
     if (id) {
       getCurrentPost(id as string);
     }
   }, [id]);
+  useEffect(()=>{
+    return ()=>{
+      setCurrentPost(undefined)
+    }
+  },[])
   return (
     <div>
       <div style={{ marginTop: "30px", marginBottom: "-30px" }}>

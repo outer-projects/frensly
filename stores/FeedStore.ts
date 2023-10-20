@@ -28,6 +28,9 @@ export class FeedStore {
       console.log(e);
     }
   };
+  @action setCurrentPost = (post: any) => {
+    this.currentPost = post;
+  };
   @action getCurrentPost = async (id: string) => {
     try {
       const res = await axios.get(prefix + "social/post/" + id);
