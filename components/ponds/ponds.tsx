@@ -101,7 +101,7 @@ const Ponds = observer(() => {
         {active == 1 && (
           <div className={style.ponds__chat}>
             {history?.map((el) => {
-              console.log(el);
+              // console.log(el);
               return <OneActivity key={el._id} activity={el} />;
             })}
           </div>
@@ -109,7 +109,7 @@ const Ponds = observer(() => {
         {active == 2 && (
           <div className={style.ponds__chat}>
             {holders?.map((el) => {
-              console.log(el);
+              // console.log(el);
               return (
                 <FinanceRow
                   key={el.user._id}
@@ -128,7 +128,7 @@ const Ponds = observer(() => {
         {active == 3 && (
           <div className={style.ponds__chat}>
             {shares?.map((el) => {
-              console.log(el);
+              // console.log(el);
               return (
                 <FinanceRow
                   key={el.subject._id}

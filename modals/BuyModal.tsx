@@ -29,7 +29,7 @@ export const BuyModal = observer(({ key, data, idx }: modalProps) => {
     if (Number(numberOfShares) < 0.000001)
       return toast.error("Amount is too low");
     try {
-      console.log("currentPrice: ", currentPrice);
+      // console.log("currentPrice: ", currentPrice);
       const res = await frensly.methods
         .buyShares(
           data.user?.account?.address,
@@ -39,7 +39,7 @@ export const BuyModal = observer(({ key, data, idx }: modalProps) => {
           from: address,
           value: currentPrice,
         });
-      console.log(res);
+      // console.log(res);
       modalStore.hideAllModals();
       checkAuth();
     } catch (e) {
@@ -48,12 +48,12 @@ export const BuyModal = observer(({ key, data, idx }: modalProps) => {
   };
 
   const checkPrice = async (num: number) => {
-    console.log("address: ", data.user?.account?.address, "num: ", num, "num*1kk", Number(num) * 10 ** 6);
+    // console.log("address: ", data.user?.account?.address, "num: ", num, "num*1kk", Number(num) * 10 ** 6);
     try {
       const res = await frensly.methods
         .getBuyPriceAfterFee(data.user?.account?.address, Number(num) * 10 ** 6)
         .call();
-      console.log("getBuyPriceAfterFee: ", res);
+      // console.log("getBuyPriceAfterFee: ", res);
       return res;
     } catch (e) {
       console.log("ERROR getBuyPriceAfterFee: ",e);
@@ -66,7 +66,7 @@ export const BuyModal = observer(({ key, data, idx }: modalProps) => {
       const res = await frensly.methods
         .sharesBalance(data?.user?.account?.address, address)
         .call();
-      console.log(res);
+      // console.log(res);
       setCount(Number(res) / 10 ** 6);
     } catch (e) {
       console.log(e);
@@ -86,7 +86,7 @@ export const BuyModal = observer(({ key, data, idx }: modalProps) => {
   const checkAndUpdateExactPrice = () => {
     checkPrice(numberOfShares !== "" ? Number(numberOfShares) : 0).then(
       (res) => {
-        console.log("currentPrice:", res, numberOfShares);
+        // console.log("currentPrice:", res, numberOfShares);
         setCurrentPrice(res);
       }
     );

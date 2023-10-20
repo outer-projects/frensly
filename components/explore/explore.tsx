@@ -45,7 +45,7 @@ const Explore = observer(() => {
       getNewUsers();
     }
   }, [active]);
-  console.log(searchResult);
+  // console.log(searchResult);
   return (
     <div className={style.explore}>
       <div className={style.explore__title}>Explore</div>

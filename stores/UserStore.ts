@@ -42,7 +42,7 @@ export class UserStore {
   @action getKeys = async () => {
     try {
       const res = await axios.get(prefix + "user/user/keys");
-      console.log(res.data);
+      // console.log(res.data);
       this.keys = res.data;
     } catch (e) {
       console.log(e);
@@ -51,7 +51,7 @@ export class UserStore {
   @action sendInviteCode = async (key: string) => {
     try {
       const res = await axios.post(prefix + "user/key/" + key);
-      console.log(res.data);
+      // console.log(res.data);
       return true;
     } catch (e) {
       console.log(e);
@@ -67,7 +67,7 @@ export class UserStore {
       const res = await axios.get(
         prefix + "user/history/subject/" + id + "?" + query.toString()
       );
-      console.log(res.data);
+      // console.log(res.data);
       this.activity = res.data;
     } catch (e) {
       console.log(e);
@@ -82,7 +82,7 @@ export class UserStore {
       const res = await axios.get(
         prefix + "user/history/account/" + id + "?" + query.toString()
       );
-      console.log(res.data);
+      // console.log(res.data);
       this.history = res.data;
     } catch (e) {
       console.log(e);
@@ -91,7 +91,7 @@ export class UserStore {
   @action getShares = async (id: string) => {
     try {
       const res = await axios.get(prefix + "user/shares/" + id);
-      console.log(res.data);
+      // console.log(res.data);
       this.portfolioValue = res.data.reduce(
         (partialSum: any, a: any) =>
           partialSum +
@@ -149,7 +149,7 @@ export class UserStore {
       let res = await axios.post(
         prefix + `social/${isFollowed ? "un" : ""}follow/` + id
       );
-      console.log(res.data);
+      // console.log(res.data);
       return true;
     } catch (e) {
       console.log(e);

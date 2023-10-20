@@ -129,7 +129,7 @@ const UserActivity = observer(() => {
         {active == 2 && (
           <div className={style.ponds__chat}>
             {history?.map((el) => {
-              console.log(el);
+              // console.log(el);
               return <OneActivity key={el._id} activity={el} />;
             })}
           </div>

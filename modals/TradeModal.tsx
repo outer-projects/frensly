@@ -39,7 +39,7 @@ export const TradeModal = observer(({ key, data, idx }: modalProps) => {
           Number(num) * 10 ** 6
         )
         .call();
-      console.log(res);
+      // console.log(res);
       return Number(res);
     } catch (e) {
       console.log(e);
@@ -57,7 +57,7 @@ export const TradeModal = observer(({ key, data, idx }: modalProps) => {
       const res = await frensly.methods
         .sharesBalance(data?.user?.account?.address, address)
         .call();
-      console.log(res);
+      // console.log(res);
       setCount(Number(res) / 10 ** 6);
     } catch (e) {
       console.log(e);

@@ -21,7 +21,7 @@ const Notifications = observer(
         </div>
         <div className={style.nots__col}>
           {activity.map((el, i) => {
-            console.log(el);
+            // console.log(el);
             // if (i <= 4) {
               return <OneNotification key={el._id} activity={el} />;
             // }

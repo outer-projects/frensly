@@ -15,7 +15,7 @@ const Write = ({
   setFile: (f?: File) => void;
 }) => {
   const onKeyDown = (e: any) => {
-    console.log(e.key, e.key == "Enter", newMsg !== "" || file);
+    // console.log(e.key, e.key == "Enter", newMsg !== "" || file);
     if (e.key == "Enter" && (newMsg !== "" || file)) {
       setNewMsg("");
       onSend();

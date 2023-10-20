@@ -76,10 +76,10 @@ export class Web3Store {
       if (
         this.address?.toLowerCase() == this.user?.account?.address.toLowerCase()
       ) {
-        console.log("wallet wrong?");
+        // console.log("wallet wrong?");
         this.needToChangeWallet = false;
       } else {
-        console.log("wallet true?");
+        // console.log("wallet true?");
         this.needToChangeWallet = true;
       }
     });
@@ -113,7 +113,7 @@ export class Web3Store {
             .trim()}/${signature?.toString().trim()}`,
           { withCredentials: true }
         );
-        console.log(res.data);
+        // console.log(res.data);
         if (res.data?.meta.message == "Succesful authentication") {
           this.checkAuth();
           this.setAuthStatus("authenticated");

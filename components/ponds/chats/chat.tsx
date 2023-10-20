@@ -39,16 +39,16 @@ const Chat = observer(() => {
   const startListening = () => {
     if (chat && !isLightning) {
       setIsLightning(true);
-      console.log("start listen 2", chat._id);
+      // console.log("start listen 2", chat._id);
       socket.emit("join", { room: chat._id });
       socket.on("join", (chat) => {
-        console.log(chat, "hi join");
+        console.log("join chat");
       });
       socket.on("connect_error", (e) => {
         console.log(e, "hi connect_error");
       });
       socket.on("message", (msg) => {
-        console.log(msg, "hi message");
+        // console.log(msg, "hi message");
         setNewMsgList((oldArray) => [...oldArray, msg]);
       });
     }
@@ -72,13 +72,13 @@ const Chat = observer(() => {
   const { id } = router.query;
   useEffect(() => {
     if (id) {
-      console.log("id is: ", id);
+      // console.log("id is: ", id);
       getChat(id as string);
     }
   }, [id]);
   useEffect(() => {
     if (chat) {
-      console.log("id is: ", chat.owner);
+      // console.log("id is: ", chat.owner);
       setNewMsgList([]);
       setNewMsgList(chat.messages);
       getHolders(chat.owner._id as string);
@@ -86,22 +86,22 @@ const Chat = observer(() => {
   }, [chat]);
   useEffect(() => {
     if (myHolds) {
-      console.log("start listen");
+      // console.log("start listen");
       startListening();
     }
   }, [myHolds]);
   useEffect(() => {
-    console.log(
-      "user, holders: ",
-      user,
-      holders,
-      user && holders && holders?.length !== 0
-    );
+    // console.log(
+    //   "user, holders: ",
+    //   user,
+    //   holders,
+    //   user && holders && holders?.length !== 0
+    // );
     if (user && holders && chat) {
-      console.log(
-        "is everything ok?",
-        holders.filter((el) => el.user._id == user?.account._id)[0]
-      );
+      // console.log(
+      //   "is everything ok?",
+      //   holders.filter((el) => el.user._id == user?.account._id)[0]
+      // );
       let myholding = holders.filter(
         (el) => el.user._id == user?.account._id && Number(el.amount) >= 1000000
       )[0];
@@ -109,7 +109,7 @@ const Chat = observer(() => {
         setMyHolds(myholding);
       }
       if (user._id == chat?.owner._id) {
-        console.log(user);
+        // console.log(user);
         setMyHolds({ amount: "1000000", user: user });
       }
     }
@@ -319,7 +319,7 @@ const Chat = observer(() => {
               setFile={setFile}
               onSend={() => {
                 sendMessage(id as string, newMsg, file);
-                console.log(messagesEndRef);
+                // console.log(messagesEndRef);
                 setFile(undefined);
                 setTimeout(() => {
                   messagesEndRef.current?.scrollTo(500, 0);

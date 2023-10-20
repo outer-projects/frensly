@@ -24,7 +24,7 @@ const Wrapper = observer(({ children }: any) => {
     setNeedChangeWallet,
   } = useInjection(Web3Store);
   const isInit = async () => {
-    console.log(address, user?.account?.address);
+    // console.log(address, user?.account?.address);
     if (address?.toLowerCase() !== user?.account?.address) {
       setNeedChangeWallet(true);
     } else {

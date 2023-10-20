@@ -23,9 +23,9 @@ export class ModalStore {
 
 
     @action showModal = (key: ModalsEnum, data?: any) => {
-        console.log('key', key);
+        // console.log('key', key);
         this.activeModals.push({ key, data });
-        console.log(this.activeModals)
+        // console.log(this.activeModals)
     }
 
     isVisible = (key: ModalsEnum) => {

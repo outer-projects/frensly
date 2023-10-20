@@ -17,7 +17,7 @@ export class ChatStore {
   @action getMyChats = async () => {
     try {
       const res = await axios.get(prefix + "chat/available");
-      console.log("chats:", res.data);
+      // console.log("chats:", res.data);
       this.myChats = res.data;
     } catch (e) {
       console.log(e);
@@ -29,7 +29,7 @@ export class ChatStore {
   @action getChat = async (id:string) => {
     try {
       const res = await axios.get(prefix + "chat/room/" + id);
-      console.log("chat:", res.data);
+      // console.log("chat:", res.data);
       this.chat = res.data.room;
     } catch (e) {
       console.log(e);
@@ -42,7 +42,7 @@ export class ChatStore {
     file && formdata.append("file", file);
     try {
       const res = await axios.post(prefix + "chat/message/" + id, formdata);
-      console.log("message sent:", res.data);
+      // console.log("message sent:", res.data);
       
     } catch (e:any) {
       console.log(e?.status);

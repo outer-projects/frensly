@@ -71,7 +71,7 @@ export const USDEthPair = async () => {
     const res = await axios.get(
       "https://api.coingecko.com/api/v3/simple/price?ids=ethereum&vs_currencies=usd"
     );
-    console.log(res.data);
+    // console.log(res.data);
     return Number(res.data.ethereum.usd);
   } catch (e) {
     console.log(e);

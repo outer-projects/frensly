@@ -5,6 +5,7 @@ import { ModalsEnum } from "../modals";
 import { IPost } from "../types/feed";
 import axios from "axios";
 import { prefix } from "../utils/config";
+import { toast } from "react-toastify";
 
 @injectable()
 export class FeedStore {
@@ -21,7 +22,7 @@ export class FeedStore {
     }).toString();
     try {
       const res = await axios.get(prefix + "social/posts?" + query);
-      console.log(res.data);
+      // console.log(res.data);
       this.feed = res.data;
     } catch (e) {
       console.log(e);
@@ -30,8 +31,8 @@ export class FeedStore {
   @action getCurrentPost = async (id: string) => {
     try {
       const res = await axios.get(prefix + "social/post/" + id);
-      console.log(res.data);
-      this.currentPost = res.data;
+      // console.log(res.data);
+      // this.currentPost = res.data;
     } catch (e) {
       console.log(e);
     }
@@ -43,7 +44,7 @@ export class FeedStore {
     }).toString();
     try {
       const res = await axios.get(prefix + "social/posts/" + id + "?" + query);
-      console.log(res.data);
+      // console.log(res.data);
       this.userPosts = res.data;
     } catch (e) {
       console.log(e);
@@ -59,7 +60,7 @@ export class FeedStore {
   ) => {
     try {
       const res = await axios.post(prefix + "social/like/" + id);
-      console.log(res.data);
+      // console.log(res.data);
       if (!isProfile) {
         const ind = this.feed.findIndex((el) => el._id == id);
         const likeInd = this.feed[ind].likes.findIndex((el) => el == userId);
@@ -95,7 +96,7 @@ export class FeedStore {
     try {
       const res = await axios.post(prefix + "social/repost/" + id);
       this.getFeed();
-      console.log(res.data);
+      // console.log(res.data);
       return true;
     } catch (e) {
       console.log(e);
@@ -111,11 +112,11 @@ export class FeedStore {
     const formdata = new FormData();
     formdata.append("text", data.text);
     data.originalPost && formdata.append("originalPost", data.originalPost);
-    console.log(data.media);
+    // console.log(data.media);
     data.media && formdata.append("file", data.media);
     try {
       const res = await axios.post(prefix + "social/post", formdata);
-      console.log(res);
+      // console.log(res);
       if (data.id) {
         this.getUserPosts(data.id);
       } else {
@@ -125,6 +126,7 @@ export class FeedStore {
       return true;
     } catch (e) {
       console.log(e);
+      // toast.error('Image is t')
       return false;
     }
   };

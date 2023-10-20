@@ -35,7 +35,7 @@ export class ExploreStore {
   @action searchUsers = async (search: string) => {
     try {
       const res = await axios.get(prefix + "user/search/" + search);
-      console.log(res.data.byAddress.concat(res.data.byNames));
+      // console.log(res.data.byAddress.concat(res.data.byNames));
       const result = res.data
       ? res.data.byAddress
           .concat(res.data.byNames)

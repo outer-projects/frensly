@@ -32,7 +32,7 @@ const ConnectButtonCustom = observer(() => {
       }) => {
         const { data: walletClient } = useWalletClient({
           onSuccess(data) {
-            console.log("Success", data);
+            // console.log("Success", data);
             setSigner(data, chain?.unsupported);
           },
         });
@@ -51,7 +51,7 @@ const ConnectButtonCustom = observer(() => {
 
         useEffect(() => {
           setConnected(connected as boolean);
-          console.log("object");
+          // console.log("object");
           if (connected) {
             setAddress(account);
             setUserBalance(account.displayBalance as string);

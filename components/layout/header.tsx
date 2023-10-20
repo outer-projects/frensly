@@ -33,7 +33,7 @@ const Header = observer(() => {
   }, []);
   useEffect(() => {
     if (router.asPath) {
-      console.log(router.asPath);
+      // console.log(router.asPath);
       setActive(router.asPath);
       checkAuth();
     }
@@ -41,7 +41,7 @@ const Header = observer(() => {
   const ref = useDetectClickOutside({
     onTriggered: () => {
       if (nots) {
-        console.log("object");
+        // console.log("object");
         setNots(false);
       }
     },
@@ -54,7 +54,7 @@ const Header = observer(() => {
         </Link>
         <div className={style.header__row}>
           {headerText.map((el, i) => {
-            console.log(el.link == "/profile");
+            // console.log(el.link == "/profile");
             return (
               <Link
                 href={
@@ -121,7 +121,7 @@ const Header = observer(() => {
           >
             <img className={style.header__mobile__menu__close} src="../../icons/Close.svg" onClick={()=>{setMenuMob(false)}}/>
             {headerText.map((el, i) => {
-              console.log(el.link == "/profile");
+              // console.log(el.link == "/profile");
               return (
                 <Link
                   href={

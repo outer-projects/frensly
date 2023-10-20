@@ -38,7 +38,7 @@ export const SellModal = observer(({ key, data, idx }: modalProps) => {
           from: address,
           // value: currentPrice,
         });
-      console.log(res);
+      // console.log(res);
       modalStore.hideAllModals();
       checkAuth();
     } catch (e) {
@@ -51,7 +51,7 @@ export const SellModal = observer(({ key, data, idx }: modalProps) => {
       const res = await frensly.methods
         .getSellPriceAfterFee(data.user?.account?.address, Number(num) * 10 ** 6)
         .call();
-      console.log(res);
+      // console.log(res);
       return res
     } catch (e) {
       console.log(e);
@@ -69,7 +69,7 @@ export const SellModal = observer(({ key, data, idx }: modalProps) => {
       const res = await frensly.methods
         .sharesBalance(data?.user?.account?.address, address)
         .call();
-      console.log(res);
+      // console.log(res);
       setCount(Number(res)/(10 ** 6));
     } catch (e) {
       console.log(e);

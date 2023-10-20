@@ -57,7 +57,7 @@ const Finance = observer(() => {
       const res = await frensly.methods.claim().send({
         from: address,
       });
-      console.log(res);
+      // console.log(res);
       setClaimValue(Number(res));
       checkAuth();
       getClaim();
@@ -68,7 +68,7 @@ const Finance = observer(() => {
   const getClaim = async () => {
     try {
       const res = await frensly.methods.availableToClaim(address).call();
-      console.log("availableToClaim: ", res);
+      // console.log("availableToClaim: ", res);
       setClaimValue(Number(res));
     } catch (e) {
       console.log(e);
@@ -86,7 +86,7 @@ const Finance = observer(() => {
       getClaim();
     }
   }, [frensly]);
-  console.log(keys);
+  // console.log(keys);
   return (
     <div className={style.finance__page}>
       <Sidebar />

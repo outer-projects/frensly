@@ -47,7 +47,7 @@ const Pagination = observer(({ children, length, scrollRef, forceFirstPage }: Pa
 
     useEffect(() => {
       if (forceFirstPage) {
-        console.log("FIRST PAGE");
+        // console.log("FIRST PAGE");
         setPage(0);
         clearFilter();
       }

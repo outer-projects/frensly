@@ -44,7 +44,7 @@ const Profile = observer(() => {
       const res = await frensly.methods
         .getBuyPriceAfterFee(profileUser?.account?.address, Number(1) * 10 ** 6)
         .call();
-      console.log(res);
+      // console.log(res);
       setPricePerShade(Number(res));
     } catch (e) {
       console.log(e);
@@ -62,7 +62,7 @@ const Profile = observer(() => {
       const res = await frensly.methods
         .sharesBalance(profileUser?.account?.address, address)
         .call();
-      console.log(res);
+      // console.log(res);
       setCount(Number(res) / 10 ** 6);
     } catch (e) {
       console.log(e);
@@ -79,11 +79,11 @@ const Profile = observer(() => {
   }, []);
   useEffect(() => {
     if (myChats) {
-      console.log("myChats", myChats);
+      // console.log("myChats", myChats);
       let userChts = myChats.filter(
         (el) => el?.room?.owner?._id == profileUser?._id
       );
-      console.log(userChts[0]);
+      // console.log(userChts[0]);
       setUserChat(
         userChts && userChts.length !== 0 ? userChts[0]?.room : undefined
       );
@@ -158,7 +158,7 @@ const Profile = observer(() => {
                 !isFollowed ? style.profile__follow : style.profile__unfollow
               )}
               onClick={() => {
-                console.log("Follow");
+                // console.log("Follow");
                 followUser(isFollowed);
               }}
             >
@@ -210,14 +210,14 @@ const Profile = observer(() => {
           <div className={style.profile__stats__row}>
             <div className={style.profile__stats__line}>
               <div className={style.profile__text}>TVH</div>
-              <div className={classNames(style.profile__text, style.black, style.right)}>
+              <div className={classNames(style.profile__text, style.black)}>
                 <img src="../icons/Info.svg" />
                 $??
               </div>
             </div>
             <div className={style.profile__stats__line}>
               <div className={style.profile__text}>Volume</div>
-              <div className={classNames(style.profile__text, style.black)}>
+              <div className={classNames(style.profile__text, style.black, style.right)}>
                 {fromWeiToEth(profileUser?.account?.totalVolume as string)} ETH
               </div>
             </div>
