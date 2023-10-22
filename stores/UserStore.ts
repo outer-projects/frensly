@@ -75,7 +75,7 @@ export class UserStore {
     try {
       const res = await axios.get(prefix + "user/notifications/unread");
       console.log(res);
-      // this.notifications = res.data;
+      this.notifications = res.data;
     } catch (e) {
       console.log(e);
     }

@@ -63,7 +63,7 @@ const Header = observer(() => {
       }
     },
   });
-  console.log(unreadCount)
+  console.log(unreadCount);
   return (
     <div className={style.header__container}>
       <header className={style.header}>
@@ -108,7 +108,13 @@ const Header = observer(() => {
             }}
             style={{ cursor: "pointer" }}
           >
-            <Bell isActive={false} />
+            <div style={{ display: "flex", alignItems: "flex-end" }}>
+              <Bell isActive={false} />
+
+              {unreadCount != 0 && (
+                <div className={style.header__count}>{unreadCount}</div>
+              )}
+            </div>
             {nots && <Notifications />}
           </div>
           <ConnectButtonCustom isHeader />
@@ -117,14 +123,13 @@ const Header = observer(() => {
       <header className={style.header__mobile}>
         <ConnectButtonCustom isHeader />
         <div className={style.header__user}>
-          
           <div
             onClick={() => {
               setNotsMob(!notsMob);
             }}
             style={{ cursor: "pointer" }}
           >
-            <div style={{ display: "flex" }}>
+            <div style={{ display: "flex", alignItems: "flex-end" }}>
               <Bell isActive={false} />
 
               {unreadCount != 0 && (
