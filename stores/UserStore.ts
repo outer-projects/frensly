@@ -58,6 +58,9 @@ export class UserStore {
       return false;
     }
   };
+  @action addOneNotification = (not:any) =>{
+    this.notifications = [...this.notifications, not]
+  }
   @action getNotifications = async (id: string) => {
     const query = new URLSearchParams();
     query.append("types", "SELL");

@@ -21,7 +21,7 @@ const Header = observer(() => {
   const [nots, setNots] = useState(false);
   const [notsMob, setNotsMob] = useState(false);
   const { user, checkAuth } = useInjection(Web3Store);
-  const { getEthCurrency } = useInjection(UserStore);
+  const { getEthCurrency, addOneNotification } = useInjection(UserStore);
 
   const headerText = [
     { name: "Ponds", link: "/ponds" },
@@ -37,6 +37,7 @@ const Header = observer(() => {
     });
     socket.on("notification", (not: any) => {
       console.log("notification: ", not);
+      addOneNotification(not)
     });
 
     return () => {
