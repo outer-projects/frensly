@@ -21,6 +21,7 @@ const Write = ({
 }) => {
   const { user } = useInjection(Web3Store);
   const [openMentions, setOpenMentions] = useState(false);
+  const [mentionSearch, setMentionSearch] = useState("");
   const onKeyDown = (e: any) => {
     console.log(e, e.key);
     if (e.key == "Enter" && (newMsg !== "" || file)) {
@@ -39,6 +40,7 @@ const Write = ({
     setNewMsg(newMsg + "{" + el + "} ");
     setOpenMentions(false);
   };
+
   useEffect(() => {
     window.addEventListener("keydown", onKeyDown);
 
@@ -53,7 +55,8 @@ const Write = ({
           <div className={style.write__mentions}>
             {members
               .filter((el) => el.twitterId !== user?.twitterId)
-              .map((el:any, i:number) => {
+              .filter((el) => el.twitterHandle.includes(mentionSearch))
+              .map((el: any, i: number) => {
                 return (
                   <div
                     className={style.write__mention}
@@ -79,11 +82,13 @@ const Write = ({
           className={style.write__input}
           value={newMsg}
           onChange={(e) => {
-            console.log(e);
-            // if (e == "Delete") {
-            //   console.log(newMsg);
-            //   setOpenMentions(true);
-            // }
+            let after = e.target.value.split("@");
+            console.log(after[after.length - 1]);
+            if (openMentions) {
+              setMentionSearch(after[after.length - 1]);
+            } else {
+              setMentionSearch("");
+            }
             setNewMsg(e.target.value);
           }}
           placeholder="Write something"
