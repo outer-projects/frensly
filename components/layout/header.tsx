@@ -42,7 +42,7 @@ const Header = observer(() => {
       getNotifications();
       getUnreadCount();
     });
-    // getNotifications();
+    getNotifications();
     getUnreadCount();
     return () => {
       socket.emit("logout");

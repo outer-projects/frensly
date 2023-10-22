@@ -74,8 +74,8 @@ export class UserStore {
   @action getNotifications = async () => {
     try {
       const res = await axios.get(prefix + "user/notifications/unread");
-      // console.log(res.data);
-      this.notifications = res.data;
+      console.log(res.data);
+      // this.notifications = res.data;
     } catch (e) {
       console.log(e);
     }
