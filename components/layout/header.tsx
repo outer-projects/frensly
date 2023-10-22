@@ -36,7 +36,7 @@ const Header = observer(() => {
       console.log(res);
     });
     socket.on("notification", (not: any) => {
-      console.log(not);
+      console.log("notification: ", not);
     });
 
     return () => {
