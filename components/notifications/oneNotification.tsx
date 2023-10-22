@@ -17,7 +17,7 @@ const OneNotification = observer(({ notification }: { notification: any }) => {
           {notification.account.profile.twitterName}{" "}
           {getActivity(notification.type)}{" "}
           {notification.amount && Number(notification.amount) / 10 ** 6}{" "}
-          {notification.account.profile.twitterId !=user?.twitterId && notification.subject.profile.twitterName }
+          {notification.account.profile.twitterId !== user?.twitterId && notification.subject.profile.twitterName }
         </div>
         <div className={style.nots__one__info}>
           {notification.price && (
