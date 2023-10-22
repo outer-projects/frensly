@@ -65,7 +65,7 @@ export class UserStore {
   @action getUnreadCount = async () => {
     try {
       const res = await axios.get(prefix + "user/notifications/count");
-      console.log(res.data);
+      console.log(res);
       // this.unreadCount = res.data;
     } catch (e) {
       console.log(e);
@@ -74,7 +74,7 @@ export class UserStore {
   @action getNotifications = async () => {
     try {
       const res = await axios.get(prefix + "user/notifications/unread");
-      console.log(res.data);
+      console.log(res);
       // this.notifications = res.data;
     } catch (e) {
       console.log(e);
