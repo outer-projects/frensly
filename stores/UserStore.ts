@@ -15,7 +15,7 @@ export class UserStore {
   @observable history: any[] = [];
   @observable keys: any[] = [];
   @observable notifications: any[] = [];
-  @observable unreadCount: number = 0
+  @observable unreadCount: number = 0;
   @observable active: number = 0;
   @observable currentType: number = 2;
   @observable profileUser?: IProfile = undefined;
@@ -66,7 +66,7 @@ export class UserStore {
     try {
       const res = await axios.get(prefix + "user/notifications/count");
       console.log(res);
-      // this.unreadCount = res.data;
+      this.unreadCount = Number(res.data);
     } catch (e) {
       console.log(e);
     }

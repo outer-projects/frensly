@@ -3,10 +3,18 @@ import OneNotification from "./oneNotification";
 import { observer } from "mobx-react";
 import { useInjection } from "inversify-react";
 import { UserStore } from "../../stores/UserStore";
+import { useEffect } from "react";
 
 const Notifications = observer(
   ({ setNots }: { setNots?: (n: boolean) => void }) => {
     const { notifications } = useInjection(UserStore);
+    const { getNotifications, getUnreadCount } = useInjection(UserStore);
+    useEffect(() => {
+      getNotifications();
+      return () => {
+        getUnreadCount();
+      };
+    }, []);
     return (
       <div className={style.nots}>
         <div className={style.nots__title}>
@@ -23,7 +31,7 @@ const Notifications = observer(
           {notifications.map((el, i) => {
             // console.log(el);
             // if (i <= 4) {
-              return <OneNotification key={el._id} notification={el} />;
+            return <OneNotification key={el._id} notification={el} />;
             // }
           })}
         </div>
