@@ -65,8 +65,8 @@ export class UserStore {
   @action getUnreadCount = async () => {
     try {
       const res = await axios.get(prefix + "user/notifications/count");
-      // console.log(res.data);
-      this.unreadCount = res.data;
+      console.log(res.data);
+      // this.unreadCount = res.data;
     } catch (e) {
       console.log(e);
     }
