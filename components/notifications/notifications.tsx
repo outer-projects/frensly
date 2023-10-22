@@ -34,7 +34,9 @@ const Notifications = observer(
             return <OneNotification key={el._id} notification={el} />;
             // }
           })}
-          {notifications.length == 0 && "You don't have unwatched notifications yet"}
+          {notifications.length == 0 && (
+            <div className={style.nots__mention}>You don't have unwatched notifications yet</div>
+          )}
         </div>
       </div>
     );
