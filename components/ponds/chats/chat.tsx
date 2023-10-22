@@ -316,6 +316,7 @@ const Chat = observer(() => {
               newMsg={newMsg}
               setNewMsg={setNewMsg}
               file={file}
+              members={chat.members}
               setFile={setFile}
               onSend={() => {
                 sendMessage(id as string, newMsg, file);
