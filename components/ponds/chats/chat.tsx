@@ -15,6 +15,7 @@ import { fromWeiToEth, getDate } from "../../../utils/utilities";
 import { SocketContext } from "../../../utils/socket";
 import { ChatStore } from "../../../stores/ChatStore";
 import Link from "next/link";
+import OneMessage from "./oneMessage";
 const Chat = observer(() => {
   const socket = useContext(SocketContext);
   const [newMsg, setNewMsg] = useState("");
@@ -233,68 +234,8 @@ const Chat = observer(() => {
             </div>
             <div className={style.openchat__messages} ref={messagesEndRef}>
               {newMsgList
-                .map((el, i) => {
-                  return (
-                    <div
-                      className={classNames(
-                        el.user.twitterId == user?.twitterId
-                          ? style.openchat__my_message__container
-                          : style.openchat__message_to_me__container
-                      )}
-                      key={el._id}
-                    >
-                      {el.media && (
-                        <img src={el.media} className={style.openchat__img} />
-                      )}
-                      <div className={style.openchat__left}>
-                        {el.user.twitterId !== user?.twitterId && (
-                          <img
-                            className={style.openchat__avatar}
-                            src={el.user.avatar}
-                          />
-                        )}
-                        <div
-                          className={classNames(
-                            el.user.twitterId == user?.twitterId
-                              ? style.openchat__msg_container__my
-                              : style.openchat__msg_container
-                          )}
-                        >
-                          <div
-                            className={classNames(
-                              style.openchat__name,
-                              el.user.twitterId == user?.twitterId &&
-                                style.openchat__mydate
-                            )}
-                          >
-                            {el.user.twitterId !== user?.twitterId && (
-                              <div>{el.user.twitterName}</div>
-                            )}
-                            {el.text == "" && (
-                              <div className={style.openchat__time}>
-                                {getDate(el.date)}
-                              </div>
-                            )}
-                          </div>
-                          {el.text !== "" && (
-                            <div
-                              className={classNames(
-                                el.user.twitterId == user?.twitterId
-                                  ? style.openchat__my_message
-                                  : style.openchat__message_to_me
-                              )}
-                              key={el._id}
-                            >
-                              {el.text}
-                              <div className={style.openchat__time}>
-                                {getDate(el.date)}
-                              </div>
-                            </div>
-                          )}
-                        </div>
-                      </div>
-                    </div>
-                  );
+                .map((el) => {
+                  return <OneMessage el={el} key={el._id} />;
                 })
                 .reverse()}
               {/* {Array.from({ length: 10 }).map((el, i) => {
