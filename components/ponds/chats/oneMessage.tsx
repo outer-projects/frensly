@@ -5,13 +5,15 @@ import { getDate } from "../../../utils/utilities";
 import { useInjection } from "inversify-react";
 import Web3Store from "../../../stores/Web3Store";
 import { useMemo } from "react";
+// @ts-ignore
+import Highlighter from "react-highlight-words";
 const OneMessage = observer(({ el }: any) => {
   const { user } = useInjection(Web3Store);
   const mentions = useMemo(() => {
     const result = el.text
-      .match(/{[\w\s]+}/g)
-      .map((s:any) => s.slice(1, s.length - 1));
-    return result
+      .match(/@{[\w\s]+}/g)
+      .map((s: any) => "@" + (s.slice(1, s.length - 1)));
+    return result;
   }, [el.text]);
   console.log(mentions);
   return (
@@ -57,7 +59,12 @@ const OneMessage = observer(({ el }: any) => {
               )}
               key={el._id}
             >
-              {el.text}
+              <Highlighter
+                highlightClassName={style.openchat__mention}
+                searchWords={mentions}
+                autoEscape={true}
+                textToHighlight={el.text.replace("{", "").replace("}", "")}
+              />{" "}
               <div className={style.openchat__time}>{getDate(el.date)}</div>
             </div>
           )}

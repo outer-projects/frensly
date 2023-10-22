@@ -42,6 +42,7 @@
     "react-detect-click-outside": "^1.1.7",
     "react-dom": "^18.2.0",
     "react-gaussian-blur": "^1.0.6",
+    "react-highlight-words": "^0.20.0",
     "react-input-autosize": "^3.0.0",
     "react-paginate": "^8.2.0",
     "react-player": "^2.12.0",
