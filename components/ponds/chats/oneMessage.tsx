@@ -10,8 +10,8 @@ import Highlighter from "react-highlight-words";
 const OneMessage = observer(({ el }: any) => {
   const { user } = useInjection(Web3Store);
   const mentions = useMemo(() => {
-    const text = el.text.match(/@{[\w\s]+}/g);
-    const result = text ? text.map((s: any) => "@" + s.slice(1, s.length - 1)) : []
+    const text = el.text.match(/{[\w\s]+}/g);
+    const result = text ? text.map((s: any) => s.slice(1, s.length - 1)) : []
     return result;
   }, [el.text]);
   console.log(mentions);
@@ -60,7 +60,7 @@ const OneMessage = observer(({ el }: any) => {
             >
               <Highlighter
                 highlightClassName={style.openchat__mention}
-                searchWords={mentions}
+                searchWords={mentions.map((el:any)=> "@" + el)}
                 autoEscape={true}
                 textToHighlight={el.text.replace("{", "").replace("}", "")}
               />{" "}
