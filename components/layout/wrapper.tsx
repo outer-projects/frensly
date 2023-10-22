@@ -13,7 +13,7 @@ import { prefix } from "../../utils/config";
 import AuthBanner from "../authBanner/authBanner";
 
 const Wrapper = observer(({ children }: any) => {
-  const { init, setInit, getActivity } = useInjection(UserStore);
+  const { init, setInit, getNotifications } = useInjection(UserStore);
   const {
     web3,
     frensly,
@@ -40,7 +40,7 @@ const Wrapper = observer(({ children }: any) => {
   useEffect(() => {
     if (web3 && address && user?.account && frensly) {
       isInit();
-      getActivity(user.account._id);
+      getNotifications(user.account._id);
     }
   }, [web3, address, user]);
 

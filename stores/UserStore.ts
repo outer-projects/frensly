@@ -14,7 +14,7 @@ export class UserStore {
   @observable ethCurrency: number = 0;
   @observable history: any[] = [];
   @observable keys: any[] = [];
-  @observable activity: any[] = [];
+  @observable notifications: any[] = [];
   @observable active: number = 0;
   @observable currentType: number = 2;
   @observable profileUser?: IProfile = undefined;
@@ -58,17 +58,21 @@ export class UserStore {
       return false;
     }
   };
-  @action getActivity = async (id: string) => {
+  @action getNotifications = async (id: string) => {
     const query = new URLSearchParams();
     query.append("types", "SELL");
     query.append("types", "BUY");
     query.append("types", "INIT");
+    query.append("types", "COMMENT");
+    query.append("types", "REPOST");
+    query.append("types", "MENTION");
+    query.append("types", "REPLY");
     try {
       const res = await axios.get(
         prefix + "user/history/subject/" + id + "?" + query.toString()
       );
       // console.log(res.data);
-      this.activity = res.data;
+      this.notifications = res.data;
     } catch (e) {
       console.log(e);
     }
@@ -78,6 +82,10 @@ export class UserStore {
     query.append("types", "SELL");
     query.append("types", "BUY");
     query.append("types", "INIT");
+    // query.append("types", "COMMENT");
+    // query.append("types", "REPOST");
+    // query.append("types", "MENTION");
+    // query.append("types", "REPLY");
     try {
       const res = await axios.get(
         prefix + "user/history/account/" + id + "?" + query.toString()

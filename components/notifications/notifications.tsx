@@ -6,7 +6,7 @@ import { UserStore } from "../../stores/UserStore";
 
 const Notifications = observer(
   ({ setNots }: { setNots?: (n: boolean) => void }) => {
-    const { activity } = useInjection(UserStore);
+    const { notifications } = useInjection(UserStore);
     return (
       <div className={style.nots}>
         <div className={style.nots__title}>
@@ -20,10 +20,10 @@ const Notifications = observer(
           />
         </div>
         <div className={style.nots__col}>
-          {activity.map((el, i) => {
+          {notifications.map((el, i) => {
             // console.log(el);
             // if (i <= 4) {
-              return <OneNotification key={el._id} activity={el} />;
+              return <OneNotification key={el._id} notification={el} />;
             // }
           })}
         </div>
