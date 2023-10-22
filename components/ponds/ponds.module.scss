@@ -473,15 +473,26 @@
   border-top-right-radius: 12px;
   border-top-left-radius: 12px;
   margin-top: -100px;
-  min-height: 100px;
+  max-height: 100px;
   overflow-y: auto;
   width: 616px;
-  padding-left: 20px;
+  padding-left: 8px;
+  padding-bottom: 8px;
   margin-left: -16px;
-  background-color: #f1f1f1;
+  background: #f8f8f8;
   display: flex;
   align-items: flex-start;
-  flex-direction: column-reverse;
+  flex-direction: column;
+}
+.write__mention {
+  width: 100%;
+  margin-bottom: 8px;
+  padding: 8px;
+  cursor: pointer;
+  border-radius: 12px;
+  &:hover {
+    background: #f1f1f1;
+  }
 }
 .write__input {
   color: $black;

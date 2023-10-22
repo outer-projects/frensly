@@ -25,7 +25,10 @@ const Write = ({
     if (e.key == "@") {
       setOpenMentions(true);
     }
-    
+    // console.log(newMsg.slice(-1));
+    // if (e.key == "Backspace" && newMsg.slice(-1) == "@") {
+    //   setOpenMentions(false);
+    // }
   };
   useEffect(() => {
     window.addEventListener("keydown", onKeyDown);
@@ -42,7 +45,7 @@ const Write = ({
             {linst.map((el, i) => {
               return (
                 <div className={style.write__mention} key={i}>
-                  {el}
+                  @{el}
                 </div>
               );
             })}
