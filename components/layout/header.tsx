@@ -110,10 +110,9 @@ const Header = observer(() => {
           >
             <div style={{ display: "flex", alignItems: "flex-end" }}>
               <Bell isActive={false} />
-
-              {unreadCount != 0 && (
-                <div className={style.header__count}>{unreadCount}</div>
-              )}
+              <div className={style.header__count}>
+                {unreadCount != 0 && unreadCount }
+              </div>
             </div>
             {nots && <Notifications />}
           </div>

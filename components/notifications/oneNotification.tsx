@@ -1,6 +1,11 @@
+import { observer } from "mobx-react";
 import { fromWeiToEth, timePassed } from "../../utils/utilities";
 import style from "./notifications.module.scss";
-const OneNotification = ({ notification }: { notification: any }) => {
+import { getActivity } from "./oneActivity";
+import { useInjection } from "inversify-react";
+import Web3Store from "../../stores/Web3Store";
+const OneNotification = observer(({ notification }: { notification: any }) => {
+  const {user} = useInjection(Web3Store)
   return (
     <div className={style.nots__one}>
       <div className={style.nots__one__users}>
@@ -9,9 +14,10 @@ const OneNotification = ({ notification }: { notification: any }) => {
       </div>
       <div>
         <div className={style.nots__one__text}>
-          {notification.account.profile.twitterName} bought{" "}
-          {Number(notification.amount) / 10 ** 6}{" "}
-          {notification.subject.profile.twitterName}
+          {notification.account.profile.twitterName}{" "}
+          {getActivity(notification.type)}{" "}
+          {notification.amount && Number(notification.amount) / 10 ** 6}{" "}
+          {notification.account.profile.twitterId !=user?.twitterId && notification.subject.profile.twitterName }
         </div>
         <div className={style.nots__one__info}>
           {notification.price && (
@@ -26,5 +32,5 @@ const OneNotification = ({ notification }: { notification: any }) => {
       </div>
     </div>
   );
-};
+});
 export default OneNotification;

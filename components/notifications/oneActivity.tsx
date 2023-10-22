@@ -1,22 +1,30 @@
 import { fromWeiToEth, getDate, timePassed } from "../../utils/utilities";
 import style from "./notifications.module.scss";
+export const getActivity = (type: string) => {
+  switch (type) {
+    case "BUY":
+      return " bought";
+    case "OWN_BUY":
+      return " bought";
+    case "SELL":
+      return " sell";
+    case "OWN_SELL":
+      return " sell";
+    case "LIKE":
+      return " liked your post";
+    case "REPOST":
+      return " reposted you";
+    case "COMMENT":
+      return " commented your post";
+    case "MENTION":
+      return " mentioned you";
+    case "INIT":
+      return " initialized successfully";
+    default:
+      return type.toLowerCase();
+  }
+};
 const OneActivity = ({ activity }: { activity: any }) => {
-  const getActivity = (type: string) => {
-    switch (type) {
-      case "BUY":
-        return " bought";
-      case "OWN_BUY":
-        return " bought";
-      case "SELL":
-        return " sell";
-      case "OWN_SELL":
-        return " sell";
-      case "INIT":
-        return " initialized successfully";
-      default:
-        return type.toLowerCase();
-    }
-  };
   return (
     <div className={style.activity__one}>
       <div className={style.activity__one__left}>
