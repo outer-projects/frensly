@@ -42,7 +42,7 @@ const Header = observer(() => {
       getNotifications();
       getUnreadCount();
     });
-    getNotifications();
+    // getNotifications();
     getUnreadCount();
     return () => {
       socket.emit("logout");
@@ -63,6 +63,7 @@ const Header = observer(() => {
       }
     },
   });
+  console.log(unreadCount)
   return (
     <div className={style.header__container}>
       <header className={style.header}>
@@ -116,6 +117,7 @@ const Header = observer(() => {
       <header className={style.header__mobile}>
         <ConnectButtonCustom isHeader />
         <div className={style.header__user}>
+          
           <div
             onClick={() => {
               setNotsMob(!notsMob);
@@ -124,6 +126,7 @@ const Header = observer(() => {
           >
             <div style={{ display: "flex" }}>
               <Bell isActive={false} />
+
               {unreadCount != 0 && (
                 <div className={style.header__count}>{unreadCount}</div>
               )}
