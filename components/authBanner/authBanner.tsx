@@ -162,15 +162,6 @@ const AuthBanner = observer(() => {
                   <div className={style.banner__join}>
                     Connect wallet that linked in {user?.twitterHandle}
                   </div>
-                  <div
-                    className={classNames(
-                      style.banner__join,
-                      style.button__buy
-                    )}
-                    style={{ marginTop: "56px" }}
-                  >
-                    Buy for 0.0001 ETH 1 share of twitter name
-                  </div>
                 </>
               )}
               {stage == "Invite" && (

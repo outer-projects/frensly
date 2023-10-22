@@ -19,10 +19,9 @@ const Header = observer(() => {
   const [active, setActive] = useState("");
   const [menuMob, setMenuMob] = useState(false);
   const [nots, setNots] = useState(false);
-  const [unviewedLength,setUnviewedLength] = useState(0)
   const [notsMob, setNotsMob] = useState(false);
   const { user, checkAuth } = useInjection(Web3Store);
-  const { getEthCurrency, addOneNotification, notifications } =
+  const { getEthCurrency, getNotifications, getUnreadCount, unreadCount } =
     useInjection(UserStore);
 
   const headerText = [
@@ -32,14 +31,7 @@ const Header = observer(() => {
     { name: "Explore", link: "/explore" },
     { name: "Finance", link: "/finance" },
   ];
-  useEffect(() => {
-    if (notifications && notifications.length > 0) {
-      let unviewed = notifications.filter((el) => 
-        !el?.viewed
-      );
-      setUnviewedLength(unviewed?.length)
-    }
-  }, [notifications]);
+
   useEffect(() => {
     getEthCurrency();
     socket.emit("login", (res: any) => {
@@ -47,7 +39,8 @@ const Header = observer(() => {
     });
     socket.on("notification", (not: any) => {
       console.log("notification: ", not);
-      addOneNotification(not);
+      getNotifications();
+      getUnreadCount();
     });
 
     return () => {
@@ -128,7 +121,12 @@ const Header = observer(() => {
             }}
             style={{ cursor: "pointer" }}
           >
-            <Bell isActive={false} />
+            <div style={{ display: "flex" }}>
+              <Bell isActive={false} />
+              {unreadCount != 0 && (
+                <div className={style.header__count}>{unreadCount}</div>
+              )}
+            </div>
             {notsMob && <Notifications setNots={setNotsMob} />}
           </div>
           <img

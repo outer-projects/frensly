@@ -15,6 +15,7 @@ export class UserStore {
   @observable history: any[] = [];
   @observable keys: any[] = [];
   @observable notifications: any[] = [];
+  @observable unreadCount: number = 0
   @observable active: number = 0;
   @observable currentType: number = 2;
   @observable profileUser?: IProfile = undefined;
@@ -58,15 +59,21 @@ export class UserStore {
       return false;
     }
   };
-  @action addOneNotification = (not:any) =>{
-    this.notifications = [...this.notifications, not]
-  }
-  @action getNotifications = async (id: string) => {
-
+  @action addOneNotification = (not: any) => {
+    this.notifications = [...this.notifications, not];
+  };
+  @action getUnreadCount = async () => {
     try {
-      const res = await axios.get(
-        prefix + "user/notifications" 
-      );
+      const res = await axios.get(prefix + "user/notifications/count");
+      // console.log(res.data);
+      this.unreadCount = res.data;
+    } catch (e) {
+      console.log(e);
+    }
+  };
+  @action getNotifications = async () => {
+    try {
+      const res = await axios.get(prefix + "user/notifications/unread");
       // console.log(res.data);
       this.notifications = res.data;
     } catch (e) {
