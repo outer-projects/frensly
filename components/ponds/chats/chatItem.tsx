@@ -47,7 +47,10 @@ const ChatItem = observer(
                   {/* @ts-ignore */}
                   <span>{messages[0]?.user?.twitterName + ": "} </span>
                   {messages[0]?.text?.length > 10
-                    ? messages[0].text.slice(0, 10) + "..."
+                    ? messages[0].text
+                        .replace("{", "")
+                        .replace("}", "")
+                        .slice(0, 10) + "..."
                     : messages[0].text}
                 </div>
               ) : (
