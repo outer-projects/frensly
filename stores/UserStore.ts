@@ -76,8 +76,10 @@ export class UserStore {
       const res = await axios.get(prefix + "user/notifications/unread");
       console.log(res);
       this.notifications = res.data;
+      return true
     } catch (e) {
       console.log(e);
+      return false
     }
   };
   @action getHistory = async (id: string) => {
