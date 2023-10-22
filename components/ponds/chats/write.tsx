@@ -37,7 +37,7 @@ const Write = ({
     }
   };
   const mention = (el: string) => {
-    setNewMsg(newMsg + "{" + el + "} ");
+    setNewMsg(newMsg.replace(mentionSearch, "") + "{" + el + "} ");
     setOpenMentions(false);
   };
 
