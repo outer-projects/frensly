@@ -15,16 +15,93 @@ import ProgressBar from "../progressBar/progressBar";
 import { toWei } from "web3-utils";
 import { toast } from "react-toastify";
 const AuthBanner = observer(() => {
-  const [title, setTitle] = useState("Creator economy onchain");
-  const [stage, setStage] = useState("Authorization");
+  const { address, authStatus, frensly, user, checkAuth } =
+    useInjection(Web3Store);
+  const { setActive, setInit, sendInviteCode } = useInjection(UserStore);
+  const [title, setTitle] = useState("");
+  const [invite, setInvite] = useState("");
+  const [stage, setStage] = useState("");
   const [opacity, setOpacity] = useState(false);
+  const [activeCode, setActiveCode] = useState(false);
 
+  useEffect(() => {
+    if (user?.account && !address) {
+      setStage("Connect wallet");
+    } else if (!user) {
+      setStage("Authorization");
+    } else if (user && !user?.isKeyConfirmed) {
+      setStage("Invite");
+    } else if (user && user?.isKeyConfirmed && !user?.account) {
+      setStage("Connect");
+    } else if (user?.account && user?.isKeyConfirmed) {
+      setStage("Connected");
+    }
+  }, [user, authStatus, address]);
+  // console.log(user, stage, address);
+  useEffect(() => {
+    switch (stage) {
+      case "Authorization":
+        setTitle("Creator economy onchain");
+        setActive(0);
+        return;
+      case "Connect":
+        setTitle("You are early!");
+        setTitle("Creator economy onchain");
+        setActive(1);
+        return;
+      case "Invite":
+        setTitle("Creator economy onchain");
+        setActive(1);
+        return;
+      case "Connected":
+        setTitle("Create my pond");
+        setActive(2);
+        return;
+      case "Connect wallet":
+        setTitle("Connect wallet");
+        setActive(2);
+        return;
+      default:
+        return;
+    }
+  }, [stage]);
+  const postCode = () => {
+    sendInviteCode(invite).then((res) => {
+      if (res) {
+        checkAuth();
+      } else {
+        toast.error("Code is not correct");
+      }
+    });
+  };
+  const init = async () => {
+    if (address?.toLowerCase() !== user?.account?.address)
+      return toast.error("Address is not assigned to this account");
+    try {
+      await frensly.methods.initShares().send({
+        from: address,
+      });
+      const isInit = await frensly.methods.isSharesSubject(address).call();
+      setInit(isInit);
+    } catch (e) {
+      toast.error("Provider error");
+      console.log(e);
+    }
+  };
+  useEffect(() => {
+    let tt = setTimeout(() => {
+      setOpacity(true);
+    }, 1000);
+    return () => {
+      clearTimeout(tt);
+    };
+  }, []);
   return (
     <>
-      {stage !== "Connect wallet" ? (
-        <div className={style.banner}>
-          <div className={style.banner__top}>
-            <img src="../logo.svg" className={style.banner__logo} />
+      {
+        <div className={style.banner} style={{ opacity: opacity ? 1 : 0 }}>
+          <img src="../logo.svg" className={style.banner__logo} />
+          <div className={style.banner__col}>
             <div
               className={classNames(
                 style.banner__title,
@@ -53,10 +130,37 @@ const AuthBanner = observer(() => {
                   </div>
                 </>
               )}
+              {stage == "Invite" && (
+                <>
+                  <div
+                    className={classNames(
+                      style.banner__join,
+                      style.banner__select
+                    )}
+                  >
+                    We are still in closed beta.
+                    <br /> To join service please write your invite code
+                  </div>
+                </>
+              )}
               {stage == "Connected" && (
                 <>
+                  <div
+                    className={classNames(
+                      style.banner__join,
+                      style.banner__select
+                    )}
+                  >
+                    To start using our app you need
+                    <br /> to initialise your account first
+                  </div>
+                </>
+              )}
+
+              {stage == "Connect wallet" && (
+                <>
                   <div className={style.banner__join}>
-                    To enter a pond, you need to buy your first share
+                    Connect wallet that linked in {user?.twitterHandle}
                   </div>
                   <div
                     className={classNames(
@@ -69,25 +173,81 @@ const AuthBanner = observer(() => {
                   </div>
                 </>
               )}
+              {stage == "Invite" && (
+                <div className={style.banner__invite}>
+                  <input
+                    className={classNames(
+                      style.banner__code,
+                      activeCode && style.banner__code__active
+                    )}
+                    value={invite}
+                    onFocus={() => {
+                      setActiveCode(true);
+                    }}
+                    onBlur={() => {
+                      setActiveCode(false);
+                    }}
+                    placeholder="Your invite code"
+                    onChange={(e) => {
+                      setInvite(e.target.value);
+                    }}
+                  />
+                  <div
+                    className={style.banner__post}
+                    style={{
+                      cursor: "pointer",
+                      transform: "translateX(-16px)",
+                    }}
+                    onClick={postCode}
+                  >
+                    Enter
+                  </div>
+                </div>
+              )}
               {stage == "Authorization" && (
                 <div>
+                  <a
+                    href="https://frensly.io/api/v1/auth/twitter"
+                    style={{ textDecoration: "none" }}
+                  >
+                    <button
+                      className={header.connect__button}
+                      style={{ width: "200px", height: "64px" }}
+                    >
+                      <Twitter color={"black"} />
+                      Authorise
+                    </button>
+                  </a>
+                </div>
+              )}
+              <div
+                className={style.banner__early}
+                style={{ display: stage == "Connect" ? "flex" : "none" }}
+              >
+                <ConnectButtonCustom />
+                <div className={style.banner__small__text}>
+                  The wallet can't be changed
+                </div>
+              </div>
+              {stage == "Connected" && (
+                <div className={style.banner__early}>
                   <button
                     className={header.connect__button}
-                    style={{
-                      width: "200px",
-                      height: "64px",
-                      backgroundColor: "#B4B4B4",
-                      cursor: "default",
-                    }}
+                    style={{ width: "221px", height: "64px" }}
+                    onClick={() => init()}
                   >
-                    <Twitter color={"black"} />
-                    Authorise (soon)
+                    Initialize
                   </button>
+                </div>
+              )}
+              {stage == "Connect wallet" && (
+                <div className={style.banner__early}>
+                  <ConnectButtonCustom />
                 </div>
               )}
             </div>
           </div>
-          <div className={style.banner__top}>
+          <div className={style.banner__col}>
             <ProgressBar />
             <div
               className={classNames(style.banner__join, style.banner__bottom)}
@@ -112,11 +272,7 @@ const AuthBanner = observer(() => {
             </div>
           </div>
         </div>
-      ) : (
-        <div className={style.banner__center}>
-          <ConnectButtonCustom />
-        </div>
-      )}
+      }
     </>
   );
 });

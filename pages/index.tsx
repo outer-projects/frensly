@@ -1,24 +1,20 @@
 import { observer } from "mobx-react";
 import type { NextPage } from "next";
-import { useEffect, useState } from "react";
-import { useInjection } from "inversify-react";
-import { UserStore } from "../stores/UserStore";
-import ClaimLogin from "../components/claim/claimLogin";
 import style from "./home.module.scss";
-import Faq from "../components/faq/faq";
-import AirdropBanner from "../components/airdrop/airdropBanner";
-import AuthBanner from "../components/authBanner/authBanner";
+import { useEffect } from "react";
 import Head from "next/head";
+import { useRouter } from "next/router";
 
 const Home: NextPage = observer((props) => {
+  const { push } = useRouter();
+  useEffect(()=>{
+    push('/explore')
+  },[])
   return (
     <div className={style.main__page}>
       <Head>
         <title>Frensly</title>
       </Head>
-      <AuthBanner />
-      {/* <ClaimLogin />
-      <Faq/> */}
     </div>
   );
 });

@@ -1,12 +1,21 @@
-
 .main__page {
-    display: flex;
-    flex-direction: column;
-    width: 600px;
-    height: 100vh;
-    min-height: 650px;
-    @media (max-width:700px) {
-        width: 100%;
+  display: flex;
+  flex-direction: column;
 
-    }
+  @media (max-width: 700px) {
+    width: 100%;
+  }
+}
+.explore__page {
+  display: flex;
+  flex-direction: column;
+  width: 616px;
+  min-height: calc(100vh - 76px);
+  @media (max-width: 616px) {
+    max-width: calc(100%);
+    margin-top: 24px;
+  }
+}
+.finance__page {
+  min-height: calc(100vh - 76px);
 }

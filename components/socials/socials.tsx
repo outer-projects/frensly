@@ -1,5 +1,4 @@
 import Twitter from "./twitter";
-import Discord from "./discord";
 import Telegram from "./telegram";
 import Medium from "./medium";
 export const socials = [

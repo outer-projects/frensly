@@ -5,12 +5,16 @@ import { observer } from "mobx-react";
 import { useInjection } from "inversify-react";
 import { UserStore } from "../../stores/UserStore";
 const ProgressBar = observer(() => {
+  const { active } = useInjection(UserStore);
   return (
-    <div className={classNames(style.progress)}>
+    <div className={classNames(style.progress, active == 1 && style.progress1, active == 2 && style.progress2)}>
       {Array.from({ length: 3 }).map((el, i) => {
         return (
           <div
-            className={classNames(style.progress__part, i == 0 && style.active)}
+            className={classNames(
+              style.progress__part,
+              active >= i && style.active
+            )}
           />
         );
       })}

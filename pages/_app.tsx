@@ -1,8 +1,8 @@
 import "../styles/main.sass";
 import type { AppProps } from "next/app";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { RootStore } from "../stores/RootStore";
-import { Provider } from "inversify-react";
+import { Provider, useInjection } from "inversify-react";
 import { ModalsContainer } from "../modals";
 import "react-toastify/dist/ReactToastify.css";
 import React, { Suspense } from "react";
@@ -20,13 +20,15 @@ import {
   RainbowKitProvider,
 } from "@rainbow-me/rainbowkit";
 import { configureChains, createConfig, WagmiConfig } from "wagmi";
-import { bscTestnet, mainnet, goerli } from "wagmi/chains";
+import { bscTestnet, base, goerli } from "wagmi/chains";
 import { publicProvider } from "wagmi/providers/public";
 import { ToastContainer } from "react-toastify";
 import Wrapper from "../components/layout/wrapper";
 import "../components/polyfills";
+import { SocketContext, socket } from "../utils/socket";
 const { chains, publicClient, webSocketPublicClient } = configureChains(
-  [mainnet,
+  [
+    base,
     ...(process.env.NEXT_PUBLIC_ENABLE_TESTNETS === "true" ? [goerli] : []),
   ],
   [publicProvider()]
@@ -40,6 +42,7 @@ const { wallets } = getDefaultWallets({
 const demoAppInfo = {
   appName: "zoo",
 };
+
 const connectors = connectorsForWallets([
   ...wallets,
   {
@@ -68,7 +71,8 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
       {loading ? (
-        <Provider container={container}>
+        <SocketContext.Provider value={socket}>
+          <Provider container={container}>
             <WagmiConfig config={wagmiConfig}>
               <RainbowKitProvider appInfo={demoAppInfo} chains={chains}>
                 <Suspense fallback={<h1>Loading posts...</h1>}>
@@ -81,7 +85,8 @@ function MyApp({ Component, pageProps }: AppProps) {
                 </Suspense>
               </RainbowKitProvider>
             </WagmiConfig>
-        </Provider>
+          </Provider>
+        </SocketContext.Provider>
       ) : (
         <div>Loading...</div>
       )}

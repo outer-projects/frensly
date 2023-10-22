@@ -5,8 +5,8 @@ export default function Document() {
     <Html>
       <Head>
         <link rel='icon' href='/logo_icon.svg' />
-        <link rel='icon' type='image/svg' href='/logo_icon.svg' />
-        <link rel='icon' type='image/svg' href='/logo_icon.svg' />
+        <link rel='icon' type='image/png' href='/logo_icon.svg' />
+        <link rel='icon' type='image/png' href='/logo_icon.svg' />
         <link rel='apple-touch-icon' href='/logo_icon.svg' />
       </Head>
       <body>
