@@ -18,6 +18,8 @@ export const getActivity = (type: string) => {
       return " commented your post";
     case "MENTION":
       return " mentioned you";
+    case "FOLLOW":
+      return " followed you";
     case "INIT":
       return " initialized successfully";
     default:
