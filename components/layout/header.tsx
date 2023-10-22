@@ -3,7 +3,7 @@ import { observer } from "mobx-react";
 import style from "./header.module.scss";
 import classNames from "classnames";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Link from "next/link";
 import Bell from "../svgs/bell";
 import Notifications from "../notifications/notifications";
@@ -11,9 +11,11 @@ import { useDetectClickOutside } from "react-detect-click-outside";
 import { useInjection } from "inversify-react";
 import Web3Store from "../../stores/Web3Store";
 import { UserStore } from "../../stores/UserStore";
+import { SocketContext } from "../../utils/socket";
 
 const Header = observer(() => {
   const router = useRouter();
+  const socket = useContext(SocketContext);
   const [active, setActive] = useState("");
   const [menuMob, setMenuMob] = useState(false);
   const [nots, setNots] = useState(false);
@@ -30,6 +32,16 @@ const Header = observer(() => {
   ];
   useEffect(() => {
     getEthCurrency();
+    socket.emit("login", (res: any) => {
+      console.log(res);
+    });
+    socket.on("notification", (not: any) => {
+      console.log(not);
+    });
+
+    return () => {
+      socket.emit("logout");
+    };
   }, []);
   useEffect(() => {
     if (router.asPath) {
@@ -93,11 +105,11 @@ const Header = observer(() => {
             <Bell isActive={false} />
             {nots && <Notifications />}
           </div>
-          <ConnectButtonCustom isHeader/>
+          <ConnectButtonCustom isHeader />
         </div>
       </header>
       <header className={style.header__mobile}>
-        <ConnectButtonCustom isHeader/>
+        <ConnectButtonCustom isHeader />
         <div className={style.header__user}>
           <div
             onClick={() => {
@@ -106,7 +118,7 @@ const Header = observer(() => {
             style={{ cursor: "pointer" }}
           >
             <Bell isActive={false} />
-            {notsMob && <Notifications setNots={setNotsMob}/>}
+            {notsMob && <Notifications setNots={setNotsMob} />}
           </div>
           <img
             src="../icons/Burger.svg"
@@ -119,7 +131,13 @@ const Header = observer(() => {
             className={style.header__mobile__menu}
             style={{ display: menuMob ? "flex" : "none" }}
           >
-            <img className={style.header__mobile__menu__close} src="../../icons/Close.svg" onClick={()=>{setMenuMob(false)}}/>
+            <img
+              className={style.header__mobile__menu__close}
+              src="../../icons/Close.svg"
+              onClick={() => {
+                setMenuMob(false);
+              }}
+            />
             {headerText.map((el, i) => {
               // console.log(el.link == "/profile");
               return (
@@ -132,7 +150,9 @@ const Header = observer(() => {
                   }
                   style={{ textDecoration: "none", color: "auto" }}
                   key={i}
-                  onClick={()=>{setMenuMob(false)}}
+                  onClick={() => {
+                    setMenuMob(false);
+                  }}
                 >
                   <div
                     className={classNames(
