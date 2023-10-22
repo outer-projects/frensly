@@ -62,17 +62,10 @@ export class UserStore {
     this.notifications = [...this.notifications, not]
   }
   @action getNotifications = async (id: string) => {
-    const query = new URLSearchParams();
-    query.append("types", "SELL");
-    query.append("types", "BUY");
-    query.append("types", "INIT");
-    query.append("types", "COMMENT");
-    query.append("types", "REPOST");
-    query.append("types", "MENTION");
-    query.append("types", "REPLY");
+
     try {
       const res = await axios.get(
-        prefix + "user/history/subject/" + id + "?" + query.toString()
+        prefix + "user/notifications" 
       );
       // console.log(res.data);
       this.notifications = res.data;

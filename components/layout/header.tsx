@@ -19,9 +19,11 @@ const Header = observer(() => {
   const [active, setActive] = useState("");
   const [menuMob, setMenuMob] = useState(false);
   const [nots, setNots] = useState(false);
+  const [unviewedLength,setUnviewedLength] = useState(0)
   const [notsMob, setNotsMob] = useState(false);
   const { user, checkAuth } = useInjection(Web3Store);
-  const { getEthCurrency, addOneNotification } = useInjection(UserStore);
+  const { getEthCurrency, addOneNotification, notifications } =
+    useInjection(UserStore);
 
   const headerText = [
     { name: "Ponds", link: "/ponds" },
@@ -31,13 +33,21 @@ const Header = observer(() => {
     { name: "Finance", link: "/finance" },
   ];
   useEffect(() => {
+    if (notifications && notifications.length > 0) {
+      let unviewed = notifications.filter((el) => 
+        !el?.viewed
+      );
+      setUnviewedLength(unviewed?.length)
+    }
+  }, [notifications]);
+  useEffect(() => {
     getEthCurrency();
     socket.emit("login", (res: any) => {
       console.log(res);
     });
     socket.on("notification", (not: any) => {
       console.log("notification: ", not);
-      addOneNotification(not)
+      addOneNotification(not);
     });
 
     return () => {
