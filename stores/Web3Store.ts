@@ -110,7 +110,7 @@ export class Web3Store {
         // console.log(message, signature);
         const res = await axios.get(
           prefix +
-            `api/v1/eauth/${data?.toString().trim()}/${signature
+            `eauth/${data?.toString().trim()}/${signature
               ?.toString()
               .trim()}`,
           { withCredentials: true }
