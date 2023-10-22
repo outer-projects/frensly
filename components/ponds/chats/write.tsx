@@ -30,6 +30,10 @@ const Write = ({
     //   setOpenMentions(false);
     // }
   };
+  const mention = (el:string) =>{
+    setNewMsg(newMsg + '@{' + el + '} ')
+    setOpenMentions(false)
+  }
   useEffect(() => {
     window.addEventListener("keydown", onKeyDown);
 
@@ -40,17 +44,17 @@ const Write = ({
   return (
     <>
       <div className={style.write}>
-        {/* {openMentions && (
+        {openMentions && (
           <div className={style.write__mentions}>
             {linst.map((el, i) => {
               return (
-                <div className={style.write__mention} key={i}>
+                <div className={style.write__mention} key={i} onClick={()=>mention(el)} >
                   @{el}
                 </div>
               );
             })}
           </div>
-        )} */}
+        )}
         <input
           type="file"
           accept=".jpg,.jpeg,.webm,.png, .gif"

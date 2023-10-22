@@ -90,7 +90,7 @@ function MyApp({ Component, pageProps }: AppProps) {
           </Provider>
         </SocketContext.Provider>
       ) : (
-        <div>Loading...</div>
+        <></>
       )}
     </>
   );
