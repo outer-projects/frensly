@@ -78,7 +78,7 @@ const Chat = observer(() => {
   }, [id]);
   useEffect(() => {
     if (chat) {
-      // console.log("id is: ", chat.owner);
+      console.log("сhat: ", chat);
       setNewMsgList([]);
       setNewMsgList(chat.messages);
       getHolders(chat.owner._id as string);
