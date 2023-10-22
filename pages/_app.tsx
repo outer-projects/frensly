@@ -26,13 +26,15 @@ import { ToastContainer } from "react-toastify";
 import Wrapper from "../components/layout/wrapper";
 import "../components/polyfills";
 import { SocketContext, socket } from "../utils/socket";
+import { isDevelopment } from "../utils/config";
+
 const { chains, publicClient, webSocketPublicClient } = configureChains(
   [
-    base,
-    ...(process.env.NEXT_PUBLIC_ENABLE_TESTNETS === "true" ? [goerli] : []),
+    base, ...isDevelopment ? [bscTestnet] : [] 
   ],
   [publicProvider()]
 );
+
 const projectId = "8271a5dee2c5981640ad5d12b20132af";
 const { wallets } = getDefaultWallets({
   appName: "zoo",

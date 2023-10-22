@@ -207,7 +207,7 @@ const AuthBanner = observer(() => {
               {stage == "Authorization" && (
                 <div>
                   <a
-                    href="https://frensly.io/api/v1/auth/twitter"
+                    href="/api/v1/auth/twitter"
                     style={{ textDecoration: "none" }}
                   >
                     <button

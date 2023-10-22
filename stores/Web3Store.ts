@@ -4,11 +4,15 @@ import "reflect-metadata";
 import { RootStore } from "./RootStore";
 import { Signer, ethers } from "ethers";
 import Web3 from "web3";
-import { frenslyAbi, frenslyContract } from "../utils/contracts/frensly";
+import {
+  frenslyAbi,
+  frenslyContract,
+  frenslyContractDev,
+} from "../utils/contracts/frensly";
 import { WalletClient } from "wagmi";
 import { AuthenticationStatus } from "@rainbow-me/rainbowkit";
 import axios from "axios";
-import { prefix } from "../utils/config";
+import { isDevelopment, prefix } from "../utils/config";
 import { IProfile } from "../types/users";
 
 @injectable()
@@ -45,7 +49,7 @@ export class Web3Store {
 
     this.frensly = new this.web3.eth.Contract(
       frenslyAbi as any,
-      frenslyContract
+      isDevelopment ? frenslyContractDev : frenslyContract
     );
   };
   @action setAuthStatus = (auth: AuthenticationStatus) => {
@@ -91,12 +95,9 @@ export class Web3Store {
   };
   @action auth = async () => {
     try {
-      const { data } = await axios.get(
-        `https://frensly.io/api/v1/eauth/${this.address}`,
-        {
-          withCredentials: true,
-        }
-      );
+      const { data } = await axios.get(prefix + `eauth/${this.address}`, {
+        withCredentials: true,
+      });
       this.setAuthStatus("loading");
       if (this.web3) {
         const signature = await this.web3?.eth.personal.sign(
@@ -108,9 +109,10 @@ export class Web3Store {
         );
         // console.log(message, signature);
         const res = await axios.get(
-          `https://frensly.io/api/v1/eauth/${data
-            ?.toString()
-            .trim()}/${signature?.toString().trim()}`,
+          prefix +
+            `api/v1/eauth/${data?.toString().trim()}/${signature
+              ?.toString()
+              .trim()}`,
           { withCredentials: true }
         );
         // console.log(res.data);
@@ -153,7 +155,7 @@ export class Web3Store {
 
       this.frensly = new this.web3.eth.Contract(
         frenslyAbi as any,
-        frenslyContract
+        isDevelopment ? frenslyContractDev : frenslyContract
       );
       this.subscribeProvider();
       this.checkAuth().then((res) => {

@@ -3,7 +3,6 @@ import BN from "bignumber.js";
 import numeral from "numeral";
 import { DateTime } from "luxon";
 import axios from "axios";
-import { backend, prefix } from "./config";
 import { fromWei } from "web3-utils";
 
 export function toBNJS(val: BigNumberish | number | string) {
