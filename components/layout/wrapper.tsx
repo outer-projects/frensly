@@ -40,7 +40,7 @@ const Wrapper = observer(({ children }: any) => {
   useEffect(() => {
     if (web3 && address && user?.account && frensly) {
       isInit();
-      getNotifications();
+      // getNotifications();
     }
   }, [web3, address, user]);
 
