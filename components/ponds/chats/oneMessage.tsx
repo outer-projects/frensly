@@ -10,9 +10,8 @@ import Highlighter from "react-highlight-words";
 const OneMessage = observer(({ el }: any) => {
   const { user } = useInjection(Web3Store);
   const mentions = useMemo(() => {
-    const result = el.text
-      .match(/@{[\w\s]+}/g)
-      .map((s: any) => "@" + (s.slice(1, s.length - 1)));
+    const text = el.text.match(/@{[\w\s]+}/g);
+    const result = text ? text.map((s: any) => "@" + s.slice(1, s.length - 1)) : []
     return result;
   }, [el.text]);
   console.log(mentions);
