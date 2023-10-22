@@ -4,12 +4,17 @@ import style from "../home.module.scss";
 import Profile from "../../components/profile/profile";
 import Head from "next/head";
 import PostWithComments from "../../components/profile/postWithComments";
+import { UserStore } from "../../stores/UserStore";
+import { useInjection } from "inversify-react";
 
 const PostPage: NextPage = observer((props) => {
+  const { unreadCount } = useInjection(UserStore);
   return (
     <div className={style.explore__page}>
       <Head>
-        <title>Frensly</title>
+        <title>
+          {unreadCount !== 0 ? `(${unreadCount})` : ""} Post | Frensly
+        </title>
       </Head>
       <PostWithComments />
     </div>

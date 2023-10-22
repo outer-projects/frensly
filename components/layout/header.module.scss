@@ -161,12 +161,15 @@
   width: 170px!important;
 }
 .header__count {
-  color: red;
-  font-size: 10px;
+  color: white;
+  font-size: 8px;
   margin-left: 0px;
   font-family: "DMSans";
   font-weight: bold;
-  width: 5px;
+  width: 10px;
+  height: 10px;
+  background-color: red;
+  border-radius: 100%;
 }
 .connect__button {
   display: flex;

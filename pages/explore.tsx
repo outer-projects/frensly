@@ -5,6 +5,8 @@ import Explore from "../components/explore/explore";
 import Head from "next/head";
 import { useContext, useEffect } from "react";
 import { SocketContext } from "../utils/socket";
+import { useInjection } from "inversify-react";
+import { UserStore } from "../stores/UserStore";
 
 const ExplorePage: NextPage = observer((props) => {
   // const socket = useContext(SocketContext);
@@ -21,10 +23,11 @@ const ExplorePage: NextPage = observer((props) => {
   //   startListening();
   //   return () => stopListen();
   // }, []);
+  const { unreadCount } = useInjection(UserStore);
   return (
     <div className={style.explore__page}>
       <Head>
-        <title>Frensly</title>
+        <title>{unreadCount !== 0 ? `(${unreadCount})` : ""} Explore | Frensly</title>
       </Head>
       <Explore />
     </div>

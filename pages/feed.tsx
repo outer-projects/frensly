@@ -12,7 +12,7 @@ const FeedPage: NextPage = observer((props) => {
   return (
     <div className={style.explore__page}>
       <Head>
-        <title>{unreadCount !== 0 ? `(${unreadCount})` : ""}Frensly</title>
+      <title>{unreadCount !== 0 ? `(${unreadCount})` : ""} Feed | Frensly</title>
       </Head>
       <TwitterFeed />
     </div>

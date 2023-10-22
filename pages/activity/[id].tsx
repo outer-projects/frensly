@@ -4,13 +4,17 @@ import style from "../home.module.scss";
 import Profile from "../../components/profile/profile";
 import Head from "next/head";
 import UserActivity from "../../components/ponds/userActivity";
+import { UserStore } from "../../stores/UserStore";
+import { useInjection } from "inversify-react";
 
 const ActivityPage: NextPage = observer((props) => {
-
+  const { unreadCount } = useInjection(UserStore);
   return (
     <div className={style.explore__page}>
       <Head>
-        <title>Frensly</title>
+        <title>
+          {unreadCount !== 0 ? `(${unreadCount})` : ""} Activity | Frensly
+        </title>
       </Head>
       <UserActivity />
     </div>
