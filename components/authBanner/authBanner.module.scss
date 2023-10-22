@@ -5,15 +5,67 @@
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
+  transition: 500ms ease all;
   height: 100vh;
 }
-.banner__top {
+.banner__col {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 .banner__select {
   margin-bottom: 56px !important;
+}
+.banner__invite {
+  width: 568px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: flex-end;
+  @media (max-width:616px) {
+    width: 100%;
+  }
+}
+.banner__code {
+  border-radius: 16px;
+  border: 1px solid $grey;
+  outline: none;
+  width: 100%;
+  height: 72px;
+  display: flex;
+  align-items: center;
+  padding-left: 16px;
+  padding-right: 16px;
+  background: #f8f8f8;
+  font-family: "DMSans";
+  font-size: 16px;
+  color: $black;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
+  letter-spacing: -0.16px;
+  &::placeholder {
+    color: $grey;
+  }
+}
+.banner__code__active {
+  border: 1px solid $green!important;
+}
+.banner__post {
+  border-radius: 100px;
+  background: $green;
+  display: flex;
+  height: 40px;
+  width: 81px;
+  padding: 16px 24px;
+  justify-content: center;
+  align-items: center;
+  color: $black;
+  font-family: "DMSans";
+  font-size: 16px;
+  font-weight: bold;
+  letter-spacing: -0.16px;
+  margin-top: -56px;
 }
 .banner__center {
   width: 100vw;
@@ -48,7 +100,7 @@
 }
 .banner__title {
   font-family: "Syne";
-  margin-top: 270px;
+  margin-top: 185px;
   width: 100vw;
   max-width: 568px;
   text-align: center;
@@ -109,11 +161,11 @@
   margin-top: 16px;
 }
 .banner__title__connection {
-  margin-top: 187px;
+  margin-top: 65px;
   margin-bottom: 25px;
 }
 .banner__title__connected {
-  margin-top: 187px;
+  margin-top: 35px;
   margin-bottom: 25px;
 }
 .button__buy {
