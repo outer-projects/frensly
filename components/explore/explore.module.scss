@@ -1,5 +1,16 @@
 @import "../../styles/_vars.sass";
-
+.profile__follow {
+  width: 100%;
+  height: 48px;
+  background: transparent !important;
+  font-weight: 400 !important;
+  border-radius: 100px;
+  border: 1px solid $green;
+}
+.profile__unfollow {
+  width: 100% !important;
+  height: 48px !important;
+}
 .explore {
   margin-top: 32px;
   width: 616px;
@@ -10,9 +21,9 @@
   }
 }
 .explore__swipe {
-    position: absolute;
-    margin-left: 555px;
-}   
+  position: absolute;
+  margin-left: 555px;
+}
 .explore__title {
   color: $black;
   margin-bottom: 24px;
@@ -105,7 +116,7 @@
   transition: 500ms ease all;
   background: #f8f8f8;
   &:hover {
-    background: #F1F1F1
+    background: #f1f1f1;
   }
 }
 .explore__user__left {
@@ -141,7 +152,7 @@
 .explore__user__balance__usd {
   color: $grey;
   text-align: right;
-  font-family: 'DMSans';
+  font-family: "DMSans";
   font-size: 12px;
   font-style: normal;
   font-weight: 400;
@@ -162,17 +173,16 @@
   font-weight: bold;
   line-height: 24px; /* 150% */
   letter-spacing: -0.16px;
-
 }
 .explore__search__active {
-    border: 1px solid $green!important;
+  border: 1px solid $green !important;
 }
 .explore__search {
   width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border: 1px solid  #e2e3e2;
+  border: 1px solid #e2e3e2;
   height: 56px;
   border-radius: 16px;
   background: #fff;
@@ -189,7 +199,7 @@
     outline: none;
     border: none;
     &::placeholder {
-        color: $grey;
+      color: $grey;
     }
   }
   img {

@@ -11,6 +11,7 @@ const Followers = observer(() => {
   useEffect(() => {
     getFollowers(user?._id as string);
   }, []);
+  
   return (
     <div className={style.ponds__chat}>
       {followers?.map((el) => {
