@@ -12,7 +12,7 @@ const Notifications = observer(() => {
     getAllNotifications();
   }, []);
   return (
-    <div>
+    <div style={{marginTop: '32px'}}>
       <div className={explore.explore__title}>{"Notifications"}</div>
       <div className={style.ponds__chat}>
         {notificationsAll?.map((el) => {
