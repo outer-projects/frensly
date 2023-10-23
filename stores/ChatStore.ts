@@ -17,7 +17,7 @@ export class ChatStore {
   @action getMyChats = async () => {
     try {
       const res = await axios.get(prefix + "chat/available");
-      // console.log("chats:", res.data);
+      console.log("chats:", res.data);
       this.myChats = res.data;
     } catch (e) {
       console.log(e);
