@@ -23,10 +23,16 @@ const OneMessage = observer(({ el, roomId, members }: any) => {
   const mentions = useMemo(() => {
     const text = el.text.match(/{[\w\s]+}/g);
     const result = text
-      ? text.map((s: any) => getUserById(s.slice(1, s.length - 1), members))
+      ? text.map((s: any) => {
+          return {
+            name: getUserById(s.slice(1, s.length - 1), members),
+            id: s.slice(1, s.length - 1),
+          };
+        })
       : [];
     return result;
   }, [el.text]);
+
   useEffect(() => {
     let isView = el?.views.filter((el: any) => el == user?._id)[0];
     setIsViewed(isView ? true : false);
@@ -39,7 +45,7 @@ const OneMessage = observer(({ el, roomId, members }: any) => {
   const message = useMemo(() => {
     let text = el.text;
     for (let i = 0; i <= mentions.length; i++) {
-      text.replace(mentions[i], getUserById(mentions[i], members));
+      text.replace(mentions[i].id, getUserById(mentions[i], members));
       console.log(text);
       if (i == mentions.length) {
         console.log(text);
@@ -93,7 +99,7 @@ const OneMessage = observer(({ el, roomId, members }: any) => {
             >
               <Highlighter
                 highlightClassName={style.openchat__mention}
-                searchWords={mentions.map((el: any) => "@" + el)}
+                searchWords={mentions.map((el: any) => "@" + el.name)}
                 autoEscape={true}
                 textToHighlight={message.replace("{", "").replace("}", "")}
               />{" "}
