@@ -16,6 +16,20 @@
     display: none;
   }
 }
+.header__missing {
+  margin-left: 4px;
+  width: 12px;
+  height: 12px;
+  background-color: $green;
+  border-radius: 100%;
+  font-size: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "DMSans";
+  font-weight: bold;
+  color: white;
+}
 .header__mobile {
   display: none;
   justify-content: space-between;

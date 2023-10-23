@@ -181,8 +181,8 @@ const Header = observer(() => {
                     )}
                   >
                     {el.name}
-                    {el.name == "Staking" && (
-                      <div className={style.header__soon}>soon</div>
+                    {el.name == "Ponds" && (
+                      <div className={style.header__missing}>5</div>
                     )}
                   </div>
                 </Link>
