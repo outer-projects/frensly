@@ -61,11 +61,11 @@ const OneNotification = observer(({ notification }: { notification: any }) => {
             )}
             <div className={style.nots__one__time}>
               {isSocial
-                ? notification?.sourse?.text.length >= 10
-                  ? notification?.sourse?.text.slice(0, 11) + "..."
-                  : notification?.sourse?.text
-                : timePassed(notification?.date)}{" "}
-              ago
+                ? notification?.source?.text.length >= 10
+                  ? notification?.source?.text.slice(0, 11) + "..."
+                  : notification?.source?.text
+                : timePassed(notification?.date) + 'ago'}{" "}
+              
             </div>
           </div>
         </div>
