@@ -16,7 +16,7 @@ import Chats from "./activity/chats";
 import History from "./activity/history";
 import Holders from "./activity/holders";
 import Holdings from "./activity/holdings";
-import Notifications from "../notifications/notifications";
+import Notifications from "./activity/notifications";
 
 const types = [
   "My Ponds",

@@ -10,7 +10,7 @@ const Holders = observer(() => {
   const { getHolders, holders } = useInjection(UserStore);
   const { user } = useInjection(Web3Store);
   useEffect(() => {
-    getHolders(user?.account._id as string);
+    getHolders(user?._id as string);
   }, []);
   return (
     <div className={style.ponds__chat}>

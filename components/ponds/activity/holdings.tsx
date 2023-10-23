@@ -10,7 +10,7 @@ const Holdings = observer(() => {
   const { getShares, shares } = useInjection(UserStore);
   const { user } = useInjection(Web3Store);
   useEffect(() => {
-    getShares(user?.account._id as string);
+    getShares(user?._id as string);
   }, []);
   return (
     <div className={style.ponds__chat}>
