@@ -12,6 +12,11 @@ import { fromWeiToEth } from "../../utils/utilities";
 import FinanceRow from "../finance/financeRow";
 import { ChatStore } from "../../stores/ChatStore";
 import OneNotification from "../notifications/oneNotification";
+import Chats from "./activity/chats";
+import History from "./activity/history";
+import Holders from "./activity/holders";
+import Holdings from "./activity/holdings";
+import Notifications from "../notifications/notifications";
 
 const types = [
   "My Ponds",
@@ -26,29 +31,17 @@ const Ponds = observer(() => {
   const { user } = useInjection(Web3Store);
   const {
     portfolioValue,
-    getHolders,
-    getShares,
-    shares,
-    holders,
-    followers,
-    followings,
-    notificationsAll,
     myActive,
     setMyActive,
-    history,
-    getHistory,
     getFollowers,
     getFollowings,
+    getAllNotifications,
   } = useInjection(UserStore);
-  const { getMyChats, myChats } = useInjection(ChatStore);
   useEffect(() => {
     if (user) {
-      getHolders(user._id as string);
-      getShares(user._id as string);
       getFollowers(user._id as string);
       getFollowings(user._id as string);
-      getMyChats();
-      getHistory(user.account._id as string);
+      getAllNotifications();
     }
   }, [user]);
   return (
@@ -87,76 +80,11 @@ const Ponds = observer(() => {
             </div>
           </div>
         </div>
-        {myActive == 0 && (
-          <div className={style.ponds__chat}>
-            {myChats?.map((el) => {
-              return (
-                <ChatItem
-                  messages={el.room.messages}
-                  key={el.room.owner._id}
-                  chatId={el.room._id}
-                  el={el.room.owner}
-                  amount={el.ownerShareAmount}
-                />
-              );
-            })}
-          </div>
-        )}
-        {myActive == 1 && (
-          <div className={style.ponds__chat}>
-            {history?.map((el) => {
-              // console.log(el);
-              return <OneActivity key={el._id} activity={el} />;
-            })}
-          </div>
-        )}
-        {myActive == 2 && (
-          <div className={style.ponds__chat}>
-            {holders?.map((el) => {
-              // console.log(el);
-              return (
-                <FinanceRow
-                  key={el.user._id}
-                  el={el.user}
-                  amount={el.amount}
-                  price={
-                    Number((Number(el.amount) / 10 ** 6).toFixed(2)) *
-                    Number(user?.account.currentPrice)
-                  }
-                />
-              );
-              // return <></>;
-            })}
-          </div>
-        )}
-        {myActive == 3 && (
-          <div className={style.ponds__chat}>
-            {shares?.map((el) => {
-              // console.log(el);
-              return (
-                <FinanceRow
-                  key={el.subject._id}
-                  el={el.subject}
-                  amount={el.amount}
-                  price={
-                    Number((Number(el.amount) / 10 ** 6).toFixed(2)) *
-                    Number(el.subject.currentPrice)
-                  }
-                />
-              );
-              // return <></>;
-            })}
-          </div>
-        )}
-        {myActive == 4 && (
-          <div className={style.ponds__chat}>
-            {notificationsAll?.map((el) => {
-              // console.log(el);
-              return <OneNotification key={el.subject._id} notification={el} />;
-              // return <></>;
-            })}
-          </div>
-        )}
+        {myActive == 0 && <Chats />}
+        {myActive == 1 && <History />}
+        {myActive == 2 && <Holders />}
+        {myActive == 3 && <Holdings />}
+        {myActive == 4 && <Notifications />}
         {/* {active == 4 && (
           <div className={style.ponds__chat}>
             {followers?.map((el) => {

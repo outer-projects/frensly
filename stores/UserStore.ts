@@ -76,7 +76,7 @@ export class UserStore {
   @action getAllNotifications = async () => {
     try {
       const res = await axios.get(prefix + "user/notifications");
-      console.log(res);
+      console.log("All notifications:",res);
       this.notificationsAll = res.data;
       return true
     } catch (e) {
