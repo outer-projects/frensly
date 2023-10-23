@@ -6,6 +6,7 @@ import { observer } from "mobx-react";
 import { UserStore } from "../../../stores/UserStore";
 import { useInjection } from "inversify-react";
 import { useEffect, useState } from "react";
+import classNames from "classnames";
 
 const ChatItem = observer(
   ({
@@ -13,7 +14,9 @@ const ChatItem = observer(
     amount,
     chatId,
     messages,
+    unread,
   }: {
+    unread: number;
     el: IProfile;
     amount?: string;
     chatId: string;
@@ -28,7 +31,12 @@ const ChatItem = observer(
     }, [el, ethCurrency]);
     return (
       <Link href={"/ponds/" + chatId}>
-        <div className={style.chat__item}>
+        <div
+          className={classNames(
+            style.chat__item,
+            unread !== 0 && style.chat__item__active
+          )}
+        >
           <div className={style.chat__info}>
             <img className={style.chat__avatar} src={el?.avatar} />
             <div>
@@ -52,6 +60,9 @@ const ChatItem = observer(
                         .replace("}", "")
                         .slice(0, 10) + "..."
                     : messages[0].text}
+                  {unread !== 0 && (
+                    <div className={style.chat__unread}>{unread}</div>
+                  )}
                 </div>
               ) : (
                 <div className={style.chat__text}>

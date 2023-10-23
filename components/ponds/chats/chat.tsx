@@ -235,7 +235,7 @@ const Chat = observer(() => {
             <div className={style.openchat__messages} ref={messagesEndRef}>
               {newMsgList
                 .map((el) => {
-                  return <OneMessage el={el} key={el._id} />;
+                  return <OneMessage el={el} key={el._id} roomId={chat._id} />;
                 })
                 .reverse()}
               {/* {Array.from({ length: 10 }).map((el, i) => {

@@ -98,6 +98,20 @@
     color: $black;
     font-size: 14px;
   }
+  display: flex;
+  align-items: center;
+  .chat__unread {
+    color: black;
+    width: 16px;
+    height: 16px;
+    border-radius: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: "DMSans";
+    font-size: 12px;
+    margin-left: 4px;
+  }
 }
 .ponds__total__text {
   color: $grey;
@@ -138,6 +152,9 @@
     justify-content: space-between;
     width: 100%;
   }
+}
+.chat__item__active {
+  background-color: #f1f1f1 !important;
 }
 .chat__item {
   display: flex;

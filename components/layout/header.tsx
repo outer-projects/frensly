@@ -12,6 +12,7 @@ import { useInjection } from "inversify-react";
 import Web3Store from "../../stores/Web3Store";
 import { UserStore } from "../../stores/UserStore";
 import { SocketContext } from "../../utils/socket";
+import { ChatStore } from "../../stores/ChatStore";
 
 const Header = observer(() => {
   const router = useRouter();
@@ -21,9 +22,9 @@ const Header = observer(() => {
   const [nots, setNots] = useState(false);
   const [notsMob, setNotsMob] = useState(false);
   const { user, checkAuth } = useInjection(Web3Store);
-  const { getEthCurrency, getAllNotifications, getUnreadCount, unreadCount } =
+  const { getEthCurrency, getUnreadCount, unreadCount } =
     useInjection(UserStore);
-
+  const { getMyChats, unread } = useInjection(ChatStore);
   const headerText = [
     { name: "Ponds", link: "/ponds" },
     { name: "Feed", link: "/feed" },
@@ -44,6 +45,7 @@ const Header = observer(() => {
     });
     // getAllNotifications();
     getUnreadCount();
+    getMyChats();
     return () => {
       socket.emit("logout");
     };
@@ -92,8 +94,8 @@ const Header = observer(() => {
                   )}
                 >
                   {el.name}
-                  {el.name == "Staking" && (
-                    <div className={style.header__soon}>soon</div>
+                  {el.name == "Ponds" && unread !== 0 && (
+                    <div className={style.header__missing}>{unread}</div>
                   )}
                 </div>
               </Link>
@@ -181,8 +183,8 @@ const Header = observer(() => {
                     )}
                   >
                     {el.name}
-                    {el.name == "Ponds" && (
-                      <div className={style.header__missing}>5</div>
+                    {el.name == "Ponds" && unread !== 0 && (
+                      <div className={style.header__missing}>{unread}</div>
                     )}
                   </div>
                 </Link>

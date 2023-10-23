@@ -10,7 +10,8 @@ import { toast } from "react-toastify";
 @injectable()
 export class ChatStore {
   @observable myChats: any[] = [];
-  @observable chat: any
+  @observable chat: any;
+  @observable unread: number = 0;
   public constructor(private readonly rootStore: RootStore) {
     makeObservable(this);
   }
@@ -18,15 +19,22 @@ export class ChatStore {
     try {
       const res = await axios.get(prefix + "chat/available");
       console.log("chats:", res.data);
-      this.myChats = res.data;
+      if (res.data) {
+        let count = res.data.reduce(
+          (partialSum: any, a: any) => partialSum + a.unread,
+          0
+        );
+        this.unread = count;
+        this.myChats = res.data;
+      }
     } catch (e) {
       console.log(e);
     }
   };
-  @action removeChat = () =>{
-    this.chat = undefined
-  }
-  @action getChat = async (id:string) => {
+  @action removeChat = () => {
+    this.chat = undefined;
+  };
+  @action getChat = async (id: string) => {
     try {
       const res = await axios.get(prefix + "chat/room/" + id);
       // console.log("chat:", res.data);
@@ -34,21 +42,20 @@ export class ChatStore {
     } catch (e) {
       console.log(e);
     }
-  }
-  sendMessage = async (id:string, text:string, file?:File) => {
+  };
+  sendMessage = async (id: string, text: string, file?: File) => {
     const formdata = new FormData();
-    
+
     formdata.append("text", text);
     file && formdata.append("file", file);
     try {
       const res = await axios.post(prefix + "chat/message/" + id, formdata);
       // console.log("message sent:", res.data);
-      
-    } catch (e:any) {
+    } catch (e: any) {
       console.log(e?.status);
-      if(e?.status == 413) {
-        toast.error("Image is too large. Max size is 2mb")
+      if (e?.status == 413) {
+        toast.error("Image is too large. Max size is 2mb");
       }
     }
-  }
+  };
 }

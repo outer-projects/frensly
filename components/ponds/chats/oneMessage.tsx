@@ -4,17 +4,28 @@ import { observer } from "mobx-react";
 import { getDate } from "../../../utils/utilities";
 import { useInjection } from "inversify-react";
 import Web3Store from "../../../stores/Web3Store";
-import { useMemo } from "react";
+import { useContext, useEffect, useMemo, useState } from "react";
 // @ts-ignore
 import Highlighter from "react-highlight-words";
-const OneMessage = observer(({ el }: any) => {
+import { SocketContext } from "../../../utils/socket";
+const OneMessage = observer(({ el, roomId }: any) => {
   const { user } = useInjection(Web3Store);
+  const [isViewed, setIsViewed] = useState(true);
+  const socket = useContext(SocketContext);
   const mentions = useMemo(() => {
     const text = el.text.match(/{[\w\s]+}/g);
-    const result = text ? text.map((s: any) => s.slice(1, s.length - 1)) : []
+    const result = text ? text.map((s: any) => s.slice(1, s.length - 1)) : [];
     return result;
   }, [el.text]);
-  console.log(mentions);
+  useEffect(() => {
+    let isView = el?.views.filter((el: any) => el == user?._id)[0];
+    setIsViewed(isView ? true : false);
+  }, []);
+  useEffect(() => {
+    if (!isViewed) {
+      socket.emit("view", { room: roomId, message: el._id });
+    }
+  }, [isViewed]);
   return (
     <div
       className={classNames(
@@ -60,7 +71,7 @@ const OneMessage = observer(({ el }: any) => {
             >
               <Highlighter
                 highlightClassName={style.openchat__mention}
-                searchWords={mentions.map((el:any)=> "@" + el)}
+                searchWords={mentions.map((el: any) => "@" + el)}
                 autoEscape={true}
                 textToHighlight={el.text.replace("{", "").replace("}", "")}
               />{" "}
