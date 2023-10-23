@@ -21,6 +21,8 @@ const OneNotification = observer(({ notification }: { notification: any }) => {
         notification?.source?.text?.length >= 10
         ? notification?.source?.text?.slice(0, 11) + "..."
         : notification?.source?.text;
+    } else {
+      return "";
     }
   }, [isSocial]);
   const isMessage = useMemo(
