@@ -39,10 +39,10 @@ const Header = observer(() => {
     });
     socket.on("notification", (not: any) => {
       console.log("notification: ", not);
-      getAllNotifications();
+      // getAllNotifications();
       getUnreadCount();
     });
-    getAllNotifications();
+    // getAllNotifications();
     getUnreadCount();
     return () => {
       socket.emit("logout");

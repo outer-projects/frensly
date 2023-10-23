@@ -35,13 +35,13 @@ const Ponds = observer(() => {
     setMyActive,
     getFollowers,
     getFollowings,
-    getAllNotifications,
+    // getAllNotifications,
   } = useInjection(UserStore);
   useEffect(() => {
     if (user) {
       getFollowers(user._id as string);
       getFollowings(user._id as string);
-      getAllNotifications();
+      // getAllNotifications();
     }
   }, [user]);
   return (

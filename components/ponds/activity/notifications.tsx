@@ -15,7 +15,7 @@ const Notifications = observer(() => {
     <div className={style.ponds__chat}>
       {notificationsAll?.map((el) => {
         // console.log(el);
-        return <OneNotification key={el.subject._id} notification={el} />;
+        return <OneNotification key={el._id} notification={el} />;
         // return <></>;
       })}
     </div>
