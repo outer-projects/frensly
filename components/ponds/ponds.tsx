@@ -17,6 +17,8 @@ import History from "./activity/history";
 import Holders from "./activity/holders";
 import Holdings from "./activity/holdings";
 import Notifications from "./activity/notifications";
+import Followers from "./activity/followers";
+import Followings from "./activity/followings";
 
 const types = [
   "My Ponds",
@@ -24,8 +26,8 @@ const types = [
   "My Holders",
   "My Holdings",
   "Notifications",
-  // "My Followers",
-  // "My Followings",
+  "My Followers",
+  "My Followings",
 ];
 const Ponds = observer(() => {
   const { user } = useInjection(Web3Store);
@@ -39,8 +41,8 @@ const Ponds = observer(() => {
   } = useInjection(UserStore);
   useEffect(() => {
     if (user) {
-      getFollowers(user._id as string);
-      getFollowings(user._id as string);
+      // getFollowers(user._id as string);
+      // getFollowings(user._id as string);
       // getAllNotifications();
     }
   }, [user]);
@@ -85,34 +87,8 @@ const Ponds = observer(() => {
         {myActive == 2 && <Holders />}
         {myActive == 3 && <Holdings />}
         {myActive == 4 && <Notifications />}
-        {/* {active == 4 && (
-          <div className={style.ponds__chat}>
-            {followers?.map((el) => {
-              console.log(el);
-              return (
-                <FinanceRow
-                  key={el._id}
-                  el={el}
-                />
-              );
-              // return <></>;
-            })}
-          </div>
-        )}
-        {active == 5 && (
-          <div className={style.ponds__chat}>
-            {followings?.map((el) => {
-              console.log(el);
-              return (
-                <FinanceRow
-                  key={el._id}
-                  el={el}
-                />
-              );
-              // return <></>;
-            })}
-          </div>
-        )} */}
+        {myActive == 5 && <Followers />}
+        {myActive == 6 && <Followings />}
       </div>
     </div>
   );

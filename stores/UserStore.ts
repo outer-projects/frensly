@@ -76,12 +76,12 @@ export class UserStore {
   @action getAllNotifications = async () => {
     try {
       const res = await axios.get(prefix + "user/notifications/all");
-      console.log("All notifications:",res);
+      console.log("All notifications:", res);
       this.notificationsAll = res.data;
-      return true
+      return true;
     } catch (e) {
       console.log(e);
-      return false
+      return false;
     }
   };
   @action getNotifications = async () => {
@@ -89,10 +89,10 @@ export class UserStore {
       const res = await axios.get(prefix + "user/notifications/unread");
       console.log(res);
       this.notifications = res.data;
-      return true
+      return true;
     } catch (e) {
       console.log(e);
-      return false
+      return false;
     }
   };
   @action getHistory = async (id: string) => {
@@ -132,6 +132,7 @@ export class UserStore {
   @action getFollowers = async (id: string) => {
     try {
       const res = await axios.get(prefix + "user/followers/" + id);
+      console.log("getFollowers:", res);
       this.followers = res.data;
     } catch (e) {
       console.log(e);
@@ -140,6 +141,7 @@ export class UserStore {
   @action getFollowings = async (id: string) => {
     try {
       const res = await axios.get(prefix + "user/following/" + id);
+      console.log("getFollowings:", res);
       this.followings = res.data;
     } catch (e) {
       console.log(e);
