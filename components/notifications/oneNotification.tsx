@@ -15,6 +15,14 @@ const OneNotification = observer(({ notification }: { notification: any }) => {
       notification?.type == "COMMENT",
     [notification]
   );
+  const message = useMemo(() => {
+    if (isSocial) {
+      return notification?.source?.text &&
+        notification?.source?.text?.length >= 10
+        ? notification?.source?.text?.slice(0, 11) + "..."
+        : notification?.source?.text;
+    }
+  }, [isSocial]);
   const isMessage = useMemo(
     () => notification?.type == "MENTION",
     [notification]
@@ -60,12 +68,7 @@ const OneNotification = observer(({ notification }: { notification: any }) => {
               </div>
             )}
             <div className={style.nots__one__time}>
-              {isSocial
-                ? notification?.source?.text.length >= 10
-                  ? notification?.source?.text.slice(0, 11) + "..."
-                  : notification?.source?.text
-                : timePassed(notification?.date) + 'ago'}{" "}
-              
+              {isSocial ? message : timePassed(notification?.date) + "ago"}{" "}
             </div>
           </div>
         </div>
