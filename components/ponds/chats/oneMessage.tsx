@@ -39,13 +39,14 @@ const OneMessage = observer(({ el, roomId, members }: any) => {
   const message = useMemo(() => {
     let text = el.text;
     for (let i = 0; i <= mentions.length; i++) {
-      text = text.replace(members[i], getUserById(mentions[i], members));
+      text = text.replace(mentions[i], getUserById(mentions[i], members));
       if (i == mentions.length) {
+        console.log(text);
         return text;
       }
     }
   }, [mentions]);
-  console.log(message);
+  console.log(message, mentions);
   return (
     <div
       className={classNames(
