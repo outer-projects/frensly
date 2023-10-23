@@ -93,7 +93,7 @@ const OneMessage = observer(({ el, roomId, members }: any) => {
             >
               <Highlighter
                 highlightClassName={style.openchat__mention}
-                searchWords={mentions.map((el: any) => "@" + el.name)}
+                searchWords={mentions.map((el: any) => "@" + el)}
                 autoEscape={true}
                 textToHighlight={message.replace("{", "").replace("}", "")}
               />{" "}
