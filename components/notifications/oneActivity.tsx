@@ -10,6 +10,8 @@ export const getActivity = (type: string) => {
       return " sell";
     case "OWN_SELL":
       return " sell";
+    case "INIT":
+      return " initialized successfully";
     case "LIKE":
       return " liked your post";
     case "REPOST":
@@ -20,8 +22,7 @@ export const getActivity = (type: string) => {
       return " mentioned you";
     case "FOLLOW":
       return " followed you";
-    case "INIT":
-      return " initialized successfully";
+
     default:
       return type.toLowerCase();
   }

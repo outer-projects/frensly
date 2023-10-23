@@ -43,7 +43,7 @@ const OneMessage = observer(({ el }: any) => {
             )}
           >
             {el.user.twitterId !== user?.twitterId && (
-              <div>{el.user.twitterName}</div>
+              <div>{el.user.twitterHandle}</div>
             )}
             {el.text == "" && (
               <div className={style.openchat__time}>{getDate(el.date)}</div>

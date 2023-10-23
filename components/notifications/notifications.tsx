@@ -1,15 +1,19 @@
 import style from "./notifications.module.scss";
+import explore from "../explore/explore.module.scss";
 import OneNotification from "./oneNotification";
 import { observer } from "mobx-react";
 import { useInjection } from "inversify-react";
 import { UserStore } from "../../stores/UserStore";
 import { useEffect, useState } from "react";
+import classNames from "classnames";
+import { useRouter } from "next/router";
 
 const Notifications = observer(
   ({ setNots }: { setNots?: (n: boolean) => void }) => {
-    const { notifications } = useInjection(UserStore);
+    const router = useRouter();
     const [visible, setVisible] = useState(false);
-    const { getNotifications, getUnreadCount } = useInjection(UserStore);
+    const { getNotifications, getUnreadCount, notifications, setMyActive } =
+      useInjection(UserStore);
     useEffect(() => {
       getNotifications().then((res) => {
         if (res) {
@@ -46,6 +50,20 @@ const Notifications = observer(
                   You don't have unwatched notifications yet
                 </div>
               )}
+            </div>
+            <div className={style.nots__buttons}>
+              <button
+                className={classNames(
+                  explore.connect__button,
+                  style.nots__button
+                )}
+                onClick={() => {
+                  setMyActive(4);
+                  router.push("../../ponds");
+                }}
+              >
+                Show more
+              </button>
             </div>
           </div>
         )}

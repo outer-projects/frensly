@@ -21,7 +21,7 @@ const Header = observer(() => {
   const [nots, setNots] = useState(false);
   const [notsMob, setNotsMob] = useState(false);
   const { user, checkAuth } = useInjection(Web3Store);
-  const { getEthCurrency, getNotifications, getUnreadCount, unreadCount } =
+  const { getEthCurrency, getAllNotifications, getUnreadCount, unreadCount } =
     useInjection(UserStore);
 
   const headerText = [
@@ -39,10 +39,10 @@ const Header = observer(() => {
     });
     socket.on("notification", (not: any) => {
       console.log("notification: ", not);
-      // getNotifications();
+      getAllNotifications();
       getUnreadCount();
     });
-    // getNotifications();
+    getAllNotifications();
     getUnreadCount();
     return () => {
       socket.emit("logout");

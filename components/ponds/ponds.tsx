@@ -17,11 +17,12 @@ const types = [
   "My Activity",
   "My Holders",
   "My Holdings",
+  "Notifications",
   // "My Followers",
   // "My Followings",
 ];
 const Ponds = observer(() => {
-  const [active, setActive] = useState(0);
+
   const { user } = useInjection(Web3Store);
   const {
     portfolioValue,
@@ -31,6 +32,9 @@ const Ponds = observer(() => {
     holders,
     followers,
     followings,
+    notificationsAll,
+    myActive,
+    setMyActive,
     history,
     getHistory,
     getFollowers,
@@ -51,7 +55,7 @@ const Ponds = observer(() => {
     <div className={style.ponds}>
       {" "}
       <div className={explore.explore__title}>{"My ponds"}</div>
-      <TypesList active={active} setActive={setActive} types={types} />
+      <TypesList active={myActive} setActive={setMyActive} types={types} />
       {/* <div
         className={classNames(
           explore.explore__search,
@@ -83,7 +87,7 @@ const Ponds = observer(() => {
             </div>
           </div>
         </div>
-        {active == 0 && (
+        {myActive == 0 && (
           <div className={style.ponds__chat}>
             {myChats?.map((el) => {
               return (
@@ -98,7 +102,7 @@ const Ponds = observer(() => {
             })}
           </div>
         )}
-        {active == 1 && (
+        {myActive == 1 && (
           <div className={style.ponds__chat}>
             {history?.map((el) => {
               // console.log(el);
@@ -106,7 +110,7 @@ const Ponds = observer(() => {
             })}
           </div>
         )}
-        {active == 2 && (
+        {myActive == 2 && (
           <div className={style.ponds__chat}>
             {holders?.map((el) => {
               // console.log(el);
@@ -125,9 +129,28 @@ const Ponds = observer(() => {
             })}
           </div>
         )}
-        {active == 3 && (
+        {myActive == 3 && (
           <div className={style.ponds__chat}>
             {shares?.map((el) => {
+              // console.log(el);
+              return (
+                <FinanceRow
+                  key={el.subject._id}
+                  el={el.subject}
+                  amount={el.amount}
+                  price={
+                    Number((Number(el.amount) / 10 ** 6).toFixed(2)) *
+                    Number(el.subject.currentPrice)
+                  }
+                />
+              );
+              // return <></>;
+            })}
+          </div>
+        )}
+        {myActive == 4 && (
+          <div className={style.ponds__chat}>
+            {notificationsAll?.map((el) => {
               // console.log(el);
               return (
                 <FinanceRow

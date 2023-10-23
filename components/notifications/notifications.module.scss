@@ -18,6 +18,19 @@
     border-radius: 0px;
   }
 }
+.nots__button {
+  background: none;
+  border-radius: 1px solid $green;
+  width: 107px;
+  height: 40px;
+}
+.nots__buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 24px;
+}
 .nots__mention {
   padding: 24px;
 }
@@ -141,6 +154,7 @@
 .nots__col {
   max-height: 350px;
   overflow-y: auto;
+  margin-bottom: 24px;
   &::-webkit-scrollbar {
     width: 15px;
     margin: 15px;

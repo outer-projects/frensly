@@ -15,8 +15,10 @@ export class UserStore {
   @observable history: any[] = [];
   @observable keys: any[] = [];
   @observable notifications: any[] = [];
+  @observable notificationsAll: any[] = [];
   @observable unreadCount: number = 0;
   @observable active: number = 0;
+  @observable myActive: number = 0;
   @observable currentType: number = 2;
   @observable profileUser?: IProfile = undefined;
   @observable portfolioValue?: number = 0;
@@ -59,9 +61,9 @@ export class UserStore {
       return false;
     }
   };
-  @action addOneNotification = (not: any) => {
-    this.notifications = [...this.notifications, not];
-  };
+  // @action addOneNotification = (not: any) => {
+  //   this.notifications = [...this.notifications, not];
+  // };
   @action getUnreadCount = async () => {
     try {
       const res = await axios.get(prefix + "user/notifications/count");
@@ -69,6 +71,17 @@ export class UserStore {
       this.unreadCount = Number(res.data.count);
     } catch (e) {
       console.log(e);
+    }
+  };
+  @action getAllNotifications = async () => {
+    try {
+      const res = await axios.get(prefix + "user/notifications");
+      console.log(res);
+      this.notificationsAll = res.data;
+      return true
+    } catch (e) {
+      console.log(e);
+      return false
     }
   };
   @action getNotifications = async () => {
@@ -180,6 +193,9 @@ export class UserStore {
   };
   @action setActive = (active: number) => {
     this.active = active;
+  };
+  @action setMyActive = (active: number) => {
+    this.myActive = active;
   };
   @action setFilter = (filter: { rangeFrom: number; rangeTo: number }) => {
     this.filterGlobal = filter;
