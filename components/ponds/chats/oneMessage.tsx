@@ -37,18 +37,12 @@ const OneMessage = observer(({ el, roomId, members }: any) => {
   }, [isViewed]);
   const message = useMemo(() => {
     let text = el.text;
-    mentions.map((el: any, i: number) => {
-      // console.log(mentions[i], getUserById(mentions[i], members));
+    mentions.map((el: any) => {
       text = text.replace(el, getUserById(el, members));
-      console.log("replace:", text.replace(el, getUserById(el, members)));
-      if (i == mentions.length) {
-        // console.log(text);
-      }
     });
-    console.log(text);
-    return setTimeout(() => {
-      return text;
-    }, 0);
+    // console.log(text);
+
+    return text;
   }, [mentions]);
   // console.log(message, mentions);
   return (
@@ -96,7 +90,9 @@ const OneMessage = observer(({ el, roomId, members }: any) => {
             >
               <Highlighter
                 highlightClassName={style.openchat__mention}
-                searchWords={mentions.map((el: any) => "@" + el)}
+                searchWords={mentions.map(
+                  (el: any) => "@" + getUserById(el, members)
+                )}
                 autoEscape={true}
                 textToHighlight={message.replace("{", "").replace("}", "")}
               />{" "}
