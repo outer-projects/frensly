@@ -14,6 +14,7 @@ const Chats = observer(() => {
       {myChats?.map((el) => {
         return (
           <ChatItem
+            unread={el.unread}
             messages={el.room.messages}
             key={el.room.owner._id}
             chatId={el.room._id}

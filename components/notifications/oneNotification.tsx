@@ -70,7 +70,7 @@ const OneNotification = observer(({ notification }: { notification: any }) => {
               </div>
             )}
             <div className={style.nots__one__time}>
-              {isSocial ? message : timePassed(notification?.date) + "ago"}{" "}
+              {isSocial ? message : timePassed(notification?.date) + " ago"}{" "}
             </div>
           </div>
         </div>

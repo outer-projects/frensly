@@ -98,6 +98,8 @@
   margin-left: 37px;
   transform: translateY(12px);
   .header__el {
+    display: flex;
+    align-items: center;
     color: $grey;
     margin-right: 36px;
     margin-left: 36px;

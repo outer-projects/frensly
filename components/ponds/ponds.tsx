@@ -1,17 +1,12 @@
 import style from "./ponds.module.scss";
 import explore from "../explore/explore.module.scss";
-import { useEffect, useState } from "react";
-import ChatItem from "./chats/chatItem";
+import { useEffect } from "react";
 import TypesList from "../common/typesList";
-import OneActivity from "../notifications/oneActivity";
 import { observer } from "mobx-react";
 import { useInjection } from "inversify-react";
 import Web3Store from "../../stores/Web3Store";
 import { UserStore } from "../../stores/UserStore";
 import { fromWeiToEth } from "../../utils/utilities";
-import FinanceRow from "../finance/financeRow";
-import { ChatStore } from "../../stores/ChatStore";
-import OneNotification from "../notifications/oneNotification";
 import Chats from "./activity/chats";
 import History from "./activity/history";
 import Holders from "./activity/holders";

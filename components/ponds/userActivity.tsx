@@ -1,15 +1,10 @@
 import style from "./ponds.module.scss";
 import explore from "../explore/explore.module.scss";
-import profile from "../profile/profile.module.scss";
-import classNames from "classnames";
 import { useEffect, useState } from "react";
-import ChatItem from "./chats/chatItem";
 import TypesList from "../common/typesList";
 import OneActivity from "../notifications/oneActivity";
-import { IProfile } from "../../types/users";
 import { observer } from "mobx-react";
 import { useInjection } from "inversify-react";
-import Web3Store from "../../stores/Web3Store";
 import { UserStore } from "../../stores/UserStore";
 import { fromWeiToEth } from "../../utils/utilities";
 import { useRouter } from "next/router";
@@ -17,8 +12,6 @@ import FinanceRow from "../finance/financeRow";
 const typesUser = ["Holders", "Holdings", "Activity"];
 const UserActivity = observer(() => {
   const [active, setActive] = useState(2);
-
-  const [outline, setOutline] = useState(false);
   const {
     portfolioValue,
     profileUser,
