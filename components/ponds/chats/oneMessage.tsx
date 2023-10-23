@@ -39,14 +39,14 @@ const OneMessage = observer(({ el, roomId, members }: any) => {
     let text = el.text;
     mentions.map((el: any, i: number) => {
       // console.log(mentions[i], getUserById(mentions[i], members));
-      text.replace(el, getUserById(el, members));
-      // console.log(text);
+      text = text.replace(el, getUserById(el, members));
+      console.log("replace:", text.replace(el, getUserById(el, members)));
       if (i == mentions.length) {
         // console.log(text);
       }
     });
     console.log(text);
-    return text
+    return text;
   }, [mentions]);
   // console.log(message, mentions);
   return (
