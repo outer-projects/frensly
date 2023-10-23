@@ -1,5 +1,5 @@
 import style from "./notifications.module.scss";
-import explore from "../explore/explore.module.scss";
+import header from "../layout/header.module.scss";
 import OneNotification from "./oneNotification";
 import { observer } from "mobx-react";
 import { useInjection } from "inversify-react";
@@ -54,7 +54,7 @@ const Notifications = observer(
             <div className={style.nots__buttons}>
               <button
                 className={classNames(
-                  explore.connect__button,
+                  header.connect__button,
                   style.nots__button
                 )}
                 onClick={() => {

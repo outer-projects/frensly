@@ -11,6 +11,7 @@ import { UserStore } from "../../stores/UserStore";
 import { fromWeiToEth } from "../../utils/utilities";
 import FinanceRow from "../finance/financeRow";
 import { ChatStore } from "../../stores/ChatStore";
+import OneNotification from "../notifications/oneNotification";
 
 const types = [
   "My Ponds",
@@ -22,7 +23,6 @@ const types = [
   // "My Followings",
 ];
 const Ponds = observer(() => {
-
   const { user } = useInjection(Web3Store);
   const {
     portfolioValue,
@@ -38,7 +38,7 @@ const Ponds = observer(() => {
     history,
     getHistory,
     getFollowers,
-    getFollowings
+    getFollowings,
   } = useInjection(UserStore);
   const { getMyChats, myChats } = useInjection(ChatStore);
   useEffect(() => {
@@ -152,17 +152,7 @@ const Ponds = observer(() => {
           <div className={style.ponds__chat}>
             {notificationsAll?.map((el) => {
               // console.log(el);
-              return (
-                <FinanceRow
-                  key={el.subject._id}
-                  el={el.subject}
-                  amount={el.amount}
-                  price={
-                    Number((Number(el.amount) / 10 ** 6).toFixed(2)) *
-                    Number(el.subject.currentPrice)
-                  }
-                />
-              );
+              return <OneNotification key={el.subject._id} notification={el} />;
               // return <></>;
             })}
           </div>
