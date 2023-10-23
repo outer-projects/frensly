@@ -58,8 +58,7 @@ const Notifications = observer(
                   style.nots__button
                 )}
                 onClick={() => {
-                  setMyActive(4);
-                  router.push("../../ponds");
+                  router.push("../../notifications");
                 }}
               >
                 Show more

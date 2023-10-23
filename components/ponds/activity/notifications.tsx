@@ -3,7 +3,7 @@ import style from "../ponds.module.scss";
 import { useInjection } from "inversify-react";
 import { useEffect } from "react";
 import { UserStore } from "../../../stores/UserStore";
-import Web3Store from "../../../stores/Web3Store";
+import explore from "../../explore/explore.module.scss";
 import OneNotification from "../../notifications/oneNotification";
 
 const Notifications = observer(() => {
@@ -12,12 +12,15 @@ const Notifications = observer(() => {
     getAllNotifications();
   }, []);
   return (
-    <div className={style.ponds__chat}>
-      {notificationsAll?.map((el) => {
-        // console.log(el);
-        return <OneNotification key={el._id} notification={el} />;
-        // return <></>;
-      })}
+    <div>
+      <div className={explore.explore__title}>{"Notifications"}</div>
+      <div className={style.ponds__chat}>
+        {notificationsAll?.map((el) => {
+          // console.log(el);
+          return <OneNotification key={el._id} notification={el} />;
+          // return <></>;
+        })}
+      </div>
     </div>
   );
 });

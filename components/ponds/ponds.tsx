@@ -20,50 +20,17 @@ const types = [
   "My Activity",
   "My Holders",
   "My Holdings",
-  "Notifications",
   "My Followers",
   "My Followings",
 ];
 const Ponds = observer(() => {
-  const { user } = useInjection(Web3Store);
-  const {
-    portfolioValue,
-    myActive,
-    setMyActive,
-    getFollowers,
-    getFollowings,
-    // getAllNotifications,
-  } = useInjection(UserStore);
-  useEffect(() => {
-    if (user) {
-      // getFollowers(user._id as string);
-      // getFollowings(user._id as string);
-      // getAllNotifications();
-    }
-  }, [user]);
+  const { portfolioValue, myActive, setMyActive } = useInjection(UserStore);
+
   return (
     <div className={style.ponds}>
       {" "}
       <div className={explore.explore__title}>{"My ponds"}</div>
       <TypesList active={myActive} setActive={setMyActive} types={types} />
-      {/* <div
-        className={classNames(
-          explore.explore__search,
-          style.ponds__search,
-          outline && explore.explore__search__active
-        )}
-      >
-        <img src="../icons/Search.svg" />
-        <input
-          placeholder="Search"
-          onBlur={() => {
-            setOutline(false);
-          }}
-          onFocus={() => {
-            setOutline(true);
-          }}
-        />
-      </div> */}
       <div className={style.ponds__bottom}>
         <div>
           <div className={style.ponds__total}>
@@ -81,9 +48,8 @@ const Ponds = observer(() => {
         {myActive == 1 && <History />}
         {myActive == 2 && <Holders />}
         {myActive == 3 && <Holdings />}
-        {myActive == 4 && <Notifications />}
-        {myActive == 5 && <Followers />}
-        {myActive == 6 && <Followings />}
+        {myActive == 4 && <Followers />}
+        {myActive == 5 && <Followings />}
       </div>
     </div>
   );
