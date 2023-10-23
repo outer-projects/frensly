@@ -24,7 +24,7 @@ export const links = [
     active: true,
   },
   {
-    title: "Beta",
+    title: "Referral system",
     link: "/finance/invite",
     img: "../icons/invite.svg",
     active: true,
@@ -93,11 +93,11 @@ const Finance = observer(() => {
       <div className={style.finance__container}>
         <div className={style.finance__titles}>
           <div className={explore.explore__title}>My funds</div>
-          <div className={classNames(explore.explore__title, style.mob__link)}><Link href={"/finance/invite"}>Beta</Link></div>
+          <div className={classNames(explore.explore__title, style.mob__link)}><Link href={"/finance/invite"}>Referral system</Link></div>
           {/* <div className={classNames(explore.explore__title, style.mob__link)}><Link href={"/finance/airdrop"}>Airdrop</Link></div> */}
         </div>
         <div className={style.finance}>
-          <User />
+          <User stage="finance"/>
           <TypesList active={active} setActive={setActive} types={types} />
           {active == 0 && (
             <div className={style.finance__stats}>

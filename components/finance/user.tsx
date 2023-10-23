@@ -4,7 +4,7 @@ import { useInjection } from "inversify-react";
 import Web3Store from "../../stores/Web3Store";
 import { addressSlice } from "../../utils/utilities";
 
-const User = observer(() => {
+const User = observer(({ stage }: { stage: string }) => {
   const { user, balance } = useInjection(Web3Store);
   return (
     <div className={style.finance__row}>
@@ -38,15 +38,22 @@ const User = observer(() => {
           </div>
         </div>
       </div>
-      <div className={style.finance__title}>
-        <div className={style.finance__balance}>
-          <div className={style.finance__balance__value}>
-            <img src="../icons/Ethereum.svg" />
-            {balance}
+      {stage == "finance" && (
+        <div className={style.finance__title}>
+          <div className={style.finance__balance}>
+            <div className={style.finance__balance__value}>
+              <img src="../icons/Ethereum.svg" />
+              {balance}
+            </div>
+            <div className={style.finance__subtitle}>Wallet balance</div>
           </div>
-          <div className={style.finance__subtitle}>Wallet balance</div>
         </div>
-      </div>
+      )}
+      {stage == "referral" && (
+        <div className={style.finance__tier}>
+          Tier:  NEW 
+        </div>
+      )}
     </div>
   );
 });

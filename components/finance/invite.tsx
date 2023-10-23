@@ -31,13 +31,23 @@ const Invite = observer(() => {
 
       <div className={style.finance__container}>
         <div className={style.finance__titles}>
-          <div className={classNames(explore.explore__title, style.mob__link)}><Link href={"/finance"}>My funds</Link></div>
-          <div className={explore.explore__title}>Beta</div>
+          <div className={classNames(explore.explore__title, style.mob__link)}>
+            <Link href={"/finance"}>My funds</Link>
+          </div>
+          <div className={explore.explore__title}>Referral system</div>
           {/* <div className={classNames(explore.explore__title, style.mob__link)}><Link href={"/finance/airdrop"}>Airdrop</Link></div> */}
         </div>
         <div className={style.finance}>
-          <User />
-
+          <User stage="referral" />
+          <div className={style.finance__total}>
+            <img src="../../icons/User.svg" />
+            <div>
+              <div className={style.finance__total__text}>
+                Total invited users
+              </div>
+              <div className={style.finance__total__count}>1 / 3</div>
+            </div>
+          </div>
           {keys.map((el) => {
             return (
               <div

@@ -17,11 +17,11 @@ const Airdrop = () => {
       <div className={style.finance__container}>
         <div className={style.finance__titles}>
           <div className={classNames(explore.explore__title, style.mob__link)}><Link href={"/finance"}>My funds</Link></div>
-          <div className={classNames(explore.explore__title, style.mob__link)}><Link href={"/finance/invite"}>Beta</Link></div>
+          <div className={classNames(explore.explore__title, style.mob__link)}><Link href={"/finance/invite"}>Referral system</Link></div>
           <div className={explore.explore__title}>Airdrop</div>
         </div>
         <div className={style.finance}>
-          <User />
+          <User stage="airdrop"/>
           <div className={style.finance__points}>
             Your friend.tech points count: 121,234
           </div>
