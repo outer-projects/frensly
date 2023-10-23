@@ -38,8 +38,8 @@ const OneMessage = observer(({ el, roomId, members }: any) => {
   const message = useMemo(() => {
     let text = el.text;
     for (let i = 0; i <= mentions.length; i++) {
-      console.log(mentions[i]?.id, getUserById(mentions[i], members));
-      text.replace(mentions[i]?.id, getUserById(mentions[i], members));
+      console.log(mentions[i], getUserById(mentions[i], members));
+      text.replace(mentions[i], getUserById(mentions[i], members));
       console.log(text);
       if (i == mentions.length) {
         console.log(text);
