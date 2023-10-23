@@ -93,7 +93,7 @@ const OneMessage = observer(({ el, roomId, members }: any) => {
                 highlightClassName={style.openchat__mention}
                 searchWords={mentions.map((el: any) => "@" + el)}
                 autoEscape={true}
-                textToHighlight={el.text.replace("{", "").replace("}", "")}
+                textToHighlight={message.replace("{", "").replace("}", "")}
               />{" "}
               <div className={style.openchat__time}>{getDate(el.date)}</div>
             </div>
