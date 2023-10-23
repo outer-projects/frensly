@@ -8,13 +8,23 @@ import { useContext, useEffect, useMemo, useState } from "react";
 // @ts-ignore
 import Highlighter from "react-highlight-words";
 import { SocketContext } from "../../../utils/socket";
-const OneMessage = observer(({ el, roomId }: any) => {
+import { IProfile } from "../../../types/users";
+const getUserById = (id: string, members: IProfile[]) => {
+  let correctUser = members.filter((el) => el.twitterId == id)[0];
+  if (correctUser) {
+    return correctUser.twitterHandle;
+  }
+  return "";
+};
+const OneMessage = observer(({ el, roomId, members }: any) => {
   const { user } = useInjection(Web3Store);
   const [isViewed, setIsViewed] = useState(true);
   const socket = useContext(SocketContext);
   const mentions = useMemo(() => {
     const text = el.text.match(/{[\w\s]+}/g);
-    const result = text ? text.map((s: any) => s.slice(1, s.length - 1)) : [];
+    const result = text
+      ? text.map((s: any) => getUserById(s.slice(1, s.length - 1), members))
+      : [];
     return result;
   }, [el.text]);
   useEffect(() => {
@@ -26,6 +36,16 @@ const OneMessage = observer(({ el, roomId }: any) => {
       socket.emit("view", { room: roomId, message: el._id });
     }
   }, [isViewed]);
+  const message = useMemo(() => {
+    let text = el.text;
+    for (let i = 0; i <= mentions.length; i++) {
+      text = text.replace(members[i], getUserById(mentions[i], members));
+      if (i == mentions.length) {
+        return text;
+      }
+    }
+  }, [mentions]);
+  console.log(message);
   return (
     <div
       className={classNames(

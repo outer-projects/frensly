@@ -3,7 +3,7 @@ import style from "../ponds.module.scss";
 import profile from "../../profile/profile.module.scss";
 import { useInjection } from "inversify-react";
 import Web3Store from "../../../stores/Web3Store";
-const linst = ["123", "123", "123"];
+
 const Write = ({
   newMsg,
   setNewMsg,
