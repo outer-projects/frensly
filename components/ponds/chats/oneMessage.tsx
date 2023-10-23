@@ -37,15 +37,15 @@ const OneMessage = observer(({ el, roomId, members }: any) => {
   }, [isViewed]);
   const message = useMemo(() => {
     let text = el.text;
-    for (let i = 0; i <= mentions.length; i++) {
-      console.log(mentions[i], getUserById(mentions[i], members));
-      text.replace(mentions[i], getUserById(mentions[i], members));
-      console.log(text);
+    mentions.map((el: any, i: number) => {
+      // console.log(mentions[i], getUserById(mentions[i], members));
+      text.replace(el, getUserById(el, members));
+      // console.log(text);
       if (i == mentions.length) {
-        console.log(text);
-        return text;
+        // console.log(text);
       }
-    }
+    });
+    console.log(text);
   }, [mentions]);
   // console.log(message, mentions);
   return (
