@@ -22,14 +22,7 @@ const OneMessage = observer(({ el, roomId, members }: any) => {
   const socket = useContext(SocketContext);
   const mentions = useMemo(() => {
     const text = el.text.match(/{[\w\s]+}/g);
-    const result = text
-      ? text.map((s: any) => {
-          return {
-            name: getUserById(s.slice(1, s.length - 1), members),
-            id: s.slice(1, s.length - 1),
-          };
-        })
-      : [];
+    const result = text ? text.map((s: any) => s.slice(1, s.length - 1)) : [];
     return result;
   }, [el.text]);
 
