@@ -46,6 +46,7 @@ const OneMessage = observer(({ el, roomId, members }: any) => {
       }
     });
     console.log(text);
+    return text
   }, [mentions]);
   // console.log(message, mentions);
   return (
