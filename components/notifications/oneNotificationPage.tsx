@@ -24,14 +24,10 @@ const OneNotificationPage = observer(
           : notification?.source?.text;
       } else if (notification.type == "MENTION") {
         let messages = notification?.source?.messages?.filter((el: any) =>
-          el.text.includes(user?.twitterId)
+          el.text.includes(user?.twitterId) && el.date == notification.date
         );
-        console.log(messages);
-        if (messages.length !== 0) {
-          return messages[messages.length - 1].text;
-        } else {
-          return "";
-        }
+        return messages.length!==0 && messages[0].text
+       
       } else {
         return "";
       }
