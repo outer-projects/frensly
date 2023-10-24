@@ -19,8 +19,8 @@ const OneNotificationPage = observer(
     const message = useMemo(() => {
       if (isSocial) {
         return notification?.source?.text &&
-          notification?.source?.text?.length >= 10
-          ? notification?.source?.text?.slice(0, 11) + "..."
+          notification?.source?.text?.length >= 30
+          ? notification?.source?.text?.slice(0, 30) + "..."
           : notification?.source?.text;
       } else if (notification.type == "MENTION") {
         let messages = notification?.source?.messages?.filter(
@@ -28,8 +28,11 @@ const OneNotificationPage = observer(
             el.text.includes(user?.twitterId) &&
             el.date.slice(0, 19) == notification.date.slice(0, 19)
         );
-        console.log(messages);
-        return messages.length !== 0 && messages[0].text;
+        return messages.length !== 0 && messages[0].text >= 30
+          ? messages[0].text
+              .slice(0, 30)
+              .replace("@{" + user?.twitterId + "}", "") + "..."
+          : messages[0].text.replace("@{" + user?.twitterId + "}", "");
       } else {
         return "";
       }
@@ -57,6 +60,7 @@ const OneNotificationPage = observer(
         return "/ponds/" + notification?.source._id;
       } else return "";
     }, [isSocial, isTrade, isMessage]);
+
     return (
       <Link href={linkTo}>
         <div className={style.nots__one__page}>
