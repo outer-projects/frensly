@@ -125,6 +125,42 @@
   letter-spacing: -0.16px;
   margin-bottom: 24px;
 }
+.finance__total__points {
+  height: 160px;
+  border-radius: 32px;
+  background: #f8f8f8;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.invite__code__left {
+  color: $grey;
+  font-family: "DMSans";
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 18px;
+  letter-spacing: -0.12px;
+}
+.finance__total__points__count {
+  color: $black;
+  text-align: center;
+  font-family: "Syne";
+  font-size: 56px;
+  font-weight: bold;
+  line-height: 64px;
+  letter-spacing: -1.12px;
+}
+.finance__total__points__claimable {
+  color: $grey;
+  text-align: center;
+  font-family: "DMSans";
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
+  margin-top: 8px;
+  letter-spacing: -0.16px;
+}
 .finance__invite {
   color: $black;
   font-family: "Syne";

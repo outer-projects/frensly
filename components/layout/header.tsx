@@ -26,11 +26,11 @@ const Header = observer(() => {
     useInjection(UserStore);
   const { getMyChats, unread } = useInjection(ChatStore);
   const headerText = [
-    { name: "Ponds", link: "/ponds" },
     { name: "Feed", link: "/feed" },
-    { name: "Profile", link: "/profile" },
     { name: "Explore", link: "/explore" },
-    { name: "Finance", link: "/finance" },
+    { name: "Ponds", link: "/ponds" },
+    { name: "Profile", link: "/profile" },
+    { name: "Dashboard", link: "/dashboard/finance" },
   ];
 
   useEffect(() => {

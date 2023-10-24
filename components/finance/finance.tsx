@@ -19,21 +19,21 @@ import Sidebar from "./sidebar";
 export const links = [
   {
     title: "My funds",
-    link: "/finance",
+    link: "/dashboard/finance",
     img: "../icons/profile.svg",
     active: true,
   },
   {
     title: "Referral system",
-    link: "/finance/invite",
+    link: "/dashboard/invite",
     img: "../icons/invite.svg",
     active: true,
   },
   {
-    title: "Airdrop (soon)",
-    link: "/finance/airdrop",
+    title: "Airdrop",
+    link: "/dashboard/airdrop",
     img: "../icons/airdrop.svg",
-    active: false,
+    active: true,
   },
 ];
 

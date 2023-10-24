@@ -16,25 +16,45 @@ const Airdrop = () => {
 
       <div className={style.finance__container}>
         <div className={style.finance__titles}>
-          <div className={classNames(explore.explore__title, style.mob__link)}><Link href={"/finance"}>My funds</Link></div>
-          <div className={classNames(explore.explore__title, style.mob__link)}><Link href={"/finance/invite"}>Referral system</Link></div>
+          <div className={classNames(explore.explore__title, style.mob__link)}>
+            <Link href={"/finance"}>My funds</Link>
+          </div>
+          <div className={classNames(explore.explore__title, style.mob__link)}>
+            <Link href={"/finance/invite"}>Referral system</Link>
+          </div>
           <div className={explore.explore__title}>Airdrop</div>
         </div>
         <div className={style.finance}>
-          <User stage="airdrop"/>
-          <div className={style.finance__points}>
-            Your friend.tech points count: 121,234
+          <User stage="airdrop" />
+          <div className={style.finance__invite}>Tier system</div>
+          <div className={style.finance__invite__text}>
+            Higher tier gives you more opportunities in our app and future
+            airdrop. To move to the next tier you need to fulfill the following
+            conditions
           </div>
-          <div className={style.finance__gain}>100.000 $FREN</div>
-          <div className={style.finance__total}>Total claimable</div>
-          <button
-            className={classNames(
-              header.connect__button,
-              style.airdrop__claim__button
-            )}
-          >
-            Claim
-          </button>
+          <div className={style.finance__total}>
+            <img src="../../icons/User.svg" />
+            <div>
+              <div className={style.finance__total__text}>Invite frens</div>
+              <div className={style.finance__total__count}>1 / 3</div>
+            </div>
+          </div>
+          <div className={style.finance__total}>
+            <img src="../../icons/User.svg" />
+            <div>
+              <div className={style.finance__total__count}>
+                Buy someone's share
+              </div>
+            </div>
+          </div>
+          <div className={style.finance__invite}>Your points</div>
+          <div className={style.finance__invite__text}>
+            Points will play the role in the future airdrop
+          </div>
+          <div className={style.finance__total__points}>
+            <div className={style.finance__total__points__count}>10028</div>
+            <div className={style.finance__total__points__claimable}>Total claimable</div>
+          </div>
         </div>
       </div>
     </div>

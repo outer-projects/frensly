@@ -61,11 +61,15 @@ const Invite = observer(() => {
                   el.isUsed && style.invite__code__used
                 )}
               >
-                {el.key}
-
+                <div>
+                  <div className={style.invite__code__left}>
+                    There are <span>2</span> uses left
+                  </div>
+                  <div>{window.location.origin + "/" + el.key}</div>
+                </div>
                 {!el.isUsed && (
                   <CopyToClipboard
-                    text={el.key}
+                    text={window.location.origin + "/" + el.key}
                     onCopy={() => {
                       toast.success("Code is copied successfully");
                     }}
