@@ -61,7 +61,7 @@ const OneNotificationPage = observer(
     return (
       <Link href={linkTo}>
         <div className={style.nots__one__page}>
-          <div>
+          <div className={style.nots__one__user}>
             <div className={style.nots__one__users}>
               <img src={notification?.account?.profile?.avatar} />
               {!isSocial && (
@@ -102,7 +102,7 @@ const OneNotificationPage = observer(
             <img src="../icons/twitterUI/Swap.svg" />
           )}
           {notification?.type == "LIKE" && (
-            <img src="../icons/twitterUI/Heart.svg" />
+            <img src="../icons/twitterUI/Heart__grey.svg" />
           )}
           {notification?.type == "FOLLOW" && <img src="../icons/Plus.svg" />}
         </div>

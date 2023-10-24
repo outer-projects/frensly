@@ -213,11 +213,17 @@
     display: block;
   }
 }
+.nots__one__user {
+  display: flex;
+  align-items: center;
+}
 .nots__one__users {
   margin-right: 16px;
   display: flex;
   flex-wrap: nowrap;
   align-items: center;
+  justify-content: center;
+  min-width: 72px;
   img {
     width: 40px;
     height: 40px;
