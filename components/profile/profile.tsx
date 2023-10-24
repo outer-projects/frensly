@@ -147,7 +147,15 @@ const Profile = observer(() => {
                     </a>
                   </div>
                   <div className={style.profile__subtitle}>
-                    {addressSlice(profileUser?.account?.address)}
+                    <a
+                      href={`https://basescan.org/${profileUser?.account?.address}`}
+                      target="_blank"
+                      rel="noreferrer"
+                      style={{ display: "flex", alignItems: "center" }}
+                    >
+                      {" "}
+                      {addressSlice(profileUser?.account?.address)}
+                    </a>
                   </div>
                 </div>
               </div>

@@ -17,10 +17,10 @@ const Airdrop = () => {
       <div className={style.finance__container}>
         <div className={style.finance__titles}>
           <div className={classNames(explore.explore__title, style.mob__link)}>
-            <Link href={"/finance"}>My funds</Link>
+            <Link href={"/dashboard/finance"}>My funds</Link>
           </div>
           <div className={classNames(explore.explore__title, style.mob__link)}>
-            <Link href={"/finance/invite"}>Referral system</Link>
+            <Link href={"/dashboard/invite"}>Referral system</Link>
           </div>
           <div className={explore.explore__title}>Airdrop</div>
         </div>

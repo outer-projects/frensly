@@ -37,7 +37,7 @@ export const links = [
   },
 ];
 
-const types = ["Activity", "Holders", "Holdings"];
+const types = ["Finance", "Holders", "Holdings"];
 const Finance = observer(() => {
   const [active, setActive] = useState(0);
   const router = useRouter();
@@ -93,8 +93,8 @@ const Finance = observer(() => {
       <div className={style.finance__container}>
         <div className={style.finance__titles}>
           <div className={explore.explore__title}>My funds</div>
-          <div className={classNames(explore.explore__title, style.mob__link)}><Link href={"/finance/invite"}>Referral system</Link></div>
-          {/* <div className={classNames(explore.explore__title, style.mob__link)}><Link href={"/finance/airdrop"}>Airdrop</Link></div> */}
+          <div className={classNames(explore.explore__title, style.mob__link)}><Link href={"/dashboard/invite"}>Invite</Link></div>
+          <div className={classNames(explore.explore__title, style.mob__link)}><Link href={"/dashboard/airdrop"}>Airdrop</Link></div>
         </div>
         <div className={style.finance}>
           <User stage="finance"/>

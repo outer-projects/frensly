@@ -34,7 +34,12 @@ const User = observer(({ stage }: { stage: string }) => {
             </a>
           </div>
           <div className={style.finance__subtitle}>
-            {addressSlice(user?.account?.address)}
+            <a
+              href={`https://https://basescan.org/${user?.account?.address}`}
+              target="_blank"
+            >
+              {addressSlice(user?.account?.address)}
+            </a>
           </div>
         </div>
       </div>

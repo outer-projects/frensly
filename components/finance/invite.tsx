@@ -16,8 +16,6 @@ import Web3Store from "../../stores/Web3Store";
 import { UserStore } from "../../stores/UserStore";
 import { getDate } from "../../utils/utilities";
 const Invite = observer(() => {
-  const router = useRouter();
-  const codes = ["fren-djjd89200", "fren-279891jsyu", "fren-279891jsyu"];
   const { user } = useInjection(Web3Store);
   const { getKeys, keys } = useInjection(UserStore);
   useEffect(() => {
@@ -32,10 +30,12 @@ const Invite = observer(() => {
       <div className={style.finance__container}>
         <div className={style.finance__titles}>
           <div className={classNames(explore.explore__title, style.mob__link)}>
-            <Link href={"/finance"}>My funds</Link>
+            <Link href={"/dashboard/finance"}>My funds</Link>
           </div>
           <div className={explore.explore__title}>Referral system</div>
-          {/* <div className={classNames(explore.explore__title, style.mob__link)}><Link href={"/finance/airdrop"}>Airdrop</Link></div> */}
+          <div className={classNames(explore.explore__title, style.mob__link)}>
+            <Link href={"/dashboard/airdrop"}>Airdrop</Link>
+          </div>
         </div>
         <div className={style.finance}>
           <User stage="referral" />

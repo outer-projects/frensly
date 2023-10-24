@@ -236,7 +236,7 @@
   display: flex;
   align-items: center;
   @media (max-width: 616px) {
-    padding-right:4px;
+    padding-right: 4px;
     padding-left: 4px;
   }
 }
@@ -386,6 +386,11 @@
   img {
     margin-left: 5px;
   }
+  a {
+    &:hover {
+      text-decoration: underline;
+    }
+  }
   span {
     color: $grey;
     /* Paragraphs/P4 */
@@ -446,6 +451,11 @@
   display: flex;
   align-items: center;
   font-family: "DMSans";
+  a {
+    &:hover {
+      text-decoration: underline;
+    }
+  }
 }
 .twitter__name {
   color: $black;
@@ -523,12 +533,18 @@
   }
 }
 .profile__subtitle {
-  color: #777e90;
+  color: $grey;
   font-size: 14px;
   margin-top: -3px;
   font-style: normal;
   font-weight: 400;
   line-height: 24px;
+  a {
+    color: $grey;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
 }
 .twitter__one__comment {
   justify-content: center !important;

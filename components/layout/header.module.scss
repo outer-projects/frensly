@@ -164,6 +164,12 @@
     width: 40px;
     height: 40px;
   }
+  a {
+    color: $grey;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
   @media (max-width: 616px) {
     margin-left: 0px;
   }

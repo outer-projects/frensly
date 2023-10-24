@@ -132,6 +132,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
 }
 .invite__code__left {
   color: $grey;
@@ -358,4 +359,10 @@
   line-height: 20px;
   font-weight: 400;
   letter-spacing: -0.14px;
+  a {
+    color: $grey;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
 }
