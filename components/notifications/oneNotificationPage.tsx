@@ -25,14 +25,14 @@ const OneNotificationPage = observer(
       } else if (notification.type == "MENTION") {
         let messages = notification?.source?.messages?.filter(
           (el: any) =>
-            el.text.includes(user?.twitterId) &&
-            el.date.slice(0, 19) == notification.date.slice(0, 19)
+            el?.text.includes(user?.twitterId) &&
+            el?.date.slice(0, 19) == notification?.date.slice(0, 19)
         );
-        return messages.length !== 0 && messages[0].text >= 30
-          ? messages[0].text
+        return messages.length !== 0 && messages[0]?.text >= 30
+          ? messages[0]?.text
               .slice(0, 30)
               .replace("@{" + user?.twitterId + "}", "") + "..."
-          : messages[0].text.replace("@{" + user?.twitterId + "}", "");
+          : messages[0]?.text?.replace("@{" + user?.twitterId + "}", "");
       } else {
         return "";
       }
