@@ -28,7 +28,7 @@ const OneNotificationPage = observer(
             el?.text.includes(user?.twitterId) &&
             el?.date.slice(0, 19) == notification?.date.slice(0, 19)
         );
-        return messages.length !== 0 && messages[0]?.text >= 30
+        return messages.length !== 0 && messages[0]?.text.length >= 30
           ? messages[0]?.text
               .slice(0, 30)
               .replace("@{" + user?.twitterId + "}", "") + "..."
