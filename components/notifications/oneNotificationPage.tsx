@@ -26,6 +26,7 @@ const OneNotificationPage = observer(
         let messages = notification?.source?.messages?.filter((el: any) =>
           el.text.includes(user?.twitterId)
         );
+        console.log(messages);
         if (messages.length !== 0) {
           return messages[messages.length - 1].text;
         } else {
@@ -73,7 +74,7 @@ const OneNotificationPage = observer(
                 {notification?.account?.profile?.twitterName}{" "}
                 {getActivity(notification?.type)}{" "}
                 {notification?.type == "MENTION" &&
-                  notification?.source.owner.twitterHandle + " pond"}
+                 "@"+ notification?.source.owner.twitterHandle + "'s pond"}
                 {notification?.amount && Number(notification?.amount) / 10 ** 6}{" "}
                 {notification?.subject?.profile?.twitterId !==
                   user?.twitterId &&
