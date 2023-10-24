@@ -30,11 +30,8 @@ const Wrapper = observer(({ children }: any) => {
     } else {
       setNeedChangeWallet(false);
     }
-    try {
-      const res = await frensly.methods.isSharesSubject(address).call();
-      setInit(res);
-    } catch (e) {
-      console.log("ERRORR: ", e);
+    if (user?.account?.isInitialized) {
+      setInit(true);
     }
   };
   useEffect(() => {
