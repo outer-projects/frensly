@@ -47,16 +47,16 @@ export class UserStore {
   @action getKeys = async () => {
     try {
       const res = await axios.get(prefix + "user/user/refs");
-      // console.log(res.data);
-      this.inviteLimit = res.data.reduce(
-        (partialSum: any, a: any) =>
-          partialSum + Number(a.usesLeft) + Number(a.referrals.length),
-        0
-      );
-      this.invited = res.data.reduce(
-        (partialSum: any, a: any) => partialSum + Number(a.referrals.length),
-        0
-      );
+      console.log(res.data);
+      // this.inviteLimit = res.data.reduce(
+      //   (partialSum: any, a: any) =>
+      //     partialSum + Number(a.usesLeft) + Number(a.referrals.length),
+      //   0
+      // );
+      // this.invited = res.data.reduce(
+      //   (partialSum: any, a: any) => partialSum + Number(a.referrals.length),
+      //   0
+      // );
       this.keys = res.data;
     } catch (e) {
       console.log(e);
