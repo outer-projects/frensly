@@ -47,7 +47,13 @@ const Airdrop = observer(() => {
               invited >= 1 && style.finance__total__complete
             )}
           >
-            <img src="../../icons/User.svg" />
+            <img
+              src={
+                invited >= 1
+                  ? "../../icons/User__green.svg"
+                  : "../../icons/User.svg"
+              }
+            />
             <div>
               <div className={style.finance__total__text}>Invite frens</div>
               <div className={style.finance__total__count}>
