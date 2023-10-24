@@ -23,11 +23,11 @@ const OneNotificationPage = observer(
           ? notification?.source?.text?.slice(0, 11) + "..."
           : notification?.source?.text;
       } else if (notification.type == "MENTION") {
-        let messages = notification?.source?.messages?.filter((el: any) =>
-          el.text.includes(user?.twitterId) && el.date == notification.date
+        let messages = notification?.source?.messages?.filter(
+          (el: any) =>
+            el.text.includes(user?.twitterId) && el.date == notification.date
         );
-        return messages.length!==0 && messages[0].text
-       
+        return messages.length !== 0 && messages[0].text;
       } else {
         return "";
       }
@@ -70,7 +70,7 @@ const OneNotificationPage = observer(
                 {notification?.account?.profile?.twitterName}{" "}
                 {getActivity(notification?.type)}{" "}
                 {notification?.type == "MENTION" &&
-                 "@"+ notification?.source.owner.twitterHandle + "'s pond"}
+                  "@" + notification?.source.owner.twitterHandle + "'s pond"}
                 {notification?.amount && Number(notification?.amount) / 10 ** 6}{" "}
                 {notification?.subject?.profile?.twitterId !==
                   user?.twitterId &&
@@ -78,7 +78,9 @@ const OneNotificationPage = observer(
               </div>
               <div className={style.nots__one__info}>
                 <div className={style.nots__one__time}>
-                  {isSocial ? message : timePassed(notification?.date) + " ago"}{" "}
+                  {isSocial || notification.type == "MENTION"
+                    ? message
+                    : timePassed(notification?.date) + " ago"}{" "}
                 </div>
               </div>
             </div>
