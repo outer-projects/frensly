@@ -27,6 +27,7 @@ const OneNotificationPage = observer(
           (el: any) =>
             el.text.includes(user?.twitterId) && el.date == notification.date
         );
+        console.log(messages);
         return messages.length !== 0 && messages[0].text;
       } else {
         return "";
