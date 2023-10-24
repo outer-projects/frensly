@@ -27,10 +27,10 @@ const AuthBanner = observer(() => {
   const router = useRouter();
   const { code } = router.query;
   useEffect(() => {
-    if (stage == "Invite" && code && code.includes("fren")) {
-      postCode(code as string);
+    if (code && code.includes("fren")) {
+      localStorage.setItem("invite", code as string);
     }
-  }, [code, stage]);
+  }, [code]);
   useEffect(() => {
     if (user?.account && !address) {
       setStage("Connect wallet");
@@ -38,6 +38,10 @@ const AuthBanner = observer(() => {
       setStage("Authorization");
     } else if (user && !user?.isKeyConfirmed) {
       setStage("Invite");
+      let code = localStorage.getItem("invite");
+      if (code) {
+        postCode(code);
+      }
     } else if (user && user?.isKeyConfirmed && !user?.account) {
       setStage("Connect");
     } else if (user?.account && user?.isKeyConfirmed) {
@@ -76,6 +80,7 @@ const AuthBanner = observer(() => {
     sendInviteCode(code).then((res) => {
       if (res) {
         checkAuth();
+        localStorage.removeItem("invite");
       } else {
         toast.error("Code is not correct");
       }
