@@ -49,7 +49,7 @@ const ChatItem = observer(
                 </div>
               </div>
               <div className={style.chat__name}>{el?.twitterName}</div>
-              {messages?.length > 0 ? (
+              {messages?.filter((el:any)=>el).length > 0 ? (
                 <div className={style.chat__text}>
                   {/* {messages}: who’s here?<span>7m</span> */}
                   {/* @ts-ignore */}

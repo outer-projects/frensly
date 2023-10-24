@@ -74,7 +74,7 @@ const Airdrop = observer(() => {
                 user?.account?.othersShares &&
                 user?.account?.othersShares?.length > 1
                   ? "../../icons/Ethereum__green.svg"
-                  : "../../icons/Ethereum.svg"
+                  : "../../icons/Ethereum__grey.svg"
               }
             />
             <div>
