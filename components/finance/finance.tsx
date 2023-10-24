@@ -50,7 +50,6 @@ const Finance = observer(() => {
     getHolders,
     portfolioValue,
     getKeys,
-    keys,
   } = useInjection(UserStore);
   const claim = async () => {
     try {

@@ -13,7 +13,7 @@ export class UserStore {
   @observable opacity: boolean = false;
   @observable ethCurrency: number = 0;
   @observable history: any[] = [];
-  @observable keys: any[] = [];
+  @observable key: any = undefined;
   @observable inviteLimit: number = 0;
   @observable invited: number = 0;
   @observable notifications: any[] = [];
@@ -48,16 +48,12 @@ export class UserStore {
     try {
       const res = await axios.get(prefix + "user/user/refs");
       console.log(res.data);
-      // this.inviteLimit = res.data.reduce(
-      //   (partialSum: any, a: any) =>
-      //     partialSum + Number(a.usesLeft) + Number(a.referrals.length),
+      this.inviteLimit =Number(res.data.usesLeft) + Number(res.data.referrals.length),
+
+      this.invited = Number(res.data.referrals.length),
       //   0
       // );
-      // this.invited = res.data.reduce(
-      //   (partialSum: any, a: any) => partialSum + Number(a.referrals.length),
-      //   0
-      // );
-      this.keys = res.data;
+      this.key = res.data;
     } catch (e) {
       console.log(e);
     }

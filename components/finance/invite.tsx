@@ -17,7 +17,7 @@ import { UserStore } from "../../stores/UserStore";
 import { getDate } from "../../utils/utilities";
 const Invite = observer(() => {
   const { user } = useInjection(Web3Store);
-  const { getKeys, keys, inviteLimit, invited } = useInjection(UserStore);
+  const { getKeys, key, inviteLimit, invited } = useInjection(UserStore);
   useEffect(() => {
     if (user) {
       getKeys();
@@ -55,28 +55,27 @@ const Invite = observer(() => {
             The link has limitations depending on your tier. Invite more users
             to get points boost and higher tier.
           </div>
-          {keys.map((el) => {
-            return (
+     
               <div
                 className={classNames(
                   style.invite__code,
-                  el.usesLeft == 0 && style.invite__code__used
+                  key.usesLeft == 0 && style.invite__code__used
                 )}
               >
                 <div>
                   <div className={style.invite__code__left}>
-                    There are <span>{el.usesLeft}</span> uses left
+                    There are <span>{key.usesLeft}</span> uses left
                   </div>
                   <div>
-                    {(window.location.origin + "/" + el.code).replace(
+                    {(window.location.origin + "/" + key.code).replace(
                       "https://",
                       ""
                     )}
                   </div>
                 </div>
-                {!el.isUsed && (
+                {key.usesLeft !== 0 && (
                   <CopyToClipboard
-                    text={window.location.origin + "/" + el.code}
+                    text={window.location.origin + "/" + key.code}
                     onCopy={() => {
                       toast.success("Code is copied successfully");
                     }}
@@ -88,8 +87,8 @@ const Invite = observer(() => {
                   </CopyToClipboard>
                 )}
               </div>
-            );
-          })}
+            
+    
         </div>
       </div>
     </div>
