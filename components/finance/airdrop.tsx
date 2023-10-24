@@ -41,15 +41,36 @@ const Airdrop = observer(() => {
             airdrop. To move to the next tier you need to fulfill the following
             conditions
           </div>
-          <div className={style.finance__total}>
+          <div
+            className={classNames(
+              style.finance__total,
+              invited >= 1 && style.finance__total__complete
+            )}
+          >
             <img src="../../icons/User.svg" />
             <div>
               <div className={style.finance__total__text}>Invite frens</div>
-              <div className={style.finance__total__count}>{invited} / {inviteLimit}</div>
+              <div className={style.finance__total__count}>
+                {invited >= 1 ? 1 : 0} / {1}
+              </div>
             </div>
           </div>
-          <div className={style.finance__total}>
-            <img src="../../icons/User.svg" />
+          <div
+            className={classNames(
+              style.finance__total,
+              user?.account?.othersShares &&
+                user?.account?.othersShares?.length > 1 &&
+                style.finance__total__complete
+            )}
+          >
+            <img
+              src={
+                user?.account?.othersShares &&
+                user?.account?.othersShares?.length > 1
+                  ? "../../icons/Ethereum__green.svg"
+                  : "../../icons/Ethereum.svg"
+              }
+            />
             <div>
               <div className={style.finance__total__count}>
                 Buy someone's share

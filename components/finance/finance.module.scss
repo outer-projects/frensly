@@ -281,6 +281,10 @@
   letter-spacing: -0.16px;
   margin-bottom: 16px;
 }
+.finance__total__complete {
+  color: $green !important;
+  border: 1px solid $green;
+}
 .finance__gain {
   color: $black;
   text-align: center;
