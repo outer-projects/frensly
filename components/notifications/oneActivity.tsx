@@ -19,7 +19,7 @@ export const getActivity = (type: string) => {
     case "COMMENT":
       return " commented your post";
     case "MENTION":
-      return " mentioned you";
+      return " tagged you in";
     case "FOLLOW":
       return " followed you";
 

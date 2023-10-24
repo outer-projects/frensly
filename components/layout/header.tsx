@@ -65,7 +65,7 @@ const Header = observer(() => {
       }
     },
   });
-  console.log(unreadCount);
+
   return (
     <div className={style.header__container}>
       <header className={style.header}>
@@ -106,7 +106,11 @@ const Header = observer(() => {
           <div
             ref={ref}
             onClick={() => {
-              setNots(!nots);
+              if (unreadCount > 0) {
+                setNots(!nots);
+              } else {
+                router.push("../../notifications");
+              }
             }}
             style={{ cursor: "pointer" }}
           >
@@ -128,7 +132,11 @@ const Header = observer(() => {
         <div className={style.header__user}>
           <div
             onClick={() => {
-              setNotsMob(!notsMob);
+              if (unreadCount > 0) {
+                setNotsMob(!notsMob);
+              } else {
+                router.push("../../notifications");
+              }
             }}
             style={{ cursor: "pointer" }}
           >

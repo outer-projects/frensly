@@ -108,206 +108,232 @@ const Profile = observer(() => {
     }
   }, [profileUser]);
   return (
-    <div className={style.profile}>
-      <div className={explore.explore__title}>
-        {isMyProfile ? "My profile" : profileUser?.twitterName}
-      </div>
-      <div className={style.profile__info}>
-        <div className={style.profile__row}>
-          <div className={style.profile__title}>
-            <img className={style.avatar} src={profileUser?.avatar} />
-            <div>
-              <div className={style.profile__name}>
-                {profileUser?.twitterName}{" "}
-                <a
-                  href={`https://twitter.com/${profileUser?.twitterHandle}`}
-                  target="_blank"
-                  rel="noreferrer"
-                  style={{
-                    width: "24px",
-                    height: "24px",
-                    display: "flex",
-                    alignItems: "center",
+    <>
+      {profileUser && (
+        <div className={style.profile}>
+          <div className={explore.explore__title}>
+            {isMyProfile ? "My profile" : profileUser?.twitterName}
+          </div>
+          <div className={style.profile__info}>
+            <div className={style.profile__row}>
+              <div className={style.profile__title}>
+                <img className={style.avatar} src={profileUser?.avatar} />
+                <div>
+                  <div className={style.profile__name}>
+                    {profileUser?.twitterName}{" "}
+                    <a
+                      href={`https://twitter.com/${profileUser?.twitterHandle}`}
+                      target="_blank"
+                      rel="noreferrer"
+                      style={{
+                        width: "24px",
+                        height: "24px",
+                        display: "flex",
+                        alignItems: "center",
+                      }}
+                    >
+                      <img
+                        src="../icons/twitter_black.svg"
+                        style={{ marginRight: "5px" }}
+                      />{" "}
+                    </a>
+                    <a
+                      href={`https://twitter.com/${profileUser?.twitterHandle}`}
+                      target="_blank"
+                      rel="noreferrer"
+                      style={{ display: "flex", alignItems: "center" }}
+                    >
+                      <span>@{profileUser?.twitterHandle}</span>
+                    </a>
+                  </div>
+                  <div className={style.profile__subtitle}>
+                    {addressSlice(profileUser?.account?.address)}
+                  </div>
+                </div>
+              </div>
+            </div>{" "}
+            <div className={style.profile__buttons}>
+              {!isMyProfile && (
+                <button
+                  className={classNames(
+                    header.connect__button,
+                    !isFollowed
+                      ? style.profile__follow
+                      : style.profile__unfollow
+                  )}
+                  onClick={() => {
+                    // console.log("Follow");
+                    followUser(isFollowed);
                   }}
                 >
                   <img
-                    src="../icons/twitter_black.svg"
-                    style={{ marginRight: "5px" }}
-                  />{" "}
-                </a>
-                <a
-                  href={`https://twitter.com/${profileUser?.twitterHandle}`}
-                  target="_blank"
-                  rel="noreferrer"
-                  style={{ display: "flex", alignItems: "center" }}
-                >
-                  <span>@{profileUser?.twitterHandle}</span>
-                </a>
-              </div>
-              <div className={style.profile__subtitle}>
-                {addressSlice(profileUser?.account?.address)}
-              </div>
-            </div>
-          </div>
-        </div>{" "}
-        <div className={style.profile__buttons}>
-          {!isMyProfile && (
-            <button
-              className={classNames(
-                header.connect__button,
-                !isFollowed ? style.profile__follow : style.profile__unfollow
-              )}
-              onClick={() => {
-                // console.log("Follow");
-                followUser(isFollowed);
-              }}
-            >
-              <img
-                src={
-                  !isFollowed ? "../../icons/Plus.svg" : "../../icons/Close.svg"
-                }
-              />
-              {!isFollowed ? "Follow" : "Unfollow"}
-            </button>
-          )}
-          <button
-            className={classNames(
-              header.connect__button,
-              style.profile__buy,
-              !isMyProfile && style.profile__half
-            )}
-            onClick={() =>
-              modalStore.showModal(ModalsEnum.Trade, { user: profileUser })
-            }
-          >
-            Buy
-          </button>
-        </div>
-        <div className={classNames(style.profile__text, style.profile__share)}>
-          {`You own ${Number(count)} share`}
-        </div>
-        <div className={style.profile__stats}>
-          <div className={style.profile__stats__row}>
-            <div className={style.profile__stats__line}>
-              <div className={style.profile__text}>NW</div>
-              <div className={classNames(style.profile__text, style.black)}>
-                $??
-              </div>
-            </div>
-            <div className={style.profile__stats__line}>
-              <div className={style.profile__text}>Per 1 share</div>
-              <div
-                className={classNames(
-                  style.profile__text,
-                  style.profile__balance
-                )}
-              >
-                <img src="../icons/Ethereum.svg" />
-                {fromWeiToEth(pricePerShade, 5)} ETH
-              </div>
-            </div>
-          </div>
-          <div className={style.profile__stats__row}>
-            <div className={style.profile__stats__line}>
-              <div className={style.profile__text}>TVH</div>
-              <div className={classNames(style.profile__text, style.black)}>
-                <img src="../icons/Info.svg" />
-                $??
-              </div>
-            </div>
-            <div className={style.profile__stats__line}>
-              <div className={style.profile__text}>Volume</div>
-              <div className={classNames(style.profile__text, style.black, style.right)}>
-                {fromWeiToEth(profileUser?.account?.totalVolume as string)} ETH
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className={style.profile__stats__follows}>
-          <div className={style.profile__stats__follow}>
-            <div
-              className={style.profile__text}
-              style={{ paddingRight: "9px", borderRight: "1px solid #E2E3E2" }}
-            >
-              <span>{profileUser?.isFollowing?.length || 0}</span> Following
-            </div>
-            <div className={style.profile__text} style={{ marginLeft: "8px" }}>
-              <span>{profileUser?.isFollowedBy?.length || 0}</span> Followers
-            </div>
-          </div>
-          <div className={style.profile__stats__follow}>
-            <div
-              className={style.profile__text}
-              style={{
-                paddingRight: "9px",
-                borderRight: "1px solid #E2E3E2",
-                cursor: "pointer",
-              }}
-              onClick={() => {
-                setCurrentType(0);
-                router.push("../../activity/" + profileUser?.twitterId);
-              }}
-            >
-              <span>{profileUser?.account?.myHolders?.length || 0}</span>{" "}
-              Holders
-            </div>
-
-            <div
-              className={style.profile__text}
-              style={{ marginLeft: "8px", cursor: "pointer" }}
-              onClick={() => {
-                setCurrentType(1);
-                router.push("../../activity/" + profileUser?.twitterId);
-              }}
-            >
-              <span>
-                {
-                  profileUser?.account?.othersShares.filter(
-                    (value: any, index: number, self: any) =>
-                      index ===
-                      self.findIndex((t: any) => t.subject === value.subject)
-                  ).length
-                }
-              </span>{" "}
-              Holding
-            </div>
-          </div>
-        </div>
-        <div className={style.profile__bottom}>
-          <div className={style.profile__types}>
-            <div
-              className={classNames(
-                style.profile__type,
-                style.profile__type__active
-              )}
-            >
-              Posts
-            </div>
-          </div>
-          <div className={style.profile__buttons__bottom}>
-            <Link href={`/activity/${profileUser?.twitterId}`}>
-              <button
-                className={style.profile__light__button}
-                style={{ marginRight: "7px", cursor: "pointer" }}
-              >
-                Activity
-              </button>
-            </Link>
-            {userChat && (
-              <Link href={`/ponds/${userChat?._id}`}>
-                <button
-                  className={style.profile__light__button}
-                  style={{ cursor: "pointer" }}
-                >
-                  Chat
+                    src={
+                      !isFollowed
+                        ? "../../icons/Plus.svg"
+                        : "../../icons/Close.svg"
+                    }
+                  />
+                  {!isFollowed ? "Follow" : "Unfollow"}
                 </button>
-              </Link>
-            )}
+              )}
+              <button
+                className={classNames(
+                  header.connect__button,
+                  style.profile__buy,
+                  !isMyProfile && style.profile__half
+                )}
+                onClick={() =>
+                  modalStore.showModal(ModalsEnum.Trade, { user: profileUser })
+                }
+              >
+                Buy
+              </button>
+            </div>
+            <div
+              className={classNames(style.profile__text, style.profile__share)}
+            >
+              {`You own ${Number(count)} share`}
+            </div>
+            <div className={style.profile__stats}>
+              <div className={style.profile__stats__row}>
+                <div className={style.profile__stats__line}>
+                  <div className={style.profile__text}>NW</div>
+                  <div className={classNames(style.profile__text, style.black)}>
+                    $??
+                  </div>
+                </div>
+                <div className={style.profile__stats__line}>
+                  <div className={style.profile__text}>Per 1 share</div>
+                  <div
+                    className={classNames(
+                      style.profile__text,
+                      style.profile__balance
+                    )}
+                  >
+                    <img src="../icons/Ethereum.svg" />
+                    {fromWeiToEth(pricePerShade, 5)} ETH
+                  </div>
+                </div>
+              </div>
+              <div className={style.profile__stats__row}>
+                <div className={style.profile__stats__line}>
+                  <div className={style.profile__text}>TVH</div>
+                  <div className={classNames(style.profile__text, style.black)}>
+                    <img src="../icons/Info.svg" />
+                    $??
+                  </div>
+                </div>
+                <div className={style.profile__stats__line}>
+                  <div className={style.profile__text}>Volume</div>
+                  <div
+                    className={classNames(
+                      style.profile__text,
+                      style.black,
+                      style.right
+                    )}
+                  >
+                    {fromWeiToEth(profileUser?.account?.totalVolume as string)}{" "}
+                    ETH
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className={style.profile__stats__follows}>
+              <div className={style.profile__stats__follow}>
+                <div
+                  className={style.profile__text}
+                  style={{
+                    paddingRight: "9px",
+                    borderRight: "1px solid #E2E3E2",
+                  }}
+                >
+                  <span>{profileUser?.isFollowing?.length || 0}</span> Following
+                </div>
+                <div
+                  className={style.profile__text}
+                  style={{ marginLeft: "8px" }}
+                >
+                  <span>{profileUser?.isFollowedBy?.length || 0}</span>{" "}
+                  Followers
+                </div>
+              </div>
+              <div className={style.profile__stats__follow}>
+                <div
+                  className={style.profile__text}
+                  style={{
+                    paddingRight: "9px",
+                    borderRight: "1px solid #E2E3E2",
+                    cursor: "pointer",
+                  }}
+                  onClick={() => {
+                    setCurrentType(0);
+                    router.push("../../activity/" + profileUser?.twitterId);
+                  }}
+                >
+                  <span>{profileUser?.account?.myHolders?.length || 0}</span>{" "}
+                  Holders
+                </div>
+
+                <div
+                  className={style.profile__text}
+                  style={{ marginLeft: "8px", cursor: "pointer" }}
+                  onClick={() => {
+                    setCurrentType(1);
+                    router.push("../../activity/" + profileUser?.twitterId);
+                  }}
+                >
+                  <span>
+                    {
+                      profileUser?.account?.othersShares.filter(
+                        (value: any, index: number, self: any) =>
+                          index ===
+                          self.findIndex(
+                            (t: any) => t.subject === value.subject
+                          )
+                      ).length
+                    }
+                  </span>{" "}
+                  Holding
+                </div>
+              </div>
+            </div>
+            <div className={style.profile__bottom}>
+              <div className={style.profile__types}>
+                <div
+                  className={classNames(
+                    style.profile__type,
+                    style.profile__type__active
+                  )}
+                >
+                  Posts
+                </div>
+              </div>
+              <div className={style.profile__buttons__bottom}>
+                <Link href={`/activity/${profileUser?.twitterId}`}>
+                  <button
+                    className={style.profile__light__button}
+                    style={{ marginRight: "7px", cursor: "pointer" }}
+                  >
+                    Activity
+                  </button>
+                </Link>
+                {userChat && (
+                  <Link href={`/ponds/${userChat?._id}`}>
+                    <button
+                      className={style.profile__light__button}
+                      style={{ cursor: "pointer" }}
+                    >
+                      Chat
+                    </button>
+                  </Link>
+                )}
+              </div>
+            </div>
           </div>
+          {profileUser && <TwitterFeed id={profileUser?._id} isProfile />}
         </div>
-      </div>
-      {profileUser && <TwitterFeed id={profileUser?._id} isProfile />}
-    </div>
+      )}
+    </>
   );
 });
 export default Profile;

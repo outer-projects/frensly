@@ -47,6 +47,11 @@ const Invite = observer(() => {
               </div>
               <div className={style.finance__total__count}>1 / 3</div>
             </div>
+            <div className={style.finance__invite}>Your invite link</div>
+            <div className={style.finance__invite__text}>
+              The link has limitations depending on your tier. Invite more users
+              to get points boost and higher tier.
+            </div>
           </div>
           {keys.map((el) => {
             return (

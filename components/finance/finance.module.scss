@@ -115,12 +115,34 @@
   line-height: 18px;
   letter-spacing: -0.12px;
 }
+.finance__invite__text {
+  color: $grey;
+  font-family: "DMSans";
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
+  letter-spacing: -0.16px;
+  margin-bottom: 24px;
+}
+.finance__invite {
+  color: $black;
+  font-family: "Syne";
+  font-size: 24px;
+  font-style: normal;
+  font-weight: bold;
+  line-height: 32px;
+  text-align: left;
+  letter-spacing: -0.48px;
+  margin-top: 24px;
+}
 .finance__total__count {
   color: $black;
   font-family: "DMSans";
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
+  text-align: left;
   line-height: 24px; /* 150% */
   letter-spacing: -0.16px;
 }
