@@ -14,6 +14,7 @@ import ConnectButtonCustom from "../layout/connectButtonCustom";
 import ProgressBar from "../progressBar/progressBar";
 import { toWei } from "web3-utils";
 import { toast } from "react-toastify";
+import { useRouter } from "next/router";
 const AuthBanner = observer(() => {
   const { address, authStatus, frensly, user, checkAuth } =
     useInjection(Web3Store);
@@ -23,7 +24,8 @@ const AuthBanner = observer(() => {
   const [stage, setStage] = useState("");
   const [opacity, setOpacity] = useState(false);
   const [activeCode, setActiveCode] = useState(false);
-
+  const router = useRouter()
+  console.log(router);
   useEffect(() => {
     if (user?.account && !address) {
       setStage("Connect wallet");
