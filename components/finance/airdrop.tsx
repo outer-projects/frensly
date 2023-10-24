@@ -1,15 +1,24 @@
 import classNames from "classnames";
 import style from "./finance.module.scss";
 import Link from "next/link";
-import { links } from "./finance";
 import explore from "../explore/explore.module.scss";
 import User from "./user";
-import header from "../layout/header.module.scss";
-import { useInjection } from "inversify-react";
 import { useRouter } from "next/router";
 import Sidebar from "./sidebar";
-const Airdrop = () => {
-  const router = useRouter();
+import { observer } from "mobx-react";
+import { useInjection } from "inversify-react";
+import Web3Store from "../../stores/Web3Store";
+import { useEffect } from "react";
+import { UserStore } from "../../stores/UserStore";
+
+const Airdrop = observer(() => {
+  const { user } = useInjection(Web3Store);
+  const { getKeys, inviteLimit, invited } = useInjection(UserStore);
+  useEffect(() => {
+    if (user) {
+      getKeys();
+    }
+  }, [user]);
   return (
     <div className={style.finance__page}>
       <Sidebar />
@@ -17,10 +26,10 @@ const Airdrop = () => {
       <div className={style.finance__container}>
         <div className={style.finance__titles}>
           <div className={classNames(explore.explore__title, style.mob__link)}>
-            <Link href={"/dashboard/finance"}>My funds</Link>
+            <Link href={"/dashboard/finance"}>Funds</Link>
           </div>
           <div className={classNames(explore.explore__title, style.mob__link)}>
-            <Link href={"/dashboard/invite"}>Referral system</Link>
+            <Link href={"/dashboard/invite"}>Referrals</Link>
           </div>
           <div className={explore.explore__title}>Airdrop</div>
         </div>
@@ -36,7 +45,7 @@ const Airdrop = () => {
             <img src="../../icons/User.svg" />
             <div>
               <div className={style.finance__total__text}>Invite frens</div>
-              <div className={style.finance__total__count}>1 / 3</div>
+              <div className={style.finance__total__count}>{invited} / {inviteLimit}</div>
             </div>
           </div>
           <div className={style.finance__total}>
@@ -52,12 +61,16 @@ const Airdrop = () => {
             Points will play the role in the future airdrop
           </div>
           <div className={style.finance__total__points}>
-            <div className={style.finance__total__points__count}>10028</div>
-            <div className={style.finance__total__points__claimable}>Total claimable</div>
+            <div className={style.finance__total__points__count}>
+              {user?.points}
+            </div>
+            <div className={style.finance__total__points__claimable}>
+              Total claimable
+            </div>
           </div>
         </div>
       </div>
     </div>
   );
-};
+});
 export default Airdrop;

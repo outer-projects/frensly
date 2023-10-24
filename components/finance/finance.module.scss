@@ -100,7 +100,7 @@
   color: $black;
   font-family: "DMSans";
   font-size: 16px;
-  font-weight: bold;
+  font-weight: 400;
   line-height: 24px;
   letter-spacing: -0.16px;
   border-radius: 100px;
@@ -167,7 +167,6 @@
   font-family: "Syne";
   font-size: 24px;
   font-style: normal;
-  font-weight: bold;
   line-height: 32px;
   text-align: left;
   letter-spacing: -0.48px;
@@ -273,6 +272,9 @@
   color: $grey;
   text-align: center;
   font-family: "DMSans";
+  border-radius: 16px;
+  background: #f8f8f8;
+  height: 56px;
   font-size: 16px;
   font-weight: 400;
   line-height: 24px; /* 150% */

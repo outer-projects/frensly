@@ -17,7 +17,7 @@ import { UserStore } from "../../stores/UserStore";
 import { getDate } from "../../utils/utilities";
 const Invite = observer(() => {
   const { user } = useInjection(Web3Store);
-  const { getKeys, keys } = useInjection(UserStore);
+  const { getKeys, keys, inviteLimit, invited } = useInjection(UserStore);
   useEffect(() => {
     if (user) {
       getKeys();
@@ -30,9 +30,9 @@ const Invite = observer(() => {
       <div className={style.finance__container}>
         <div className={style.finance__titles}>
           <div className={classNames(explore.explore__title, style.mob__link)}>
-            <Link href={"/dashboard/finance"}>My funds</Link>
+            <Link href={"/dashboard/finance"}>Funds</Link>
           </div>
-          <div className={explore.explore__title}>Referral system</div>
+          <div className={explore.explore__title}>Referrals</div>
           <div className={classNames(explore.explore__title, style.mob__link)}>
             <Link href={"/dashboard/airdrop"}>Airdrop</Link>
           </div>
@@ -45,7 +45,9 @@ const Invite = observer(() => {
               <div className={style.finance__total__text}>
                 Total invited users
               </div>
-              <div className={style.finance__total__count}>1 / 3</div>
+              <div className={style.finance__total__count}>
+                {invited} / {inviteLimit}
+              </div>
             </div>
           </div>
           <div className={style.finance__invite}>Your invite link</div>
@@ -58,18 +60,23 @@ const Invite = observer(() => {
               <div
                 className={classNames(
                   style.invite__code,
-                  el.isUsed && style.invite__code__used
+                  el.usesLeft == 0 && style.invite__code__used
                 )}
               >
                 <div>
                   <div className={style.invite__code__left}>
-                    There are <span>2</span> uses left
+                    There are <span>{el.usesLeft}</span> uses left
                   </div>
-                  <div>{window.location.origin + "/" + el.key}</div>
+                  <div>
+                    {(window.location.origin + "/" + el.code).replace(
+                      "https://",
+                      ""
+                    )}
+                  </div>
                 </div>
                 {!el.isUsed && (
                   <CopyToClipboard
-                    text={window.location.origin + "/" + el.key}
+                    text={window.location.origin + "/" + el.code}
                     onCopy={() => {
                       toast.success("Code is copied successfully");
                     }}

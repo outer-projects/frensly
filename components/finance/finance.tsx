@@ -24,7 +24,7 @@ export const links = [
     active: true,
   },
   {
-    title: "Referral system",
+    title: "Referrals",
     link: "/dashboard/invite",
     img: "../icons/invite.svg",
     active: true,
@@ -92,8 +92,8 @@ const Finance = observer(() => {
       <Sidebar />
       <div className={style.finance__container}>
         <div className={style.finance__titles}>
-          <div className={explore.explore__title}>My funds</div>
-          <div className={classNames(explore.explore__title, style.mob__link)}><Link href={"/dashboard/invite"}>Invite</Link></div>
+          <div className={explore.explore__title}>Funds</div>
+          <div className={classNames(explore.explore__title, style.mob__link)}><Link href={"/dashboard/invite"}>Referrals</Link></div>
           <div className={classNames(explore.explore__title, style.mob__link)}><Link href={"/dashboard/airdrop"}>Airdrop</Link></div>
         </div>
         <div className={style.finance}>

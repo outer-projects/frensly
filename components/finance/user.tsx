@@ -55,7 +55,7 @@ const User = observer(({ stage }: { stage: string }) => {
         </div>
       )}
       {stage == "referral" && (
-        <div className={style.finance__tier}>Tier: NEW</div>
+        <div className={style.finance__tier}>Tier: {user?.tier}</div>
       )}
     </div>
   );

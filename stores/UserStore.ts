@@ -14,6 +14,8 @@ export class UserStore {
   @observable ethCurrency: number = 0;
   @observable history: any[] = [];
   @observable keys: any[] = [];
+  @observable inviteLimit: number = 0;
+  @observable invited: number = 0;
   @observable notifications: any[] = [];
   @observable notificationsAll: any[] = [];
   @observable unreadCount: number = 0;
@@ -44,8 +46,17 @@ export class UserStore {
   };
   @action getKeys = async () => {
     try {
-      const res = await axios.get(prefix + "user/user/keys");
+      const res = await axios.get(prefix + "user/user/refs");
       // console.log(res.data);
+      this.inviteLimit = res.data.reduce(
+        (partialSum: any, a: any) =>
+          partialSum + Number(a.usesLeft) + Number(a.referrals.length),
+        0
+      );
+      this.invited = res.data.reduce(
+        (partialSum: any, a: any) => partialSum + Number(a.referrals.length),
+        0
+      );
       this.keys = res.data;
     } catch (e) {
       console.log(e);

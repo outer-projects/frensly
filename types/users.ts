@@ -27,6 +27,10 @@ export interface IProfile {
   //тут все очевидно вроде
   account: IAccount;
   twitterId: string;
+  tier: number;
+  points: number;
+  hasReceivedPoints: boolean;
+  requireManualPointsUpdate: boolean;
   avatar: string;
   twitterName: string;
   posts: string[];

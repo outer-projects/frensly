@@ -24,8 +24,13 @@ const AuthBanner = observer(() => {
   const [stage, setStage] = useState("");
   const [opacity, setOpacity] = useState(false);
   const [activeCode, setActiveCode] = useState(false);
-  const router = useRouter()
-  console.log(router);
+  const router = useRouter();
+  const { code } = router.query;
+  useEffect(() => {
+    if (stage == "Invite" && code && code.includes("fren")) {
+      postCode(code as string);
+    }
+  }, [code, stage]);
   useEffect(() => {
     if (user?.account && !address) {
       setStage("Connect wallet");
@@ -67,8 +72,8 @@ const AuthBanner = observer(() => {
         return;
     }
   }, [stage]);
-  const postCode = () => {
-    sendInviteCode(invite).then((res) => {
+  const postCode = (code: string) => {
+    sendInviteCode(code).then((res) => {
       if (res) {
         checkAuth();
       } else {
@@ -191,7 +196,7 @@ const AuthBanner = observer(() => {
                       cursor: "pointer",
                       transform: "translateX(-16px)",
                     }}
-                    onClick={postCode}
+                    onClick={() => postCode(invite)}
                   >
                     Enter
                   </div>
