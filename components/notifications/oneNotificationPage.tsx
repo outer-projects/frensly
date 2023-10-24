@@ -25,7 +25,8 @@ const OneNotificationPage = observer(
       } else if (notification.type == "MENTION") {
         let messages = notification?.source?.messages?.filter(
           (el: any) =>
-            el.text.includes(user?.twitterId) && el.date == notification.date
+            el.text.includes(user?.twitterId) &&
+            el.date.slice(0, 19) == notification.date.slice(0, 19)
         );
         console.log(messages);
         return messages.length !== 0 && messages[0].text;
