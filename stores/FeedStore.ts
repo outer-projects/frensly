@@ -12,6 +12,7 @@ export class FeedStore {
   @observable feed: IPost[] = [];
   @observable userPosts: IPost[] = [];
   @observable feedOffset: number = 0;
+  @observable postOffset: number = 0;
   @observable currentPost?: IPost = undefined;
   constructor(private readonly rootStore: RootStore) {
     makeObservable(this);
@@ -25,7 +26,7 @@ export class FeedStore {
       const res = await axios.get(prefix + "social/posts?" + query);
       // console.log(res.data);
       this.feedOffset = this.feedOffset + 100;
-      this.feed = [...res.data, res.data];
+      this.feed = [...this.feed, ...res.data];
     } catch (e) {
       console.log(e);
     }
@@ -45,15 +46,19 @@ export class FeedStore {
       console.log(e);
     }
   };
+  @action setPostOffset = (n: number) => {
+    this.postOffset = n;
+  };
   @action getUserPosts = async (id: string) => {
     const query = new URLSearchParams({
-      offset: "0",
-      limit: "100",
+      offset: this.postOffset.toString(),
+      limit: (this.postOffset + 100).toString(),
     }).toString();
     try {
       const res = await axios.get(prefix + "social/posts/" + id + "?" + query);
       // console.log(res.data);
-      this.userPosts = res.data;
+      this.setPostOffset(this.postOffset + 100);
+      this.userPosts = [...this.userPosts, ...res.data];
     } catch (e) {
       console.log(e);
     }

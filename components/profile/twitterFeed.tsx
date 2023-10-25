@@ -16,6 +16,7 @@ const TwitterFeed = observer(
       getUserPosts,
       userPosts,
       deletePost,
+      setPostOffset,
       clearUserPosts,
     } = useInjection(FeedStore);
     const { user } = useInjection(Web3Store);
@@ -38,6 +39,7 @@ const TwitterFeed = observer(
     useEffect(() => {
       getPosts();
       return () => {
+        setPostOffset(0);
         clearUserPosts();
       };
     }, []);
@@ -56,13 +58,13 @@ const TwitterFeed = observer(
                 return (
                   <>
                     <TwitterPost key={el._id} post={el} isProfile={isProfile} />
-                    {i!==0 && i % 99 == 0 && (
+                    {i !== 0 && i % 99 == 0 && (
                       <InView
                         as="div"
                         triggerOnce
                         onChange={(inView, entry) => {
                           if (inView) {
-                            console.log('inview');
+                            console.log("inview");
                             updatePosts();
                           }
                         }}
