@@ -9,9 +9,10 @@ import { prefix } from "../utils/config";
 @injectable()
 export class ExploreStore {
   @observable topUsersList: IProfile[] = [];
-  @observable currentUserList: IProfile[] = [];
+  @observable currentUserList: string = "";
   @observable newUsersList: IProfile[] = [];
   @observable searchResult: IProfile[] = [];
+  @observable newOffset: number = 0;
   @observable filterGlobal: { rangeFrom: number; rangeTo: number } = {
     rangeFrom: 0,
     rangeTo: 8,
@@ -21,13 +22,14 @@ export class ExploreStore {
   }
   @action getNewUsers = async () => {
     const query = new URLSearchParams({
-      offset: "0",
-      limit: "20",
+      offset: this.newOffset.toString(),
+      limit: (this.newOffset + 20).toString(),
     }).toString();
     try {
       const res = await axios.get(prefix + "user/newest/?" + query);
-      this.newUsersList = res.data;
-      this.currentUserList = res.data;
+      this.newUsersList = [...this.newUsersList, ...res.data];
+      this.newOffset = this.newOffset + 20;
+      this.currentUserList = "new";
     } catch (e) {
       console.log(e);
     }
@@ -37,15 +39,15 @@ export class ExploreStore {
       const res = await axios.get(prefix + "user/search/" + search);
       // console.log(res.data.byAddress.concat(res.data.byNames));
       const result = res.data
-      ? res.data.byAddress
-          .concat(res.data.byNames)
-          .filter(
-            (value: any, index: number, self: any) =>
-              index ===
-              self.findIndex((t: any) => t.twitterId === value.twitterId)
-          )
-      : [];
-      this.searchResult = result
+        ? res.data.byAddress
+            .concat(res.data.byNames)
+            .filter(
+              (value: any, index: number, self: any) =>
+                index ===
+                self.findIndex((t: any) => t.twitterId === value.twitterId)
+            )
+        : [];
+      this.searchResult = result;
     } catch (e) {
       console.log(e);
     }
@@ -58,7 +60,7 @@ export class ExploreStore {
     try {
       const res = await axios.get(prefix + "user/top/?" + query);
       this.topUsersList = res.data;
-      this.currentUserList = res.data;
+      this.currentUserList = "top";
     } catch (e) {
       console.log(e);
     }

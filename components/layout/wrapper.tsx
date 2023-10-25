@@ -11,6 +11,7 @@ import Web3Store from "../../stores/Web3Store";
 import { toast } from "react-toastify";
 import { prefix } from "../../utils/config";
 import AuthBanner from "../authBanner/authBanner";
+import ConnectButtonCustom from "./connectButtonCustom";
 
 const Wrapper = observer(({ children }: any) => {
   const { init, setInit, getNotifications } = useInjection(UserStore);
@@ -65,6 +66,9 @@ const Wrapper = observer(({ children }: any) => {
         <div className={style.change__account}>
           Address is not assigned to this account. Change to{" "}
           {user?.account.address}
+          <div style={{ display: "none" }}>
+            <ConnectButtonCustom />
+          </div>
         </div>
       )}
       {!needToChangeWallet && init && user?.account && <Header />}

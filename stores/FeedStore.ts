@@ -129,12 +129,12 @@ export class FeedStore {
     data.media && formdata.append("file", data.media);
     try {
       const res = await axios.post(prefix + "social/post", formdata);
-      // console.log(res);
-      if (data.id) {
-        this.getUserPosts(data.id);
-      } else {
-        this.getFeed();
-      }
+      console.log(res);
+      // if (data.id) {
+      //   this.getUserPosts(data.id);
+      // } else {
+      //   this.getFeed();
+      // }
       data.originalPost && this.getCurrentPost(data.originalPost);
       return true;
     } catch (e) {

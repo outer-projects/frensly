@@ -134,7 +134,7 @@ const Profile = observer(() => {
                     >
                       <img
                         src="../icons/twitter_black.svg"
-                        style={{ marginRight: "5px" }}
+                        style={{ marginRight: "5px", width: "24px", height: "24px" }}
                       />{" "}
                     </a>
                     <a

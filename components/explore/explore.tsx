@@ -8,6 +8,7 @@ import Link from "next/link";
 import { fromWei } from "web3-utils";
 import TypesList from "../common/typesList";
 import ExploreRow from "./exploreRow";
+import { InView } from "react-intersection-observer";
 const types = ["Top", "New Users"];
 const Explore = observer(() => {
   const [active, setActive] = useState(0);
@@ -17,6 +18,7 @@ const Explore = observer(() => {
   const {
     getNewUsers,
     currentUserList,
+    newUsersList,
     getTopUsers,
     searchUsers,
     searchResult,
@@ -38,10 +40,10 @@ const Explore = observer(() => {
     searchDeb(saveInput, 700);
   }, [search]);
   useEffect(() => {
-    if (active == 0) {
+    if (active == 0 && topUsersList?.length == 0) {
       getTopUsers();
     }
-    if (active == 1) {
+    if (active == 1 && newUsersList?.length == 0) {
       getNewUsers();
     }
   }, [active]);
@@ -95,9 +97,27 @@ const Explore = observer(() => {
         <TypesList types={types} setActive={setActive} active={active} />
       </div>
       <div className={style.explore__users__col}>
-        {currentUserList?.map((el, i) => {
-          return <ExploreRow el={el} key={i} />;
-        })}
+        {(currentUserList == "new" ? newUsersList : topUsersList)?.map(
+          (el, i) => {
+            return (
+              <div>
+                <ExploreRow el={el} key={i} />
+                {currentUserList == "new" && i !== 0 && i % 19 == 0 && (
+                  <InView
+                    as="div"
+                    triggerOnce
+                    onChange={(inView, entry) => {
+                      if (inView) {
+                        console.log("inview");
+                        getNewUsers();
+                      }
+                    }}
+                  ></InView>
+                )}
+              </div>
+            );
+          }
+        )}
       </div>
     </div>
   );
