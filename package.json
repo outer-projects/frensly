@@ -44,6 +44,7 @@
     "react-gaussian-blur": "^1.0.6",
     "react-highlight-words": "^0.20.0",
     "react-input-autosize": "^3.0.0",
+    "react-intersection-observer": "^9.5.2",
     "react-paginate": "^8.2.0",
     "react-player": "^2.12.0",
     "react-random-reveal": "^2.0.0",

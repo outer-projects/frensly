@@ -235,7 +235,14 @@ const Chat = observer(() => {
             <div className={style.openchat__messages} ref={messagesEndRef}>
               {newMsgList
                 .map((el) => {
-                  return <OneMessage el={el} key={el._id} roomId={chat._id} members={chat.members}/>;
+                  return (
+                    <OneMessage
+                      el={el}
+                      key={el._id}
+                      roomId={chat._id}
+                      members={chat.members}
+                    />
+                  );
                 })
                 .reverse()}
               {/* {Array.from({ length: 10 }).map((el, i) => {
@@ -271,12 +278,20 @@ const Chat = observer(() => {
           </div>
         </div>
       ) : (
-        <div
-          className={style.openchat__close}
-          style={{ opacity: opacity ? 1 : 0 }}
-        >
-          You are not allowed to enter this chat
-        </div>
+        <>
+          {opacity ? (
+            <div
+              className={style.openchat__close}
+              style={{ opacity: opacity ? 1 : 0 }}
+            >
+              You are not allowed to enter this chat
+            </div>
+          ) : (
+            <div className={style.profile__loading}>
+              <img src="../spinner.gif" />
+            </div>
+          )}
+        </>
       )}
     </>
   );

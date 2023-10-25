@@ -11,22 +11,27 @@ import { toast } from "react-toastify";
 export class FeedStore {
   @observable feed: IPost[] = [];
   @observable userPosts: IPost[] = [];
+  @observable feedOffset: number = 0;
   @observable currentPost?: IPost = undefined;
   constructor(private readonly rootStore: RootStore) {
     makeObservable(this);
   }
   @action getFeed = async () => {
     const query = new URLSearchParams({
-      offset: "0",
-      limit: "100",
+      offset: this.feedOffset.toString(),
+      limit: (this.feedOffset + 100).toString(),
     }).toString();
     try {
       const res = await axios.get(prefix + "social/posts?" + query);
       // console.log(res.data);
-      this.feed = res.data;
+      this.feedOffset = this.feedOffset + 100;
+      this.feed = [...res.data, res.data];
     } catch (e) {
       console.log(e);
     }
+  };
+  @action clearUserPosts = () => {
+    this.userPosts = [];
   };
   @action setCurrentPost = (post: any) => {
     this.currentPost = post;

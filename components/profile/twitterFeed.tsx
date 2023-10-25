@@ -7,19 +7,39 @@ import { useEffect, useState } from "react";
 import { FeedStore } from "../../stores/FeedStore";
 import Web3Store from "../../stores/Web3Store";
 import Swap from "../socials/twitterUI/Swap";
-
+import { InView } from "react-intersection-observer";
 const TwitterFeed = observer(
   ({ id, isProfile }: { id?: string; isProfile?: boolean }) => {
-    const { feed, getFeed, getUserPosts, userPosts, deletePost } =
-      useInjection(FeedStore);
+    const {
+      feed,
+      getFeed,
+      getUserPosts,
+      userPosts,
+      deletePost,
+      clearUserPosts,
+    } = useInjection(FeedStore);
     const { user } = useInjection(Web3Store);
     const [hideRow, setHideRow] = useState<string[]>([]);
-    useEffect(() => {
+
+    const updatePosts = () => {
       if (id) {
         getUserPosts(id);
       } else {
         getFeed();
       }
+    };
+    const getPosts = () => {
+      if (id && userPosts.length == 0) {
+        getUserPosts(id);
+      } else if (feed.length == 0) {
+        getFeed();
+      }
+    };
+    useEffect(() => {
+      getPosts();
+      return () => {
+        clearUserPosts();
+      };
     }, []);
     const hide = (id: string) => {
       setHideRow([...hideRow, id]);
@@ -33,7 +53,22 @@ const TwitterFeed = observer(
             ?.map((el, i) => {
               if (!el.isRepost && !el.originalPost) {
                 //@ts-ignore
-                return <TwitterPost key={el._id} post={el} isProfile={isProfile}/>;
+                return (
+                  <>
+                    <TwitterPost key={el._id} post={el} isProfile={isProfile} />
+                    {i % 100 == 0 && (
+                      <InView
+                        as="div"
+                        triggerOnce
+                        onChange={(inView, entry) => {
+                          if (inView) {
+                            updatePosts();
+                          }
+                        }}
+                      >123123123</InView>
+                    )}
+                  </>
+                );
               } else if (el.isRepost) {
                 return (
                   <div key={el._id}>
@@ -67,7 +102,11 @@ const TwitterFeed = observer(
                           )}
                         </div>
                         {/* @ts-ignore */}
-                        <TwitterPost post={el?.originalPost} isRepost isProfile={isProfile}/>
+                        <TwitterPost
+                          post={el?.originalPost}
+                          isRepost
+                          isProfile={isProfile}
+                        />
                       </>
                     )}
                   </div>
