@@ -16,12 +16,12 @@ import Followers from "./activity/followers";
 import Followings from "./activity/followings";
 
 const types = [
-  "My Ponds",
-  "My Activity",
-  "My Holders",
-  "My Holdings",
-  "My Followers",
-  "My Followings",
+  "Ponds",
+  "Activity",
+  "Holders",
+  "Holdings",
+  "Followers",
+  "Followings",
 ];
 const Ponds = observer(() => {
   const { portfolioValue, myActive, setMyActive } = useInjection(UserStore);

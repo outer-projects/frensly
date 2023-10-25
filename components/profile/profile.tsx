@@ -109,7 +109,7 @@ const Profile = observer(() => {
   }, [profileUser]);
   return (
     <>
-      {profileUser && (
+      {profileUser ? (
         <div className={style.profile}>
           <div className={explore.explore__title}>
             {isMyProfile ? "My profile" : profileUser?.twitterName}
@@ -339,6 +339,10 @@ const Profile = observer(() => {
             </div>
           </div>
           {profileUser && <TwitterFeed id={profileUser?._id} isProfile />}
+        </div>
+      ) : (
+        <div className={style.profile__loading}>
+          <img src="../spinner.gif"/>
         </div>
       )}
     </>

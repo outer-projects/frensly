@@ -43,7 +43,7 @@ const User = observer(({ stage }: { stage: string }) => {
           </div>
         </div>
       </div>
-      {(stage == "finance" || stage == "airdrop") && (
+      {stage == "finance" && (
         <div className={style.finance__title}>
           <div className={style.finance__balance}>
             <div className={style.finance__balance__value}>
@@ -54,7 +54,7 @@ const User = observer(({ stage }: { stage: string }) => {
           </div>
         </div>
       )}
-      {stage == "referral" && (
+      {(stage == "referral" || stage == "airdrop") && (
         <div className={style.finance__tier}>Tier: {user?.tier}</div>
       )}
     </div>

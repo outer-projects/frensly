@@ -162,6 +162,17 @@
   justify-content: space-between;
   align-items: center;
 }
+.profile__loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+  width: 100%;
+  img {
+    width: 75px;
+    height: 75px;
+  }
+}
 .profile__stats__line {
   display: flex;
   padding-left: 16px;

@@ -39,42 +39,39 @@ const FollowRow = observer(({ el }: { el: IProfile }) => {
     });
   };
   return (
-    <Link href={"/profile/" + el?.twitterId}>
-      <div className={style.explore__user}>
-        <div className={style.explore__user__left}>
-          <img src={el?.avatar} />
-          <div className={style.explore__user__left__text}>
+    <div className={style.explore__user}>
+      <div className={style.explore__user__left}>
+        <img src={el?.avatar} />
+        <div className={style.explore__user__left__text}>
+          <Link href={"/profile/" + el?.twitterId}>
+            {" "}
             <div className={style.explore__user__name}>{el?.twitterName}</div>
-            <div className={style.explore__user__share}>
-              @{el?.twitterHandle}
-            </div>
-          </div>
-        </div>
-        <div className={style.explore__user__right}>
-          {!isMyProfile && (
-            <button
-              className={classNames(
-                header.connect__button,
-                !isFollowed
-                  ? style.profile__follow
-                  : style.profile__unfollow
-              )}
-              onClick={() => {
-                // console.log("Follow");
-                followUser(isFollowed);
-              }}
-            >
-              <img
-                src={
-                  !isFollowed ? "../../icons/Plus.svg" : "../../icons/Close.svg"
-                }
-              />
-              {!isFollowed ? "Follow" : "Unfollow"}
-            </button>
-          )}
+          </Link>
+          <div className={style.explore__user__share}>@{el?.twitterHandle}</div>
         </div>
       </div>
-    </Link>
+      <div className={style.explore__user__right}>
+        {!isMyProfile && (
+          <button
+            className={classNames(
+              header.connect__button,
+              !isFollowed ? style.profile__follow : style.profile__unfollow
+            )}
+            onClick={() => {
+              // console.log("Follow");
+              followUser(isFollowed);
+            }}
+          >
+            <img
+              src={
+                !isFollowed ? "../../icons/Plus.svg" : "../../icons/Close.svg"
+              }
+            />
+            {!isFollowed ? "Follow" : "Unfollow"}
+          </button>
+        )}
+      </div>
+    </div>
   );
 });
 export default FollowRow;

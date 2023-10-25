@@ -55,19 +55,14 @@ const TwitterPost = observer(
       }
     }, []);
     const like = () => {
-      likePost(
-        post._id,
-        user?._id,
-        isProfile || isComment || isOnePostPage
-      ).then((res) => {
-        if (res && isActiveLike) {
-          setIsActiveLike(false);
-          setLikesCount(likesCount - 1);
-        } else if (res && !isActiveLike) {
-          setIsActiveLike(true);
-          setLikesCount(likesCount + 1);
-        }
-      });
+      if (isActiveLike) {
+        setIsActiveLike(false);
+        setLikesCount(likesCount - 1);
+      } else if (!isActiveLike) {
+        setIsActiveLike(true);
+        setLikesCount(likesCount + 1);
+      }
+      likePost(post._id, user?._id, isProfile || isComment || isOnePostPage);
     };
     const _deletePost = () => {
       deletePost(post._id).then((res) => {
