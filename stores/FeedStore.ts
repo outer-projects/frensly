@@ -130,11 +130,11 @@ export class FeedStore {
     try {
       const res = await axios.post(prefix + "social/post", formdata);
       console.log(res);
-      // if (data.id) {
-      //   this.getUserPosts(data.id);
-      // } else {
-      //   this.getFeed();
-      // }
+      if (data.id) {
+        this.userPosts = [res.data, ...this.userPosts];
+      } else {
+        this.feed = [res.data, ...this.feed];
+      }
       data.originalPost && this.getCurrentPost(data.originalPost);
       return true;
     } catch (e) {
