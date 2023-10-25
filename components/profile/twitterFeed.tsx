@@ -56,16 +56,17 @@ const TwitterFeed = observer(
                 return (
                   <>
                     <TwitterPost key={el._id} post={el} isProfile={isProfile} />
-                    {i % 100 == 0 && (
+                    {i!==0 && i % 99 == 0 && (
                       <InView
                         as="div"
                         triggerOnce
                         onChange={(inView, entry) => {
                           if (inView) {
+                            console.log('inview');
                             updatePosts();
                           }
                         }}
-                      >123123123</InView>
+                      ></InView>
                     )}
                   </>
                 );
