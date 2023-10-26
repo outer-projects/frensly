@@ -22,6 +22,7 @@ const AuthBanner = observer(() => {
   const [title, setTitle] = useState("");
   const [invite, setInvite] = useState("");
   const [stage, setStage] = useState("");
+  const [codeEntered, setCodeEntered] = useState(false);
   const [opacity, setOpacity] = useState(false);
   const [activeCode, setActiveCode] = useState(false);
   const router = useRouter();
@@ -77,14 +78,17 @@ const AuthBanner = observer(() => {
     }
   }, [stage]);
   const postCode = (code: string) => {
-    sendInviteCode(code).then((res) => {
-      if (res) {
-        checkAuth();
-        localStorage.removeItem("invite");
-      } else {
-        toast.error("Code is not correct");
-      }
-    });
+    if (!codeEntered) {
+      sendInviteCode(code).then((res) => {
+        if (res) {
+          checkAuth();
+          setCodeEntered(true);
+          localStorage.removeItem("invite");
+        } else {
+          // toast.error("Code is not correct");
+        }
+      });
+    }
   };
   const init = async () => {
     if (address?.toLowerCase() !== user?.account?.address)

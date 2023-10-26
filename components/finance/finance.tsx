@@ -10,7 +10,7 @@ import { useRouter } from "next/router";
 import { useInjection } from "inversify-react";
 import Web3Store from "../../stores/Web3Store";
 import { fromWei } from "web3-utils";
-import { fromWeiToEth } from "../../utils/utilities";
+import { fromWeiToEth, toBNJS } from "../../utils/utilities";
 import { observer } from "mobx-react";
 import { UserStore } from "../../stores/UserStore";
 import ExploreRow from "../explore/exploreRow";
@@ -40,24 +40,18 @@ export const links = [
 const types = ["Finance", "Holders", "Holdings"];
 const Finance = observer(() => {
   const [active, setActive] = useState(0);
-  const router = useRouter();
-  const [claimValue, setClaimValue] = useState(0);
+  const [keysReady, setKeysReady] = useState(false);
+  const [claimValue, setClaimValue] = useState("0");
   const { user, frensly, address, checkAuth } = useInjection(Web3Store);
-  const {
-    shares,
-    holders,
-    getShares,
-    getHolders,
-    portfolioValue,
-    getKeys,
-  } = useInjection(UserStore);
+  const { shares, holders, getShares, getHolders, portfolioValue, getKeys } =
+    useInjection(UserStore);
   const claim = async () => {
     try {
       const res = await frensly.methods.claim().send({
         from: address,
       });
       // console.log(res);
-      setClaimValue(Number(res));
+      setClaimValue(res);
       checkAuth();
       getClaim();
     } catch (e) {
@@ -68,13 +62,14 @@ const Finance = observer(() => {
     try {
       const res = await frensly.methods.availableToClaim(address).call();
       // console.log("availableToClaim: ", res);
-      setClaimValue(Number(res));
+      setClaimValue(res);
     } catch (e) {
       console.log(e);
     }
   };
   useEffect(() => {
-    if (user) {
+    if (user && !keysReady) {
+      setKeysReady(true);
       getShares(user?._id as string);
       getHolders(user?._id as string);
       getKeys();
@@ -92,11 +87,15 @@ const Finance = observer(() => {
       <div className={style.finance__container}>
         <div className={style.finance__titles}>
           <div className={explore.explore__title}>Funds</div>
-          <div className={classNames(explore.explore__title, style.mob__link)}><Link href={"/dashboard/invite"}>Referrals</Link></div>
-          <div className={classNames(explore.explore__title, style.mob__link)}><Link href={"/dashboard/airdrop"}>Airdrop</Link></div>
+          <div className={classNames(explore.explore__title, style.mob__link)}>
+            <Link href={"/dashboard/invite"}>Referrals</Link>
+          </div>
+          <div className={classNames(explore.explore__title, style.mob__link)}>
+            <Link href={"/dashboard/airdrop"}>Airdrop</Link>
+          </div>
         </div>
         <div className={style.finance}>
-          <User stage="finance"/>
+          <User stage="finance" />
           <TypesList active={active} setActive={setActive} types={types} />
           {active == 0 && (
             <div className={style.finance__stats}>
@@ -118,8 +117,9 @@ const Finance = observer(() => {
                   <div className={style.finance__stat__name}>Fees Earned</div>
                   <div className={style.finance__stat__value}>
                     {fromWeiToEth(
-                      Number(user?.account.subjectFeeClaimed) +
-                        Number(user?.account.holderFeeClaimed)
+                      toBNJS(user?.account?.subjectFeeClaimed as string).plus(
+                        user?.account.holderFeeClaimed as string
+                      )
                     )}{" "}
                     ETH
                   </div>

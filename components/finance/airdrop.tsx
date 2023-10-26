@@ -8,7 +8,7 @@ import Sidebar from "./sidebar";
 import { observer } from "mobx-react";
 import { useInjection } from "inversify-react";
 import Web3Store from "../../stores/Web3Store";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { UserStore } from "../../stores/UserStore";
 import Message from "../socials/twitterUI/Message";
 import UserIcon from "../socials/twitterUI/UserIcon";
@@ -164,12 +164,14 @@ const getOutputByKey = (require: any, progress: any) => {
   }
 };
 const Airdrop = observer(() => {
+  const [keysReady, setKeysReady] = useState(false)
   const { user } = useInjection(Web3Store);
   const { getKeys, currentRequire, currentProgress, finished } =
     useInjection(UserStore);
 
   useEffect(() => {
-    if (user) {
+    if (user && !keysReady) {
+      setKeysReady(true)
       getKeys();
     }
   }, [user]);

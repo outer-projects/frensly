@@ -1,5 +1,5 @@
 import { BigNumberish } from "ethers";
-import BN from "bignumber.js";
+import BN, { BigNumber } from "bignumber.js";
 import numeral from "numeral";
 import { DateTime } from "luxon";
 import axios from "axios";
@@ -21,7 +21,7 @@ export function fd(val: number | string | BN) {
   if (!val) return "";
   return numeral(val?.toString()).format("0,0[.][000000000000000000]");
 }
-export const fromWeiToEth = (num: string | BigInt, fixed?: number) => {
+export const fromWeiToEth = (num: string | BigNumber, fixed?: number) => {
   return Number(Number(fromWei(num.toString(), "ether")).toFixed(fixed || 5));
 };
 BN.config({ EXPONENTIAL_AT: 100 });

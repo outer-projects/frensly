@@ -7,6 +7,7 @@ import { prefix } from "../utils/config";
 import { IAccount, IProfile } from "../types/users";
 import { USDEthPair, fromWeiToEth, toBNJS } from "../utils/utilities";
 import Web3 from "web3";
+import BigNumber from "bignumber.js";
 
 @injectable()
 export class UserStore {
@@ -24,7 +25,7 @@ export class UserStore {
   @observable myActive: number = 0;
   @observable currentType: number = 2;
   @observable profileUser?: IProfile = undefined;
-  @observable portfolioValue?: BigInt;
+  @observable portfolioValue?: BigNumber;
   @observable followings?: IProfile[] = [];
   @observable followers?: IProfile[] = [];
   @observable currentRequire: any[] = [];

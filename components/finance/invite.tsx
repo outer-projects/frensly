@@ -10,17 +10,19 @@ import { useRouter } from "next/router";
 import Sidebar from "./sidebar";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { toast } from "react-toastify";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { observer } from "mobx-react";
 import Web3Store from "../../stores/Web3Store";
 import { UserStore } from "../../stores/UserStore";
-import { getDate } from "../../utils/utilities";
 import UserIcon from "../socials/twitterUI/UserIcon";
+
 const Invite = observer(() => {
   const { user } = useInjection(Web3Store);
   const { getKeys, key, inviteLimit, invited } = useInjection(UserStore);
+  const [keysReady, setKeysReady] = useState(false);
   useEffect(() => {
-    if (user) {
+    if (user && !keysReady) {
+      setKeysReady(true);
       getKeys();
     }
   }, [user]);
