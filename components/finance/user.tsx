@@ -41,7 +41,7 @@ const User = observer(({ stage }: { stage: string }) => {
           </div>
           <div className={style.finance__subtitle}>
             <a
-              href={`https://https://basescan.org/${user?.account?.address}`}
+              href={`https://basescan.org/address/${user?.account?.address}`}
               target="_blank"
             >
               {addressSlice(user?.account?.address)}

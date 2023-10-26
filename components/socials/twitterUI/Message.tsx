@@ -1,4 +1,4 @@
-const Message = ({ color }: { color: string }) => (
+const Message = ({ color }: { color?: string }) => (
   <svg
     width="24"
     height="24"

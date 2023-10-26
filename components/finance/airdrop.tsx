@@ -11,6 +11,11 @@ import Web3Store from "../../stores/Web3Store";
 import { useEffect } from "react";
 import { UserStore } from "../../stores/UserStore";
 import Message from "../socials/twitterUI/Message";
+import UserIcon from "../socials/twitterUI/UserIcon";
+import EthereumIcon from "../socials/ethereum";
+import { fromWeiToEth } from "../../utils/utilities";
+import Heart from "../socials/twitterUI/Heart";
+import Follow from "../socials/twitterUI/Follow";
 const getOutputByKey = (require: any, progress: any) => {
   console.log(require);
   if (require[0] == "isFollowing") {
@@ -21,11 +26,9 @@ const getOutputByKey = (require: any, progress: any) => {
           progress[1] && style.finance__total__complete
         )}
       >
-        <img
-          src={
-            progress[1] ? "../../icons/User__green.svg" : "../../icons/User.svg"
-          }
-        />
+        <div className={style.finance__icon}>
+          <UserIcon color={progress[1] ? "#A6D000" : "#676766"} />
+        </div>
         <div>
           <div className={style.finance__total__text}>Follow someone</div>
           <div className={style.finance__total__count}>
@@ -43,7 +46,9 @@ const getOutputByKey = (require: any, progress: any) => {
           progress[1] && style.finance__total__complete
         )}
       >
-        <Message color={progress[1] ? "#A6D000" : "#676766"} />
+        <div className={style.finance__icon}>
+          <Message color={progress[1] ? "#A6D000" : "#676766"} />
+        </div>
         <div>
           <div className={style.finance__total__text}>Post something</div>
           <div className={style.finance__total__count}>
@@ -61,15 +66,95 @@ const getOutputByKey = (require: any, progress: any) => {
           progress[1] && style.finance__total__complete
         )}
       >
-        <img
-          src={
-            Number(progress[1] > 1)
-              ? "../../icons/Ethereum__green.svg"
-              : "../../icons/Ethereum__grey.svg"
-          }
-        />
+        <div className={style.finance__icon}>
+          <EthereumIcon
+            color={Number(progress[1] > 1) ? "#A6D000" : "#676766"}
+          />
+        </div>
         <div>
           <div className={style.finance__total__count}>Buy someone's share</div>
+        </div>
+      </div>
+    );
+  }
+  if (require[0] == "totalVolume" && require[1] !== "1") {
+    return (
+      <div
+        className={classNames(
+          style.finance__total,
+          progress[1] && style.finance__total__complete
+        )}
+      >
+        <div className={style.finance__icon}>
+          <EthereumIcon
+            color={Number(progress[1] > 1) ? "#A6D000" : "#676766"}
+          />
+        </div>
+        <div>
+          <div className={style.finance__total__text}>Total Volume</div>
+          <div className={style.finance__total__count}>
+            {fromWeiToEth(progress[1])}/{fromWeiToEth(require[1])}
+          </div>
+        </div>
+      </div>
+    );
+  }
+  if (require[0] == "referrals") {
+    return (
+      <div
+        className={classNames(
+          style.finance__total,
+          progress[1] >= require[1] && style.finance__total__complete
+        )}
+      >
+        <div className={style.finance__icon}>
+          <UserIcon color={progress[1] >= require[1] ? "#A6D000" : "#676766"} />
+        </div>
+        <div>
+          <div className={style.finance__total__text}>Invite frens</div>
+          <div className={style.finance__total__count}>
+            {progress[1] / require[1]}
+          </div>
+        </div>
+      </div>
+    );
+  }
+  if (require[0] == "likes") {
+    return (
+      <div
+        className={classNames(
+          style.finance__total,
+          progress[1] >= require[1] && style.finance__total__complete
+        )}
+      >
+        <div className={style.finance__icon}>
+          <Heart color={progress[1] >= require[1] ? "#A6D000" : "#676766"} />
+        </div>
+        <div>
+          <div className={style.finance__total__text}>Like posts</div>
+          <div className={style.finance__total__count}>
+            {progress[1] / require[1]}
+          </div>
+        </div>
+      </div>
+    );
+  }
+  if (require[0] == "isFollowedBy") {
+    return (
+      <div
+        className={classNames(
+          style.finance__total,
+          progress[1] >= require[1] && style.finance__total__complete
+        )}
+      >
+        <div className={style.finance__icon}>
+          <Follow color={progress[1] >= require[1] ? "#A6D000" : "#676766"} />
+        </div>
+        <div>
+          <div className={style.finance__total__text}>Get followers</div>
+          <div className={style.finance__total__count}>
+            {progress[1] / require[1]}
+          </div>
         </div>
       </div>
     );

@@ -189,7 +189,7 @@ const TwitterPost = observer(
                         marginRight: "4px",
                       }}
                     >
-                      <Heart isActive={isActiveLike} />
+                      <Heart color={isActiveLike ? "#DC0000" : "#B4B4B3"} />
                     </div>
                     <div>{likesCount}</div>
                   </div>

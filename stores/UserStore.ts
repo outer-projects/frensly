@@ -5,7 +5,8 @@ import { RootStore } from "./RootStore";
 import axios from "axios";
 import { prefix } from "../utils/config";
 import { IAccount, IProfile } from "../types/users";
-import { USDEthPair, fromWeiToEth } from "../utils/utilities";
+import { USDEthPair, fromWeiToEth, toBNJS } from "../utils/utilities";
+import Web3 from "web3";
 
 @injectable()
 export class UserStore {
@@ -23,7 +24,7 @@ export class UserStore {
   @observable myActive: number = 0;
   @observable currentType: number = 2;
   @observable profileUser?: IProfile = undefined;
-  @observable portfolioValue?: number = 0;
+  @observable portfolioValue?: BigInt;
   @observable followings?: IProfile[] = [];
   @observable followers?: IProfile[] = [];
   @observable currentRequire: any[] = [];
@@ -49,9 +50,9 @@ export class UserStore {
       console.log(res.data);
       this.currentRequire = Object.entries(res.data.requirements);
       this.currentProgress = Object.entries(res.data.progress);
-      // if (res.data.canUpgrade) {
-      //   this.upgradeTier();
-      // }
+      if (res.data.canUpgrade) {
+        this.upgradeTier();
+      }
     } catch (e) {
       console.log(e);
     }
@@ -151,9 +152,8 @@ export class UserStore {
       // console.log(res.data);
       this.portfolioValue = res.data.reduce(
         (partialSum: any, a: any) =>
-          partialSum +
-          Number(a.subject.currentPrice) * (Number(a.amount) / 1000000),
-        0
+          toBNJS(partialSum).plus((toBNJS(a.subject.currentPrice).multipliedBy(Number(a.amount) / 1000000))),
+        "0"
       );
       this.shares = res.data;
     } catch (e) {

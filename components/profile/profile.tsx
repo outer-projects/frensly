@@ -30,7 +30,7 @@ const Profile = observer(() => {
   const router = useRouter();
   const [isMyProfile, setIsMyProfile] = useState(false);
   const [isFollowed, setIsFollowed] = useState(false);
-  const [pricePerShade, setPricePerShade] = useState(0);
+  const [pricePerShade, setPricePerShade] = useState('0');
   const [count, setCount] = useState(0);
   const followUser = (isFollowed: boolean) => {
     follow(profileUser?._id as string, isFollowed).then((res) => {
@@ -45,7 +45,7 @@ const Profile = observer(() => {
         .getBuyPriceAfterFee(profileUser?.account?.address, Number(1) * 10 ** 6)
         .call();
       // console.log(res);
-      setPricePerShade(Number(res));
+      setPricePerShade(res);
     } catch (e) {
       console.log(e);
     }
@@ -148,7 +148,7 @@ const Profile = observer(() => {
                   </div>
                   <div className={style.profile__subtitle}>
                     <a
-                      href={`https://basescan.org/${profileUser?.account?.address}`}
+                      href={`https://basescan.org/address/${profileUser?.account?.address}`}
                       target="_blank"
                       rel="noreferrer"
                       style={{ display: "flex", alignItems: "center" }}

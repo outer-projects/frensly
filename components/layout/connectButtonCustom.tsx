@@ -111,7 +111,7 @@ const ConnectButtonCustom = observer(({ isHeader }: { isHeader?: boolean }) => {
                         </div>
                         <div className={style.address}>
                           <a
-                            href={`https://https://basescan.org/${account.address}`}
+                            href={`https://basescan.org/address/${account.address}`}
                             target="_blank"
                           >
                             {addressSlice(account.address)}
