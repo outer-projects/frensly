@@ -19,7 +19,9 @@ const FeedPage: NextPage = observer((props) => {
           {unreadCount !== 0 ? `(${unreadCount})` : ""} Feed | Frensly
         </title>
       </Head>
-      <TypesList types={types} active={active} setActive={setActive} />
+      <div className={style.explore__type}>
+        <TypesList types={types} active={active} setActive={setActive} />
+      </div>
       <TwitterFeed isFrens={active == 1 ? true : false} />
     </div>
   );

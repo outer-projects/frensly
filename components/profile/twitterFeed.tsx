@@ -51,9 +51,9 @@ const TwitterFeed = observer(
       if (id && userPosts.length == 0) {
         getUserPosts(id);
       } else if (isFrens && feed.length == 0) {
-        getFeed();
-      } else if (feed.length == 0) {
         getFrensFeed();
+      } else if (feed.length == 0) {
+        getFeed();
       }
     };
     useEffect(() => {

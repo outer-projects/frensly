@@ -18,9 +18,13 @@
   }
 }
 .image__container {
-  width: 80vw;
+  max-width: 90vw;
+  width: fit-content;
   display: flex;
+  height: 90vh;
+  margin-top: 5vh;
   .image {
+    object-fit: contain;
     width: 100%;
   }
   .close {
