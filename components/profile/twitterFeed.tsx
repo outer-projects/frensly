@@ -43,6 +43,8 @@ const TwitterFeed = observer(
     const updatePosts = () => {
       if (id) {
         getUserPosts(id);
+      } else if (isFrens) {
+        getFrensFeed();
       } else {
         getFeed();
       }
@@ -57,6 +59,7 @@ const TwitterFeed = observer(
       }
     };
     useEffect(() => {
+      console.log("get?", isFrens);
       getPosts();
       return () => {
         setPostOffset(0);
@@ -68,7 +71,9 @@ const TwitterFeed = observer(
     };
     return (
       <div className={style.twitter__feed}>
-        {(!id || id == user?._id) && (user?.verified || !isFrens) && <MessageSend id={id} />}
+        {(!id || id == user?._id) && (user?.verified || !isFrens) && (
+          <MessageSend id={id} />
+        )}
         <div>
           {currentFeed
             .filter((el) => !hideRow.includes(el._id))
@@ -76,8 +81,8 @@ const TwitterFeed = observer(
               if (!el.isRepost && !el.originalPost) {
                 //@ts-ignore
                 return (
-                  <>
-                    <TwitterPost key={el._id} post={el} isProfile={isProfile} />
+                  <div key={el._id}>
+                    <TwitterPost post={el} isProfile={isProfile} />
                     {i !== 0 && i % 99 == 0 && (
                       <InView
                         as="div"
@@ -90,7 +95,7 @@ const TwitterFeed = observer(
                         }}
                       ></InView>
                     )}
-                  </>
+                  </div>
                 );
               } else if (el.isRepost) {
                 return (
