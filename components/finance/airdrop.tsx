@@ -63,13 +63,11 @@ const getOutputByKey = (require: any, progress: any) => {
       <div
         className={classNames(
           style.finance__total,
-          progress[1] && style.finance__total__complete
+          progress[1] !== "0" && style.finance__total__complete
         )}
       >
         <div className={style.finance__icon}>
-          <EthereumIcon
-            color={Number(progress[1] > 1) ? "#A6D000" : "#676766"}
-          />
+          <EthereumIcon color={progress[1] !== "0" ? "#A6D000" : "#676766"} />
         </div>
         <div className={style.finance__text}>
           <div className={style.finance__total__count}>Buy someone's share</div>
@@ -82,12 +80,15 @@ const getOutputByKey = (require: any, progress: any) => {
       <div
         className={classNames(
           style.finance__total,
-          Number(progress[1] >= Number(require[1])) && style.finance__total__complete
+          Number(progress[1] >= Number(require[1])) &&
+            style.finance__total__complete
         )}
       >
         <div className={style.finance__icon}>
           <EthereumIcon
-            color={Number(progress[1] >= Number(require[1])) ? "#A6D000" : "#676766"}
+            color={
+              Number(progress[1] >= Number(require[1])) ? "#A6D000" : "#676766"
+            }
           />
         </div>
         <div className={style.finance__text}>
@@ -164,7 +165,8 @@ const getOutputByKey = (require: any, progress: any) => {
 };
 const Airdrop = observer(() => {
   const { user } = useInjection(Web3Store);
-  const { getKeys, currentRequire, currentProgress } = useInjection(UserStore);
+  const { getKeys, currentRequire, currentProgress, finished } =
+    useInjection(UserStore);
 
   useEffect(() => {
     if (user) {
@@ -187,16 +189,21 @@ const Airdrop = observer(() => {
         </div>
         <div className={style.finance}>
           <User stage="airdrop" />
-          <div className={style.finance__invite}>Tier system</div>
-          <div className={style.finance__invite__text}>
-            Higher tier gives you more opportunities in our app and future
-            airdrop. To move to the next tier you need to fulfill the following
-            conditions
-          </div>
-          {currentRequire.map((req: any, i: number) => {
-            return <div key={i}>{getOutputByKey(req, currentProgress[i])}</div>;
-          })}
-         
+          {!finished && (
+            <>
+              <div className={style.finance__invite}>Tier system</div>
+              <div className={style.finance__invite__text}>
+                Higher tier gives you more opportunities in our app and future
+                airdrop. To move to the next tier you need to fulfill the
+                following conditions
+              </div>
+              {currentRequire.map((req: any, i: number) => {
+                return (
+                  <div key={i}>{getOutputByKey(req, currentProgress[i])}</div>
+                );
+              })}
+            </>
+          )}
           <div className={style.finance__invite}>Your points</div>
           <div className={style.finance__invite__text}>
             Points will play the role in the future airdrop

@@ -29,6 +29,7 @@ export class UserStore {
   @observable followers?: IProfile[] = [];
   @observable currentRequire: any[] = [];
   @observable currentProgress: any[] = [];
+  @observable finished: boolean = false;
   @observable holders?: {
     user: IAccount;
     amount: string;
@@ -48,10 +49,19 @@ export class UserStore {
     try {
       const res = await axios.get(prefix + "user/tier/requirements");
       console.log(res.data);
-      this.currentRequire = Object.entries(res.data.requirements);
-      this.currentProgress = Object.entries(res.data.progress);
-      if (res.data.canUpgrade) {
+      if (res.data?.requirements) {
+        this.currentRequire = Object.entries(res.data.requirements);
+      }
+      if (res.data?.progress) {
+        this.currentProgress = Object.entries(res.data.progress);
+      }
+      if (res.data?.canUpgrade) {
         this.upgradeTier();
+      }
+      if (res.data?.finished) {
+        this.currentRequire = [];
+        this.currentProgress = [];
+        this.finished = true;
       }
     } catch (e) {
       console.log(e);
@@ -152,7 +162,11 @@ export class UserStore {
       // console.log(res.data);
       this.portfolioValue = res.data.reduce(
         (partialSum: any, a: any) =>
-          toBNJS(partialSum).plus((toBNJS(a.subject.currentPrice).multipliedBy(Number(a.amount) / 1000000))),
+          toBNJS(partialSum).plus(
+            toBNJS(a.subject.currentPrice).multipliedBy(
+              Number(a.amount) / 1000000
+            )
+          ),
         "0"
       );
       this.shares = res.data;
