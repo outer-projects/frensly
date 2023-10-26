@@ -82,12 +82,12 @@ const getOutputByKey = (require: any, progress: any) => {
       <div
         className={classNames(
           style.finance__total,
-          progress[1] && style.finance__total__complete
+          Number(progress[1] >= Number(require[1])) && style.finance__total__complete
         )}
       >
         <div className={style.finance__icon}>
           <EthereumIcon
-            color={Number(progress[1] > 1) ? "#A6D000" : "#676766"}
+            color={Number(progress[1] >= Number(require[1])) ? "#A6D000" : "#676766"}
           />
         </div>
         <div className={style.finance__text}>
@@ -196,48 +196,7 @@ const Airdrop = observer(() => {
           {currentRequire.map((req: any, i: number) => {
             return <div key={i}>{getOutputByKey(req, currentProgress[i])}</div>;
           })}
-          {/* <div
-            className={classNames(
-              style.finance__total,
-              invited >= 1 && style.finance__total__complete
-            )}
-          >
-            <img
-              src={
-                invited >= 1
-                  ? "../../icons/User__green.svg"
-                  : "../../icons/User.svg"
-              }
-            />
-            <div>
-              <div className={style.finance__total__text}>Invite frens</div>
-              <div className={style.finance__total__count}>
-                {invited >= 1 ? 1 : 0} / {1}
-              </div>
-            </div>
-          </div> */}
-          {/* <div
-            className={classNames(
-              style.finance__total,
-              user?.account?.othersShares &&
-                user?.account?.othersShares?.length > 1 &&
-                style.finance__total__complete
-            )}
-          >
-            <img
-              src={
-                user?.account?.othersShares &&
-                user?.account?.othersShares?.length > 1
-                  ? "../../icons/Ethereum__green.svg"
-                  : "../../icons/Ethereum__grey.svg"
-              }
-            />
-            <div>
-              <div className={style.finance__total__count}>
-                Buy someone's share
-              </div>
-            </div>
-          </div> */}
+         
           <div className={style.finance__invite}>Your points</div>
           <div className={style.finance__invite__text}>
             Points will play the role in the future airdrop

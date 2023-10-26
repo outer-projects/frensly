@@ -15,6 +15,7 @@ import { observer } from "mobx-react";
 import Web3Store from "../../stores/Web3Store";
 import { UserStore } from "../../stores/UserStore";
 import { getDate } from "../../utils/utilities";
+import UserIcon from "../socials/twitterUI/UserIcon";
 const Invite = observer(() => {
   const { user } = useInjection(Web3Store);
   const { getKeys, key, inviteLimit, invited } = useInjection(UserStore);
@@ -40,7 +41,9 @@ const Invite = observer(() => {
         <div className={style.finance}>
           <User stage="referral" />
           <div className={style.finance__total}>
-            <img src="../../icons/User.svg" />
+            <div className={style.finance__icon}>
+              <UserIcon color="#676766" />
+            </div>
             <div>
               <div className={style.finance__total__text}>
                 Total invited users
@@ -55,40 +58,35 @@ const Invite = observer(() => {
             The link has limitations depending on your tier. Invite more users
             to get points boost and higher tier.
           </div>
-     
-              <div
-                className={classNames(
-                  style.invite__code,
-                  key.usesLeft == 0 && style.invite__code__used
-                )}
-              >
-                <div>
-                  <div className={style.invite__code__left}>
-                    There are <span>{key.usesLeft}</span> uses left
-                  </div>
-                  <div>
-                    {(window.location.origin + "/" + key.code).replace(
-                      "https://",
-                      ""
-                    )}
-                  </div>
-                </div>
-                {key.usesLeft !== 0 && (
-                  <CopyToClipboard
-                    text={window.location.origin + "/" + key.code}
-                    onCopy={() => {
-                      toast.success("Code is copied successfully");
-                    }}
-                  >
-                    <img
-                      src="../icons/copy.svg"
-                      style={{ cursor: "pointer" }}
-                    />
-                  </CopyToClipboard>
+
+          <div
+            className={classNames(
+              style.invite__code,
+              key.usesLeft == 0 && style.invite__code__used
+            )}
+          >
+            <div>
+              <div className={style.invite__code__left}>
+                There are <span>{key.usesLeft}</span> uses left
+              </div>
+              <div>
+                {(window.location.origin + "/" + key.code).replace(
+                  "https://",
+                  ""
                 )}
               </div>
-            
-    
+            </div>
+            {key.usesLeft !== 0 && (
+              <CopyToClipboard
+                text={window.location.origin + "/" + key.code}
+                onCopy={() => {
+                  toast.success("Code is copied successfully");
+                }}
+              >
+                <img src="../icons/copy.svg" style={{ cursor: "pointer" }} />
+              </CopyToClipboard>
+            )}
+          </div>
         </div>
       </div>
     </div>
