@@ -10,10 +10,75 @@ import { useInjection } from "inversify-react";
 import Web3Store from "../../stores/Web3Store";
 import { useEffect } from "react";
 import { UserStore } from "../../stores/UserStore";
-
+import Message from "../socials/twitterUI/Message";
+const getOutputByKey = (require: any, progress: any) => {
+  console.log(require);
+  if (require[0] == "isFollowing") {
+    return (
+      <div
+        className={classNames(
+          style.finance__total,
+          progress[1] && style.finance__total__complete
+        )}
+      >
+        <img
+          src={
+            progress[1] ? "../../icons/User__green.svg" : "../../icons/User.svg"
+          }
+        />
+        <div>
+          <div className={style.finance__total__text}>Follow someone</div>
+          <div className={style.finance__total__count}>
+            {progress[1] ? 1 : 0} / {require[1]}
+          </div>
+        </div>
+      </div>
+    );
+  }
+  if (require[0] == "post") {
+    return (
+      <div
+        className={classNames(
+          style.finance__total,
+          progress[1] && style.finance__total__complete
+        )}
+      >
+        <Message color={progress[1] ? "#A6D000" : "#676766"} />
+        <div>
+          <div className={style.finance__total__text}>Post something</div>
+          <div className={style.finance__total__count}>
+            {progress[1] ? 1 : 0} / {require[1]}
+          </div>
+        </div>
+      </div>
+    );
+  }
+  if (require[0] == "totalVolume" && require[1] == "1") {
+    return (
+      <div
+        className={classNames(
+          style.finance__total,
+          progress[1] && style.finance__total__complete
+        )}
+      >
+        <img
+          src={
+            Number(progress[1] > 1)
+              ? "../../icons/Ethereum__green.svg"
+              : "../../icons/Ethereum__grey.svg"
+          }
+        />
+        <div>
+          <div className={style.finance__total__count}>Buy someone's share</div>
+        </div>
+      </div>
+    );
+  }
+};
 const Airdrop = observer(() => {
   const { user } = useInjection(Web3Store);
-  const { getKeys, inviteLimit, invited } = useInjection(UserStore);
+  const { getKeys, currentRequire, currentProgress } = useInjection(UserStore);
+
   useEffect(() => {
     if (user) {
       getKeys();
@@ -41,7 +106,10 @@ const Airdrop = observer(() => {
             airdrop. To move to the next tier you need to fulfill the following
             conditions
           </div>
-          <div
+          {currentRequire.map((req: any, i: number) => {
+            return <div key={i}>{getOutputByKey(req, currentProgress[i])}</div>;
+          })}
+          {/* <div
             className={classNames(
               style.finance__total,
               invited >= 1 && style.finance__total__complete
@@ -60,8 +128,8 @@ const Airdrop = observer(() => {
                 {invited >= 1 ? 1 : 0} / {1}
               </div>
             </div>
-          </div>
-          <div
+          </div> */}
+          {/* <div
             className={classNames(
               style.finance__total,
               user?.account?.othersShares &&
@@ -82,7 +150,7 @@ const Airdrop = observer(() => {
                 Buy someone's share
               </div>
             </div>
-          </div>
+          </div> */}
           <div className={style.finance__invite}>Your points</div>
           <div className={style.finance__invite__text}>
             Points will play the role in the future airdrop

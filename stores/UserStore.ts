@@ -26,7 +26,8 @@ export class UserStore {
   @observable portfolioValue?: number = 0;
   @observable followings?: IProfile[] = [];
   @observable followers?: IProfile[] = [];
-  @observable currentTier?: any = undefined;
+  @observable currentRequire: any[] = [];
+  @observable currentProgress: any[] = [];
   @observable holders?: {
     user: IAccount;
     amount: string;
@@ -46,7 +47,11 @@ export class UserStore {
     try {
       const res = await axios.get(prefix + "user/tier/requirements");
       console.log(res.data);
-      this.currentTier = res.data;
+      this.currentRequire = Object.entries(res.data.requirements);
+      this.currentProgress = Object.entries(res.data.progress);
+      // if (res.data.canUpgrade) {
+      //   this.upgradeTier();
+      // }
     } catch (e) {
       console.log(e);
     }
@@ -55,7 +60,7 @@ export class UserStore {
     try {
       const res = await axios.get(prefix + "user/tier/upgrade");
       console.log(res.data);
-
+      this.getCurrentTier();
     } catch (e) {
       console.log(e);
     }
