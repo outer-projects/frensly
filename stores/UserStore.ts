@@ -26,6 +26,7 @@ export class UserStore {
   @observable portfolioValue?: number = 0;
   @observable followings?: IProfile[] = [];
   @observable followers?: IProfile[] = [];
+  @observable currentTier?: any = undefined;
   @observable holders?: {
     user: IAccount;
     amount: string;
@@ -41,6 +42,24 @@ export class UserStore {
   public constructor(private readonly rootStore: RootStore) {
     makeObservable(this);
   }
+  @action getCurrentTier = async () => {
+    try {
+      const res = await axios.get(prefix + "user/tier/requirements");
+      console.log(res.data);
+      this.currentTier = res.data;
+    } catch (e) {
+      console.log(e);
+    }
+  };
+  @action upgradeTier = async () => {
+    try {
+      const res = await axios.get(prefix + "user/tier/upgrade");
+      console.log(res.data);
+
+    } catch (e) {
+      console.log(e);
+    }
+  };
   @action setCurrentType = async (number: number) => {
     this.currentType = number;
   };
@@ -48,12 +67,12 @@ export class UserStore {
     try {
       const res = await axios.get(prefix + "user/user/refs");
       console.log(res.data);
-      this.inviteLimit =Number(res.data.usesLeft) + Number(res.data.referrals.length),
-
-      this.invited = Number(res.data.referrals.length),
-      //   0
-      // );
-      this.key = res.data;
+      (this.inviteLimit =
+        Number(res.data.usesLeft) + Number(res.data.referrals.length)),
+        (this.invited = Number(res.data.referrals.length)),
+        //   0
+        // );
+        (this.key = res.data);
     } catch (e) {
       console.log(e);
     }

@@ -3,9 +3,15 @@ import style from "./finance.module.scss";
 import { useInjection } from "inversify-react";
 import Web3Store from "../../stores/Web3Store";
 import { addressSlice } from "../../utils/utilities";
+import { UserStore } from "../../stores/UserStore";
+import { useEffect } from "react";
 
 const User = observer(({ stage }: { stage: string }) => {
   const { user, balance } = useInjection(Web3Store);
+  const { getCurrentTier } = useInjection(UserStore);
+  useEffect(()=>{
+    getCurrentTier()
+  },[])
   return (
     <div className={style.finance__row}>
       <div className={style.finance__title}>
