@@ -68,7 +68,7 @@ const TwitterFeed = observer(
     };
     return (
       <div className={style.twitter__feed}>
-        {(!id || id == user?._id) && <MessageSend id={id} />}
+        {(!id || id == user?._id) && (user?.verified || !isFrens) && <MessageSend id={id} />}
         <div>
           {currentFeed
             .filter((el) => !hideRow.includes(el._id))

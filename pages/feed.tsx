@@ -1,14 +1,15 @@
 import { observer } from "mobx-react";
 import type { NextPage } from "next";
 import style from "./home.module.scss";
-import Explore from "../components/explore/explore";
 import TwitterFeed from "../components/profile/twitterFeed";
 import Head from "next/head";
 import { useInjection } from "inversify-react";
 import { UserStore } from "../stores/UserStore";
 import TypesList from "../components/common/typesList";
 import { useState } from "react";
+
 const types = ["Frens feed", "Following"];
+
 const FeedPage: NextPage = observer((props) => {
   const { unreadCount } = useInjection(UserStore);
   const [active, setActive] = useState(0);
