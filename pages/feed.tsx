@@ -23,7 +23,8 @@ const FeedPage: NextPage = observer((props) => {
       <div className={style.explore__type}>
         <TypesList types={types} active={active} setActive={setActive} />
       </div>
-      <TwitterFeed isFrens={active == 0 ? true : false} />
+      {active == 0 && <TwitterFeed isFrens={true} />}
+      {active == 1 && <TwitterFeed isFrens={false} />}
     </div>
   );
 });
