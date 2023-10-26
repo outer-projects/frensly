@@ -134,7 +134,7 @@ const getOutputByKey = (require: any, progress: any) => {
           <Heart color={progress[1] >= require[1] ? "#A6D000" : "#676766"} />
         </div>
         <div className={style.finance__text}>
-          <div className={style.finance__total__text}>Like posts</div>
+          <div className={style.finance__total__text}>Get at least 3 Likes on your post</div>
           <div className={style.finance__total__count}>
             {progress[1] + " / " + require[1]}
           </div>
