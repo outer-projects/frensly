@@ -22,10 +22,11 @@
   width: fit-content;
   display: flex;
   height: 90vh;
-  margin-top: 5vh;
+  // margin-top: 5vh;
   .image {
     object-fit: contain;
-    width: 100%;
+    width: 95%;
+    object-position: top center;
   }
   .close {
     margin-left: 5px;
