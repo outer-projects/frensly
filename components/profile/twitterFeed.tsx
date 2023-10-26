@@ -50,7 +50,7 @@ const TwitterFeed = observer(
     const getPosts = () => {
       if (id && userPosts.length == 0) {
         getUserPosts(id);
-      } else if (isFrens && feed.length == 0) {
+      } else if (isFrens && frensFeed.length == 0) {
         getFrensFeed();
       } else if (feed.length == 0) {
         getFeed();

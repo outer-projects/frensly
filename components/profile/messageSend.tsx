@@ -6,11 +6,13 @@ import TextareaAutosize from "react-textarea-autosize";
 import { useInjection } from "inversify-react";
 import { FeedStore } from "../../stores/FeedStore";
 import { observer } from "mobx-react";
+import Web3Store from "../../stores/Web3Store";
 
 const MessageSend = observer(({ id }: { id?: string }) => {
   const [message, setMessage] = useState("");
   const [focus, setFocus] = useState(false);
   const [image, setImage] = useState<File | null>(null);
+  const { user } = useInjection(Web3Store);
   const { addPost } = useInjection(FeedStore);
   // const onKeyDown = (e: any) => {
   //   if (e.key == "Enter") {
@@ -67,7 +69,12 @@ const MessageSend = observer(({ id }: { id?: string }) => {
             className={classNames(header.connect__button, style.twitter__post)}
             disabled={message.length == 0}
             onClick={() => {
-              addPost({ text: message, media: image, id: id }).then((res) => {
+              addPost({
+                text: message,
+                media: image,
+                id: id,
+                isVerified: user?.verified,
+              }).then((res) => {
                 if (res) {
                   setMessage("");
                   setImage(null);

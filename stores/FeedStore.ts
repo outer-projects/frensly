@@ -137,6 +137,7 @@ export class FeedStore {
     originalPost?: string;
     media: File | null;
     id?: string;
+    isVerified?: boolean;
   }) => {
     const formdata = new FormData();
     formdata.append("text", data.text);
@@ -150,6 +151,9 @@ export class FeedStore {
         this.userPosts = [res.data, ...this.userPosts];
       } else {
         this.feed = [res.data, ...this.feed];
+      }
+      if(data.isVerified) {
+        this.frensFeed = [res.data, ...this.frensFeed];
       }
       data.originalPost && this.getCurrentPost(data.originalPost);
       return true;

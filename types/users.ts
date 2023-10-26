@@ -24,7 +24,7 @@ export interface IAccount {
   }[];
 }
 export interface IProfile {
-  //тут все очевидно вроде
+  verified?: boolean
   account: IAccount;
   twitterId: string;
   tier: number;
