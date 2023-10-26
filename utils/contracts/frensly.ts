@@ -1,5 +1,5 @@
 
-export const frenslyContractDev = "0xF7b99F91FD68bDaBb8eb7722B347FcC3e9bb3D41";
+export const frenslyContractDev = "0xD5616fAcCCc1B2872b9BD076c43876025C736684";
 export const frenslyContract = "0x98cc2CB809cAC9B03dbC52fdA89835a81C9476E1";
 export const frenslyAbi = [
   {
