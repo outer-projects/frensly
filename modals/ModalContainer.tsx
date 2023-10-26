@@ -31,8 +31,6 @@ const ModalContainer: React.FC<P> = observer(
   }: P) => {
     const fade = useRef<HTMLDivElement>(null);
 
-    const modalStore = useInjection(ModalStore);
-
     useEffect(() => {
       onShow?.();
       return () => onHide?.();
@@ -48,7 +46,7 @@ const ModalContainer: React.FC<P> = observer(
       >
         <div className={classNames(styles.modal)}>
           <h2 className={styles.heading}>
-            {heading}
+
             {/* <span onClick={() => modalStore.hideModal(idx)}>x</span> */}
           </h2>
           <div className={styles.children}>{children}</div>

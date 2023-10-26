@@ -3,13 +3,21 @@ import MessageSend from "./messageSend";
 import TwitterPost from "./twitterPost";
 import { observer } from "mobx-react";
 import { useInjection } from "inversify-react";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { FeedStore } from "../../stores/FeedStore";
 import Web3Store from "../../stores/Web3Store";
 import Swap from "../socials/twitterUI/Swap";
 import { InView } from "react-intersection-observer";
 const TwitterFeed = observer(
-  ({ id, isProfile }: { id?: string; isProfile?: boolean }) => {
+  ({
+    id,
+    isProfile,
+    isFrens,
+  }: {
+    id?: string;
+    isProfile?: boolean;
+    isFrens?: boolean;
+  }) => {
     const {
       feed,
       getFeed,
@@ -18,10 +26,20 @@ const TwitterFeed = observer(
       deletePost,
       setPostOffset,
       clearUserPosts,
+      getFrensFeed,
+      frensFeed,
     } = useInjection(FeedStore);
     const { user } = useInjection(Web3Store);
     const [hideRow, setHideRow] = useState<string[]>([]);
-
+    const currentFeed = useMemo(() => {
+      if (id) {
+        return userPosts;
+      } else if (isFrens) {
+        return frensFeed;
+      } else {
+        return feed;
+      }
+    }, [id, isFrens, userPosts, frensFeed, feed]);
     const updatePosts = () => {
       if (id) {
         getUserPosts(id);
@@ -32,8 +50,10 @@ const TwitterFeed = observer(
     const getPosts = () => {
       if (id && userPosts.length == 0) {
         getUserPosts(id);
-      } else if (feed.length == 0) {
+      } else if (isFrens && feed.length == 0) {
         getFeed();
+      } else if (feed.length == 0) {
+        getFrensFeed();
       }
     };
     useEffect(() => {
@@ -50,7 +70,7 @@ const TwitterFeed = observer(
       <div className={style.twitter__feed}>
         {(!id || id == user?._id) && <MessageSend id={id} />}
         <div>
-          {(id ? userPosts : feed)
+          {currentFeed
             .filter((el) => !hideRow.includes(el._id))
             ?.map((el, i) => {
               if (!el.isRepost && !el.originalPost) {
@@ -117,7 +137,7 @@ const TwitterFeed = observer(
               }
             })}
         </div>
-        {(id ? userPosts.length == 0 : feed.length == 0) && (
+        {currentFeed.length == 0 && (
           <div className={style.twitter__empty}>No activity yet</div>
         )}
       </div>

@@ -10,11 +10,6 @@
   align-items: center;
   justify-content: center;
   z-index: 99999;
-  @media (max-width: 1350px) {
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-  }
 }
 
 .modal {

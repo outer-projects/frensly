@@ -9,14 +9,30 @@ import { toast } from "react-toastify";
 
 @injectable()
 export class FeedStore {
+  @observable frensFeed: IPost[] = [];
   @observable feed: IPost[] = [];
   @observable userPosts: IPost[] = [];
   @observable feedOffset: number = 0;
+  @observable feedFrensOffset: number = 0;
   @observable postOffset: number = 0;
   @observable currentPost?: IPost = undefined;
   constructor(private readonly rootStore: RootStore) {
     makeObservable(this);
   }
+  @action getFrensFeed = async () => {
+    const query = new URLSearchParams({
+      offset: this.feedFrensOffset.toString(),
+      limit: (this.feedFrensOffset + 100).toString(),
+    }).toString();
+    try {
+      const res = await axios.get(prefix + "social/posts/verified?" + query);
+      // console.log(res.data);
+      this.feedFrensOffset = this.feedFrensOffset + 100;
+      this.frensFeed = [...this.frensFeed, ...res.data];
+    } catch (e) {
+      console.log(e);
+    }
+  };
   @action getFeed = async () => {
     const query = new URLSearchParams({
       offset: this.feedOffset.toString(),

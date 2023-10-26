@@ -11,10 +11,25 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  @media (max-width:616px) {
+  @media (max-width: 616px) {
     width: 100vw;
     height: 100vh;
     border-radius: 0px;
+  }
+}
+.image__container {
+  width: 80vw;
+  display: flex;
+  .image {
+    width: 100%;
+  }
+  .close {
+    margin-left: 5px;
+    width: 24px;
+    height: 24px;
+  }
+  @media (max-width: 550px) {
+    width: 100vw;
   }
 }
 .trade {
@@ -28,7 +43,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  @media (max-width:616px) {
+  @media (max-width: 616px) {
     width: 100vw;
     height: 100vh;
     border-radius: 0px;
@@ -112,8 +127,8 @@
 .sell__button {
   width: 370px !important;
   height: 56px;
-  background-color: #EF5DA8!important;
-  color: white!important;
+  background-color: #ef5da8 !important;
+  color: white !important;
 }
 .buy__avatar {
   width: 40px;

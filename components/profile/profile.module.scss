@@ -131,8 +131,8 @@
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
-  padding-left: 9px;
-  padding-right: 9px;
+  padding-left: 20px;
+  padding-right: 20px;
   height: 36px;
   display: flex;
   align-items: center;
@@ -393,6 +393,7 @@
 }
 .profile__name {
   display: flex;
+  overflow: hidden;
   align-items: center;
   img {
     margin-left: 5px;
@@ -475,6 +476,7 @@
   line-height: 24px;
   margin-right: 5px;
   letter-spacing: -0.16px;
+  overflow: hidden;
 }
 .twitter__nickname {
   color: $grey;

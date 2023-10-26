@@ -9,6 +9,8 @@ import { useContext, useEffect, useMemo, useState } from "react";
 import Highlighter from "react-highlight-words";
 import { SocketContext } from "../../../utils/socket";
 import { IProfile } from "../../../types/users";
+import { ModalsEnum } from "../../../modals";
+import { ModalStore } from "../../../stores/ModalStore";
 const getUserById = (id: string, members: IProfile[]) => {
   let correctUser = members.filter((el) => el.twitterId == id)[0];
   if (correctUser) {
@@ -18,6 +20,7 @@ const getUserById = (id: string, members: IProfile[]) => {
 };
 const OneMessage = observer(({ el, roomId, members }: any) => {
   const { user } = useInjection(Web3Store);
+  const modalStore = useInjection(ModalStore);
   const [isViewed, setIsViewed] = useState(true);
   const socket = useContext(SocketContext);
   const mentions = useMemo(() => {
@@ -54,7 +57,17 @@ const OneMessage = observer(({ el, roomId, members }: any) => {
       )}
       key={el._id}
     >
-      {el.media && <img src={el.media} className={style.openchat__img} />}
+      {el.media && (
+        <img
+          src={el.media}
+          className={style.openchat__img}
+          onClick={() =>
+            modalStore.showModal(ModalsEnum.Image, {
+              image: el.media,
+            })
+          }
+        />
+      )}
       <div className={style.openchat__left}>
         {el.user.twitterId !== user?.twitterId && (
           <img className={style.openchat__avatar} src={el.user.avatar} />

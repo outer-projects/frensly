@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import style from "./profile.module.scss";
 import classNames from "classnames";
 import header from "../layout/header.module.scss";
@@ -12,7 +12,18 @@ const MessageSend = observer(({ id }: { id?: string }) => {
   const [focus, setFocus] = useState(false);
   const [image, setImage] = useState<File | null>(null);
   const { addPost } = useInjection(FeedStore);
+  // const onKeyDown = (e: any) => {
+  //   if (e.key == "Enter") {
+  //     setMessage(message + "n/")
+  //   }
+  // };
+  // useEffect(() => {
+  //   window.addEventListener("keydown", onKeyDown);
 
+  //   return () => {
+  //     window.removeEventListener("keydown", onKeyDown);
+  //   };
+  // }, [message]);
   return (
     <div>
       <div>
@@ -31,6 +42,7 @@ const MessageSend = observer(({ id }: { id?: string }) => {
             setFocus(true);
           }}
           onChange={(e: any) => {
+            console.log(e.key);
             setMessage(e.target.value);
           }}
         />
@@ -39,7 +51,6 @@ const MessageSend = observer(({ id }: { id?: string }) => {
             type="file"
             accept=".jpg,.jpeg,.webm,.png"
             className={style.twitter__send__img}
-            
             onChange={(e) => e?.target?.files && setImage(e?.target?.files[0])}
           />
           <input
@@ -51,11 +62,7 @@ const MessageSend = observer(({ id }: { id?: string }) => {
           <img src="../../icons/ImageAdd.svg" />
           <img src="../../icons/gifAdd.svg" />
         </div>
-        <div
-          className={classNames(
-            style.twitter__button
-          )}
-        >
+        <div className={classNames(style.twitter__button)}>
           <button
             className={classNames(header.connect__button, style.twitter__post)}
             disabled={message.length == 0}

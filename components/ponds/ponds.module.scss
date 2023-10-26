@@ -99,6 +99,7 @@
   font-size: 14px;
   line-height: 20px; /* 142.857% */
   letter-spacing: -0.14px;
+  overflow: hidden;
   span {
     color: $black;
     font-size: 14px;
@@ -201,6 +202,7 @@
   font-weight: bold;
   line-height: 24px; /* 150% */
   letter-spacing: -0.16px;
+  overflow: hidden;
 }
 .openchat__avatar {
   width: 40px;
@@ -335,6 +337,7 @@
   width: 240px;
   align-items: center;
   display: flex;
+  overflow: hidden;
   justify-content: space-between;
 }
 .openchat__mydate {
@@ -449,6 +452,7 @@
   flex-direction: column;
   line-height: 28px; /* 140% */
   letter-spacing: -0.2px;
+  overflow: hidden;
   .twitter__redirect {
     color: $grey;
     margin-left: 4px;

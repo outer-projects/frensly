@@ -1,4 +1,5 @@
 import style from "../ponds.module.scss";
+import profile from "../../profile/profile.module.scss";
 import explore from "../../explore/explore.module.scss";
 import header from "../../layout/header.module.scss";
 import classNames from "classnames";
@@ -287,7 +288,7 @@ const Chat = observer(() => {
               You are not allowed to enter this chat
             </div>
           ) : (
-            <div className={style.profile__loading}>
+            <div className={profile.profile__loading}>
               <img src="../spinner.gif" />
             </div>
           )}

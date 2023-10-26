@@ -15,6 +15,8 @@ import { timePassed } from "../../utils/utilities";
 import classNames from "classnames";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { ModalStore } from "../../stores/ModalStore";
+import { ModalsEnum } from "../../modals";
 
 const TwitterPost = observer(
   ({
@@ -34,6 +36,7 @@ const TwitterPost = observer(
     const [isActiveRepost, setIsActiveRepost] = useState(false);
     const [repostAvailable, setRepostAvailable] = useState(false);
     const router = useRouter();
+    const modalStore = useInjection(ModalStore);
     const { user } = useInjection(Web3Store);
     const { likePost, repostPost, deletePost } = useInjection(FeedStore);
     const [likesCount, setLikesCount] = useState(0);
@@ -133,6 +136,11 @@ const TwitterPost = observer(
                 {post.media && (
                   <img
                     src={post.media}
+                    onClick={() =>
+                      modalStore.showModal(ModalsEnum.Image, {
+                        image: post.media,
+                      })
+                    }
                     className={classNames(
                       style.twitter__image,
                       isComment && style.twitter__image__com
