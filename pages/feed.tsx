@@ -8,7 +8,7 @@ import { useInjection } from "inversify-react";
 import { UserStore } from "../stores/UserStore";
 import TypesList from "../components/common/typesList";
 import { useState } from "react";
-const types = ["My feed", "Frens feed"];
+const types = ["Frens feed", "Following"];
 const FeedPage: NextPage = observer((props) => {
   const { unreadCount } = useInjection(UserStore);
   const [active, setActive] = useState(0);
@@ -22,7 +22,7 @@ const FeedPage: NextPage = observer((props) => {
       <div className={style.explore__type}>
         <TypesList types={types} active={active} setActive={setActive} />
       </div>
-      <TwitterFeed isFrens={active == 1 ? true : false} />
+      <TwitterFeed isFrens={active == 0 ? true : false} />
     </div>
   );
 });

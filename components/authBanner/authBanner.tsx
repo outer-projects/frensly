@@ -168,7 +168,7 @@ const AuthBanner = observer(() => {
                     )}
                   >
                     To start using our app you need
-                    <br /> to initialise your account first
+                    <br /> to initialize your account first
                   </div>
                 </>
               )}
@@ -222,7 +222,7 @@ const AuthBanner = observer(() => {
                       style={{ width: "200px", height: "64px" }}
                     >
                       <Twitter color={"black"} />
-                      Authorise
+                      Authorize
                     </button>
                   </a>
                 </div>
