@@ -29,10 +29,10 @@ const getOutputByKey = (require: any, progress: any) => {
         <div className={style.finance__icon}>
           <UserIcon color={progress[1] ? "#A6D000" : "#676766"} />
         </div>
-        <div>
+        <div className={style.finance__text}>
           <div className={style.finance__total__text}>Follow someone</div>
           <div className={style.finance__total__count}>
-            {progress[1] ? 1 : 0} / {require[1]}
+            {progress[1] ? 1 : 0} {" / "} {require[1]}
           </div>
         </div>
       </div>
@@ -49,10 +49,10 @@ const getOutputByKey = (require: any, progress: any) => {
         <div className={style.finance__icon}>
           <Message color={progress[1] ? "#A6D000" : "#676766"} />
         </div>
-        <div>
+        <div className={style.finance__text}>
           <div className={style.finance__total__text}>Post something</div>
           <div className={style.finance__total__count}>
-            {progress[1] ? 1 : 0} / {require[1]}
+            {progress[1] ? 1 : 0} {" / "} {require[1]}
           </div>
         </div>
       </div>
@@ -71,7 +71,7 @@ const getOutputByKey = (require: any, progress: any) => {
             color={Number(progress[1] > 1) ? "#A6D000" : "#676766"}
           />
         </div>
-        <div>
+        <div className={style.finance__text}>
           <div className={style.finance__total__count}>Buy someone's share</div>
         </div>
       </div>
@@ -90,10 +90,12 @@ const getOutputByKey = (require: any, progress: any) => {
             color={Number(progress[1] > 1) ? "#A6D000" : "#676766"}
           />
         </div>
-        <div>
+        <div className={style.finance__text}>
           <div className={style.finance__total__text}>Total Volume</div>
           <div className={style.finance__total__count}>
-            {fromWeiToEth(progress[1])}/{fromWeiToEth(require[1])}
+            {fromWeiToEth(progress[1])}
+            {" / "}
+            {fromWeiToEth(require[1])}
           </div>
         </div>
       </div>
@@ -110,10 +112,10 @@ const getOutputByKey = (require: any, progress: any) => {
         <div className={style.finance__icon}>
           <UserIcon color={progress[1] >= require[1] ? "#A6D000" : "#676766"} />
         </div>
-        <div>
+        <div className={style.finance__text}>
           <div className={style.finance__total__text}>Invite frens</div>
           <div className={style.finance__total__count}>
-            {progress[1] / require[1]}
+            {progress[1] + " / " + require[1]}
           </div>
         </div>
       </div>
@@ -130,10 +132,10 @@ const getOutputByKey = (require: any, progress: any) => {
         <div className={style.finance__icon}>
           <Heart color={progress[1] >= require[1] ? "#A6D000" : "#676766"} />
         </div>
-        <div>
+        <div className={style.finance__text}>
           <div className={style.finance__total__text}>Like posts</div>
           <div className={style.finance__total__count}>
-            {progress[1] / require[1]}
+            {progress[1] + " / " + require[1]}
           </div>
         </div>
       </div>
@@ -150,10 +152,10 @@ const getOutputByKey = (require: any, progress: any) => {
         <div className={style.finance__icon}>
           <Follow color={progress[1] >= require[1] ? "#A6D000" : "#676766"} />
         </div>
-        <div>
+        <div className={style.finance__text}>
           <div className={style.finance__total__text}>Get followers</div>
           <div className={style.finance__total__count}>
-            {progress[1] / require[1]}
+            {progress[1] + " / " + require[1]}
           </div>
         </div>
       </div>
