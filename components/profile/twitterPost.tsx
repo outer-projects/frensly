@@ -94,12 +94,12 @@ const TwitterPost = observer(
           <div className={style.twitter__post__container}>
             <div
               className={classNames(
-                style.twitter__one__post
-                // isComment && style.twitter__one__comment
+                style.twitter__one__post,
+                isOnePostPage && style.twitter__one__post__top
               )}
             >
               <div style={{ display: "flex", alignItems: "center" }}>
-                {isOnePostPage && (
+                {isOnePostPage ? (
                   <Link
                     href={
                       !isComment
@@ -112,7 +112,7 @@ const TwitterPost = observer(
                       style={{ marginRight: "8px" }}
                     />
                   </Link>
-                )}
+                ) : <div style={{width:'32px'}}/>}
                 <Link href={"/profile/" + post?.user.twitterId}>
                   <img
                     className={style.twitter__avatar}
