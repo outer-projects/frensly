@@ -39,6 +39,7 @@ const Admin = observer(() => {
             onClick={() => {
               verify(handle, code);
               setHandle("");
+              setCode("");
             }}
           >
             Send
@@ -70,13 +71,14 @@ const Admin = observer(() => {
           <input
             placeholder="Enter codes separated by coma"
             value={codeToGenerate}
-            onChange={(e) => setCodeToGenerate(codeToGenerate)}
+            onChange={(e) => setCodeToGenerate(e.target.value)}
           />
           <button
             className={style.connect__button}
             onClick={() => {
               console.log(codeToGenerate.split(","));
               createCodes(codeToGenerate.split(","));
+              setCodeToGenerate("");
             }}
           >
             Create
