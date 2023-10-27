@@ -21,6 +21,7 @@ const Explore = observer(() => {
     newUsersList,
     getTopUsers,
     searchUsers,
+    updateNewUsers,
     searchResult,
     topUsersList,
   } = useInjection(ExploreStore);
@@ -40,10 +41,10 @@ const Explore = observer(() => {
     searchDeb(saveInput, 700);
   }, [search]);
   useEffect(() => {
-    if (active == 0 && topUsersList?.length == 0) {
+    if (active == 0) {
       getTopUsers();
     }
-    if (active == 1 && newUsersList?.length == 0) {
+    if (active == 1) {
       getNewUsers();
     }
   }, [active]);
@@ -109,7 +110,7 @@ const Explore = observer(() => {
                     onChange={(inView, entry) => {
                       if (inView) {
                         console.log("inview");
-                        getNewUsers();
+                        updateNewUsers();
                       }
                     }}
                   ></InView>

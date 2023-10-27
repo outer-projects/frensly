@@ -20,7 +20,7 @@ export class ExploreStore {
   public constructor(private readonly rootStore: RootStore) {
     makeObservable(this);
   }
-  @action getNewUsers = async () => {
+  @action updateNewUsers = async () => {
     const query = new URLSearchParams({
       offset: this.newOffset.toString(),
       limit: (this.newOffset + 20).toString(),
@@ -29,6 +29,20 @@ export class ExploreStore {
       const res = await axios.get(prefix + "user/newest/?" + query);
       this.newUsersList = [...this.newUsersList, ...res.data];
       this.newOffset = this.newOffset + 20;
+      this.currentUserList = "new";
+    } catch (e) {
+      console.log(e);
+    }
+  };
+  @action getNewUsers = async () => {
+    const query = new URLSearchParams({
+      offset: this.newOffset.toString(),
+      limit: (this.newOffset + 20).toString(),
+    }).toString();
+    try {
+      const res = await axios.get(prefix + "user/newest/?" + query);
+      this.newUsersList = res.data;
+      this.newOffset = 0;
       this.currentUserList = "new";
     } catch (e) {
       console.log(e);
