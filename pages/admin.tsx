@@ -23,64 +23,59 @@ const Admin = observer(() => {
     <div className={style.explore__page}>
       <div className={style.explore__row}>
         Verify user
-        <div>
-          <input
-            placeholder="Twitter handle"
-            value={handle}
-            onChange={(e) => setHandle(e.target.value)}
-          />
-          <input
-            placeholder="Custom code"
-            value={code}
-            onChange={(e) => setCode(e.target.value)}
-          />
-          <button
-            onClick={() => {
-              verify(handle, code);
-              setHandle("");
-              setCode("");
-            }}
-          >
-            Send
-          </button>
-        </div>
+        <input
+          placeholder="Twitter handle"
+          value={handle}
+          onChange={(e) => setHandle(e.target.value)}
+        />
+        <input
+          placeholder="Custom code"
+          value={code}
+          onChange={(e) => setCode(e.target.value)}
+        />
+        <button
+          onClick={() => {
+            verify(handle, code);
+            setHandle("");
+            setCode("");
+          }}
+        >
+          Send
+        </button>
       </div>
       <div className={style.explore__row}>
         Make admin
-        <div>
-          <input
-            placeholder="Twitter handle"
-            value={admin}
-            onChange={(e) => setAdmin(e.target.value)}
-          />
-          <button
-            onClick={() => {
-              makeAdmin(admin);
-              setAdmin("");
-            }}
-          >
-            Send
-          </button>
-        </div>
+        <input
+          placeholder="Twitter handle"
+          value={admin}
+          onChange={(e) => setAdmin(e.target.value)}
+        />
+        <button
+          onClick={() => {
+            makeAdmin(admin);
+            setAdmin("");
+          }}
+        >
+          Send
+        </button>
       </div>
       <div className={style.explore__row}>
         Generate codes
-        <div>
-          <input
-            placeholder="Enter codes separated by coma"
-            value={codeToGenerate}
-            onChange={(e) => setCodeToGenerate(e.target.value)}
-          />
-          <button
-            onClick={() => {
-              console.log(codeToGenerate.split(","));
-              createCodes(codeToGenerate.split(",").map((el) => el.trim()));
-              setCodeToGenerate("");
-            }}
-          >
-            Create
-          </button>
-        </div>
+        <input
+          placeholder="Enter codes separated by coma"
+          value={codeToGenerate}
+          style={{ width: "250px" }}
+          onChange={(e) => setCodeToGenerate(e.target.value)}
+        />
+        <button
+          onClick={() => {
+            console.log(codeToGenerate.split(","));
+            createCodes(codeToGenerate.split(",").map((el) => el.trim()));
+            setCodeToGenerate("");
+          }}
+        >
+          Create
+        </button>
       </div>
     </div>
   );
