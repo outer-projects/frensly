@@ -111,7 +111,7 @@ export const SellModal = observer(({ key, data, idx }: modalProps) => {
             <div className={style.buy__user__left}>
               <img
                 className={style.buy__avatar}
-                src="../icons/AvatarBlue.svg"
+                src={data.user?.avatar}
               />
               <div className={style.buy__user__left__text}>
                 <div className={style.buy__user__name}>
@@ -128,7 +128,7 @@ export const SellModal = observer(({ key, data, idx }: modalProps) => {
                 {fromWeiToEth(priceOfOne, 8)} ETH
               </div>
               <div className={style.buy__status}>
-                Key price <img src="../icons/Info.svg" />
+              Share price <img src="../icons/Info.svg" />
               </div>
             </div>
           </div>

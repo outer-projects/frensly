@@ -21,7 +21,7 @@ interface modalProps {
 export const TradeModal = observer(({ key, data, idx }: modalProps) => {
   const modalStore = useInjection(ModalStore);
   const { frensly, address, checkAuth } = useInjection(Web3Store);
-  const [priceOfOne, setPriceOfOne] = useState(0);
+  const [priceOfOne, setPriceOfOne] = useState('0');
   const [count, setCount] = useState(0);
   const sell = async () => {
     modalStore.hideModal(ModalsEnum.Trade);
@@ -40,7 +40,7 @@ export const TradeModal = observer(({ key, data, idx }: modalProps) => {
         )
         .call();
       // console.log(res);
-      return Number(res);
+      return res;
     } catch (e) {
       console.log(e);
       return 0;
@@ -87,7 +87,7 @@ export const TradeModal = observer(({ key, data, idx }: modalProps) => {
             <div className={style.buy__user__left}>
               <img
                 className={style.buy__avatar}
-                src="../icons/AvatarBlue.svg"
+                src={data.user?.avatar}
               />
               <div className={style.buy__user__left__text}>
                 <div className={style.buy__user__name}>
@@ -104,7 +104,7 @@ export const TradeModal = observer(({ key, data, idx }: modalProps) => {
                 {fromWeiToEth(priceOfOne, 8)} ETH
               </div>
               <div className={style.buy__status}>
-                Key price <img src="../icons/Info.svg" />
+                Share price <img src="../icons/Info.svg" />
               </div>
             </div>
           </div>
