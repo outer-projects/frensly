@@ -6,6 +6,7 @@ import WalletStore from "./Web3Store";
 import { ExploreStore } from "./ExploreStore";
 import { FeedStore } from "./FeedStore";
 import { ChatStore } from "./ChatStore";
+import { AdminStore } from "./AdminStore";
 
 export class RootStore {
   public userStore: UserStore;
@@ -14,6 +15,7 @@ export class RootStore {
   public walletStore: WalletStore;
   public exploreStore: ExploreStore;
   public feedStore: FeedStore;
+  public adminStore: AdminStore;
   public chatStore: ChatStore;
   public constructor() {
     this.userStore = new UserStore(this);
@@ -21,6 +23,7 @@ export class RootStore {
     this.walletStore = new WalletStore(this);
     this.exploreStore = new ExploreStore(this);
     this.feedStore = new FeedStore(this);
+    this.adminStore = new AdminStore(this);
     this.chatStore = new ChatStore(this);
     this.container = new Container();
     this.container.bind(UserStore).toConstantValue(this.userStore);
@@ -29,6 +32,7 @@ export class RootStore {
     this.container.bind(ExploreStore).toConstantValue(this.exploreStore);
     this.container.bind(FeedStore).toConstantValue(this.feedStore);
     this.container.bind(ChatStore).toConstantValue(this.chatStore);
+    this.container.bind(AdminStore).toConstantValue(this.adminStore);
     this.container.bind(Container).toConstantValue(this.container);
   }
 }

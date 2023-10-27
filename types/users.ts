@@ -24,7 +24,7 @@ export interface IAccount {
   }[];
 }
 export interface IProfile {
-  verified?: boolean
+  verified?: boolean;
   account: IAccount;
   twitterId: string;
   tier: number;
@@ -33,6 +33,7 @@ export interface IProfile {
   requireManualPointsUpdate: boolean;
   avatar: string;
   twitterName: string;
+  role: string;
   posts: string[];
   twitterHandle: string;
   twitterDescription: string;
