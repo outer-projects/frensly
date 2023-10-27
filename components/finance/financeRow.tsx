@@ -7,9 +7,10 @@ import { observer } from "mobx-react";
 import { useInjection } from "inversify-react";
 import { UserStore } from "../../stores/UserStore";
 import Web3Store from "../../stores/Web3Store";
+import BigNumber from "bignumber.js";
 
 const FinanceRow = observer(
-  ({ el, amount, price }: { el: IAccount; amount?: string, price:number }) => {
+  ({ el, amount, price }: { el: IAccount; amount?: string, price:BigNumber }) => {
     const [usdPrice, setUsdPrice] = useState(0);
     const { user } = useInjection(Web3Store);
     const { getPriceInUsd, ethCurrency } = useInjection(UserStore);

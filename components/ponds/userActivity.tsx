@@ -6,7 +6,7 @@ import OneActivity from "../notifications/oneActivity";
 import { observer } from "mobx-react";
 import { useInjection } from "inversify-react";
 import { UserStore } from "../../stores/UserStore";
-import { fromWeiToEth } from "../../utils/utilities";
+import { fromWeiToEth, toBNJS } from "../../utils/utilities";
 import { useRouter } from "next/router";
 import FinanceRow from "../finance/financeRow";
 const typesUser = ["Holders", "Holdings", "Activity"];
@@ -93,10 +93,9 @@ const UserActivity = observer(() => {
                   key={el.user._id}
                   el={el.user}
                   amount={el.amount}
-                  price={
-                    Number((Number(el.amount) / 10 ** 6).toFixed(2)) *
-                    Number(profileUser?.account.currentPrice)
-                  }
+                  price={toBNJS(
+                    profileUser?.account.currentPrice as string
+                  ).multipliedBy(Math.round(Number(el.amount) / 10 ** 6))}
                 />
               );
             })}
@@ -110,10 +109,9 @@ const UserActivity = observer(() => {
                   key={el.subject._id}
                   el={el.subject}
                   amount={el.amount}
-                  price={
-                    Number((Number(el.amount) / 10 ** 6).toFixed(2)) *
-                    Number(el.subject.currentPrice)
-                  }
+                  price={toBNJS(el.subject.currentPrice as string).multipliedBy(
+                    Math.round(Number(el.amount) / 10 ** 6)
+                  )}
                 />
               );
             })}

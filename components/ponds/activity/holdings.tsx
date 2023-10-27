@@ -5,6 +5,7 @@ import { useEffect } from "react";
 import { UserStore } from "../../../stores/UserStore";
 import Web3Store from "../../../stores/Web3Store";
 import FinanceRow from "../../finance/financeRow";
+import { toBNJS } from "../../../utils/utilities";
 
 const Holdings = observer(() => {
   const { getShares, shares } = useInjection(UserStore);
@@ -21,10 +22,9 @@ const Holdings = observer(() => {
             key={el.subject._id}
             el={el.subject}
             amount={el.amount}
-            price={
-              Number((Number(el.amount) / 10 ** 6).toFixed(2)) *
-              Number(user?.account.currentPrice)
-            }
+            price={toBNJS(el?.subject?.currentPrice as string).multipliedBy(
+              Math.round(Number(el.amount) / 10 ** 6)
+            )}
           />
         );
         // return <></>;

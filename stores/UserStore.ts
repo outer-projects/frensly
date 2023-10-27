@@ -164,7 +164,7 @@ export class UserStore {
         (partialSum: any, a: any) =>
           toBNJS(partialSum).plus(
             toBNJS(a.subject.currentPrice).multipliedBy(
-              Number(a.amount) / 1000000
+              Math.round(Number(a.amount) / 10 ** 6)
             )
           ),
         "0"

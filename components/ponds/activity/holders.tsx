@@ -6,6 +6,7 @@ import { UserStore } from "../../../stores/UserStore";
 import OneActivity from "../../notifications/oneActivity";
 import Web3Store from "../../../stores/Web3Store";
 import FinanceRow from "../../finance/financeRow";
+import { toBNJS } from "../../../utils/utilities";
 const Holders = observer(() => {
   const { getHolders, holders } = useInjection(UserStore);
   const { user } = useInjection(Web3Store);
@@ -21,10 +22,9 @@ const Holders = observer(() => {
             key={el.user._id}
             el={el.user}
             amount={el.amount}
-            price={
-              Number((Number(el.amount) / 10 ** 6).toFixed(2)) *
-              Number(user?.account.currentPrice)
-            }
+            price={toBNJS(user?.account.currentPrice as string).multipliedBy(
+              Math.round(Number(el.amount) / 10 ** 6)
+            )}
           />
         );
         // return <></>;
