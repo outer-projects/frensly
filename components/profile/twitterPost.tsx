@@ -108,8 +108,7 @@ const TwitterPost = observer(
                     }
                   >
                     <img
-                      className={style.twitter__avatar}
-                      src={"../../icons/arrow__back.svg"}
+                      src={"../../icons/arrow_back.svg"}
                       style={{ marginRight: "8px" }}
                     />
                   </Link>
