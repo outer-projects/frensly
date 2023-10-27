@@ -46,7 +46,7 @@ const Admin = observer(() => {
           </button>
         </div>
       </div>
-      <div className={style.explore__row}>
+      <div className={header.explore__row}>
         Make admin
         <div>
           <input
@@ -55,7 +55,7 @@ const Admin = observer(() => {
             onChange={(e) => setAdmin(e.target.value)}
           />
           <button
-            className={style.connect__button}
+            className={header.connect__button}
             onClick={() => {
               makeAdmin(admin);
               setAdmin("");
@@ -74,7 +74,7 @@ const Admin = observer(() => {
             onChange={(e) => setCodeToGenerate(e.target.value)}
           />
           <button
-            className={style.connect__button}
+            className={header.connect__button}
             onClick={() => {
               console.log(codeToGenerate.split(","));
               createCodes(codeToGenerate.split(","));
