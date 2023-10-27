@@ -31,6 +31,7 @@ export class UserStore {
   @observable currentRequire: any[] = [];
   @observable currentProgress: any[] = [];
   @observable finished: boolean = false;
+  @observable unlimitedKeys: boolean = false;
   @observable holders?: {
     user: IAccount;
     amount: string;
@@ -84,6 +85,7 @@ export class UserStore {
     try {
       const res = await axios.get(prefix + "user/user/refs");
       console.log(res.data);
+      this.unlimitedKeys = res.data.unlimited
       (this.inviteLimit =
         Number(res.data.usesLeft) + Number(res.data.referrals.length)),
         (this.invited = Number(res.data.referrals.length)),

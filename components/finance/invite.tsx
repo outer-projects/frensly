@@ -18,7 +18,8 @@ import UserIcon from "../socials/twitterUI/UserIcon";
 
 const Invite = observer(() => {
   const { user } = useInjection(Web3Store);
-  const { getKeys, key, inviteLimit, invited } = useInjection(UserStore);
+  const { getKeys, key, inviteLimit, invited, unlimitedKeys } =
+    useInjection(UserStore);
   const [keysReady, setKeysReady] = useState(false);
   useEffect(() => {
     if (user && !keysReady) {
@@ -51,7 +52,7 @@ const Invite = observer(() => {
                 Total invited users
               </div>
               <div className={style.finance__total__count}>
-                {invited} / {inviteLimit}
+                {invited} {!unlimitedKeys && "/" + inviteLimit}
               </div>
             </div>
           </div>
@@ -69,7 +70,13 @@ const Invite = observer(() => {
           >
             <div>
               <div className={style.invite__code__left}>
-                There are <span>{key.usesLeft}</span> uses left
+                {!unlimitedKeys ? (
+                  <>
+                    There are <span>{key.usesLeft}</span> uses left
+                  </>
+                ) : (
+                  <>Unlimited use</>
+                )}
               </div>
               <div>
                 {(window.location.origin + "/" + key.code).replace(
