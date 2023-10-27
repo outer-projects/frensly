@@ -136,7 +136,7 @@ const Finance = observer(() => {
                     amount={el.amount}
                     price={toBNJS(
                       user?.account.currentPrice as string
-                    ).multipliedBy(Math.round(Number(el.amount) / 10 ** 6))}
+                    ).multipliedBy((Number(el.amount) / 10 ** 6).toFixed(2))}
                   />
                 );
               })}
@@ -149,9 +149,9 @@ const Finance = observer(() => {
                   <FinanceRow
                     el={el.subject}
                     amount={el.amount}
-                    price={toBNJS(el.subject.currentPrice as string).multipliedBy(
-                      Math.round(Number(el.amount) / 10 ** 6)
-                    )}
+                    price={toBNJS(
+                      el.subject.currentPrice as string
+                    ).multipliedBy((Number(el.amount) / 10 ** 6).toFixed(2))}
                   />
                 );
               })}

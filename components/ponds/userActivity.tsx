@@ -95,7 +95,7 @@ const UserActivity = observer(() => {
                   amount={el.amount}
                   price={toBNJS(
                     profileUser?.account.currentPrice as string
-                  ).multipliedBy(Math.round(Number(el.amount) / 10 ** 6))}
+                  ).multipliedBy((Number(el.amount) / 10 ** 6).toFixed(2))}
                 />
               );
             })}
@@ -110,7 +110,7 @@ const UserActivity = observer(() => {
                   el={el.subject}
                   amount={el.amount}
                   price={toBNJS(el.subject.currentPrice as string).multipliedBy(
-                    Math.round(Number(el.amount) / 10 ** 6)
+                    (Number(el.amount) / 10 ** 6).toFixed(2)
                   )}
                 />
               );

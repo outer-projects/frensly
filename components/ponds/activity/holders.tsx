@@ -23,7 +23,7 @@ const Holders = observer(() => {
             el={el.user}
             amount={el.amount}
             price={toBNJS(user?.account.currentPrice as string).multipliedBy(
-              Math.round(Number(el.amount) / 10 ** 6)
+              (Number(el.amount) / 10 ** 6).toFixed(2)
             )}
           />
         );
