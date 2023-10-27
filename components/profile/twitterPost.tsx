@@ -94,24 +94,26 @@ const TwitterPost = observer(
           <div className={style.twitter__post__container}>
             <div
               className={classNames(
-                style.twitter__one__post,
+                style.twitter__one__post
                 // isComment && style.twitter__one__comment
               )}
             >
               <div style={{ display: "flex", alignItems: "center" }}>
-                <Link
-                  href={
-                    !isComment
-                      ? "/profile/" + post?.user.twitterId
-                      : "/posts/" + post.originalPost
-                  }
-                >
-                  <img
-                    className={style.twitter__avatar}
-                    src={post?.user?.avatar}
-                    style={{ marginRight: "8px" }}
-                  />
-                </Link>
+                {isOnePostPage && (
+                  <Link
+                    href={
+                      !isComment
+                        ? "/profile/" + post?.user.twitterId
+                        : "/posts/" + post.originalPost
+                    }
+                  >
+                    <img
+                      className={style.twitter__avatar}
+                      src={"../../icons/arrow__back.svg"}
+                      style={{ marginRight: "8px" }}
+                    />
+                  </Link>
+                )}
                 <Link href={"/profile/" + post?.user.twitterId}>
                   <img
                     className={style.twitter__avatar}
@@ -142,7 +144,7 @@ const TwitterPost = observer(
                 </div>
                 <div
                   className={classNames(
-                    style.twitter__text,
+                    style.twitter__text
                     // isComment && style.twitter__text__comm
                   )}
                 >
@@ -157,7 +159,7 @@ const TwitterPost = observer(
                       })
                     }
                     className={classNames(
-                      style.twitter__image,
+                      style.twitter__image
                       // isComment && style.twitter__image__com
                     )}
                   />

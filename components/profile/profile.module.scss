@@ -334,7 +334,7 @@
   margin-right: 80px !important;
 }
 .twitter__textarea__comment {
-  width: 488px !important;
+  width: 456px !important;
 }
 .twitter__textarea {
   margin-left: 24px;
@@ -512,7 +512,7 @@
   color: $black;
 }
 .twitter__image {
-  width: 488px;
+  width: 456px;
   max-height: 500px;
   margin-top: 8px;
   object-fit: contain;
@@ -530,7 +530,7 @@
   font-weight: 400;
   line-height: 20px; /* 142.857% */
   letter-spacing: -0.14px;
-  max-width: 488px;
+  max-width: 456px;
   white-space: pre-wrap;
   min-width: 488px;
 }
@@ -579,7 +579,8 @@
   margin-bottom: 20px !important;
 }
 .twitter__one__post__wrap {
-  padding: 24px;
+  padding-top: 24px;
+  padding-bottom: 24px;
   border-radius: 32px;
   margin-top: 24px;
   background: #fff;
