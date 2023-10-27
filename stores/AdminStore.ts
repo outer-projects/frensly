@@ -23,7 +23,7 @@ export class AdminStore {
       console.log("verify:", res.data);
     } catch (e) {
       console.log(e);
-      toast.success("Error");
+      toast.error("Error");
     }
   };
   @action verify = async (handle: string, code: string) => {
@@ -36,18 +36,18 @@ export class AdminStore {
       console.log("verify:", res.data);
     } catch (e) {
       console.log(e);
-      toast.success("Error");
+      toast.error("Error");
     }
   };
   @action createCodes = async (keys: string[]) => {
     try {
-      const res = await axios.post(prefix + "user/admin/verify", {
+      const res = await axios.post(prefix + "user/keys/generate", {
         keys: keys,
       });
       toast.success("Codes added");
     } catch (e) {
       console.log(e);
-      toast.success("Error");
+      toast.error("Error");
     }
   };
 }
