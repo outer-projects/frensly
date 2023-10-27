@@ -103,13 +103,14 @@ const PostWithComments = observer(() => {
           </button>
         </div>
       </div>
-
-      {currentPost &&
-        currentPost?.comments
-          .map((el) => {
-            return <TwitterPost key={el._id} post={el} isComment={true} />;
-          })
-          .reverse()}
+      <div style={{marginTop:'-24px'}}>
+        {currentPost &&
+          currentPost?.comments
+            .map((el) => {
+              return <TwitterPost key={el._id} post={el} isComment={true} />;
+            })
+            .reverse()}
+      </div>
     </div>
   );
 });
