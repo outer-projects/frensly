@@ -74,7 +74,10 @@ const OneNotificationPage = observer(
             <div>
               <div className={style.nots__one__text}>
                 {notification?.account?.profile?.twitterName}{" "}
-                {getActivity(notification?.type)}{" "}
+                {getActivity(
+                  notification?.type,
+                  notification?.source?.originalPost
+                )}{" "}
                 {notification?.type == "MENTION" &&
                   "@" + notification?.source.owner.twitterHandle + "'s pond"}
                 {notification?.amount && Number(notification?.amount) / 10 ** 6}{" "}

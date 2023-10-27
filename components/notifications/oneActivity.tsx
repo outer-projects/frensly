@@ -1,6 +1,6 @@
 import { fromWeiToEth, getDate, timePassed } from "../../utils/utilities";
 import style from "./notifications.module.scss";
-export const getActivity = (type: string) => {
+export const getActivity = (type: string, isOriginalPost?: string) => {
   switch (type) {
     case "BUY":
       return " bought";
@@ -17,7 +17,12 @@ export const getActivity = (type: string) => {
     case "REPOST":
       return " reposted you";
     case "COMMENT":
-      return " commented your post";
+      if (!isOriginalPost) {
+        return " commented your post";
+      } else {
+        return " answered to your comment";
+      }
+
     case "MENTION":
       return " tagged you in";
     case "FOLLOW":
@@ -38,7 +43,7 @@ const OneActivity = ({ activity }: { activity: any }) => {
         <div>
           <div className={style.nots__one__text}>
             {activity?.account?.profile?.twitterName}{" "}
-            {getActivity(activity?.type)}{" "}
+            {getActivity(activity?.type, activity?.source?.originalPost)}{" "}
             {activity?.type !== "INIT" && Number(activity?.amount) / 10 ** 6}{" "}
             {activity?.type !== "INIT" &&
               activity?.type !== "OWN_BUY" &&
