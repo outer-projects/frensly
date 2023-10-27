@@ -153,7 +153,7 @@ const TwitterPost = observer(
                     isComment && style.twitter__interact__comment
                   )}
                 >
-                  {!isComment && (
+                  {
                     <Link href={`/posts/${post._id}`}>
                       <div className={style.twitter__icon}>
                         <div
@@ -168,26 +168,25 @@ const TwitterPost = observer(
                         <div>{post?.comments?.length || 0}</div>
                       </div>
                     </Link>
-                  )}
-                  {!isComment && (
+                  }
+
+                  <div
+                    className={style.twitter__icon}
+                    onClick={() => {
+                      !isActiveRepost && repostAvailable && repost();
+                    }}
+                  >
                     <div
-                      className={style.twitter__icon}
-                      onClick={() => {
-                        !isActiveRepost && repostAvailable && repost();
+                      style={{
+                        width: "24px",
+                        height: "24px",
+                        marginRight: "4px",
                       }}
                     >
-                      <div
-                        style={{
-                          width: "24px",
-                          height: "24px",
-                          marginRight: "4px",
-                        }}
-                      >
-                        <Swap isActive={isActiveRepost} />
-                      </div>
-                      <div>{repostCount}</div>
+                      <Swap isActive={isActiveRepost} />
                     </div>
-                  )}
+                    <div>{repostCount}</div>
+                  </div>
 
                   <div className={style.twitter__icon} onClick={like}>
                     <div
