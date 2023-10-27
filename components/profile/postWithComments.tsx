@@ -16,22 +16,21 @@ const PostWithComments = observer(() => {
   const [message, setMessage] = useState("");
   const [focus, setFocus] = useState(false);
   const [image, setImage] = useState<File | null>(null);
-  const { addPost, getCurrentPost, currentPost,setCurrentPost } = useInjection(FeedStore);
+  const { addPost, getCurrentPost, currentPost, setCurrentPost } =
+    useInjection(FeedStore);
   useEffect(() => {
     if (id) {
       getCurrentPost(id as string);
     }
   }, [id]);
-  useEffect(()=>{
-    return ()=>{
-      setCurrentPost(undefined)
-    }
-  },[])
+  useEffect(() => {
+    return () => {
+      setCurrentPost(undefined);
+    };
+  }, []);
   return (
-    <div>
-      <div style={{ marginTop: "30px", marginBottom: "-30px" }}>
-        {currentPost && <TwitterPost post={currentPost} isOnePostPage/>}
-      </div>
+    <div className={style.twitter__one__post__wrap}>
+      {currentPost && <TwitterPost post={currentPost} isOnePostPage />}
 
       <div>
         <TextareaAutosize
@@ -106,9 +105,11 @@ const PostWithComments = observer(() => {
       </div>
 
       {currentPost &&
-        currentPost?.comments.map((el) => {
-          return <TwitterPost key={el._id} post={el} isComment={true} />;
-        }).reverse()}
+        currentPost?.comments
+          .map((el) => {
+            return <TwitterPost key={el._id} post={el} isComment={true} />;
+          })
+          .reverse()}
     </div>
   );
 });

@@ -95,15 +95,30 @@ const TwitterPost = observer(
             <div
               className={classNames(
                 style.twitter__one__post,
-                isComment && style.twitter__one__comment
+                // isComment && style.twitter__one__comment
               )}
             >
-              <Link href={"/profile/" + post?.user.twitterId}>
-                <img
-                  className={style.twitter__avatar}
-                  src={post?.user?.avatar}
-                />
-              </Link>
+              <div style={{ display: "flex", alignItems: "center" }}>
+                <Link
+                  href={
+                    !isComment
+                      ? "/profile/" + post?.user.twitterId
+                      : "/posts/" + post.originalPost
+                  }
+                >
+                  <img
+                    className={style.twitter__avatar}
+                    src={post?.user?.avatar}
+                    style={{ marginRight: "8px" }}
+                  />
+                </Link>
+                <Link href={"/profile/" + post?.user.twitterId}>
+                  <img
+                    className={style.twitter__avatar}
+                    src={post?.user?.avatar}
+                  />
+                </Link>
+              </div>
               <div>
                 <div className={style.twitter__row}>
                   <Link href={"/profile/" + post?.user.twitterId}>
@@ -128,7 +143,7 @@ const TwitterPost = observer(
                 <div
                   className={classNames(
                     style.twitter__text,
-                    isComment && style.twitter__text__comm
+                    // isComment && style.twitter__text__comm
                   )}
                 >
                   {post?.text}
@@ -143,7 +158,7 @@ const TwitterPost = observer(
                     }
                     className={classNames(
                       style.twitter__image,
-                      isComment && style.twitter__image__com
+                      // isComment && style.twitter__image__com
                     )}
                   />
                 )}
@@ -158,8 +173,8 @@ const TwitterPost = observer(
                       <div className={style.twitter__icon}>
                         <div
                           style={{
-                            width: "24px",
-                            height: "24px",
+                            width: "20px",
+                            height: "20px",
                             marginRight: "4px",
                           }}
                         >
@@ -178,8 +193,8 @@ const TwitterPost = observer(
                   >
                     <div
                       style={{
-                        width: "24px",
-                        height: "24px",
+                        width: "20px",
+                        height: "20px",
                         marginRight: "4px",
                       }}
                     >
@@ -191,8 +206,8 @@ const TwitterPost = observer(
                   <div className={style.twitter__icon} onClick={like}>
                     <div
                       style={{
-                        width: "24px",
-                        height: "24px",
+                        width: "20px",
+                        height: "20px",
                         marginRight: "4px",
                       }}
                     >

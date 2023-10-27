@@ -8,7 +8,7 @@ import { UserStore } from "../stores/UserStore";
 import TypesList from "../components/common/typesList";
 import { useState } from "react";
 
-const types = ["Frens feed", "Following"];
+const types = ["Frens", "Following"];
 
 const FeedPage: NextPage = observer((props) => {
   const { unreadCount } = useInjection(UserStore);

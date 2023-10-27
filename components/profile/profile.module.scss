@@ -437,6 +437,13 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+  margin-top: 40px;
+  &:first-child {
+    margin-top: 0px;
+  }
+  &:last-child {
+    margin-bottom: 40px;
+  }
 }
 .profile__title {
   color: #23262f;
@@ -495,7 +502,7 @@
   line-height: 20px; /* 142.857% */
   letter-spacing: -0.14px;
   margin-top: 16px;
-  margin-bottom: 50px;
+  padding-bottom: 10px;
 }
 .twitter__icon {
   display: flex;
@@ -571,12 +578,19 @@
 .twitter__interact__open__comment {
   margin-bottom: 20px !important;
 }
+.twitter__one__post__wrap {
+  padding: 24px;
+  border-radius: 32px;
+  margin-top: 24px;
+  background: #fff;
+}
 .twitter__one__post {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
   margin-left: 24px;
   margin-right: 24px;
+  border-bottom: 1px solid #e2e3e2;
   @media (max-width: 616px) {
     margin-left: 0px;
     margin-right: 0px;
