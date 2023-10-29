@@ -43,6 +43,13 @@
   font-weight: bold;
   line-height: 24px; /* 150% */
   letter-spacing: -0.16px;
+  a {
+    color: $black;
+    text-decoration: none;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
 }
 .nots__one__price {
   color: #219653;
@@ -58,7 +65,7 @@
   display: flex;
 }
 .activiy__one__price__sell {
-  background: rgba(239, 93, 168, 0.20)!important;
+  background: rgba(239, 93, 168, 0.2) !important;
 }
 .activiy__one__price {
   display: flex;

@@ -1,6 +1,12 @@
 import classNames from "classnames";
-import { fromWeiToEth, getDate, timePassed } from "../../utils/utilities";
+import {
+  fromWeiToEth,
+  getDate,
+  shortNick,
+  timePassed,
+} from "../../utils/utilities";
 import style from "./notifications.module.scss";
+import Link from "next/link";
 export const getActivity = (type: string, isOriginalPost?: string) => {
   switch (type) {
     case "BUY":
@@ -43,13 +49,24 @@ const OneActivity = ({ activity }: { activity: any }) => {
         </div>
         <div>
           <div className={style.nots__one__text}>
-            {activity?.account?.profile?.twitterName}{" "}
+            <span>
+              <Link href={"/profile/" + activity?.account?.profile?.twitterId}>
+                {shortNick(activity?.account?.profile?.twitterName)}
+              </Link>{" "}
+            </span>
             {getActivity(activity?.type, activity?.source?.originalPost)}{" "}
             {activity?.type !== "INIT" && Number(activity?.amount) / 10 ** 6}{" "}
             {activity?.type !== "INIT" &&
               activity?.type !== "OWN_BUY" &&
-              activity?.type !== "OWN_SELL" &&
-              activity.subject?.profile?.twitterName}
+              activity?.type !== "OWN_SELL" && (
+                <span>
+                  <Link
+                    href={"/profile/" + activity?.subject?.profile?.twitterId}
+                  >
+                    {shortNick(activity?.subject?.profile?.twitterName)}
+                  </Link>{" "}
+                </span>
+              )}
             {(activity?.type == "OWN_BUY" || activity?.type == "OWN_SELL") &&
               "my shares"}
           </div>

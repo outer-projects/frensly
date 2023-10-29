@@ -6,7 +6,7 @@ import OneActivity from "../notifications/oneActivity";
 import { observer } from "mobx-react";
 import { useInjection } from "inversify-react";
 import { UserStore } from "../../stores/UserStore";
-import { fromWeiToEth, toBNJS } from "../../utils/utilities";
+import { fromWeiToEth, shortNick, toBNJS } from "../../utils/utilities";
 import { useRouter } from "next/router";
 import FinanceRow from "../finance/financeRow";
 const typesUser = ["Holders", "Holdings", "Activity"];
@@ -50,7 +50,7 @@ const UserActivity = observer(() => {
       <div className={style.ponds__top}>
         <div className={style.ponds__image}>
           <img src={profileUser?.avatar} />
-          <div className={style.ponds__title}>{profileUser?.twitterName}</div>
+          <div className={style.ponds__title}>{shortNick(profileUser?.twitterName)}</div>
         </div>
       </div>
       <TypesList active={active} setActive={setActive} types={typesUser} />

@@ -2,7 +2,7 @@ import Link from "next/link";
 import { IAccount, IProfile } from "../../types/users";
 import style from "../explore/explore.module.scss";
 import { useEffect, useState } from "react";
-import { fromWeiToEth } from "../../utils/utilities";
+import { fromWeiToEth, shortNick } from "../../utils/utilities";
 import { observer } from "mobx-react";
 import { useInjection } from "inversify-react";
 import { UserStore } from "../../stores/UserStore";
@@ -45,7 +45,7 @@ const FollowRow = observer(({ el }: { el: IProfile }) => {
         <div className={style.explore__user__left__text}>
           <Link href={"/profile/" + el?.twitterId}>
             {" "}
-            <div className={style.explore__user__name}>{el?.twitterName}</div>
+            <div className={style.explore__user__name}>{shortNick(el?.twitterName)}</div>
           </Link>
           <div className={style.explore__user__share}>@{el?.twitterHandle}</div>
         </div>

@@ -2,7 +2,7 @@ import Link from "next/link";
 import { IProfile } from "../../types/users";
 import style from "./explore.module.scss";
 import { useEffect, useState } from "react";
-import { fromWeiToEth } from "../../utils/utilities";
+import { fromWeiToEth, shortNick } from "../../utils/utilities";
 import { observer } from "mobx-react";
 import { useInjection } from "inversify-react";
 import { UserStore } from "../../stores/UserStore";
@@ -32,7 +32,7 @@ const ExploreRow = observer(({ el }: { el: IProfile }) => {
               )?.length >= 1 && <img src="../icons/Key.svg" />}
               <div>{Number(el?.account?.sharesAmount) / 10 ** 6} share</div>
             </div>
-            <div className={style.explore__user__name}>{el.twitterName}</div>
+            <div className={style.explore__user__name}>{shortNick(el.twitterName)}</div>
           </div>
         </div>
         <div className={style.explore__user__right}>

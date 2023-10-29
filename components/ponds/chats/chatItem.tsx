@@ -1,7 +1,7 @@
 import Link from "next/link";
 import style from "../ponds.module.scss";
 import { IAccount, IProfile } from "../../../types/users";
-import { fromWeiToEth } from "../../../utils/utilities";
+import { fromWeiToEth, shortNick } from "../../../utils/utilities";
 import { observer } from "mobx-react";
 import { UserStore } from "../../../stores/UserStore";
 import { useInjection } from "inversify-react";
@@ -48,8 +48,10 @@ const ChatItem = observer(
                   shares
                 </div>
               </div>
-              <div className={style.chat__name}>{el?.twitterName}</div>
-              {messages?.filter((el:any)=>el).length > 0 ? (
+              <div className={style.chat__name}>
+                {shortNick(el?.twitterName)}
+              </div>
+              {messages?.filter((el: any) => el).length > 0 ? (
                 <div className={style.chat__text}>
                   {/* {messages}: who’s here?<span>7m</span> */}
                   {/* @ts-ignore */}

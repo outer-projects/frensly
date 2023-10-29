@@ -92,7 +92,7 @@ const getOutputByKey = (require: any, progress: any) => {
           />
         </div>
         <div className={style.finance__text}>
-          <div className={style.finance__total__text}>Total Volume</div>
+          <div className={style.finance__total__text}>Trades Volume</div>
           <div className={style.finance__total__count}>
             {fromWeiToEth(progress[1])}
             {" / "}

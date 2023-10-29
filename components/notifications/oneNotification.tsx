@@ -1,5 +1,5 @@
 import { observer } from "mobx-react";
-import { fromWeiToEth, timePassed } from "../../utils/utilities";
+import { fromWeiToEth, shortNick, timePassed } from "../../utils/utilities";
 import style from "./notifications.module.scss";
 import { getActivity } from "./oneActivity";
 import { useInjection } from "inversify-react";
@@ -57,14 +57,14 @@ const OneNotification = observer(({ notification }: { notification: any }) => {
         </div>
         <div>
           <div className={style.nots__one__text}>
-            {notification?.account?.profile?.twitterName}{" "}
+            {shortNick(notification?.account?.profile?.twitterName)}
             {getActivity(
               notification?.type,
               notification?.source?.originalPost
             )}{" "}
             {notification?.amount && Number(notification?.amount) / 10 ** 6}{" "}
             {notification?.subject?.profile?.twitterId !== user?.twitterId &&
-              notification?.subject?.profile?.twitterName}
+              shortNick(notification?.subject?.profile?.twitterName)}
           </div>
           <div className={style.nots__one__info}>
             {notification?.price && (

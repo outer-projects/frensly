@@ -11,6 +11,7 @@ import { SocketContext } from "../../../utils/socket";
 import { IProfile } from "../../../types/users";
 import { ModalsEnum } from "../../../modals";
 import { ModalStore } from "../../../stores/ModalStore";
+import Link from "next/link";
 const getUserById = (id: string, members: IProfile[]) => {
   let correctUser = members.filter((el) => el.twitterId == id)[0];
   if (correctUser) {
@@ -70,7 +71,9 @@ const OneMessage = observer(({ el, roomId, members }: any) => {
       )}
       <div className={style.openchat__left}>
         {el.user.twitterId !== user?.twitterId && (
-          <img className={style.openchat__avatar} src={el.user.avatar} />
+          <Link href={"/profile/" + el.user.twitterId}>
+            <img className={style.openchat__avatar} src={el.user.avatar} />
+          </Link>
         )}
         <div
           className={classNames(

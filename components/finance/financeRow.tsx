@@ -2,7 +2,7 @@ import Link from "next/link";
 import { IAccount, IProfile } from "../../types/users";
 import style from "../explore/explore.module.scss";
 import { useEffect, useState } from "react";
-import { fromWeiToEth } from "../../utils/utilities";
+import { fromWeiToEth, shortNick } from "../../utils/utilities";
 import { observer } from "mobx-react";
 import { useInjection } from "inversify-react";
 import { UserStore } from "../../stores/UserStore";
@@ -44,7 +44,7 @@ const FinanceRow = observer(
                 </div>
               </div>
               <div className={style.explore__user__name}>
-                {el.profile?.twitterName}
+                {shortNick(el.profile?.twitterName)}
               </div>
             </div>
           </div>

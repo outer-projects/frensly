@@ -10,6 +10,7 @@ import TypesList from "../common/typesList";
 import ExploreRow from "./exploreRow";
 import { InView } from "react-intersection-observer";
 import OneActivity from "../notifications/oneActivity";
+import { shortNick } from "../../utils/utilities";
 const types = ["Top", "New Users", "Activity"];
 const Explore = observer(() => {
   const [active, setActive] = useState(0);
@@ -65,14 +66,12 @@ const Explore = observer(() => {
             ? searchResult
             : topUsersList
           ).map((el, i) => {
-            if (i <= 4) {
+            if (i <= 5) {
               return (
                 <Link href={"/profile/" + el.twitterId}>
                   <div key={i} className={style.explore__topuser}>
                     <img src={el.avatar} />
-                    {el.twitterName.length > 15
-                      ? el.twitterName.slice(0, 13) + "..."
-                      : el.twitterName}
+                    {shortNick(el.twitterName)}
                   </div>
                 </Link>
               );
