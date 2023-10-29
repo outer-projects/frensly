@@ -22,7 +22,7 @@ export class FeedStore {
   @action getFrensFeed = async () => {
     const query = new URLSearchParams({
       offset: this.feedFrensOffset.toString(),
-      limit: (this.feedFrensOffset + 100).toString(),
+      limit: "100",
     }).toString();
     try {
       const res = await axios.get(prefix + "social/posts/verified?" + query);
@@ -36,7 +36,7 @@ export class FeedStore {
   @action getFeed = async () => {
     const query = new URLSearchParams({
       offset: this.feedOffset.toString(),
-      limit: (this.feedOffset + 100).toString(),
+      limit: "100",
     }).toString();
     try {
       const res = await axios.get(prefix + "social/posts?" + query);
@@ -68,7 +68,7 @@ export class FeedStore {
   @action getUserPosts = async (id: string) => {
     const query = new URLSearchParams({
       offset: this.postOffset.toString(),
-      limit: (this.postOffset + 100).toString(),
+      limit: "100",
     }).toString();
     try {
       const res = await axios.get(prefix + "social/posts/" + id + "?" + query);

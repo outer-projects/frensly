@@ -23,7 +23,7 @@ export class ExploreStore {
   @action updateNewUsers = async () => {
     const query = new URLSearchParams({
       offset: this.newOffset.toString(),
-      limit: (this.newOffset + 20).toString(),
+      limit: "20",
     }).toString();
     try {
       const res = await axios.get(prefix + "user/newest/?" + query);
@@ -36,8 +36,8 @@ export class ExploreStore {
   };
   @action getNewUsers = async () => {
     const query = new URLSearchParams({
-      offset: this.newOffset?.toString(),
-      limit: (this.newOffset + 20)?.toString(),
+      offset: "0",
+      limit: "20",
     }).toString();
     try {
       const res = await axios.get(prefix + "user/newest/?" + query);
