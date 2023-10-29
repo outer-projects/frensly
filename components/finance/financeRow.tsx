@@ -10,7 +10,15 @@ import Web3Store from "../../stores/Web3Store";
 import BigNumber from "bignumber.js";
 
 const FinanceRow = observer(
-  ({ el, amount, price }: { el: IAccount; amount?: string, price:BigNumber }) => {
+  ({
+    el,
+    amount,
+    price,
+  }: {
+    el: IAccount;
+    amount?: string;
+    price: BigNumber | string;
+  }) => {
     const [usdPrice, setUsdPrice] = useState(0);
     const { user } = useInjection(Web3Store);
     const { getPriceInUsd, ethCurrency } = useInjection(UserStore);
@@ -31,7 +39,9 @@ const FinanceRow = observer(
                 {user?.account?.othersShares.filter(
                   (u) => u.subject == el._id && Number(u.amount) >= 1000000
                 )?.length >= 1 && <img src="../icons/Key.svg" />}
-                <div>{Number(amount ? amount : el?.sharesAmount) / 10 ** 6} share</div>
+                <div>
+                  {Number(amount ? amount : el?.sharesAmount) / 10 ** 6} share
+                </div>
               </div>
               <div className={style.explore__user__name}>
                 {el.profile?.twitterName}
