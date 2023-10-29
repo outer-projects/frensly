@@ -162,11 +162,13 @@ export class UserStore {
       // console.log(res.data);
       this.portfolioValue = res.data.reduce(
         (partialSum: any, a: any) =>
-          toBNJS(partialSum).plus(
-            toBNJS(a?.subject?.currentPrice).multipliedBy(
-              Number((Number(a.amount) / 10 ** 6).toFixed(2))
+          toBNJS(partialSum)
+            .plus(
+              toBNJS(a?.subject?.currentPrice).multipliedBy(
+                (Number(a.amount) / 10 ** 6).toFixed(2)
+              )
             )
-          ),
+            .toFixed(0),
         "0"
       );
       this.shares = res.data;
