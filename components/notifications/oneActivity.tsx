@@ -1,3 +1,4 @@
+import classNames from "classnames";
 import { fromWeiToEth, getDate, timePassed } from "../../utils/utilities";
 import style from "./notifications.module.scss";
 export const getActivity = (type: string, isOriginalPost?: string) => {
@@ -59,7 +60,12 @@ const OneActivity = ({ activity }: { activity: any }) => {
           </div>
         </div>
       </div>
-      <div className={style.activiy__one__price}>
+      <div
+        className={classNames(
+          style.activiy__one__price,
+          activity?.type.includes("SELL") && style.activiy__one__price__sell
+        )}
+      >
         <img src="../icons/Ethereum.svg" />
         {fromWeiToEth(activity.price)} ETH
       </div>
