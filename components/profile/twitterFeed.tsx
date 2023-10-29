@@ -52,15 +52,12 @@ const TwitterFeed = observer(
     const handleUserChange = () => {
       setPostOffset(0);
       clearUserPosts();
-      setTimeout(()=>{
-        getPosts()
-      },0)
     };
-    useEffect(() => {
-      if (id) {
-        handleUserChange();
-      }
-    }, [id]);
+    // useEffect(() => {
+    //   if (id) {
+    //     handleUserChange();
+    //   }
+    // }, [id]);
     const getPosts = () => {
       if (id && userPosts.length == 0) {
         getUserPosts(id);
