@@ -17,6 +17,7 @@ import { SocketContext } from "../../../utils/socket";
 import { ChatStore } from "../../../stores/ChatStore";
 import Link from "next/link";
 import OneMessage from "./oneMessage";
+import { InView } from "react-intersection-observer";
 const Chat = observer(() => {
   const socket = useContext(SocketContext);
   const [newMsg, setNewMsg] = useState("");
@@ -26,7 +27,8 @@ const Chat = observer(() => {
   const messagesEndRef = useRef<any>(null);
   const { getHolders, holders, setCurrentType } = useInjection(UserStore);
   const { user } = useInjection(Web3Store);
-  const { chat, getChat, sendMessage, removeChat } = useInjection(ChatStore);
+  const { chat, getChat, sendMessage, removeChat, updateChat } =
+    useInjection(ChatStore);
   const modalStore = useInjection(ModalStore);
   const [isLightning, setIsLightning] = useState(false);
   const [newMsgList, setNewMsgList] = useState<any[]>([]);
@@ -51,7 +53,9 @@ const Chat = observer(() => {
       });
       socket.on("message", (msg) => {
         // console.log(msg, "hi message");
-        setNewMsgList((oldArray) => [...oldArray, msg]);
+        if (msg?.roomId == id) {
+          setNewMsgList((oldArray) => [...oldArray, msg]);
+        }
       });
     }
   };
@@ -235,14 +239,27 @@ const Chat = observer(() => {
             </div>
             <div className={style.openchat__messages} ref={messagesEndRef}>
               {newMsgList
-                .map((el) => {
+                .map((el, i) => {
                   return (
-                    <OneMessage
-                      el={el}
-                      key={el._id}
-                      roomId={chat._id}
-                      members={chat.members}
-                    />
+                    <div key={el._id}>
+                      <OneMessage
+                        el={el}
+                        roomId={chat._id}
+                        members={chat.members}
+                      />
+                      {i !== 0 && i % 49 == 0 && (
+                        <InView
+                          as="div"
+                          triggerOnce
+                          onChange={(inView, entry) => {
+                            if (inView) {
+                              // console.log("inview");
+                              updateChat(id as string);
+                            }
+                          }}
+                        ></InView>
+                      )}
+                    </div>
                   );
                 })
                 .reverse()}

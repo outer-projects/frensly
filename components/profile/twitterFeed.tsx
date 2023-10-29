@@ -13,10 +13,12 @@ const TwitterFeed = observer(
     id,
     isProfile,
     isFrens,
+    isFeed,
   }: {
     id?: string;
     isProfile?: boolean;
     isFrens?: boolean;
+    isFeed?: boolean;
   }) => {
     const {
       feed,
@@ -28,6 +30,7 @@ const TwitterFeed = observer(
       clearUserPosts,
       getFrensFeed,
       frensFeed,
+      updateUserPosts
     } = useInjection(FeedStore);
     const { user } = useInjection(Web3Store);
     const [hideRow, setHideRow] = useState<string[]>([]);
@@ -49,26 +52,28 @@ const TwitterFeed = observer(
         getFeed();
       }
     };
-    const handleUserChange = () => {
-      setPostOffset(0);
-      clearUserPosts();
-    };
-    // useEffect(() => {
-    //   if (id) {
-    //     handleUserChange();
-    //   }
-    // }, [id]);
-    const getPosts = () => {
-      if (id && userPosts.length == 0) {
+    useEffect(() => {
+      if (isProfile) {
+        getProfilePosts();
+      }
+    }, [id]);
+    const getProfilePosts = () => {
+      if (id) {
         getUserPosts(id);
-      } else if (isFrens && frensFeed.length == 0) {
+      }
+    };
+    const getFeedPosts = () => {
+      if (isFrens && frensFeed.length == 0) {
         getFrensFeed();
       } else if (feed.length == 0) {
         getFeed();
       }
     };
     useEffect(() => {
-      getPosts();
+      if (isFeed) {
+        getFeedPosts();
+      }
+
       return () => {
         setPostOffset(0);
         clearUserPosts();
@@ -96,9 +101,11 @@ const TwitterFeed = observer(
                         as="div"
                         triggerOnce
                         onChange={(inView, entry) => {
-                          if (inView) {
+                          if (inView && isFeed) {
                             console.log("inview");
                             updatePosts();
+                          } else if(inView && isProfile) {
+                            updateUserPosts(id as string)
                           }
                         }}
                       ></InView>
