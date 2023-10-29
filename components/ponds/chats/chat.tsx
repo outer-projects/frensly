@@ -83,10 +83,13 @@ const Chat = observer(() => {
     }
   }, [id]);
   useEffect(() => {
+    if (chat) {
+      getHolders(chat?.owner?._id as string);
+    }
+  }, [chat]);
+  useEffect(() => {
     if (messages) {
-      // console.log("сhat: ", chat);
       setNewMsgList(messages);
-      getHolders(chat.owner._id as string);
     }
   }, [messages]);
   useEffect(() => {
@@ -113,12 +116,12 @@ const Chat = observer(() => {
       if (myholding) {
         setMyHolds(myholding);
       }
-      if (user._id == chat?.owner._id) {
+      if (user._id == chat?.owner?._id) {
         // console.log(user);
         setMyHolds({ amount: "1000000", user: user });
       }
     }
-  }, [holders, user]);
+  }, [holders, user, chat]);
   return (
     <>
       {myHolds ? (
