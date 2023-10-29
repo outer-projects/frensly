@@ -11,8 +11,10 @@ export class ExploreStore {
   @observable topUsersList: IProfile[] = [];
   @observable currentUserList: string = "";
   @observable newUsersList: IProfile[] = [];
+  @observable globalActivity: any[] = [];
   @observable searchResult: IProfile[] = [];
   @observable newOffset: number = 0;
+  @observable activityOffset: number = 0;
   @observable filterGlobal: { rangeFrom: number; rangeTo: number } = {
     rangeFrom: 0,
     rangeTo: 8,
@@ -44,6 +46,32 @@ export class ExploreStore {
       this.newUsersList = res.data;
       this.newOffset = 20;
       this.currentUserList = "new";
+    } catch (e) {
+      console.log(e);
+    }
+  };
+  @action getGlobalActivity = async () => {
+    const query = new URLSearchParams({
+      offset: "0",
+      limit: "20",
+    }).toString();
+    try {
+      const res = await axios.get(prefix + "user/activity/global/?" + query);
+      this.globalActivity = res.data;
+      this.activityOffset = 20;
+    } catch (e) {
+      console.log(e);
+    }
+  };
+  @action updateGlobalActivity = async () => {
+    const query = new URLSearchParams({
+      offset: this.activityOffset.toString(),
+      limit: "20",
+    }).toString();
+    try {
+      const res = await axios.get(prefix + "user/activity/global/?" + query);
+      this.globalActivity = [...this.globalActivity, ...res.data];
+      this.activityOffset = this.activityOffset + 20;
     } catch (e) {
       console.log(e);
     }

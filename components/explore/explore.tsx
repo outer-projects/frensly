@@ -9,7 +9,8 @@ import { fromWei } from "web3-utils";
 import TypesList from "../common/typesList";
 import ExploreRow from "./exploreRow";
 import { InView } from "react-intersection-observer";
-const types = ["Top", "New Users"];
+import OneActivity from "../notifications/oneActivity";
+const types = ["Top", "New Users", "Activity"];
 const Explore = observer(() => {
   const [active, setActive] = useState(0);
   const [search, setSearch] = useState("");
@@ -22,8 +23,11 @@ const Explore = observer(() => {
     getTopUsers,
     searchUsers,
     updateNewUsers,
+    updateGlobalActivity,
     searchResult,
     topUsersList,
+    globalActivity,
+    getGlobalActivity,
   } = useInjection(ExploreStore);
   const saveInput = () => {
     searchUsers(search);
@@ -46,6 +50,9 @@ const Explore = observer(() => {
     }
     if (active == 1) {
       getNewUsers();
+    }
+    if (active == 2) {
+      getGlobalActivity();
     }
   }, [active]);
   // console.log(searchResult);
@@ -97,29 +104,54 @@ const Explore = observer(() => {
       <div className={style.explore__types__row}>
         <TypesList types={types} setActive={setActive} active={active} />
       </div>
-      <div className={style.explore__users__col}>
-        {(currentUserList == "new" ? newUsersList : topUsersList)?.map(
-          (el, i) => {
+      {active <= 1 && (
+        <div className={style.explore__users__col}>
+          {(currentUserList == "new" ? newUsersList : topUsersList)?.map(
+            (el, i) => {
+              return (
+                <div>
+                  <ExploreRow el={el} key={i} />
+                  {currentUserList == "new" && i !== 0 && i % 19 == 0 && (
+                    <InView
+                      as="div"
+                      triggerOnce
+                      onChange={(inView, entry) => {
+                        if (inView) {
+                          // console.log("inview");
+                          updateNewUsers();
+                        }
+                      }}
+                    ></InView>
+                  )}
+                </div>
+              );
+            }
+          )}
+        </div>
+      )}
+      {active == 2 && (
+        <div className={style.explore__users__col}>
+          {globalActivity?.map((el, i) => {
             return (
               <div>
-                <ExploreRow el={el} key={i} />
-                {currentUserList == "new" && i !== 0 && i % 19 == 0 && (
+                <OneActivity activity={el} key={i} />
+                {i !== 0 && i % 19 == 0 && (
                   <InView
                     as="div"
                     triggerOnce
                     onChange={(inView, entry) => {
                       if (inView) {
-                        // console.log("inview");
-                        updateNewUsers();
+                        console.log("inview");
+                        updateGlobalActivity();
                       }
                     }}
                   ></InView>
                 )}
               </div>
             );
-          }
-        )}
-      </div>
+          })}
+        </div>
+      )}
     </div>
   );
 });
