@@ -34,6 +34,7 @@ const Chat = observer(() => {
     removeChat,
     updateChat,
     messages,
+    messagesleft,
     setNewMessage,
   } = useInjection(ChatStore);
   const modalStore = useInjection(ModalStore);
@@ -252,7 +253,7 @@ const Chat = observer(() => {
                         roomId={chat._id}
                         members={chat.members}
                       />
-                      {i == 1 && (
+                      {i == 1 && messagesleft !== 0 && (
                         <InView
                           as="div"
                           triggerOnce
