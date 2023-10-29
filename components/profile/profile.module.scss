@@ -434,8 +434,8 @@
   }
 }
 .twitter__one__post__top {
-  margin-top: 16px!important;
-  border-bottom: 0px!important;
+  margin-top: 16px !important;
+  border-bottom: 0px !important;
 }
 .twitter__post__container {
   display: flex;
@@ -535,6 +535,8 @@
   line-height: 20px; /* 142.857% */
   letter-spacing: -0.14px;
   max-width: 456px;
+  overflow: hidden;
+  text-overflow: ellipsis;
   white-space: pre-wrap;
   min-width: 456px;
 }

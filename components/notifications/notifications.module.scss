@@ -38,6 +38,8 @@
   color: $black;
   font-family: "DMSans";
   font-size: 16px;
+  overflow: hidden;
+
   font-weight: bold;
   line-height: 24px; /* 150% */
   letter-spacing: -0.16px;
@@ -107,7 +109,7 @@
   padding: 4px 8px;
   justify-content: center;
   color: var(--Black, #151614);
-  font-family: 'DMSans';
+  font-family: "DMSans";
   font-size: 16px;
   font-weight: bold;
   line-height: 24px;

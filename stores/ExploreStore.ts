@@ -36,8 +36,8 @@ export class ExploreStore {
   };
   @action getNewUsers = async () => {
     const query = new URLSearchParams({
-      offset: this.newOffset.toString(),
-      limit: (this.newOffset + 20).toString(),
+      offset: this.newOffset?.toString(),
+      limit: (this.newOffset + 20)?.toString(),
     }).toString();
     try {
       const res = await axios.get(prefix + "user/newest/?" + query);

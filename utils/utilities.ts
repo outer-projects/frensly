@@ -6,7 +6,11 @@ import axios from "axios";
 import { fromWei } from "web3-utils";
 
 export function toBNJS(val: BigNumberish | number | string) {
-  return new BN(val.toString());
+  if (val) {
+    return new BN(val?.toString());
+  } else {
+    return new BN(0);
+  }
 }
 interface ITime {
   year: number;

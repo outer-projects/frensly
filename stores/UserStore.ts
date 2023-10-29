@@ -148,7 +148,7 @@ export class UserStore {
     // query.append("types", "REPLY");
     try {
       const res = await axios.get(
-        prefix + "user/history/account/" + id + "?" + query.toString()
+        prefix + "user/history/account/" + id + "?" + query?.toString()
       );
       // console.log(res.data);
       this.history = res.data;
@@ -163,8 +163,8 @@ export class UserStore {
       this.portfolioValue = res.data.reduce(
         (partialSum: any, a: any) =>
           toBNJS(partialSum).plus(
-            toBNJS(a.subject.currentPrice).multipliedBy(
-              (Number(a.amount) / 10 ** 6).toFixed(2)
+            toBNJS(a?.subject?.currentPrice).multipliedBy(
+              Number((Number(a.amount) / 10 ** 6).toFixed(2))
             )
           ),
         "0"

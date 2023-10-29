@@ -194,7 +194,7 @@ const Profile = observer(() => {
                   modalStore.showModal(ModalsEnum.Trade, { user: profileUser })
                 }
               >
-                Buy
+                Trade
               </button>
             </div>
             <div

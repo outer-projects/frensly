@@ -24,8 +24,14 @@ const types = [
   "Followings",
 ];
 const Ponds = observer(() => {
-  const { portfolioValue, myActive, setMyActive } = useInjection(UserStore);
-
+  const { user } = useInjection(Web3Store);
+  const { portfolioValue, myActive, setMyActive, getShares } =
+    useInjection(UserStore);
+  useEffect(() => {
+    if (user) {
+      getShares(user?._id as string);
+    }
+  }, [user]);
   return (
     <div className={style.ponds}>
       {" "}
