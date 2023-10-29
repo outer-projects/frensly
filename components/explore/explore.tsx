@@ -71,7 +71,7 @@ const Explore = observer(() => {
                 <Link href={"/profile/" + el.twitterId}>
                   <div key={i} className={style.explore__topuser}>
                     <img src={el.avatar} />
-                    {shortNick(el.twitterName)}
+                    {shortNick(el.twitterName, 13)}
                   </div>
                 </Link>
               );

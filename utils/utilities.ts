@@ -67,8 +67,9 @@ export const timePassed = (time: string) => {
   if (r.minute !== 0) return r.minute + "m";
   if (r.second !== 0) return r.second + "s";
 };
-export const shortNick = (nick?: string) => {
-  return nick ? (nick?.length >= 25 ? nick?.slice(0, 25) + "..." : nick) : "";
+export const shortNick = (nick?: string, length?:number) => {
+  let le = length ? length : 25
+  return nick ? (nick?.length >= le ? nick?.slice(0, le) + "..." : nick) : "";
 };
 export const isServer = typeof window === "undefined";
 export const USDEthPair = async () => {
