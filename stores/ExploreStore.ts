@@ -27,8 +27,8 @@ export class ExploreStore {
     }).toString();
     try {
       const res = await axios.get(prefix + "user/newest/?" + query);
-      this.newUsersList = [...this.newUsersList, ...res.data];
       this.newOffset = this.newOffset + 20;
+      this.newUsersList = [...this.newUsersList, ...res.data];
       this.currentUserList = "new";
     } catch (e) {
       console.log(e);
@@ -42,7 +42,7 @@ export class ExploreStore {
     try {
       const res = await axios.get(prefix + "user/newest/?" + query);
       this.newUsersList = res.data;
-      this.newOffset = 0;
+      this.newOffset = 20;
       this.currentUserList = "new";
     } catch (e) {
       console.log(e);
