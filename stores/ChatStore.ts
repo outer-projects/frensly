@@ -38,7 +38,7 @@ export class ChatStore {
     this.chat = undefined;
   };
   @action setMessagesLeft = (left: number) => {
-    // this.chat = undefined;
+    this.messagesleft = left;
   };
   @action getChat = async (id: string) => {
     const query = new URLSearchParams({
@@ -69,7 +69,7 @@ export class ChatStore {
       const res = await axios.get(prefix + "chat/room/" + id + "/?" + query);
       // console.log("chat:", res.data);
       let n = this.messagesleft;
-      this.messagesleft = n - 50 > 0 ? n - 50 : 0; 
+      this.messagesleft = n - 50 > 0 ? n - 50 : 0;
       this.messagesOffset = this.messagesOffset + 50;
       this.messages = [...res.data.room.messages, ...this.messages];
     } catch (e) {
