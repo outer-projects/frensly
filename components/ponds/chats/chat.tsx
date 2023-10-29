@@ -34,12 +34,15 @@ const Chat = observer(() => {
     removeChat,
     updateChat,
     messages,
+    setMessagesLeft,
     messagesleft,
     setNewMessage,
   } = useInjection(ChatStore);
   const modalStore = useInjection(ModalStore);
   const [isLightning, setIsLightning] = useState(false);
-
+  useEffect(()=>{
+    console.log(messages);
+  }, [messages])
   useEffect(() => {
     let tt = setTimeout(() => {
       setOpacity(true);
@@ -60,9 +63,10 @@ const Chat = observer(() => {
         console.log(e, "hi connect_error");
       });
       socket.on("message", (msg) => {
-        // console.log(msg, "hi message");
+        console.log(msg, "hi message");
         if (msg?.roomId == id) {
           setNewMessage(msg);
+          setMessagesLeft(messagesleft + 1)
         }
       });
     }

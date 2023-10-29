@@ -37,6 +37,9 @@ export class ChatStore {
   @action removeChat = () => {
     this.chat = undefined;
   };
+  @action setMessagesLeft = (left:number) => {
+    // this.chat = undefined;
+  };
   @action getChat = async (id: string) => {
     const query = new URLSearchParams({
       offset: "50",
