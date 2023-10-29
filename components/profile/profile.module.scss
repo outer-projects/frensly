@@ -335,6 +335,9 @@
 }
 .twitter__textarea__comment {
   width: 456px !important;
+  @media (max-width:600px) {
+    width: 100%;
+  }
 }
 .twitter__textarea {
   margin-left: 24px;
@@ -522,6 +525,9 @@
   margin-top: 8px;
   object-fit: contain;
   cursor: pointer;
+  @media (max-width:600px) {
+    width: 100%;
+  }
 }
 .twitter__image__com {
   width: 400px;
@@ -540,10 +546,18 @@
   text-overflow: ellipsis;
   white-space: pre-wrap;
   min-width: 456px;
+  @media (max-width:600px) {
+    max-width: 100%;
+    min-width: 100%;
+  }
 }
 .twitter__text__comm {
   max-width: 400px !important;
   min-width: 400px !important;
+  @media (max-width:600px) {
+    max-width: 100%;
+    min-width: 100%;
+  }
 }
 .twitter__time {
   color: #b4b4b3;
@@ -601,5 +615,6 @@
   @media (max-width: 616px) {
     margin-left: 0px;
     margin-right: 0px;
+    justify-content: flex-start;
   }
 }
