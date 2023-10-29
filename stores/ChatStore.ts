@@ -12,6 +12,7 @@ export class ChatStore {
   @observable myChats: any[] = [];
   @observable chat: any;
   @observable messages: any[] = [];
+  @observable messagesleft: number = 0;
   @observable messagesOffset: number = 0;
   @observable unread: number = 0;
   public constructor(private readonly rootStore: RootStore) {
@@ -43,17 +44,24 @@ export class ChatStore {
     }).toString();
     try {
       const res = await axios.get(prefix + "chat/room/" + id + "/?" + query);
-      // console.log("chat:", res.data);
+      // console.log("chat:", res.data)
+      const n = Number(res.data.total);
+      this.messagesleft =
+        n - 50 > 0 && n - 50 < 50 ? n : n <= 0 ? 0 : n >= 50 ? 50 : 0;
+      this.messagesOffset = 100;
       this.chat = res.data.room;
-      this.messages = res.data.room.messages
+      this.messages = res.data.room.messages;
     } catch (e) {
       console.log(e);
     }
   };
+  @action setNewMessage = (newMsg: any) => {
+    this.messages = [...this.messages, newMsg];
+  };
   @action updateChat = async (id: string) => {
     const query = new URLSearchParams({
-      offset: this.messagesOffset.toString(),
-      limit: "50",
+      offset: this.messagesleft == 50 ? this.messagesOffset.toString() : "0",
+      limit: this.messagesleft.toString(),
     }).toString();
     try {
       const res = await axios.get(prefix + "chat/room/" + id + "/?" + query);

@@ -27,11 +27,18 @@ const Chat = observer(() => {
   const messagesEndRef = useRef<any>(null);
   const { getHolders, holders, setCurrentType } = useInjection(UserStore);
   const { user } = useInjection(Web3Store);
-  const { chat, getChat, sendMessage, removeChat, updateChat, messages } =
-    useInjection(ChatStore);
+  const {
+    chat,
+    getChat,
+    sendMessage,
+    removeChat,
+    updateChat,
+    messages,
+    setNewMessage,
+  } = useInjection(ChatStore);
   const modalStore = useInjection(ModalStore);
   const [isLightning, setIsLightning] = useState(false);
-  const [newMsgList, setNewMsgList] = useState<any[]>([]);
+
   useEffect(() => {
     let tt = setTimeout(() => {
       setOpacity(true);
@@ -54,7 +61,7 @@ const Chat = observer(() => {
       socket.on("message", (msg) => {
         // console.log(msg, "hi message");
         if (msg?.roomId == id) {
-          setNewMsgList((oldArray) => [...oldArray, msg]);
+          setNewMessage(msg);
         }
       });
     }
@@ -87,11 +94,7 @@ const Chat = observer(() => {
       getHolders(chat?.owner?._id as string);
     }
   }, [chat]);
-  useEffect(() => {
-    if (messages) {
-      setNewMsgList(messages);
-    }
-  }, [messages]);
+
   useEffect(() => {
     if (myHolds) {
       // console.log("start listen");
@@ -240,8 +243,8 @@ const Chat = observer(() => {
               </div>
             </div>
             <div className={style.openchat__messages} ref={messagesEndRef}>
-              {newMsgList
-                .map((el, i) => {
+              {messages
+                ?.map((el, i) => {
                   return (
                     <div key={el._id}>
                       <OneMessage
@@ -249,7 +252,7 @@ const Chat = observer(() => {
                         roomId={chat._id}
                         members={chat.members}
                       />
-                      {i !== 0 && i % 49 == 0 && (
+                      {i == 1 && (
                         <InView
                           as="div"
                           triggerOnce
