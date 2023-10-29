@@ -47,7 +47,13 @@ export class ChatStore {
       // console.log("chat:", res.data)
       const n = Number(res.data.total);
       this.messagesleft =
-        n - 50 > 0 && n - 50 < 50 ? n : n <= 0 ? 0 : n >= 50 ? 50 : 0;
+        n - 50 > 0 && n - 50 < 50
+          ? n - 50
+          : n - 50 <= 0
+          ? 0
+          : n - 50 >= 50
+          ? 50
+          : 0;
       this.messagesOffset = 100;
       this.chat = res.data.room;
       this.messages = res.data.room.messages;
@@ -66,6 +72,9 @@ export class ChatStore {
     try {
       const res = await axios.get(prefix + "chat/room/" + id + "/?" + query);
       // console.log("chat:", res.data);
+      let n = this.messagesleft;
+      this.messagesleft =
+        n - 50 > 0 && n - 50 < 50 ? n : n <= 0 ? 0 : n >= 50 ? 50 : 0;
       this.messagesOffset = this.messagesOffset + 50;
       this.messages = [...res.data.room.messages, ...this.messages];
     } catch (e) {
