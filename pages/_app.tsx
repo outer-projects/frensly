@@ -27,11 +27,10 @@ import Wrapper from "../components/layout/wrapper";
 import "../components/polyfills";
 import { SocketContext, socket } from "../utils/socket";
 import { isDevelopment } from "../utils/config";
+import Head from "next/head";
 
 const { chains, publicClient, webSocketPublicClient } = configureChains(
-  [
-    base, ...isDevelopment ? [bscTestnet] : [] 
-  ],
+  [base, ...(isDevelopment ? [bscTestnet] : [])],
   [publicProvider()]
 );
 
@@ -72,6 +71,12 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   return (
     <>
+      <Head>
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0,user-scalable=0"
+        />
+      </Head>
       {loading ? (
         <SocketContext.Provider value={socket}>
           <Provider container={container}>
