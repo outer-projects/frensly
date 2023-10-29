@@ -37,7 +37,7 @@ export class ChatStore {
   @action removeChat = () => {
     this.chat = undefined;
   };
-  @action setMessagesLeft = (left:number) => {
+  @action setMessagesLeft = (left: number) => {
     // this.chat = undefined;
   };
   @action getChat = async (id: string) => {
@@ -49,14 +49,7 @@ export class ChatStore {
       const res = await axios.get(prefix + "chat/room/" + id + "/?" + query);
       // console.log("chat:", res.data)
       const n = Number(res.data.total);
-      this.messagesleft =
-        n - 50 > 0 && n - 50 < 50
-          ? n - 50
-          : n - 50 <= 0
-          ? 0
-          : n - 50 >= 50
-          ? 50
-          : 0;
+      this.messagesleft = n - 50 > 0 ? n - 50 : 0;
       this.messagesOffset = 100;
       this.chat = res.data.room;
       this.messages = res.data.room.messages;
@@ -69,15 +62,14 @@ export class ChatStore {
   };
   @action updateChat = async (id: string) => {
     const query = new URLSearchParams({
-      offset: this.messagesleft == 50 ? this.messagesOffset.toString() : "0",
-      limit: this.messagesleft.toString(),
+      offset: this.messagesleft >= 50 ? this.messagesOffset.toString() : "0",
+      limit: this.messagesleft >= 50 ? "50" : this.messagesleft.toString(),
     }).toString();
     try {
       const res = await axios.get(prefix + "chat/room/" + id + "/?" + query);
       // console.log("chat:", res.data);
       let n = this.messagesleft;
-      this.messagesleft =
-        n - 50 > 0 && n - 50 < 50 ? n : n <= 0 ? 0 : n >= 50 ? 50 : 0;
+      this.messagesleft = n - 50 > 0 ? n - 50 : 0; 
       this.messagesOffset = this.messagesOffset + 50;
       this.messages = [...res.data.room.messages, ...this.messages];
     } catch (e) {
