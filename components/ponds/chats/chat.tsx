@@ -27,7 +27,7 @@ const Chat = observer(() => {
   const messagesEndRef = useRef<any>(null);
   const { getHolders, holders, setCurrentType } = useInjection(UserStore);
   const { user } = useInjection(Web3Store);
-  const { chat, getChat, sendMessage, removeChat, updateChat } =
+  const { chat, getChat, sendMessage, removeChat, updateChat, messages } =
     useInjection(ChatStore);
   const modalStore = useInjection(ModalStore);
   const [isLightning, setIsLightning] = useState(false);
@@ -83,13 +83,12 @@ const Chat = observer(() => {
     }
   }, [id]);
   useEffect(() => {
-    if (chat) {
+    if (messages) {
       // console.log("сhat: ", chat);
-      setNewMsgList([]);
-      setNewMsgList(chat.messages);
+      setNewMsgList(messages);
       getHolders(chat.owner._id as string);
     }
-  }, [chat]);
+  }, [messages]);
   useEffect(() => {
     if (myHolds) {
       // console.log("start listen");

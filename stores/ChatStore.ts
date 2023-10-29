@@ -11,7 +11,8 @@ import { toast } from "react-toastify";
 export class ChatStore {
   @observable myChats: any[] = [];
   @observable chat: any;
-  @observable chatOffset: number = 0;
+  @observable messages: any[] = [];
+  @observable messagesOffset: number = 0;
   @observable unread: number = 0;
   public constructor(private readonly rootStore: RootStore) {
     makeObservable(this);
@@ -37,33 +38,34 @@ export class ChatStore {
   };
   @action getChat = async (id: string) => {
     const query = new URLSearchParams({
-      offset: "0",
+      offset: "50",
       limit: "50",
     }).toString();
     try {
       const res = await axios.get(prefix + "chat/room/" + id + "/?" + query);
       // console.log("chat:", res.data);
       this.chat = res.data.room;
+      this.messages = res.data.room.messages
     } catch (e) {
       console.log(e);
     }
   };
   @action updateChat = async (id: string) => {
     const query = new URLSearchParams({
-      offset: this.chatOffset.toString(),
+      offset: this.messagesOffset.toString(),
       limit: "50",
     }).toString();
     try {
       const res = await axios.get(prefix + "chat/room/" + id + "/?" + query);
       // console.log("chat:", res.data);
-      this.chatOffset = this.chatOffset + 50;
-      this.chat = [...res.data.room, ...this.chat];
+      this.messagesOffset = this.messagesOffset + 50;
+      this.messages = [...res.data.room.messages, ...this.messages];
     } catch (e) {
       console.log(e);
     }
   };
   @action clearChat = async (id: string) => {
-    this.chatOffset = 0;
+    this.messagesOffset = 0;
     this.chat = [];
   };
   sendMessage = async (id: string, text: string, file?: File) => {
