@@ -22,9 +22,9 @@ const Holdings = observer(() => {
             key={el.subject._id}
             el={el.subject}
             amount={el.amount}
-            price={toBNJS(el?.subject?.currentPrice as string).multipliedBy(
-              (Number(el.amount) / 10 ** 6).toFixed(2)
-            )}
+            price={toBNJS(el?.subject?.currentPrice as string)
+              .multipliedBy((Number(el.amount) / 10 ** 6).toFixed(2))
+              .toFixed(0)}
           />
         );
         // return <></>;
