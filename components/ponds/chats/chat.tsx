@@ -56,7 +56,7 @@ const Chat = observer(() => {
     }
   };
   const stopListen = () => {
-    console.log("stop listen");
+    // console.log("stop listen");
     socket.emit("leave", { room: chat?._id });
     socket.off("join");
     socket.off("leave");
@@ -80,7 +80,7 @@ const Chat = observer(() => {
   }, [id]);
   useEffect(() => {
     if (chat) {
-      console.log("сhat: ", chat);
+      // console.log("сhat: ", chat);
       setNewMsgList([]);
       setNewMsgList(chat.messages);
       getHolders(chat.owner._id as string);

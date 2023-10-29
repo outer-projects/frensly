@@ -44,7 +44,7 @@ const MessageSend = observer(({ id }: { id?: string }) => {
             setFocus(true);
           }}
           onChange={(e: any) => {
-            console.log(e.key);
+            // console.log(e.key);
             setMessage(e.target.value);
           }}
         />

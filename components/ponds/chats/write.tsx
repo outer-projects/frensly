@@ -23,7 +23,7 @@ const Write = ({
   const [openMentions, setOpenMentions] = useState(false);
   const [mentionSearch, setMentionSearch] = useState("");
   const onKeyDown = (e: any) => {
-    console.log(e, e.key);
+    // console.log(e, e.key);
     if (e.key == "Enter" && (newMsg !== "" || file)) {
       setNewMsg("");
       onSend();
@@ -31,7 +31,7 @@ const Write = ({
     if (e.key == "@") {
       setOpenMentions(true);
     }
-    console.log(newMsg.slice(-1));
+    // console.log(newMsg.slice(-1));
     if (e.key == "Backspace" && newMsg.slice(-1) == "@") {
       setOpenMentions(false);
     }
@@ -83,7 +83,7 @@ const Write = ({
           value={newMsg}
           onChange={(e) => {
             let after = e.target.value.split("@");
-            console.log(after[after.length - 1]);
+            // console.log(after[after.length - 1]);
             if (openMentions) {
               setMentionSearch(after[after.length - 1]);
             } else {

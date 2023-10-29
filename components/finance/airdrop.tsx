@@ -17,7 +17,7 @@ import { fromWeiToEth } from "../../utils/utilities";
 import Heart from "../socials/twitterUI/Heart";
 import Follow from "../socials/twitterUI/Follow";
 const getOutputByKey = (require: any, progress: any) => {
-  console.log(require);
+  // console.log(require);
   if (require[0] == "isFollowing") {
     return (
       <div

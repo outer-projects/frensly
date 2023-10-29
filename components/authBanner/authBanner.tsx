@@ -101,7 +101,7 @@ const AuthBanner = observer(() => {
       setInit(isInit);
     } catch (e) {
       toast.error("Provider error");
-      console.log(e);
+      // console.log(e);
     }
   };
   useEffect(() => {

@@ -15,7 +15,7 @@ const Followers = observer(() => {
   return (
     <div className={style.ponds__chat}>
       {followers?.map((el) => {
-        console.log(el);
+        // console.log(el);
         return <FollowRow key={el._id} el={el} />;
         // return <></>;
       })}

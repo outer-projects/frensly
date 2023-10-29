@@ -18,7 +18,7 @@ export class ChatStore {
   @action getMyChats = async () => {
     try {
       const res = await axios.get(prefix + "chat/available");
-      console.log("chats:", res.data);
+      // console.log("chats:", res.data);
       if (res.data) {
         let count = res.data.reduce(
           (partialSum: any, a: any) => partialSum + a.unread,

@@ -50,7 +50,7 @@ export class UserStore {
   @action getCurrentTier = async () => {
     try {
       const res = await axios.get(prefix + "user/tier/requirements");
-      console.log(res.data);
+      // console.log(res.data);
       if (res.data?.requirements) {
         this.currentRequire = Object.entries(res.data.requirements);
       }
@@ -72,7 +72,7 @@ export class UserStore {
   @action upgradeTier = async () => {
     try {
       const res = await axios.get(prefix + "user/tier/upgrade");
-      console.log(res.data);
+      // console.log(res.data);
       this.getCurrentTier();
     } catch (e) {
       console.log(e);
@@ -84,7 +84,7 @@ export class UserStore {
   @action getKeys = async () => {
     try {
       const res = await axios.get(prefix + "user/user/refs");
-      console.log(res.data);
+      // console.log(res.data);
       this.unlimitedKeys = res.data.unlimited;
       this.inviteLimit = Number(res.data.usesLeft) + res.data.referrals.length;
       this.key = res.data;
@@ -109,7 +109,7 @@ export class UserStore {
   @action getUnreadCount = async () => {
     try {
       const res = await axios.get(prefix + "user/notifications/count");
-      console.log(res);
+      // console.log(res);
       this.unreadCount = Number(res.data.count);
     } catch (e) {
       console.log(e);
@@ -118,7 +118,7 @@ export class UserStore {
   @action getAllNotifications = async () => {
     try {
       const res = await axios.get(prefix + "user/notifications/all");
-      console.log("All notifications:", res);
+      // console.log("All notifications:", res);
       this.notificationsAll = res.data;
       return true;
     } catch (e) {
@@ -129,7 +129,7 @@ export class UserStore {
   @action getNotifications = async () => {
     try {
       const res = await axios.get(prefix + "user/notifications/unread");
-      console.log(res);
+      // console.log(res);
       this.notifications = res.data;
       return true;
     } catch (e) {
@@ -179,7 +179,7 @@ export class UserStore {
   @action getFollowers = async (id: string) => {
     try {
       const res = await axios.get(prefix + "user/followers/" + id);
-      console.log("getFollowers:", res);
+      // console.log("getFollowers:", res);
       this.followers = res.data;
     } catch (e) {
       console.log(e);
@@ -188,7 +188,7 @@ export class UserStore {
   @action getFollowings = async (id: string) => {
     try {
       const res = await axios.get(prefix + "user/following/" + id);
-      console.log("getFollowings:", res);
+      // console.log("getFollowings:", res);
       this.followings = res.data;
     } catch (e) {
       console.log(e);

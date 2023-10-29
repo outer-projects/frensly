@@ -36,10 +36,10 @@ const Header = observer(() => {
   useEffect(() => {
     getEthCurrency();
     socket.emit("login", (res: any) => {
-      console.log(res);
+      // console.log(res);
     });
     socket.on("notification", (not: any) => {
-      console.log("notification: ", not);
+      // console.log("notification: ", not);
       // getAllNotifications();
       getUnreadCount();
     });

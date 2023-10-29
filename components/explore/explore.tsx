@@ -109,7 +109,7 @@ const Explore = observer(() => {
                     triggerOnce
                     onChange={(inView, entry) => {
                       if (inView) {
-                        console.log("inview");
+                        // console.log("inview");
                         updateNewUsers();
                       }
                     }}
