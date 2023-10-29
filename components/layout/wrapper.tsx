@@ -12,6 +12,7 @@ import { toast } from "react-toastify";
 import { prefix } from "../../utils/config";
 import AuthBanner from "../authBanner/authBanner";
 import ConnectButtonCustom from "./connectButtonCustom";
+import Head from "next/head";
 
 const Wrapper = observer(({ children }: any) => {
   const { init, setInit, getNotifications } = useInjection(UserStore);
@@ -57,6 +58,12 @@ const Wrapper = observer(({ children }: any) => {
   }, []);
   return (
     <div className={style.page__container}>
+      <Head>
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+        />
+      </Head>
       {!needToChangeWallet && (!init || !user?.account) && (
         <div className={home.main__page}>
           <AuthBanner />
