@@ -63,7 +63,7 @@ const Chat = observer(() => {
         console.log(e, "hi connect_error");
       });
       socket.on("message", (msg) => {
-        console.log(msg, "hi message", chat._id);
+        // console.log(msg, "hi message", chat._id);
         if (msg?.roomId == chat._id) {
           setNewMessage(msg);
           setMessagesLeft(messagesleft + 1)
