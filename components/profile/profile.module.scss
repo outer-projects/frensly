@@ -446,9 +446,7 @@
   flex-direction: column;
   justify-content: center;
   margin-top: 24px;
-  &:first-child {
-    margin-top: -12px;
-  }
+
   &:last-child {
     margin-bottom: 24px;
   }
