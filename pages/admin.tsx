@@ -8,10 +8,13 @@ import header from "../components/layout/header.module.scss";
 import { AdminStore } from "../stores/AdminStore";
 const Admin = observer(() => {
   const { push } = useRouter();
-  const { verify, makeAdmin, createCodes } = useInjection(AdminStore);
+  const { verify, makeAdmin, createCodes, unban, unverify, ban } = useInjection(AdminStore);
   const [handle, setHandle] = useState("");
   const [codeToGenerate, setCodeToGenerate] = useState("");
   const [admin, setAdmin] = useState("");
+  const [_ban, setBan] = useState("");
+  const [_unban, setUnban] = useState("");
+  const [_unverify, setUnverify] = useState("");
   const [code, setCode] = useState("");
   const { user } = useInjection(Web3Store);
   useEffect(() => {
@@ -44,6 +47,22 @@ const Admin = observer(() => {
         </button>
       </div>
       <div className={style.explore__row}>
+        Unferify user
+        <input
+          placeholder="Twitter handle"
+          value={_unverify}
+          onChange={(e) => setUnverify(e.target.value)}
+        />
+        <button
+          onClick={() => {
+            unverify(_unverify);
+            setUnverify("");
+          }}
+        >
+          Unferify
+        </button>
+      </div>
+      <div className={style.explore__row}>
         Make admin
         <input
           placeholder="Twitter handle"
@@ -57,6 +76,38 @@ const Admin = observer(() => {
           }}
         >
           Send
+        </button>
+      </div>
+      <div className={style.explore__row}>
+        ban user
+        <input
+          placeholder="Twitter handle"
+          value={_ban}
+          onChange={(e) => setBan(e.target.value)}
+        />
+        <button
+          onClick={() => {
+            ban(_ban);
+            setBan("");
+          }}
+        >
+          ban
+        </button>
+      </div>
+      <div className={style.explore__row}>
+        unban user
+        <input
+          placeholder="Twitter handle"
+          value={_unban}
+          onChange={(e) => setUnban(e.target.value)}
+        />
+        <button
+          onClick={() => {
+            unban(_unban);
+            setUnban("");
+          }}
+        >
+          unban
         </button>
       </div>
       <div className={style.explore__row}>

@@ -39,6 +39,42 @@ export class AdminStore {
       toast.error("Error");
     }
   };
+  @action unban = async (handle: string) => {
+    try {
+      const res = await axios.post(prefix + "user/admin/unban", {
+        twitterHandle: handle,
+      });
+      toast.success("unbaned");
+      console.log("unbaned:", res.data);
+    } catch (e) {
+      console.log(e);
+      toast.error("Error");
+    }
+  };
+  @action ban = async (handle: string) => {
+    try {
+      const res = await axios.post(prefix + "user/admin/ban", {
+        twitterHandle: handle,
+      });
+      toast.success("banned");
+      console.log("banned:", res.data);
+    } catch (e) {
+      console.log(e);
+      toast.error("Error");
+    }
+  };
+  @action unverify = async (handle: string) => {
+    try {
+      const res = await axios.post(prefix + "user/admin/unverify", {
+        twitterHandle: handle,
+      });
+      toast.success("unverified");
+      console.log("unverified:", res.data);
+    } catch (e) {
+      console.log(e);
+      toast.error("Error");
+    }
+  };
   @action createCodes = async (keys: string[]) => {
     try {
       const res = await axios.post(prefix + "user/keys/generate", {
