@@ -22,12 +22,12 @@ export class FeedStore {
   @action getFrensFeed = async () => {
     const query = new URLSearchParams({
       offset: "0",
-      limit: "100",
+      limit: "30",
     }).toString();
     try {
       const res = await axios.get(prefix + "social/posts/verified?" + query);
       // console.log(res.data);
-      this.feedFrensOffset = 100;
+      this.feedFrensOffset = 30;
       this.frensFeed = res.data;
     } catch (e) {
       console.log(e);
@@ -36,12 +36,12 @@ export class FeedStore {
   @action updateFrensFeed = async () => {
     const query = new URLSearchParams({
       offset: this.feedFrensOffset.toString(),
-      limit: "100",
+      limit: "30",
     }).toString();
     try {
       const res = await axios.get(prefix + "social/posts/verified?" + query);
       // console.log(res.data);
-      this.feedFrensOffset = this.feedFrensOffset + 100;
+      this.feedFrensOffset = this.feedFrensOffset + 30;
       this.frensFeed = [...this.frensFeed, ...res.data];
     } catch (e) {
       console.log(e);
@@ -50,12 +50,12 @@ export class FeedStore {
   @action getFeed = async () => {
     const query = new URLSearchParams({
       offset: "0",
-      limit: "100",
+      limit: "30",
     }).toString();
     try {
       const res = await axios.get(prefix + "social/posts?" + query);
       // console.log(res.data);
-      this.feedOffset = 100;
+      this.feedOffset = 30;
       this.feed = res.data;
     } catch (e) {
       console.log(e);
@@ -64,12 +64,12 @@ export class FeedStore {
   @action updateFeed = async () => {
     const query = new URLSearchParams({
       offset: this.feedOffset.toString(),
-      limit: "100",
+      limit: "30",
     }).toString();
     try {
       const res = await axios.get(prefix + "social/posts?" + query);
       // console.log(res.data);
-      this.feedOffset = this.feedOffset + 100;
+      this.feedOffset = this.feedOffset + 30;
       this.feed = [...this.feed, ...res.data];
     } catch (e) {
       console.log(e);
@@ -96,12 +96,12 @@ export class FeedStore {
   @action updateUserPosts = async (id: string) => {
     const query = new URLSearchParams({
       offset: this.postOffset.toString(),
-      limit: "100",
+      limit: "30",
     }).toString();
     try {
       const res = await axios.get(prefix + "social/posts/" + id + "?" + query);
       // console.log(res.data);
-      this.setPostOffset(this.postOffset + 100);
+      this.setPostOffset(this.postOffset + 30);
       this.userPosts = [...this.userPosts, ...res.data];
     } catch (e) {
       console.log(e);
@@ -110,12 +110,12 @@ export class FeedStore {
   @action getUserPosts = async (id: string) => {
     const query = new URLSearchParams({
       offset: "0",
-      limit: "100",
+      limit: "30",
     }).toString();
     try {
       const res = await axios.get(prefix + "social/posts/" + id + "?" + query);
       // console.log(res.data);
-      this.setPostOffset(100);
+      this.setPostOffset(30);
       this.userPosts = res.data;
     } catch (e) {
       console.log(e);

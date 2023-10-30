@@ -32,7 +32,7 @@ const TwitterFeed = observer(
       frensFeed,
       updateFrensFeed,
       updateFeed,
-      updateUserPosts
+      updateUserPosts,
     } = useInjection(FeedStore);
     const { user } = useInjection(Web3Store);
     const [hideRow, setHideRow] = useState<string[]>([]);
@@ -46,9 +46,7 @@ const TwitterFeed = observer(
       }
     }, [id, isFrens, userPosts, frensFeed, feed]);
     const updatePosts = () => {
-      if (id) {
-        getUserPosts(id);
-      } else if (isFrens) {
+      if (isFrens) {
         updateFrensFeed();
       } else {
         updateFeed();
@@ -98,7 +96,7 @@ const TwitterFeed = observer(
                 return (
                   <div key={el._id}>
                     <TwitterPost post={el} isProfile={isProfile} />
-                    {i !== 0 && i % 99 == 0 && (
+                    {i !== 0 && i % 29 == 0 && (
                       <InView
                         as="div"
                         triggerOnce
@@ -106,8 +104,8 @@ const TwitterFeed = observer(
                           if (inView && isFeed) {
                             console.log("inview");
                             updatePosts();
-                          } else if(inView && isProfile) {
-                            updateUserPosts(id as string)
+                          } else if (inView && isProfile) {
+                            updateUserPosts(id as string);
                           }
                         }}
                       ></InView>
