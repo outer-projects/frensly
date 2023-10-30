@@ -6,26 +6,40 @@ import { UserStore } from "../../../stores/UserStore";
 import Web3Store from "../../../stores/Web3Store";
 import FinanceRow from "../../finance/financeRow";
 import { toBNJS } from "../../../utils/utilities";
+import { InView } from "react-intersection-observer";
 
-const Holdings = observer(() => {
-  const { getShares, shares } = useInjection(UserStore);
-  const { user } = useInjection(Web3Store);
+const Holdings = observer(({ id }: { id: string }) => {
+  const { getShares, shares, updateShares } = useInjection(UserStore);
   useEffect(() => {
-    getShares(user?._id as string);
+    getShares(id as string);
   }, []);
   return (
     <div className={style.ponds__chat}>
-      {shares?.map((el) => {
+      {shares?.map((el, i) => {
         // console.log(el);
         return (
-          <FinanceRow
-            key={el.subject._id}
-            el={el.subject}
-            amount={el.amount}
-            price={toBNJS(el?.subject?.currentPrice as string)
-              .multipliedBy((Number(el.amount) / 10 ** 6).toFixed(2))
-              .toFixed(0)}
-          />
+          <>
+            <FinanceRow
+              key={el.subject._id}
+              el={el.subject}
+              amount={el.amount}
+              price={toBNJS(el?.subject?.currentPrice as string)
+                .multipliedBy((Number(el.amount) / 10 ** 6).toFixed(2))
+                .toFixed(0)}
+            />
+            {i !== 0 && i % 29 == 0 && (
+              <InView
+                as="div"
+                triggerOnce
+                onChange={(inView, entry) => {
+                  if (inView) {
+                    console.log("inview");
+                    updateShares(id);
+                  }
+                }}
+              ></InView>
+            )}
+          </>
         );
         // return <></>;
       })}

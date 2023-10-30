@@ -20,7 +20,7 @@ const FeedPage: NextPage = observer((props) => {
           {unreadCount !== 0 ? `(${unreadCount})` : ""} Feed | Frensly
         </title>
       </Head>
-      <div className={style.explore__type}>
+      <div className={style.feed__type}>
         <TypesList types={types} active={active} setActive={setActive} />
       </div>
       {active == 0 && <TwitterFeed isFeed isFrens={true} />}

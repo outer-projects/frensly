@@ -7,25 +7,41 @@ import OneActivity from "../../notifications/oneActivity";
 import Web3Store from "../../../stores/Web3Store";
 import FinanceRow from "../../finance/financeRow";
 import { toBNJS } from "../../../utils/utilities";
-const Holders = observer(() => {
-  const { getHolders, holders } = useInjection(UserStore);
-  const { user } = useInjection(Web3Store);
+import { InView } from "react-intersection-observer";
+import { IProfile } from "../../../types/users";
+const Holders = observer(({ id, user }: { id: string, user:IProfile}) => {
+  const { getHolders, holders, updateHolders } = useInjection(UserStore);
+
   useEffect(() => {
-    getHolders(user?._id as string);
+    getHolders(id as string);
   }, []);
   return (
     <div className={style.ponds__chat}>
-      {holders?.map((el) => {
+      {holders?.map((el, i) => {
         // console.log(el);
         return (
-          <FinanceRow
-            key={el.user._id}
-            el={el.user}
-            amount={el.amount}
-            price={toBNJS(user?.account.currentPrice as string)
-              .multipliedBy((Number(el.amount) / 10 ** 6).toFixed(2))
-              .toFixed(0)}
-          />
+          <>
+            <FinanceRow
+              key={el.user._id}
+              el={el.user}
+              amount={el.amount}
+              price={toBNJS(user?.account.currentPrice as string)
+                .multipliedBy((Number(el.amount) / 10 ** 6).toFixed(2))
+                .toFixed(0)}
+            />
+            {i !== 0 && i % 29 == 0 && (
+              <InView
+                as="div"
+                triggerOnce
+                onChange={(inView, entry) => {
+                  if (inView) {
+                    console.log("inview");
+                    updateHolders(id);
+                  }
+                }}
+              ></InView>
+            )}
+          </>
         );
         // return <></>;
       })}

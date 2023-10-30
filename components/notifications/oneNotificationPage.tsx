@@ -68,7 +68,7 @@ const OneNotificationPage = observer(
               <div className={style.nots__one__info}>
                 <div className={style.nots__one__time}>
                   {notification.text
-                    ? notification.text
+                    ? notification.text.slice(0,20)
                     : timePassed(notification?.date) + " ago"}{" "}
                 </div>
               </div>

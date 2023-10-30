@@ -9,7 +9,17 @@ import { UserStore } from "../../stores/UserStore";
 import { fromWeiToEth, shortNick, toBNJS } from "../../utils/utilities";
 import { useRouter } from "next/router";
 import FinanceRow from "../finance/financeRow";
-const typesUser = ["Holders", "Holdings", "Activity"];
+import Followers from "./activity/followers";
+import Followings from "./activity/followings";
+import Holders from "./activity/holders";
+import Holdings from "./activity/holdings";
+const typesUser = [
+  "Holders",
+  "Holdings",
+  "Activity",
+  "Followers",
+  "Followings",
+];
 const UserActivity = observer(() => {
   const [active, setActive] = useState(2);
   const {
@@ -50,7 +60,9 @@ const UserActivity = observer(() => {
       <div className={style.ponds__top}>
         <div className={style.ponds__image}>
           <img src={profileUser?.avatar} />
-          <div className={style.ponds__title}>{shortNick(profileUser?.twitterName)}</div>
+          <div className={style.ponds__title}>
+            {shortNick(profileUser?.twitterName)}
+          </div>
         </div>
       </div>
       <TypesList active={active} setActive={setActive} types={typesUser} />
@@ -85,38 +97,10 @@ const UserActivity = observer(() => {
             </div>
           </div>
         </div>
-        {active == 0 && (
-          <div className={style.ponds__chat}>
-            {holders?.map((el) => {
-              return (
-                <FinanceRow
-                  key={el.user._id}
-                  el={el.user}
-                  amount={el.amount}
-                  price={toBNJS(profileUser?.account.currentPrice as string)
-                    .multipliedBy((Number(el.amount) / 10 ** 6).toFixed(2))
-                    .toFixed(0)}
-                />
-              );
-            })}
-          </div>
+        {active == 0 && id && profileUser && (
+          <Holders id={id as string} user={profileUser} />
         )}
-        {active == 1 && (
-          <div className={style.ponds__chat}>
-            {shares?.map((el) => {
-              return (
-                <FinanceRow
-                  key={el.subject._id}
-                  el={el.subject}
-                  amount={el.amount}
-                  price={toBNJS(el.subject.currentPrice as string)
-                    .multipliedBy((Number(el.amount) / 10 ** 6).toFixed(2))
-                    .toFixed(0)}
-                />
-              );
-            })}
-          </div>
-        )}
+        {active == 1 && id && <Holdings id={id as string} />}
         {active == 2 && (
           <div className={style.ponds__chat}>
             {history?.map((el) => {
@@ -125,6 +109,8 @@ const UserActivity = observer(() => {
             })}
           </div>
         )}
+        {active == 3 && id && <Followers id={id as string} />}
+        {active == 4 && id && <Followings id={id as string} />}
       </div>
     </div>
   );

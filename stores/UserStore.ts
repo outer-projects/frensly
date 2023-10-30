@@ -23,6 +23,10 @@ export class UserStore {
   @observable unreadCount: number = 0;
   @observable active: number = 0;
   @observable myActive: number = 0;
+  @observable followersOffset: number = 0;
+  @observable followingsOffset: number = 0;
+  @observable holdersOffset: number = 0;
+  @observable sharesOffset: number = 0;
   @observable currentType: number = 2;
   @observable profileUser?: IProfile = undefined;
   @observable portfolioValue?: BigNumber;
@@ -180,27 +184,100 @@ export class UserStore {
       console.log(e);
     }
   };
-  @action getFollowers = async (id: string) => {
+  @action updateShares = async (id: string) => {
+    const query = new URLSearchParams({
+      offset: this.sharesOffset.toString(),
+      limit: "30",
+    }).toString();
     try {
-      const res = await axios.get(prefix + "user/followers/" + id);
-      // console.log("getFollowers:", res);
+      const res = await axios.get(prefix + "user/shares/" + id + "?" + query);
+      this.sharesOffset = this.sharesOffset + 30;
+      this.shares = res.data;
+    } catch (e) {
+      console.log(e);
+    }
+  };
+  @action getFollowers = async (id: string) => {
+    const query = new URLSearchParams({
+      offset: "0",
+      limit: "30",
+    }).toString();
+    try {
+      const res = await axios.get(
+        prefix + "user/followers/" + id + "?" + query
+      );
+      this.followersOffset = 30;
+      this.followers = res.data;
+    } catch (e) {
+      console.log(e);
+    }
+  };
+  @action updateFollowers = async (id: string) => {
+    const query = new URLSearchParams({
+      offset: this.followersOffset.toString(),
+      limit: "30",
+    }).toString();
+    try {
+      const res = await axios.get(
+        prefix + "user/followers/" + id + "?" + query
+      );
+      this.followersOffset = 30;
       this.followers = res.data;
     } catch (e) {
       console.log(e);
     }
   };
   @action getFollowings = async (id: string) => {
+    const query = new URLSearchParams({
+      offset: "0",
+      limit: "30",
+    }).toString();
     try {
-      const res = await axios.get(prefix + "user/following/" + id);
-      // console.log("getFollowings:", res);
+      const res = await axios.get(
+        prefix + "user/following/" + id + "?" + query
+      );
+      this.followingsOffset = 30;
+      this.followings = res.data;
+    } catch (e) {
+      console.log(e);
+    }
+  };
+  @action updateFollowings = async (id: string) => {
+    const query = new URLSearchParams({
+      offset: this.followingsOffset.toString(),
+      limit: "30",
+    }).toString();
+    try {
+      const res = await axios.get(
+        prefix + "user/following/" + id + "?" + query
+      );
+      this.followingsOffset = this.followingsOffset + 30;
       this.followings = res.data;
     } catch (e) {
       console.log(e);
     }
   };
   @action getHolders = async (id: string) => {
+    const query = new URLSearchParams({
+      offset: "0",
+      limit: "30",
+    }).toString();
     try {
-      const res = await axios.get(prefix + "user/holders/" + id);
+      const res = await axios.get(prefix + "user/holders/" + id + "?" + query);
+      this.holders = res.data;
+      this.holdersOffset = 30;
+    } catch (e) {
+      console.log(e);
+    }
+  };
+  @action updateHolders = async (id: string) => {
+    const query = new URLSearchParams({
+      offset: this.holdersOffset.toString(),
+      limit: "30",
+    }).toString();
+    try {
+      const res = await axios.get(prefix + "user/holders/" + id + "?" + query);
+      this.holdersOffset = this.holdersOffset + 30;
       this.holders = res.data;
     } catch (e) {
       console.log(e);

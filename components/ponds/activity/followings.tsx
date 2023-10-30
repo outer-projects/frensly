@@ -4,19 +4,34 @@ import { UserStore } from "../../../stores/UserStore";
 import style from "../ponds.module.scss";
 import { observer } from "mobx-react";
 import { useEffect } from "react";
-import Web3Store from "../../../stores/Web3Store";
-const Followings = observer(() => {
-  const { followings, getFollowings } = useInjection(UserStore);
-  const { user } = useInjection(Web3Store);
+import { InView } from "react-intersection-observer";
+const Followings = observer(({ id }: { id: string }) => {
+  const { followings, getFollowings, updateFollowings } =
+    useInjection(UserStore);
   useEffect(() => {
-    getFollowings(user?._id as string);
+    getFollowings(id);
   }, []);
   return (
     <div className={style.ponds__chat}>
-      {followings?.map((el) => {
+      {followings?.map((el, i) => {
         // console.log(el);
-        return <FollowRow key={el._id} el={el} />;
-        // return <></>;
+        return (
+          <>
+            <FollowRow key={el._id} el={el} />
+            {i !== 0 && i % 29 == 0 && (
+              <InView
+                as="div"
+                triggerOnce
+                onChange={(inView, entry) => {
+                  if (inView) {
+                    console.log("inview");
+                    updateFollowings(id);
+                  }
+                }}
+              ></InView>
+            )}
+          </>
+        );
       })}
     </div>
   );

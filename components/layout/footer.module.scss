@@ -1,0 +1,28 @@
+.footer__container {
+  position: fixed;
+  bottom: 0;
+  top: auto;
+  width: 100vw;
+  left: 0;
+  background: #fbfbfb;
+  display: none; 
+  @media (max-width: 1000px) {
+    display: block;
+  }
+}
+.footer__mobile {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.footer__link {
+  border-radius: 100px;
+  height: 36px;
+  width: 85px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.footer__link__active {
+  background: #f1f1f1;
+}

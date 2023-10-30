@@ -15,34 +15,39 @@ import { observer } from "mobx-react";
 import Web3Store from "../../stores/Web3Store";
 import { UserStore } from "../../stores/UserStore";
 import UserIcon from "../socials/twitterUI/UserIcon";
-
+import TypesList from "../common/typesList";
+export const types = ["Finance", "Referrals", "Airdrop"];
 const Invite = observer(() => {
   const { user } = useInjection(Web3Store);
   const { getKeys, key, inviteLimit, invited, unlimitedKeys } =
     useInjection(UserStore);
+
   const [keysReady, setKeysReady] = useState(false);
+  const [active, setActive] = useState(1);
+  const router = useRouter();
+
   useEffect(() => {
     if (user && !keysReady) {
       setKeysReady(true);
       getKeys();
     }
   }, [user]);
+
+  useEffect(() => {
+    if (active == 0) {
+      router.push("/dashboard/finance");
+    }
+    if (active == 2) {
+      router.push("/dashboard/airdrop");
+    }
+  }, [active]);
   return (
     <div className={style.finance__page}>
       <Sidebar />
 
       <div className={style.finance__container}>
-        <div className={style.finance__titles}>
-          <div className={classNames(explore.explore__title, style.mob__link)}>
-            <Link href={"/dashboard/finance"}>Funds</Link>
-          </div>
-          <div className={explore.explore__title}>Referrals</div>
-          <div className={classNames(explore.explore__title, style.mob__link)}>
-            <Link href={"/dashboard/airdrop"}>Airdrop</Link>
-          </div>
-        </div>
+        <TypesList active={active} setActive={setActive} types={types} />
         <div className={style.finance}>
-          <User stage="referral" />
           <div className={style.finance__total}>
             <div className={style.finance__icon}>
               <UserIcon color="#676766" />

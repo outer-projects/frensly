@@ -149,14 +149,14 @@ const Header = observer(() => {
             </div>
             {notsMob && <Notifications setNots={setNotsMob} />}
           </div>
-          <img
+          {/* <img
             src="../icons/Burger.svg"
             style={{ height: "24px", marginLeft: "24px" }}
             onClick={() => {
               setMenuMob(!menuMob);
             }}
-          />
-          <div
+          /> */}
+          {/* <div
             className={style.header__mobile__menu}
             style={{ display: menuMob ? "flex" : "none" }}
           >
@@ -198,7 +198,7 @@ const Header = observer(() => {
                 </Link>
               );
             })}
-          </div>
+          </div> */}
         </div>
       </header>
     </div>

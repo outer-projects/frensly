@@ -9,6 +9,7 @@ import { useWalletClient } from "wagmi";
 import style from "./header.module.scss";
 import { addressSlice } from "../../utils/utilities";
 import classNames from "classnames";
+import Link from "next/link";
 const ConnectButtonCustom = observer(({ isHeader }: { isHeader?: boolean }) => {
   const {
     setConnected,
@@ -103,10 +104,15 @@ const ConnectButtonCustom = observer(({ isHeader }: { isHeader?: boolean }) => {
               return (
                 <div>
                   {user?.account ? (
-                    <div className={style.account} onClick={openAccountModal}>
-                      <img src={user?.avatar} alt="#" />
+                    <div className={style.account}>
+                      <Link href={"/profile/" + user.twitterHandle}>
+                        <img src={user?.avatar}  />
+                      </Link>
                       <div style={{ marginLeft: "8px" }}>
-                        <div className={style.balance}>
+                        <div
+                          className={style.balance}
+                          onClick={openAccountModal}
+                        >
                           {account.displayBalance}
                         </div>
                         <div className={style.address}>

@@ -52,10 +52,10 @@ const Ponds = observer(() => {
         </div>
         {myActive == 0 && <Chats />}
         {myActive == 1 && <History />}
-        {myActive == 2 && <Holders />}
-        {myActive == 3 && <Holdings />}
-        {myActive == 4 && <Followers />}
-        {myActive == 5 && <Followings />}
+        {myActive == 2 && user?._id && <Holders id={user._id} user={user} />}
+        {myActive == 3 && user?._id && <Holdings id={user._id} />}
+        {myActive == 4 && user?._id && <Followers id={user?._id} />}
+        {myActive == 5 && user?._id && <Followings id={user?._id} />}
       </div>
     </div>
   );

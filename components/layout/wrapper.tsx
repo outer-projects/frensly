@@ -13,6 +13,7 @@ import { prefix } from "../../utils/config";
 import AuthBanner from "../authBanner/authBanner";
 import ConnectButtonCustom from "./connectButtonCustom";
 import Head from "next/head";
+import Footer from "./footer";
 
 const Wrapper = observer(({ children }: any) => {
   const { init, setInit, getNotifications } = useInjection(UserStore);
@@ -42,7 +43,7 @@ const Wrapper = observer(({ children }: any) => {
       // getNotifications();
     }
   }, [web3, address, user]);
-
+  
   const getUser = async () => {
     try {
       const res: AxiosRequestConfig = await axios.get(prefix + "user", {
@@ -81,7 +82,7 @@ const Wrapper = observer(({ children }: any) => {
       {!needToChangeWallet && init && user?.account && <Header />}
       {/* <Header /> */}
       {!needToChangeWallet && init && user?.account && children}
-      {/* {children} */}
+      {!needToChangeWallet && init && user?.account && <Footer/>}
     </div>
   );
 });

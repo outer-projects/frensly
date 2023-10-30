@@ -36,12 +36,13 @@ export const links = [
     active: true,
   },
 ];
-
+const mobTypes = ["Referrals", "Airdrop"];
 const types = ["Finance", "Holders", "Holdings"];
 const Finance = observer(() => {
   const [active, setActive] = useState(0);
   const [keysReady, setKeysReady] = useState(false);
   const [claimValue, setClaimValue] = useState("0");
+  const router = useRouter();
   const { user, frensly, address, checkAuth } = useInjection(Web3Store);
   const { shares, holders, getShares, getHolders, portfolioValue, getKeys } =
     useInjection(UserStore);
@@ -51,13 +52,21 @@ const Finance = observer(() => {
         from: address,
       });
       // console.log(res);
-      setClaimValue('0');
+      setClaimValue("0");
       checkAuth();
       getClaim();
     } catch (e) {
       console.log(e);
     }
   };
+  useEffect(() => {
+    if (active == 3) {
+      router.push("/dashboard/invite");
+    }
+    if (active == 4) {
+      router.push("/dashboard/airdrop");
+    }
+  }, [active]);
   const getClaim = async () => {
     try {
       const res = await frensly.methods.availableToClaim(address).call();
@@ -85,7 +94,7 @@ const Finance = observer(() => {
     <div className={style.finance__page}>
       <Sidebar />
       <div className={style.finance__container}>
-        <div className={style.finance__titles}>
+        {/* <div className={style.finance__titles}>
           <div className={explore.explore__title}>Funds</div>
           <div className={classNames(explore.explore__title, style.mob__link)}>
             <Link href={"/dashboard/invite"}>Referrals</Link>
@@ -93,10 +102,15 @@ const Finance = observer(() => {
           <div className={classNames(explore.explore__title, style.mob__link)}>
             <Link href={"/dashboard/airdrop"}>Airdrop</Link>
           </div>
-        </div>
+        </div> */}
         <div className={style.finance}>
           <User stage="finance" />
-          <TypesList active={active} setActive={setActive} types={types} />
+          <TypesList
+            active={active}
+            setActive={setActive}
+            types={types}
+            mobTypes={mobTypes}
+          />
           {active == 0 && (
             <div className={style.finance__stats}>
               <div className={style.finance__stat}>

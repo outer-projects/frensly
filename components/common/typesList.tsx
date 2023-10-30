@@ -1,11 +1,12 @@
 import classNames from "classnames";
-import profile from "../profile/profile.module.scss"
+import profile from "../profile/profile.module.scss";
 interface ITypes {
-    types: string[],
-    active: number,
-    setActive:(s:number)=>void
+  types: string[];
+  active: number;
+  setActive: (s: number) => void;
+  mobTypes?: string[];
 }
-const TypesList = ({types,active,setActive}:ITypes) => {
+const TypesList = ({ types, active, setActive, mobTypes }: ITypes) => {
   return (
     <div className={profile.profile__types}>
       {types.map((el, i) => (
@@ -21,6 +22,21 @@ const TypesList = ({types,active,setActive}:ITypes) => {
           {el}
         </div>
       ))}
+      {mobTypes &&
+        mobTypes.map((el, i) => (
+          <div
+            className={classNames(
+              profile.profile__type,
+              profile.profile__type__mob,
+              active == i && profile.profile__type__active
+            )}
+            onClick={() => {
+              setActive(i);
+            }}
+          >
+            {el}
+          </div>
+        ))}
     </div>
   );
 };

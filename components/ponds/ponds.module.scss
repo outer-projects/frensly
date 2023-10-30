@@ -5,9 +5,9 @@
   width: 616px;
   font-family: "DMSans";
   @media (max-width: 616px) {
-    width: calc(100% - 48px);
+    width: calc(100% - 16px);
     margin-top: 24px;
-    margin-left: 24px;
+    margin-left: 8px;
   }
 }
 .openchat__mention {
@@ -94,6 +94,9 @@
   border-radius: 32px;
   background: #fff;
   padding: 24px;
+  @media (max-width: 616px) {
+    padding: 8px;
+  }
 }
 .chat__text {
   color: $grey;
@@ -286,7 +289,7 @@
   width: 100%;
   margin-left: 0px;
   margin-top: 25px;
-  height: 630px;
+  height: calc(100vh - 275px);
   flex: 1;
   overflow-y: scroll;
   &::-webkit-scrollbar {
@@ -299,6 +302,7 @@
     border-radius: 9999px;
     background-color: #aaaaaa;
   }
+
   @media (max-height: 1080px) {
     height: 550px;
   }
@@ -366,7 +370,7 @@
   border-radius: 24px 8px 0px 24px;
   width: fit-content;
   overflow: hidden;
-  
+
   padding-left: 16px;
   padding-right: 16px;
   background: #effdde;

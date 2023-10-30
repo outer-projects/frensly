@@ -30,7 +30,7 @@ const Profile = observer(() => {
   const router = useRouter();
   const [isMyProfile, setIsMyProfile] = useState(false);
   const [isFollowed, setIsFollowed] = useState(false);
-  const [pricePerShade, setPricePerShade] = useState('0');
+  const [pricePerShade, setPricePerShade] = useState("0");
   const [count, setCount] = useState(0);
   const followUser = (isFollowed: boolean) => {
     follow(profileUser?._id as string, isFollowed).then((res) => {
@@ -134,7 +134,11 @@ const Profile = observer(() => {
                     >
                       <img
                         src="../icons/twitter_black.svg"
-                        style={{ marginRight: "5px", width: "24px", height: "24px" }}
+                        style={{
+                          marginRight: "5px",
+                          width: "24px",
+                          height: "24px",
+                        }}
                       />{" "}
                     </a>
                     <a
@@ -249,17 +253,31 @@ const Profile = observer(() => {
             <div className={style.profile__stats__follows}>
               <div className={style.profile__stats__follow}>
                 <div
-                  className={style.profile__text}
+                  className={classNames(
+                    style.profile__text,
+                    style.profile__text__clickable
+                  )}
                   style={{
                     paddingRight: "9px",
                     borderRight: "1px solid #E2E3E2",
+                  }}
+                  onClick={() => {
+                    setCurrentType(4);
+                    router.push("../../activity/" + profileUser?.twitterId);
                   }}
                 >
                   <span>{profileUser?.isFollowing?.length || 0}</span> Following
                 </div>
                 <div
-                  className={style.profile__text}
+                  className={classNames(
+                    style.profile__text,
+                    style.profile__text__clickable
+                  )}
                   style={{ marginLeft: "8px" }}
+                  onClick={() => {
+                    setCurrentType(3);
+                    router.push("../../activity/" + profileUser?.twitterId);
+                  }}
                 >
                   <span>{profileUser?.isFollowedBy?.length || 0}</span>{" "}
                   Followers
@@ -267,7 +285,10 @@ const Profile = observer(() => {
               </div>
               <div className={style.profile__stats__follow}>
                 <div
-                  className={style.profile__text}
+                  className={classNames(
+                    style.profile__text,
+                    style.profile__text__clickable
+                  )}
                   style={{
                     paddingRight: "9px",
                     borderRight: "1px solid #E2E3E2",
@@ -283,7 +304,10 @@ const Profile = observer(() => {
                 </div>
 
                 <div
-                  className={style.profile__text}
+                  className={classNames(
+                    style.profile__text,
+                    style.profile__text__clickable
+                  )}
                   style={{ marginLeft: "8px", cursor: "pointer" }}
                   onClick={() => {
                     setCurrentType(1);
@@ -342,7 +366,7 @@ const Profile = observer(() => {
         </div>
       ) : (
         <div className={style.profile__loading}>
-          <img src="../spinner.gif"/>
+          <img src="../spinner.gif" />
         </div>
       )}
     </>

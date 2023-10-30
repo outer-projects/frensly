@@ -13,7 +13,7 @@ const User = observer(({ stage }: { stage: string }) => {
     getCurrentTier()
   },[])
   return (
-    <div className={style.finance__row}>
+    <div className={style.user__row}>
       <div className={style.finance__title}>
         <img src={user?.avatar} className={style.finance__avatar} />
         <div>

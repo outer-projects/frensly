@@ -1,12 +1,17 @@
 @import "../../styles/_vars.sass";
-
+.profile__type__mob {
+  display: none;
+  @media (max-width: 600px) {
+    display: block;
+  }
+}
 .profile {
   margin-top: 32px;
   width: 616px;
   @media (max-width: 616px) {
-    width: calc(100% - 48px);
+    width: calc(100% - 16px);
     margin-top: 24px;
-    margin-left: 24px;
+    margin-left: 8px;
   }
 }
 .profile__info {
@@ -77,6 +82,7 @@
   align-items: center;
   margin-top: 16px;
   margin-left: 24px;
+  margin-right: 24px;
   @media (max-width: 616px) {
     margin-left: 0px;
     margin-right: 0px;
@@ -161,6 +167,9 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  @media (max-width: 616px) {
+    flex-direction: column;
+  }
 }
 .profile__loading {
   display: flex;
@@ -217,6 +226,12 @@
   @media (max-width: 616px) {
     margin-left: 0px;
     margin-right: 0px;
+  }
+}
+.profile__text__clickable {
+  cursor: pointer;
+  &:hover {
+    text-decoration: underline;
   }
 }
 .profile__text {
@@ -335,8 +350,8 @@
 }
 .twitter__textarea__comment {
   width: 456px !important;
-  @media (max-width:600px) {
-    width: 100%;
+  @media (max-width: 600px) {
+    width: calc(100vw - 80px);
   }
 }
 .twitter__textarea {
@@ -374,6 +389,10 @@
   padding-top: 25px;
   padding-left: 24px;
   padding-right: 24px;
+  @media (max-width: 616px) {
+    padding-left: 8px;
+    padding-right: 8px;
+  }
 }
 .profile__types {
   display: flex;
@@ -523,8 +542,8 @@
   margin-top: 8px;
   object-fit: contain;
   cursor: pointer;
-  @media (max-width:600px) {
-    width: 100%;
+  @media (max-width: 600px) {
+    width: calc(100vw - 80px);
   }
 }
 .twitter__image__com {
@@ -539,24 +558,22 @@
   font-weight: 400;
   line-height: 20px; /* 142.857% */
   letter-spacing: -0.14px;
-  max-width: 456px;
+  width: 456px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: pre-wrap;
-  min-width: 456px;
-  @media (max-width:600px) {
-    max-width: 100%;
-    min-width: 100%;
+  @media (max-width: 600px) {
+    width: calc(100vw - 80px);
   }
 }
-.twitter__text__comm {
-  max-width: 400px !important;
-  min-width: 400px !important;
-  @media (max-width:600px) {
-    max-width: 100%;
-    min-width: 100%;
-  }
-}
+// .twitter__text__comm {
+//   max-width: 400px !important;
+//   min-width: 400px !important;
+//   @media (max-width: 600px) {
+//     max-width: 100%;
+//     min-width: 100%;
+//   }
+// }
 .twitter__time {
   color: #b4b4b3;
   font-size: 14px;

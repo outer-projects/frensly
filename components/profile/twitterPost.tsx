@@ -109,8 +109,10 @@ const TwitterPost = observer(
                         : router.push("/posts/" + post.originalPost);
                     }}
                   />
-                ) : (
+                ) : isComment ? (
                   <div style={{ width: "32px" }} />
+                ) : (
+                  <div style={{ width: "11px" }} />
                 )}
                 <Link href={"/profile/" + post?.user.twitterId}>
                   <img

@@ -12,8 +12,9 @@
   width: 616px;
   min-height: calc(100vh - 76px);
   @media (max-width: 616px) {
-    max-width: calc(100%);
+    max-width: calc(100% - 16px);
     margin-top: 24px;
+    margin-left: 8px;
   }
 }
 .explore__row {
@@ -32,9 +33,13 @@
     margin-left: 10px;
   }
 }
-.explore__type {
+.feed__type {
   margin-top: 48px;
   margin-bottom: 24px;
+  @media (max-width: 600px) {
+    margin-top: -12px;
+    margin-bottom: 12px;
+  }
 }
 .finance__page {
   min-height: calc(100vh - 76px);

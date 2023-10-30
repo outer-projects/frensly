@@ -91,6 +91,7 @@
   background: rgba(252, 252, 253, 0.7);
   border-bottom: 1px solid #f4f5f6;
   padding-bottom: 19px;
+  width: 100vw;
 }
 .header__row {
   display: flex;
@@ -148,6 +149,9 @@
     font-weight: bold;
     line-height: 24px;
     letter-spacing: -0.16px;
+    &:hover {
+      text-decoration: underline;
+    }
   }
   .address {
     color: $grey;

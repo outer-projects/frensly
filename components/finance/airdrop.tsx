@@ -1,8 +1,5 @@
 import classNames from "classnames";
 import style from "./finance.module.scss";
-import Link from "next/link";
-import explore from "../explore/explore.module.scss";
-import User from "./user";
 import { useRouter } from "next/router";
 import Sidebar from "./sidebar";
 import { observer } from "mobx-react";
@@ -16,6 +13,8 @@ import EthereumIcon from "../socials/ethereum";
 import { fromWeiToEth } from "../../utils/utilities";
 import Heart from "../socials/twitterUI/Heart";
 import Follow from "../socials/twitterUI/Follow";
+import TypesList from "../common/typesList";
+import { types } from "./invite";
 const getOutputByKey = (require: any, progress: any) => {
   // console.log(require);
   if (require[0] == "isFollowing") {
@@ -134,7 +133,9 @@ const getOutputByKey = (require: any, progress: any) => {
           <Heart color={progress[1] >= require[1] ? "#A6D000" : "#676766"} />
         </div>
         <div className={style.finance__text}>
-          <div className={style.finance__total__text}>Get at least 3 Likes on your post</div>
+          <div className={style.finance__total__text}>
+            Get at least 3 Likes on your post
+          </div>
           <div className={style.finance__total__count}>
             {progress[1] + " / " + require[1]}
           </div>
@@ -164,14 +165,24 @@ const getOutputByKey = (require: any, progress: any) => {
   }
 };
 const Airdrop = observer(() => {
-  const [keysReady, setKeysReady] = useState(false)
+  const [active, setActive] = useState(2);
+
+  const [keysReady, setKeysReady] = useState(false);
   const { user } = useInjection(Web3Store);
   const { getKeys, currentRequire, currentProgress, finished } =
     useInjection(UserStore);
-
+  const router = useRouter();
+  useEffect(() => {
+    if (active == 0) {
+      router.push("/dashboard/finance");
+    }
+    if (active == 1) {
+      router.push("/dashboard/invite");
+    }
+  }, [active]);
   useEffect(() => {
     if (user && !keysReady) {
-      setKeysReady(true)
+      setKeysReady(true);
       getKeys();
     }
   }, [user]);
@@ -180,17 +191,8 @@ const Airdrop = observer(() => {
       <Sidebar />
 
       <div className={style.finance__container}>
-        <div className={style.finance__titles}>
-          <div className={classNames(explore.explore__title, style.mob__link)}>
-            <Link href={"/dashboard/finance"}>Funds</Link>
-          </div>
-          <div className={classNames(explore.explore__title, style.mob__link)}>
-            <Link href={"/dashboard/invite"}>Referrals</Link>
-          </div>
-          <div className={explore.explore__title}>Airdrop</div>
-        </div>
+        <TypesList active={active} setActive={setActive} types={types} />
         <div className={style.finance}>
-          <User stage="airdrop" />
           {!finished && (
             <>
               <div className={style.finance__invite}>Tier system</div>
