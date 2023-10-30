@@ -4,8 +4,9 @@
   top: auto;
   width: 100vw;
   left: 0;
+  height: 56px;
   background: #fbfbfb;
-  display: none; 
+  display: none;
   @media (max-width: 1000px) {
     display: block;
   }
@@ -22,7 +23,15 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  color: $grey;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px; /* 166.667% */
+  letter-spacing: -0.12px;
 }
 .footer__link__active {
   background: #f1f1f1;
+  color: $black !important;
+  font-weight: bold !important;
 }

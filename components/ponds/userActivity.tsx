@@ -28,8 +28,6 @@ const UserActivity = observer(() => {
     getProfileUser,
     getHolders,
     getShares,
-    shares,
-    holders,
     history,
     getHistory,
     currentType,
@@ -97,10 +95,12 @@ const UserActivity = observer(() => {
             </div>
           </div>
         </div>
-        {active == 0 && id && profileUser && (
-          <Holders id={id as string} user={profileUser} />
+        {active == 0 && profileUser?._id && (
+          <Holders id={profileUser?._id as string} user={profileUser} />
         )}
-        {active == 1 && id && <Holdings id={id as string} />}
+        {active == 1 && profileUser?._id && (
+          <Holdings id={profileUser?._id as string} />
+        )}
         {active == 2 && (
           <div className={style.ponds__chat}>
             {history?.map((el) => {
@@ -109,8 +109,12 @@ const UserActivity = observer(() => {
             })}
           </div>
         )}
-        {active == 3 && id && <Followers id={id as string} />}
-        {active == 4 && id && <Followings id={id as string} />}
+        {active == 3 && profileUser?._id && (
+          <Followers id={profileUser?._id as string} />
+        )}
+        {active == 4 && profileUser?._id && (
+          <Followings id={profileUser?._id as string} />
+        )}
       </div>
     </div>
   );
