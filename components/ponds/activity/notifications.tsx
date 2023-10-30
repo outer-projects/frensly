@@ -4,7 +4,6 @@ import { useInjection } from "inversify-react";
 import { useEffect } from "react";
 import { UserStore } from "../../../stores/UserStore";
 import explore from "../../explore/explore.module.scss";
-import OneNotification from "../../notifications/oneNotification";
 import OneNotificationPage from "../../notifications/oneNotificationPage";
 
 const Notifications = observer(() => {

@@ -100,19 +100,18 @@ const TwitterPost = observer(
             >
               <div style={{ display: "flex", alignItems: "center" }}>
                 {isOnePostPage ? (
-                  <Link
-                    href={
+                  <img
+                    src={"../../icons/arrow_back.svg"}
+                    style={{ marginRight: "8px" }}
+                    onClick={() => {
                       !isComment
-                        ? "/profile/" + post?.user.twitterId
-                        : "/posts/" + post.originalPost
-                    }
-                  >
-                    <img
-                      src={"../../icons/arrow_back.svg"}
-                      style={{ marginRight: "8px" }}
-                    />
-                  </Link>
-                ) : <div style={{width:'32px'}}/>}
+                        ? router.back()
+                        : router.push("/posts/" + post.originalPost);
+                    }}
+                  />
+                ) : (
+                  <div style={{ width: "32px" }} />
+                )}
                 <Link href={"/profile/" + post?.user.twitterId}>
                   <img
                     className={style.twitter__avatar}

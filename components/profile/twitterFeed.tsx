@@ -30,6 +30,8 @@ const TwitterFeed = observer(
       clearUserPosts,
       getFrensFeed,
       frensFeed,
+      updateFrensFeed,
+      updateFeed,
       updateUserPosts
     } = useInjection(FeedStore);
     const { user } = useInjection(Web3Store);
@@ -47,9 +49,9 @@ const TwitterFeed = observer(
       if (id) {
         getUserPosts(id);
       } else if (isFrens) {
-        getFrensFeed();
+        updateFrensFeed();
       } else {
-        getFeed();
+        updateFeed();
       }
     };
     useEffect(() => {
@@ -63,9 +65,9 @@ const TwitterFeed = observer(
       }
     };
     const getFeedPosts = () => {
-      if (isFrens && frensFeed.length == 0) {
+      if (isFrens) {
         getFrensFeed();
-      } else if (feed.length == 0) {
+      } else {
         getFeed();
       }
     };

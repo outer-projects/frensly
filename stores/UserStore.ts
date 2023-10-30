@@ -116,8 +116,12 @@ export class UserStore {
     }
   };
   @action getAllNotifications = async () => {
+    const query = new URLSearchParams({
+      offset: "0",
+      limit: "30",
+    }).toString();
     try {
-      const res = await axios.get(prefix + "user/notifications/all");
+      const res = await axios.get(prefix + "user/notifications/all?" + query);
       // console.log("All notifications:", res);
       this.notificationsAll = res.data;
       return true;

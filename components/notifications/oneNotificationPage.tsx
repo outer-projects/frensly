@@ -16,27 +16,7 @@ const OneNotificationPage = observer(
         notification?.type == "COMMENT",
       [notification]
     );
-    const message = useMemo(() => {
-      if (isSocial) {
-        return notification?.source?.text &&
-          notification?.source?.text?.length >= 30
-          ? notification?.source?.text?.slice(0, 30) + "..."
-          : notification?.source?.text;
-      } else if (notification.type == "MENTION") {
-        let messages = notification?.source?.messages?.filter(
-          (el: any) =>
-            el?.text.includes(user?.twitterId) &&
-            el?.date.slice(0, 19) == notification?.date.slice(0, 19)
-        );
-        return messages.length !== 0 && messages[0]?.text.length >= 30
-          ? messages[0]?.text
-              .slice(0, 30)
-              .replace("@{" + user?.twitterId + "}", "") + "..."
-          : messages[0]?.text?.replace("@{" + user?.twitterId + "}", "");
-      } else {
-        return "";
-      }
-    }, [isSocial]);
+
     const isMessage = useMemo(
       () => notification?.type == "MENTION",
       [notification]
@@ -74,7 +54,6 @@ const OneNotificationPage = observer(
             <div>
               <div className={style.nots__one__text}>
                 {shortNick(notification?.account?.profile?.twitterName)}{" "}
-                
                 {getActivity(
                   notification?.type,
                   notification?.source?.originalPost
@@ -88,8 +67,8 @@ const OneNotificationPage = observer(
               </div>
               <div className={style.nots__one__info}>
                 <div className={style.nots__one__time}>
-                  {isSocial || notification.type == "MENTION"
-                    ? message
+                  {notification.text
+                    ? notification.text
                     : timePassed(notification?.date) + " ago"}{" "}
                 </div>
               </div>

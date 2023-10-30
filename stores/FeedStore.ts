@@ -21,6 +21,20 @@ export class FeedStore {
   }
   @action getFrensFeed = async () => {
     const query = new URLSearchParams({
+      offset: "0",
+      limit: "100",
+    }).toString();
+    try {
+      const res = await axios.get(prefix + "social/posts/verified?" + query);
+      // console.log(res.data);
+      this.feedFrensOffset = 100;
+      this.frensFeed = res.data;
+    } catch (e) {
+      console.log(e);
+    }
+  };
+  @action updateFrensFeed = async () => {
+    const query = new URLSearchParams({
       offset: this.feedFrensOffset.toString(),
       limit: "100",
     }).toString();
@@ -34,6 +48,20 @@ export class FeedStore {
     }
   };
   @action getFeed = async () => {
+    const query = new URLSearchParams({
+      offset: "0",
+      limit: "100",
+    }).toString();
+    try {
+      const res = await axios.get(prefix + "social/posts?" + query);
+      // console.log(res.data);
+      this.feedOffset = 100;
+      this.feed = res.data;
+    } catch (e) {
+      console.log(e);
+    }
+  };
+  @action updateFeed = async () => {
     const query = new URLSearchParams({
       offset: this.feedOffset.toString(),
       limit: "100",
