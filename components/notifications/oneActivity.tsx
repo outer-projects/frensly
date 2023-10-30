@@ -41,45 +41,58 @@ export const getActivity = (type: string, isOriginalPost?: string) => {
 };
 const OneActivity = ({ activity }: { activity: any }) => {
   return (
-    <div className={style.activity__one}>
-      <div className={style.activity__one__left}>
-        <div className={style.activiy__one__users}>
-          <img src={activity?.account?.profile?.avatar} />
-          <img src={activity?.subject?.profile?.avatar} />
-        </div>
-        <div>
-          <div className={style.nots__one__text}>
-            <span>
-              <Link href={"/profile/" + activity?.account?.profile?.twitterId}>
-                {shortNick(activity?.account?.profile?.twitterName)}
-              </Link>{" "}
-            </span>
-            {getActivity(activity?.type, activity?.source?.originalPost)}{" "}
-            {activity?.type !== "INIT" && Number(activity?.amount) / 10 ** 6}{" "}
-            {activity?.type !== "INIT" &&
-              activity?.type !== "OWN_BUY" &&
-              activity?.type !== "OWN_SELL" && (
-                <span>
-                  <Link
-                    href={"/profile/" + activity?.subject?.profile?.twitterId}
-                  >
-                    {shortNick(activity?.subject?.profile?.twitterName)}
-                  </Link>{" "}
-                </span>
-              )}
-            {(activity?.type == "OWN_BUY" || activity?.type == "OWN_SELL") &&
-              "my shares"}
+    <div className={style.activity__one__container}>
+      <div className={style.activity__one}>
+        <div className={style.activity__one__left}>
+          <div className={style.activiy__one__users}>
+            <img src={activity?.account?.profile?.avatar} />
+            <img src={activity?.subject?.profile?.avatar} />
           </div>
-          <div className={style.nots__one__info}>
-            <div className={style.activiy__one__time}>
-              {timePassed(activity.date)} ago
+          <div>
+            <div className={style.nots__one__text}>
+              <span>
+                <Link
+                  href={"/profile/" + activity?.account?.profile?.twitterId}
+                >
+                  {shortNick(activity?.account?.profile?.twitterName)}
+                </Link>{" "}
+              </span>
+              {getActivity(activity?.type, activity?.source?.originalPost)}{" "}
+              {activity?.type !== "INIT" && Number(activity?.amount) / 10 ** 6}{" "}
+              {activity?.type !== "INIT" &&
+                activity?.type !== "OWN_BUY" &&
+                activity?.type !== "OWN_SELL" && (
+                  <span>
+                    <Link
+                      href={"/profile/" + activity?.subject?.profile?.twitterId}
+                    >
+                      {shortNick(activity?.subject?.profile?.twitterName)}
+                    </Link>{" "}
+                  </span>
+                )}
+              {(activity?.type == "OWN_BUY" || activity?.type == "OWN_SELL") &&
+                "my shares"}
+            </div>
+            <div className={style.nots__one__info}>
+              <div className={style.activiy__one__time}>
+                {timePassed(activity.date)} ago
+              </div>
             </div>
           </div>
+        </div>
+        <div
+          className={classNames(
+            style.activiy__one__price,
+            activity?.type.includes("SELL") && style.activiy__one__price__sell
+          )}
+        >
+          <img src="../icons/Ethereum.svg" />
+          {fromWeiToEth(activity.price)} ETH
         </div>
       </div>
       <div
         className={classNames(
-          style.activiy__one__price,
+          style.activiy__one__price__mobile,
           activity?.type.includes("SELL") && style.activiy__one__price__sell
         )}
       >
