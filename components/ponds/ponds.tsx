@@ -1,6 +1,6 @@
 import style from "./ponds.module.scss";
 import explore from "../explore/explore.module.scss";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import TypesList from "../common/typesList";
 import { observer } from "mobx-react";
 import { useInjection } from "inversify-react";
@@ -24,11 +24,13 @@ const types = [
   "Followings",
 ];
 const Ponds = observer(() => {
+  const [sharesReady, setSharesReady] = useState(false)
   const { user } = useInjection(Web3Store);
   const { portfolioValue, myActive, setMyActive, getShares } =
     useInjection(UserStore);
   useEffect(() => {
-    if (user) {
+    if (user && !sharesReady) {
+      setSharesReady(true)
       getShares(user?._id as string);
     }
   }, [user]);
