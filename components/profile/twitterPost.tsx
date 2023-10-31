@@ -50,13 +50,15 @@ const TwitterPost = observer(
       const result = text ? text.map((s: any) => s.slice(1, s.length - 1)) : [];
       return result;
     }, []);
+
     console.log(mentions);
     const tagGet = (text: string) => {
       text.replace(">", "").replace("<", "");
       var tagRegex = /[^{\}]+(?=})/g
       return text.replace(tagRegex, function (url) {
-        return '<span onсlick="()=>console.log("hi")" style="color: #a6d000; font-weight: bold">' + url + "</span>";
-      });
+        return `<span ><a href="/profile/${url}" style="color: #a6d000!important; cursor: pointer; font-weight: bold">'${url}"</a></span>`;
+      }).replace('{', '').replace('}', '');
+      
     };
     function linkify(text: string) {
       var urlRegex =

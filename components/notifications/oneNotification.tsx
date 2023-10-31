@@ -12,7 +12,8 @@ const OneNotification = observer(({ notification }: { notification: any }) => {
     () =>
       notification?.type == "LIKE" ||
       notification?.type == "REPOST" ||
-      notification?.type == "COMMENT",
+      notification?.type == "COMMENT" ||
+      (notification?.type == "MENTION" && notification?.sourceModel == "post"),
     [notification]
   );
   const message = useMemo(() => {
@@ -26,7 +27,8 @@ const OneNotification = observer(({ notification }: { notification: any }) => {
     }
   }, [isSocial]);
   const isMessage = useMemo(
-    () => notification?.type == "MENTION",
+    () =>
+      notification?.type == "MENTION" && notification?.sourceModel !== "post",
     [notification]
   );
   const isTrade = useMemo(
