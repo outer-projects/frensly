@@ -96,7 +96,7 @@ const TwitterPost = observer(
         const res = await axios.get(
           "/api/v1/user/get/byids/?" + query.toString()
         );
-        setHandles(res.data);
+        setHandles(res.data.handles);
       } catch (e) {
         console.log(e);
       }
@@ -199,7 +199,7 @@ const TwitterPost = observer(
                   )}
                 >
                   <Linkify
-                    componentDecorator={componentDecorator}
+                    // componentDecorator={componentDecorator}
                     properties={{
                       target: "_blank",
                       style: {

@@ -22,6 +22,7 @@ const getUserById = (id: string, members: IProfile[]) => {
 const OneMessage = observer(({ el, roomId, members }: any) => {
   const { user } = useInjection(Web3Store);
   const modalStore = useInjection(ModalStore);
+
   const mentions = useMemo(() => {
     const text = el.text.match(/{[\w\s]+}/g);
     const result = text ? text.map((s: any) => s.slice(1, s.length - 1)) : [];
