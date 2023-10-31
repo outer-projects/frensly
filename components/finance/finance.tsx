@@ -53,8 +53,6 @@ const Finance = observer(() => {
       });
       // console.log(res);
       setClaimValue("0");
-      checkAuth();
-      getClaim();
     } catch (e) {
       console.log(e);
     }

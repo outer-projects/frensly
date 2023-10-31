@@ -93,23 +93,20 @@ const TwitterFeed = observer(
             ?.map((el, i) => {
               if (!el.isRepost && !el.originalPost) {
                 //@ts-ignore
-                
-                
+
                 return (
                   <div key={el._id}>
                     <TwitterPost post={el} isProfile={isProfile} />
-                    {i +'/'+ currentFeed.length}
+
                     {i !== 0 && i % 29 == 0 && (
                       <InView
                         as="div"
                         triggerOnce
                         onChange={(inView, entry) => {
                           if (inView && isFeed) {
-                            
                             console.log("inview");
                             updatePosts();
                           } else if (inView && isProfile) {
-                            
                             updateUserPosts(id as string);
                           }
                         }}
@@ -155,6 +152,20 @@ const TwitterFeed = observer(
                           isRepost
                           isProfile={isProfile}
                         />
+                        {i !== 0 && i % 29 == 0 && (
+                          <InView
+                            as="div"
+                            triggerOnce
+                            onChange={(inView, entry) => {
+                              if (inView && isFeed) {
+                                console.log("inview");
+                                updatePosts();
+                              } else if (inView && isProfile) {
+                                updateUserPosts(id as string);
+                              }
+                            }}
+                          ></InView>
+                        )}
                       </>
                     )}
                   </div>

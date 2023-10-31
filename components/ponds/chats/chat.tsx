@@ -47,7 +47,7 @@ const Chat = observer(() => {
   useEffect(() => {
     let tt = setTimeout(() => {
       setOpacity(true);
-    }, 1000);
+    }, 5000);
     return () => {
       clearTimeout(tt);
     };

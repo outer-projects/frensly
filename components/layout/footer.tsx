@@ -25,7 +25,6 @@ const Footer = observer(() => {
     if (router.asPath) {
       console.log(router.asPath);
       setActive(router.asPath);
-      checkAuth();
     }
     if (router.asPath.includes("/ponds/")) {
       setDisabled(true);
