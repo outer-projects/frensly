@@ -77,6 +77,14 @@ const MessageSend = observer(({ id }: { id?: string }) => {
             // console.log(e.key);
             let after = e.target.value.split("@");
             // console.log(after[after.length - 1]);
+            let key = e.target.value.substring(e.target.value.length - 1)
+            console.log(key);
+            if (key == "@") {
+              setOpenMentions(true);
+            }
+            if(!e.target.value.includes('@')) {
+              setOpenMentions(false)
+            }
             if (openMentions) {
               setMent(after[after.length - 1]);
             } else {

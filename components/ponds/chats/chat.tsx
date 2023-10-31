@@ -32,6 +32,7 @@ const Chat = observer(() => {
     getChat,
     sendMessage,
     removeChat,
+    getMyChats,
     updateChat,
     messages,
     setMessagesLeft,
@@ -94,6 +95,7 @@ const Chat = observer(() => {
     if (id) {
       console.log("id is: ", id);
       getChat(id as string);
+      getMyChats()
     }
   }, [id]);
 

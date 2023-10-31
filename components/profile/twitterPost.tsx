@@ -143,7 +143,15 @@ const TwitterPost = observer(
                     {timePassed(post?.date)}
                   </div>
                 </div>
-                <Linkify properties={{ target: "_blank" }}>
+                <Linkify
+                  properties={{
+                    target: "_blank",
+                    style: {
+                      textDecoration: "underline",
+                      color: "black",
+                    },
+                  }}
+                >
                   <div
                     className={classNames(
                       style.twitter__text
