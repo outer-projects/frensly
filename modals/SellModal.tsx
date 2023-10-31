@@ -31,7 +31,7 @@ export const SellModal = observer(({ key, data, idx }: modalProps) => {
     try {
       const res = await frensly.methods
         .sellShares(
-          data.user?.account?.address,
+          data.user?.account?.address || data.user?.address,
           Number(numberOfShares) * 10 ** 6
         )
         .send({
@@ -49,7 +49,7 @@ export const SellModal = observer(({ key, data, idx }: modalProps) => {
   const checkPrice = async (num: number) => {
     try {
       const res = await frensly.methods
-        .getSellPriceAfterFee(data.user?.account?.address, Number(num) * 10 ** 6)
+        .getSellPriceAfterFee(data.user?.account?.address || data.user?.address, Number(num) * 10 ** 6)
         .call();
       // console.log(res);
       return res
@@ -67,7 +67,7 @@ export const SellModal = observer(({ key, data, idx }: modalProps) => {
   const ownCount = async () => {
     try {
       const res = await frensly.methods
-        .sharesBalance(data?.user?.account?.address, address)
+        .sharesBalance(data?.user?.account?.address || data.user?.address, address)
         .call();
       // console.log(res);
       setCount(Number(res)/(10 ** 6));

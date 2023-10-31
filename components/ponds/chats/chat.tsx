@@ -115,7 +115,7 @@ const Chat = observer(() => {
         <div className={style.openchat}>
           {" "}
           {/* <div className={explore.explore__title}>
-            {chat?.owner?.twitterName} pond
+            {chat?.profile?.twitterName} pond
           </div> */}
           <div className={style.openchat__info}>
             <div className={style.openchat__user}>
@@ -128,7 +128,7 @@ const Chat = observer(() => {
                 </Link>
                 <img
                   className={style.openchat__avatar}
-                  src={chat?.owner?.avatar}
+                  src={chat?.profile?.avatar}
                 />
                 <div className={style.openchat__user__left__text}>
                   <div
@@ -136,19 +136,19 @@ const Chat = observer(() => {
                     style={{ cursor: "pointer" }}
                   >
                     <Link
-                      href={"../../profile/" + chat?.owner.twitterId}
+                      href={"../../profile/" + chat?.profile.twitterId}
                       style={{ color: "#151614" }}
                     >
-                      {chat?.owner?.twitterName}
+                      {chat?.profile?.twitterName}
                     </Link>
 
                     <a
                       className={style.twitter__redirect}
-                      href={"https://twitter.com/" + chat?.owner?.twitterHandle}
+                      href={"https://twitter.com/" + chat?.profile?.twitterHandle}
                       rel="noreferrer"
                       target="_blank"
                     >
-                      @{chat?.owner?.twitterHandle}
+                      @{chat?.profile?.twitterHandle}
                     </a>
                   </div>
 
@@ -156,7 +156,7 @@ const Chat = observer(() => {
                 </div>
               </div>
               <div className={style.openchat__user__right}>
-                <Link href={"../../activity/" + chat?.owner?.twitterId}>
+                <Link href={"../../activity/" + chat?.profile?.twitterId}>
                   <button
                     className={classNames(
                       header.connect__button,
@@ -173,11 +173,11 @@ const Chat = observer(() => {
                   )}
                   onClick={() =>
                     modalStore.showModal(ModalsEnum.Trade, {
-                      user: chat?.owner,
+                      user: chat?.profile,
                     })
                   }
                 >
-                  Buy
+                  Trade
                 </button>
               </div>
             </div>
@@ -191,8 +191,8 @@ const Chat = observer(() => {
                 {" "}
                 <div className={style.openchat__share__value}>
                   <img src="../../icons/Ethereum.svg" />
-                  {chat?.owner?.account.currentPrice &&
-                    fromWeiToEth(chat.owner?.account.currentPrice)}{" "}
+                  {chat?.profile?.userAccount.currentPrice &&
+                    fromWeiToEth(chat.profile?.userAccount.currentPrice)}{" "}
                   ETH
                 </div>
                 <div className={style.openchat__shares}> per 1 share</div>
@@ -205,20 +205,20 @@ const Chat = observer(() => {
                   style={{ marginRight: "17px", cursor: "pointer" }}
                   onClick={() => {
                     setCurrentType(0);
-                    router.push("../../activity/" + chat?.owner?.twitterId);
+                    router.push("../../activity/" + chat?.profile?.twitterId);
                   }}
                 >
-                  <span>{chat?.owner?.account?.myHolders?.length}</span> Holders
+                  <span>{chat?.profile?.userAccount?.myHolders}</span> Holders
                 </div>
                 <div
                   className={style.openchat__shares}
                   style={{ cursor: "pointer" }}
                   onClick={() => {
                     setCurrentType(1);
-                    router.push("../../activity/" + chat?.owner?.twitterId);
+                    router.push("../../activity/" + chat?.profile?.twitterId);
                   }}
                 >
-                  <span>{chat?.owner?.account?.othersShares?.length}</span>{" "}
+                  <span>{chat?.profile?.userAccount?.othersShares}</span>{" "}
                   Holding
                 </div>
               </div>
@@ -234,7 +234,7 @@ const Chat = observer(() => {
                       <OneMessage
                         el={el}
                         roomId={chat._id}
-                        members={chat.members}
+                        members={chat.memberDetails}
                       />
                       {i == 1 && messagesleft !== 0 && (
                         <InView
@@ -271,7 +271,7 @@ const Chat = observer(() => {
               newMsg={newMsg}
               setNewMsg={setNewMsg}
               file={file}
-              members={chat.members}
+              members={chat.memberDetails}
               setFile={setFile}
               onSend={() => {
                 sendMessage(id as string, newMsg, file);

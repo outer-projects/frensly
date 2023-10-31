@@ -11,7 +11,6 @@ import Chats from "./activity/chats";
 import History from "./activity/history";
 import Holders from "./activity/holders";
 import Holdings from "./activity/holdings";
-import Notifications from "./activity/notifications";
 import Followers from "./activity/followers";
 import Followings from "./activity/followings";
 

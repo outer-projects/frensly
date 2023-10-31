@@ -97,7 +97,6 @@
   margin-right: 8px;
   cursor: pointer;
   @media (max-width: 600px) {
-    
   }
 }
 .explore__type {
@@ -203,6 +202,16 @@
   overflow: hidden;
   &:hover {
     text-decoration: underline;
+  }
+  a {
+    margin-left: 4px;
+    font-size: 14px;
+    font-family: "DMSans";
+    font-weight: 400;
+    color: #5a5a5a;
+    &:hover {
+      text-decoration: underline;
+    }
   }
 }
 .explore__search__active {

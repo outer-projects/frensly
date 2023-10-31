@@ -21,7 +21,7 @@ interface modalProps {
 export const TradeModal = observer(({ key, data, idx }: modalProps) => {
   const modalStore = useInjection(ModalStore);
   const { frensly, address, checkAuth } = useInjection(Web3Store);
-  const [priceOfOne, setPriceOfOne] = useState('0');
+  const [priceOfOne, setPriceOfOne] = useState("0");
   const [count, setCount] = useState(0);
   const sell = async () => {
     modalStore.hideModal(ModalsEnum.Trade);
@@ -35,7 +35,7 @@ export const TradeModal = observer(({ key, data, idx }: modalProps) => {
     try {
       const res = await frensly.methods
         .getSellPriceAfterFee(
-          data.user?.account?.address,
+          data.user?.account?.address || data.user?.address,
           Number(num) * 10 ** 6
         )
         .call();
@@ -55,7 +55,7 @@ export const TradeModal = observer(({ key, data, idx }: modalProps) => {
   const ownCount = async () => {
     try {
       const res = await frensly.methods
-        .sharesBalance(data?.user?.account?.address, address)
+        .sharesBalance(data?.user?.account?.address || data.user?.address, address)
         .call();
       // console.log(res);
       setCount(Number(res) / 10 ** 6);
@@ -85,10 +85,7 @@ export const TradeModal = observer(({ key, data, idx }: modalProps) => {
           </div>
           <div className={style.buy__user}>
             <div className={style.buy__user__left}>
-              <img
-                className={style.buy__avatar}
-                src={data.user?.avatar}
-              />
+              <img className={style.buy__avatar} src={data.user?.avatar} />
               <div className={style.buy__user__left__text}>
                 <div className={style.buy__user__name}>
                   {data.user?.twitterName}

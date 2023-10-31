@@ -32,7 +32,18 @@ const ExploreRow = observer(({ el }: { el: IProfile }) => {
               )?.length >= 1 && <img src="../icons/Key.svg" />}
               <div>{Number(el?.account?.sharesAmount) / 10 ** 6} share</div>
             </div>
-            <div className={style.explore__user__name}>{shortNick(el.twitterName)}</div>
+            <div className={style.explore__user__name}>
+              {shortNick(el.twitterName)}
+              <span>
+                <a
+                  href={"https://twitter.com/" + el.twitterHandle}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  @{el.twitterHandle}
+                </a>
+              </span>
+            </div>
           </div>
         </div>
         <div className={style.explore__user__right}>
