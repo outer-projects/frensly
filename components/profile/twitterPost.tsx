@@ -213,7 +213,11 @@ const TwitterPost = observer(
                   )}
                 >
                   {/* @ts-ignore */}
-                  <div dangerouslySetInnerHTML={tagGet(linkify(postText))}></div>
+                  <div
+                    dangerouslySetInnerHTML={{
+                      __html: tagGet(linkify(postText)),
+                    }}
+                  ></div>
                 </div>
 
                 {post.media && (
