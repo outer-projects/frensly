@@ -8,10 +8,6 @@ export default function Document() {
         <link rel="icon" type="image/png" href="/logo_icon.svg" />
         <link rel="icon" type="image/png" href="/logo_icon.svg" />
         <link rel="apple-touch-icon" href="/logo_icon.svg" />
-        <meta
-          name="viewport"
-          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
-        ></meta>
       </Head>
       <body>
         <Main />
