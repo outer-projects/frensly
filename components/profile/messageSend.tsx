@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import style from "./profile.module.scss";
+import write from "../ponds/ponds.module.scss";
 import classNames from "classnames";
 import header from "../layout/header.module.scss";
 import TextareaAutosize from "react-textarea-autosize";
@@ -7,28 +8,57 @@ import { useInjection } from "inversify-react";
 import { FeedStore } from "../../stores/FeedStore";
 import { observer } from "mobx-react";
 import Web3Store from "../../stores/Web3Store";
+import { ExploreStore } from "../../stores/ExploreStore";
 
 const MessageSend = observer(({ id }: { id?: string }) => {
   const [message, setMessage] = useState("");
+  const [openMentions, setOpenMentions] = useState(false);
   const [focus, setFocus] = useState(false);
   const [image, setImage] = useState<File | null>(null);
   const { user } = useInjection(Web3Store);
+  const [ment, setMent] = useState("");
+  const [tt, updateTimeout] = useState<any>(undefined);
   const { addPost } = useInjection(FeedStore);
-  // const onKeyDown = (e: any) => {
-  //   if (e.key == "Enter") {
-  //     setMessage(message + "n/")
-  //   }
-  // };
-  // useEffect(() => {
-  //   window.addEventListener("keydown", onKeyDown);
-
-  //   return () => {
-  //     window.removeEventListener("keydown", onKeyDown);
-  //   };
-  // }, [message]);
+  const { searchUsers, mentionSearch } = useInjection(ExploreStore);
+  const searchDeb = (fn: any, ms: number) => {
+    const clear = () => {
+      clearTimeout(tt);
+      updateTimeout(setTimeout(fn, ms));
+    };
+    return clear();
+  };
+  const saveInput = () => {
+    searchUsers(ment, "mention");
+  };
+  console.log(ment);
+  useEffect(() => {
+    searchDeb(saveInput, 700);
+  }, [ment]);
+  const mention = (el: string) => {
+    setMessage(message.replace(ment, "") + "{" + el + "} ");
+    setOpenMentions(false);
+  };
   return (
     <div>
       <div>
+        {openMentions && (
+          <div className={write.write__mentions}>
+            {mentionSearch
+              .filter((el) => el.twitterId !== user?.twitterId)
+
+              .map((el: any, i: number) => {
+                return (
+                  <div
+                    className={write.write__mention}
+                    key={i}
+                    onClick={() => mention(el.twitterHandle)}
+                  >
+                    @{el.twitterHandle}
+                  </div>
+                );
+              })}
+          </div>
+        )}
         <TextareaAutosize
           value={message}
           style={{ resize: "none" }}
@@ -45,6 +75,13 @@ const MessageSend = observer(({ id }: { id?: string }) => {
           }}
           onChange={(e: any) => {
             // console.log(e.key);
+            let after = e.target.value.split("@");
+            // console.log(after[after.length - 1]);
+            if (openMentions) {
+              setMent(after[after.length - 1]);
+            } else {
+              setMent("");
+            }
             setMessage(e.target.value);
           }}
         />

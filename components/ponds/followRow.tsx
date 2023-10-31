@@ -45,7 +45,9 @@ const FollowRow = observer(({ el }: { el: IProfile }) => {
         <div className={style.explore__user__left__text}>
           <Link href={"/profile/" + el?.twitterId}>
             {" "}
-            <div className={style.explore__user__name}>{shortNick(el?.twitterName)}</div>
+            <div className={style.explore__user__name}>
+              <div>{shortNick(el?.twitterName)}</div>
+            </div>
           </Link>
           <div className={style.explore__user__share}>@{el?.twitterHandle}</div>
         </div>

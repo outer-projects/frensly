@@ -200,8 +200,10 @@
   line-height: 24px; /* 150% */
   letter-spacing: -0.16px;
   overflow: hidden;
-  &:hover {
-    text-decoration: underline;
+  div {
+    &:hover {
+      text-decoration: underline;
+    }
   }
   a {
     margin-left: 4px;

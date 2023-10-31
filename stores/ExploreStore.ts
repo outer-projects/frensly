@@ -13,6 +13,7 @@ export class ExploreStore {
   @observable newUsersList: IProfile[] = [];
   @observable globalActivity: any[] = [];
   @observable searchResult: IProfile[] = [];
+  @observable mentionSearch: IProfile[] = [];
   @observable newOffset: number = 0;
   @observable activityOffset: number = 0;
   @observable filterGlobal: { rangeFrom: number; rangeTo: number } = {
@@ -76,7 +77,7 @@ export class ExploreStore {
       console.log(e);
     }
   };
-  @action searchUsers = async (search: string) => {
+  @action searchUsers = async (search: string, type?: string) => {
     try {
       const res = await axios.get(prefix + "user/search/" + search);
       // console.log(res.data.byAddress.concat(res.data.byNames));
@@ -89,7 +90,11 @@ export class ExploreStore {
                 self.findIndex((t: any) => t.twitterId === value.twitterId)
             )
         : [];
-      this.searchResult = result;
+      if (type !== "mention") {
+        this.searchResult = result;
+      } else {
+        this.mentionSearch = result;
+      }
     } catch (e) {
       console.log(e);
     }

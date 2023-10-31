@@ -44,7 +44,7 @@ const FinanceRow = observer(
                 </div>
               </div>
               <div className={style.explore__user__name}>
-                {shortNick(el.profile?.twitterName)}
+                <div>{shortNick(el.profile?.twitterName)}</div>
               </div>
             </div>
           </div>

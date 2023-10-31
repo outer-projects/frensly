@@ -17,7 +17,8 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { ModalStore } from "../../stores/ModalStore";
 import { ModalsEnum } from "../../modals";
-
+//@ts-ignore
+import Linkify from "react-linkify";
 const TwitterPost = observer(
   ({
     post,
@@ -142,14 +143,16 @@ const TwitterPost = observer(
                     {timePassed(post?.date)}
                   </div>
                 </div>
-                <div
-                  className={classNames(
-                    style.twitter__text
-                    // isComment && style.twitter__text__comm
-                  )}
-                >
-                  {post?.text}
-                </div>
+                <Linkify>
+                  <div
+                    className={classNames(
+                      style.twitter__text
+                      // isComment && style.twitter__text__comm
+                    )}
+                  >
+                    {post?.text}
+                  </div>
+                </Linkify>
                 {post.media && (
                   <img
                     src={post.media}
