@@ -71,7 +71,6 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   return (
     <>
-      
       {loading ? (
         <SocketContext.Provider value={socket}>
           <Provider container={container}>
@@ -79,6 +78,12 @@ function MyApp({ Component, pageProps }: AppProps) {
               <RainbowKitProvider appInfo={demoAppInfo} chains={chains}>
                 <Suspense fallback={<h1>Loading posts...</h1>}>
                   {/* <Rotate /> */}
+                  <Head>
+                    <meta
+                      name="viewport"
+                      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+                    ></meta>
+                  </Head>
                   <Wrapper>
                     <AnyComponent {...pageProps} />
                   </Wrapper>

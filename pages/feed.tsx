@@ -19,6 +19,10 @@ const FeedPage: NextPage = observer((props) => {
         <title>
           {unreadCount !== 0 ? `(${unreadCount})` : ""} Feed | Frensly
         </title>
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+        ></meta>
       </Head>
       <div className={style.feed__type}>
         <TypesList types={types} active={active} setActive={setActive} />

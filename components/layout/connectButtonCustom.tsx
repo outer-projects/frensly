@@ -105,7 +105,7 @@ const ConnectButtonCustom = observer(({ isHeader }: { isHeader?: boolean }) => {
                 <div>
                   {user?.account ? (
                     <div className={style.account}>
-                      <Link href={"/profile/" + user.twitterHandle}>
+                      <Link href={"/profile/" + user.twitterId}>
                         <img src={user?.avatar}  />
                       </Link>
                       <div style={{ marginLeft: "8px" }}>

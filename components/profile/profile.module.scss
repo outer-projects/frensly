@@ -547,7 +547,7 @@
   object-fit: contain;
   cursor: pointer;
   @media (max-width: 600px) {
-    width: calc(100vw - 80px);
+    width: calc(100vw - 100px);
   }
 }
 .twitter__image__com {
@@ -567,7 +567,7 @@
   text-overflow: ellipsis;
   white-space: pre-wrap;
   @media (max-width: 600px) {
-    width: calc(100vw - 80px);
+    width: calc(100vw - 100px);
   }
 }
 // .twitter__text__comm {

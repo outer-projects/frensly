@@ -9,14 +9,18 @@ import { UserStore } from "../stores/UserStore";
 
 const CodePage: NextPage = observer((props) => {
   const { push } = useRouter();
-  useEffect(()=>{
-    push('/explore')
-  },[])
+  useEffect(() => {
+    push("/explore");
+  }, []);
   const { unreadCount } = useInjection(UserStore);
   return (
     <div className={style.main__page}>
       <Head>
-      <title>{unreadCount !== 0 ? `(${unreadCount})` : ""}Frensly</title>
+        <title>{unreadCount !== 0 ? `(${unreadCount})` : ""}Frensly</title>
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+        ></meta>
       </Head>
     </div>
   );
