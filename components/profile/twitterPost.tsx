@@ -50,6 +50,14 @@ const TwitterPost = observer(
       const result = text ? text.map((s: any) => s.slice(1, s.length - 1)) : [];
       return result;
     }, []);
+    console.log(mentions);
+    function linkify(text:string) {
+      var urlRegex =
+        /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gi;
+      return text.replace(urlRegex, function (url) {
+        return '<a href="' + url + '">' + url + "</a>";
+      });
+    }
     const modalStore = useInjection(ModalStore);
     const { user } = useInjection(Web3Store);
     const { likePost, repostPost, deletePost } = useInjection(FeedStore);
@@ -221,7 +229,7 @@ const TwitterPost = observer(
                         console.log(e.target);
                       }}
                       autoEscape={true}
-                      textToHighlight={postText}
+                      textToHighlight={linkify(postText)}
                     />
                   </Linkify>
                 </div>
