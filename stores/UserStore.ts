@@ -30,17 +30,17 @@ export class UserStore {
   @observable currentType: number = 2;
   @observable profileUser?: IProfile = undefined;
   @observable portfolioValue?: BigNumber;
-  @observable followings?: IProfile[] = [];
-  @observable followers?: IProfile[] = [];
+  @observable followings: IProfile[] = [];
+  @observable followers: IProfile[] = [];
   @observable currentRequire: any[] = [];
   @observable currentProgress: any[] = [];
   @observable finished: boolean = false;
   @observable unlimitedKeys: boolean = false;
-  @observable holders?: {
+  @observable holders: {
     user: IAccount;
     amount: string;
   }[] = [];
-  @observable shares?: {
+  @observable shares: {
     subject: IAccount;
     amount: string;
   }[] = [];
@@ -192,7 +192,7 @@ export class UserStore {
     try {
       const res = await axios.get(prefix + "user/shares/" + id + "?" + query);
       this.sharesOffset = this.sharesOffset + 30;
-      this.shares = res.data;
+      this.shares = [...this.shares, ...res.data];
     } catch (e) {
       console.log(e);
     }
@@ -221,8 +221,8 @@ export class UserStore {
       const res = await axios.get(
         prefix + "user/followers/" + id + "?" + query
       );
-      this.followersOffset = 30;
-      this.followers = res.data;
+      this.followersOffset = this.followersOffset + 30;
+      this.followers = [...this.followers, ...res.data];
     } catch (e) {
       console.log(e);
     }
@@ -252,7 +252,7 @@ export class UserStore {
         prefix + "user/following/" + id + "?" + query
       );
       this.followingsOffset = this.followingsOffset + 30;
-      this.followings = res.data;
+      this.followings = [...this.followings, ...res.data];
     } catch (e) {
       console.log(e);
     }
@@ -278,7 +278,7 @@ export class UserStore {
     try {
       const res = await axios.get(prefix + "user/holders/" + id + "?" + query);
       this.holdersOffset = this.holdersOffset + 30;
-      this.holders = res.data;
+      this.holders = [...this.holders, ...res.data];
     } catch (e) {
       console.log(e);
     }
