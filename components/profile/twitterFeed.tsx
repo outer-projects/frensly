@@ -93,6 +93,8 @@ const TwitterFeed = observer(
             ?.map((el, i) => {
               if (!el.isRepost && !el.originalPost) {
                 //@ts-ignore
+                console.log(i, currentFeed.length);
+                
                 return (
                   <div key={el._id}>
                     <TwitterPost post={el} isProfile={isProfile} />
