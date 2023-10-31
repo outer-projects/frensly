@@ -53,18 +53,28 @@ const TwitterPost = observer(
 
     console.log(mentions);
     const tagGet = (text: string) => {
-      text.replace(">", "").replace("<", "");
-      var tagRegex = /[^{\}]+(?=})/g
-      return text.replace(tagRegex, function (url) {
-        return `<span ><a href="/profile/${url}" style="color: #a6d000!important; cursor: pointer; font-weight: bold">'${url}"</a></span>`;
-      }).replace('{', '').replace('}', '');
-      
+      var tagRegex = /[^{\}]+(?=})/g;
+      console.log(text);
+      return text
+        .replace(">", ".")
+        .replace("<", ".")
+        .replace(tagRegex, function (url) {
+          return `<span ><a href="/profile/${url}" style="color: #a6d000!important; cursor: pointer; font-weight: bold">${url}</a></span>`;
+        })
+        .replace("{", "")
+        .replace("}", "");
     };
     function linkify(text: string) {
       var urlRegex =
         /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gi;
       return text.replace(urlRegex, function (url) {
-        return '<a style="color: black; text-decoration: underline" href="' + url + '" target="_blank">' + url + "</a>";
+        return (
+          '<a style="color: black; text-decoration: underline" href="' +
+          url +
+          '" target="_blank">' +
+          url +
+          "</a>"
+        );
       });
     }
     const modalStore = useInjection(ModalStore);
