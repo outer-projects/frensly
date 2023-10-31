@@ -51,13 +51,7 @@ const TwitterPost = observer(
       return result;
     }, []);
     console.log(mentions);
-    function linkify(text:string) {
-      var urlRegex =
-        /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gi;
-      return text.replace(urlRegex, function (url) {
-        return '<a href="' + url + '">' + url + "</a>";
-      });
-    }
+
     const modalStore = useInjection(ModalStore);
     const { user } = useInjection(Web3Store);
     const { likePost, repostPost, deletePost } = useInjection(FeedStore);
@@ -206,32 +200,28 @@ const TwitterPost = observer(
                     // isComment && style.twitter__text__comm
                   )}
                 >
-                  <Linkify
-                    // componentDecorator={componentDecorator}
-                    properties={{
-                      target: "_blank",
-                      style: {
-                        textDecoration: "underline",
-                        color: "black",
-                      },
+                  <Highlighter
+                    highlightClassName={style.openchat__mention}
+                    searchWords={handles.map((el: any, i: number) => "@" + el)}
+                    onClick={(e: any) => {
+                      console.log(e.target);
                     }}
-                  >
-                    <Highlighter
-                      highlightClassName={style.openchat__mention}
-                      searchWords={
-                        mentions.length == handles.length
-                          ? mentions.map(
-                              (el: any, i: number) => "@" + handles[i]
-                            )
-                          : []
-                      }
-                      onClick={(e: any) => {
-                        console.log(e.target);
-                      }}
-                      autoEscape={true}
-                      textToHighlight={linkify(postText)}
-                    />
-                  </Linkify>
+                    autoEscape={true}
+                    textToHighlight={
+                      <Linkify
+                        // componentDecorator={componentDecorator}
+                        properties={{
+                          target: "_blank",
+                          style: {
+                            textDecoration: "underline",
+                            color: "black",
+                          },
+                        }}
+                      >
+                        {postText}
+                      </Linkify>
+                    }
+                  />
                 </div>
 
                 {post.media && (
