@@ -45,6 +45,11 @@ const TwitterPost = observer(
     const [isActiveRepost, setIsActiveRepost] = useState(false);
     const [repostAvailable, setRepostAvailable] = useState(false);
     const router = useRouter();
+    const mentions = useMemo(() => {
+      const text = post?.text.match(/{[\w\s]+}/g);
+      const result = text ? text.map((s: any) => s.slice(1, s.length - 1)) : [];
+      return result;
+    }, []);
     const modalStore = useInjection(ModalStore);
     const { user } = useInjection(Web3Store);
     const { likePost, repostPost, deletePost } = useInjection(FeedStore);
@@ -66,11 +71,7 @@ const TwitterPost = observer(
         return post.text;
       }
     }, [handles]);
-    const mentions = useMemo(() => {
-      const text = post?.text.match(/{[\w\s]+}/g);
-      const result = text ? text.map((s: any) => s.slice(1, s.length - 1)) : [];
-      return result;
-    }, []);
+
     useEffect(() => {
       setLikesCount(post?.likes?.length);
       setRepostCount(post?.reposts?.length);
@@ -190,21 +191,22 @@ const TwitterPost = observer(
                     {timePassed(post?.date)}
                   </div>
                 </div>
-                <Linkify
-                  componentDecorator={componentDecorator}
-                  properties={{
-                    target: "_blank",
-                    style: {
-                      textDecoration: "underline",
-                      color: "black",
-                    },
-                  }}
+
+                <div
+                  className={classNames(
+                    style.twitter__text
+                    // isComment && style.twitter__text__comm
+                  )}
                 >
-                  <div
-                    className={classNames(
-                      style.twitter__text
-                      // isComment && style.twitter__text__comm
-                    )}
+                  <Linkify
+                    componentDecorator={componentDecorator}
+                    properties={{
+                      target: "_blank",
+                      style: {
+                        textDecoration: "underline",
+                        color: "black",
+                      },
+                    }}
                   >
                     <Highlighter
                       highlightClassName={style.openchat__mention}
@@ -215,14 +217,15 @@ const TwitterPost = observer(
                             )
                           : []
                       }
-                      onClick={(e:any) => {
+                      onClick={(e: any) => {
                         console.log(e.target);
                       }}
                       autoEscape={true}
                       textToHighlight={postText}
                     />
-                  </div>
-                </Linkify>
+                  </Linkify>
+                </div>
+
                 {post.media && (
                   <img
                     src={post.media}
