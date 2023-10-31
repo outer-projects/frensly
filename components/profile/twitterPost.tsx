@@ -20,7 +20,7 @@ import { ModalsEnum } from "../../modals";
 //@ts-ignore
 import Highlighter from "react-highlight-words";
 //@ts-ignore
-import Linkify from "react-linkify";
+
 import axios from "axios";
 const componentDecorator = (href: string, text: string, key: number) => (
   <a className="linkify__text" href={href} key={key} target="_blank">
@@ -51,7 +51,19 @@ const TwitterPost = observer(
       return result;
     }, []);
     console.log(mentions);
-
+    const tagGet = (text: string) => {
+      var tagRegex = /{([^}]+)}/;
+      return text.replace(tagRegex, function (url) {
+        return '<span style="color: red">' + { url } + "</span>";
+      });
+    };
+    function linkify(text: string) {
+      var urlRegex =
+        /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gi;
+      return text.replace(urlRegex, function (url) {
+        return '<a href="' + url + '">' + url + "</a>";
+      });
+    }
     const modalStore = useInjection(ModalStore);
     const { user } = useInjection(Web3Store);
     const { likePost, repostPost, deletePost } = useInjection(FeedStore);
@@ -68,7 +80,7 @@ const TwitterPost = observer(
         mentions.map((el: any, i: number) => "@" + handles[i]);
         // console.log(text);
 
-        return text.replace("{", "").replace("}", "");
+        return text;
       } else {
         return post.text;
       }
@@ -200,28 +212,8 @@ const TwitterPost = observer(
                     // isComment && style.twitter__text__comm
                   )}
                 >
-                  <Highlighter
-                    highlightClassName={style.openchat__mention}
-                    searchWords={handles.map((el: any, i: number) => "@" + el)}
-                    onClick={(e: any) => {
-                      console.log(e.target);
-                    }}
-                    autoEscape={true}
-                    textToHighlight={
-                      <Linkify
-                        // componentDecorator={componentDecorator}
-                        properties={{
-                          target: "_blank",
-                          style: {
-                            textDecoration: "underline",
-                            color: "black",
-                          },
-                        }}
-                      >
-                        {postText}
-                      </Linkify>
-                    }
-                  />
+                  {/* @ts-ignore */}
+                  <div dangerouslySetInnerHTML={tagGet(linkify(postText))}></div>
                 </div>
 
                 {post.media && (
