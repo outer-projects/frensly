@@ -293,11 +293,20 @@ export class UserStore {
     return Number((this.ethCurrency * priceInEth).toFixed(2));
   };
   @action getProfileUser = async (id: string) => {
-    try {
-      let res = await axios.get(prefix + "user/" + id);
-      this.profileUser = res.data;
-    } catch (e) {
-      console.log(e);
+    if (!isNaN(Number(id))) {
+      try {
+        let res = await axios.get(prefix + "user/" + id);
+        this.profileUser = res.data;
+      } catch (e) {
+        console.log(e);
+      }
+    } else {
+      try {
+        let res = await axios.get(prefix + "user/get/profile/" + id);
+        this.profileUser = res.data;
+      } catch (e) {
+        console.log(e);
+      }
     }
   };
   @action follow = async (id: string, isFollowed: boolean) => {
