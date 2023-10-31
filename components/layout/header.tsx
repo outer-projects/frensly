@@ -52,9 +52,8 @@ const Header = observer(() => {
   }, []);
   useEffect(() => {
     if (router.asPath) {
-      // console.log(router.asPath);
       setActive(router.asPath);
-      checkAuth();
+      // checkAuth();
     }
   }, [router.asPath]);
   const ref = useDetectClickOutside({

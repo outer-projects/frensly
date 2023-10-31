@@ -87,6 +87,9 @@ const Finance = observer(() => {
       getClaim();
     }
   }, [frensly]);
+  useEffect(()=>{
+    checkAuth();
+  },[])
   // console.log(keys);
   return (
     <div className={style.finance__page}>
