@@ -83,7 +83,11 @@ const Write = ({
           value={newMsg}
           onChange={(e) => {
             let after = e.target.value.split("@");
-            // console.log(after[after.length - 1]);
+            let keycode = e.target.value.substring(-1).charCodeAt(0);
+            console.log(keycode, e.target.value.substring(-1));
+            if(keycode == 64) {
+              setOpenMentions(true)
+            }
             if (openMentions) {
               setMentionSearch(after[after.length - 1]);
             } else {

@@ -22,24 +22,11 @@ const getUserById = (id: string, members: IProfile[]) => {
 const OneMessage = observer(({ el, roomId, members }: any) => {
   const { user } = useInjection(Web3Store);
   const modalStore = useInjection(ModalStore);
-  const [isViewed, setIsViewed] = useState(true);
-  const socket = useContext(SocketContext);
-  
   const mentions = useMemo(() => {
     const text = el.text.match(/{[\w\s]+}/g);
     const result = text ? text.map((s: any) => s.slice(1, s.length - 1)) : [];
     return result;
   }, [el.text]);
-
-  useEffect(() => {
-    let isView = el?.views.filter((el: any) => el == user?._id)[0];
-    setIsViewed(isView ? true : false);
-  }, []);
-  useEffect(() => {
-    if (!isViewed) {
-      socket.emit("view", { room: roomId, message: el._id });
-    }
-  }, [isViewed]);
   const message = useMemo(() => {
     let text = el.text;
     mentions.map((el: any) => {
