@@ -15,6 +15,7 @@ import Heart from "../socials/twitterUI/Heart";
 import Follow from "../socials/twitterUI/Follow";
 import TypesList from "../common/typesList";
 import { types } from "./invite";
+import User from "./user";
 const getOutputByKey = (require: any, progress: any) => {
   // console.log(require);
   if (require[0] == "isFollowing") {
@@ -191,8 +192,11 @@ const Airdrop = observer(() => {
       <Sidebar />
 
       <div className={style.finance__container}>
-        <TypesList active={active} setActive={setActive} types={types} />
+        <div className={style.finance__links}>
+          <TypesList active={active} setActive={setActive} types={types} />
+        </div>
         <div className={style.finance}>
+          <User stage="airdrop" />
           {!finished && (
             <>
               <div className={style.finance__invite}>Tier system</div>

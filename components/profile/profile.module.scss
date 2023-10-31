@@ -1,17 +1,17 @@
 @import "../../styles/_vars.sass";
 .profile__type__mob {
-  display: none;
+  display: none !important;
   @media (max-width: 600px) {
-    display: block;
+    display: flex !important;
   }
 }
 .profile {
   margin-top: 32px;
   width: 616px;
   @media (max-width: 616px) {
-    width: calc(100% - 16px);
+    width: calc(100%);
     margin-top: 24px;
-    margin-left: 8px;
+    margin-left: 0px;
   }
 }
 .profile__info {
@@ -193,6 +193,9 @@
   justify-content: space-between;
   background: #f8f8f8;
   margin-top: -2px;
+  @media (max-width: 616px) {
+    width: 100%;
+  }
 }
 .profile__stats__follows {
   display: flex;
@@ -351,7 +354,7 @@
 .twitter__textarea__comment {
   width: 456px !important;
   @media (max-width: 600px) {
-    width: calc(100vw - 80px);
+    width: calc(100vw - 90px);
   }
 }
 .twitter__textarea {
@@ -378,6 +381,7 @@
   @media (max-width: 616px) {
     margin-left: 0px;
     margin-right: 0px;
+    width: calc(100vw);
   }
 }
 .profile__bottom {

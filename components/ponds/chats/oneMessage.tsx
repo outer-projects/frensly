@@ -24,6 +24,7 @@ const OneMessage = observer(({ el, roomId, members }: any) => {
   const modalStore = useInjection(ModalStore);
   const [isViewed, setIsViewed] = useState(true);
   const socket = useContext(SocketContext);
+  
   const mentions = useMemo(() => {
     const text = el.text.match(/{[\w\s]+}/g);
     const result = text ? text.map((s: any) => s.slice(1, s.length - 1)) : [];

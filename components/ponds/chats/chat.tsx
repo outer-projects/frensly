@@ -25,7 +25,7 @@ const Chat = observer(() => {
   const [opacity, setOpacity] = useState(false);
   const [myHolds, setMyHolds] = useState<any>(undefined);
   const messagesEndRef = useRef<any>(null);
-  const { getHolders, holders, setCurrentType } = useInjection(UserStore);
+  const { setCurrentType } = useInjection(UserStore);
   const { user } = useInjection(Web3Store);
   const {
     chat,
@@ -35,14 +35,15 @@ const Chat = observer(() => {
     updateChat,
     messages,
     setMessagesLeft,
+    chatAmount,
     messagesleft,
     setNewMessage,
   } = useInjection(ChatStore);
   const modalStore = useInjection(ModalStore);
   const [isLightning, setIsLightning] = useState(false);
-  useEffect(()=>{
-    console.log(messages);
-  }, [messages])
+  // useEffect(()=>{
+  //   console.log(messages);
+  // }, [messages])
   useEffect(() => {
     let tt = setTimeout(() => {
       setOpacity(true);
@@ -66,7 +67,7 @@ const Chat = observer(() => {
         // console.log(msg, "hi message", chat._id);
         if (msg?.roomId == chat._id) {
           setNewMessage(msg);
-          setMessagesLeft(messagesleft + 1)
+          setMessagesLeft(messagesleft + 1);
         }
       });
     }
@@ -94,11 +95,6 @@ const Chat = observer(() => {
       getChat(id as string);
     }
   }, [id]);
-  useEffect(() => {
-    if (chat) {
-      getHolders(chat?.owner?._id as string);
-    }
-  }, [chat]);
 
   useEffect(() => {
     if (myHolds) {
@@ -107,29 +103,12 @@ const Chat = observer(() => {
     }
   }, [myHolds]);
   useEffect(() => {
-    // console.log(
-    //   "user, holders: ",
-    //   user,
-    //   holders,
-    //   user && holders && holders?.length !== 0
-    // );
-    if (user && holders && chat) {
-      // console.log(
-      //   "is everything ok?",
-      //   holders.filter((el) => el.user._id == user?.account._id)[0]
-      // );
-      let myholding = holders.filter(
-        (el) => el.user._id == user?.account._id && Number(el.amount) >= 1000000
-      )[0];
-      if (myholding) {
-        setMyHolds(myholding);
-      }
-      if (user._id == chat?.owner?._id) {
-        // console.log(user);
-        setMyHolds({ amount: "1000000", user: user });
+    if (user && chat && chatAmount) {
+      if (chatAmount) {
+        setMyHolds(chatAmount);
       }
     }
-  }, [holders, user, chat]);
+  }, [user, chat, chatAmount]);
   return (
     <>
       {myHolds ? (
@@ -205,7 +184,7 @@ const Chat = observer(() => {
             <div className={style.openchat__row}>
               <div className={style.openchat__own}>
                 <div className={style.openchat__shares}>
-                  You own {Number(myHolds?.amount) / 10 ** 6} shares
+                  You own {Number(myHolds)} shares
                 </div>
               </div>
               <div className={style.openchat__val}>

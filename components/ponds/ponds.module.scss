@@ -289,7 +289,7 @@
   width: 100%;
   margin-left: 0px;
   margin-top: 25px;
-  height: calc(100vh - 275px);
+  height: calc(100vh - 455px);
   flex: 1;
   overflow-y: scroll;
   &::-webkit-scrollbar {
@@ -302,15 +302,8 @@
     border-radius: 9999px;
     background-color: #aaaaaa;
   }
-
-  @media (max-height: 1080px) {
-    height: 550px;
-  }
-  @media (max-height: 980px) {
-    height: 450px;
-  }
-  @media (max-height: 870px) {
-    height: 350px;
+  @media (max-height: 750px) {
+    height: calc(100vh - 285px);
   }
 }
 .openchat__time {

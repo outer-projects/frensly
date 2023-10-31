@@ -14,6 +14,13 @@
     margin-top: 0px;
   }
 }
+.finance__links {
+  display: none;
+  margin-top: 20px;
+  @media (max-width: 870px) {
+    display: block;
+  }
+}
 .invite__code__used {
   border: 1px solid $green;
   color: $green !important;
@@ -86,6 +93,9 @@
   justify-content: space-between;
   padding-left: 4px;
   padding-right: 4px;
+}
+.finance__container {
+  background: #fff;
 }
 .finance {
   padding: 24px;

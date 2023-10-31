@@ -15,6 +15,7 @@ export class ChatStore {
   @observable messagesleft: number = 0;
   @observable messagesOffset: number = 0;
   @observable unread: number = 0;
+  @observable chatAmount: Number = 0;
   public constructor(private readonly rootStore: RootStore) {
     makeObservable(this);
   }
@@ -52,6 +53,7 @@ export class ChatStore {
       this.messagesleft = n - 50 > 0 ? n - 50 : 0;
       this.messagesOffset = 100;
       this.chat = res.data.room;
+      this.chatAmount = Number(res.data.ownerShareAmount) / 10 ** 6;
       this.messages = res.data.room.messages;
     } catch (e) {
       console.log(e);

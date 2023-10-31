@@ -48,6 +48,7 @@ const Invite = observer(() => {
       <div className={style.finance__container}>
         <TypesList active={active} setActive={setActive} types={types} />
         <div className={style.finance}>
+          <User stage="referral" />
           <div className={style.finance__total}>
             <div className={style.finance__icon}>
               <UserIcon color="#676766" />

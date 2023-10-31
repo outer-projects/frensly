@@ -43,56 +43,65 @@ const OneNotificationPage = observer(
 
     return (
       <Link href={linkTo}>
-        <div className={style.nots__one__page}>
-          <div className={style.nots__one__user}>
-            <div className={style.nots__one__users}>
-              <img src={notification?.account?.profile?.avatar} />
-              {!isSocial && (
-                <img src={notification?.subject?.profile?.avatar} />
-              )}
-            </div>
-            <div>
-              <div className={style.nots__one__text}>
-                {shortNick(notification?.account?.profile?.twitterName)}{" "}
-                {getActivity(
-                  notification?.type,
-                  notification?.source?.originalPost
-                )}{" "}
-                {notification?.type == "MENTION" &&
-                  "@" + notification?.source.owner.twitterHandle + "'s pond"}
-                {notification?.amount && Number(notification?.amount) / 10 ** 6}{" "}
-                {notification?.subject?.profile?.twitterId !==
-                  user?.twitterId &&
-                  shortNick(notification?.subject?.profile?.twitterName)}
+        <div className={style.nots__one__page__container}>
+          <div className={style.nots__one__page}>
+            <div className={style.nots__one__user}>
+              <div className={style.nots__one__users}>
+                <img src={notification?.account?.profile?.avatar} />
+                {!isSocial && (
+                  <img src={notification?.subject?.profile?.avatar} />
+                )}
               </div>
-              <div className={style.nots__one__info}>
-                <div className={style.nots__one__time}>
-                  {notification.text
-                    ? notification.text.slice(0,20)
-                    : timePassed(notification?.date) + " ago"}{" "}
+              <div>
+                <div className={style.nots__one__text}>
+                  {shortNick(notification?.account?.profile?.twitterName)}{" "}
+                  {getActivity(
+                    notification?.type,
+                    notification?.source?.originalPost
+                  )}{" "}
+                  {notification?.type == "MENTION" &&
+                    "@" + notification?.source.owner.twitterHandle + "'s pond"}
+                  {notification?.amount &&
+                    Number(notification?.amount) / 10 ** 6}{" "}
+                  {notification?.subject?.profile?.twitterId !==
+                    user?.twitterId &&
+                    shortNick(notification?.subject?.profile?.twitterName)}
+                </div>
+                <div className={style.nots__one__info}>
+                  <div className={style.nots__one__time}>
+                    {notification.text
+                      ? notification.text.slice(0, 20)
+                      : timePassed(notification?.date) + " ago"}{" "}
+                  </div>
                 </div>
               </div>
             </div>
+            {notification?.price && (
+              <div className={style.nots__one__price__page}>
+                <img src="../icons/Ethereum.svg" />
+                {fromWeiToEth(notification?.price) + " ETH"}
+              </div>
+            )}
+            {notification?.type == "COMMENT" && (
+              <img src="../icons/twitterUI/Message.svg" />
+            )}
+            {notification?.type == "MENTION" && (
+              <img src="../icons/twitterUI/Send.svg" />
+            )}
+            {notification?.type == "REPOST" && (
+              <img src="../icons/twitterUI/Swap.svg" />
+            )}
+            {notification?.type == "LIKE" && (
+              <img src="../icons/twitterUI/Heart__grey.svg" />
+            )}
+            {notification?.type == "FOLLOW" && <img src="../icons/Plus.svg" />}
           </div>
           {notification?.price && (
-            <div className={style.nots__one__price__page}>
+            <div className={style.nots__one__price__page__mobile}>
               <img src="../icons/Ethereum.svg" />
               {fromWeiToEth(notification?.price) + " ETH"}
             </div>
           )}
-          {notification?.type == "COMMENT" && (
-            <img src="../icons/twitterUI/Message.svg" />
-          )}
-          {notification?.type == "MENTION" && (
-            <img src="../icons/twitterUI/Send.svg" />
-          )}
-          {notification?.type == "REPOST" && (
-            <img src="../icons/twitterUI/Swap.svg" />
-          )}
-          {notification?.type == "LIKE" && (
-            <img src="../icons/twitterUI/Heart__grey.svg" />
-          )}
-          {notification?.type == "FOLLOW" && <img src="../icons/Plus.svg" />}
         </div>
       </Link>
     );
