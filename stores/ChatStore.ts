@@ -48,12 +48,12 @@ export class ChatStore {
     }).toString();
     try {
       const res = await axios.get(prefix + "chat/room/test/" + id + "/?" + query);
-      // console.log("chat:", res.data)
+      console.log("chat:", res.data)
       const n = Number(res.data.total);
       this.messagesleft = n - 50 > 0 ? n - 50 : 0;
       this.messagesOffset = 100;
       this.chat = res.data.room;
-      this.chatAmount = Number(res.data.ownerShareAmount) / 10 ** 6;
+      this.chatAmount = Number(res.data.room.ownerShareAmount) / 10 ** 6;
       this.messages = res.data.room.messages;
     } catch (e) {
       console.log(e);
