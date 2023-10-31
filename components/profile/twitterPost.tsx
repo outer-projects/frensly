@@ -56,13 +56,13 @@ const TwitterPost = observer(
       var tagRegex = /[^{\}]+(?=})/g;
       console.log(text);
       return text
-        .replace(">", ".")
-        .replace("<", ".")
+        .replaceAll(">", ".")
+        .replaceAll("<", ".")
         .replace(tagRegex, function (url) {
           return `<span ><a href="/profile/${url}" style="color: #a6d000!important; cursor: pointer; font-weight: bold">${url}</a></span>`;
         })
-        .replace("{", "")
-        .replace("}", "");
+        .replaceAll("{", "")
+        .replaceAll("}", "");
     };
     function linkify(text: string) {
       var urlRegex =
