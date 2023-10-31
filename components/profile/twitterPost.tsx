@@ -54,7 +54,7 @@ const TwitterPost = observer(
     const tagGet = (text: string) => {
       text.replace(">", "").replace("<", "");
       var tagRegex = /[^{\}]+(?=})/g
-      return text.replace(tagRegex, function (url) {
+      return text.replace("{",'').replace("}", '').replace(tagRegex, function (url) {
         return '<span onClick={()=>console.log("hi")} style="color: #a6d000; font-weight: bold">' + url + "</span>";
       });
     };
