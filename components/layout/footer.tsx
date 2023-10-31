@@ -23,7 +23,7 @@ const Footer = observer(() => {
   ];
   useEffect(() => {
     if (router.asPath) {
-      // console.log(router.asPath);
+      console.log(router.asPath);
       setActive(router.asPath);
       checkAuth();
     }

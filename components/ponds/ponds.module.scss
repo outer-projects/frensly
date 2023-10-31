@@ -303,7 +303,10 @@
     background-color: #aaaaaa;
   }
   @media (max-height: 750px) {
-    height: calc(100vh - 285px);
+    height: calc(100vh - 340px);
+  }
+  @media (max-width: 750px) {
+    height: calc(100vh - 340px);
   }
 }
 .openchat__time {

@@ -28,10 +28,10 @@ const TypesList = ({ types, active, setActive, mobTypes }: ITypes) => {
             className={classNames(
               profile.profile__type,
               profile.profile__type__mob,
-              active == (types.length-1) + i && profile.profile__type__active
+              active == types.length + i && profile.profile__type__active
             )}
             onClick={() => {
-              setActive((types.length-1) + i);
+              setActive(types.length + i);
             }}
           >
             {el}

@@ -46,7 +46,9 @@ const Invite = observer(() => {
       <Sidebar />
 
       <div className={style.finance__container}>
-        <TypesList active={active} setActive={setActive} types={types} />
+        <div className={style.finance__links}>
+          <TypesList active={active} setActive={setActive} types={types} />
+        </div>
         <div className={style.finance}>
           <User stage="referral" />
           <div className={style.finance__total}>
