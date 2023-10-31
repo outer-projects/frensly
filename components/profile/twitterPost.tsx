@@ -55,14 +55,14 @@ const TwitterPost = observer(
       text.replace(">", "").replace("<", "");
       var tagRegex = /[^{\}]+(?=})/g
       return text.replace(tagRegex, function (url) {
-        return '<span style="color: #a6d000, font-weight: bold">' + url + "</span>";
+        return '<span onClick={()=>console.log("hi")} style="color: #a6d000; font-weight: bold">' + url + "</span>";
       });
     };
     function linkify(text: string) {
       var urlRegex =
         /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gi;
       return text.replace(urlRegex, function (url) {
-        return '<a style="color: black, text-decoration: underline" href="' + url + '" target="_blank">' + url + "</a>";
+        return '<a style="color: black; text-decoration: underline" href="' + url + '" target="_blank">' + url + "</a>";
       });
     }
     const modalStore = useInjection(ModalStore);
