@@ -9,6 +9,7 @@ import { prefix } from "../utils/config";
 @injectable()
 export class ExploreStore {
   @observable topUsersList: IProfile[] = [];
+  @observable topFive: IProfile[] = [];
   @observable currentUserList: string = "";
   @observable newUsersList: IProfile[] = [];
   @observable globalActivity: any[] = [];
@@ -95,6 +96,18 @@ export class ExploreStore {
       } else {
         this.mentionSearch = result;
       }
+    } catch (e) {
+      console.log(e);
+    }
+  };
+  @action getTopFive = async () => {
+    const query = new URLSearchParams({
+      offset: "0",
+      limit: "5",
+    }).toString();
+    try {
+      const res = await axios.get(prefix + "user/top/?" + query);
+      this.topFive = res.data;
     } catch (e) {
       console.log(e);
     }

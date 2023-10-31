@@ -13,12 +13,15 @@ const OneNotificationPage = observer(
       () =>
         notification?.type == "LIKE" ||
         notification?.type == "REPOST" ||
-        notification?.type == "COMMENT",
+        notification?.type == "COMMENT" ||
+        (notification?.type == "MENTION" &&
+          notification?.sourceModel == "post"),
       [notification]
     );
 
     const isMessage = useMemo(
-      () => notification?.type == "MENTION",
+      () =>
+        notification?.type == "MENTION" && notification?.sourceModel !== "post",
       [notification]
     );
     const isTrade = useMemo(
@@ -60,6 +63,7 @@ const OneNotificationPage = observer(
                     notification?.source?.originalPost
                   )}{" "}
                   {notification?.type == "MENTION" &&
+                    notification?.sourceModel !== "post" &&
                     "@" + notification?.source.owner.twitterHandle + "'s pond"}
                   {notification?.amount &&
                     Number(notification?.amount) / 10 ** 6}{" "}

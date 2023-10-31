@@ -19,7 +19,8 @@ const MessageSend = observer(({ id }: { id?: string }) => {
   const [ment, setMent] = useState("");
   const [tt, updateTimeout] = useState<any>(undefined);
   const { addPost } = useInjection(FeedStore);
-  const { searchUsers, mentionSearch } = useInjection(ExploreStore);
+  const { searchUsers, mentionSearch, getTopFive, topFive } =
+    useInjection(ExploreStore);
   const searchDeb = (fn: any, ms: number) => {
     const clear = () => {
       clearTimeout(tt);
@@ -38,12 +39,20 @@ const MessageSend = observer(({ id }: { id?: string }) => {
     setMessage(message.replace(ment, "") + "{" + el + "} ");
     setOpenMentions(false);
   };
+  useEffect(() => {
+    if (openMentions && topFive.length == 0) {
+      getTopFive();
+    }
+  }, [openMentions]);
   return (
     <div>
       <div>
         {openMentions && (
-          <div className={write.write__mentions}>
-            {mentionSearch
+          <div
+            className={write.write__mentions}
+            style={{ fontFamily: "DMSans" }}
+          >
+            {(mentionSearch.length == 0 ? topFive : mentionSearch)
               .filter((el) => el.twitterId !== user?.twitterId)
 
               .map((el: any, i: number) => {
@@ -77,13 +86,13 @@ const MessageSend = observer(({ id }: { id?: string }) => {
             // console.log(e.key);
             let after = e.target.value.split("@");
             // console.log(after[after.length - 1]);
-            let key = e.target.value.substring(e.target.value.length - 1)
+            let key = e.target.value.substring(e.target.value.length - 1);
             console.log(key);
             if (key == "@") {
               setOpenMentions(true);
             }
-            if(!e.target.value.includes('@')) {
-              setOpenMentions(false)
+            if (!e.target.value.includes("@")) {
+              setOpenMentions(false);
             }
             if (openMentions) {
               setMent(after[after.length - 1]);

@@ -7,7 +7,7 @@ import Upload from "../socials/twitterUI/Upload";
 import ThreeDots from "../socials/twitterUI/threeDots";
 import style from "./profile.module.scss";
 import { IPost } from "../../types/feed";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useInjection } from "inversify-react";
 import Web3Store from "../../stores/Web3Store";
 import { FeedStore } from "../../stores/FeedStore";
@@ -18,7 +18,15 @@ import { useRouter } from "next/router";
 import { ModalStore } from "../../stores/ModalStore";
 import { ModalsEnum } from "../../modals";
 //@ts-ignore
+import Highlighter from "react-highlight-words";
+//@ts-ignore
 import Linkify from "react-linkify";
+import axios from "axios";
+const componentDecorator = (href: string, text: string, key: number) => (
+  <a className="linkify__text" href={href} key={key} target="_blank">
+    {text}
+  </a>
+);
 const TwitterPost = observer(
   ({
     post,
@@ -41,8 +49,28 @@ const TwitterPost = observer(
     const { user } = useInjection(Web3Store);
     const { likePost, repostPost, deletePost } = useInjection(FeedStore);
     const [likesCount, setLikesCount] = useState(0);
+    const [handles, setHandles] = useState<string[]>([]);
     const [repostCount, setRepostCount] = useState(0);
     const [deleted, setDeleted] = useState(false);
+    const postText = useMemo(() => {
+      if (handles.length !== 0) {
+        let text = post.text;
+        mentions.map((el: any, i: number) => {
+          text = text.replace(el, handles[i]);
+        });
+        mentions.map((el: any, i: number) => "@" + handles[i]);
+        // console.log(text);
+
+        return text.replace("{", "").replace("}", "");
+      } else {
+        return post.text;
+      }
+    }, [handles]);
+    const mentions = useMemo(() => {
+      const text = post?.text.match(/{[\w\s]+}/g);
+      const result = text ? text.map((s: any) => s.slice(1, s.length - 1)) : [];
+      return result;
+    }, []);
     useEffect(() => {
       setLikesCount(post?.likes?.length);
       setRepostCount(post?.reposts?.length);
@@ -58,6 +86,25 @@ const TwitterPost = observer(
         setIsActiveRepost(true);
       }
     }, []);
+    const getIds = async () => {
+      const query = new URLSearchParams();
+      mentions.map((el) => {
+        query.append("ids", el);
+      });
+      try {
+        const res = await axios.get(
+          "/api/v1/user/get/byids/?" + query.toString()
+        );
+        setHandles(res.data);
+      } catch (e) {
+        console.log(e);
+      }
+    };
+    useEffect(() => {
+      if (mentions && mentions.length !== 0) {
+        getIds();
+      }
+    }, [mentions]);
     const like = () => {
       if (isActiveLike) {
         setIsActiveLike(false);
@@ -144,6 +191,7 @@ const TwitterPost = observer(
                   </div>
                 </div>
                 <Linkify
+                  componentDecorator={componentDecorator}
                   properties={{
                     target: "_blank",
                     style: {
@@ -158,7 +206,21 @@ const TwitterPost = observer(
                       // isComment && style.twitter__text__comm
                     )}
                   >
-                    {post?.text}
+                    <Highlighter
+                      highlightClassName={style.openchat__mention}
+                      searchWords={
+                        mentions.length == handles.length
+                          ? mentions.map(
+                              (el: any, i: number) => "@" + handles[i]
+                            )
+                          : []
+                      }
+                      onClick={(e:any) => {
+                        console.log(e.target);
+                      }}
+                      autoEscape={true}
+                      textToHighlight={postText}
+                    />
                   </div>
                 </Linkify>
                 {post.media && (
