@@ -56,10 +56,11 @@ const TwitterPost = observer(
       var tagRegex = /[^{\}]+(?=})/g;
       console.log(text);
       return text
-        .replaceAll(">", ".")
-        .replaceAll("<", ".")
+        .replaceAll(">", "")
+        .replaceAll("<", "")
+        .replaceAll("@", "")
         .replace(tagRegex, function (url) {
-          return `<span ><a href="/profile/${url}" style="color: #a6d000!important; cursor: pointer; font-weight: bold">${url}</a></span>`;
+          return `<span ><a href="/profile/${url}" style="color: #a6d000!important; cursor: pointer; font-weight: bold">@${url}</a></span>`;
         })
         .replaceAll("{", "")
         .replaceAll("}", "");
@@ -228,7 +229,7 @@ const TwitterPost = observer(
                   {/* @ts-ignore */}
                   <div
                     dangerouslySetInnerHTML={{
-                      __html: tagGet(linkify(postText)),
+                      __html: linkify(tagGet(postText)),
                     }}
                   ></div>
                 </div>
