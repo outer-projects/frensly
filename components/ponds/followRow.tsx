@@ -10,19 +10,15 @@ import Web3Store from "../../stores/Web3Store";
 import classNames from "classnames";
 import profile from "../profile/profile.module.scss";
 import header from "../layout/header.module.scss";
+import useDarkMode from "use-dark-mode";
 const FollowRow = observer(({ el }: { el: IProfile }) => {
   const [isMyProfile, setIsMyProfile] = useState(false);
   const [isFollowed, setIsFollowed] = useState(false);
   const { getPriceInUsd, follow } = useInjection(UserStore);
   const { user } = useInjection(Web3Store);
+  const darkMode = useDarkMode()
   useEffect(() => {
     checkIsFollowed();
-
-    // if (el?.twitterId == user?.twitterId) {
-    //   setIsMyProfile(true);
-    // } else {
-    //   setIsMyProfile(false);
-    // }
   }, []);
   const checkIsFollowed = () => {
     if (user?.isFollowing.includes(el?._id as string)) {
@@ -68,6 +64,7 @@ const FollowRow = observer(({ el }: { el: IProfile }) => {
               src={
                 !isFollowed ? "../../icons/Plus.svg" : "../../icons/Close.svg"
               }
+              style={{ cursor: "pointer", filter: `invert(${darkMode.value ? "1" : "0"})` }}
             />
             {!isFollowed ? "Follow" : "Unfollow"}
           </button>

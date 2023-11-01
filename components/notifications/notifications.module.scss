@@ -23,6 +23,7 @@
   border: 1px solid $green;
   width: 135px;
   height: 40px;
+  color: var(--text-main);
 }
 .nots__buttons {
   display: flex;
@@ -33,6 +34,7 @@
 }
 .nots__mention {
   padding: 24px;
+  color: var(--text-shade);
 }
 .nots__one__text {
   color: var(--text-main);

@@ -308,7 +308,12 @@ const TwitterPost = observer(
               {!isRepost && user?.twitterId == post?.user?.twitterId ? (
                 <img
                   src="../icons/Close.svg"
-                  style={{ width: "20px", height: "20px", cursor: "pointer" }}
+                  style={{
+                    width: "20px",
+                    height: "20px",
+                    cursor: "pointer",
+                    filter: `invert(${darkMode.value ? "1" : "0"})`,
+                  }}
                   onClick={() => _deletePost()}
                 />
               ) : (

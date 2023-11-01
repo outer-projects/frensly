@@ -13,13 +13,14 @@ const types = ["Following", "Frens", "Public"];
 
 const FeedPage: NextPage = observer((props) => {
   const { unreadCount } = useInjection(UserStore);
-  const { feedOffset, feed } = useInjection(FeedStore);
+  const { feedOffset, feed, activeFeed, setActiveFeed } =
+    useInjection(FeedStore);
   const [firstRun, setFirstRun] = useState(false);
-  const [active, setActive] = useState(0);
+
   useEffect(() => {
     if (feedOffset == 30 && feed.length == 0 && !firstRun) {
       setFirstRun(true);
-      setActive(1);
+      setActiveFeed(1);
     }
   }, [feed, feedOffset]);
 
@@ -35,11 +36,11 @@ const FeedPage: NextPage = observer((props) => {
         ></meta>
       </Head>
       <div className={style.feed__type}>
-        <TypesList types={types} active={active} setActive={setActive} />
+        <TypesList types={types} active={activeFeed} setActive={setActiveFeed} />
       </div>
-      {active == 0 && <TwitterFeed isFeed />}
-      {active == 1 && <TwitterFeed isFeed isFrens />}
-      {active == 2 && <TwitterFeed isFeed isPublic />}
+      {activeFeed == 0 && <TwitterFeed isFeed />}
+      {activeFeed == 1 && <TwitterFeed isFeed isFrens />}
+      {activeFeed == 2 && <TwitterFeed isFeed isPublic />}
     </div>
   );
 });

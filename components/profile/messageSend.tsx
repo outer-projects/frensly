@@ -9,6 +9,7 @@ import { FeedStore } from "../../stores/FeedStore";
 import { observer } from "mobx-react";
 import Web3Store from "../../stores/Web3Store";
 import { ExploreStore } from "../../stores/ExploreStore";
+import useDarkMode from "use-dark-mode";
 
 const MessageSend = observer(({ id }: { id?: string }) => {
   const [message, setMessage] = useState("");
@@ -31,6 +32,7 @@ const MessageSend = observer(({ id }: { id?: string }) => {
   const saveInput = () => {
     searchUsers(ment, "mention");
   };
+  const darkMode = useDarkMode()
   console.log(ment);
   useEffect(() => {
     searchDeb(saveInput, 700);
@@ -149,7 +151,7 @@ const MessageSend = observer(({ id }: { id?: string }) => {
           {image?.name}
           <img
             src="../icons/Close.svg"
-            style={{ cursor: "pointer" }}
+            style={{ cursor: "pointer",filter: `invert(${darkMode.value ? "1" : "0"})`, }}
             onClick={() => {
               setImage(null);
             }}

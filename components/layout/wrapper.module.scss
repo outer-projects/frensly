@@ -20,4 +20,7 @@
   font-size: 24px;
   font-family: "DMSans";
   font-weight: bold;
+  @media (max-width: 616px) {
+    font-size: 16px;
+  }
 }

@@ -3,6 +3,7 @@ import style from "../ponds.module.scss";
 import profile from "../../profile/profile.module.scss";
 import { useInjection } from "inversify-react";
 import Web3Store from "../../../stores/Web3Store";
+import useDarkMode from "use-dark-mode";
 
 const Write = ({
   newMsg,
@@ -40,7 +41,7 @@ const Write = ({
     setNewMsg(newMsg.replace(mentionSearch, "") + "{" + el + "} ");
     setOpenMentions(false);
   };
-
+  const darkMode = useDarkMode()
   useEffect(() => {
     window.addEventListener("keydown", onKeyDown);
 
@@ -119,7 +120,7 @@ const Write = ({
           {file?.name}
           <img
             src="../icons/Close.svg"
-            style={{ cursor: "pointer" }}
+            style={{ cursor: "pointer", filter: `invert(${darkMode.value ? "1" : "0"})` }}
             onClick={() => {
               setFile(undefined);
             }}

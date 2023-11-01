@@ -7,10 +7,12 @@ import { UserStore } from "../../stores/UserStore";
 import { useEffect, useState } from "react";
 import classNames from "classnames";
 import { useRouter } from "next/router";
+import useDarkMode from "use-dark-mode";
 
 const Notifications = observer(
   ({ setNots }: { setNots?: (n: boolean) => void }) => {
     const router = useRouter();
+    const darkMode = useDarkMode()
     const [visible, setVisible] = useState(false);
     const { getNotifications, getUnreadCount, notifications, setMyActive } =
       useInjection(UserStore);
@@ -33,6 +35,7 @@ const Notifications = observer(
               <img
                 className={style.nots__close}
                 src="../../icons/Close.svg"
+                style={{ cursor: "pointer", filter: `invert(${darkMode.value ? "1" : "0"})` }}
                 onClick={() => {
                   setNots && setNots(false);
                 }}

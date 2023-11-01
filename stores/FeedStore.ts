@@ -17,6 +17,7 @@ export class FeedStore {
   @observable feedFrensOffset: number = 0;
   @observable publicOffset: number = 0
   @observable postOffset: number = 0;
+  @observable activeFeed: number = 0;
   @observable currentPost?: IPost = undefined;
   constructor(private readonly rootStore: RootStore) {
     makeObservable(this);
@@ -49,6 +50,9 @@ export class FeedStore {
       console.log(e);
     }
   };
+  @action setActiveFeed = (f:number) =>{
+    this.activeFeed = f
+  }
   @action updatePublicFeed = async () => {
     const query = new URLSearchParams({
       offset: this.publicOffset.toString(),
