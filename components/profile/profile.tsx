@@ -16,6 +16,7 @@ import { fromWei } from "web3-utils";
 import Link from "next/link";
 import { ChatStore } from "../../stores/ChatStore";
 import EthereumSvg from "../svgs/Ethereum";
+import useDarkMode from "use-dark-mode";
 const Profile = observer(() => {
   const modalStore = useInjection(ModalStore);
   const { user, frensly, address } = useInjection(Web3Store);
@@ -29,6 +30,7 @@ const Profile = observer(() => {
     setCurrentType,
   } = useInjection(UserStore);
   const router = useRouter();
+  const darkMode = useDarkMode()
   const [isMyProfile, setIsMyProfile] = useState(false);
   const [isFollowed, setIsFollowed] = useState(false);
   const [pricePerShade, setPricePerShade] = useState("0");
@@ -185,6 +187,7 @@ const Profile = observer(() => {
                         ? "../../icons/Plus.svg"
                         : "../../icons/Close.svg"
                     }
+                    style={{filter: `invert(${darkMode.value ? '1' : '0'})`}}
                   />
                   {!isFollowed ? "Follow" : "Unfollow"}
                 </button>

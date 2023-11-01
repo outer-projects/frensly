@@ -9,6 +9,7 @@ import Web3Store from "../../stores/Web3Store";
 import Swap from "../socials/twitterUI/Swap";
 import { InView } from "react-intersection-observer";
 import classNames from "classnames";
+import useDarkMode from "use-dark-mode";
 const TwitterFeed = observer(
   ({
     id,
@@ -53,6 +54,8 @@ const TwitterFeed = observer(
         return feed;
       }
     }, [id, isFrens, isPublic, userPosts, frensFeed, feed, publicFeed]);
+    const darkMode = useDarkMode();
+
     const updatePosts = () => {
       if (isFrens) {
         updateFrensFeed();
@@ -95,7 +98,7 @@ const TwitterFeed = observer(
       setHideRow([...hideRow, id]);
     };
     return (
-      <div className={classNames(style.twitter__feed, id && style.feed)}>
+      <div className={classNames(style.twitter__feed, id && style.user__feed)}>
         {(!id || id == user?._id) && (user?.verified || !isFrens) && (
           <MessageSend id={id} />
         )}
@@ -141,10 +144,12 @@ const TwitterFeed = observer(
                           {user?.twitterId == el.user?.twitterId ? (
                             <img
                               src="../icons/Close.svg"
+                      
                               style={{
                                 width: "20px",
                                 height: "20px",
                                 cursor: "pointer",
+                                filter: `invert(${darkMode.value ? "1" : "0"})`,
                               }}
                               onClick={() =>
                                 deletePost(el._id).then((res) => {

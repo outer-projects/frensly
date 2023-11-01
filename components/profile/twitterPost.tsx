@@ -42,7 +42,7 @@ const TwitterPost = observer(
     const [isActiveRepost, setIsActiveRepost] = useState(false);
     const [repostAvailable, setRepostAvailable] = useState(false);
     const router = useRouter();
-    const darkMode = useDarkMode()
+    const darkMode = useDarkMode();
     const mentions = useMemo(() => {
       const text = post?.text.match(/{[\w\s]+}/g);
       const result = text ? text.map((s: any) => s.slice(1, s.length - 1)) : [];
@@ -67,7 +67,9 @@ const TwitterPost = observer(
         /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gi;
       return text.replace(urlRegex, function (url) {
         return (
-          `<a style="color: ${darkMode.value ? 'white' : 'black'}; text-decoration: underline" href="` +
+          `<a style="color: ${
+            darkMode.value ? "white" : "black"
+          }; text-decoration: underline" href="` +
           url +
           '" target="_blank">' +
           url +
@@ -176,7 +178,10 @@ const TwitterPost = observer(
                 {isOnePostPage ? (
                   <img
                     src={"../../icons/arrow_back.svg"}
-                    style={{ marginRight: "8px" }}
+                    style={{
+                      marginRight: "8px",
+                      filter: `invert(${darkMode.value ? "1" : "0"})`,
+                    }}
                     onClick={() => {
                       !isComment
                         ? router.back()

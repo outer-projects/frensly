@@ -19,6 +19,7 @@ import Link from "next/link";
 import OneMessage from "./oneMessage";
 import { InView } from "react-intersection-observer";
 import EthereumSvg from "../../svgs/Ethereum";
+import useDarkMode from "use-dark-mode";
 const Chat = observer(() => {
   const socket = useContext(SocketContext);
   const [newMsg, setNewMsg] = useState("");
@@ -43,9 +44,7 @@ const Chat = observer(() => {
   } = useInjection(ChatStore);
   const modalStore = useInjection(ModalStore);
   const [isLightning, setIsLightning] = useState(false);
-  // useEffect(()=>{
-  //   console.log(messages);
-  // }, [messages])
+  const darkMode = useDarkMode()
   useEffect(() => {
     let tt = setTimeout(() => {
       setOpacity(true);
@@ -128,6 +127,7 @@ const Chat = observer(() => {
                   <img
                     className={style.openchat__back}
                     src={"../../icons/arrow_back.svg"}
+                    style={{filter: `invert(${darkMode.value ? '1' : '0'})`}}
                   />
                 </Link>
                 <img

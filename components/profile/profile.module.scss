@@ -103,6 +103,7 @@
   font-weight: 400 !important;
   border-radius: 100px;
   border: 1px solid $green;
+  color: var(--text-main)!important;
 }
 .profile__unfollow {
   width: 49% !important;
@@ -294,8 +295,9 @@
     height: 24px;
   }
 }
-.feed {
-  border-radius: 0px;
+.user__feed {
+  border-top-left-radius: 0px!important;
+  border-top-right-radius: 0px!important;
   border-bottom-left-radius: 32px;
   border-bottom-right-radius: 32px;
 }

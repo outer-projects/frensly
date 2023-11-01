@@ -11,6 +11,7 @@ import Web3Store from "../stores/Web3Store";
 import { fromWei } from "web3-utils";
 import { toast } from "react-toastify";
 import { fromWeiToEth } from "../utils/utilities";
+import useDarkMode from "use-dark-mode";
 
 interface modalProps {
   key: ModalsEnum;
@@ -52,10 +53,15 @@ export const TradeModal = observer(({ key, data, idx }: modalProps) => {
       ownCount();
     }
   }, [frensly]);
+  const darkMode = useDarkMode();
+
   const ownCount = async () => {
     try {
       const res = await frensly.methods
-        .sharesBalance(data?.user?.account?.address || data.user?.address, address)
+        .sharesBalance(
+          data?.user?.account?.address || data.user?.address,
+          address
+        )
         .call();
       // console.log(res);
       setCount(Number(res) / 10 ** 6);
@@ -77,7 +83,10 @@ export const TradeModal = observer(({ key, data, idx }: modalProps) => {
             Trade shares
             <img
               src="../icons/Close.svg"
-              style={{ cursor: "pointer" }}
+              style={{
+                cursor: "pointer",
+                filter: `invert(${darkMode.value ? "1" : "0"})`,
+              }}
               onClick={() => {
                 modalStore.hideAllModals();
               }}

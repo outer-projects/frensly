@@ -6,7 +6,7 @@
   width: 100vw;
   left: 0;
   height: 56px;
-  background: #fbfbfb;
+  background: var(--background-row);
   display: none;
   @media (max-width: 1000px) {
     display: block;

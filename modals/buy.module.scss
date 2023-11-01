@@ -69,6 +69,7 @@
   background-color: transparent !important;
   border: 1px solid $green !important;
   margin-bottom: 8px;
+  color: var(--text-shade)!important;
 }
 .buy__title {
   font-family: "Syne";
@@ -105,6 +106,7 @@
 }
 .buy__amount__value {
   font-size: 16px;
+  color: var(--text-main);
   line-height: 24px; /* 150% */
   letter-spacing: -0.16px;
   border: none;

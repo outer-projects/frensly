@@ -11,6 +11,7 @@ import Web3Store from "../stores/Web3Store";
 import { fromWei } from "web3-utils";
 import { toast } from "react-toastify";
 import { fromWeiToEth } from "../utils/utilities";
+import useDarkMode from "use-dark-mode";
 
 interface modalProps {
   key: ModalsEnum;
@@ -22,9 +23,11 @@ export const BuyModal = observer(({ key, data, idx }: modalProps) => {
   const modalStore = useInjection(ModalStore);
   const { frensly, address, checkAuth } = useInjection(Web3Store);
   const [numberOfShares, setNumberOfShares] = useState<number | string>(1);
-  const [currentPrice, setCurrentPrice] = useState('0');
-  const [priceOfOne, setPriceOfOne] = useState('0');
+  const [currentPrice, setCurrentPrice] = useState("0");
+  const [priceOfOne, setPriceOfOne] = useState("0");
   const [count, setCount] = useState(0);
+  const darkMode = useDarkMode();
+
   const buy = async () => {
     if (Number(numberOfShares) < 0.000001)
       return toast.error("Amount is too low");
@@ -56,7 +59,7 @@ export const BuyModal = observer(({ key, data, idx }: modalProps) => {
       // console.log("getBuyPriceAfterFee: ", res);
       return res;
     } catch (e) {
-      console.log("ERROR getBuyPriceAfterFee: ",e);
+      console.log("ERROR getBuyPriceAfterFee: ", e);
 
       return 0;
     }
@@ -105,7 +108,10 @@ export const BuyModal = observer(({ key, data, idx }: modalProps) => {
             Buy shares
             <img
               src="../icons/Close.svg"
-              style={{ cursor: "pointer" }}
+              style={{
+                cursor: "pointer",
+                filter: `invert(${darkMode.value ? "1" : "0"})`,
+              }}
               onClick={() => {
                 modalStore.hideAllModals();
               }}
@@ -113,10 +119,7 @@ export const BuyModal = observer(({ key, data, idx }: modalProps) => {
           </div>
           <div className={style.buy__user}>
             <div className={style.buy__user__left}>
-              <img
-                className={style.buy__avatar}
-                src={data.user?.avatar}
-              />
+              <img className={style.buy__avatar} src={data.user?.avatar} />
               <div className={style.buy__user__left__text}>
                 <div className={style.buy__user__name}>
                   {data.user?.twitterName}
