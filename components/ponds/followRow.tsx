@@ -64,7 +64,7 @@ const FollowRow = observer(({ el }: { el: IProfile }) => {
               src={
                 !isFollowed ? "../../icons/Plus.svg" : "../../icons/Close.svg"
               }
-              style={{ cursor: "pointer", filter: `invert(${darkMode.value ? "1" : "0"})` }}
+              style={{ cursor: "pointer", filter: `invert(${!isFollowed && darkMode.value ? "1" : "0"})` }}
             />
             {!isFollowed ? "Follow" : "Unfollow"}
           </button>

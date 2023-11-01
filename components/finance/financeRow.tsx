@@ -51,7 +51,7 @@ const FinanceRow = observer(
             </div>
           </div>
           <div className={style.explore__user__right}>
-            <div className={style.explore__user__name}>
+            <div className={style.explore__user__price}>
               <EthereumSvg />
               {fromWeiToEth(price ? price : el.currentPrice)} ETH
             </div>

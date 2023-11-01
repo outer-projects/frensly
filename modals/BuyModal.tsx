@@ -146,7 +146,7 @@ export const BuyModal = observer(({ key, data, idx }: modalProps) => {
               value={numberOfShares}
               type="text"
               onChange={(e) => {
-                if (!isNaN(Number(e.target.value))) {
+                if (!isNaN(Number(e.target.value)) || e.target.value == ".") {
                   setNumberOfShares(e.target.value);
                 } else if (e.target.value == "") {
                   setNumberOfShares("");
@@ -173,7 +173,11 @@ export const BuyModal = observer(({ key, data, idx }: modalProps) => {
           </button>
           <button
             className={classNames(header.connect__button, style.buy__button)}
-            disabled={numberOfShares == 0 || numberOfShares == ""}
+            disabled={
+              numberOfShares == 0 ||
+              numberOfShares == "" ||
+              numberOfShares == "."
+            }
             onClick={buy}
           >
             Buy

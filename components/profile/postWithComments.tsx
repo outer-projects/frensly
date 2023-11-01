@@ -66,7 +66,7 @@ const PostWithComments = observer(() => {
       <div>
         {openMentions && (
           <div
-            className={write.write__mentions}
+            className={write.write__mentions__post}
             style={{ fontFamily: "DMSans" }}
           >
             {(mentionSearch.length == 0 ? topFive : mentionSearch)

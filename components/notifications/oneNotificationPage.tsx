@@ -99,7 +99,7 @@ const OneNotificationPage = observer(
             {notification?.type == "LIKE" && (
               <img src="../icons/twitterUI/Heart__grey.svg" />
             )}
-            {notification?.type == "FOLLOW" && <img src="../icons/Plus.svg" />}
+            {notification?.type == "FOLLOW" && <img src="../icons/Plus.svg" style={{filter: "invert(0.5)"}} />}
           </div>
           {notification?.price && (
             <div className={style.nots__one__price__page__mobile}>

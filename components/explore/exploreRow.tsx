@@ -52,7 +52,7 @@ const ExploreRow = observer(({ el }: { el: IProfile }) => {
           </div>
         </div>
         <div className={style.explore__user__right}>
-          <div className={style.explore__user__name}>
+          <div className={style.explore__user__price}>
             <EthereumSvg />
             {fromWeiToEth(el.account.currentPrice)} ETH
           </div>
