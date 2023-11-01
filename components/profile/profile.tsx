@@ -187,7 +187,7 @@ const Profile = observer(() => {
                         ? "../../icons/Plus.svg"
                         : "../../icons/Close.svg"
                     }
-                    style={{filter: `invert(${darkMode.value ? '1' : '0'})`}}
+                    style={{filter: `invert(${!isFollowed && darkMode.value ? '1' : '0'})`}}
                   />
                   {!isFollowed ? "Follow" : "Unfollow"}
                 </button>
