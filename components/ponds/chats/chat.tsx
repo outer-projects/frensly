@@ -141,7 +141,7 @@ const Chat = observer(() => {
                   >
                     <Link
                       href={"../../profile/" + chat?.profile.twitterId}
-                      style={{ color: "#151614" }}
+                      
                     >
                       {chat?.profile?.twitterName}
                     </Link>
