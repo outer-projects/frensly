@@ -47,14 +47,16 @@ export class ChatStore {
       limit: "50",
     }).toString();
     try {
-      const res = await axios.get(prefix + "chat/room/test/" + id + "/?" + query);
-      console.log("chat:", res.data)
+      const res = await axios.get(
+        prefix + "chat/room/test/" + id + "/?" + query
+      );
+      console.log("chat:", res.data);
       const n = Number(res.data.total);
       this.messagesleft = n - 50 > 0 ? n - 50 : 0;
       this.messagesOffset = 100;
       this.chat = res.data.room;
       this.chatAmount = Number(res.data.room.ownerShareAmount) / 10 ** 6;
-      this.messages = res.data.room.messages;
+      this.messages = res.data.room.messages.filter((el: any) => !el?.isHidden);
     } catch (e) {
       console.log(e);
     }
@@ -68,12 +70,14 @@ export class ChatStore {
       limit: this.messagesleft >= 50 ? "50" : this.messagesleft.toString(),
     }).toString();
     try {
-      const res = await axios.get(prefix + "chat/room/test/" + id + "/?" + query);
+      const res = await axios.get(
+        prefix + "chat/room/test/" + id + "/?" + query
+      );
       // console.log("chat:", res.data);
       let n = this.messagesleft;
       this.messagesleft = n - 50 > 0 ? n - 50 : 0;
       this.messagesOffset = this.messagesOffset + 50;
-      this.messages = [...res.data.room.messages, ...this.messages];
+      this.messages = [...res.data.room.messages.filter((el:any) => !el?.isHidden), ...this.messages];
     } catch (e) {
       console.log(e);
     }

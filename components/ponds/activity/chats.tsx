@@ -15,7 +15,7 @@ const Chats = observer(() => {
         return (
           <ChatItem
             unread={el.unread}
-            messages={el.room.messages}
+            messages={el.room.messages.filter((el:any) => !el?.isHidden)}
             key={el.room.owner._id}
             chatId={el.room._id}
             el={el.room.owner}
