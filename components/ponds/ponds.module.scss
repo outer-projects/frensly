@@ -112,7 +112,7 @@
   display: flex;
   align-items: center;
   .chat__unread {
-    color: black;
+    color: var(--text-main);
     width: 16px;
     height: 16px;
     border-radius: 100%;
@@ -256,7 +256,7 @@
     margin-left: 8px;
   }
   @media (max-height: 671px) {
-    height: 100vh;
+    height: calc(100vh - 107px);
   }
 }
 .openchat__close {
@@ -328,6 +328,7 @@
   background: transparent !important;
   width: 75px;
   height: 48px;
+  color: var(--text-main);
   margin-right: 8px;
   @media (max-width: 616px) {
     width: 57px;
@@ -343,6 +344,7 @@
   display: flex;
   overflow: hidden;
   justify-content: space-between;
+  color: var(--name);
 }
 .openchat__mydate {
   display: flex;
@@ -366,7 +368,7 @@
   border-radius: 24px 8px 0px 24px;
   width: fit-content;
   overflow: hidden;
-
+  color: black;
   padding-left: 16px;
   padding-right: 16px;
   background: #effdde;
@@ -459,7 +461,6 @@
   letter-spacing: -0.2px;
   overflow: hidden;
   .twitter__redirect {
-    color: var(--text-shade);
     margin-left: 4px;
     font-size: 14px;
     font-weight: 400;
@@ -467,8 +468,7 @@
     line-height: 20px;
     letter-spacing: -0.14px;
     cursor: pointer;
-
-    color: var(--text-shade);
+    color: var(--text-main);
   }
 }
 .chat__share {
@@ -543,6 +543,7 @@
   outline: none;
   line-height: 24px; /* 150% */
   letter-spacing: -0.16px;
+  background-color: var(--background-pages);
   margin-left: 16px;
   &::placeholder {
     color: #b4b4b3;

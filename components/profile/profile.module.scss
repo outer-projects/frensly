@@ -294,6 +294,11 @@
     height: 24px;
   }
 }
+.feed {
+  border-radius: 0px;
+  border-bottom-left-radius: 32px;
+  border-bottom-right-radius: 32px;
+}
 .twitter__feed {
   padding-top: 24px;
   border-radius: 32px;
@@ -422,6 +427,7 @@
   display: flex;
   overflow: hidden;
   align-items: center;
+  color: var(--text-main);
   img {
     margin-left: 5px;
   }

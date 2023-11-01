@@ -8,6 +8,7 @@ import { useInjection } from "inversify-react";
 import { UserStore } from "../../stores/UserStore";
 import Web3Store from "../../stores/Web3Store";
 import EthereumSvg from "../svgs/Ethereum";
+import Key from "../svgs/key";
 
 const ExploreRow = observer(({ el }: { el: IProfile }) => {
   const [usdPrice, setUsdPrice] = useState(0);
@@ -30,7 +31,7 @@ const ExploreRow = observer(({ el }: { el: IProfile }) => {
               {user?.account?.othersShares.filter(
                 (u) =>
                   u.subject == el.account._id && Number(u.amount) >= 1000000
-              )?.length >= 1 && <img src="../icons/Key.svg" />}
+              )?.length >= 1 && <Key />}
               <div>{Number(el?.account?.sharesAmount) / 10 ** 6} share</div>
             </div>
             <div className={style.explore__user__name}>
@@ -40,6 +41,9 @@ const ExploreRow = observer(({ el }: { el: IProfile }) => {
                   href={"https://twitter.com/" + el.twitterHandle}
                   target="_blank"
                   rel="noreferrer"
+                  onClick={(e) => {
+                    e.stopPropagation()
+                  }}
                 >
                   @{el.twitterHandle}
                 </a>
@@ -49,7 +53,7 @@ const ExploreRow = observer(({ el }: { el: IProfile }) => {
         </div>
         <div className={style.explore__user__right}>
           <div className={style.explore__user__name}>
-            <EthereumSvg/>
+            <EthereumSvg />
             {fromWeiToEth(el.account.currentPrice)} ETH
           </div>
           <div className={style.explore__user__balance__usd}>${usdPrice}</div>

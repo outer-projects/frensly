@@ -22,11 +22,8 @@ import Highlighter from "react-highlight-words";
 //@ts-ignore
 
 import axios from "axios";
-const componentDecorator = (href: string, text: string, key: number) => (
-  <a className="linkify__text" href={href} key={key} target="_blank">
-    {text}
-  </a>
-);
+import useDarkMode from "use-dark-mode";
+
 const TwitterPost = observer(
   ({
     post,
@@ -45,13 +42,13 @@ const TwitterPost = observer(
     const [isActiveRepost, setIsActiveRepost] = useState(false);
     const [repostAvailable, setRepostAvailable] = useState(false);
     const router = useRouter();
+    const darkMode = useDarkMode()
     const mentions = useMemo(() => {
       const text = post?.text.match(/{[\w\s]+}/g);
       const result = text ? text.map((s: any) => s.slice(1, s.length - 1)) : [];
       return result;
     }, []);
 
-    console.log(mentions);
     const tagGet = (text: string) => {
       var tagRegex = /[^{\}]+(?=})/g;
       console.log(text);
@@ -70,7 +67,7 @@ const TwitterPost = observer(
         /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gi;
       return text.replace(urlRegex, function (url) {
         return (
-          '<a style="color: black; text-decoration: underline" href="' +
+          `<a style="color: ${darkMode.value ? 'white' : 'black'}; text-decoration: underline" href="` +
           url +
           '" target="_blank">' +
           url +

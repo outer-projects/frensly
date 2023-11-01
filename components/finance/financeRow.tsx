@@ -9,6 +9,7 @@ import { UserStore } from "../../stores/UserStore";
 import Web3Store from "../../stores/Web3Store";
 import BigNumber from "bignumber.js";
 import EthereumSvg from "../svgs/Ethereum";
+import Key from "../svgs/key";
 
 const FinanceRow = observer(
   ({
@@ -39,7 +40,7 @@ const FinanceRow = observer(
                 {/* @ts-ignore */}
                 {user?.account?.othersShares.filter(
                   (u) => u.subject == el._id && Number(u.amount) >= 1000000
-                )?.length >= 1 && <img src="../icons/Key.svg" />}
+                )?.length >= 1 && <Key />}
                 <div>
                   {Number(amount ? amount : el?.sharesAmount) / 10 ** 6} share
                 </div>

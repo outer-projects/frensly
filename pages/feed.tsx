@@ -39,7 +39,7 @@ const FeedPage: NextPage = observer((props) => {
       </div>
       {active == 0 && <TwitterFeed isFeed />}
       {active == 1 && <TwitterFeed isFeed isFrens />}
-      {active == 1 && <TwitterFeed isFeed isPublic />}
+      {active == 2 && <TwitterFeed isFeed isPublic />}
     </div>
   );
 });

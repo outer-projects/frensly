@@ -35,22 +35,26 @@ a {
   --background-row: #f8f8f8;
   --background-pages: white;
   --text-main: #151614;
-  --text-shade: #676766!important;
+  --text-shade: #676766 !important;
   --hover: #f1f1f1;
   --header: rgba(252, 252, 253, 0.7);
   --header-bottom: #f4f5f6;
   --border: #e2e3e2;
+  --msg-bg: #f1f1f1;
+  --name: #676766;
 }
 
 .dark-mode {
   --background: #131414;
-  --background-row: #1C1D1B;
+  --background-row: #1c1d1b;
   --background-row-hover: #232422;
-  --background-pages: #232422;
+  --background-pages: #161717;
   --text-main: white;
   --text-shade: #adadad;
   --hover: #232422;
   --header: #1c1d1b;
   --header-bottom: #232422;
+  --msg-bg: #1c1d1b;
+  --name: #5D5FEF;
   --border: #313230;
 }

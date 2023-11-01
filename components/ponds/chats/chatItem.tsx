@@ -8,6 +8,7 @@ import { useInjection } from "inversify-react";
 import { useEffect, useState } from "react";
 import classNames from "classnames";
 import EthereumSvg from "../../svgs/Ethereum";
+import Key from "../../svgs/key";
 
 const ChatItem = observer(
   ({
@@ -42,7 +43,7 @@ const ChatItem = observer(
             <img className={style.chat__avatar} src={el?.avatar} />
             <div>
               <div className={style.chat__share}>
-                {<img src="../icons/Key.svg" />}
+                <Key/>
                 <div>
                   {Number(amount ? amount : el?.account?.sharesAmount) /
                     10 ** 6}{" "}

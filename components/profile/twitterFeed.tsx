@@ -8,6 +8,7 @@ import { FeedStore } from "../../stores/FeedStore";
 import Web3Store from "../../stores/Web3Store";
 import Swap from "../socials/twitterUI/Swap";
 import { InView } from "react-intersection-observer";
+import classNames from "classnames";
 const TwitterFeed = observer(
   ({
     id,
@@ -94,7 +95,7 @@ const TwitterFeed = observer(
       setHideRow([...hideRow, id]);
     };
     return (
-      <div className={style.twitter__feed}>
+      <div className={classNames(style.twitter__feed, id && style.feed)}>
         {(!id || id == user?._id) && (user?.verified || !isFrens) && (
           <MessageSend id={id} />
         )}

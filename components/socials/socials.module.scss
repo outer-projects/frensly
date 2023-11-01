@@ -1,3 +1,5 @@
+@import "../../styles/_vars.sass";
+
 .airdrop {
   font-family: "Manrope";
   font-size: 16px;
@@ -101,7 +103,7 @@
 .airdrop__input {
   border-radius: 40px;
   background: #fcfcfd;
-  color: black;
+  color: var(--text-main);
   text-align: center;
   font-family: "Manrope";
   outline: none;
