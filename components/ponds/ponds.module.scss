@@ -522,7 +522,7 @@
   width: 616px;
   padding-left: 8px;
   padding-bottom: 8px;
-  margin-left: 26px;
+  margin-left: -16px;
   max-width: 100%;
   background: var(--background-row);
   display: flex;
@@ -538,9 +538,9 @@
   height: 100px;
   overflow-y: auto;
   width: 568px;
-  padding-left: 26px;
+  padding-left: 8px;
   padding-bottom: 8px;
-  margin-left: -16px;
+  margin-left: 26px;
   max-width: 100%;
   background: var(--background-row);
   color: var(--text-main);
