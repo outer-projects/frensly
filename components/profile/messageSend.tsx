@@ -91,6 +91,9 @@ const MessageSend = observer(({ id }: { id?: string }) => {
             if (key == "@") {
               setOpenMentions(true);
             }
+            if (key == " ") {
+              setOpenMentions(false);
+            }
             if (!e.target.value.includes("@")) {
               setOpenMentions(false);
             }
@@ -123,6 +126,7 @@ const MessageSend = observer(({ id }: { id?: string }) => {
             className={classNames(header.connect__button, style.twitter__post)}
             disabled={message.length == 0}
             onClick={() => {
+              setOpenMentions(false)
               addPost({
                 text: message,
                 media: image,

@@ -9,13 +9,21 @@ import { observer } from "mobx-react";
 import { IPost } from "../../types/feed";
 import TwitterPost from "./twitterPost";
 import { useRouter } from "next/router";
-
+import { ExploreStore } from "../../stores/ExploreStore";
+import write from "../ponds/ponds.module.scss";
+import Web3Store from "../../stores/Web3Store";
 const PostWithComments = observer(() => {
   const router = useRouter();
   const { id } = router.query;
+  const [tt, updateTimeout] = useState<any>(undefined);
   const [message, setMessage] = useState("");
+  const { user } = useInjection(Web3Store);
   const [focus, setFocus] = useState(false);
+  const [openMentions, setOpenMentions] = useState(false);
   const [image, setImage] = useState<File | null>(null);
+  const [ment, setMent] = useState("");
+  const { searchUsers, mentionSearch, getTopFive, topFive } =
+    useInjection(ExploreStore);
   const { addPost, getCurrentPost, currentPost, setCurrentPost } =
     useInjection(FeedStore);
   useEffect(() => {
@@ -28,11 +36,55 @@ const PostWithComments = observer(() => {
       setCurrentPost(undefined);
     };
   }, []);
+  const searchDeb = (fn: any, ms: number) => {
+    const clear = () => {
+      clearTimeout(tt);
+      updateTimeout(setTimeout(fn, ms));
+    };
+    return clear();
+  };
+  const saveInput = () => {
+    searchUsers(ment, "mention");
+  };
+  console.log(ment);
+  useEffect(() => {
+    searchDeb(saveInput, 700);
+  }, [ment]);
+  const mention = (el: string) => {
+    setMessage(message.replace(ment, "") + "{" + el + "} ");
+    setOpenMentions(false);
+  };
+  useEffect(() => {
+    if (openMentions && topFive.length == 0) {
+      getTopFive();
+    }
+  }, [openMentions]);
   return (
     <div className={style.twitter__one__post__wrap}>
       {currentPost && <TwitterPost post={currentPost} isOnePostPage />}
 
       <div>
+        {openMentions && (
+          <div
+            className={write.write__mentions}
+            style={{ fontFamily: "DMSans" }}
+          >
+            {(mentionSearch.length == 0 ? topFive : mentionSearch)
+              .filter((el) => el.twitterId !== user?.twitterId)
+
+              .map((el: any, i: number) => {
+                return (
+                  <div
+                    className={write.write__mention}
+                    key={i}
+                    onClick={() => mention(el.twitterHandle)}
+                  >
+                    @{el.twitterHandle}
+                  </div>
+                );
+              })}
+          </div>
+        )}
         <TextareaAutosize
           value={message}
           style={{ resize: "none" }}
@@ -49,6 +101,25 @@ const PostWithComments = observer(() => {
             setFocus(true);
           }}
           onChange={(e: any) => {
+            // console.log(e.key);
+            let after = e.target.value.split("@");
+            // console.log(after[after.length - 1]);
+            let key = e.target.value.substring(e.target.value.length - 1);
+            console.log(key);
+            if (key == "@") {
+              setOpenMentions(true);
+            }
+            if (key == " ") {
+              setOpenMentions(false);
+            }
+            if (!e.target.value.includes("@")) {
+              setOpenMentions(false);
+            }
+            if (openMentions) {
+              setMent(after[after.length - 1]);
+            } else {
+              setMent("");
+            }
             setMessage(e.target.value);
           }}
         />
@@ -87,6 +158,7 @@ const PostWithComments = observer(() => {
             )}
             disabled={message.length == 0}
             onClick={() => {
+              setOpenMentions(false)
               addPost({
                 text: message,
                 media: image,
@@ -103,7 +175,7 @@ const PostWithComments = observer(() => {
           </button>
         </div>
       </div>
-      <div style={{marginTop:'-24px'}}>
+      <div style={{ marginTop: "-24px" }}>
         {currentPost &&
           currentPost?.comments
             .map((el) => {
