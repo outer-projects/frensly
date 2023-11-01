@@ -8,6 +8,7 @@ import { useInjection } from "inversify-react";
 import { UserStore } from "../../stores/UserStore";
 import Web3Store from "../../stores/Web3Store";
 import BigNumber from "bignumber.js";
+import EthereumSvg from "../svgs/Ethereum";
 
 const FinanceRow = observer(
   ({
@@ -50,7 +51,7 @@ const FinanceRow = observer(
           </div>
           <div className={style.explore__user__right}>
             <div className={style.explore__user__name}>
-              <img src="../icons/Ethereum.svg" />
+              <EthereumSvg />
               {fromWeiToEth(price ? price : el.currentPrice)} ETH
             </div>
             <div className={style.explore__user__balance__usd}>${usdPrice}</div>

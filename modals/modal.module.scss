@@ -22,7 +22,7 @@
   align-items: center;
   gap: 50px;
   overflow: hidden;
-  color: $black;
+  color: var(--text-main);
   font-family: "DMSans";
   @media (max-width: 1350px) {
     max-width: fit-content;

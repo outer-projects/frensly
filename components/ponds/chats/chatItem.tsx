@@ -7,6 +7,7 @@ import { UserStore } from "../../../stores/UserStore";
 import { useInjection } from "inversify-react";
 import { useEffect, useState } from "react";
 import classNames from "classnames";
+import EthereumSvg from "../../svgs/Ethereum";
 
 const ChatItem = observer(
   ({
@@ -75,7 +76,7 @@ const ChatItem = observer(
           </div>
           <div className={style.chat__price}>
             <div className={style.chat__value}>
-              <img src="../icons/Ethereum.svg" />
+              <EthereumSvg />
               {fromWeiToEth(el?.account?.currentPrice)} ETH
             </div>
             <div className={style.chat__dollar}>${usdPrice}</div>

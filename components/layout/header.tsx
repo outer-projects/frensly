@@ -13,12 +13,16 @@ import Web3Store from "../../stores/Web3Store";
 import { UserStore } from "../../stores/UserStore";
 import { SocketContext } from "../../utils/socket";
 import { ChatStore } from "../../stores/ChatStore";
+import useDarkMode from "use-dark-mode";
+import Moon from "../svgs/moon";
+import Sun from "../svgs/sun";
 
 const Header = observer(() => {
   const router = useRouter();
   const socket = useContext(SocketContext);
   const [active, setActive] = useState("");
   const [menuMob, setMenuMob] = useState(false);
+  const darkMode = useDarkMode(false);
   const [nots, setNots] = useState(false);
   const [notsMob, setNotsMob] = useState(false);
   const { user, checkAuth } = useInjection(Web3Store);
@@ -69,7 +73,7 @@ const Header = observer(() => {
     <div className={style.header__container}>
       <header className={style.header}>
         <Link href={"../../feed"}>
-          <img src="../logo.svg" />
+          <img src={!darkMode.value ? "../logo.svg" : "../logo_white.svg"} />
         </Link>
         <div className={style.header__row}>
           {headerText.map((el, i) => {
@@ -102,19 +106,28 @@ const Header = observer(() => {
           })}
         </div>
         <div className={style.header__user}>
-          <div
-            ref={ref}
-            onClick={() => {
-              if (unreadCount > 0) {
-                setNots(!nots);
-              } else {
-                router.push("../../notifications");
-              }
-            }}
-            style={{ cursor: "pointer" }}
-          >
+          <div style={{ cursor: "pointer" }}>
             <div style={{ display: "flex", alignItems: "flex-end" }}>
-              <Bell isActive={false} />
+              <button
+                className={classNames(style.theme__btn)}
+                onClick={darkMode.toggle}
+              >
+                {darkMode.value && <Moon />}
+                {!darkMode.value && <Sun />}
+              </button>
+              <div
+                ref={ref}
+                style={{ display: "flex", alignItems: "flex-end" }}
+                onClick={() => {
+                  if (unreadCount > 0) {
+                    setNots(!nots);
+                  } else {
+                    router.push("../../notifications");
+                  }
+                }}
+              >
+                <Bell isActive={false} />
+              </div>
               <div className={style.header__count__contain}>
                 {unreadCount != 0 && (
                   <div className={style.header__count}>{unreadCount}</div>
@@ -140,6 +153,13 @@ const Header = observer(() => {
             style={{ cursor: "pointer" }}
           >
             <div style={{ display: "flex", alignItems: "flex-end" }}>
+              <button
+                className={classNames(style.theme__btn)}
+                onClick={darkMode.toggle}
+              >
+                {darkMode.value && <Moon />}
+                {!darkMode.value && <Sun />}
+              </button>
               <Bell isActive={false} />
 
               {unreadCount != 0 && (

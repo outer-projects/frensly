@@ -22,7 +22,7 @@ const Sidebar = () => {
                 el.link == router.asPath && style.finance__link__active
               )}
             >
-              <img src={el.img} />
+              {el.img} 
               {el.title}
             </div>
           </Link>

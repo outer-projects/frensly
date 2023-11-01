@@ -1,4 +1,4 @@
-import "../styles/main.sass";
+import "../styles/main.scss";
 import type { AppProps } from "next/app";
 import { useContext, useEffect, useState } from "react";
 import { RootStore } from "../stores/RootStore";
@@ -6,6 +6,7 @@ import { Provider, useInjection } from "inversify-react";
 import { ModalsContainer } from "../modals";
 import "react-toastify/dist/ReactToastify.css";
 import React, { Suspense } from "react";
+import useDarkMode from "use-dark-mode";
 const rootStore = new RootStore();
 const container = rootStore.container;
 import "@rainbow-me/rainbowkit/styles.css";
@@ -28,7 +29,7 @@ import "../components/polyfills";
 import { SocketContext, socket } from "../utils/socket";
 import { isDevelopment } from "../utils/config";
 import Head from "next/head";
-
+let darkMode;
 const { chains, publicClient, webSocketPublicClient } = configureChains(
   [base, ...(isDevelopment ? [bscTestnet] : [])],
   [publicProvider()]
@@ -68,7 +69,10 @@ function MyApp({ Component, pageProps }: AppProps) {
   useEffect(() => {
     setLoading(true);
   }, []);
-
+  if (typeof document !== `undefined`) {
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    darkMode = useDarkMode(false, { element: document.documentElement });
+  }
   return (
     <>
       {loading ? (

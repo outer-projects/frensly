@@ -102,7 +102,7 @@ export const BuyModal = observer(({ key, data, idx }: modalProps) => {
       <div className={style.buy}>
         <div className={style.buy__info}>
           <div className={style.buy__title}>
-            Buy a shares
+            Buy shares
             <img
               src="../icons/Close.svg"
               style={{ cursor: "pointer" }}

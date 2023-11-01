@@ -15,6 +15,9 @@ import ProgressBar from "../progressBar/progressBar";
 import { toWei } from "web3-utils";
 import { toast } from "react-toastify";
 import { useRouter } from "next/router";
+import Moon from "../svgs/moon";
+import Sun from "../svgs/sun";
+import useDarkMode from "use-dark-mode";
 const AuthBanner = observer(() => {
   const { address, authStatus, frensly, user, checkAuth } =
     useInjection(Web3Store);
@@ -22,6 +25,7 @@ const AuthBanner = observer(() => {
   const [title, setTitle] = useState("");
   const [invite, setInvite] = useState("");
   const [stage, setStage] = useState("");
+  const darkMode = useDarkMode(false);
   const [codeEntered, setCodeEntered] = useState(false);
   const [opacity, setOpacity] = useState(false);
   const [activeCode, setActiveCode] = useState(false);
@@ -116,7 +120,19 @@ const AuthBanner = observer(() => {
     <>
       {
         <div className={style.banner} style={{ opacity: opacity ? 1 : 0 }}>
-          <img src="../logo.svg" className={style.banner__logo} />
+          <div className={style.banner__top}>
+            <img
+              src={!darkMode.value ? "../logo.svg" : "../logo_white.svg"}
+              className={style.banner__logo}
+            />
+            <button
+              className={classNames(style.theme__btn)}
+              onClick={darkMode.toggle}
+            >
+              {darkMode.value && <Moon />}
+              {!darkMode.value && <Sun />}
+            </button>
+          </div>
           <div className={style.banner__col}>
             <div
               className={classNames(

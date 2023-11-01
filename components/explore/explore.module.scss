@@ -25,7 +25,7 @@
   margin-left: 555px;
 }
 .explore__title {
-  color: $black;
+  color: var(--text-main);
   margin-bottom: 24px;
   /* Header/H2 */
   font-family: Syne;
@@ -58,7 +58,7 @@
   align-items: center;
   margin-left: 8px;
   margin-right: 8px;
-  color: $grey;
+  color: var(--text-shade);
   text-align: center;
   font-family: "DMSans";
   font-size: 14px;
@@ -79,7 +79,7 @@
   margin-bottom: 16px;
 }
 .feed__type {
-  color: $grey;
+  color: var(--text-shade);
   text-align: center;
   font-family: "DMSans";
   font-size: 14px;
@@ -100,7 +100,7 @@
   }
 }
 .explore__type {
-  color: $grey;
+  color: var(--text-shade);
   text-align: center;
   font-family: "DMSans";
   font-size: 14px;
@@ -119,14 +119,14 @@
   cursor: pointer;
 }
 .explore__active {
-  background: #f1f1f1 !important;
-  color: $black !important;
+  background: var(--hover) !important;
+  color: var(--text-main) !important;
   font-weight: bold !important;
 }
 .explore__users__col {
   padding: 24px;
   border-radius: 32px;
-  background: #fff;
+  background: var(--background-pages);
   @media (max-width: 616px) {
     padding: 12px;
   }
@@ -140,9 +140,9 @@
   padding: 8px 16px;
   margin-bottom: 16px;
   transition: 500ms ease all;
-  background: #f8f8f8;
+  background: var(--background-row);
   &:hover {
-    background: #f1f1f1;
+    background: var(--hover);
   }
 }
 .explore__user__left {
@@ -157,7 +157,7 @@
 .explore__user__share {
   display: flex;
   align-items: center;
-  color: $grey;
+  color: var(--text-shade);
   font-family: "DMSans";
   font-size: 12px;
   font-style: normal;
@@ -170,13 +170,13 @@
   }
   div {
     border-radius: 100px;
-    background: var(--Black-6, #f1f1f1);
+    background: var(--Black-6, var(--hover));
     padding-left: 8px;
     padding-right: 8px;
   }
 }
 .explore__user__balance__usd {
-  color: $grey;
+  color: var(--text-shade);
   text-align: right;
   font-family: "DMSans";
   font-size: 12px;
@@ -191,7 +191,7 @@
 .explore__user__name {
   display: flex;
   align-items: center;
-  color: $black;
+  color: var(--text-main);
   cursor: pointer;
   font-family: "DMSans";
   font-size: 16px;
@@ -224,14 +224,15 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border: 1px solid #e2e3e2;
+  border: 1px solid var(--border);
   height: 56px;
   border-radius: 16px;
-  background: #fff;
+  background: var(--background-pages);
   input {
     width: 100%;
     height: 100%;
-    color: $black;
+    color: var(--text-main);
+    background: var(--background-pages);
     font-family: "DMSans";
     font-size: 16px;
     font-style: normal;
@@ -241,7 +242,7 @@
     outline: none;
     border: none;
     &::placeholder {
-      color: $grey;
+      color: var(--text-shade);
     }
   }
   img {

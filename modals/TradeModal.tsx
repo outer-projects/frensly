@@ -112,13 +112,13 @@ export const TradeModal = observer(({ key, data, idx }: modalProps) => {
             onClick={buy}
             style={{ marginBottom: "16px" }}
           >
-            Buy a key
+            Buy share
           </button>
           <button
             className={classNames(header.connect__button, style.sell__button)}
             onClick={sell}
           >
-            Sell a key
+            Sell share
           </button>
         </div>
       </div>

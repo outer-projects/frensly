@@ -24,7 +24,7 @@
   justify-content: center;
   align-items: center;
   border-radius: 100px;
-  background: #f1f1f1;
+  background: var(--hover);
 }
 .airdrop__soon {
   display: flex;
@@ -56,7 +56,7 @@
     height: 40px;
     border-radius: 100px;
     &:hover {
-      background: var(--Black-6, #f1f1f1);
+      background: var(--Black-6, var(--hover));
     }
   }
 }

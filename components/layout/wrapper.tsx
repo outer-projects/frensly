@@ -65,7 +65,7 @@ const Wrapper = observer(({ children }: any) => {
           content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
         />
       </Head>
-      {!needToChangeWallet && (!init || !user?.account) && (
+      {/* {!needToChangeWallet && (!init || !user?.account) && (
         <div className={home.main__page}>
           <AuthBanner />
         </div>
@@ -78,11 +78,12 @@ const Wrapper = observer(({ children }: any) => {
             <ConnectButtonCustom />
           </div>
         </div>
-      )}
-      {!needToChangeWallet && init && user?.account && <Header />}
-      {/* <Header /> */}
-      {!needToChangeWallet && init && user?.account && children}
-      {!needToChangeWallet && init && user?.account && <Footer/>}
+      )} */}
+      {/* {!needToChangeWallet && init && user?.account && <Header />} */}
+      <Header />
+      {/* {!needToChangeWallet && init && user?.account && children} */}
+      {children}
+      {/* {!needToChangeWallet && init && user?.account && <Footer/>} */}
     </div>
   );
 });

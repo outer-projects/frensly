@@ -9,7 +9,7 @@ import TypesList from "../components/common/typesList";
 import { useEffect, useState } from "react";
 import { FeedStore } from "../stores/FeedStore";
 
-const types = ["Following", "Frens"];
+const types = ["Following", "Frens", "Public"];
 
 const FeedPage: NextPage = observer((props) => {
   const { unreadCount } = useInjection(UserStore);
@@ -37,8 +37,9 @@ const FeedPage: NextPage = observer((props) => {
       <div className={style.feed__type}>
         <TypesList types={types} active={active} setActive={setActive} />
       </div>
-      {active == 0 && <TwitterFeed isFeed isFrens={false} />}
-      {active == 1 && <TwitterFeed isFeed isFrens={true} />}
+      {active == 0 && <TwitterFeed isFeed />}
+      {active == 1 && <TwitterFeed isFeed isFrens />}
+      {active == 1 && <TwitterFeed isFeed isPublic />}
     </div>
   );
 });

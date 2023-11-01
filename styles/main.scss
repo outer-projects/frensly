@@ -1,0 +1,56 @@
+@use "sass:math";
+@use "sass:color";
+@import "helpers";
+@import "fonts";
+@import "libs";
+@import "vars";
+html {
+  overflow-x: hidden;
+}
+
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  &:before {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+  }
+  &:after {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+  }
+}
+a {
+  text-decoration: none;
+  color: auto;
+}
+
+:root {
+  --background: #f8f8f8;
+  --background-row: #f8f8f8;
+  --background-pages: white;
+  --text-main: #151614;
+  --text-shade: #676766!important;
+  --hover: #f1f1f1;
+  --header: rgba(252, 252, 253, 0.7);
+  --header-bottom: #f4f5f6;
+  --border: #e2e3e2;
+}
+
+.dark-mode {
+  --background: #131414;
+  --background-row: #1C1D1B;
+  --background-row-hover: #232422;
+  --background-pages: #232422;
+  --text-main: white;
+  --text-shade: #adadad;
+  --hover: #232422;
+  --header: #1c1d1b;
+  --header-bottom: #232422;
+  --border: #313230;
+}

@@ -6,6 +6,7 @@ import { useInjection } from "inversify-react";
 import Web3Store from "../../stores/Web3Store";
 import { useMemo } from "react";
 import Link from "next/link";
+import EthereumSvg from "../svgs/Ethereum";
 const OneNotificationPage = observer(
   ({ notification }: { notification: any }) => {
     const { user } = useInjection(Web3Store);
@@ -82,7 +83,7 @@ const OneNotificationPage = observer(
             </div>
             {notification?.price && (
               <div className={style.nots__one__price__page}>
-                <img src="../icons/Ethereum.svg" />
+                <EthereumSvg />
                 {fromWeiToEth(notification?.price) + " ETH"}
               </div>
             )}
@@ -102,7 +103,7 @@ const OneNotificationPage = observer(
           </div>
           {notification?.price && (
             <div className={style.nots__one__price__page__mobile}>
-              <img src="../icons/Ethereum.svg" />
+              <EthereumSvg />
               {fromWeiToEth(notification?.price) + " ETH"}
             </div>
           )}

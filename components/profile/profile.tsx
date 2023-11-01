@@ -15,6 +15,7 @@ import { addressSlice, fromWeiToEth } from "../../utils/utilities";
 import { fromWei } from "web3-utils";
 import Link from "next/link";
 import { ChatStore } from "../../stores/ChatStore";
+import EthereumSvg from "../svgs/Ethereum";
 const Profile = observer(() => {
   const modalStore = useInjection(ModalStore);
   const { user, frensly, address } = useInjection(Web3Store);
@@ -222,7 +223,7 @@ const Profile = observer(() => {
                       style.profile__balance
                     )}
                   >
-                    <img src="../icons/Ethereum.svg" />
+                    <EthereumSvg />
                     {fromWeiToEth(pricePerShade, 5)} ETH
                   </div>
                 </div>
@@ -259,7 +260,7 @@ const Profile = observer(() => {
                   )}
                   style={{
                     paddingRight: "9px",
-                    borderRight: "1px solid #E2E3E2",
+                    borderRight: "1px solid var(--border)",
                   }}
                   onClick={() => {
                     setCurrentType(4);
@@ -291,7 +292,7 @@ const Profile = observer(() => {
                   )}
                   style={{
                     paddingRight: "9px",
-                    borderRight: "1px solid #E2E3E2",
+                    borderRight: "1px solid var(--border)",
                     cursor: "pointer",
                   }}
                   onClick={() => {

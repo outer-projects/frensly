@@ -17,18 +17,18 @@
 .profile__info {
   border-top-left-radius: 32px;
   border-top-right-radius: 32px;
-  background: #fff;
+  background: var(--background-pages);
   padding-top: 24px;
 }
 .twitter__empty {
   width: 100%;
-  color: $grey;
+  color: var(--text-shade);
   text-align: center;
   font-family: "DMSans";
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
-  margin-top: -24px;
+  margin-top: -14px;
   margin-bottom: 24px;
 }
 .twitter__send__img {
@@ -42,7 +42,7 @@
   margin-top: -40px;
   margin-left: 36px;
   position: absolute;
-  color: $grey;
+  color: var(--text-shade);
   font-family: "DMSans";
   font-size: 16px;
   font-style: normal;
@@ -118,7 +118,7 @@
   padding-left: 24px;
   padding-right: 24px;
   height: 36px;
-  color: $black;
+  color: var(--text-main);
   font-family: "DMSans";
   font-size: 16px;
   font-style: normal;
@@ -127,11 +127,11 @@
   letter-spacing: -0.16px;
   background: none;
   &:hover {
-    background: #f1f1f1;
+    background: var(--hover);
   }
 }
 .profile__type {
-  color: $grey;
+  color: var(--text-shade);
   text-align: center;
   font-family: "DMSans";
   font-size: 14px;
@@ -150,14 +150,14 @@
   line-height: 20px; /* 142.857% */
   letter-spacing: -0.14px;
   &:hover {
-    color: $black;
+    color: var(--text-main);
   }
 }
 .profile__type__active {
   border-radius: 100px;
-  background: #f1f1f1;
+  background: var(--hover);
   font-weight: bold;
-  color: $black;
+  color: var(--text-main);
 }
 .profile__buy {
   width: 568px;
@@ -191,7 +191,7 @@
   width: 49%;
   align-items: center;
   justify-content: space-between;
-  background: #f8f8f8;
+  background: var(--background-row);
   margin-top: -2px;
   @media (max-width: 616px) {
     width: 100%;
@@ -218,7 +218,7 @@
 }
 .profile__share {
   border-radius: 16px;
-  background: #f8f8f8;
+  background: var(--background-row);
   display: flex;
   height: 40px;
   align-items: center;
@@ -238,7 +238,7 @@
   }
 }
 .profile__text {
-  color: $grey;
+  color: var(--text-shade);
   font-family: "DMSans";
   font-size: 16px;
   font-style: normal;
@@ -248,7 +248,7 @@
   align-items: center;
   span {
     font-weight: bold;
-    color: $black;
+    color: var(--text-main);
     margin-right: 5px;
   }
   img {
@@ -256,7 +256,7 @@
   }
 }
 .black {
-  color: $black;
+  color: var(--text-main);
 }
 .right {
   text-align: right;
@@ -279,7 +279,7 @@
   }
 }
 .profile__balance {
-  color: $black;
+  color: var(--text-main);
   display: flex;
   align-items: center;
   text-align: right;
@@ -296,7 +296,8 @@
 }
 .twitter__feed {
   padding-top: 24px;
-  background: #fff;
+  border-radius: 32px;
+  background: var(--background-pages);
 }
 .twitter__add {
   margin-left: 36px;
@@ -369,8 +370,8 @@
   min-height: 72px;
   border: 1px solid transparent;
   outline: none;
-  background: var(--Black-3, #f8f8f8);
-  color: $black;
+  background: var(--Black-3, var(--background-row));
+  color: var(--text-main);
   font-family: "DMSans";
   font-size: 16px;
   line-height: 36px; /* 150% */
@@ -389,7 +390,7 @@
   justify-content: space-between;
   align-items: center;
   margin-top: 25px;
-  border-top: 1px solid #f1f1f1;
+  border-top: 1px solid var(--hover);
   padding-top: 25px;
   padding-left: 24px;
   padding-right: 24px;
@@ -430,7 +431,7 @@
     }
   }
   span {
-    color: $grey;
+    color: var(--text-shade);
     /* Paragraphs/P4 */
     font-family: "DMSans";
     margin-left: 10px;
@@ -445,7 +446,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  color: $grey;
+  color: var(--text-shade);
   padding-left: 48px;
   padding-right: 24px;
   margin-bottom: 16px;
@@ -506,7 +507,7 @@
   }
 }
 .twitter__name {
-  color: $black;
+  color: var(--text-main);
   font-size: 16px;
   font-weight: bold;
   line-height: 24px;
@@ -515,7 +516,7 @@
   overflow: hidden;
 }
 .twitter__nickname {
-  color: $grey;
+  color: var(--text-shade);
   font-size: 14px;
   line-height: 20px; /* 142.857% */
   letter-spacing: -0.14px;
@@ -523,7 +524,7 @@
 .twitter__interact {
   display: flex;
   align-items: center;
-  color: $grey;
+  color: var(--text-shade);
   font-family: "DMSans";
   font-size: 14px;
   font-style: normal;
@@ -538,7 +539,7 @@
   align-items: center;
   margin-right: 48px;
   cursor: pointer;
-  color: $black;
+  color: var(--text-main);
 }
 .twitter__image {
   width: 456px;
@@ -554,7 +555,7 @@
   width: 400px;
 }
 .twitter__text {
-  color: $grey;
+  color: var(--text-shade);
   /* Paragraphs/P4 */
   font-family: "DMSans";
   font-size: 14px;
@@ -595,14 +596,14 @@
   }
 }
 .profile__subtitle {
-  color: $grey;
+  color: var(--text-shade);
   font-size: 14px;
   margin-top: -3px;
   font-style: normal;
   font-weight: 400;
   line-height: 24px;
   a {
-    color: $grey;
+    color: var(--text-shade);
     &:hover {
       text-decoration: underline;
     }
@@ -622,7 +623,7 @@
   padding-top: 24px;
   border-radius: 32px;
   margin-top: 24px;
-  background: #fff;
+  background: var(--background-pages);
 }
 .twitter__one__post {
   display: flex;
@@ -630,7 +631,7 @@
   justify-content: space-between;
   margin-left: 24px;
   margin-right: 24px;
-  border-bottom: 1px solid #e2e3e2;
+  border-bottom: 1px solid var(--border);
   @media (max-width: 616px) {
     margin-left: 0px;
     margin-right: 0px;

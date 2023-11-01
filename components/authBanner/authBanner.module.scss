@@ -28,7 +28,7 @@
 }
 .banner__code {
   border-radius: 16px;
-  border: 1px solid $grey;
+  border: 1px solid var(--text-shade);
   outline: none;
   width: 100%;
   height: 72px;
@@ -36,16 +36,15 @@
   align-items: center;
   padding-left: 16px;
   padding-right: 16px;
-  background: #f8f8f8;
   font-family: "DMSans";
   font-size: 16px;
-  color: $black;
+  color: var(--text-main);
   font-style: normal;
   font-weight: 400;
   line-height: 24px;
   letter-spacing: -0.16px;
   &::placeholder {
-    color: $grey;
+    color: var(--text-shade);
   }
 }
 .banner__code__active {
@@ -60,7 +59,7 @@
   padding: 16px 24px;
   justify-content: center;
   align-items: center;
-  color: $black;
+  color: var(--text-main);
   font-family: "DMSans";
   font-size: 16px;
   font-weight: bold;
@@ -98,6 +97,26 @@
   border-radius: 3.469px;
   background: rgba(238, 254, 59, 0.1);
 }
+.theme__btn {
+  background: none;
+  border: none;
+  outline: none;
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+  margin-top: -24px;
+}
+.banner__top {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  width: 80vw;
+  flex-direction: column;
+  img {
+    align-self: center;
+  }
+  
+}
 .banner__title {
   font-family: "Syne";
   margin-top: 185px;
@@ -110,7 +129,7 @@
   flex-direction: column;
   letter-spacing: -1.12px;
   align-items: center;
-  color: $black;
+  color: var(--text-main);
   @media (max-height: 1080px) {
     margin-top: 185px;
   }
@@ -122,7 +141,7 @@
   }
 }
 .banner__bottom {
-  color: $grey !important;
+  color: var(--text-shade) !important;
 }
 .banner__early {
   display: flex;
@@ -151,7 +170,7 @@
   margin-bottom: 65px;
 }
 .banner__small__text {
-  color: $grey;
+  color: var(--text-shade);
   text-align: center;
   font-family: "DMSans";
   font-size: 14px;
@@ -177,7 +196,7 @@
   font-family: "DMSans";
   font-size: 16px;
   font-style: normal;
-  color: $black;
+  color: var(--text-main);
   max-width: 420px;
   line-height: 24px;
   font-weight: 400;

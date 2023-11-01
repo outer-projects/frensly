@@ -16,23 +16,27 @@ import { UserStore } from "../../stores/UserStore";
 import ExploreRow from "../explore/exploreRow";
 import FinanceRow from "./financeRow";
 import Sidebar from "./sidebar";
+import EthereumSvg from "../svgs/Ethereum";
+import ProfileSvg from "../svgs/profile";
+import InviteSvg from "../svgs/invite";
+import AirdropSvg from "../svgs/airdrop";
 export const links = [
   {
     title: "My funds",
     link: "/dashboard/finance",
-    img: "../icons/profile.svg",
+    img: <ProfileSvg/>,
     active: true,
   },
   {
     title: "Referrals",
     link: "/dashboard/invite",
-    img: "../icons/invite.svg",
+    img: <InviteSvg/>,
     active: true,
   },
   {
     title: "Airdrop",
     link: "/dashboard/airdrop",
-    img: "../icons/airdrop.svg",
+    img: <AirdropSvg/>,
     active: true,
   },
 ];
@@ -87,9 +91,9 @@ const Finance = observer(() => {
       getClaim();
     }
   }, [frensly]);
-  useEffect(()=>{
+  useEffect(() => {
     checkAuth();
-  },[])
+  }, []);
   // console.log(keys);
   return (
     <div className={style.finance__page}>
@@ -182,7 +186,7 @@ const Finance = observer(() => {
           </div>
           <div className={style.finance__row}>
             <div className={style.finance__claim__value}>
-              <img src="../icons/Ethereum.svg" />
+              <EthereumSvg />
               {fromWeiToEth(claimValue, 8)} ETH
             </div>
             <button

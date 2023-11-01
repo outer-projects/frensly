@@ -13,16 +13,19 @@ const TwitterFeed = observer(
     id,
     isProfile,
     isFrens,
+    isPublic,
     isFeed,
   }: {
     id?: string;
     isProfile?: boolean;
     isFrens?: boolean;
+    isPublic?: boolean;
     isFeed?: boolean;
   }) => {
     const {
       feed,
       getFeed,
+      getPublicFeed,
       getUserPosts,
       userPosts,
       deletePost,
@@ -31,7 +34,9 @@ const TwitterFeed = observer(
       getFrensFeed,
       frensFeed,
       updateFrensFeed,
+      updatePublicFeed,
       updateFeed,
+      publicFeed,
       updateUserPosts,
     } = useInjection(FeedStore);
     const { user } = useInjection(Web3Store);
@@ -41,13 +46,17 @@ const TwitterFeed = observer(
         return userPosts;
       } else if (isFrens) {
         return frensFeed;
+      } else if (isPublic) {
+        return publicFeed;
       } else {
         return feed;
       }
-    }, [id, isFrens, userPosts, frensFeed, feed]);
+    }, [id, isFrens, isPublic, userPosts, frensFeed, feed, publicFeed]);
     const updatePosts = () => {
       if (isFrens) {
         updateFrensFeed();
+      } else if (isPublic) {
+        updatePublicFeed();
       } else {
         updateFeed();
       }
@@ -65,6 +74,8 @@ const TwitterFeed = observer(
     const getFeedPosts = () => {
       if (isFrens) {
         getFrensFeed();
+      } else if (isPublic) {
+        getPublicFeed();
       } else {
         getFeed();
       }

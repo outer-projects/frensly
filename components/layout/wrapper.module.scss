@@ -1,9 +1,11 @@
+@import "../../styles/_vars.sass";
+
 .page__container {
   display: flex;
   flex-direction: column;
   width: 100vw;
   align-items: center;
-  background: #f8f8f8;
+  background: var(--background);
   background-size: cover;
   justify-content: center;
   overflow: hidden;

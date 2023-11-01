@@ -5,13 +5,14 @@ import Web3Store from "../../stores/Web3Store";
 import { addressSlice } from "../../utils/utilities";
 import { UserStore } from "../../stores/UserStore";
 import { useEffect } from "react";
+import EthereumSvg from "../svgs/Ethereum";
 
 const User = observer(({ stage }: { stage: string }) => {
   const { user, balance } = useInjection(Web3Store);
   const { getCurrentTier } = useInjection(UserStore);
-  useEffect(()=>{
-    getCurrentTier()
-  },[])
+  useEffect(() => {
+    getCurrentTier();
+  }, []);
   return (
     <div className={style.user__row}>
       <div className={style.finance__title}>
@@ -53,7 +54,7 @@ const User = observer(({ stage }: { stage: string }) => {
         <div className={style.finance__title}>
           <div className={style.finance__balance}>
             <div className={style.finance__balance__value}>
-              <img src="../icons/Ethereum.svg" />
+              <EthereumSvg />
               {balance}
             </div>
             <div className={style.finance__subtitle}>Wallet balance</div>

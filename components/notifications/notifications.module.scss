@@ -3,7 +3,7 @@
 .nots {
   position: absolute;
   border-radius: 32px;
-  background: #fff;
+  background: var(--background-pages);
   box-shadow: 0px 4px 16px 0px rgba(0, 0, 0, 0.1);
   margin-left: -400px;
   padding-top: 24px;
@@ -35,7 +35,7 @@
   padding: 24px;
 }
 .nots__one__text {
-  color: $black;
+  color: var(--text-main);
   font-family: "DMSans";
   font-size: 16px;
   overflow: hidden;
@@ -44,7 +44,7 @@
   line-height: 24px; /* 150% */
   letter-spacing: -0.16px;
   a {
-    color: $black;
+    color: var(--text-main);
     text-decoration: none;
     &:hover {
       text-decoration: underline;
@@ -96,7 +96,7 @@
   padding-left: 8px;
   white-space: nowrap;
   padding-right: 8px;
-  color: $black;
+  color: var(--text-main);
   text-align: right;
   font-family: "DMSans";
   font-size: 16px;
@@ -121,7 +121,7 @@
   padding-left: 8px;
   white-space: nowrap;
   padding-right: 8px;
-  color: $black;
+  color: var(--text-main);
   text-align: right;
   font-family: "DMSans";
   font-size: 16px;
@@ -138,7 +138,7 @@
   }
 }
 .activity__one__container {
-  background-color: #f8f8f8;
+  background-color: var(--background-row);
   border-radius: 16px;
 }
 .activity__one {
@@ -151,10 +151,10 @@
   margin-left: 8px;
   margin-right: 8px;
   padding-right: 16px;
-  background-color: #f8f8f8;
+  background-color: var(--background-row);
   cursor: pointer;
   &:hover {
-    background: #f1f1f1;
+    background: var(--hover);
   }
   margin-top: 16px;
   @media (max-width: 1000px) {
@@ -202,7 +202,7 @@
   }
 }
 .nots__one__page__container {
-  background: #f8f8f8;
+  background: var(--background-row);
 }
 .nots__one__page {
   display: flex;
@@ -211,7 +211,7 @@
   border-radius: 16px;
   padding-right: 16px;
   padding-left: 16px;
-  background: #f8f8f8;
+  background: var(--background-row);
   align-items: center;
   border-radius: 16px;
   margin-bottom: 8px;
@@ -219,7 +219,7 @@
   margin-right: 8px;
   margin-top: 16px;
   &:hover {
-    background: #f1f1f1;
+    background: var(--hover);
   }
   @media (max-width: 616px) {
     height: 80px;
@@ -235,7 +235,7 @@
   margin-right: 8px;
   margin-top: 16px;
   &:hover {
-    background: #f1f1f1;
+    background: var(--hover);
   }
   @media (max-width: 616px) {
     height: 80px;
@@ -245,7 +245,7 @@
   display: flex;
 }
 .nots__one__time {
-  color: $grey;
+  color: var(--text-shade);
 
   /* Paragraphs/P4 */
   font-family: "DMSans";
@@ -256,7 +256,7 @@
   letter-spacing: -0.14px;
 }
 .activiy__one__time {
-  color: $grey;
+  color: var(--text-shade);
   font-family: "DMSans";
   font-size: 14px;
   font-style: normal;
@@ -331,7 +331,7 @@
   }
 }
 .nots__title {
-  color: $black;
+  color: var(--text-main);
   padding-left: 24px;
   padding-right: 24px;
   /* Header/H4 */
@@ -342,7 +342,7 @@
   line-height: 40px; /* 125% */
   letter-spacing: -0.64px;
   width: 100%;
-  border-bottom: 1px solid #e2e3e2;
+  border-bottom: 1px solid var(--border);
   display: flex;
   justify-content: space-between;
   align-items: center;

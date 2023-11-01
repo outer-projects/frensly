@@ -98,7 +98,7 @@ export const SellModal = observer(({ key, data, idx }: modalProps) => {
       <div className={style.buy}>
         <div className={style.buy__info}>
           <div className={style.buy__title}>
-            Sell a shares
+            Sell shares
             <img
               src="../icons/Close.svg"
               style={{ cursor: "pointer" }}
@@ -169,7 +169,7 @@ export const SellModal = observer(({ key, data, idx }: modalProps) => {
             disabled={currentPrice == '0' || numberOfShares == ""}
             onClick={sell}
           >
-            Sell a key
+            Sell shares
           </button>
         </div>
       </div>

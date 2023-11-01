@@ -60,7 +60,7 @@ const Invite = observer(() => {
                 Total invited users
               </div>
               <div className={style.finance__total__count}>
-                {invited} {!unlimitedKeys && "/" + inviteLimit}
+                {invited}{!unlimitedKeys && " / " + inviteLimit}
               </div>
             </div>
           </div>
@@ -73,29 +73,29 @@ const Invite = observer(() => {
           <div
             className={classNames(
               style.invite__code,
-              key.usesLeft == 0 && style.invite__code__used
+              key?.usesLeft == 0 && style.invite__code__used
             )}
           >
             <div>
               <div className={style.invite__code__left}>
                 {!unlimitedKeys ? (
                   <>
-                    There are <span>{key.usesLeft}</span> uses left
+                    There are <span>{key?.usesLeft}</span> uses left
                   </>
                 ) : (
                   <>Unlimited use</>
                 )}
               </div>
               <div>
-                {(window.location.origin + "/" + key.code).replace(
+                {(window.location.origin + "/" + key?.code).replace(
                   "https://",
                   ""
                 )}
               </div>
             </div>
-            {key.usesLeft !== 0 && (
+            {key?.usesLeft !== 0 && (
               <CopyToClipboard
-                text={window.location.origin + "/" + key.code}
+                text={window.location.origin + "/" + key?.code}
                 onCopy={() => {
                   toast.success("Code is copied successfully");
                 }}

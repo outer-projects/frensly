@@ -26,7 +26,7 @@
   color: $green !important;
 }
 .invite__code {
-  color: $black;
+  color: var(--text-main);
   font-family: "DMSans";
   font-size: 16px;
   width: 100%;
@@ -37,13 +37,13 @@
   padding-left: 16px;
   padding-right: 16px;
   border-radius: 16px;
-  background: #f8f8f8;
+  background: var(--background-row);
   margin-bottom: 12px;
 }
 .finance__link {
   border-radius: 16px;
   width: 248px;
-  color: #141416;
+  color: var(--text-main);
   font-family: "DMSans";
   font-size: 16px;
   font-style: normal;
@@ -55,14 +55,12 @@
   align-items: center;
   padding-left: 24px;
   margin-bottom: 8px;
-  img {
+  svg {
     margin-right: 8px;
-    width: 24px;
-    height: 24px;
   }
 }
 .finance__link__active {
-  background: #f1f1f1 !important;
+  background: var(--hover) !important;
 }
 .finance__side {
   margin-right: 24px;
@@ -78,7 +76,7 @@
   width: 0;
   margin-right: 4px;
   a {
-    color: $grey;
+    color: var(--text-shade);
   }
   @media (max-width: 870px) {
     display: block;
@@ -95,12 +93,13 @@
   padding-right: 4px;
 }
 .finance__container {
-  background: #fff;
+  background: var(--background-pages);
+  border-radius: 32px;
 }
 .finance {
   padding: 24px;
   border-radius: 32px;
-  background: #fff;
+  background: var(--background-pages);
   width: 616px;
   @media (max-width: 870px) {
     width: 100vw;
@@ -112,7 +111,7 @@
   padding-right: 8px;
   padding-top: 4px;
   padding-bottom: 4px;
-  color: $black;
+  color: var(--text-main);
   font-family: "DMSans";
   font-size: 16px;
   font-weight: 400;
@@ -131,7 +130,7 @@
   letter-spacing: -0.12px;
 }
 .finance__invite__text {
-  color: $grey;
+  color: var(--text-shade);
   font-family: "DMSans";
   font-size: 16px;
   font-style: normal;
@@ -143,14 +142,14 @@
 .finance__total__points {
   height: 160px;
   border-radius: 32px;
-  background: #f8f8f8;
+  background: var(--background-row);
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
 }
 .invite__code__left {
-  color: $grey;
+  color: var(--text-shade);
   font-family: "DMSans";
   font-size: 12px;
   font-weight: 400;
@@ -158,7 +157,7 @@
   letter-spacing: -0.12px;
 }
 .finance__total__points__count {
-  color: $black;
+  color: var(--text-main);
   text-align: center;
   font-family: "Syne";
   font-size: 56px;
@@ -167,7 +166,7 @@
   letter-spacing: -1.12px;
 }
 .finance__total__points__claimable {
-  color: $grey;
+  color: var(--text-shade);
   text-align: center;
   font-family: "DMSans";
   font-size: 16px;
@@ -178,7 +177,7 @@
   letter-spacing: -0.16px;
 }
 .finance__invite {
-  color: $black;
+  color: var(--text-main);
   font-family: "Syne";
   font-size: 24px;
   font-style: normal;
@@ -188,7 +187,7 @@
   margin-top: 24px;
 }
 .finance__total__count {
-  color: $black;
+  color: var(--text-main);
   font-family: "DMSans";
   font-size: 16px;
   font-style: normal;
@@ -224,7 +223,7 @@
   }
 }
 .finance__name {
-  color: $black;
+  color: var(--text-main);
   font-size: 20px;
   display: flex;
   align-items: center;
@@ -232,7 +231,7 @@
   line-height: 28px; /* 140% */
   letter-spacing: -0.2px;
   span {
-    color: $grey;
+    color: var(--text-shade);
     font-size: 14px;
     font-weight: 400;
     line-height: 20px; /* 142.857% */
@@ -249,8 +248,14 @@
     margin-left: 4px;
   }
 }
+.finance__stat__value {
+  color: var(--text-main);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+}
 .finance__stat__name {
-  color: $grey;
+  color: var(--text-shade);
   font-size: 12px;
   font-style: normal;
   font-weight: 400;
@@ -258,7 +263,7 @@
   letter-spacing: -0.12px;
 }
 .finance__title__second {
-  color: $black;
+  color: var(--text-main);
   font-family: "Syne";
   font-size: 24px;
   font-style: normal;
@@ -269,7 +274,7 @@
 }
 .finance__claim__value {
   border-radius: 100px;
-  color: $black;
+  color: var(--text-main);
   font-family: "DMSans";
   font-size: 16px;
   font-style: normal;
@@ -293,11 +298,11 @@
   margin-top: 72px;
 }
 .finance__total {
-  color: $grey;
+  color: var(--text-shade);
   text-align: center;
   font-family: "DMSans";
   border-radius: 16px;
-  background: #f8f8f8;
+  background: var(--background-row);
   height: 56px;
   font-size: 16px;
   padding-left: 16px;
@@ -315,7 +320,7 @@
   }
 }
 .finance__gain {
-  color: $black;
+  color: var(--text-main);
   text-align: center;
   font-family: "Syne";
   font-size: 56px;
@@ -324,7 +329,7 @@
   letter-spacing: -1.12px;
 }
 .finance__points {
-  color: $grey;
+  color: var(--text-shade);
   font-family: "DMSans";
   font-size: 16px;
   line-height: 24px; /* 150% */
@@ -340,7 +345,7 @@
   width: 90px;
 }
 .finance__fees {
-  color: $grey;
+  color: var(--text-shade);
   font-family: "DMSans";
   font-size: 16px;
   font-weight: 400;
@@ -353,7 +358,7 @@
   align-items: center;
   justify-content: space-between;
   padding-bottom: 24px;
-  border-bottom: 1px solid #f1f1f1;
+  border-bottom: 1px solid var(--hover);
   margin-bottom: 24px;
   @media (max-width: 1000px) {
     display: none;
@@ -364,14 +369,14 @@
   align-items: center;
   justify-content: space-between;
   padding-bottom: 24px;
-  border-bottom: 1px solid #f1f1f1;
+  border-bottom: 1px solid var(--hover);
   margin-bottom: 24px;
 }
 .finance__stat {
   border-radius: 16px;
   height: 56px;
   padding: 7px 16px;
-  background: #f8f8f8;
+  background: var(--background-row);
   font-family: "DMSans";
   margin-bottom: 12px;
   display: flex;
@@ -386,7 +391,7 @@
   margin-top: 16px;
 }
 .finance__balance {
-  color: $black;
+  color: var(--text-main);
   text-align: right;
   font-size: 20px;
   font-weight: bold;
@@ -402,13 +407,13 @@
   justify-content: flex-end;
 }
 .finance__subtitle {
-  color: $grey;
+  color: var(--text-shade);
   font-size: 14px;
   line-height: 20px;
   font-weight: 400;
   letter-spacing: -0.14px;
   a {
-    color: $grey;
+    color: var(--text-shade);
     &:hover {
       text-decoration: underline;
     }

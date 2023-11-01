@@ -18,6 +18,7 @@ import { ChatStore } from "../../../stores/ChatStore";
 import Link from "next/link";
 import OneMessage from "./oneMessage";
 import { InView } from "react-intersection-observer";
+import EthereumSvg from "../../svgs/Ethereum";
 const Chat = observer(() => {
   const socket = useContext(SocketContext);
   const [newMsg, setNewMsg] = useState("");
@@ -95,7 +96,7 @@ const Chat = observer(() => {
     if (id) {
       console.log("id is: ", id);
       getChat(id as string);
-      getMyChats()
+      getMyChats();
     }
   }, [id]);
 
@@ -147,7 +148,9 @@ const Chat = observer(() => {
 
                     <a
                       className={style.twitter__redirect}
-                      href={"https://twitter.com/" + chat?.profile?.twitterHandle}
+                      href={
+                        "https://twitter.com/" + chat?.profile?.twitterHandle
+                      }
                       rel="noreferrer"
                       target="_blank"
                     >
@@ -193,7 +196,7 @@ const Chat = observer(() => {
               <div className={style.openchat__val}>
                 {" "}
                 <div className={style.openchat__share__value}>
-                  <img src="../../icons/Ethereum.svg" />
+                  <EthereumSvg />
                   {chat?.profile?.userAccount.currentPrice &&
                     fromWeiToEth(chat.profile?.userAccount.currentPrice)}{" "}
                   ETH

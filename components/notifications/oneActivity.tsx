@@ -7,6 +7,7 @@ import {
 } from "../../utils/utilities";
 import style from "./notifications.module.scss";
 import Link from "next/link";
+import EthereumSvg from "../svgs/Ethereum";
 export const getActivity = (type: string, isOriginalPost?: string) => {
   switch (type) {
     case "BUY":
@@ -25,7 +26,7 @@ export const getActivity = (type: string, isOriginalPost?: string) => {
       return " reposted you";
     case "COMMENT":
       if (!isOriginalPost) {
-        return " commented your post";
+        return " commented on your post";
       } else {
         return " answered to your comment";
       }
@@ -86,7 +87,7 @@ const OneActivity = ({ activity }: { activity: any }) => {
             activity?.type.includes("SELL") && style.activiy__one__price__sell
           )}
         >
-          <img src="../icons/Ethereum.svg" />
+          <EthereumSvg />
           {fromWeiToEth(activity.price)} ETH
         </div>
       </div>
@@ -96,7 +97,7 @@ const OneActivity = ({ activity }: { activity: any }) => {
           activity?.type.includes("SELL") && style.activiy__one__price__sell
         )}
       >
-        <img src="../icons/Ethereum.svg" />
+        <EthereumSvg/>
         {fromWeiToEth(activity.price)} ETH
       </div>
     </div>
