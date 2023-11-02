@@ -191,6 +191,21 @@
     height: 75px;
   }
 }
+.profile__stats__line__big {
+  display: flex;
+  padding-left: 16px;
+  padding-right: 16px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  width: 58%;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--background-row);
+  margin-top: -2px;
+  @media (max-width: 616px) {
+    width: 100%;
+  }
+}
 .profile__stats__line {
   display: flex;
   padding-left: 16px;
@@ -306,7 +321,7 @@
   color: var(--text-main);
   display: flex;
   align-items: center;
-  width: 58% !important;
+  justify-content: flex-end;
   text-align: right;
   font-family: "DMSans";
   font-size: 20px;

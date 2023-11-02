@@ -241,7 +241,7 @@ const Profile = observer(() => {
                   </div>
                 </div>
 
-                <div className={style.profile__stats__line}>
+                <div className={style.profile__stats__line__big}>
                   <div className={style.profile__text}>Per 1 share</div>
                   <div
                     className={classNames(
@@ -266,7 +266,7 @@ const Profile = observer(() => {
                   </div>
                 </div>
 
-                <div className={style.profile__stats__line}>
+                <div className={style.profile__stats__line__big}>
                   <div className={style.profile__text}>Volume</div>
                   <div
                     className={classNames(
