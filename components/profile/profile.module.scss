@@ -197,7 +197,7 @@
   padding-right: 16px;
   padding-top: 5px;
   padding-bottom: 5px;
-  width: 49%;
+  width: 40%;
   align-items: center;
   justify-content: space-between;
   background: var(--background-row);
@@ -270,6 +270,12 @@
 }
 .right {
   text-align: right;
+  width: 58% !important;
+  span {
+    font-size: 14px;
+    color: var(--text-shade);
+    margin-right: 5px;
+  }
 }
 .profile__stats__follow {
   display: flex;
@@ -299,6 +305,7 @@
   color: var(--text-main);
   display: flex;
   align-items: center;
+  width: 58% !important;
   text-align: right;
   font-family: "DMSans";
   font-size: 20px;

@@ -84,7 +84,7 @@ const Profile = observer(() => {
     } catch (e) {
       console.log(e);
     }
-  }
+  };
   useEffect(() => {
     if (user) {
       // getProfileUser(router.query.id as string);
@@ -116,7 +116,7 @@ const Profile = observer(() => {
     if (profileUser) {
       checkPrice();
       ownCount();
-      hasYourSharesCount()
+      hasYourSharesCount();
       checkIsFollowed();
     }
     if (profileUser?.twitterId == user?.twitterId) {
@@ -228,68 +228,58 @@ const Profile = observer(() => {
               className={classNames(style.profile__text, style.profile__share)}
             >
               <div> {`You own ${Number(count)} share`}</div>
-              {!isMyProfile && <div> {`Has ${Number(hasYourCount)} of your share`}</div>}
+              {!isMyProfile && (
+                <div> {`Has ${Number(hasYourCount)} of your share`}</div>
+              )}
             </div>
             <div className={style.profile__stats}>
               <div className={style.profile__stats__row}>
-                <div className={style.profile__usdprice}>
-                  <div className={style.profile__stats__line}>
-                    <div className={style.profile__text}>NW</div>
-                    <div
-                      className={classNames(style.profile__text, style.black)}
-                    >
-                      $??
-                    </div>
+                <div className={style.profile__stats__line}>
+                  <div className={style.profile__text}>NW</div>
+                  <div className={classNames(style.profile__text, style.black)}>
+                    $??
                   </div>
                 </div>
-                <div className={style.profile__usdprice}>
-                  <div className={style.profile__stats__line}>
-                    <div className={style.profile__text}>Per 1 share</div>
-                    <div
-                      className={classNames(
-                        style.profile__text,
-                        style.profile__balance
-                      )}
-                    >
-                      <EthereumSvg />
-                      {fromWeiToEth(pricePerShade, 5)} ETH
-                    </div>
+
+                <div className={style.profile__stats__line}>
+                  <div className={style.profile__text}>Per 1 share</div>
+                  <div
+                    className={classNames(
+                      style.profile__text,
+                      style.profile__balance
+                    )}
+                  >
                     <span>
                       {getPriceInUsd(profileUser?.account?.totalVolume)}$
                     </span>
+                    <EthereumSvg />
+                    {fromWeiToEth(pricePerShade, 5)} ETH
                   </div>
                 </div>
               </div>
               <div className={style.profile__stats__row}>
-                <div className={style.profile__usdprice}>
-                  <div className={style.profile__stats__line}>
-                    <div className={style.profile__text}>TVH</div>
-                    <div
-                      className={classNames(style.profile__text, style.black)}
-                    >
-                      <img src="../icons/Info.svg" />
-                      $??
-                    </div>
+                <div className={style.profile__stats__line}>
+                  <div className={style.profile__text}>TVH</div>
+                  <div className={classNames(style.profile__text, style.black)}>
+                    <img src="../icons/Info.svg" />
+                    $??
                   </div>
                 </div>
-                <div className={style.profile__usdprice}>
-                  <div className={style.profile__stats__line}>
-                    <div className={style.profile__text}>Volume</div>
-                    <div
-                      className={classNames(
-                        style.profile__text,
-                        style.black,
-                        style.right
-                      )}
-                    >
-                      <span>
-                        {getPriceInUsd(profileUser?.account?.totalVolume)}$
-                      </span>
-                      {fromWeiToEth(
-                        profileUser?.account?.totalVolume as string
-                      )}{" "}
-                      ETH
-                    </div>
+
+                <div className={style.profile__stats__line}>
+                  <div className={style.profile__text}>Volume</div>
+                  <div
+                    className={classNames(
+                      style.profile__text,
+                      style.black,
+                      style.right
+                    )}
+                  >
+                    <span>
+                      {getPriceInUsd(profileUser?.account?.totalVolume)}$
+                    </span>
+                    {fromWeiToEth(profileUser?.account?.totalVolume as string)}{" "}
+                    ETH
                   </div>
                 </div>
               </div>
