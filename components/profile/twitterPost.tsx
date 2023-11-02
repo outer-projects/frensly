@@ -44,20 +44,20 @@ const TwitterPost = observer(
     const router = useRouter();
     const darkMode = useDarkMode();
     const mentions = useMemo(() => {
-      const text = post?.text.match(/@(\S+)(?=\s|$)/g);
+      const text = post?.text.match(/(?<=^|\s)@(\w+)/g);
       const result = text ? text.map((s: any) => s.replace('@', '')) : [];
       return result;
     }, []);
 
     const tagGet = (text: string) => {
-      var tagRegex = /@(\S+)(?=\s|$)/g;
+      var tagRegex = /(?<=^|\s)@(\w+)/g;
       // console.log(text);
       return text
         .replaceAll(">", "")
         .replaceAll("<", "")
         // .replaceAll("@", "")
         .replace(tagRegex, function (url) {
-          return `<span ><a href="/profile/${url}" style="color: #a6d000!important; cursor: pointer; font-weight: bold">@${url}</a></span>`;
+          return `<span ><a href="/profile/${url.replace('@','')}" style="color: #a6d000!important; cursor: pointer; font-weight: bold">${url}</a></span>`;
         })
         .replaceAll("{", "")
         .replaceAll("}", "");
