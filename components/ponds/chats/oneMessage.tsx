@@ -13,7 +13,9 @@ import { ModalsEnum } from "../../../modals";
 import { ModalStore } from "../../../stores/ModalStore";
 import Link from "next/link";
 const getUserById = (id: string, members: IProfile[]) => {
-  let correctUser = members.filter((el) => el.twitterId == id.replace('@',''))[0];
+  let correctUser = members.filter(
+    (el) => el.twitterId == id.replace("@", "")
+  )[0];
   if (correctUser) {
     return correctUser.twitterHandle;
   }
@@ -25,18 +27,18 @@ const OneMessage = observer(({ el, roomId, members }: any) => {
 
   const mentions = useMemo(() => {
     const text = el.text.match(/(?<=^|\s)@(\w+)/g);
-    const result = text ? text.map((s: any) => s.slice(1, s.length - 1)) : [];
+    const result = text ? text.map((s: any) => s) : [];
     return result;
   }, [el.text]);
-  const message = useMemo(() => {
-    let text = el.text;
-    mentions.map((el: any) => {
-      text = text.replace(el, getUserById(el, members));
-    });
-    // console.log(text);
+  // const message = useMemo(() => {
+  //   let text = el.text;
+  //   mentions.map((el: any) => {
+  //     text = text.replace(el, getUserById(el, members));
+  //   });
+  //   // console.log(text);
 
-    return text;
-  }, [mentions]);
+  //   return text;
+  // }, [mentions]);
   // console.log(message, mentions);
   return (
     <div
@@ -95,11 +97,9 @@ const OneMessage = observer(({ el, roomId, members }: any) => {
             >
               <Highlighter
                 highlightClassName={style.openchat__mention}
-                searchWords={mentions.map(
-                  (el: any) => "@" + getUserById(el, members)
-                )}
+                searchWords={mentions.map((el: any) => "@" + el)}
                 autoEscape={true}
-                textToHighlight={message.replace("{", "").replace("}", "")}
+                textToHighlight={el?.text?.replace("{", "").replace("}", "")}
               />{" "}
               <div className={style.openchat__time}>{getDate(el.date)}</div>
             </div>

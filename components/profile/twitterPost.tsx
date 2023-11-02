@@ -79,24 +79,24 @@ const TwitterPost = observer(
     const { user } = useInjection(Web3Store);
     const { likePost, repostPost } = useInjection(FeedStore);
     const [likesCount, setLikesCount] = useState(0);
-    const [handles, setHandles] = useState<string[]>([]);
+    // const [handles, setHandles] = useState<string[]>([]);
     const [repostCount, setRepostCount] = useState(0);
     const [mentionsUpdated, setMentionsUpdated] = useState(false);
     const [deleted, setDeleted] = useState(false);
-    const postText = useMemo(() => {
-      if (handles.length !== 0) {
-        let text = post.text;
-        mentions.map((el: any, i: number) => {
-          text = text.replace(el, handles[i]);
-        });
-        mentions.map((el: any, i: number) => "@" + handles[i]);
-        // console.log(text);
+    // const postText = useMemo(() => {
+    //   if (handles.length !== 0) {
+    //     let text = post.text;
+    //     mentions.map((el: any, i: number) => {
+    //       text = text.replace(el, handles[i]);
+    //     });
+    //     mentions.map((el: any, i: number) => "@" + handles[i]);
+    //     // console.log(text);
 
-        return text;
-      } else {
-        return post.text;
-      }
-    }, [handles, post.text]);
+    //     return text;
+    //   } else {
+    //     return post.text;
+    //   }
+    // }, [handles, post.text]);
 
     useEffect(() => {
       setLikesCount(post?.likes?.length);
@@ -113,24 +113,24 @@ const TwitterPost = observer(
         setIsActiveRepost(true);
       }
     }, []);
-    const getIds = async () => {
-      const query = new URLSearchParams();
-      mentions.map((el) => {
-        query.append("ids", el);
-      });
-      try {
-        const res = await axios.get(
-          "/api/v1/user/get/byids/?" + query.toString()
-        );
-        setHandles(res.data.handles);
-      } catch (e) {
-        console.log(e);
-      }
-    };
+    // const getIds = async () => {
+    //   const query = new URLSearchParams();
+    //   mentions.map((el) => {
+    //     query.append("ids", el);
+    //   });
+    //   try {
+    //     const res = await axios.get(
+    //       "/api/v1/user/get/byids/?" + query.toString()
+    //     );
+    //     setHandles(res.data.handles);
+    //   } catch (e) {
+    //     console.log(e);
+    //   }
+    // };
     useEffect(() => {
       if (mentions && mentions.length !== 0 && !mentionsUpdated) {
         setMentionsUpdated(true)
-        getIds();
+        // getIds();
       }
     }, [mentions]);
     const like = () => {
@@ -148,7 +148,7 @@ const TwitterPost = observer(
         post: post,
         setDeleted: setDeleted,
         isOnePostPage: isOnePostPage,
-        postText: postText
+        postText: post.text
       });
     };
     const repost = () => {
@@ -229,7 +229,7 @@ const TwitterPost = observer(
                   {/* @ts-ignore */}
                   <div
                     dangerouslySetInnerHTML={{
-                      __html: linkify(tagGet(postText)),
+                      __html: linkify(tagGet(post.text)),
                     }}
                   ></div>
                 </div>
