@@ -13,7 +13,7 @@ import { ModalsEnum } from "../../../modals";
 import { ModalStore } from "../../../stores/ModalStore";
 import Link from "next/link";
 const getUserById = (id: string, members: IProfile[]) => {
-  let correctUser = members.filter((el) => el.twitterId == id)[0];
+  let correctUser = members.filter((el) => el.twitterId == id.replace('@',''))[0];
   if (correctUser) {
     return correctUser.twitterHandle;
   }

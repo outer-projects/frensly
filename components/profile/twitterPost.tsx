@@ -81,6 +81,7 @@ const TwitterPost = observer(
     const [likesCount, setLikesCount] = useState(0);
     const [handles, setHandles] = useState<string[]>([]);
     const [repostCount, setRepostCount] = useState(0);
+    const [mentionsUpdated, setMentionsUpdated] = useState(false);
     const [deleted, setDeleted] = useState(false);
     const postText = useMemo(() => {
       if (handles.length !== 0) {
@@ -127,7 +128,8 @@ const TwitterPost = observer(
       }
     };
     useEffect(() => {
-      if (mentions && mentions.length !== 0) {
+      if (mentions && mentions.length !== 0 && !mentionsUpdated) {
+        setMentionsUpdated(true)
         getIds();
       }
     }, [mentions]);
