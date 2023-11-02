@@ -40,7 +40,7 @@ const MessageSend = observer(({ id }: { id?: string }) => {
     }
   }, [ment]);
   const mention = (el: string) => {
-    setMessage(message.replace(ment, "") + "{" + el + "} ");
+    setMessage(message.replace(ment, "") + el);
     setOpenMentions(false);
   };
   useEffect(() => {
