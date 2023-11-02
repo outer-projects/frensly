@@ -14,6 +14,7 @@ import AuthBanner from "../authBanner/authBanner";
 import ConnectButtonCustom from "./connectButtonCustom";
 import Head from "next/head";
 import Footer from "./footer";
+import { browser } from "process";
 
 const Wrapper = observer(({ children }: any) => {
   const { init, setInit, getNotifications } = useInjection(UserStore);
@@ -43,7 +44,7 @@ const Wrapper = observer(({ children }: any) => {
       // getNotifications();
     }
   }, [web3, address, user]);
-  
+
   const getUser = async () => {
     try {
       const res: AxiosRequestConfig = await axios.get(prefix + "user", {
@@ -77,13 +78,29 @@ const Wrapper = observer(({ children }: any) => {
           <div style={{ display: "none" }}>
             <ConnectButtonCustom />
           </div>
+          <div
+            onClick={() => {
+              // retrieve all cookies
+              var Cookies = document.cookie.split(";");
+              // set past expiry to all cookies
+              for (var i = 0; i < Cookies.length; i++) {
+                document.cookie =
+                  Cookies[i] + "=; expires=" + new Date(0).toUTCString();
+              }
+              setTimeout(() => {
+                window.location.reload();
+              }, 400);
+            }}
+          >
+            Disconnect
+          </div>
         </div>
       )}
       {!needToChangeWallet && init && user?.account && <Header />}
       {/* <Header /> */}
       {!needToChangeWallet && init && user?.account && children}
       {/* {children} */}
-      {!needToChangeWallet && init && user?.account && <Footer/>}
+      {!needToChangeWallet && init && user?.account && <Footer />}
     </div>
   );
 });

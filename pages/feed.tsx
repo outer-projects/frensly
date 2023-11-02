@@ -9,7 +9,7 @@ import TypesList from "../components/common/typesList";
 import { useEffect, useState } from "react";
 import { FeedStore } from "../stores/FeedStore";
 
-const types = ["Following", "Frens", "Public"];
+const types = ["Following", "Verified", "Public"];
 
 const FeedPage: NextPage = observer((props) => {
   const { unreadCount } = useInjection(UserStore);
