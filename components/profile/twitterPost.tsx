@@ -45,24 +45,22 @@ const TwitterPost = observer(
     const darkMode = useDarkMode();
     const mentions = useMemo(() => {
       const text = post?.text.match(/@(\S+)(?=\s|$)/g);
-      const result = text ? text : [];
+      const result = text ? text.map((s: any) => s.replace('@', '')) : [];
       return result;
     }, []);
 
     const tagGet = (text: string) => {
       var tagRegex = /@(\S+)(?=\s|$)/g;
       // console.log(text);
-      return (
-        text
-          .replaceAll(">", "")
-          .replaceAll("<", "")
-          // .replaceAll("@", "")
-          .replace(tagRegex, function (url) {
-            return `<span ><a href="/profile/${url}" style="color: #a6d000!important; cursor: pointer; font-weight: bold">${url}</a></span>`;
-          })
-          .replaceAll("{", "")
-          .replaceAll("}", "")
-      );
+      return text
+        .replaceAll(">", "")
+        .replaceAll("<", "")
+        // .replaceAll("@", "")
+        .replace(tagRegex, function (url) {
+          return `<span ><a href="/profile/${url}" style="color: #a6d000!important; cursor: pointer; font-weight: bold">@${url}</a></span>`;
+        })
+        .replaceAll("{", "")
+        .replaceAll("}", "");
     };
     function linkify(text: string) {
       var urlRegex =
@@ -148,7 +146,7 @@ const TwitterPost = observer(
         post: post,
         setDeleted: setDeleted,
         isOnePostPage: isOnePostPage,
-        postText: postText,
+        postText: postText
       });
     };
     const repost = () => {
