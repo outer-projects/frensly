@@ -14,7 +14,7 @@ import AuthBanner from "../authBanner/authBanner";
 import ConnectButtonCustom from "./connectButtonCustom";
 import Head from "next/head";
 import Footer from "./footer";
-import header from "./header.module.scss"
+import header from "./header.module.scss";
 
 const Wrapper = observer(({ children }: any) => {
   const { init, setInit, getNotifications } = useInjection(UserStore);
@@ -80,18 +80,16 @@ const Wrapper = observer(({ children }: any) => {
           </div>
           <button
             className={header.connect__button}
-            style={{marginTop:'20px'}}
-            onClick={() => {
-              // retrieve all cookies
-              var Cookies = document.cookie.split(";");
-              // set past expiry to all cookies
-              for (var i = 0; i < Cookies.length; i++) {
-                document.cookie =
-                  Cookies[i] + "=; expires=" + new Date(0).toUTCString();
+            style={{ marginTop: "20px" }}
+            onClick={async () => {
+              try {
+                const res = await axios.get("/api/v1/auth/logout");
+                setTimeout(() => {
+                  window.location.reload();
+                }, 400);
+              } catch (e) {
+                console.log(e);
               }
-              setTimeout(() => {
-                window.location.reload();
-              }, 400);
             }}
           >
             Disconnect
