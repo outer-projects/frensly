@@ -11,6 +11,8 @@ import { InView } from "react-intersection-observer";
 import classNames from "classnames";
 import useDarkMode from "use-dark-mode";
 import Link from "next/link";
+import { ModalStore } from "../../stores/ModalStore";
+import { ModalsEnum } from "../../modals";
 const TwitterFeed = observer(
   ({
     id,
@@ -31,7 +33,6 @@ const TwitterFeed = observer(
       getPublicFeed,
       getUserPosts,
       userPosts,
-      deletePost,
       setPostOffset,
       clearUserPosts,
       getFrensFeed,
@@ -41,9 +42,11 @@ const TwitterFeed = observer(
       updateFeed,
       publicFeed,
       updateUserPosts,
+      setHideRow,
+      hideRow
     } = useInjection(FeedStore);
     const { user } = useInjection(Web3Store);
-    const [hideRow, setHideRow] = useState<string[]>([]);
+
     const currentFeed = useMemo(() => {
       if (id) {
         return userPosts;
@@ -56,7 +59,7 @@ const TwitterFeed = observer(
       }
     }, [id, isFrens, isPublic, userPosts, frensFeed, feed, publicFeed]);
     const darkMode = useDarkMode();
-
+    const modalStore = useInjection(ModalStore)
     const updatePosts = () => {
       if (isFrens) {
         updateFrensFeed();
@@ -96,7 +99,7 @@ const TwitterFeed = observer(
       };
     }, []);
     const hide = (id: string) => {
-      setHideRow([...hideRow, id]);
+      setHideRow(id);
     };
     return (
       <div className={classNames(style.twitter__feed, id && style.user__feed)}>
@@ -156,11 +159,9 @@ const TwitterFeed = observer(
                                 filter: `invert(${darkMode.value ? "1" : "0"})`,
                               }}
                               onClick={() =>
-                                deletePost(el._id).then((res) => {
-                                  if (res) {
-                                    hide(el._id);
-                                  }
-                                })
+                               {
+                                modalStore.showModal(ModalsEnum.DeletePost, {post: el, isRepost: true})
+                               }
                               }
                             />
                           ) : (

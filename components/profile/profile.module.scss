@@ -286,9 +286,13 @@
 }
 .right {
   text-align: right;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
   width: 58% !important;
   span {
     font-size: 14px;
+    font-weight: 400!important;
     color: var(--text-shade);
     margin-right: 5px;
   }
@@ -335,6 +339,7 @@
   }
   span {
     color: var(--text-shade);
+    font-weight: 400!important;
     margin-right: 5px;
     font-size: 14px;
   }
@@ -607,10 +612,10 @@
   width: 400px;
 }
 .twitter__text {
-  color: var(--text-shade);
+  color: var(--text-post);
   /* Paragraphs/P4 */
   font-family: "DMSans";
-  font-size: 14px;
+  font-size: 15px;
   font-style: normal;
   font-weight: 400;
   line-height: 20px; /* 142.857% */

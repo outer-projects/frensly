@@ -13,15 +13,19 @@ export class FeedStore {
   @observable publicFeed: IPost[] = [];
   @observable feed: IPost[] = [];
   @observable userPosts: IPost[] = [];
+  @observable hideRow: string[] = [];
   @observable feedOffset: number = 0;
   @observable feedFrensOffset: number = 0;
-  @observable publicOffset: number = 0
+  @observable publicOffset: number = 0;
   @observable postOffset: number = 0;
   @observable activeFeed: number = 0;
   @observable currentPost?: IPost = undefined;
   constructor(private readonly rootStore: RootStore) {
     makeObservable(this);
   }
+  @action setHideRow = (hide: string) => {
+    this.hideRow = [...this.hideRow, hide];
+  };
   @action getFrensFeed = async () => {
     const query = new URLSearchParams({
       offset: "0",
@@ -50,10 +54,10 @@ export class FeedStore {
       console.log(e);
     }
   };
-  @action setActiveFeed = (f:number) =>{
-    localStorage.setItem('feed', f.toString())
-    this.activeFeed = f
-  }
+  @action setActiveFeed = (f: number) => {
+    localStorage.setItem("feed", f.toString());
+    this.activeFeed = f;
+  };
   @action updatePublicFeed = async () => {
     const query = new URLSearchParams({
       offset: this.publicOffset.toString(),
@@ -228,7 +232,7 @@ export class FeedStore {
         this.userPosts = [res.data, ...this.userPosts];
       } else {
         this.feed = [res.data, ...this.feed];
-        this.publicFeed = [res.data, ...this.publicFeed]
+        this.publicFeed = [res.data, ...this.publicFeed];
       }
       if (data.isVerified) {
         this.frensFeed = [res.data, ...this.frensFeed];

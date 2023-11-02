@@ -250,7 +250,7 @@ const Profile = observer(() => {
                     )}
                   >
                     <span>
-                      {getPriceInUsd(profileUser?.account?.totalVolume)}$
+                      {getPriceInUsd(pricePerShade)}$
                     </span>
                     <EthereumSvg />
                     {fromWeiToEth(pricePerShade, 5)} ETH

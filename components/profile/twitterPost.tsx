@@ -44,20 +44,20 @@ const TwitterPost = observer(
     const router = useRouter();
     const darkMode = useDarkMode();
     const mentions = useMemo(() => {
-      const text = post?.text.match(/{[\w\s]+}/g);
+      const text = post?.text.match(/@(\S+)(?=\s|$)/g);
       const result = text ? text.map((s: any) => s.slice(1, s.length - 1)) : [];
       return result;
     }, []);
 
     const tagGet = (text: string) => {
-      var tagRegex = /[^{\}]+(?=})/g;
+      var tagRegex = /@(\S+)(?=\s|$)/g;
       // console.log(text);
       return text
         .replaceAll(">", "")
         .replaceAll("<", "")
-        .replaceAll("@", "")
+        // .replaceAll("@", "")
         .replace(tagRegex, function (url) {
-          return `<span ><a href="/profile/${url}" style="color: #a6d000!important; cursor: pointer; font-weight: bold">@${url}</a></span>`;
+          return `<span ><a href="/profile/${url}" style="color: #a6d000!important; cursor: pointer; font-weight: bold">${url}</a></span>`;
         })
         .replaceAll("{", "")
         .replaceAll("}", "");
@@ -67,9 +67,7 @@ const TwitterPost = observer(
         /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gi;
       return text.replace(urlRegex, function (url) {
         return (
-          `<a style="color: ${
-            darkMode.value ? "white" : "black"
-          }; text-decoration: underline" href="` +
+          `<a style="color: #a6d000; text-decoration: underline" href="` +
           url +
           '" target="_blank">' +
           url +
@@ -79,7 +77,7 @@ const TwitterPost = observer(
     }
     const modalStore = useInjection(ModalStore);
     const { user } = useInjection(Web3Store);
-    const { likePost, repostPost, deletePost } = useInjection(FeedStore);
+    const { likePost, repostPost } = useInjection(FeedStore);
     const [likesCount, setLikesCount] = useState(0);
     const [handles, setHandles] = useState<string[]>([]);
     const [repostCount, setRepostCount] = useState(0);
@@ -144,13 +142,11 @@ const TwitterPost = observer(
       likePost(post._id, user?._id, isProfile || isComment || isOnePostPage);
     };
     const _deletePost = () => {
-      deletePost(post._id).then((res) => {
-        if (res) {
-          setDeleted(true);
-        }
-        if (res && isOnePostPage) {
-          router.push("../../profile/" + post.user.twitterId);
-        }
+      modalStore.showModal(ModalsEnum.DeletePost, {
+        post: post,
+        setDeleted: setDeleted,
+        isOnePostPage: isOnePostPage,
+        postText: postText
       });
     };
     const repost = () => {

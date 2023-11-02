@@ -18,6 +18,8 @@ import { useRouter } from "next/router";
 import Moon from "../svgs/moon";
 import Sun from "../svgs/sun";
 import useDarkMode from "use-dark-mode";
+import { ModalStore } from "../../stores/ModalStore";
+import { ModalsEnum } from "../../modals";
 const AuthBanner = observer(() => {
   const { address, authStatus, frensly, user, checkAuth } =
     useInjection(Web3Store);
@@ -31,6 +33,7 @@ const AuthBanner = observer(() => {
   const [activeCode, setActiveCode] = useState(false);
   const router = useRouter();
   const { code } = router.query;
+  const modalStore = useInjection(ModalStore);
   useEffect(() => {
     if (code && code.includes("fren")) {
       localStorage.setItem("invite", code as string);
@@ -270,7 +273,10 @@ const AuthBanner = observer(() => {
               )}
             </div>
           </div>
-          <div className={style.banner__col}>
+          <div
+            className={style.banner__col}
+            // onClick={() => modalStore.showModal(ModalsEnum.DeletePost, {post:''})}
+          >
             <ProgressBar />
             <div
               className={classNames(style.banner__join, style.banner__bottom)}

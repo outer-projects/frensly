@@ -54,6 +54,43 @@
     border-radius: 0px;
   }
 }
+.delete {
+  width: 418px;
+  height: 250px;
+  border-radius: 32px;
+  background: var(--background-pages);
+  padding: 24px;
+  padding-left: 16px;
+  padding-right: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  @media (max-width: 616px) {
+    width: 100vw;
+    height: 100vh;
+    border-radius: 0px;
+  }
+}
+.delete__buttons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.delete__button__no {
+  width: 120px!important;
+  height: 40px!important;
+  background-color: #ef5da8 !important;
+  color: white !important;
+}
+.delete__button {
+  width: 120px!important;
+  height: 40px!important;
+}
+.delete__top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 .buy__buttons {
   display: flex;
   flex-direction: column;
@@ -69,7 +106,7 @@
   background-color: transparent !important;
   border: 1px solid $green !important;
   margin-bottom: 8px;
-  color: var(--text-shade)!important;
+  color: var(--text-shade) !important;
 }
 .buy__title {
   font-family: "Syne";
