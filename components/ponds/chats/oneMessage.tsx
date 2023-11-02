@@ -12,15 +12,16 @@ import { IProfile } from "../../../types/users";
 import { ModalsEnum } from "../../../modals";
 import { ModalStore } from "../../../stores/ModalStore";
 import Link from "next/link";
-const getUserById = (id: string, members: IProfile[]) => {
-  let correctUser = members.filter(
-    (el) => el.twitterId == id.replace("@", "")
-  )[0];
-  if (correctUser) {
-    return correctUser.twitterHandle;
-  }
-  return "";
-};
+import { linkify, tagGet } from "../../profile/twitterPost";
+// const getUserById = (id: string, members: IProfile[]) => {
+//   let correctUser = members.filter(
+//     (el) => el.twitterId == id.replace("@", "")
+//   )[0];
+//   if (correctUser) {
+//     return correctUser.twitterHandle;
+//   }
+//   return "";
+// };
 const OneMessage = observer(({ el, roomId, members }: any) => {
   const { user } = useInjection(Web3Store);
   const modalStore = useInjection(ModalStore);
@@ -95,12 +96,11 @@ const OneMessage = observer(({ el, roomId, members }: any) => {
               )}
               key={el._id}
             >
-              <Highlighter
-                highlightClassName={style.openchat__mention}
-                searchWords={mentions.map((el: any) => "@" + el)}
-                autoEscape={true}
-                textToHighlight={el?.text?.replace("{", "").replace("}", "")}
-              />{" "}
+              <div
+                dangerouslySetInnerHTML={{
+                  __html: linkify(tagGet(el?.text)),
+                }}
+              ></div>
               <div className={style.openchat__time}>{getDate(el.date)}</div>
             </div>
           )}

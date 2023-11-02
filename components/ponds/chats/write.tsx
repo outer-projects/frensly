@@ -89,6 +89,9 @@ const Write = ({
             if (key == "@") {
               setOpenMentions(true);
             }
+            if (key == " ") {
+              setOpenMentions(false);
+            }
             if(!e.target.value.includes('@')) {
               setOpenMentions(false)
             }
@@ -107,6 +110,7 @@ const Write = ({
           onClick={() => {
             if (newMsg !== "" || file) {
               setNewMsg("");
+              setOpenMentions(false);
               onSend();
             }
           }}
