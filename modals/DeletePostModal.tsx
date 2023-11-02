@@ -23,12 +23,15 @@ export const DeletePostModal = observer(({ key, data, idx }: modalProps) => {
   const deleteP = () => {
     deletePost(data.post._id).then((res) => {
       if (res && data.setDeleted) {
+        modalStore.hideAllModals()
         data.setDeleted(true);
       }
       if (res && data.isRepost) {
+        modalStore.hideAllModals()
         setHideRow(data.post._id);
       }
       if (res && data.isOnePostPage) {
+        modalStore.hideAllModals()
         router.push("../../profile/" + data.post.user.twitterId);
       }
     });
@@ -51,13 +54,18 @@ export const DeletePostModal = observer(({ key, data, idx }: modalProps) => {
             }}
           />
         </div>
-        {data.postText ? data.postText : data.post.text.slice(0, 50)}
+        {data.postText
+          ? data.postText
+          : data?.post?.text
+          ? data?.post?.text?.slice(0, 50)
+          : ""}
         <div className={style.delete__buttons}>
           <button
             className={classNames(
               header.connect__button,
               style.delete__button__no
             )}
+            onClick={()=>modalStore.hideAllModals()}
           >
             No
           </button>
