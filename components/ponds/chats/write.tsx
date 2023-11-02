@@ -85,7 +85,7 @@ const Write = ({
           onChange={(e) => {
             let after = e.target.value.split("@");
             let key = e.target.value.substring(e.target.value.length - 1)
-            console.log(key);
+            // console.log(key);
             if (key == "@") {
               setOpenMentions(true);
             }

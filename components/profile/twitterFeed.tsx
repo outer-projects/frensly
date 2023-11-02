@@ -10,6 +10,7 @@ import Swap from "../socials/twitterUI/Swap";
 import { InView } from "react-intersection-observer";
 import classNames from "classnames";
 import useDarkMode from "use-dark-mode";
+import Link from "next/link";
 const TwitterFeed = observer(
   ({
     id,
@@ -111,8 +112,6 @@ const TwitterFeed = observer(
 
                 return (
                   <div key={el._id}>
-                    <TwitterPost post={el} isProfile={isProfile} />
-
                     {i !== 0 && i % 29 == 0 && (
                       <InView
                         as="div"
@@ -127,6 +126,7 @@ const TwitterFeed = observer(
                         }}
                       ></InView>
                     )}
+                    <TwitterPost post={el} isProfile={isProfile} />
                   </div>
                 );
               } else if (el.isRepost) {
@@ -136,15 +136,19 @@ const TwitterFeed = observer(
                       <>
                         <div className={style.twitter__repost}>
                           <div
-                            style={{ display: "flex", alignItems: "center" }}
+                            className={style.twitter__reposted}
                           >
                             <Swap isActive={false} />
-                            {el.user.twitterName} reposted
+                            <span>
+                              <Link href={"/profile/" + el.user.twitterHandle}>
+                                {el.user.twitterName}
+                              </Link>
+                            </span>{" "}
+                            reposted
                           </div>
                           {user?.twitterId == el.user?.twitterId ? (
                             <img
                               src="../icons/Close.svg"
-                      
                               style={{
                                 width: "20px",
                                 height: "20px",

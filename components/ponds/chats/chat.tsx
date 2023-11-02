@@ -54,7 +54,7 @@ const Chat = observer(() => {
     };
   }, []);
   const startListening = () => {
-    console.log(chat);
+    // console.log(chat);
     if (chat && !isLightning) {
       setIsLightning(true);
       // console.log("start listen 2", chat._id);
@@ -93,7 +93,7 @@ const Chat = observer(() => {
   const { id } = router.query;
   useEffect(() => {
     if (id) {
-      console.log("id is: ", id);
+      // console.log("id is: ", id);
       getChat(id as string);
       getMyChats();
     }

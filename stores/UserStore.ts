@@ -288,9 +288,11 @@ export class UserStore {
       if (el) this.ethCurrency = el;
     });
   };
-  @action getPriceInUsd = (price: string) => {
-    const priceInEth = fromWeiToEth(price);
-    return Number((this.ethCurrency * priceInEth).toFixed(2));
+  @action getPriceInUsd = (price?: string) => {
+    if (price) {
+      const priceInEth = fromWeiToEth(price);
+      return Number((this.ethCurrency * priceInEth).toFixed(2));
+    } else return 0
   };
   @action getProfileUser = async (id: string) => {
     if (!isNaN(Number(id))) {

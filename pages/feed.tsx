@@ -16,11 +16,17 @@ const FeedPage: NextPage = observer((props) => {
   const { feedOffset, feed, activeFeed, setActiveFeed } =
     useInjection(FeedStore);
   const [firstRun, setFirstRun] = useState(false);
-
+  useEffect(() => {
+    let storageFeed = localStorage.getItem("feed");
+    if (storageFeed && Number(storageFeed) !== activeFeed) {
+      setActiveFeed(Number(localStorage.getItem("feed")));
+    }
+  }, []);
   useEffect(() => {
     if (feedOffset == 30 && feed.length == 0 && !firstRun) {
       setFirstRun(true);
       setActiveFeed(1);
+      localStorage.setItem("feed", "1");
     }
   }, [feed, feedOffset]);
 
@@ -36,7 +42,11 @@ const FeedPage: NextPage = observer((props) => {
         ></meta>
       </Head>
       <div className={style.feed__type}>
-        <TypesList types={types} active={activeFeed} setActive={setActiveFeed} />
+        <TypesList
+          types={types}
+          active={activeFeed}
+          setActive={setActiveFeed}
+        />
       </div>
       {activeFeed == 0 && <TwitterFeed isFeed />}
       {activeFeed == 1 && <TwitterFeed isFeed isFrens />}

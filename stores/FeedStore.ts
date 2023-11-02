@@ -51,6 +51,7 @@ export class FeedStore {
     }
   };
   @action setActiveFeed = (f:number) =>{
+    localStorage.setItem('feed', f.toString())
     this.activeFeed = f
   }
   @action updatePublicFeed = async () => {
@@ -222,11 +223,12 @@ export class FeedStore {
     data.media && formdata.append("file", data.media);
     try {
       const res = await axios.post(prefix + "social/post", formdata);
-      console.log(res);
+      // console.log(res);
       if (data.id) {
         this.userPosts = [res.data, ...this.userPosts];
       } else {
         this.feed = [res.data, ...this.feed];
+        this.publicFeed = [res.data, ...this.publicFeed]
       }
       if (data.isVerified) {
         this.frensFeed = [res.data, ...this.frensFeed];

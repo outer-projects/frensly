@@ -51,7 +51,7 @@ const TwitterPost = observer(
 
     const tagGet = (text: string) => {
       var tagRegex = /[^{\}]+(?=})/g;
-      console.log(text);
+      // console.log(text);
       return text
         .replaceAll(">", "")
         .replaceAll("<", "")
@@ -97,7 +97,7 @@ const TwitterPost = observer(
       } else {
         return post.text;
       }
-    }, [handles]);
+    }, [handles, post.text]);
 
     useEffect(() => {
       setLikesCount(post?.likes?.length);

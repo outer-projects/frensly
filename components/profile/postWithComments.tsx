@@ -46,7 +46,7 @@ const PostWithComments = observer(() => {
   const saveInput = () => {
     searchUsers(ment, "mention");
   };
-  console.log(ment);
+  // console.log(ment);
   useEffect(() => {
     searchDeb(saveInput, 700);
   }, [ment]);
@@ -105,7 +105,7 @@ const PostWithComments = observer(() => {
             let after = e.target.value.split("@");
             // console.log(after[after.length - 1]);
             let key = e.target.value.substring(e.target.value.length - 1);
-            console.log(key);
+            // console.log(key);
             if (key == "@") {
               setOpenMentions(true);
             }

@@ -32,10 +32,12 @@ const MessageSend = observer(({ id }: { id?: string }) => {
   const saveInput = () => {
     searchUsers(ment, "mention");
   };
-  const darkMode = useDarkMode()
-  console.log(ment);
+  const darkMode = useDarkMode();
+  // console.log(ment);
   useEffect(() => {
-    searchDeb(saveInput, 700);
+    if (ment.length !== 0) {
+      searchDeb(saveInput, 700);
+    }
   }, [ment]);
   const mention = (el: string) => {
     setMessage(message.replace(ment, "") + "{" + el + "} ");
@@ -128,7 +130,7 @@ const MessageSend = observer(({ id }: { id?: string }) => {
             className={classNames(header.connect__button, style.twitter__post)}
             disabled={message.length == 0}
             onClick={() => {
-              setOpenMentions(false)
+              setOpenMentions(false);
               addPost({
                 text: message,
                 media: image,
@@ -151,7 +153,10 @@ const MessageSend = observer(({ id }: { id?: string }) => {
           {image?.name}
           <img
             src="../icons/Close.svg"
-            style={{ cursor: "pointer",filter: `invert(${darkMode.value ? "1" : "0"})`, }}
+            style={{
+              cursor: "pointer",
+              filter: `invert(${darkMode.value ? "1" : "0"})`,
+            }}
             onClick={() => {
               setImage(null);
             }}

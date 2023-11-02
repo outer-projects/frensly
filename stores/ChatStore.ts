@@ -50,7 +50,7 @@ export class ChatStore {
       const res = await axios.get(
         prefix + "chat/room/test/" + id + "/?" + query
       );
-      console.log("chat:", res.data);
+      // console.log("chat:", res.data);
       const n = Number(res.data.total);
       this.messagesleft = n - 50 > 0 ? n - 50 : 0;
       this.messagesOffset = 100;

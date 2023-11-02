@@ -5,6 +5,14 @@
     display: flex !important;
   }
 }
+.twitter__reposted {
+  a {
+    color: var(--text-main);
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
 .profile {
   margin-top: 32px;
   width: 616px;
@@ -103,7 +111,7 @@
   font-weight: 400 !important;
   border-radius: 100px;
   border: 1px solid $green;
-  color: var(--text-main)!important;
+  color: var(--text-main) !important;
 }
 .profile__unfollow {
   width: 49% !important;
@@ -223,6 +231,7 @@
   display: flex;
   height: 40px;
   align-items: center;
+  justify-content: space-between;
   padding-left: 16px;
   margin-top: 24px;
   margin-left: 24px;
@@ -279,6 +288,13 @@
     margin-right: 0px;
   }
 }
+.profile__usdprice {
+  height: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: center;
+}
 .profile__balance {
   color: var(--text-main);
   display: flex;
@@ -294,10 +310,15 @@
     width: 24px;
     height: 24px;
   }
+  span {
+    color: var(--text-shade);
+    margin-right: 5px;
+    font-size: 14px;
+  }
 }
 .user__feed {
-  border-top-left-radius: 0px!important;
-  border-top-right-radius: 0px!important;
+  border-top-left-radius: 0px !important;
+  border-top-right-radius: 0px !important;
   border-bottom-left-radius: 32px;
   border-bottom-right-radius: 32px;
 }
