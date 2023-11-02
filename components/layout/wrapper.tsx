@@ -14,7 +14,7 @@ import AuthBanner from "../authBanner/authBanner";
 import ConnectButtonCustom from "./connectButtonCustom";
 import Head from "next/head";
 import Footer from "./footer";
-import { browser } from "process";
+import header from "./header.module.scss"
 
 const Wrapper = observer(({ children }: any) => {
   const { init, setInit, getNotifications } = useInjection(UserStore);
@@ -78,7 +78,9 @@ const Wrapper = observer(({ children }: any) => {
           <div style={{ display: "none" }}>
             <ConnectButtonCustom />
           </div>
-          <div
+          <button
+            className={header.connect__button}
+            style={{marginTop:'20px'}}
             onClick={() => {
               // retrieve all cookies
               var Cookies = document.cookie.split(";");
@@ -93,7 +95,7 @@ const Wrapper = observer(({ children }: any) => {
             }}
           >
             Disconnect
-          </div>
+          </button>
         </div>
       )}
       {!needToChangeWallet && init && user?.account && <Header />}
