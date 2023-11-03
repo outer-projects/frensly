@@ -11,7 +11,7 @@ import ExploreRow from "./exploreRow";
 import { InView } from "react-intersection-observer";
 import OneActivity from "../notifications/oneActivity";
 import { shortNick } from "../../utils/utilities";
-const types = ["Top", "New Users", "Activity", "Top by networth", "Top by TVH"];
+const types = ["Top", "New Users", "Activity"];
 const Explore = observer(() => {
   const [active, setActive] = useState(0);
   const [search, setSearch] = useState("");
