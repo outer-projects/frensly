@@ -54,17 +54,17 @@ const ExploreRow = observer(
           </div>
           <div className={style.explore__user__right}>
             <div className={style.explore__user__price}>
-              {(!isNw || !isTVH) && <EthereumSvg />}
-              {!isNw || !isTVH
-                ? fromWeiToEth(el.account.currentPrice) + "ETH"
-                : "$" +
+              {!isNw && !isTVH && <EthereumSvg />}
+              {isNw || isTVH
+                ? "$" +
                   Number(
                     Number(
                       isNw ? el?.account?.networth : el.account.holderNetworth
                     ).toFixed(1)
-                  )}
+                  )
+                : fromWeiToEth(el.account.currentPrice) + "ETH"}
             </div>
-            {!isNw && (
+            {!isNw && !isTVH && (
               <div className={style.explore__user__balance__usd}>
                 ${usdPrice}
               </div>
