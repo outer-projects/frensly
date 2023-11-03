@@ -16,6 +16,8 @@ const Write = ({
   gif,
   setGif,
   setFile,
+  setOpenGifMenu,
+  openGifMenu
 }: {
   newMsg: string;
   setNewMsg: (newm: string) => void;
@@ -25,10 +27,11 @@ const Write = ({
   setGif: (g: string) => void;
   file?: File;
   setFile: (f?: File) => void;
+  setOpenGifMenu: (menu: boolean) => void;
+  openGifMenu: boolean
 }) => {
   const { user } = useInjection(Web3Store);
   const { setGifList } = useInjection(ChatStore);
-  const [openGifMenu, setOpenGifMenu] = useState(false);
   const [openMentions, setOpenMentions] = useState(false);
   const [mentionSearch, setMentionSearch] = useState("");
   const onKeyDown = (e: any) => {
@@ -72,7 +75,6 @@ const Write = ({
   }, [newMsg]);
   return (
     <>
-      {openGifMenu && <GifSearch setGif={setGif} reverse={true} />}
       <div className={style.write}>
         {openMentions && (
           <div className={style.write__mentions}>
@@ -104,7 +106,7 @@ const Write = ({
           src="../icons/gifAdd.svg"
           style={{ cursor: "pointer" }}
           onClick={() => {
-            setOpenGifMenu(true);
+            setOpenGifMenu(!openGifMenu);
           }}
         />
         <input

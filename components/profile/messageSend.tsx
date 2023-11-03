@@ -144,7 +144,7 @@ const MessageSend = observer(({ id }: { id?: string }) => {
           <img
             src="../../icons/gifAdd.svg"
             onClick={() => {
-              setGifMenu(true);
+              setGifMenu(!gifMenu);
             }}
           />
         </div>

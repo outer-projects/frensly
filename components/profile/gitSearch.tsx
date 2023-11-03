@@ -62,7 +62,7 @@ const GifSearch = observer(
             }}
           />
         </div>
-        <div className={style.gif__list} ref={listInnerRef} onScroll={onScroll}>
+        <div className={classNames(style.gif__list, reverse && style.gif__list__reverse)} ref={listInnerRef} onScroll={onScroll}>
           {availabeGifs?.map((el, i) => {
             return (
               <div

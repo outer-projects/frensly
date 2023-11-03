@@ -20,6 +20,7 @@ import OneMessage from "./oneMessage";
 import { InView } from "react-intersection-observer";
 import EthereumSvg from "../../svgs/Ethereum";
 import useDarkMode from "use-dark-mode";
+import GifSearch from "../../profile/gitSearch";
 const Chat = observer(() => {
   const socket = useContext(SocketContext);
   const [newMsg, setNewMsg] = useState("");
@@ -45,6 +46,7 @@ const Chat = observer(() => {
   const modalStore = useInjection(ModalStore);
   const [isLightning, setIsLightning] = useState(false);
   const [gif, setGif] = useState("");
+  const [openGifMenu, setOpenGifMenu] = useState(false);
   const darkMode = useDarkMode();
   useEffect(() => {
     let tt = setTimeout(() => {
@@ -115,7 +117,7 @@ const Chat = observer(() => {
   }, [user, chat, chatAmount]);
   return (
     <>
-      {myHolds ? (
+      {!myHolds ? (
         <div className={style.openchat}>
           {" "}
           {/* <div className={explore.explore__title}>
@@ -230,6 +232,18 @@ const Chat = observer(() => {
                 <span>TVH</span> $??
               </div>
             </div>
+            {openGifMenu && (
+              <div
+                style={{
+                  position: "absolute",
+                  maxWidth: "616px",
+                  overflowX: "hidden",
+                }}
+                className={style.openchat__messages}
+              >
+                <GifSearch setGif={setGif} reverse={true} />
+              </div>
+            )}
             <div className={style.openchat__messages} ref={messagesEndRef}>
               {messages
                 ?.map((el, i) => {
@@ -237,8 +251,8 @@ const Chat = observer(() => {
                     <div key={el._id}>
                       <OneMessage
                         el={el}
-                        roomId={chat._id}
-                        members={chat.memberDetails}
+                        roomId={chat?._id}
+                        members={chat?.memberDetails}
                       />
                       {i == 1 && messagesleft !== 0 && (
                         <InView
@@ -271,13 +285,16 @@ const Chat = observer(() => {
                 );
               })} */}
             </div>
+
             <Write
               newMsg={newMsg}
               setNewMsg={setNewMsg}
               file={file}
+              openGifMenu={openGifMenu}
               gif={gif}
+              setOpenGifMenu={setOpenGifMenu}
               setGif={setGif}
-              members={chat.memberDetails}
+              members={chat?.memberDetails}
               setFile={setFile}
               onSend={() => {
                 sendMessage(id as string, newMsg, file, gif);

@@ -160,7 +160,7 @@ const PostWithComments = observer(() => {
           <img
             src="../../icons/gifAdd.svg"
             onClick={() => {
-              setGifMenu(true);
+              setGifMenu(!gifMenu);
             }}
           />
         </div>

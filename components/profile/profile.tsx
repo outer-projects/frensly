@@ -263,7 +263,7 @@ const Profile = observer(() => {
                   <div className={style.profile__text}>TVH</div>
                   <div className={classNames(style.profile__text, style.black)}>
                     <img src="../icons/Info.svg" />
-                    ${Number(Number(profileUser?.account?.networth).toFixed(1))}
+                    ${Number(Number(profileUser?.account?.holderNetworth).toFixed(1))}
                   </div>
                 </div>
 
