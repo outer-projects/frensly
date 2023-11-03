@@ -394,6 +394,7 @@
   display: flex;
   justify-content: flex-end;
   margin-top: -30px;
+  margin-bottom: -30px;
   padding-right: 40px;
   @media (max-width: 616px) {
     padding-right: 12px;
@@ -740,7 +741,7 @@
   margin-bottom: 20px !important;
 }
 .twitter__one__post__wrap {
-  padding-top: 24px;
+  padding-top: 0px;
   border-radius: 32px;
   margin-top: 24px;
   background: var(--background-pages);
