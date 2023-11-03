@@ -117,7 +117,7 @@ const Chat = observer(() => {
   }, [user, chat, chatAmount]);
   return (
     <>
-      {!myHolds ? (
+      {myHolds ? (
         <div className={style.openchat}>
           {" "}
           {/* <div className={explore.explore__title}>
