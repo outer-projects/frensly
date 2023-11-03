@@ -4,6 +4,8 @@ import profile from "../../profile/profile.module.scss";
 import { useInjection } from "inversify-react";
 import Web3Store from "../../../stores/Web3Store";
 import useDarkMode from "use-dark-mode";
+import GifSearch from "../../profile/gitSearch";
+import { ChatStore } from "../../../stores/ChatStore";
 
 const Write = ({
   newMsg,
@@ -11,16 +13,22 @@ const Write = ({
   onSend,
   file,
   members,
+  gif,
+  setGif,
   setFile,
 }: {
   newMsg: string;
   setNewMsg: (newm: string) => void;
   onSend: () => any;
   members: any[];
+  gif: string;
+  setGif: (g: string) => void;
   file?: File;
   setFile: (f?: File) => void;
 }) => {
   const { user } = useInjection(Web3Store);
+  const { setGifList } = useInjection(ChatStore);
+  const [openGifMenu, setOpenGifMenu] = useState(false);
   const [openMentions, setOpenMentions] = useState(false);
   const [mentionSearch, setMentionSearch] = useState("");
   const onKeyDown = (e: any) => {
@@ -37,11 +45,23 @@ const Write = ({
       setOpenMentions(false);
     }
   };
+  useEffect(() => {
+    if (gif !== "") {
+      setFile(undefined);
+      setGifList([]);
+      setOpenGifMenu(false);
+    }
+  }, [gif]);
+  useEffect(() => {
+    if (file) {
+      setGif("");
+    }
+  }, [file]);
   const mention = (el: string) => {
     setNewMsg(newMsg.replace(mentionSearch, "") + el);
     setOpenMentions(false);
   };
-  const darkMode = useDarkMode()
+  const darkMode = useDarkMode();
   useEffect(() => {
     window.addEventListener("keydown", onKeyDown);
 
@@ -52,6 +72,7 @@ const Write = ({
   return (
     <>
       <div className={style.write}>
+        {openGifMenu && <GifSearch setGif={setGif} reverse={true} />}
         {openMentions && (
           <div className={style.write__mentions}>
             {members
@@ -78,13 +99,13 @@ const Write = ({
           onChange={(e) => e?.target?.files && setFile(e?.target?.files[0])}
         />
         <img src="../icons/ImageAdd.svg" style={{ cursor: "pointer" }} />
-
+        <img src="../icons/gifAdd.svg" style={{ cursor: "pointer" }} />
         <input
           className={style.write__input}
           value={newMsg}
           onChange={(e) => {
             let after = e.target.value.split("@");
-            let key = e.target.value.substring(e.target.value.length - 1)
+            let key = e.target.value.substring(e.target.value.length - 1);
             // console.log(key);
             if (key == "@") {
               setOpenMentions(true);
@@ -92,8 +113,8 @@ const Write = ({
             if (key == " ") {
               setOpenMentions(false);
             }
-            if(!e.target.value.includes('@')) {
-              setOpenMentions(false)
+            if (!e.target.value.includes("@")) {
+              setOpenMentions(false);
             }
             if (openMentions) {
               setMentionSearch(after[after.length - 1]);
@@ -124,9 +145,30 @@ const Write = ({
           {file?.name}
           <img
             src="../icons/Close.svg"
-            style={{ cursor: "pointer", filter: `invert(${darkMode.value ? "1" : "0"})` }}
+            style={{
+              cursor: "pointer",
+              filter: `invert(${darkMode.value ? "1" : "0"})`,
+            }}
             onClick={() => {
               setFile(undefined);
+            }}
+          />
+        </div>
+      )}
+      {gif !== "" && (
+        <div
+          className={profile.twitter__image__name}
+          style={{ marginLeft: "20px", marginTop: "7px" }}
+        >
+          {gif?.split("/")[gif?.split("/")?.length - 1]}
+          <img
+            src="../icons/Close.svg"
+            style={{
+              cursor: "pointer",
+              filter: `invert(${darkMode.value ? "1" : "0"})`,
+            }}
+            onClick={() => {
+              setGif("");
             }}
           />
         </div>

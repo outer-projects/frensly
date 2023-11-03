@@ -237,7 +237,7 @@ const Profile = observer(() => {
                 <div className={style.profile__stats__line}>
                   <div className={style.profile__text}>NW</div>
                   <div className={classNames(style.profile__text, style.black)}>
-                    $??
+                    ${profileUser?.account?.networth}
                   </div>
                 </div>
 
@@ -249,9 +249,9 @@ const Profile = observer(() => {
                       style.profile__balance
                     )}
                   >
-                    <span>
+                    {/* <span>
                       {getPriceInUsd(pricePerShade)}$
-                    </span>
+                    </span> */}
                     <EthereumSvg />
                     {fromWeiToEth(pricePerShade, 5)} ETH
                   </div>
@@ -275,9 +275,9 @@ const Profile = observer(() => {
                       style.right
                     )}
                   >
-                    <span>
+                    {/* <span>
                       {getPriceInUsd(profileUser?.account?.totalVolume)}$
-                    </span>
+                    </span> */}
                     {fromWeiToEth(profileUser?.account?.totalVolume as string)}{" "}
                     ETH
                   </div>

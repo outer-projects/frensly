@@ -159,6 +159,7 @@ const MessageSend = observer(({ id }: { id?: string }) => {
                 media: image,
                 id: id,
                 isVerified: user?.verified,
+                gif: gif
               }).then((res) => {
                 if (res) {
                   setMessage("");

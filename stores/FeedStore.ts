@@ -219,12 +219,14 @@ export class FeedStore {
     media: File | null;
     id?: string;
     isVerified?: boolean;
+    gif?: string;
   }) => {
     const formdata = new FormData();
     formdata.append("text", data.text);
     data.originalPost && formdata.append("originalPost", data.originalPost);
     // console.log(data.media);
     data.media && formdata.append("file", data.media);
+    data.gif && data?.gif !== "" && formdata.append("tenor", data.gif);
     try {
       const res = await axios.post(prefix + "social/post", formdata);
       // console.log(res);

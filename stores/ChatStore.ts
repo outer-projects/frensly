@@ -120,11 +120,12 @@ export class ChatStore {
     this.messagesOffset = 0;
     this.chat = [];
   };
-  sendMessage = async (id: string, text: string, file?: File) => {
+  sendMessage = async (id: string, text: string, file?: File, gif?:string) => {
     const formdata = new FormData();
 
     formdata.append("text", text);
     file && formdata.append("file", file);
+    gif && gif!=='' && formdata.append("tenor", gif);
     try {
       const res = await axios.post(prefix + "chat/message/" + id, formdata);
       // console.log("message sent:", res.data);

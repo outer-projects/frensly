@@ -12,13 +12,19 @@ import { useRouter } from "next/router";
 import { ExploreStore } from "../../stores/ExploreStore";
 import write from "../ponds/ponds.module.scss";
 import Web3Store from "../../stores/Web3Store";
+import { ChatStore } from "../../stores/ChatStore";
+import useDarkMode from "use-dark-mode";
+import GifSearch from "./gitSearch";
 const PostWithComments = observer(() => {
   const router = useRouter();
   const { id } = router.query;
   const [tt, updateTimeout] = useState<any>(undefined);
   const [message, setMessage] = useState("");
+  const [gif, setGif] = useState("");
   const { user } = useInjection(Web3Store);
   const [focus, setFocus] = useState(false);
+  const darkMode = useDarkMode();
+  const [gifMenu, setGifMenu] = useState(false);
   const [openMentions, setOpenMentions] = useState(false);
   const [image, setImage] = useState<File | null>(null);
   const [ment, setMent] = useState("");
@@ -26,6 +32,7 @@ const PostWithComments = observer(() => {
     useInjection(ExploreStore);
   const { addPost, getCurrentPost, currentPost, setCurrentPost } =
     useInjection(FeedStore);
+  const { setGifList } = useInjection(ChatStore);
   useEffect(() => {
     if (id) {
       getCurrentPost(id as string);
@@ -36,6 +43,18 @@ const PostWithComments = observer(() => {
       setCurrentPost(undefined);
     };
   }, []);
+  useEffect(() => {
+    if (gif !== "") {
+      setImage(null);
+      setGifList([]);
+      setGifMenu(false);
+    }
+  }, [gif]);
+  useEffect(() => {
+    if (image) {
+      setGif("");
+    }
+  }, [image]);
   const searchDeb = (fn: any, ms: number) => {
     const clear = () => {
       clearTimeout(tt);
@@ -123,6 +142,7 @@ const PostWithComments = observer(() => {
             setMessage(e.target.value);
           }}
         />
+        {gifMenu && <GifSearch reverse={false} setGif={setGif} />}
         <div
           className={classNames(
             // style.twitter__add__comment,
@@ -131,18 +151,18 @@ const PostWithComments = observer(() => {
         >
           <input
             type="file"
-            accept=".jpg,.jpeg,.webm,.png"
+            accept=".jpg,.jpeg,.webm,.png, .gif"
             className={style.twitter__send__img}
             onChange={(e) => e?.target?.files && setImage(e?.target?.files[0])}
           />
-          <input
-            type="file"
-            accept=".gif"
-            className={style.twitter__send__gif}
-            onChange={(e) => e?.target?.files && setImage(e?.target?.files[0])}
-          />
+
           <img src="../../icons/ImageAdd.svg" />
-          <img src="../../icons/gifAdd.svg" />
+          <img
+            src="../../icons/gifAdd.svg"
+            onClick={() => {
+              setGifMenu(true);
+            }}
+          />
         </div>
         <div
           className={classNames(
@@ -158,11 +178,12 @@ const PostWithComments = observer(() => {
             )}
             disabled={message.length == 0}
             onClick={() => {
-              setOpenMentions(false)
+              setOpenMentions(false);
               addPost({
                 text: message,
                 media: image,
                 originalPost: currentPost?._id,
+                gif: gif,
               }).then((res) => {
                 if (res) {
                   setMessage("");
@@ -175,6 +196,36 @@ const PostWithComments = observer(() => {
           </button>
         </div>
       </div>
+      {image && (
+        <div className={style.twitter__image__name}>
+          {image?.name}
+          <img
+            src="../icons/Close.svg"
+            style={{
+              cursor: "pointer",
+              filter: `invert(${darkMode.value ? "1" : "0"})`,
+            }}
+            onClick={() => {
+              setImage(null);
+            }}
+          />
+        </div>
+      )}
+      {gif!=='' && (
+        <div className={style.twitter__image__name}>
+          {gif.split("/")[gif.split("/").length - 1]}
+          <img
+            src="../icons/Close.svg"
+            style={{
+              cursor: "pointer",
+              filter: `invert(${darkMode.value ? "1" : "0"})`,
+            }}
+            onClick={() => {
+              setGif('');
+            }}
+          />
+        </div>
+      )}
       <div style={{ marginTop: "-24px" }}>
         {currentPost &&
           currentPost?.comments

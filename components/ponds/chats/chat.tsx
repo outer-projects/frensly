@@ -44,7 +44,8 @@ const Chat = observer(() => {
   } = useInjection(ChatStore);
   const modalStore = useInjection(ModalStore);
   const [isLightning, setIsLightning] = useState(false);
-  const darkMode = useDarkMode()
+  const [gif, setGif] = useState("");
+  const darkMode = useDarkMode();
   useEffect(() => {
     let tt = setTimeout(() => {
       setOpacity(true);
@@ -127,7 +128,7 @@ const Chat = observer(() => {
                   <img
                     className={style.openchat__back}
                     src={"../../icons/arrow_back.svg"}
-                    style={{filter: `invert(${darkMode.value ? '1' : '0'})`}}
+                    style={{ filter: `invert(${darkMode.value ? "1" : "0"})` }}
                   />
                 </Link>
                 <img
@@ -139,10 +140,7 @@ const Chat = observer(() => {
                     className={style.openchat__user__name}
                     style={{ cursor: "pointer" }}
                   >
-                    <Link
-                      href={"../../profile/" + chat?.profile.twitterId}
-                      
-                    >
+                    <Link href={"../../profile/" + chat?.profile.twitterId}>
                       {chat?.profile?.twitterName}
                     </Link>
 
@@ -277,10 +275,12 @@ const Chat = observer(() => {
               newMsg={newMsg}
               setNewMsg={setNewMsg}
               file={file}
+              gif={gif}
+              setGif={setGif}
               members={chat.memberDetails}
               setFile={setFile}
               onSend={() => {
-                sendMessage(id as string, newMsg, file);
+                sendMessage(id as string, newMsg, file, gif);
                 // console.log(messagesEndRef);
                 setFile(undefined);
                 setTimeout(() => {
