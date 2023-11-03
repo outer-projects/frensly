@@ -36,6 +36,7 @@ const Write = ({
     if (e.key == "Enter" && (newMsg !== "" || file)) {
       setNewMsg("");
       onSend();
+      setGif("");
     }
     if (e.key == "@") {
       setOpenMentions(true);
@@ -99,7 +100,13 @@ const Write = ({
           onChange={(e) => e?.target?.files && setFile(e?.target?.files[0])}
         />
         <img src="../icons/ImageAdd.svg" style={{ cursor: "pointer" }} />
-        <img src="../icons/gifAdd.svg" style={{ cursor: "pointer" }} />
+        <img
+          src="../icons/gifAdd.svg"
+          style={{ cursor: "pointer" }}
+          onClick={() => {
+            setOpenGifMenu(true);
+          }}
+        />
         <input
           className={style.write__input}
           value={newMsg}
@@ -131,6 +138,7 @@ const Write = ({
           onClick={() => {
             if (newMsg !== "" || file) {
               setNewMsg("");
+              setGif("");
               setOpenMentions(false);
               onSend();
             }

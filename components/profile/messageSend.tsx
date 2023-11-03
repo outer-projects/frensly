@@ -162,6 +162,7 @@ const MessageSend = observer(({ id }: { id?: string }) => {
                 gif: gif
               }).then((res) => {
                 if (res) {
+                  setGif("")
                   setMessage("");
                   setImage(null);
                 }

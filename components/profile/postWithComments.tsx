@@ -187,6 +187,7 @@ const PostWithComments = observer(() => {
               }).then((res) => {
                 if (res) {
                   setMessage("");
+                  setGif("")
                   setImage(null);
                 }
               });

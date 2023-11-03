@@ -56,7 +56,7 @@ const ExploreRow = observer(({ el, isNw }: { el: IProfile; isNw: boolean }) => {
             <EthereumSvg />
             {!isNw
               ? fromWeiToEth(el.account.currentPrice) + "ETH"
-              : "$" + el?.account?.networth}
+              : "$" + Number(Number(el?.account?.networth).toFixed(1))}
           </div>
           {!isNw && <div className={style.explore__user__balance__usd}>${usdPrice}</div>}
         </div>

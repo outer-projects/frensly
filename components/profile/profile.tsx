@@ -238,9 +238,7 @@ const Profile = observer(() => {
                   <div className={style.profile__text}>NW</div>
                   <div className={classNames(style.profile__text, style.black)}>
                     $
-                    {profileUser?.account?.networth
-                      ? profileUser?.account?.networth
-                      : 0}
+                    {Number(Number(profileUser?.account?.networth).toFixed(1))}
                   </div>
                 </div>
 
