@@ -129,7 +129,7 @@ const Explore = observer(() => {
                   el={el}
                   key={i}
                   isTVH={
-                    currentUserList == "topNW"
+                    currentUserList == "topTVH"
                       ? true
                       : false
                   }
