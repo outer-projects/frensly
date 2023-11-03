@@ -164,6 +164,7 @@ const MessageSend = observer(({ id }: { id?: string }) => {
                 if (res) {
                   setGif("")
                   setMessage("");
+                  setGifMenu(false)
                   setImage(null);
                 }
               });

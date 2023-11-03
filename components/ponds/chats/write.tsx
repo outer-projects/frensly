@@ -141,6 +141,7 @@ const Write = ({
             if (newMsg !== "" || file || gif !== "") {
               setNewMsg("");
               setGif("");
+              setOpenGifMenu(false)
               setOpenMentions(false);
               onSend();
             }
