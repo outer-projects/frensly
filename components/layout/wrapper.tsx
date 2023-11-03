@@ -66,11 +66,11 @@ const Wrapper = observer(({ children }: any) => {
           content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
         />
       </Head>
-      {/* {!needToChangeWallet && (!init || !user?.account) && (
+      {!needToChangeWallet && (!init || !user?.account) && (
         <div className={home.main__page}>
           <AuthBanner />
         </div>
-      )} */}
+      )}1
       {needToChangeWallet && (
         <div className={style.change__account}>
           Address is not assigned to this account. Change to{" "}
