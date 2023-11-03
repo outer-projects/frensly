@@ -176,7 +176,7 @@ const PostWithComments = observer(() => {
               style.twitter__post
               // style.twitter__post__comment
             )}
-            disabled={message.length == 0}
+            disabled={message.length == 0 && gif == "" && !image}
             onClick={() => {
               setOpenMentions(false);
               addPost({

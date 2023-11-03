@@ -151,7 +151,7 @@ const MessageSend = observer(({ id }: { id?: string }) => {
         <div className={classNames(style.twitter__button)}>
           <button
             className={classNames(header.connect__button, style.twitter__post)}
-            disabled={message.length == 0}
+            disabled={message.length == 0 && gif == "" && !image}
             onClick={() => {
               setOpenMentions(false);
               addPost({
