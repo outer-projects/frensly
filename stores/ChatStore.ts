@@ -13,7 +13,9 @@ export class ChatStore {
   @observable chat: any;
   @observable messages: any[] = [];
   @observable messagesleft: number = 0;
+  @observable gifOffset: number = 0;
   @observable messagesOffset: number = 0;
+  @observable availabeGifs: any[] = [];
   @observable unread: number = 0;
   @observable chatAmount: Number = 0;
   public constructor(private readonly rootStore: RootStore) {
@@ -35,8 +37,37 @@ export class ChatStore {
       console.log(e);
     }
   };
+  @action setGifList = (gifs:any[]) =>{
+    this.availabeGifs = gifs
+  }
   @action removeChat = () => {
     this.chat = undefined;
+  };
+  @action getGifs = async (search: string) => {
+    try {
+      const res = await axios.get(
+        `https://tenor.googleapis.com/v2/search?key=AIzaSyAeMRVWGryNMP9ssHIjRN95fDbcIWwb8Wc&q=${search}&limit=10&pos=0`
+      );
+      console.log(res);
+      this.gifOffset = res.data.next;
+      this.availabeGifs = res.data.results;
+    } catch (e) {
+      console.log(e);
+    }
+    // }
+  };
+  @action updateGifs = async (search: string) => {
+    try {
+      const res = await axios.get(
+        `https://tenor.googleapis.com/v2/search?key=AIzaSyAeMRVWGryNMP9ssHIjRN95fDbcIWwb8Wc&q=${search}&limit=10&pos=${this.gifOffset}`
+      );
+      console.log(res);
+      this.gifOffset = res.data.next;
+      this.availabeGifs = [...this.availabeGifs, ...res.data.results];
+    } catch (e) {
+      console.log(e);
+    }
+    // }
   };
   @action setMessagesLeft = (left: number) => {
     this.messagesleft = left;
@@ -77,7 +108,10 @@ export class ChatStore {
       let n = this.messagesleft;
       this.messagesleft = n - 50 > 0 ? n - 50 : 0;
       this.messagesOffset = this.messagesOffset + 50;
-      this.messages = [...res.data.room.messages.filter((el:any) => !el?.isHidden), ...this.messages];
+      this.messages = [
+        ...res.data.room.messages.filter((el: any) => !el?.isHidden),
+        ...this.messages,
+      ];
     } catch (e) {
       console.log(e);
     }

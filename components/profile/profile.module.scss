@@ -292,7 +292,7 @@
   width: 58% !important;
   span {
     font-size: 14px;
-    font-weight: 400!important;
+    font-weight: 400 !important;
     color: var(--text-shade);
     margin-right: 5px;
   }
@@ -339,7 +339,7 @@
   }
   span {
     color: var(--text-shade);
-    font-weight: 400!important;
+    font-weight: 400 !important;
     margin-right: 5px;
     font-size: 14px;
   }
@@ -610,6 +610,63 @@
 }
 .twitter__image__com {
   width: 400px;
+}
+.gif__menu {
+  position: absolute;
+  z-index: 10;
+  width: 100%;
+  padding-left: 24px;
+  padding-right: 24px;
+  max-width: 616px;
+  background-color: var(--background-pages);
+}
+.gif__list {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 616px;
+  flex-wrap: wrap;
+  max-height: 300px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  &::-webkit-scrollbar {
+    width: 15px;
+    margin: 15px;
+  }
+  &::-webkit-scrollbar-thumb {
+    border: 5px solid rgba(0, 0, 0, 0);
+    background-clip: padding-box;
+    border-radius: 9999px;
+    background-color: #aaaaaa;
+  }
+}
+.gif__empty {
+  color: var(--text-main);
+  font-family: "DMSans";
+  text-align: left;
+  width: 100%;
+  padding: 20px;
+}
+.gif__one {
+  width: 48%;
+  display: flex;
+  align-items: center;
+  border-radius: 10px;
+  justify-content: center;
+  cursor: pointer;
+  overflow: hidden;
+  margin: 5px;
+  height: 150px;
+  border: 1px solid transparent;
+  &:hover {
+    border: 1px solid white;
+  }
+  img {
+    width: 290px;
+
+    object-fit: cover;
+
+  }
 }
 .twitter__text {
   color: var(--text-post);
