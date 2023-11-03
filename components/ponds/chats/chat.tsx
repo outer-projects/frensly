@@ -229,7 +229,7 @@ const Chat = observer(() => {
                 </div>
               </div>
               <div className={style.openchat__shares}>
-                <span>TVH</span> $ {chat?.profile?.userAccount?.holderNetworth}
+                <span>TVH</span> $ {Number(Number(chat?.profile?.userAccount?.holderNetworth).toFixed(1))}
               </div>
             </div>
             {openGifMenu && (

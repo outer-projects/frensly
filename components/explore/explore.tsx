@@ -128,8 +128,13 @@ const Explore = observer(() => {
                 <ExploreRow
                   el={el}
                   key={i}
+                  isTVH={
+                    currentUserList == "topNW"
+                      ? true
+                      : false
+                  }
                   isNw={
-                    currentUserList == "topNW" || currentUserList == "topTVH"
+                    currentUserList == "topNW"
                       ? true
                       : false
                   }
