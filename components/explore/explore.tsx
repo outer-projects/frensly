@@ -128,7 +128,11 @@ const Explore = observer(() => {
                 <ExploreRow
                   el={el}
                   key={i}
-                  isNw={currentUserList == "topNW" ? true : false}
+                  isNw={
+                    currentUserList == "topNW" || currentUserList == "topTVH"
+                      ? true
+                      : false
+                  }
                 />
                 {currentUserList == "new" && i !== 0 && i % 19 == 0 && (
                   <InView
