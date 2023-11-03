@@ -235,7 +235,7 @@ const Profile = observer(() => {
             <div className={style.profile__stats}>
               <div className={style.profile__stats__row}>
                 <div className={style.profile__stats__line}>
-                  <div className={style.profile__text}>NW</div>
+                  <div className={style.profile__text}>Net worth</div>
                   <div className={classNames(style.profile__text, style.black)}>
                     $
                     {Number(Number(profileUser?.account?.networth).toFixed(1))}
@@ -260,7 +260,7 @@ const Profile = observer(() => {
               </div>
               <div className={style.profile__stats__row}>
                 <div className={style.profile__stats__line}>
-                  <div className={style.profile__text}>TVH</div>
+                  <div className={style.profile__text}>Total value holders</div>
                   <div className={classNames(style.profile__text, style.black)}>
                     <img src="../icons/Info.svg" />
                     ${Number(Number(profileUser?.account?.holderNetworth).toFixed(1))}
