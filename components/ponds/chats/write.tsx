@@ -17,7 +17,7 @@ const Write = ({
   setGif,
   setFile,
   setOpenGifMenu,
-  openGifMenu
+  openGifMenu,
 }: {
   newMsg: string;
   setNewMsg: (newm: string) => void;
@@ -28,7 +28,7 @@ const Write = ({
   file?: File;
   setFile: (f?: File) => void;
   setOpenGifMenu: (menu: boolean) => void;
-  openGifMenu: boolean
+  openGifMenu: boolean;
 }) => {
   const { user } = useInjection(Web3Store);
   const { setGifList } = useInjection(ChatStore);
@@ -36,7 +36,7 @@ const Write = ({
   const [mentionSearch, setMentionSearch] = useState("");
   const onKeyDown = (e: any) => {
     // console.log(e, e.key);
-    if (e.key == "Enter" && (newMsg !== "" || file)) {
+    if (e.key == "Enter" && (newMsg !== "" || file || gif !== "")) {
       setNewMsg("");
       onSend();
       setGif("");
@@ -138,7 +138,7 @@ const Write = ({
           src="../icons/twitterUI/Send.svg"
           style={{ cursor: "pointer" }}
           onClick={() => {
-            if (newMsg !== "" || file) {
+            if (newMsg !== "" || file || gif !== "") {
               setNewMsg("");
               setGif("");
               setOpenMentions(false);
