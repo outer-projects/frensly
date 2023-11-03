@@ -72,8 +72,8 @@ const Write = ({
   }, [newMsg]);
   return (
     <>
+      {openGifMenu && <GifSearch setGif={setGif} reverse={true} />}
       <div className={style.write}>
-        {openGifMenu && <GifSearch setGif={setGif} reverse={true} />}
         {openMentions && (
           <div className={style.write__mentions}>
             {members

@@ -5,7 +5,8 @@ export interface IAccount {
   isInitialized: boolean;
   initDate: Date;
   myHolders: string[];
-  networth:string;
+  networth: string;
+  holderNetworth: string;
   currentPrice: string;
   profile: IProfile; //профиль с неймами и прочей хуитой
   history: IHistory[][]; //все действия юзера

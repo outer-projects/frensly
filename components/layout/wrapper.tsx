@@ -70,7 +70,7 @@ const Wrapper = observer(({ children }: any) => {
         <div className={home.main__page}>
           <AuthBanner />
         </div>
-      )}1
+      )}
       {needToChangeWallet && (
         <div className={style.change__account}>
           Address is not assigned to this account. Change to{" "}
