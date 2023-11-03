@@ -11,7 +11,7 @@ import ExploreRow from "./exploreRow";
 import { InView } from "react-intersection-observer";
 import OneActivity from "../notifications/oneActivity";
 import { shortNick } from "../../utils/utilities";
-const types = ["Top", "New Users", "Activity"];
+const types = ["Top", "Top by networth", "New Users", "Activity"];
 const Explore = observer(() => {
   const [active, setActive] = useState(0);
   const [search, setSearch] = useState("");
@@ -22,6 +22,8 @@ const Explore = observer(() => {
     currentUserList,
     newUsersList,
     getTopUsers,
+    getTopNW,
+    topNW,
     searchUsers,
     updateNewUsers,
     updateGlobalActivity,
@@ -50,9 +52,12 @@ const Explore = observer(() => {
       getTopUsers();
     }
     if (active == 1) {
-      getNewUsers();
+      getTopNW();
     }
     if (active == 2) {
+      getNewUsers();
+    }
+    if (active == 3) {
       getGlobalActivity();
     }
   }, [active]);
@@ -103,32 +108,35 @@ const Explore = observer(() => {
       <div className={style.explore__types__row}>
         <TypesList types={types} setActive={setActive} active={active} />
       </div>
-      {active <= 1 && (
+      {active <= 2 && (
         <div className={style.explore__users__col}>
-          {(currentUserList == "new" ? newUsersList : topUsersList)?.map(
-            (el, i) => {
-              return (
-                <div>
-                  <ExploreRow el={el} key={i} />
-                  {currentUserList == "new" && i !== 0 && i % 19 == 0 && (
-                    <InView
-                      as="div"
-                      triggerOnce
-                      onChange={(inView, entry) => {
-                        if (inView) {
-                          // console.log("inview");
-                          updateNewUsers();
-                        }
-                      }}
-                    ></InView>
-                  )}
-                </div>
-              );
-            }
-          )}
+          {(currentUserList == "new"
+            ? newUsersList
+            : currentUserList == "topNW"
+            ? topNW
+            : topUsersList
+          )?.map((el:any, i:number) => {
+            return (
+              <div>
+                <ExploreRow el={el} key={i} isNw={currentUserList == "topNW" ? true : false}/>
+                {currentUserList == "new" && i !== 0 && i % 19 == 0 && (
+                  <InView
+                    as="div"
+                    triggerOnce
+                    onChange={(inView, entry) => {
+                      if (inView) {
+                        // console.log("inview");
+                        updateNewUsers();
+                      }
+                    }}
+                  ></InView>
+                )}
+              </div>
+            );
+          })}
         </div>
       )}
-      {active == 2 && (
+      {active == 3 && (
         <div className={style.explore__users__col}>
           {globalActivity?.map((el, i) => {
             return (

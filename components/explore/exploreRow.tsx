@@ -10,7 +10,7 @@ import Web3Store from "../../stores/Web3Store";
 import EthereumSvg from "../svgs/Ethereum";
 import Key from "../svgs/key";
 
-const ExploreRow = observer(({ el }: { el: IProfile }) => {
+const ExploreRow = observer(({ el, isNw }: { el: IProfile; isNw: boolean }) => {
   const [usdPrice, setUsdPrice] = useState(0);
   const { user } = useInjection(Web3Store);
   const { getPriceInUsd, ethCurrency } = useInjection(UserStore);
@@ -42,7 +42,7 @@ const ExploreRow = observer(({ el }: { el: IProfile }) => {
                   target="_blank"
                   rel="noreferrer"
                   onClick={(e) => {
-                    e.stopPropagation()
+                    e.stopPropagation();
                   }}
                 >
                   @{el.twitterHandle}
@@ -54,9 +54,11 @@ const ExploreRow = observer(({ el }: { el: IProfile }) => {
         <div className={style.explore__user__right}>
           <div className={style.explore__user__price}>
             <EthereumSvg />
-            {fromWeiToEth(el.account.currentPrice)} ETH
+            {!isNw
+              ? fromWeiToEth(el.account.currentPrice) + "ETH"
+              : "$" + el?.account?.networth}
           </div>
-          <div className={style.explore__user__balance__usd}>${usdPrice}</div>
+          {!isNw && <div className={style.explore__user__balance__usd}>${usdPrice}</div>}
         </div>
       </div>
     </Link>
