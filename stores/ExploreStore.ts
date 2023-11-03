@@ -11,6 +11,7 @@ export class ExploreStore {
   @observable topUsersList: IProfile[] = [];
   @observable topFive: IProfile[] = [];
   @observable topNW: IProfile[] = [];
+  @observable topTVH: IProfile[] = [];
   @observable currentUserList: string = "";
   @observable newUsersList: IProfile[] = [];
   @observable globalActivity: any[] = [];
@@ -135,6 +136,19 @@ export class ExploreStore {
       const res = await axios.get(prefix + "user/top/networth?" + query);
       this.topNW = res.data;
       this.currentUserList = "topNW";
+    } catch (e) {
+      console.log(e);
+    }
+  };
+  @action getTopTVH = async () => {
+    const query = new URLSearchParams({
+      offset: "0",
+      limit: "20",
+    }).toString();
+    try {
+      const res = await axios.get(prefix + "user/top/totalholder?" + query);
+      this.topTVH = res.data;
+      this.currentUserList = "topTVH";
     } catch (e) {
       console.log(e);
     }

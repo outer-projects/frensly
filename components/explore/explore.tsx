@@ -11,7 +11,7 @@ import ExploreRow from "./exploreRow";
 import { InView } from "react-intersection-observer";
 import OneActivity from "../notifications/oneActivity";
 import { shortNick } from "../../utils/utilities";
-const types = ["Top", "Top by networth", "New Users", "Activity"];
+const types = ["Top", "New Users", "Activity", "Top by networth", "Top by TVH"];
 const Explore = observer(() => {
   const [active, setActive] = useState(0);
   const [search, setSearch] = useState("");
@@ -23,7 +23,9 @@ const Explore = observer(() => {
     newUsersList,
     getTopUsers,
     getTopNW,
+    getTopTVH,
     topNW,
+    topTVH,
     searchUsers,
     updateNewUsers,
     updateGlobalActivity,
@@ -52,13 +54,16 @@ const Explore = observer(() => {
       getTopUsers();
     }
     if (active == 1) {
-      getTopNW();
-    }
-    if (active == 2) {
       getNewUsers();
     }
-    if (active == 3) {
+    if (active == 2) {
       getGlobalActivity();
+    }
+    if (active == 3) {
+      getTopNW();
+    }
+    if (active == 4) {
+      getTopTVH();
     }
   }, [active]);
   // console.log(searchResult);
@@ -108,17 +113,23 @@ const Explore = observer(() => {
       <div className={style.explore__types__row}>
         <TypesList types={types} setActive={setActive} active={active} />
       </div>
-      {active <= 2 && (
+      {(active <= 1 || active == 3 || active == 4) && (
         <div className={style.explore__users__col}>
           {(currentUserList == "new"
             ? newUsersList
             : currentUserList == "topNW"
             ? topNW
+            : currentUserList == "topTVH"
+            ? topTVH
             : topUsersList
-          )?.map((el:any, i:number) => {
+          )?.map((el: any, i: number) => {
             return (
               <div>
-                <ExploreRow el={el} key={i} isNw={currentUserList == "topNW" ? true : false}/>
+                <ExploreRow
+                  el={el}
+                  key={i}
+                  isNw={currentUserList == "topNW" ? true : false}
+                />
                 {currentUserList == "new" && i !== 0 && i % 19 == 0 && (
                   <InView
                     as="div"
@@ -136,7 +147,7 @@ const Explore = observer(() => {
           })}
         </div>
       )}
-      {active == 3 && (
+      {active == 2 && (
         <div className={style.explore__users__col}>
           {globalActivity?.map((el, i) => {
             return (
