@@ -237,7 +237,10 @@ const Profile = observer(() => {
                 <div className={style.profile__stats__line}>
                   <div className={style.profile__text}>NW</div>
                   <div className={classNames(style.profile__text, style.black)}>
-                    ${profileUser?.account?.networth}
+                    $
+                    {profileUser?.account?.networth
+                      ? profileUser?.account?.networth
+                      : 0}
                   </div>
                 </div>
 
