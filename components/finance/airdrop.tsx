@@ -16,155 +16,10 @@ import Follow from "../socials/twitterUI/Follow";
 import TypesList from "../common/typesList";
 import { types } from "./invite";
 import User from "./user";
-const getOutputByKey = (require: any, progress: any) => {
-  // console.log(require);
-  if (require[0] == "isFollowing") {
-    return (
-      <div
-        className={classNames(
-          style.finance__total,
-          progress[1] && style.finance__total__complete
-        )}
-      >
-        <div className={style.finance__icon}>
-          <UserIcon color={progress[1] ? "#A6D000" : "#676766"} />
-        </div>
-        <div className={style.finance__text}>
-          <div className={style.finance__total__text}>Follow someone</div>
-          <div className={style.finance__total__count}>
-            {progress[1] ? 1 : 0} {" / "} {require[1]}
-          </div>
-        </div>
-      </div>
-    );
-  }
-  if (require[0] == "post") {
-    return (
-      <div
-        className={classNames(
-          style.finance__total,
-          progress[1] && style.finance__total__complete
-        )}
-      >
-        <div className={style.finance__icon}>
-          <Message color={progress[1] ? "#A6D000" : "#676766"} />
-        </div>
-        <div className={style.finance__text}>
-          <div className={style.finance__total__text}>Post something</div>
-          <div className={style.finance__total__count}>
-            {progress[1] ? 1 : 0} {" / "} {require[1]}
-          </div>
-        </div>
-      </div>
-    );
-  }
-  if (require[0] == "totalVolume" && require[1] == "1") {
-    return (
-      <div
-        className={classNames(
-          style.finance__total,
-          progress[1] !== "0" && style.finance__total__complete
-        )}
-      >
-        <div className={style.finance__icon}>
-          <EthereumIcon color={progress[1] !== "0" ? "#A6D000" : "#676766"} />
-        </div>
-        <div className={style.finance__text}>
-          <div className={style.finance__total__count}>Buy someone's share</div>
-        </div>
-      </div>
-    );
-  }
-  if (require[0] == "totalVolume" && require[1] !== "1") {
-    return (
-      <div
-        className={classNames(
-          style.finance__total,
-          Number(progress[1] >= Number(require[1])) &&
-            style.finance__total__complete
-        )}
-      >
-        <div className={style.finance__icon}>
-          <EthereumIcon
-            color={
-              Number(progress[1] >= Number(require[1])) ? "#A6D000" : "#676766"
-            }
-          />
-        </div>
-        <div className={style.finance__text}>
-          <div className={style.finance__total__text}>Trades Volume</div>
-          <div className={style.finance__total__count}>
-            {fromWeiToEth(progress[1])}
-            {" / "}
-            {fromWeiToEth(require[1])}
-          </div>
-        </div>
-      </div>
-    );
-  }
-  if (require[0] == "referrals") {
-    return (
-      <div
-        className={classNames(
-          style.finance__total,
-          progress[1] >= require[1] && style.finance__total__complete
-        )}
-      >
-        <div className={style.finance__icon}>
-          <UserIcon color={progress[1] >= require[1] ? "#A6D000" : "#676766"} />
-        </div>
-        <div className={style.finance__text}>
-          <div className={style.finance__total__text}>Invite frens</div>
-          <div className={style.finance__total__count}>
-            {progress[1] + " / " + require[1]}
-          </div>
-        </div>
-      </div>
-    );
-  }
-  if (require[0] == "likes") {
-    return (
-      <div
-        className={classNames(
-          style.finance__total,
-          progress[1] >= require[1] && style.finance__total__complete
-        )}
-      >
-        <div className={style.finance__icon}>
-          <Heart color={progress[1] >= require[1] ? "#A6D000" : "#676766"} />
-        </div>
-        <div className={style.finance__text}>
-          <div className={style.finance__total__text}>
-            Get at least 3 Likes on your post
-          </div>
-          <div className={style.finance__total__count}>
-            {progress[1] + " / " + require[1]}
-          </div>
-        </div>
-      </div>
-    );
-  }
-  if (require[0] == "isFollowedBy") {
-    return (
-      <div
-        className={classNames(
-          style.finance__total,
-          progress[1] >= require[1] && style.finance__total__complete
-        )}
-      >
-        <div className={style.finance__icon}>
-          <Follow color={progress[1] >= require[1] ? "#A6D000" : "#676766"} />
-        </div>
-        <div className={style.finance__text}>
-          <div className={style.finance__total__text}>Get followers</div>
-          <div className={style.finance__total__count}>
-            {progress[1] + " / " + require[1]}
-          </div>
-        </div>
-      </div>
-    );
-  }
-};
+import PointsIcon from "../socials/twitterUI/points";
+import FtIcon from "../svgs/ft";
+import Frensly from "../svgs/frensly";
+
 const Airdrop = observer(() => {
   const [active, setActive] = useState(2);
 
@@ -179,6 +34,12 @@ const Airdrop = observer(() => {
     }
     if (active == 1) {
       router.push("/dashboard/invite");
+    }
+    if (active == 3) {
+      router.push("/dashboard/rankings");
+    }
+    if (active == 4) {
+      router.push("/dashboard/settings");
     }
   }, [active]);
   useEffect(() => {
@@ -197,22 +58,32 @@ const Airdrop = observer(() => {
         </div>
         <div className={style.finance}>
           <User stage="airdrop" />
-          {!finished && (
-            <>
-              <div className={style.finance__invite}>Tier system</div>
-              <div className={style.finance__invite__text}>
-                Higher tier gives you more opportunities in our app and future
-                airdrop. To move to the next tier you need to fulfill the
-                following conditions
+        
+          <>
+            <div className={style.finance__invite}>Points 1.0</div>
+            <div className={style.finance__invite__text}>
+              Your points are added to the profile once per hour.
+              <br /> The amount depends on various metric but in general depends
+              on how active you use platform.
+            </div>
+            <div className={style.finance__total}>
+              <div className={style.finance__icon}>
+                <PointsIcon color="#676766" />
               </div>
-              {currentRequire.map((req: any, i: number) => {
-                return (
-                  <div key={i}>{getOutputByKey(req, currentProgress[i])}</div>
-                );
-              })}
-            </>
-          )}
-          <div className={style.finance__invite}>Your points</div>
+              <div>
+                <div className={style.finance__total__text}>
+                  Points per hour
+                </div>
+                <div className={style.finance__total__count}>0</div>
+              </div>
+            </div>
+            {/* {currentRequire.map((req: any, i: number) => {
+              return (
+                <div key={i}>{getOutputByKey(req, currentProgress[i])}</div>
+              );
+            })} */}
+          </>
+          <div className={style.finance__invite}>Total points</div>
           <div className={style.finance__invite__text}>
             Points will play the role in the future airdrop
           </div>
@@ -222,6 +93,29 @@ const Airdrop = observer(() => {
             </div>
             <div className={style.finance__total__points__claimable}>
               Total claimable
+            </div>
+          </div>
+          <div className={style.finance__invite}>Methodology</div>
+          <div className={style.finance__invite__text}>
+            Your total points is calculate with your Friend Tech points plus
+            your Activity on Frensly.
+          </div>
+          <div className={style.finance__total}>
+            <div className={style.finance__icon}>
+              <img src="../icons/ft.svg" />
+            </div>
+            <div>
+              <div className={style.finance__total__text}>Your FT points</div>
+              <div className={style.finance__total__count}>6782</div>
+            </div>
+          </div>
+          <div className={style.finance__total}>
+            <div className={style.finance__icon}>
+              <Frensly />
+            </div>
+            <div>
+              <div className={style.finance__total__text}>Your current Frensly points</div>
+              <div className={style.finance__total__count}>6782</div>
             </div>
           </div>
         </div>

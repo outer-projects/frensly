@@ -20,6 +20,8 @@ import EthereumSvg from "../svgs/Ethereum";
 import ProfileSvg from "../svgs/profile";
 import InviteSvg from "../svgs/invite";
 import AirdropSvg from "../svgs/airdrop";
+import AchivementsSvg from "../svgs/rankings";
+import SettingsSvg from "../svgs/settings";
 export const links = [
   {
     title: "My funds",
@@ -38,6 +40,18 @@ export const links = [
     link: "/dashboard/airdrop",
     img: <AirdropSvg/>,
     active: true,
+  },
+  {
+    title: "Rankings",
+    link: "/dashboard/rankings",
+    img: <AchivementsSvg/>,
+    active: true,
+  },
+  {
+    title: "Settings",
+    link: "/dashboard/settings",
+    img: <SettingsSvg/>,
+    active: false,
   },
 ];
 const mobTypes = ["Referrals", "Airdrop"];

@@ -26,7 +26,11 @@ export function fd(val: number | string | BN) {
   return numeral(val?.toString()).format("0,0[.][000000000000000000]");
 }
 export const fromWeiToEth = (num: string | BigNumber, fixed?: number) => {
-  return Number(Number(fromWei(num.toString(), "ether")).toFixed(fixed || 5));
+  if (!isNaN(Number(num))) {
+    return Number(Number(fromWei(num.toString(), "ether")).toFixed(fixed || 5));
+  } else {
+    return 0;
+  }
 };
 BN.config({ EXPONENTIAL_AT: 100 });
 export const timePassed = (time: string) => {
@@ -67,8 +71,8 @@ export const timePassed = (time: string) => {
   if (r.minute !== 0) return r.minute + "m";
   if (r.second !== 0) return r.second + "s";
 };
-export const shortNick = (nick?: string, length?:number) => {
-  let le = length ? length : 25
+export const shortNick = (nick?: string, length?: number) => {
+  let le = length ? length : 25;
   return nick ? (nick?.length >= le ? nick?.slice(0, le) + "..." : nick) : "";
 };
 export const isServer = typeof window === "undefined";
