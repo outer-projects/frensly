@@ -259,17 +259,15 @@
   margin-top: 32px;
   width: 616px;
   height: calc(100vh - 110px);
-  @media (max-width: 616px) {
-    width: calc(100%);
+  @media (max-height: 750px) {
+    margin-top: 0px;
+    height: calc(100vh - 20px);
     margin-left: 0px;
   }
-  @media (max-height: 750px) {
-    margin-top: 20px;
-    height: calc(100vh - 20px);
-  }
   @media (max-width: 750px) {
-    margin-top: 20px;
+    margin-top: 0px;
     height: calc(100vh - 20px);
+    margin-left: 0px;
   }
 }
 .openchat__close {
@@ -470,15 +468,19 @@
   padding-bottom: 16px;
   border-top-right-radius: 32px;
   background: var(--background-pages);
-  @media (max-height: 750px) {
-    top: 16px;
+  @media (max-width: 616px) {
+    width: calc(100vw - 0px);
     padding-bottom: 0px;
-    width: calc(100vw - 20px);
+  }
+  @media (max-height: 750px) {
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+    top: 0px;
   }
   @media (max-width: 750px) {
-    top: 16px;
-    padding-bottom: 0px;
-    width: calc(100vw - 20px);
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+    top: 0px;
   }
 }
 .openchat__user {
