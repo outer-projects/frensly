@@ -180,6 +180,7 @@ const Rankings = observer(() => {
     inviteLimit,
     invited,
     unlimitedKeys,
+    getShares,
     pointsInfo,
   } = useInjection(UserStore);
   const router = useRouter();
@@ -201,6 +202,7 @@ const Rankings = observer(() => {
     if (user && !keysReady) {
       setKeysReady(true);
       getKeys();
+      getShares(user._id);
       getPoints();
     }
   }, [user]);
