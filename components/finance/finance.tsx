@@ -131,7 +131,7 @@ const Finance = observer(() => {
           <div className={style.finance__list__desctop}>
             <TypesList active={active} setActive={setActive} types={types} />
           </div>
-          <div className={style.finance__list__mob}>
+          <div className={style.finance__links}>
             <TypesList active={activeMob} setActive={setActiveMob} types={mobTypes} />
           </div>
           {active == 0 && (
