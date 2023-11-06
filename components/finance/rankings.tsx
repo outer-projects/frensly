@@ -166,7 +166,7 @@ const getOutputByKey = (require: any, progress: any) => {
   }
 };
 const Rankings = observer(() => {
-  const [active, setActive] = useState(2);
+  const [active, setActive] = useState(3);
 
   const [keysReady, setKeysReady] = useState(false);
   const { user } = useInjection(Web3Store);
