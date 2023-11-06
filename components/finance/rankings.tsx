@@ -190,12 +190,12 @@ const Rankings = observer(() => {
     if (active == 1) {
       router.push("/dashboard/invite");
     }
-    if (active == 3) {
-      router.push("/dashboard/rankings");
+    if (active == 2) {
+      router.push("/dashboard/airdrop");
     }
-    if (active == 4) {
-      router.push("/dashboard/settings");
-    }
+    // if (active == 4) {
+    //   router.push("/dashboard/settings");
+    // }
   }, [active]);
   useEffect(() => {
     if (user && !keysReady) {

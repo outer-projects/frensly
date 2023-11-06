@@ -25,8 +25,7 @@ const Airdrop = observer(() => {
 
   const [keysReady, setKeysReady] = useState(false);
   const { user } = useInjection(Web3Store);
-  const { getKeys, getPoints, pointsInfo } =
-    useInjection(UserStore);
+  const { getKeys, getPoints, pointsInfo } = useInjection(UserStore);
   const router = useRouter();
   useEffect(() => {
     if (active == 0) {
@@ -38,15 +37,15 @@ const Airdrop = observer(() => {
     if (active == 3) {
       router.push("/dashboard/rankings");
     }
-    if (active == 4) {
-      router.push("/dashboard/settings");
-    }
+    // if (active == 4) {
+    //   router.push("/dashboard/settings");
+    // }
   }, [active]);
   useEffect(() => {
     if (user && !keysReady) {
       setKeysReady(true);
       getKeys();
-      getPoints()
+      getPoints();
     }
   }, [user]);
   return (
@@ -59,13 +58,14 @@ const Airdrop = observer(() => {
         </div>
         <div className={style.finance}>
           <User stage="airdrop" />
-        
+
           <>
             <div className={style.finance__invite}>Points 1.0</div>
             <div className={style.finance__invite__text}>
               Your points are added to the profile once per hour.
-              <br /> The amount depends on various metric but in general depends
-              on how active you use platform.
+              <br /> The amount depends on various metrics, but basically the
+              more actively you use and promote the platform, the more points
+              per hour you earn
             </div>
             <div className={style.finance__total}>
               <div className={style.finance__icon}>
@@ -75,7 +75,9 @@ const Airdrop = observer(() => {
                 <div className={style.finance__total__text}>
                   Points per hour
                 </div>
-                <div className={style.finance__total__count}>{Number(Number(pointsInfo?.income).toFixed(2))}</div>
+                <div className={style.finance__total__count}>
+                  {Number(Number(pointsInfo?.income).toFixed(2))}
+                </div>
               </div>
             </div>
             {/* {currentRequire.map((req: any, i: number) => {
@@ -86,7 +88,7 @@ const Airdrop = observer(() => {
           </>
           <div className={style.finance__invite}>Total points</div>
           <div className={style.finance__invite__text}>
-            Points will play the role in the future airdrop
+            Points play a significant role in the future airdrop
           </div>
           <div className={style.finance__total__points}>
             <div className={style.finance__total__points__count}>
@@ -98,8 +100,7 @@ const Airdrop = observer(() => {
           </div>
           <div className={style.finance__invite}>Methodology</div>
           <div className={style.finance__invite__text}>
-            Your total points is calculate with your Friend Tech points plus
-            your Activity on Frensly.
+            Total points include your FT points and your activity on Frensly
           </div>
           <div className={style.finance__total}>
             <div className={style.finance__icon}>
@@ -107,7 +108,9 @@ const Airdrop = observer(() => {
             </div>
             <div>
               <div className={style.finance__total__text}>Your FT points</div>
-              <div className={style.finance__total__count}>{Number(Number(pointsInfo?.friendTechPoints).toFixed(2))}</div>
+              <div className={style.finance__total__count}>
+                {Number(Number(pointsInfo?.friendTechPoints).toFixed(2))}
+              </div>
             </div>
           </div>
           <div className={style.finance__total}>
@@ -115,8 +118,12 @@ const Airdrop = observer(() => {
               <Frensly />
             </div>
             <div>
-              <div className={style.finance__total__text}>Your current Frensly points</div>
-              <div className={style.finance__total__count}>{Number(Number(pointsInfo?.points).toFixed(2))}</div>
+              <div className={style.finance__total__text}>
+                Your Frensly points
+              </div>
+              <div className={style.finance__total__count}>
+                {Number(Number(pointsInfo?.points).toFixed(2))}
+              </div>
             </div>
           </div>
         </div>

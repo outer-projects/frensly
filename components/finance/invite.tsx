@@ -16,7 +16,7 @@ import Web3Store from "../../stores/Web3Store";
 import { UserStore } from "../../stores/UserStore";
 import UserIcon from "../socials/twitterUI/UserIcon";
 import TypesList from "../common/typesList";
-export const types = ["Finance", "Referrals", "Airdrop"];
+export const types = ["Finance", "Referrals", "Airdrop", "Rankings"];
 const Invite = observer(() => {
   const { user } = useInjection(Web3Store);
   const { getKeys, key, inviteLimit, invited, unlimitedKeys } =
@@ -40,6 +40,9 @@ const Invite = observer(() => {
     if (active == 2) {
       router.push("/dashboard/airdrop");
     }
+    if (active == 2) {
+      router.push("/dashboard/rankings");
+    }
   }, [active]);
   return (
     <div className={style.finance__page}>
@@ -60,7 +63,8 @@ const Invite = observer(() => {
                 Total invited users
               </div>
               <div className={style.finance__total__count}>
-                {invited}{!unlimitedKeys && " / " + inviteLimit}
+                {invited}
+                {!unlimitedKeys && " / " + inviteLimit}
               </div>
             </div>
           </div>

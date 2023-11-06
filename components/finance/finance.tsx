@@ -26,25 +26,25 @@ export const links = [
   {
     title: "My funds",
     link: "/dashboard/finance",
-    img: <ProfileSvg/>,
+    img: <ProfileSvg />,
     active: true,
   },
   {
     title: "Referrals",
     link: "/dashboard/invite",
-    img: <InviteSvg/>,
+    img: <InviteSvg />,
     active: true,
   },
   {
     title: "Airdrop",
     link: "/dashboard/airdrop",
-    img: <AirdropSvg/>,
+    img: <AirdropSvg />,
     active: true,
   },
   {
     title: "Rankings",
     link: "/dashboard/rankings",
-    img: <AchivementsSvg/>,
+    img: <AchivementsSvg />,
     active: true,
   },
   // {
@@ -54,10 +54,11 @@ export const links = [
   //   active: false,
   // },
 ];
-const mobTypes = ["Referrals", "Airdrop"];
+const mobTypes = ["Finance", "Referrals", "Airdrop", "Rankings"];
 const types = ["Finance", "Holders", "Holdings"];
 const Finance = observer(() => {
   const [active, setActive] = useState(0);
+  const [activeMob, setActiveMob] = useState(0);
   const [keysReady, setKeysReady] = useState(false);
   const [claimValue, setClaimValue] = useState("0");
   const router = useRouter();
@@ -76,13 +77,16 @@ const Finance = observer(() => {
     }
   };
   useEffect(() => {
-    if (active == 3) {
+    if (activeMob == 1) {
       router.push("/dashboard/invite");
     }
-    if (active == 4) {
+    if (activeMob == 2) {
       router.push("/dashboard/airdrop");
     }
-  }, [active]);
+    if (activeMob == 3) {
+      router.push("/dashboard/rankings");
+    }
+  }, [activeMob]);
   const getClaim = async () => {
     try {
       const res = await frensly.methods.availableToClaim(address).call();
@@ -124,12 +128,12 @@ const Finance = observer(() => {
         </div> */}
         <div className={style.finance}>
           <User stage="finance" />
-          <TypesList
-            active={active}
-            setActive={setActive}
-            types={types}
-            mobTypes={mobTypes}
-          />
+          <div className={style.finance__list__desctop}>
+            <TypesList active={active} setActive={setActive} types={types} />
+          </div>
+          <div className={style.finance__list__mob}>
+            <TypesList active={activeMob} setActive={setActiveMob} types={mobTypes} />
+          </div>
           {active == 0 && (
             <div className={style.finance__stats}>
               <div className={style.finance__stat}>

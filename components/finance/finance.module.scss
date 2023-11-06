@@ -124,7 +124,7 @@
   letter-spacing: -0.16px;
   border-radius: 100px;
   margin-right: 10px;
-  background: rgba(208, 0, 175, 0.20);
+  background: rgba(208, 0, 175, 0.2);
 }
 .finance__tier {
   padding-left: 8px;
@@ -139,6 +139,18 @@
   letter-spacing: -0.16px;
   border-radius: 100px;
   background: rgba(166, 208, 0, 0.2);
+}
+.finance__list__mob {
+  display: none;
+  @media (max-width: 870px) {
+    display: block;
+  }
+}
+.finance__list__desctop {
+  display: block;
+  @media (max-width: 870px) {
+    display: none;
+  }
 }
 .finance__total__text {
   color: var(--text-shade);
