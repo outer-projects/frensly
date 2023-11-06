@@ -117,7 +117,7 @@ const Chat = observer(() => {
   }, [user, chat, chatAmount]);
   return (
     <>
-      {myHolds ? (
+      {!myHolds ? (
         <div className={style.openchat}>
           {" "}
           {/* <div className={explore.explore__title}>
@@ -229,7 +229,10 @@ const Chat = observer(() => {
                 </div>
               </div>
               <div className={style.openchat__shares}>
-                <span>TVH</span> ${Number(Number(chat?.profile?.userAccount?.holderNetworth).toFixed(1))}
+                <span>TVH</span> $
+                {Number(
+                  Number(chat?.profile?.userAccount?.holderNetworth).toFixed(1)
+                )}
               </div>
             </div>
             {openGifMenu && (
@@ -244,33 +247,34 @@ const Chat = observer(() => {
                 <GifSearch setGif={setGif} reverse={true} />
               </div>
             )}
-            <div className={style.openchat__messages} ref={messagesEndRef}>
-              {messages
-                ?.map((el, i) => {
-                  return (
-                    <div key={el._id}>
-                      <OneMessage
-                        el={el}
-                        roomId={chat?._id}
-                        members={chat?.memberDetails}
-                      />
-                      {i == 1 && messagesleft !== 0 && (
-                        <InView
-                          as="div"
-                          triggerOnce
-                          onChange={(inView, entry) => {
-                            if (inView) {
-                              console.log("inview");
-                              updateChat(id as string);
-                            }
-                          }}
-                        ></InView>
-                      )}
-                    </div>
-                  );
-                })
-                .reverse()}
-              {/* {Array.from({ length: 10 }).map((el, i) => {
+            <div className={classNames(style.openchat, style.openchat__bottom)}>
+              <div className={style.openchat__messages} ref={messagesEndRef}>
+                {messages
+                  ?.map((el, i) => {
+                    return (
+                      <div key={el._id}>
+                        <OneMessage
+                          el={el}
+                          roomId={chat?._id}
+                          members={chat?.memberDetails}
+                        />
+                        {i == 1 && messagesleft !== 0 && (
+                          <InView
+                            as="div"
+                            triggerOnce
+                            onChange={(inView, entry) => {
+                              if (inView) {
+                                console.log("inview");
+                                updateChat(id as string);
+                              }
+                            }}
+                          ></InView>
+                        )}
+                      </div>
+                    );
+                  })
+                  .reverse()}
+                {/* {Array.from({ length: 10 }).map((el, i) => {
                 return (
                   <div
                     className={classNames(
@@ -284,27 +288,28 @@ const Chat = observer(() => {
                   </div>
                 );
               })} */}
-            </div>
+              </div>
 
-            <Write
-              newMsg={newMsg}
-              setNewMsg={setNewMsg}
-              file={file}
-              openGifMenu={openGifMenu}
-              gif={gif}
-              setOpenGifMenu={setOpenGifMenu}
-              setGif={setGif}
-              members={chat?.memberDetails}
-              setFile={setFile}
-              onSend={() => {
-                sendMessage(id as string, newMsg, file, gif);
-                // console.log(messagesEndRef);
-                setFile(undefined);
-                setTimeout(() => {
-                  messagesEndRef.current?.scrollTo(500, 0);
-                }, 10);
-              }}
-            />
+              <Write
+                newMsg={newMsg}
+                setNewMsg={setNewMsg}
+                file={file}
+                openGifMenu={openGifMenu}
+                gif={gif}
+                setOpenGifMenu={setOpenGifMenu}
+                setGif={setGif}
+                members={chat?.memberDetails}
+                setFile={setFile}
+                onSend={() => {
+                  sendMessage(id as string, newMsg, file, gif);
+                  // console.log(messagesEndRef);
+                  setFile(undefined);
+                  setTimeout(() => {
+                    messagesEndRef.current?.scrollTo(500, 0);
+                  }, 10);
+                }}
+              />
+            </div>
           </div>
         </div>
       ) : (
