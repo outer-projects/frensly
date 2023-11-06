@@ -126,14 +126,20 @@ const Finance = observer(() => {
             <Link href={"/dashboard/airdrop"}>Airdrop</Link>
           </div>
         </div> */}
+        <div className={style.finance__links}>
+          <TypesList
+            active={activeMob}
+            setActive={setActiveMob}
+            types={mobTypes}
+          />
+        </div>
         <div className={style.finance}>
           <User stage="finance" />
+
           <div className={style.finance__list__desctop}>
             <TypesList active={active} setActive={setActive} types={types} />
           </div>
-          <div className={style.finance__links}>
-            <TypesList active={activeMob} setActive={setActiveMob} types={mobTypes} />
-          </div>
+
           {active == 0 && (
             <div className={style.finance__stats}>
               <div className={style.finance__stat}>
