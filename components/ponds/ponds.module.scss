@@ -259,6 +259,9 @@
   margin-top: 32px;
   width: 616px;
   height: calc(100vh - 110px);
+  @media (max-width: 616px) {
+    width: 100vw;
+  }
   @media (max-height: 750px) {
     margin-top: 0px;
     height: calc(100vh - 20px);
