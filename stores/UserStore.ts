@@ -27,6 +27,8 @@ export class UserStore {
   @observable followingsOffset: number = 0;
   @observable holdersOffset: number = 0;
   @observable sharesOffset: number = 0;
+  @observable pointsInfo: any = undefined;
+  @observable pointsTop: any[] = [];
   @observable currentType: number = 2;
   @observable profileUser?: IProfile = undefined;
   @observable portfolioValue?: BigNumber;
@@ -78,6 +80,24 @@ export class UserStore {
       const res = await axios.get(prefix + "user/tier/upgrade");
       // console.log(res.data);
       this.getCurrentTier();
+    } catch (e) {
+      console.log(e);
+    }
+  };
+  @action getPoints = async () => {
+    try {
+      const res = await axios.get(prefix + "user/points/info");
+      // console.log(res.data);
+      this.pointsInfo = res.data;
+    } catch (e) {
+      console.log(e);
+    }
+  };
+  @action getPointsTop = async () => {
+    try {
+      const res = await axios.get(prefix + "user/top/points?limit=0&offset=20");
+      // console.log(res.data);
+      this.pointsTop = res.data;
     } catch (e) {
       console.log(e);
     }
@@ -292,7 +312,7 @@ export class UserStore {
     if (price) {
       const priceInEth = fromWeiToEth(price);
       return Number((this.ethCurrency * priceInEth).toFixed(2));
-    } else return 0
+    } else return 0;
   };
   @action getProfileUser = async (id: string) => {
     if (!isNaN(Number(id))) {

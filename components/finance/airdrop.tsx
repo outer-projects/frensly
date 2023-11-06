@@ -25,7 +25,7 @@ const Airdrop = observer(() => {
 
   const [keysReady, setKeysReady] = useState(false);
   const { user } = useInjection(Web3Store);
-  const { getKeys, currentRequire, currentProgress, finished } =
+  const { getKeys, getPoints, pointsInfo } =
     useInjection(UserStore);
   const router = useRouter();
   useEffect(() => {
@@ -46,6 +46,7 @@ const Airdrop = observer(() => {
     if (user && !keysReady) {
       setKeysReady(true);
       getKeys();
+      getPoints()
     }
   }, [user]);
   return (
@@ -74,7 +75,7 @@ const Airdrop = observer(() => {
                 <div className={style.finance__total__text}>
                   Points per hour
                 </div>
-                <div className={style.finance__total__count}>0</div>
+                <div className={style.finance__total__count}>{pointsInfo.income}</div>
               </div>
             </div>
             {/* {currentRequire.map((req: any, i: number) => {
@@ -89,7 +90,7 @@ const Airdrop = observer(() => {
           </div>
           <div className={style.finance__total__points}>
             <div className={style.finance__total__points__count}>
-              {user?.points}
+              {pointsInfo.points}
             </div>
             <div className={style.finance__total__points__claimable}>
               Total claimable
@@ -106,7 +107,7 @@ const Airdrop = observer(() => {
             </div>
             <div>
               <div className={style.finance__total__text}>Your FT points</div>
-              <div className={style.finance__total__count}>6782</div>
+              <div className={style.finance__total__count}>{pointsInfo.friendTechPoints}</div>
             </div>
           </div>
           <div className={style.finance__total}>
@@ -115,7 +116,7 @@ const Airdrop = observer(() => {
             </div>
             <div>
               <div className={style.finance__total__text}>Your current Frensly points</div>
-              <div className={style.finance__total__count}>6782</div>
+              <div className={style.finance__total__count}>{pointsInfo.points}</div>
             </div>
           </div>
         </div>

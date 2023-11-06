@@ -170,7 +170,7 @@ const Rankings = observer(() => {
 
   const [keysReady, setKeysReady] = useState(false);
   const { user } = useInjection(Web3Store);
-  const { getKeys, currentRequire, currentProgress, finished } =
+  const { getKeys, currentRequire, currentProgress, finished, getPoints, pointsInfo } =
     useInjection(UserStore);
   const router = useRouter();
   useEffect(() => {
@@ -191,6 +191,7 @@ const Rankings = observer(() => {
     if (user && !keysReady) {
       setKeysReady(true);
       getKeys();
+      getPoints()
     }
   }, [user]);
   return (
@@ -205,7 +206,7 @@ const Rankings = observer(() => {
           <User stage="rankings" />
           <div className={style.finance__invite}>
             <div>Rankings</div>
-            <div>Top #12</div>
+            <div>Top #{pointsInfo.place}</div>
           </div>
           <div className={style.finance__invite__text}>Your global ranking</div>
           <div className={style.finance__stat}>
