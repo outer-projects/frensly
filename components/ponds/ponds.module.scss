@@ -263,11 +263,11 @@
     margin-left: 0px;
   }
   @media (max-height: 750px) {
-    margin-top: 0px;
+    margin-top: 20px;
     height: calc(100vh - 0px);
   }
   @media (max-width: 750px) {
-    margin-top: 0px;
+    margin-top: 20px;
     height: calc(100vh - 0px);
   }
 }
@@ -316,10 +316,10 @@
     background-color: #aaaaaa;
   }
   @media (max-height: 750px) {
-    height: calc(100vh - 143px);
+    height: calc(100vh - 230px);
   }
   @media (max-width: 750px) {
-    height: calc(100vh - 143px);
+    height: calc(100vh - 230px);
   }
 }
 .openchat__time {
