@@ -228,6 +228,12 @@
   // flex-direction: column;
   border-radius: 32px;
   background: var(--background-pages);
+  @media (max-height: 750px) {
+    margin-top: 0px;
+  }
+  @media (max-width: 750px) {
+    margin-top: 0px;
+  }
 }
 .openchat__row {
   display: flex;
@@ -253,12 +259,16 @@
   width: 616px;
   height: calc(100vh - 110px);
   @media (max-width: 616px) {
-    width: calc(100% - 16px);
-    margin-top: 0px;
-    margin-left: 8px;
+    width: calc(100%);
+    margin-left: 0px;
   }
-  @media (max-height: 671px) {
-    height: calc(100vh - 107px);
+  @media (max-height: 750px) {
+    margin-top: 0px;
+    height: calc(100vh - 0px);
+  }
+  @media (max-width: 750px) {
+    margin-top: 0px;
+    height: calc(100vh - 0px);
   }
 }
 .openchat__close {
@@ -292,7 +302,7 @@
   width: 100%;
   margin-left: 0px;
   margin-top: 25px;
-  height: calc(100vh - 455px);
+  height: calc(100vh - 400px);
   flex: 1;
   overflow-y: scroll;
   &::-webkit-scrollbar {
@@ -306,10 +316,10 @@
     background-color: #aaaaaa;
   }
   @media (max-height: 750px) {
-    height: calc(100vh - 340px);
+    height: calc(100vh - 143px);
   }
   @media (max-width: 750px) {
-    height: calc(100vh - 340px);
+    height: calc(100vh - 143px);
   }
 }
 .openchat__time {
@@ -376,7 +386,7 @@
   padding-right: 16px;
   background: #effdde;
   .openchat__mention {
-    color: black!important;
+    color: black !important;
   }
 }
 .openchat__message_to_me__container {

@@ -16,6 +16,15 @@
     display: none;
   }
 }
+.header__disable {
+  display: flex;
+  @media (max-height: 750px) {
+    display: none !important; 
+  }
+  @media (max-width: 750px) {
+    display: none !important;
+  }
+}
 .theme__btn {
   background: none;
   border: none;

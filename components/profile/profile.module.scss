@@ -47,7 +47,7 @@
   cursor: pointer;
 }
 .twitter__image__name {
-  margin-top: -40px;
+  margin-top: 0px;
   margin-left: 36px;
   position: absolute;
   color: var(--text-shade);
@@ -361,6 +361,13 @@
   transform: translateY(-52px);
   @media (max-width: 616px) {
     margin-left: 12px;
+    width: 66px;
+    transform: translateY(-58px);
+    img {
+      width: 33px;
+      height: 33px;
+      
+    }
   }
 }
 .twitter__add__comment {
@@ -398,6 +405,7 @@
   padding-right: 40px;
   @media (max-width: 616px) {
     padding-right: 12px;
+    margin-top: -40px;
   }
 }
 .twitter__comments {
@@ -439,7 +447,8 @@
   @media (max-width: 616px) {
     margin-left: 0px;
     margin-right: 0px;
-    width: calc(100vw);
+    padding-left: 80px;
+    width: calc(100vw - 16px);
   }
 }
 .profile__bottom {
@@ -625,6 +634,7 @@
   padding-left: 24px;
   padding-right: 24px;
   max-width: 616px;
+  margin-bottom: 10px;
   background-color: var(--background-pages);
 }
 .gif__list {
@@ -645,6 +655,9 @@
     background-clip: padding-box;
     border-radius: 9999px;
     background-color: #aaaaaa;
+  }
+  @media (max-width: 616px) {
+    max-height: 420px;
   }
 }
 .gif__empty {
@@ -673,6 +686,13 @@
 
     object-fit: cover;
 
+  }
+  @media (max-width: 616px) {
+    height: 250px;
+    width: 100%;
+    img {
+      width: 390px;
+    }
   }
 }
 .twitter__text {
