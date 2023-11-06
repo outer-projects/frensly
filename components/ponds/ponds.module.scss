@@ -78,6 +78,7 @@
 }
 .ponds__bottom {
   border-radius: 32px;
+  z-index: -1;
   background: var(--background-pages);
 }
 .ponds__total {
@@ -223,7 +224,6 @@
 }
 .openchat__info {
   margin-top: 24px;
-  padding-top: 24px;
   // display: flex;
   // flex-direction: column;
   border-radius: 32px;
@@ -293,7 +293,7 @@
 }
 .openchat__messages {
   padding-top: 5px;
-  // border-top: 2px solid var(--hover);
+  border-top: 2px solid var(--hover);
   border-bottom: 2px solid var(--hover);
   margin-left: 24px;
   margin-top: 24px;
@@ -311,8 +311,7 @@
   width: 100%;
   margin-left: 0px;
   margin-top: 25px;
-  height: calc(100vh - 400px);
-  flex: 1;
+  height: calc(100vh - 300px);
   overflow-y: scroll;
   &::-webkit-scrollbar {
     width: 15px;
@@ -325,10 +324,10 @@
     background-color: #aaaaaa;
   }
   @media (max-height: 750px) {
-    height: calc(100vh - 230px);
+    height: calc(100vh - 170px);
   }
   @media (max-width: 750px) {
-    height: calc(100vh - 230px);
+    height: calc(100vh - 170px);
   }
 }
 .openchat__time {
@@ -343,6 +342,7 @@
 }
 .openchat__user__right {
   display: flex;
+  
   align-items: center;
 }
 .openchat__button__info {
@@ -458,6 +458,12 @@
   justify-content: space-between;
   margin-left: 8px;
   margin-right: 24px;
+  // background: var(--background-pages);
+  z-index: 1;
+  // border-bottom: 2px solid var(--hover);
+  padding-top: 24px;
+  padding-bottom: 24px;
+  width: 100%;
   @media (max-width: 616px) {
     margin-left: 0px;
   }
