@@ -75,7 +75,7 @@ const Airdrop = observer(() => {
                 <div className={style.finance__total__text}>
                   Points per hour
                 </div>
-                <div className={style.finance__total__count}>{pointsInfo?.income}</div>
+                <div className={style.finance__total__count}>{Number(Number(pointsInfo?.income).toFixed(2))}</div>
               </div>
             </div>
             {/* {currentRequire.map((req: any, i: number) => {
@@ -90,7 +90,7 @@ const Airdrop = observer(() => {
           </div>
           <div className={style.finance__total__points}>
             <div className={style.finance__total__points__count}>
-              {pointsInfo?.points}
+              {Number(Number(pointsInfo?.points).toFixed(2))}
             </div>
             <div className={style.finance__total__points__claimable}>
               Total claimable
@@ -107,7 +107,7 @@ const Airdrop = observer(() => {
             </div>
             <div>
               <div className={style.finance__total__text}>Your FT points</div>
-              <div className={style.finance__total__count}>{pointsInfo?.friendTechPoints}</div>
+              <div className={style.finance__total__count}>{Number(Number(pointsInfo?.friendTechPoints).toFixed(2))}</div>
             </div>
           </div>
           <div className={style.finance__total}>
@@ -116,7 +116,7 @@ const Airdrop = observer(() => {
             </div>
             <div>
               <div className={style.finance__total__text}>Your current Frensly points</div>
-              <div className={style.finance__total__count}>{pointsInfo?.points}</div>
+              <div className={style.finance__total__count}>{Number(Number(pointsInfo?.points).toFixed(2))}</div>
             </div>
           </div>
         </div>
