@@ -40,6 +40,7 @@ export interface IProfile {
   twitterHandle: string;
   twitterDescription: string;
   regDate: Date;
+  earlyAdopter?: boolean;
   isKeyConfirmed?: boolean;
   _id: string;
   isFollowing: string[];

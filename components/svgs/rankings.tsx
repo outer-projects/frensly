@@ -7,7 +7,7 @@ const AchivementsSvg = () => {
       width="26"
       height="26"
       viewBox="0 0 26 26"
-      style={{filter: `invert(${darkMode ? '1' : '0'})`}}
+      style={{filter: `invert(${darkMode.value ? '1' : '0'})`}}
       xmlns="http://www.w3.org/2000/svg"
       xmlnsXlink="http://www.w3.org/1999/xlink"
     >

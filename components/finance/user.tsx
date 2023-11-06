@@ -64,7 +64,7 @@ const User = observer(({ stage }: { stage: string }) => {
       {stage !== "finance" && (
         <div className={style.finance__ranks}>
           {" "}
-          <div className={style.finance__early}>Early adopter</div>
+          {user?.earlyAdopter && <div className={style.finance__early}>Early adopter</div>}
           <div className={style.finance__tier}>Tier: {user?.tier}</div>
         </div>
       )}

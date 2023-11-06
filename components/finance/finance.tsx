@@ -47,12 +47,12 @@ export const links = [
     img: <AchivementsSvg/>,
     active: true,
   },
-  {
-    title: "Settings",
-    link: "/dashboard/settings",
-    img: <SettingsSvg/>,
-    active: false,
-  },
+  // {
+  //   title: "Settings",
+  //   link: "/dashboard/settings",
+  //   img: <SettingsSvg/>,
+  //   active: false,
+  // },
 ];
 const mobTypes = ["Referrals", "Airdrop"];
 const types = ["Finance", "Holders", "Holdings"];
