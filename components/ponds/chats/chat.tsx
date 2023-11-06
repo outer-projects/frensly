@@ -255,6 +255,7 @@ const Chat = observer(() => {
             )}
             <div className={classNames(style.openchat, style.openchat__bottom)}>
               <div className={style.openchat__messages} ref={messagesEndRef}>
+                {messages.length==0 && <div className={style.openchat__empty}>No messages yet. Be first!</div>}
                 {messages
                   ?.map((el, i) => {
                     return (
