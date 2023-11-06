@@ -311,7 +311,7 @@
   width: 100%;
   margin-left: 0px;
   margin-top: 25px;
-  height: calc(100vh - 300px);
+  height: calc(100vh - 410px);
   overflow-y: scroll;
   &::-webkit-scrollbar {
     width: 15px;
@@ -463,7 +463,7 @@
   // border-bottom: 2px solid var(--hover);
   padding-top: 24px;
   padding-bottom: 24px;
-  width: 100%;
+  // width: 100%;
   @media (max-width: 616px) {
     margin-left: 0px;
   }

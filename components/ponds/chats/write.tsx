@@ -101,9 +101,10 @@ const Write = ({
           style={{ transform: "translateY(20px)" }}
           onChange={(e) => e?.target?.files && setFile(e?.target?.files[0])}
         />
-        <img src="../icons/ImageAdd.svg" style={{ cursor: "pointer" }} />
+        <img src="../icons/ImageAdd.svg" className={profile.img__add} style={{ cursor: "pointer" }} />
         <img
           src="../icons/gifAdd.svg"
+          className={profile.img__add}
           style={{ cursor: "pointer" }}
           onClick={() => {
             setOpenGifMenu(!openGifMenu);
