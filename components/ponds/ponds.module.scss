@@ -293,7 +293,7 @@
 }
 .openchat__messages {
   padding-top: 5px;
-  border-top: 2px solid var(--hover);
+  // border-top: 2px solid var(--hover);
   border-bottom: 2px solid var(--hover);
   margin-left: 24px;
   margin-top: 24px;
@@ -342,7 +342,7 @@
 }
 .openchat__user__right {
   display: flex;
-  
+
   align-items: center;
 }
 .openchat__button__info {
@@ -453,19 +453,45 @@
   letter-spacing: -0.18px;
   margin-right: 8px;
 }
+.openchat__top {
+  position: fixed;
+  top: 120px;
+  width: 616px;
+  display: flex;
+  flex-direction: column;
+  z-index: 1;
+  border-top-left-radius: 32px;
+  border-bottom: 2px solid var(--hover);
+  padding-bottom: 16px;
+  border-top-right-radius: 32px;
+  background: var(--background-pages);
+  @media (max-height: 750px) {
+    top: 16px;
+    padding-bottom: 0px;
+  }
+  @media (max-width: 750px) {
+    top: 16px;
+    padding-bottom: 0px;
+  }
+}
 .openchat__user {
   display: flex;
   justify-content: space-between;
   margin-left: 8px;
   margin-right: 24px;
-  // background: var(--background-pages);
+
   z-index: 1;
   // border-bottom: 2px solid var(--hover);
   padding-top: 24px;
-  padding-bottom: 24px;
+  padding-bottom: 8px;
   // width: 100%;
-  @media (max-width: 616px) {
+  @media (max-width: 750px) {
     margin-left: 0px;
+    padding-bottom: 24px;
+  }
+  @media (max-height: 750px) {
+    margin-left: 0px;
+    padding-bottom: 24px;
   }
 }
 .openchat__back {
@@ -542,6 +568,9 @@
   font-family: "DMSans";
   display: flex;
   margin-bottom: 0px;
+}
+.write__moved {
+  margin-bottom: 24px;
 }
 .write__mentions {
   position: absolute;

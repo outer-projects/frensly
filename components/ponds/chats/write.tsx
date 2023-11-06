@@ -6,6 +6,7 @@ import Web3Store from "../../../stores/Web3Store";
 import useDarkMode from "use-dark-mode";
 import GifSearch from "../../profile/gitSearch";
 import { ChatStore } from "../../../stores/ChatStore";
+import classNames from "classnames";
 
 const Write = ({
   newMsg,
@@ -75,7 +76,7 @@ const Write = ({
   }, [newMsg]);
   return (
     <>
-      <div className={style.write}>
+      <div className={classNames(style.write, file && style.write__moved)}>
         {openMentions && (
           <div className={style.write__mentions}>
             {members

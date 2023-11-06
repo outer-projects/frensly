@@ -117,122 +117,128 @@ const Chat = observer(() => {
   }, [user, chat, chatAmount]);
   return (
     <>
-      {myHolds ? (
+      {!myHolds ? (
         <div className={style.openchat}>
           {" "}
           {/* <div className={explore.explore__title}>
             {chat?.profile?.twitterName} pond
           </div> */}
           <div className={style.openchat__info}>
-            <div className={style.openchat__user}>
-              <div className={style.openchat__user__left}>
-                <Link href={"../../ponds"}>
+            <div className={style.openchat__top}>
+              <div className={style.openchat__user}>
+                <div className={style.openchat__user__left}>
+                  <Link href={"../../ponds"}>
+                    <img
+                      className={style.openchat__back}
+                      src={"../../icons/arrow_back.svg"}
+                      style={{
+                        filter: `invert(${darkMode.value ? "1" : "0"})`,
+                      }}
+                    />
+                  </Link>
                   <img
-                    className={style.openchat__back}
-                    src={"../../icons/arrow_back.svg"}
-                    style={{ filter: `invert(${darkMode.value ? "1" : "0"})` }}
+                    className={style.openchat__avatar}
+                    src={chat?.profile?.avatar}
                   />
-                </Link>
-                <img
-                  className={style.openchat__avatar}
-                  src={chat?.profile?.avatar}
-                />
-                <div className={style.openchat__user__left__text}>
-                  <div
-                    className={style.openchat__user__name}
-                    style={{ cursor: "pointer" }}
-                  >
-                    <Link href={"../../profile/" + chat?.profile.twitterId}>
-                      {chat?.profile?.twitterName}
-                    </Link>
-
-                    <a
-                      className={style.twitter__redirect}
-                      href={
-                        "https://twitter.com/" + chat?.profile?.twitterHandle
-                      }
-                      rel="noreferrer"
-                      target="_blank"
+                  <div className={style.openchat__user__left__text}>
+                    <div
+                      className={style.openchat__user__name}
+                      style={{ cursor: "pointer" }}
                     >
-                      @{chat?.profile?.twitterHandle}
-                    </a>
-                  </div>
+                      <Link href={"../../profile/" + chat?.profile.twitterId}>
+                        {chat?.profile?.twitterName}
+                      </Link>
 
-                  <div className={style.openchat__status}></div>
+                      <a
+                        className={style.twitter__redirect}
+                        href={
+                          "https://twitter.com/" + chat?.profile?.twitterHandle
+                        }
+                        rel="noreferrer"
+                        target="_blank"
+                      >
+                        @{chat?.profile?.twitterHandle}
+                      </a>
+                    </div>
+
+                    <div className={style.openchat__status}></div>
+                  </div>
                 </div>
-              </div>
-              <div className={style.openchat__user__right}>
-                <Link href={"../../activity/" + chat?.profile?.twitterId}>
+                <div className={style.openchat__user__right}>
+                  <Link href={"../../activity/" + chat?.profile?.twitterId}>
+                    <button
+                      className={classNames(
+                        header.connect__button,
+                        style.openchat__button__info
+                      )}
+                    >
+                      Info
+                    </button>
+                  </Link>
                   <button
                     className={classNames(
                       header.connect__button,
-                      style.openchat__button__info
+                      style.openchat__button
                     )}
+                    onClick={() =>
+                      modalStore.showModal(ModalsEnum.Trade, {
+                        user: chat?.profile,
+                      })
+                    }
                   >
-                    Info
+                    Trade
                   </button>
-                </Link>
-                <button
-                  className={classNames(
-                    header.connect__button,
-                    style.openchat__button
-                  )}
-                  onClick={() =>
-                    modalStore.showModal(ModalsEnum.Trade, {
-                      user: chat?.profile,
-                    })
-                  }
-                >
-                  Trade
-                </button>
+                </div>
               </div>
-            </div>
-            <div className={style.openchat__row}>
-              <div className={style.openchat__own}>
+              <div className={style.openchat__row}>
+                <div className={style.openchat__own}>
+                  <div className={style.openchat__shares}>
+                    You own {Number(myHolds)} shares
+                  </div>
+                </div>
+                <div className={style.openchat__val}>
+                  {" "}
+                  <div className={style.openchat__share__value}>
+                    <EthereumSvg />
+                    {chat?.profile?.userAccount.currentPrice &&
+                      fromWeiToEth(chat.profile?.userAccount.currentPrice)}{" "}
+                    ETH
+                  </div>
+                  <div className={style.openchat__shares}> per 1 share</div>
+                </div>
+              </div>
+              <div className={style.openchat__row}>
+                <div className={style.openchat__holders}>
+                  <div
+                    className={style.openchat__shares}
+                    style={{ marginRight: "17px", cursor: "pointer" }}
+                    onClick={() => {
+                      setCurrentType(0);
+                      router.push("../../activity/" + chat?.profile?.twitterId);
+                    }}
+                  >
+                    <span>{chat?.profile?.userAccount?.myHolders}</span> Holders
+                  </div>
+                  <div
+                    className={style.openchat__shares}
+                    style={{ cursor: "pointer" }}
+                    onClick={() => {
+                      setCurrentType(1);
+                      router.push("../../activity/" + chat?.profile?.twitterId);
+                    }}
+                  >
+                    <span>{chat?.profile?.userAccount?.othersShares}</span>{" "}
+                    Holding
+                  </div>
+                </div>
                 <div className={style.openchat__shares}>
-                  You own {Number(myHolds)} shares
+                  <span>TVH</span> $
+                  {Number(
+                    Number(chat?.profile?.userAccount?.holderNetworth).toFixed(
+                      1
+                    )
+                  )}
                 </div>
-              </div>
-              <div className={style.openchat__val}>
-                {" "}
-                <div className={style.openchat__share__value}>
-                  <EthereumSvg />
-                  {chat?.profile?.userAccount.currentPrice &&
-                    fromWeiToEth(chat.profile?.userAccount.currentPrice)}{" "}
-                  ETH
-                </div>
-                <div className={style.openchat__shares}> per 1 share</div>
-              </div>
-            </div>
-            <div className={style.openchat__row}>
-              <div className={style.openchat__holders}>
-                <div
-                  className={style.openchat__shares}
-                  style={{ marginRight: "17px", cursor: "pointer" }}
-                  onClick={() => {
-                    setCurrentType(0);
-                    router.push("../../activity/" + chat?.profile?.twitterId);
-                  }}
-                >
-                  <span>{chat?.profile?.userAccount?.myHolders}</span> Holders
-                </div>
-                <div
-                  className={style.openchat__shares}
-                  style={{ cursor: "pointer" }}
-                  onClick={() => {
-                    setCurrentType(1);
-                    router.push("../../activity/" + chat?.profile?.twitterId);
-                  }}
-                >
-                  <span>{chat?.profile?.userAccount?.othersShares}</span>{" "}
-                  Holding
-                </div>
-              </div>
-              <div className={style.openchat__shares}>
-                <span>TVH</span> $
-                {Number(
-                  Number(chat?.profile?.userAccount?.holderNetworth).toFixed(1)
-                )}
               </div>
             </div>
             {openGifMenu && (
