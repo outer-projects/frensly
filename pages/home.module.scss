@@ -12,6 +12,7 @@
   flex-direction: column;
   width: 616px;
   min-height: calc(100vh - 75px);
+  overflow: hidden;
   @media (max-width: 616px) {
     max-width: calc(100%);
     margin-top: 0px;
