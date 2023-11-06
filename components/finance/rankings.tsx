@@ -170,8 +170,18 @@ const Rankings = observer(() => {
 
   const [keysReady, setKeysReady] = useState(false);
   const { user } = useInjection(Web3Store);
-  const { getKeys, currentRequire, currentProgress, finished, getPoints, pointsInfo } =
-    useInjection(UserStore);
+  const {
+    getKeys,
+    currentRequire,
+    currentProgress,
+    finished,
+    getPoints,
+    portfolioValue,
+    inviteLimit,
+    invited,
+    unlimitedKeys,
+    pointsInfo,
+  } = useInjection(UserStore);
   const router = useRouter();
   useEffect(() => {
     if (active == 0) {
@@ -191,7 +201,7 @@ const Rankings = observer(() => {
     if (user && !keysReady) {
       setKeysReady(true);
       getKeys();
-      getPoints()
+      getPoints();
     }
   }, [user]);
   return (
@@ -215,7 +225,7 @@ const Rankings = observer(() => {
               <div className={style.finance__stat__name}>Portfolio value</div>
               <div className={style.finance__stat__value}>
                 {/* {portfolioValue && fromWeiToEth(portfolioValue?.toString())} ETH */}
-                0
+                {portfolioValue && fromWeiToEth(portfolioValue?.toString())}{" "}
               </div>
             </div>
           </div>
@@ -227,7 +237,11 @@ const Rankings = observer(() => {
               <div className={style.finance__total__text}>
                 Total invited users
               </div>
-              <div className={style.finance__total__count}>0</div>
+              <div className={style.finance__total__count}>
+                {" "}
+                {invited}
+                {!unlimitedKeys && " / " + inviteLimit}
+              </div>
             </div>
           </div>
           {!finished && (
