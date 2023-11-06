@@ -40,7 +40,7 @@ const Invite = observer(() => {
     if (active == 2) {
       router.push("/dashboard/airdrop");
     }
-    if (active == 2) {
+    if (active == 3) {
       router.push("/dashboard/rankings");
     }
   }, [active]);
