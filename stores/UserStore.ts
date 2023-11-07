@@ -110,11 +110,11 @@ export class UserStore {
     try {
       const res = await axios.get(prefix + "user/user/refs");
       console.log(res.data);
-      this.unlimitedKeys = res.data.unlimited;
-      this.inviteLimit = Number(res.data.usesLeft) + res.data.referrals.length;
-      this.key = res.data;
+      this.unlimitedKeys = res.data.refInfo.unlimited;
+      this.inviteLimit = Number(res.data.usesLeft) + res.data.refInfo.referrals.length;
+      this.key = res.data.refInfo;
       this.inviter = res.data.inviter;
-      this.invited = Number(res.data.referrals.length);
+      this.invited = Number(res.data.refInfo.referrals.length);
     } catch (e) {
       console.log(e);
     }

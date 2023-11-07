@@ -115,7 +115,7 @@ const Invite = observer(() => {
               </CopyToClipboard>
             )}
           </div>
-          {inviter && (
+          {user && (
             <>
               <div className={style.finance__invite}>Invited by</div>
               <div className={explore.explore__user__left}>
