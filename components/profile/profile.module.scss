@@ -422,12 +422,23 @@
   margin-right: 80px !important;
 }
 .twitter__textarea__comment {
-  position: fixed;
-  bottom: 0px;
-  left: 0;
-  background: var(--background-row);
-  width: 100vw;
-  top: auto;
+  position: relative;
+  @media (max-width: 750px) {
+    position: fixed;
+    bottom: 0px;
+    left: 0;
+    background: var(--background-row);
+    width: 100vw;
+    top: auto;
+  }
+  @media (max-height: 750px) {
+    position: fixed;
+    bottom: 0px;
+    left: 0;
+    background: var(--background-row);
+    width: 100vw;
+    top: auto;
+  }
 }
 .twitter__textarea {
   margin-left: 24px;
