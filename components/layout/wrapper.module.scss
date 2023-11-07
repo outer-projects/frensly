@@ -11,11 +11,20 @@
   // overflow-x: hidden;
   // height: auto;
   min-height: 100vh;
+  // height: fit-content;
 }
 .page__open {
   @media (max-width: 1000px) {
     margin-top: 70px;
   }
+}
+.page__bg {
+  position: fixed;
+  top: 0;
+  width: 100vw;
+  background: var(--background);
+  z-index: -1;
+  height: 100vh;
 }
 .change__account {
   width: 100vw;

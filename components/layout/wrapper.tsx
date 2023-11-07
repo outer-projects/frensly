@@ -72,6 +72,7 @@ const Wrapper = observer(({ children }: any) => {
     <div
       className={classNames(style.page__container, ready && style.page__open)}
     >
+      <div className={classNames(style.page__bg)}></div>
       <Head>
         <meta
           name="viewport"
