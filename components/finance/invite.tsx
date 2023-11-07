@@ -16,10 +16,12 @@ import Web3Store from "../../stores/Web3Store";
 import { UserStore } from "../../stores/UserStore";
 import UserIcon from "../socials/twitterUI/UserIcon";
 import TypesList from "../common/typesList";
+import { addressSlice, shortNick } from "../../utils/utilities";
+import Key from "../svgs/key";
 export const types = ["Finance", "Referrals", "Airdrop", "Rankings"];
 const Invite = observer(() => {
   const { user } = useInjection(Web3Store);
-  const { getKeys, key, inviteLimit, invited, unlimitedKeys } =
+  const { getKeys, key, inviteLimit, invited, unlimitedKeys, inviter } =
     useInjection(UserStore);
 
   const [keysReady, setKeysReady] = useState(false);
@@ -54,6 +56,11 @@ const Invite = observer(() => {
         </div>
         <div className={style.finance}>
           <User stage="referral" />
+          <div className={style.finance__invite}>Referral system</div>
+          <div className={style.finance__invite__text}>
+            Get more invites to boost your future airdrop and move farther in
+            rankings.
+          </div>
           <div className={style.finance__total}>
             <div className={style.finance__icon}>
               <UserIcon color="#676766" />
@@ -108,6 +115,42 @@ const Invite = observer(() => {
               </CopyToClipboard>
             )}
           </div>
+          {inviter && (
+            <>
+              <div className={style.finance__invite}>Invited by</div>
+              <div className={explore.explore__user__left}>
+                <img src={inviter.avatar} />
+                <div className={explore.explore__user__left__text}>
+                  <div className={explore.explore__user__share}>
+                    {/* @ts-ignore */}
+                    {user?.account?.othersShares.filter(
+                      (u) =>
+                        u.subject == inviter.account._id &&
+                        Number(u.amount) >= 1000000
+                    )?.length >= 1 && <Key />}
+                    <div>
+                      {Number(inviter?.account?.sharesAmount) / 10 ** 6} share
+                    </div>
+                  </div>
+                  <div className={explore.explore__user__name}>
+                    <div>{shortNick(inviter.twitterName)}</div>
+                    <span>
+                      <a
+                        href={"https://twitter.com/" + inviter.twitterHandle}
+                        target="_blank"
+                        rel="noreferrer"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                        }}
+                      >
+                        @{inviter.twitterHandle}
+                      </a>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </>
+          )}
         </div>
       </div>
     </div>

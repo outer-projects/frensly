@@ -26,6 +26,7 @@ export class UserStore {
   @observable followersOffset: number = 0;
   @observable followingsOffset: number = 0;
   @observable holdersOffset: number = 0;
+  @observable inviter?: IProfile | null = null;
   @observable sharesOffset: number = 0;
   @observable pointsInfo: any = undefined;
   @observable pointsTop: any[] = [];
@@ -108,10 +109,11 @@ export class UserStore {
   @action getKeys = async () => {
     try {
       const res = await axios.get(prefix + "user/user/refs");
-      // console.log(res.data);
+      console.log(res.data);
       this.unlimitedKeys = res.data.unlimited;
       this.inviteLimit = Number(res.data.usesLeft) + res.data.referrals.length;
       this.key = res.data;
+      this.inviter = res.data.inviter;
       this.invited = Number(res.data.referrals.length);
     } catch (e) {
       console.log(e);

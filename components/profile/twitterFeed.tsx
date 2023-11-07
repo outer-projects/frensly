@@ -151,7 +151,7 @@ const TwitterFeed = observer(
                                 comment to{" "}
                                 <Link
                                   href={
-                                    "/ponds/" + el?.originalPost?.originalPost
+                                    "/posts/" + el?.originalPost?.originalPost
                                   }
                                 >
                                   post
