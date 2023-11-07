@@ -431,14 +431,6 @@
     width: 100vw;
     top: auto;
   }
-  @media (max-height: 750px) {
-    position: fixed;
-    bottom: 0px;
-    left: 0;
-    background: var(--background-row);
-    width: 100vw;
-    top: auto;
-  }
 }
 .twitter__textarea {
   margin-left: 24px;
@@ -784,12 +776,6 @@
   @media (max-width: 750px) {
     margin-top: 0px;
     padding-bottom: 100px;
-    border-radius: 0px;
-  }
-  @media (max-height: 750px) {
-    margin-top: 0px;
-    padding-bottom: 100px;
-
     border-radius: 0px;
   }
 }
