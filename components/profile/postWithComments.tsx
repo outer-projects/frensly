@@ -108,7 +108,7 @@ const PostWithComments = observer(() => {
           <TextareaAutosize
             value={message}
             style={{ resize: "none" }}
-            placeholder="What is happening?"
+            placeholder="Reply to post"
             className={classNames(
               style.twitter__textarea,
               focus && style.twitter__active
