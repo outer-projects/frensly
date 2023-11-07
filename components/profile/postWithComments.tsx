@@ -110,8 +110,8 @@ const PostWithComments = observer(() => {
           placeholder="What is happening?"
           className={classNames(
             style.twitter__textarea,
-            focus && style.twitter__active
-            // style.twitter__textarea__comment
+            focus && style.twitter__active,
+            style.twitter__textarea__comment
           )}
           onBlur={() => {
             setFocus(false);

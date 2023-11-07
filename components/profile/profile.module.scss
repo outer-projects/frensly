@@ -371,7 +371,6 @@
     img {
       width: 33px;
       height: 33px;
-      
     }
   }
 }
@@ -423,10 +422,9 @@
   margin-right: 80px !important;
 }
 .twitter__textarea__comment {
-  width: 456px !important;
-  @media (max-width: 600px) {
-    width: calc(100vw - 90px);
-  }
+  position: fixed;
+  bottom: 0px;
+  top: auto;
 }
 .twitter__textarea {
   margin-left: 24px;
@@ -628,7 +626,7 @@
 }
 .gif__menu__reverse {
   display: flex;
-  flex-direction: column-reverse!important;
+  flex-direction: column-reverse !important;
 }
 .gif__menu {
   position: absolute;
@@ -690,7 +688,6 @@
     width: 290px;
 
     object-fit: cover;
-
   }
   @media (max-width: 616px) {
     height: 250px;
@@ -770,6 +767,14 @@
   border-radius: 32px;
   margin-top: 24px;
   background: var(--background-pages);
+  @media (max-width: 750px) {
+    margin-top: 0px;
+    border-radius: 0px;
+  }
+  @media (max-height: 750px) {
+    margin-top: 0px;
+    border-radius: 0px;
+  }
 }
 .twitter__one__post {
   display: flex;

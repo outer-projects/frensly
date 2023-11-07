@@ -168,6 +168,7 @@ const getOutputByKey = (require: any, progress: any) => {
 };
 const Rankings = observer(() => {
   const [active, setActive] = useState(3);
+  const [closeContest, setCloseContest] = useState(false);
   const darkMode = useDarkMode();
   const [keysReady, setKeysReady] = useState(false);
   const { user } = useInjection(Web3Store);
@@ -207,6 +208,11 @@ const Rankings = observer(() => {
       getPoints();
     }
   }, [user]);
+  useEffect(() => {
+    if (localStorage.getItem("contest") == "true") {
+      setCloseContest(true);
+    }
+  }, []);
   return (
     <div className={style.finance__page}>
       <Sidebar />
@@ -217,16 +223,21 @@ const Rankings = observer(() => {
         </div>
         <div className={style.finance}>
           <User stage="rankings" />
-          {localStorage.getItem("contest") !== "true" && (
+          {!closeContest && (
             <div className={style.contest}>
               <div className={style.contest__title}>
                 🐸 Contest
                 <img
                   className={style.header__mobile__menu__close}
                   src="../../icons/Close.svg"
-                  style={{ filter: `invert(${darkMode.value ? "1" : "0"})`, cursor: "pointer", marginTop: "-15px", marginLeft: "10px" }}
+                  style={{
+                    filter: `invert(${darkMode.value ? "1" : "0"})`,
+                    cursor: "pointer",
+                    marginTop: "-15px",
+                    marginLeft: "10px",
+                  }}
                   onClick={() => {
-                    // setMenuMob(false);
+                    setCloseContest(true);
                     localStorage.setItem("contest", "true");
                   }}
                 />

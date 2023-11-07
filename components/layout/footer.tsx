@@ -26,7 +26,7 @@ const Footer = observer(() => {
       // console.log(router.asPath);
       setActive(router.asPath);
     }
-    if (router.asPath.includes("/ponds/")) {
+    if (router.asPath.includes("/ponds/") || router.asPath.includes("/posts/")) {
       setDisabled(true);
     } else {
       setDisabled(false);
