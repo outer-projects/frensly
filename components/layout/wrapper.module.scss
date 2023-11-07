@@ -8,7 +8,9 @@
   background: var(--background);
   background-size: cover;
   justify-content: center;
-  overflow-x: hidden;
+  // overflow-x: hidden;
+  // height: auto;
+  min-height: 100vh;
 }
 .page__open {
   @media (max-width: 1000px) {
