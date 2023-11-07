@@ -215,6 +215,7 @@
   letter-spacing: -0.16px;
   overflow: hidden;
   div {
+    color: var(--text-main);
     &:hover {
       text-decoration: underline;
     }
@@ -224,18 +225,17 @@
     font-size: 14px;
     font-family: "DMSans";
     font-weight: 400;
-    color: #5a5a5a;
+    color: var(--text-shade);
     &:hover {
       text-decoration: underline;
     }
   }
-  @media (max-width:616px) {
+  @media (max-width: 616px) {
     flex-direction: column;
     a {
       margin-left: 0px;
     }
   }
-
 }
 .explore__search__active {
   border: 1px solid $green !important;

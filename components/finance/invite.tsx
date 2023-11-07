@@ -116,10 +116,15 @@ const Invite = observer(() => {
             )}
           </div>
           {inviter && (
-            <div style={{marginTop:'24px'}}>
+            <div style={{ marginTop: "24px" }}>
               <div className={style.finance__invite}>Invited by</div>
-              <div className={explore.explore__user__left}>
-                <img src={inviter?.avatar} />
+              <div
+                className={explore.explore__user__left}
+                style={{ marginTop: "24px" }}
+              >
+                <Link href={"/profile/" + user?.twitterId}>
+                  <img src={inviter?.avatar} />
+                </Link>
                 <div className={explore.explore__user__left__text}>
                   <div className={explore.explore__user__share}>
                     {/* @ts-ignore */}
@@ -133,7 +138,9 @@ const Invite = observer(() => {
                     </div>
                   </div>
                   <div className={explore.explore__user__name}>
-                    <div>{shortNick(inviter?.twitterName)}</div>
+                    <Link href={"/profile/" + user?.twitterId}>
+                      <div>{shortNick(inviter?.twitterName)}</div>
+                    </Link>
                     <span>
                       <a
                         href={"https://twitter.com/" + inviter?.twitterHandle}
