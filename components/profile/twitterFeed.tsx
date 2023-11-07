@@ -43,7 +43,7 @@ const TwitterFeed = observer(
       publicFeed,
       updateUserPosts,
       setHideRow,
-      hideRow
+      hideRow,
     } = useInjection(FeedStore);
     const { user } = useInjection(Web3Store);
 
@@ -59,7 +59,7 @@ const TwitterFeed = observer(
       }
     }, [id, isFrens, isPublic, userPosts, frensFeed, feed, publicFeed]);
     const darkMode = useDarkMode();
-    const modalStore = useInjection(ModalStore)
+    const modalStore = useInjection(ModalStore);
     const updatePosts = () => {
       if (isFrens) {
         updateFrensFeed();
@@ -138,16 +138,26 @@ const TwitterFeed = observer(
                     {!el.isDeleted && (
                       <>
                         <div className={style.twitter__repost}>
-                          <div
-                            className={style.twitter__reposted}
-                          >
+                          <div className={style.twitter__reposted}>
                             <Swap isActive={false} />
                             <span>
                               <Link href={"/profile/" + el.user.twitterHandle}>
                                 {el.user.twitterName}
                               </Link>
                             </span>{" "}
-                            reposted
+                            reposted{" "}
+                            {el?.originalPost?.originalPost && (
+                              <span>
+                                comment to{" "}
+                                <Link
+                                  href={
+                                    "/ponds/" + el?.originalPost?.originalPost
+                                  }
+                                >
+                                  post
+                                </Link>
+                              </span>
+                            )}
                           </div>
                           {user?.twitterId == el.user?.twitterId ? (
                             <img
@@ -158,11 +168,12 @@ const TwitterFeed = observer(
                                 cursor: "pointer",
                                 filter: `invert(${darkMode.value ? "1" : "0"})`,
                               }}
-                              onClick={() =>
-                               {
-                                modalStore.showModal(ModalsEnum.DeletePost, {post: el, isRepost: true})
-                               }
-                              }
+                              onClick={() => {
+                                modalStore.showModal(ModalsEnum.DeletePost, {
+                                  post: el,
+                                  isRepost: true,
+                                });
+                              }}
                             />
                           ) : (
                             <div style={{ width: "20px", height: "20px" }} />
