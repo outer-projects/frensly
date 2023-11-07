@@ -19,7 +19,7 @@
 .header__disable {
   display: flex;
   @media (max-height: 750px) {
-    display: none !important; 
+    display: none !important;
   }
   @media (max-width: 750px) {
     display: none !important;
@@ -48,6 +48,10 @@
   font-weight: bold;
   color: white;
 }
+// .header__placeholder {
+//   height: 70px;
+//   width: 100vw;
+// }
 .header__mobile {
   display: none;
   justify-content: space-between;

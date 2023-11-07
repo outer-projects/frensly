@@ -1,4 +1,4 @@
-import { use, useEffect } from "react";
+import { use, useEffect, useMemo } from "react";
 import Header from "./header";
 import { observer } from "mobx-react";
 import style from "./wrapper.module.scss";
@@ -15,9 +15,11 @@ import ConnectButtonCustom from "./connectButtonCustom";
 import Head from "next/head";
 import Footer from "./footer";
 import header from "./header.module.scss";
+import classNames from "classnames";
 
 const Wrapper = observer(({ children }: any) => {
   const { init, setInit, getNotifications } = useInjection(UserStore);
+
   const {
     web3,
     frensly,
@@ -38,6 +40,14 @@ const Wrapper = observer(({ children }: any) => {
       setInit(true);
     }
   };
+  const ready = useMemo(
+    () => !needToChangeWallet && init && user?.account,
+    [needToChangeWallet, init, user?.account]
+  );
+  const needAuth = useMemo(
+    () => !needToChangeWallet && (!init || !user?.account),
+    [needToChangeWallet, init, user?.account]
+  );
   useEffect(() => {
     if (web3 && address && user?.account && frensly) {
       isInit();
@@ -59,14 +69,16 @@ const Wrapper = observer(({ children }: any) => {
     getUser();
   }, []);
   return (
-    <div className={style.page__container}>
+    <div
+      className={classNames(style.page__container, ready && style.page__open)}
+    >
       <Head>
         <meta
           name="viewport"
           content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
         />
       </Head>
-      {!needToChangeWallet && (!init || !user?.account) && (
+      {needAuth && (
         <div className={home.main__page}>
           <AuthBanner />
         </div>
@@ -96,11 +108,15 @@ const Wrapper = observer(({ children }: any) => {
           </button>
         </div>
       )}
-      {!needToChangeWallet && init && user?.account && <Header />}
-      {/* <Header /> */}
-      {!needToChangeWallet && init && user?.account && children}
-      {/* {children} */}
-      {!needToChangeWallet && init && user?.account && <Footer />}
+      {ready && (
+        <>
+          <Header />
+          {children}
+          <Footer />
+        </>
+      )}
+      {/* <Header />
+      {children} */}
     </div>
   );
 });

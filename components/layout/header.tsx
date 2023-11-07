@@ -70,112 +70,118 @@ const Header = observer(() => {
   });
 
   return (
-    <div className={classNames(style.header__container, active.includes('/ponds/') && style.header__disable)}>
-      <header className={style.header}>
-        <Link href={"../../feed"}>
-          <img src={!darkMode.value ? "../logo.svg" : "../logo_white.svg"} />
-        </Link>
-        <div className={style.header__row}>
-          {headerText.map((el, i) => {
-            // console.log(el.link == "/profile");
-            return (
-              <Link
-                href={
-                  "../.." +
-                  (el.link == "/profile"
-                    ? el.link + "/" + user?.twitterId
-                    : el.link)
-                }
-                style={{ textDecoration: "none", color: "auto" }}
-              >
-                <div
-                  key={i}
-                  className={classNames(
-                    style.header__el,
-                    active.includes(el.name.toLowerCase()) &&
-                      style.header__el__active
-                  )}
+    // <div className={style.header__placeholder}>
+      <div
+        className={classNames(
+          style.header__container,
+          active.includes("/ponds/") && style.header__disable
+        )}
+      >
+        <header className={style.header}>
+          <Link href={"../../feed"}>
+            <img src={!darkMode.value ? "../logo.svg" : "../logo_white.svg"} />
+          </Link>
+          <div className={style.header__row}>
+            {headerText.map((el, i) => {
+              // console.log(el.link == "/profile");
+              return (
+                <Link
+                  href={
+                    "../.." +
+                    (el.link == "/profile"
+                      ? el.link + "/" + user?.twitterId
+                      : el.link)
+                  }
+                  style={{ textDecoration: "none", color: "auto" }}
                 >
-                  {el.name}
-                  {el.name == "Ponds" && unread !== 0 && (
-                    <div className={style.header__missing}>{unread}</div>
+                  <div
+                    key={i}
+                    className={classNames(
+                      style.header__el,
+                      active.includes(el.name.toLowerCase()) &&
+                        style.header__el__active
+                    )}
+                  >
+                    {el.name}
+                    {el.name == "Ponds" && unread !== 0 && (
+                      <div className={style.header__missing}>{unread}</div>
+                    )}
+                  </div>
+                </Link>
+              );
+            })}
+          </div>
+          <div className={style.header__user}>
+            <div style={{ cursor: "pointer" }}>
+              <div style={{ display: "flex", alignItems: "flex-end" }}>
+                <button
+                  className={classNames(style.theme__btn)}
+                  onClick={darkMode.toggle}
+                >
+                  {darkMode.value && <Moon />}
+                  {!darkMode.value && <Sun />}
+                </button>
+                <div
+                  ref={ref}
+                  style={{ display: "flex", alignItems: "flex-end" }}
+                  onClick={() => {
+                    if (unreadCount > 0) {
+                      setNots(!nots);
+                    } else {
+                      router.push("../../notifications");
+                    }
+                  }}
+                >
+                  <Bell isActive={false} />
+                </div>
+                <div className={style.header__count__contain}>
+                  {unreadCount != 0 && (
+                    <div className={style.header__count}>{unreadCount}</div>
                   )}
                 </div>
-              </Link>
-            );
-          })}
-        </div>
-        <div className={style.header__user}>
-          <div style={{ cursor: "pointer" }}>
-            <div style={{ display: "flex", alignItems: "flex-end" }}>
-              <button
-                className={classNames(style.theme__btn)}
-                onClick={darkMode.toggle}
-              >
-                {darkMode.value && <Moon />}
-                {!darkMode.value && <Sun />}
-              </button>
-              <div
-                ref={ref}
-                style={{ display: "flex", alignItems: "flex-end" }}
-                onClick={() => {
-                  if (unreadCount > 0) {
-                    setNots(!nots);
-                  } else {
-                    router.push("../../notifications");
-                  }
-                }}
-              >
-                <Bell isActive={false} />
               </div>
-              <div className={style.header__count__contain}>
+              {nots && <Notifications />}
+            </div>
+            <ConnectButtonCustom isHeader />
+          </div>
+        </header>
+        <header className={style.header__mobile}>
+          <ConnectButtonCustom isHeader />
+          <div className={style.header__user}>
+            <div
+              onClick={() => {
+                if (unreadCount > 0) {
+                  setNotsMob(!notsMob);
+                } else {
+                  router.push("../../notifications");
+                }
+              }}
+              style={{ cursor: "pointer" }}
+            >
+              <div style={{ display: "flex", alignItems: "flex-end" }}>
+                <button
+                  className={classNames(style.theme__btn)}
+                  onClick={darkMode.toggle}
+                >
+                  {darkMode.value && <Moon />}
+                  {!darkMode.value && <Sun />}
+                </button>
+                <Bell isActive={false} />
+
                 {unreadCount != 0 && (
                   <div className={style.header__count}>{unreadCount}</div>
                 )}
               </div>
+              {notsMob && <Notifications setNots={setNotsMob} />}
             </div>
-            {nots && <Notifications />}
-          </div>
-          <ConnectButtonCustom isHeader />
-        </div>
-      </header>
-      <header className={style.header__mobile}>
-        <ConnectButtonCustom isHeader />
-        <div className={style.header__user}>
-          <div
-            onClick={() => {
-              if (unreadCount > 0) {
-                setNotsMob(!notsMob);
-              } else {
-                router.push("../../notifications");
-              }
-            }}
-            style={{ cursor: "pointer" }}
-          >
-            <div style={{ display: "flex", alignItems: "flex-end" }}>
-              <button
-                className={classNames(style.theme__btn)}
-                onClick={darkMode.toggle}
-              >
-                {darkMode.value && <Moon />}
-                {!darkMode.value && <Sun />}
-              </button>
-              <Bell isActive={false} />
-
-              {unreadCount != 0 && (
-                <div className={style.header__count}>{unreadCount}</div>
-              )}
-            </div>
-            {notsMob && <Notifications setNots={setNotsMob} />}
-          </div>
-          {/* <img
+            {/* <img
             src="../icons/Burger.svg"
             style={{ height: "24px", marginLeft: "24px" }}
             onClick={() => {
               setMenuMob(!menuMob);
             }}
           /> */}
-          {/* <div
+            {/* <div
             className={style.header__mobile__menu}
             style={{ display: menuMob ? "flex" : "none" }}
           >
@@ -218,9 +224,10 @@ const Header = observer(() => {
               );
             })}
           </div> */}
-        </div>
-      </header>
-    </div>
+          </div>
+        </header>
+      </div>
+    // </div>
   );
 });
 export default Header;
