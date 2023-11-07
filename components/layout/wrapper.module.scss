@@ -9,6 +9,9 @@
   background-size: cover;
   justify-content: center;
   overflow: hidden;
+  @media (max-width: 1000px) {
+    margin-top: 70px;
+  }
 }
 .change__account {
   width: 100vw;

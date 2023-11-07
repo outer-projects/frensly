@@ -110,6 +110,10 @@
   border-bottom: 1px solid var(--header-bottom);
   padding-bottom: 19px;
   width: 100vw;
+  @media screen and (max-width: 1000px) {
+    position: fixed;
+    top: 0;
+  }
 }
 .header__row {
   display: flex;
