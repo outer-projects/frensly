@@ -540,6 +540,12 @@
 .twitter__one__post__top {
   margin-top: 16px !important;
   border-bottom: 0px !important;
+  @media (max-width: 750px) {
+    margin-top: 0px !important;
+    padding-bottom: 20px;
+    border-bottom: 3px solid var(--border) !important;
+    margin-bottom: 20px;
+  }
 }
 .twitter__post__container {
   display: flex;
