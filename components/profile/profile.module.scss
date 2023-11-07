@@ -424,6 +424,9 @@
 .twitter__textarea__comment {
   position: fixed;
   bottom: 0px;
+  left: 0;
+  background: var(--background-row);
+  width: 100vw;
   top: auto;
 }
 .twitter__textarea {
@@ -438,7 +441,7 @@
   min-height: 72px;
   border: 1px solid transparent;
   outline: none;
-  background: var(--Black-3, var(--background-row));
+  background: var(--background-row);
   color: var(--text-main);
   font-family: "DMSans";
   font-size: 16px;

@@ -104,98 +104,101 @@ const PostWithComments = observer(() => {
               })}
           </div>
         )}
-        <TextareaAutosize
-          value={message}
-          style={{ resize: "none" }}
-          placeholder="What is happening?"
-          className={classNames(
-            style.twitter__textarea,
-            focus && style.twitter__active,
-            style.twitter__textarea__comment
-          )}
-          onBlur={() => {
-            setFocus(false);
-          }}
-          onFocus={() => {
-            setFocus(true);
-          }}
-          onChange={(e: any) => {
-            // console.log(e.key);
-            let after = e.target.value.split("@");
-            // console.log(after[after.length - 1]);
-            let key = e.target.value.substring(e.target.value.length - 1);
-            // console.log(key);
-            if (key == "@") {
-              setOpenMentions(true);
-            }
-            if (key == " ") {
-              setOpenMentions(false);
-            }
-            if (!e.target.value.includes("@")) {
-              setOpenMentions(false);
-            }
-            if (openMentions) {
-              setMent(after[after.length - 1]);
-            } else {
-              setMent("");
-            }
-            setMessage(e.target.value);
-          }}
-        />
-        {gifMenu && <GifSearch reverse={false} setGif={setGif} />}
-        <div
-          className={classNames(
-            // style.twitter__add__comment,
-            style.twitter__add
-          )}
-        >
-          <input
-            type="file"
-            accept=".jpg,.jpeg,.webm,.png, .gif"
-            className={style.twitter__send__img}
-            onChange={(e) => e?.target?.files && setImage(e?.target?.files[0])}
-          />
-
-          <img src="../../icons/ImageAdd.svg" />
-          <img
-            src="../../icons/gifAdd.svg"
-            onClick={() => {
-              setGifMenu(!gifMenu);
-            }}
-          />
-        </div>
-        <div
-          className={classNames(
-            style.twitter__button
-            // style.twitter__button__comment
-          )}
-        >
-          <button
+        <div className={style.twitter__textarea__comment}>
+          <TextareaAutosize
+            value={message}
+            style={{ resize: "none" }}
+            placeholder="What is happening?"
             className={classNames(
-              header.connect__button,
-              style.twitter__post
-              // style.twitter__post__comment
+              style.twitter__textarea,
+              focus && style.twitter__active
             )}
-            disabled={message.length == 0 && gif == "" && !image}
-            onClick={() => {
-              setOpenMentions(false);
-              addPost({
-                text: message,
-                media: image,
-                originalPost: currentPost?._id,
-                gif: gif,
-              }).then((res) => {
-                if (res) {
-                  setMessage("");
-                  setGifMenu(false)
-                  setGif("")
-                  setImage(null);
-                }
-              });
+            onBlur={() => {
+              setFocus(false);
             }}
+            onFocus={() => {
+              setFocus(true);
+            }}
+            onChange={(e: any) => {
+              // console.log(e.key);
+              let after = e.target.value.split("@");
+              // console.log(after[after.length - 1]);
+              let key = e.target.value.substring(e.target.value.length - 1);
+              // console.log(key);
+              if (key == "@") {
+                setOpenMentions(true);
+              }
+              if (key == " ") {
+                setOpenMentions(false);
+              }
+              if (!e.target.value.includes("@")) {
+                setOpenMentions(false);
+              }
+              if (openMentions) {
+                setMent(after[after.length - 1]);
+              } else {
+                setMent("");
+              }
+              setMessage(e.target.value);
+            }}
+          />
+          {gifMenu && <GifSearch reverse={false} setGif={setGif} />}
+          <div
+            className={classNames(
+              // style.twitter__add__comment,
+              style.twitter__add
+            )}
           >
-            Post
-          </button>
+            <input
+              type="file"
+              accept=".jpg,.jpeg,.webm,.png, .gif"
+              className={style.twitter__send__img}
+              onChange={(e) =>
+                e?.target?.files && setImage(e?.target?.files[0])
+              }
+            />
+
+            <img src="../../icons/ImageAdd.svg" />
+            <img
+              src="../../icons/gifAdd.svg"
+              onClick={() => {
+                setGifMenu(!gifMenu);
+              }}
+            />
+          </div>
+          <div
+            className={classNames(
+              style.twitter__button
+              // style.twitter__button__comment
+            )}
+          >
+            <button
+              className={classNames(
+                header.connect__button,
+                style.twitter__post
+                // style.twitter__post__comment
+              )}
+              disabled={message.length == 0 && gif == "" && !image}
+              onClick={() => {
+                setOpenMentions(false);
+                addPost({
+                  text: message,
+                  media: image,
+                  originalPost: currentPost?._id,
+                  gif: gif,
+                }).then((res) => {
+                  if (res) {
+                    setMessage("");
+                    setGifMenu(false);
+                    setGif("");
+                    setImage(null);
+                  }
+                });
+              }}
+            >
+              Post
+            </button>
+          </div>
         </div>
       </div>
       {image && (
@@ -213,7 +216,7 @@ const PostWithComments = observer(() => {
           />
         </div>
       )}
-      {gif!=='' && (
+      {gif !== "" && (
         <div className={style.twitter__image__name}>
           {gif.split("/")[gif.split("/").length - 1]}
           <img
@@ -223,7 +226,7 @@ const PostWithComments = observer(() => {
               filter: `invert(${darkMode.value ? "1" : "0"})`,
             }}
             onClick={() => {
-              setGif('');
+              setGif("");
             }}
           />
         </div>
