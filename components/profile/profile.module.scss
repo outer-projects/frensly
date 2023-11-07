@@ -782,11 +782,11 @@
   margin-top: 24px;
   background: var(--background-pages);
   @media (max-width: 750px) {
-    margin-top: 0px;
+    margin-top: -70px;
     border-radius: 0px;
   }
   @media (max-height: 750px) {
-    margin-top: 0px;
+    margin-top: -70px;
     border-radius: 0px;
   }
 }
