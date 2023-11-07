@@ -115,41 +115,41 @@ const Invite = observer(() => {
               </CopyToClipboard>
             )}
           </div>
-          {user && (
-            <>
+          {inviter && (
+            <div style={{marginTop:'24px'}}>
               <div className={style.finance__invite}>Invited by</div>
               <div className={explore.explore__user__left}>
-                <img src={user?.avatar} />
+                <img src={inviter?.avatar} />
                 <div className={explore.explore__user__left__text}>
                   <div className={explore.explore__user__share}>
                     {/* @ts-ignore */}
                     {user?.account?.othersShares.filter(
                       (u) =>
-                        u.subject == user?.account._id &&
+                        u.subject == inviter?.account._id &&
                         Number(u.amount) >= 1000000
                     )?.length >= 1 && <Key />}
                     <div>
-                      {Number(user?.account?.sharesAmount) / 10 ** 6} share
+                      {Number(inviter?.account?.sharesAmount) / 10 ** 6} share
                     </div>
                   </div>
                   <div className={explore.explore__user__name}>
-                    <div>{shortNick(user?.twitterName)}</div>
+                    <div>{shortNick(inviter?.twitterName)}</div>
                     <span>
                       <a
-                        href={"https://twitter.com/" + user?.twitterHandle}
+                        href={"https://twitter.com/" + inviter?.twitterHandle}
                         target="_blank"
                         rel="noreferrer"
                         onClick={(e) => {
                           e.stopPropagation();
                         }}
                       >
-                        @{user?.twitterHandle}
+                        @{inviter?.twitterHandle}
                       </a>
                     </span>
                   </div>
                 </div>
               </div>
-            </>
+            </div>
           )}
         </div>
       </div>
