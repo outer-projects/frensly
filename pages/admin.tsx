@@ -8,7 +8,16 @@ import header from "../components/layout/header.module.scss";
 import { AdminStore } from "../stores/AdminStore";
 const Admin = observer(() => {
   const { push } = useRouter();
-  const { verify, makeAdmin, createCodes, unban, unverify, ban } = useInjection(AdminStore);
+  const {
+    verify,
+    makeAdmin,
+    createCodes,
+    unban,
+    unverify,
+    ban,
+    getAdminPoints,
+    pointsInfo,
+  } = useInjection(AdminStore);
   const [handle, setHandle] = useState("");
   const [codeToGenerate, setCodeToGenerate] = useState("");
   const [admin, setAdmin] = useState("");
@@ -20,6 +29,8 @@ const Admin = observer(() => {
   useEffect(() => {
     if (user?.role !== "admin") {
       push("/explore");
+    } else {
+      getAdminPoints();
     }
   }, [user]);
   return (
@@ -127,6 +138,14 @@ const Admin = observer(() => {
         >
           Create
         </button>
+      </div>
+      <div className={style.explore__row}>
+        <span> Points per hour</span>
+        <span>{Number(pointsInfo?.hourlyStats?.pointsDistributed)?.toFixed(0)}</span>
+      </div>
+      <div className={style.explore__row}>
+        <span>Total points</span>
+        <span>{Number(pointsInfo?.totalPoints)?.toFixed(0)}</span>
       </div>
     </div>
   );

@@ -9,7 +9,7 @@ import { toast } from "react-toastify";
 
 @injectable()
 export class AdminStore {
-  //   @observable myChats: any[] = [];
+    @observable pointsInfo: any = undefined;
 
   public constructor(private readonly rootStore: RootStore) {
     makeObservable(this);
@@ -21,6 +21,16 @@ export class AdminStore {
       });
       toast.success("Rights gained");
       console.log("verify:", res.data);
+    } catch (e) {
+      console.log(e);
+      toast.error("Error");
+    }
+  };
+  @action getAdminPoints = async () => {
+    try {
+      const res = await axios.get(prefix + "user/admin/pointstats");
+      console.log("verify:", res.data);
+      this.pointsInfo = res.data;
     } catch (e) {
       console.log(e);
       toast.error("Error");
