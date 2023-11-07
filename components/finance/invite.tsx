@@ -125,7 +125,7 @@ const Invite = observer(() => {
                     {/* @ts-ignore */}
                     {user?.account?.othersShares.filter(
                       (u) =>
-                        u.subject == inviter?.account._id &&
+                        u.subject == inviter?.account?._id &&
                         Number(u.amount) >= 1000000
                     )?.length >= 1 && <Key />}
                     <div>

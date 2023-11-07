@@ -10,7 +10,7 @@ import { useInjection } from "inversify-react";
 const PostPage: NextPage = observer((props) => {
   const { unreadCount } = useInjection(UserStore);
   return (
-    <div className={style.chat__page}>
+    <div className={style.post__page}>
       <Head>
         <title>
           {unreadCount !== 0 ? `(${unreadCount})` : ""} Post | Frensly

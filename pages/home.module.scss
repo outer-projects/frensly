@@ -27,10 +27,9 @@
   flex-direction: column;
   width: 616px;
   height: calc(100vh - 75px);
-  overflow: hidden;
-  @media (max-width: 616px) {
+  @media (max-width: 750px) {
     max-width: calc(100%);
-    margin-top: 0px;
+    margin-top: -70px;
     
     margin-left: 0px;
   }
