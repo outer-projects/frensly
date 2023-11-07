@@ -216,6 +216,24 @@ const Rankings = observer(() => {
         </div>
         <div className={style.finance}>
           <User stage="rankings" />
+          {localStorage.getItem('contest') !== "true" && <div className={style.contest}>
+            <div className={style.contest__title}>
+              🐸 Contest
+              <img
+                className={style.header__mobile__menu__close}
+                src="../../icons/Close.svg"
+                onClick={() => {
+                  // setMenuMob(false);
+                  localStorage.setItem("contest", "true");
+                }}
+              />
+            </div>
+            <div className={style.contest__text}>
+              Post your meme in twitter till 10 Nov and tag @frenslyio The top 3
+              with biggest exposure receives "memetic" achievement, boosting
+              your per-hour points X2 for 8 hours!
+            </div>
+          </div>}
           <div className={style.finance__invite}>
             <div>Rankings</div>
             <div>Top #{pointsInfo?.place}</div>

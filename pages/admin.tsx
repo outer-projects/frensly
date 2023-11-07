@@ -141,7 +141,12 @@ const Admin = observer(() => {
       </div>
       <div className={style.explore__row}>
         <span> Points per hour</span>
-        <span>{Number(pointsInfo?.hourlyStats?.pointsDistributed)?.toFixed(0)}</span>
+        <span>
+          {Number(
+            pointsInfo?.hourlyStats[pointsInfo?.hourlyStats.length - 1]
+              ?.pointsDistributed
+          )?.toFixed(0)}
+        </span>
       </div>
       <div className={style.explore__row}>
         <span>Total points</span>

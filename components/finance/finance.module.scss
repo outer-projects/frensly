@@ -14,6 +14,29 @@
     margin-top: 0px;
   }
 }
+.contest {
+  border-radius: 16px;
+  background: rgba(166, 208, 0, 0.2);
+  padding: 8px 16px;
+}
+.contest__title {
+  color: var(--text-shade);
+  font-family: "DMSans";
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 18px; /* 120% */
+  letter-spacing: -0.15px;
+}
+.contest__text {
+  color: var(--text-shade);
+  font-family: "DMSans";
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 19px; /* 135.714% */
+  letter-spacing: -0.14px;
+}
 .finance__ranks {
   display: flex;
   justify-content: flex-end;
