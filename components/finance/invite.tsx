@@ -119,31 +119,31 @@ const Invite = observer(() => {
             <>
               <div className={style.finance__invite}>Invited by</div>
               <div className={explore.explore__user__left}>
-                <img src={inviter.avatar} />
+                <img src={user?.avatar} />
                 <div className={explore.explore__user__left__text}>
                   <div className={explore.explore__user__share}>
                     {/* @ts-ignore */}
                     {user?.account?.othersShares.filter(
                       (u) =>
-                        u.subject == inviter.account._id &&
+                        u.subject == user?.account._id &&
                         Number(u.amount) >= 1000000
                     )?.length >= 1 && <Key />}
                     <div>
-                      {Number(inviter?.account?.sharesAmount) / 10 ** 6} share
+                      {Number(user?.account?.sharesAmount) / 10 ** 6} share
                     </div>
                   </div>
                   <div className={explore.explore__user__name}>
-                    <div>{shortNick(inviter.twitterName)}</div>
+                    <div>{shortNick(user?.twitterName)}</div>
                     <span>
                       <a
-                        href={"https://twitter.com/" + inviter.twitterHandle}
+                        href={"https://twitter.com/" + user?.twitterHandle}
                         target="_blank"
                         rel="noreferrer"
                         onClick={(e) => {
                           e.stopPropagation();
                         }}
                       >
-                        @{inviter.twitterHandle}
+                        @{user?.twitterHandle}
                       </a>
                     </span>
                   </div>
