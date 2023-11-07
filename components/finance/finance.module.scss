@@ -18,6 +18,9 @@
   border-radius: 16px;
   background: rgba(166, 208, 0, 0.2);
   padding: 8px 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 .contest__title {
   color: var(--text-shade);
@@ -27,7 +30,8 @@
   justify-content: space-between;
   align-items: center;
   font-style: normal;
-  font-weight: 700;
+  margin-bottom: 4px;
+  font-weight: bold;
   line-height: 18px; /* 120% */
   letter-spacing: -0.15px;
   img {

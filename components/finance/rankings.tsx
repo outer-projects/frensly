@@ -16,6 +16,7 @@ import Follow from "../socials/twitterUI/Follow";
 import TypesList from "../common/typesList";
 import { types } from "./invite";
 import User from "./user";
+import useDarkMode from "use-dark-mode";
 const getOutputByKey = (require: any, progress: any) => {
   // console.log(require);
   if (require[0] == "isFollowing") {
@@ -167,7 +168,7 @@ const getOutputByKey = (require: any, progress: any) => {
 };
 const Rankings = observer(() => {
   const [active, setActive] = useState(3);
-
+  const darkMode = useDarkMode();
   const [keysReady, setKeysReady] = useState(false);
   const { user } = useInjection(Web3Store);
   const {
@@ -216,24 +217,27 @@ const Rankings = observer(() => {
         </div>
         <div className={style.finance}>
           <User stage="rankings" />
-          {localStorage.getItem('contest') !== "true" && <div className={style.contest}>
-            <div className={style.contest__title}>
-              🐸 Contest
-              <img
-                className={style.header__mobile__menu__close}
-                src="../../icons/Close.svg"
-                onClick={() => {
-                  // setMenuMob(false);
-                  localStorage.setItem("contest", "true");
-                }}
-              />
+          {localStorage.getItem("contest") !== "true" && (
+            <div className={style.contest}>
+              <div className={style.contest__title}>
+                🐸 Contest
+                <img
+                  className={style.header__mobile__menu__close}
+                  src="../../icons/Close.svg"
+                  style={{ filter: `invert(${darkMode.value ? "1" : "0"})`, cursor: "pointer", marginTop: "-15px", marginLeft: "10px" }}
+                  onClick={() => {
+                    // setMenuMob(false);
+                    localStorage.setItem("contest", "true");
+                  }}
+                />
+              </div>
+              <div className={style.contest__text}>
+                Post your meme in twitter till 10 Nov and tag @frenslyio The top
+                3 with biggest exposure receives "memetic" achievement, boosting
+                your per-hour points X2 for 8 hours!
+              </div>
             </div>
-            <div className={style.contest__text}>
-              Post your meme in twitter till 10 Nov and tag @frenslyio The top 3
-              with biggest exposure receives "memetic" achievement, boosting
-              your per-hour points X2 for 8 hours!
-            </div>
-          </div>}
+          )}
           <div className={style.finance__invite}>
             <div>Rankings</div>
             <div>Top #{pointsInfo?.place}</div>
