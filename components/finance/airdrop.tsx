@@ -76,7 +76,7 @@ const Airdrop = observer(() => {
                   Points per hour
                 </div>
                 <div className={style.finance__total__count}>
-                  {Number(Number(pointsInfo?.income).toFixed(2))}
+                  {pointsInfo?.income ? Number(Number(pointsInfo?.income).toFixed(2)) : 0}
                 </div>
               </div>
             </div>
@@ -92,7 +92,9 @@ const Airdrop = observer(() => {
           </div>
           <div className={style.finance__total__points}>
             <div className={style.finance__total__points__count}>
-              {Number(Number(pointsInfo?.points).toFixed(2))}
+              {pointsInfo?.points
+                ? Number(Number(pointsInfo?.points).toFixed(2))
+                : 0}
             </div>
             <div className={style.finance__total__points__claimable}>
               Total claimable
@@ -109,7 +111,9 @@ const Airdrop = observer(() => {
             <div>
               <div className={style.finance__total__text}>Your FT points</div>
               <div className={style.finance__total__count}>
-                {Number(Number(pointsInfo?.friendTechPoints).toFixed(2))}
+                {pointsInfo?.friendTechPoints
+                  ? Number(Number(pointsInfo?.friendTechPoints).toFixed(2))
+                  : 0}
               </div>
             </div>
           </div>
@@ -122,7 +126,9 @@ const Airdrop = observer(() => {
                 Your Frensly points
               </div>
               <div className={style.finance__total__count}>
-                {Number(Number(pointsInfo?.points).toFixed(2))}
+                {pointsInfo?.points
+                  ? Number(Number(pointsInfo?.points).toFixed(2))
+                  : 0}
               </div>
             </div>
           </div>
