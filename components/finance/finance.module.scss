@@ -23,10 +23,16 @@
   color: var(--text-shade);
   font-family: "DMSans";
   font-size: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   font-style: normal;
   font-weight: 700;
   line-height: 18px; /* 120% */
   letter-spacing: -0.15px;
+  img {
+    margin-top: -10px;
+  }
 }
 .contest__text {
   color: var(--text-shade);
