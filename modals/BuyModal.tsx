@@ -27,7 +27,7 @@ export const BuyModal = observer(({ key, data, idx }: modalProps) => {
   const [priceOfOne, setPriceOfOne] = useState("0");
   const [count, setCount] = useState(0);
   const darkMode = useDarkMode();
-
+  const [isBlocked, setIsBlocked] = useState(false);
   const buy = async () => {
     if (Number(numberOfShares) < 0.000001)
       return toast.error("Amount is too low");
@@ -90,12 +90,14 @@ export const BuyModal = observer(({ key, data, idx }: modalProps) => {
     checkPrice(numberOfShares !== "" ? Number(numberOfShares) : 0).then(
       (res) => {
         // console.log("currentPrice:", res, numberOfShares);
+        setIsBlocked(false)
         setCurrentPrice(res);
       }
     );
   };
   useEffect(() => {
     if (numberOfShares) {
+      setIsBlocked(true)
       checkAndUpdateExactPrice();
     }
   }, [numberOfShares]);
@@ -176,7 +178,8 @@ export const BuyModal = observer(({ key, data, idx }: modalProps) => {
             disabled={
               numberOfShares == 0 ||
               numberOfShares == "" ||
-              numberOfShares == "."
+              numberOfShares == "."||
+              isBlocked
             }
             onClick={buy}
           >

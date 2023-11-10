@@ -79,11 +79,11 @@ const Wrapper = observer(({ children }: any) => {
           content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
         />
       </Head>
-      {needAuth && (
+      {/* {needAuth && (
         <div className={home.main__page}>
           <AuthBanner />
         </div>
-      )}
+      )} */}
       {needToChangeWallet && (
         <div className={style.change__account}>
           Address is not assigned to this account. Change to{" "}
@@ -116,8 +116,8 @@ const Wrapper = observer(({ children }: any) => {
           <Footer />
         </>
       )}
-      {/* <Header />
-      {children} */}
+      <Header />
+      {children}
     </div>
   );
 });
