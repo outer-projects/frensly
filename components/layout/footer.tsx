@@ -14,7 +14,7 @@ const Footer = observer(() => {
   const { unread } = useInjection(ChatStore);
   const [active, setActive] = useState("");
   const [disabled, setDisabled] = useState(false);
-  const { user, checkAuth } = useInjection(Web3Store);
+  const { user, authSummaryCheck } = useInjection(Web3Store);
   const headerText = [
     { name: "Feed", link: "/feed" },
     { name: "Explore", link: "/explore" },
@@ -26,7 +26,10 @@ const Footer = observer(() => {
       // console.log(router.asPath);
       setActive(router.asPath);
     }
-    if (router.asPath.includes("/ponds/") || router.asPath.includes("/posts/")) {
+    if (
+      router.asPath.includes("/ponds/") ||
+      router.asPath.includes("/posts/")
+    ) {
       setDisabled(true);
     } else {
       setDisabled(false);
@@ -38,32 +41,33 @@ const Footer = observer(() => {
         <div className={style.footer__container}>
           <footer className={style.footer__mobile}>
             {headerText.map((el, i) => {
-              // console.log(el.link == "/profile");
-              return (
-                <Link
-                  href={
-                    "../.." +
-                    (el.link == "/profile"
-                      ? el.link + "/" + user?.twitterId
-                      : el.link)
-                  }
-                  style={{ textDecoration: "none", color: "auto" }}
-                  key={i}
-                >
-                  <div
-                    className={classNames(
-                      style.footer__link,
-                      active.includes(el.name.toLowerCase()) &&
-                        style.footer__link__active
-                    )}
+              if (authSummaryCheck || i <= 1) {
+                return (
+                  <Link
+                    href={
+                      "../.." +
+                      (el.link == "/profile"
+                        ? el.link + "/" + user?.twitterId
+                        : el.link)
+                    }
+                    style={{ textDecoration: "none", color: "auto" }}
+                    key={i}
                   >
-                    {el.name}
-                    {el.name == "Ponds" && unread !== 0 && (
-                      <div className={header.header__missing}>{unread}</div>
-                    )}
-                  </div>
-                </Link>
-              );
+                    <div
+                      className={classNames(
+                        style.footer__link,
+                        active.includes(el.name.toLowerCase()) &&
+                          style.footer__link__active
+                      )}
+                    >
+                      {el.name}
+                      {el.name == "Ponds" && unread !== 0 && (
+                        <div className={header.header__missing}>{unread}</div>
+                      )}
+                    </div>
+                  </Link>
+                );
+              }
             })}
           </footer>
         </div>
