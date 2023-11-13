@@ -32,7 +32,7 @@ const AuthBanner = observer(() => {
   const [codeEntered, setCodeEntered] = useState(false);
   const [opacity, setOpacity] = useState(false);
   const [activeCode, setActiveCode] = useState(false);
-  const modalStore = useInjection(ModalStore);
+  const router = useRouter();
 
   useEffect(() => {
     if (user?.account && !address) {
@@ -235,20 +235,24 @@ const AuthBanner = observer(() => {
                 <div
                   onClick={() => {
                     localStorage.setItem("authorization", "true");
+                    setTimeout(() => {
+                      router.push("/explore");
+                    }, 0);
+                    // localStorage.setItem("authorization", "true");
                   }}
                 >
-                  <a
+                  {/* <a
                     href="/api/v1/auth/twitter"
                     style={{ textDecoration: "none" }}
+                  > */}
+                  <button
+                    className={header.connect__button}
+                    style={{ width: "200px", height: "64px" }}
                   >
-                    <button
-                      className={header.connect__button}
-                      style={{ width: "200px", height: "64px" }}
-                    >
-                      <Twitter color={"black"} />
-                      Authorize
-                    </button>
-                  </a>
+                    <Twitter color={"black"} />
+                    Authorize
+                  </button>
+                  {/* </a> */}
                 </div>
               )}
               <div
