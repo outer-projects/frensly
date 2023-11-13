@@ -25,6 +25,7 @@ const Wrapper = observer(({ children }: any) => {
     user,
     setUser,
     needToChangeWallet,
+    setAuthorize,
     setNeedChangeWallet,
     authorizeOpen,
     setAuthSummaryCheck,
@@ -57,6 +58,7 @@ const Wrapper = observer(({ children }: any) => {
         "background: yellow; color: white; display: block;",
         needAuth
       );
+      setAuthorize(false);
       setAuthSummaryCheck(true);
     } else if (needToChangeWallet) {
       setAuthSummaryCheck(false);
