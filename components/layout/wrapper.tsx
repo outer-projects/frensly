@@ -59,7 +59,7 @@ const Wrapper = observer(({ children }: any) => {
       );
       setAuthSummaryCheck(true);
     } else if (needToChangeWallet) {
-      setAuthSummaryCheck(false)
+      setAuthSummaryCheck(false);
     } else {
       setAuthSummaryCheck(false);
     }
@@ -126,7 +126,7 @@ const Wrapper = observer(({ children }: any) => {
           </button>
         </div>
       )}
-      {!authorizeOpen && (
+      {!authorizeOpen && !needToChangeWallet && (
         <>
           <Header />
           {children}
