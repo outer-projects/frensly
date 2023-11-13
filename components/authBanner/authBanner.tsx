@@ -37,7 +37,7 @@ const AuthBanner = observer(() => {
   useEffect(() => {
     if (user?.account && !address) {
       setStage("Connect wallet");
-    } 
+    }
     // else if (!user) {
     //   setStage("Authorization");
     // }
@@ -232,7 +232,11 @@ const AuthBanner = observer(() => {
                 </div>
               )}
               {stage == "Authorization" && (
-                <div>
+                <div
+                  onClick={() => {
+                    localStorage.setItem("authorization", "true");
+                  }}
+                >
                   <a
                     href="/api/v1/auth/twitter"
                     style={{ textDecoration: "none" }}
