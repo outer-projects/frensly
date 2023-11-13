@@ -23,7 +23,8 @@ import { ModalsEnum } from "../../modals";
 const AuthBanner = observer(() => {
   const { address, authStatus, frensly, user, checkAuth } =
     useInjection(Web3Store);
-  const { setActive, setInit, sendInviteCode } = useInjection(UserStore);
+  const { setActive, sendInviteCode } = useInjection(UserStore);
+  const { setInit } = useInjection(Web3Store);
   const [title, setTitle] = useState("");
   const [invite, setInvite] = useState("");
   const [stage, setStage] = useState("");
@@ -268,7 +269,7 @@ const AuthBanner = observer(() => {
               )}
               {stage == "Connect wallet" && (
                 <div className={style.banner__early}>
-                  <ConnectButtonCustom />
+                  <SeparatedConnect />
                 </div>
               )}
             </div>
