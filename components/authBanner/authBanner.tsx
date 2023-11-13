@@ -32,26 +32,22 @@ const AuthBanner = observer(() => {
   const [codeEntered, setCodeEntered] = useState(false);
   const [opacity, setOpacity] = useState(false);
   const [activeCode, setActiveCode] = useState(false);
-  const router = useRouter();
-  const { code } = router.query;
   const modalStore = useInjection(ModalStore);
-  useEffect(() => {
-    if (code && code.includes("fren")) {
-      localStorage.setItem("invite", code as string);
-    }
-  }, [code]);
+ 
   useEffect(() => {
     if (user?.account && !address) {
       setStage("Connect wallet");
     } else if (!user) {
       setStage("Authorization");
-    } else if (user && !user?.isKeyConfirmed) {
-      setStage("Invite");
-      let code = localStorage.getItem("invite");
-      if (code) {
-        postCode(code);
-      }
-    } else if (user && user?.isKeyConfirmed && !user?.account) {
+    } 
+    // else if (user && !user?.isKeyConfirmed) {
+    //   setStage("Invite");
+    //   let code = localStorage.getItem("invite");
+    //   if (code) {
+    //     postCode(code);
+    //   }
+    // } 
+    else if (user && user?.isKeyConfirmed && !user?.account) {
       setStage("Connect");
     } else if (user?.account && user?.isKeyConfirmed) {
       setStage("Connected");
@@ -69,10 +65,10 @@ const AuthBanner = observer(() => {
         setTitle("Creator economy onchain");
         setActive(1);
         return;
-      case "Invite":
-        setTitle("Creator economy onchain");
-        setActive(1);
-        return;
+      // case "Invite":
+      //   setTitle("Creator economy onchain");
+      //   setActive(1);
+      //   return;
       case "Connected":
         setTitle("Create my pond");
         setActive(2);
@@ -166,7 +162,7 @@ const AuthBanner = observer(() => {
                   </div>
                 </>
               )}
-              {stage == "Invite" && (
+              {/* {stage == "Invite" && (
                 <>
                   <div
                     className={classNames(
@@ -178,7 +174,7 @@ const AuthBanner = observer(() => {
                     <br /> To join service please write your invite code
                   </div>
                 </>
-              )}
+              )} */}
               {stage == "Connected" && (
                 <>
                   <div

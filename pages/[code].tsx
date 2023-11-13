@@ -12,6 +12,13 @@ const CodePage: NextPage = observer((props) => {
   useEffect(() => {
     push("/explore");
   }, []);
+  const router = useRouter();
+  const { code } = router.query;
+  useEffect(() => {
+    if (code && code.includes("fren")) {
+      localStorage.setItem("invite", code as string);
+    }
+  }, [code]);
   const { unreadCount } = useInjection(UserStore);
   return (
     <div className={style.main__page}>
