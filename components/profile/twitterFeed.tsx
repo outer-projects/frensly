@@ -45,7 +45,7 @@ const TwitterFeed = observer(
       setHideRow,
       hideRow,
     } = useInjection(FeedStore);
-    const { user } = useInjection(Web3Store);
+    const { user, authSummaryCheck} = useInjection(Web3Store);
 
     const currentFeed = useMemo(() => {
       if (id) {
@@ -103,7 +103,7 @@ const TwitterFeed = observer(
     };
     return (
       <div className={classNames(style.twitter__feed, id && style.user__feed)}>
-        {(!id || id == user?._id) && (user?.verified || !isFrens) && (
+        {(!id || id == user?._id) && (user?.verified || !isFrens) && (authSummaryCheck) && (
           <MessageSend id={id} />
         )}
         <div>

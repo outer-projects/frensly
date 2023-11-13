@@ -124,7 +124,7 @@ const Header = observer(() => {
                 {darkMode.value && <Moon />}
                 {!darkMode.value && <Sun />}
               </button>
-              <div
+              {authSummaryCheck && <div
                 ref={ref}
                 style={{ display: "flex", alignItems: "flex-end" }}
                 onClick={() => {
@@ -136,7 +136,7 @@ const Header = observer(() => {
                 }}
               >
                 <Bell isActive={false} />
-              </div>
+              </div>}
               <div className={style.header__count__contain}>
                 {unreadCount != 0 && (
                   <div className={style.header__count}>{unreadCount}</div>
@@ -169,7 +169,7 @@ const Header = observer(() => {
                 {darkMode.value && <Moon />}
                 {!darkMode.value && <Sun />}
               </button>
-              <Bell isActive={false} />
+              {authSummaryCheck && <Bell isActive={false} />}
 
               {unreadCount != 0 && (
                 <div className={style.header__count}>{unreadCount}</div>
