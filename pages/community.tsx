@@ -2,7 +2,7 @@ import Head from "next/head";
 import { UserStore } from "../stores/UserStore";
 import { useInjection } from "inversify-react";
 import style from "./home.module.scss";
-import Configuration from "../components/comunity/configuration";
+import Configuration from "../components/community/configuration";
 
 const Community = () => {
   const { unreadCount } = useInjection(UserStore);

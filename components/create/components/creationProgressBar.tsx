@@ -24,7 +24,7 @@ const CreationProgressBar = observer(({ step }: { step: number }) => {
                 step >= i && style.active
               )}
             ></div>{" "}
-            {el}
+            <span>{el}</span>
           </div>
         );
       })}

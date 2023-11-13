@@ -40,7 +40,7 @@ const StageOne = observer(({ setStep }: { setStep: (s: number) => void }) => {
       </div>
       <div className={style.stage__one__row}>
         <div className={style.stage__one__social}>
-          <img />
+          <img src="../../icons/X.svg" />
           <input
             placeholder="Twitter"
             value={twitter}
@@ -48,7 +48,7 @@ const StageOne = observer(({ setStep }: { setStep: (s: number) => void }) => {
           />
         </div>
         <div className={style.stage__one__social}>
-          <img />
+          <img src="../../icons/web.svg" />
           <input
             placeholder="Web site"
             value={webSite}
@@ -58,7 +58,7 @@ const StageOne = observer(({ setStep }: { setStep: (s: number) => void }) => {
       </div>
       <div className={style.stage__one__row}>
         <div className={style.stage__one__social}>
-          <img />
+          <img src="../../icons/telegram.svg" />
           <input
             placeholder="Tg"
             value={tg}
@@ -66,7 +66,7 @@ const StageOne = observer(({ setStep }: { setStep: (s: number) => void }) => {
           />
         </div>
         <div className={style.stage__one__social}>
-          <img />
+          <img src="../../icons/discord.svg" />
           <input
             placeholder="Discord"
             value={discord}

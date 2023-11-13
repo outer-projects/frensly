@@ -32,18 +32,19 @@ const Configuration = () => {
   const [numberOfShares, setNumberOfShares] = useState("");
   return (
     <div className={style.configuration}>
-      <div className={style.configuration__back}>
-        <img
-          src={"../../icons/arrow_back.svg"}
-          style={{
-            marginRight: "8px",
-            filter: `invert(${darkMode.value ? "1" : "0"})`,
-          }}
-        />
-        <div>back</div>
-      </div>
-      <div>
+      <div className={style.first__block}>
         <div className={style.configuration__top}>
+          <div className={style.configuration__back}>
+            <img
+              src={"../../icons/arrow_back.svg"}
+              style={{
+                marginRight: "8px",
+                filter: `invert(${darkMode.value ? "1" : "0"})`,
+              }}
+            />
+            <div>back</div>
+          </div>
+
           <img src="../Avatar.svg" />
           <div className={style.configuration__top__title}>Community name</div>
         </div>
@@ -110,18 +111,21 @@ const Configuration = () => {
           <SubscriptionProgressBar progress={20} />
           <div className={buy.buy__amount} style={{ margin: "0px" }}>
             <div className={buy.buy__amount__title}>Amount (max: 0 BNB)</div>
-            <input
-              className={buy.buy__amount__value}
-              value={numberOfShares}
-              type="text"
-              onChange={(e) => {
-                if (!isNaN(Number(e.target.value)) || e.target.value == ".") {
-                  setNumberOfShares(e.target.value);
-                } else if (e.target.value == "") {
-                  setNumberOfShares("");
-                }
-              }}
-            />
+            <div className={buy.buy__amount__input}>
+              <input
+                className={buy.buy__amount__value}
+                value={numberOfShares}
+                type="text"
+                onChange={(e) => {
+                  if (!isNaN(Number(e.target.value)) || e.target.value == ".") {
+                    setNumberOfShares(e.target.value);
+                  } else if (e.target.value == "") {
+                    setNumberOfShares("");
+                  }
+                }}
+              />
+              <button className={style.max__button}>max</button>
+            </div>
           </div>
           <div
             className={classNames(
