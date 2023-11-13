@@ -21,7 +21,7 @@ import useDarkMode from "use-dark-mode";
 import { ModalStore } from "../../stores/ModalStore";
 import { ModalsEnum } from "../../modals";
 const AuthBanner = observer(() => {
-  const { address, authStatus, frensly, user, checkAuth } =
+  const { address, authStatus, frensly, user, checkAuth, setAuthorize } =
     useInjection(Web3Store);
   const { setActive, sendInviteCode } = useInjection(UserStore);
   const { setInit } = useInjection(Web3Store);
@@ -33,20 +33,21 @@ const AuthBanner = observer(() => {
   const [opacity, setOpacity] = useState(false);
   const [activeCode, setActiveCode] = useState(false);
   const modalStore = useInjection(ModalStore);
- 
+
   useEffect(() => {
     if (user?.account && !address) {
       setStage("Connect wallet");
-    } else if (!user) {
-      setStage("Authorization");
     } 
+    // else if (!user) {
+    //   setStage("Authorization");
+    // }
     // else if (user && !user?.isKeyConfirmed) {
     //   setStage("Invite");
     //   let code = localStorage.getItem("invite");
     //   if (code) {
     //     postCode(code);
     //   }
-    // } 
+    // }
     else if (user && user?.isKeyConfirmed && !user?.account) {
       setStage("Connect");
     } else if (user?.account && user?.isKeyConfirmed) {
@@ -120,11 +121,12 @@ const AuthBanner = observer(() => {
     <>
       {
         <div className={style.banner} style={{ opacity: opacity ? 1 : 0 }}>
-          <div className={style.banner__top}>
+          {/* <div className={style.banner__top}>
             <img
               src={!darkMode.value ? "../logo.svg" : "../logo_white.svg"}
               className={style.banner__logo}
             />
+
             <button
               className={classNames(style.theme__btn)}
               onClick={darkMode.toggle}
@@ -132,7 +134,9 @@ const AuthBanner = observer(() => {
               {darkMode.value && <Moon />}
               {!darkMode.value && <Sun />}
             </button>
-          </div>
+          
+            
+          </div> */}
           <div className={style.banner__col}>
             <div
               className={classNames(
@@ -247,7 +251,7 @@ const AuthBanner = observer(() => {
                 className={style.banner__early}
                 style={{ display: stage == "Connect" ? "flex" : "none" }}
               >
-                <ConnectButtonCustom isAuth/>
+                <ConnectButtonCustom isAuth />
                 <div className={style.banner__small__text}>
                   The wallet can't be changed
                 </div>

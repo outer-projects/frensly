@@ -16,6 +16,7 @@ import Head from "next/head";
 import Footer from "./footer";
 import header from "./header.module.scss";
 import classNames from "classnames";
+import { useRouter } from "next/router";
 
 const Wrapper = observer(({ children }: any) => {
   const {
@@ -25,9 +26,8 @@ const Wrapper = observer(({ children }: any) => {
     user,
     setUser,
     needToChangeWallet,
-    setAuthorize,
     setNeedChangeWallet,
-    authorizeOpen,
+
     setAuthSummaryCheck,
     init,
     setInit,
@@ -47,25 +47,22 @@ const Wrapper = observer(({ children }: any) => {
     () => !needToChangeWallet && init && user?.account,
     [needToChangeWallet, init, user?.account]
   );
-  const needAuth = useMemo(
-    () => !needToChangeWallet && (!init || !user?.account),
-    [needToChangeWallet, init, user?.account]
-  );
+
+  const router = useRouter();
   useEffect(() => {
     if (ready) {
-      console.log(
-        "%cHello wrapper.tsx line:55 ",
-        "background: yellow; color: white; display: block;",
-        needAuth
-      );
-      setAuthorize(false);
       setAuthSummaryCheck(true);
     } else if (needToChangeWallet) {
       setAuthSummaryCheck(false);
     } else {
       setAuthSummaryCheck(false);
     }
-  }, [ready, needAuth]);
+  }, [ready]);
+  useEffect(() => {
+    if (localStorage.authorization === "true") {
+      router.push("/auth");
+    }
+  }, []);
   console.log(ready);
   useEffect(() => {
     if (web3 && address && user?.account && frensly) {
@@ -92,17 +89,18 @@ const Wrapper = observer(({ children }: any) => {
       className={classNames(style.page__container, ready && style.page__open)}
     >
       <div className={classNames(style.page__bg)}></div>
+      {!needToChangeWallet && <Header />}
       <Head>
         <meta
           name="viewport"
           content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
         />
       </Head>
-      {authorizeOpen && (
+      {/* {authorizeOpen && (
         <div className={home.main__page}>
           <AuthBanner />
         </div>
-      )}
+      )} */}
       {needToChangeWallet && (
         <div className={style.change__account}>
           Address is not assigned to this account. Change to{" "}
@@ -128,13 +126,9 @@ const Wrapper = observer(({ children }: any) => {
           </button>
         </div>
       )}
-      {!authorizeOpen && !needToChangeWallet && (
-        <>
-          <Header />
-          {children}
-          <Footer />
-        </>
-      )}
+
+      {!needToChangeWallet && children}
+      {!needToChangeWallet && <Footer />}
       {/* <Header /> */}
       {/* {children} */}
     </div>
