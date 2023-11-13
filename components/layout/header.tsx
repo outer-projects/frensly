@@ -21,7 +21,7 @@ const Header = observer(() => {
   const router = useRouter();
   const socket = useContext(SocketContext);
   const [active, setActive] = useState("");
-  const [menuMob, setMenuMob] = useState(false);
+  // const [menuMob, setMenuMob] = useState(false);
   const darkMode = useDarkMode(false);
   const [nots, setNots] = useState(false);
   const [notsMob, setNotsMob] = useState(false);
