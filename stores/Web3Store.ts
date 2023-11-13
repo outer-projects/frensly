@@ -17,6 +17,8 @@ import { IProfile } from "../types/users";
 
 @injectable()
 export class Web3Store {
+  @observable init: boolean = false;
+  @observable authSummaryCheck: boolean = false;
   @observable address: undefined | string = undefined;
   @observable connected: boolean = false;
   @observable provider: any = undefined;
@@ -27,6 +29,7 @@ export class Web3Store {
   @observable web3?: Web3;
   @observable socketWeb3?: Web3;
   @observable fee: number = 0;
+  @observable authorizeOpen: boolean  = false;
   @observable blockInterface: boolean = false;
   @observable frensly?: any = undefined;
   @observable authStatus: AuthenticationStatus = "unauthenticated";
@@ -55,6 +58,9 @@ export class Web3Store {
   @action setAuthStatus = (auth: AuthenticationStatus) => {
     this.authStatus = auth;
   };
+  @action setAuthSummaryCheck = (auth: boolean) => {
+    this.authSummaryCheck = auth;
+  };
   @action setAddress = (user: any) => {
     this.address = user.address;
   };
@@ -64,7 +70,9 @@ export class Web3Store {
   @action setUser = (user: any) => {
     this.user = user;
   };
-
+  @action setAuthorize = (status: boolean) => {
+    this.authorizeOpen = status;
+  };
   disconnected = () => {
     this.address = undefined;
   };
@@ -130,6 +138,9 @@ export class Web3Store {
       console.error(error);
       this.setAuthStatus("unauthenticated");
     }
+  };
+  @action setInit = (init: boolean) => {
+    this.init = init;
   };
   @action checkAuth = async () => {
     try {

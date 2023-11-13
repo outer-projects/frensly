@@ -11,7 +11,6 @@ import BigNumber from "bignumber.js";
 
 @injectable()
 export class UserStore {
-  @observable init: boolean = false;
   @observable opacity: boolean = false;
   @observable ethCurrency: number = 0;
   @observable history: any[] = [];
@@ -350,9 +349,6 @@ export class UserStore {
   };
   @action setOpacity = (opacity: boolean) => {
     this.opacity = opacity;
-  };
-  @action setInit = (init: boolean) => {
-    this.init = init;
   };
   @action setActive = (active: number) => {
     this.active = active;

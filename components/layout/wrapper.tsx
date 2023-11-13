@@ -18,8 +18,6 @@ import header from "./header.module.scss";
 import classNames from "classnames";
 
 const Wrapper = observer(({ children }: any) => {
-  const { init, setInit, getNotifications } = useInjection(UserStore);
-
   const {
     web3,
     frensly,
@@ -28,6 +26,10 @@ const Wrapper = observer(({ children }: any) => {
     setUser,
     needToChangeWallet,
     setNeedChangeWallet,
+    authorizeOpen,
+    setAuthSummaryCheck,
+    init,
+    setInit,
   } = useInjection(Web3Store);
   const isInit = async () => {
     // console.log(address, user?.account?.address);
@@ -48,6 +50,13 @@ const Wrapper = observer(({ children }: any) => {
     () => !needToChangeWallet && (!init || !user?.account),
     [needToChangeWallet, init, user?.account]
   );
+  useEffect(() => {
+    if (!needAuth) {
+      setAuthSummaryCheck(needAuth);
+    } else {
+      setAuthSummaryCheck(!needAuth);
+    }
+  }, [needAuth]);
   useEffect(() => {
     if (web3 && address && user?.account && frensly) {
       isInit();
@@ -79,11 +88,11 @@ const Wrapper = observer(({ children }: any) => {
           content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
         />
       </Head>
-      {/* {needAuth && (
+      {authorizeOpen && (
         <div className={home.main__page}>
           <AuthBanner />
         </div>
-      )} */}
+      )}
       {needToChangeWallet && (
         <div className={style.change__account}>
           Address is not assigned to this account. Change to{" "}
@@ -109,7 +118,7 @@ const Wrapper = observer(({ children }: any) => {
           </button>
         </div>
       )}
-      {ready && (
+      {!authorizeOpen && (
         <>
           <Header />
           {children}
@@ -117,7 +126,7 @@ const Wrapper = observer(({ children }: any) => {
         </>
       )}
       {/* <Header /> */}
-      {children}
+      {/* {children} */}
     </div>
   );
 });

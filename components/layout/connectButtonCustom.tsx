@@ -19,6 +19,8 @@ const ConnectButtonCustom = observer(({ isHeader }: { isHeader?: boolean }) => {
     setUserBalance,
     user,
     auth,
+    authSummaryCheck,
+    setAuthorize
   } = useInjection(Web3Store);
 
   return (
@@ -77,6 +79,22 @@ const ConnectButtonCustom = observer(({ isHeader }: { isHeader?: boolean }) => {
             })}
           >
             {(() => {
+              if (!authSummaryCheck) {
+                return (
+                  <button
+                    className={classNames(
+                      style.connect__button,
+                      style.authorize__button
+                    )}
+                    onClick={()=>{
+                      setAuthorize(true)
+                    }}
+                  >
+                    {" "}
+                    Connect{" "}
+                  </button>
+                );
+              }
               if (!connected) {
                 return <SeparatedConnect />;
               }
@@ -106,7 +124,7 @@ const ConnectButtonCustom = observer(({ isHeader }: { isHeader?: boolean }) => {
                   {user?.account ? (
                     <div className={style.account}>
                       <Link href={"/profile/" + user.twitterId}>
-                        <img src={user?.avatar}  />
+                        <img src={user?.avatar} />
                       </Link>
                       <div style={{ marginLeft: "8px" }}>
                         <div
