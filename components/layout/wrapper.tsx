@@ -52,13 +52,18 @@ const Wrapper = observer(({ children }: any) => {
   );
   useEffect(() => {
     if (ready) {
-      console.log('%cHello wrapper.tsx line:55 ', 'background: yellow; color: white; display: block;', needAuth);
+      console.log(
+        "%cHello wrapper.tsx line:55 ",
+        "background: yellow; color: white; display: block;",
+        needAuth
+      );
       setAuthSummaryCheck(true);
+    } else if (needToChangeWallet) {
+      setAuthSummaryCheck(false)
     } else {
-      console.log('%cHello wrapper.tsx line:55 ', 'background: green; color: white; display: block;', needAuth);
       setAuthSummaryCheck(false);
     }
-  }, [ready]);
+  }, [ready, needAuth]);
   console.log(ready);
   useEffect(() => {
     if (web3 && address && user?.account && frensly) {
