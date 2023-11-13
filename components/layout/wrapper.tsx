@@ -52,8 +52,10 @@ const Wrapper = observer(({ children }: any) => {
   );
   useEffect(() => {
     if (!needAuth) {
+      console.log('%cHello wrapper.tsx line:55 ', 'background: yellow; color: white; display: block;', needAuth);
       setAuthSummaryCheck(needAuth);
     } else {
+      console.log('%cHello wrapper.tsx line:55 ', 'background: green; color: white; display: block;', needAuth);
       setAuthSummaryCheck(!needAuth);
     }
   }, [needAuth]);

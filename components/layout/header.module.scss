@@ -128,6 +128,8 @@
   display: flex;
   justify-content: flex-start;
   margin-left: 37px;
+  min-width: 616px;
+  justify-content: space-around;
   transform: translateY(12px);
   .header__el {
     display: flex;
