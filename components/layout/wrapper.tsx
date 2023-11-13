@@ -51,14 +51,15 @@ const Wrapper = observer(({ children }: any) => {
     [needToChangeWallet, init, user?.account]
   );
   useEffect(() => {
-    if (!needAuth) {
+    if (ready) {
       console.log('%cHello wrapper.tsx line:55 ', 'background: yellow; color: white; display: block;', needAuth);
-      setAuthSummaryCheck(needAuth);
+      setAuthSummaryCheck(true);
     } else {
       console.log('%cHello wrapper.tsx line:55 ', 'background: green; color: white; display: block;', needAuth);
-      setAuthSummaryCheck(!needAuth);
+      setAuthSummaryCheck(false);
     }
-  }, [needAuth]);
+  }, [ready]);
+  console.log(ready);
   useEffect(() => {
     if (web3 && address && user?.account && frensly) {
       isInit();
