@@ -251,7 +251,7 @@ const AuthBanner = observer(() => {
                 className={style.banner__early}
                 style={{ display: stage == "Connect" ? "flex" : "none" }}
               >
-                <ConnectButtonCustom />
+                <ConnectButtonCustom isAuth/>
                 <div className={style.banner__small__text}>
                   The wallet can't be changed
                 </div>

@@ -10,7 +10,7 @@ import style from "./header.module.scss";
 import { addressSlice } from "../../utils/utilities";
 import classNames from "classnames";
 import Link from "next/link";
-const ConnectButtonCustom = observer(({ isHeader }: { isHeader?: boolean }) => {
+const ConnectButtonCustom = observer(({ isHeader, isAuth }: { isHeader?: boolean, isAuth?:boolean }) => {
   const {
     setConnected,
     setSigner,
@@ -79,7 +79,7 @@ const ConnectButtonCustom = observer(({ isHeader }: { isHeader?: boolean }) => {
             })}
           >
             {(() => {
-              if (!authSummaryCheck) {
+              if (!authSummaryCheck && !isAuth) {
                 return (
                   <button
                     className={classNames(
