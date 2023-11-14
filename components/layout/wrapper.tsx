@@ -59,7 +59,7 @@ const Wrapper = observer(({ children }: any) => {
     }
   }, [ready]);
   useEffect(() => {
-    if (localStorage.authorization === "true") {
+    if (localStorage.getItem("auth") === "true") {
       router.push("/auth");
     }
   }, []);

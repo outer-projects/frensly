@@ -12,15 +12,15 @@ import Web3Store from "../stores/Web3Store";
 const AuthPage: NextPage = observer((props) => {
   const { push } = useRouter();
   const { authSummaryCheck } = useInjection(Web3Store);
-//   useEffect(() => {
-//     push("/explore");
-//   }, []);
+  //   useEffect(() => {
+  //     push("/explore");
+  //   }, []);
   //   const router = useRouter();
   //   const { code } = router.query;s
   useEffect(() => {
-    if (localStorage.getItem("authorization") == undefined) {
+    if (localStorage.getItem("auth") == undefined) {
       //   localStorage.setItem("invite", code as string);
-      localStorage.setItem("authorization", "true");
+      localStorage.setItem("auth", "true");
     }
     // if(checkAuth)
   }, []);

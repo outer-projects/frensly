@@ -103,6 +103,8 @@ const AuthBanner = observer(() => {
         from: address,
       });
       const isInit = await frensly.methods.isSharesSubject(address).call();
+      localStorage.setItem("auth", "false");
+      router.push('/explore')
       setInit(isInit);
     } catch (e) {
       toast.error("Provider error");
@@ -233,13 +235,7 @@ const AuthBanner = observer(() => {
               )}
               {stage == "Authorization" && (
                 <div
-                  onClick={() => {
-                    localStorage.setItem("authorization", "true");
-                    setTimeout(() => {
-                      router.push("/explore");
-                    }, 0);
-                    // localStorage.setItem("authorization", "true");
-                  }}
+                 
                 >
                   {/* <a
                     href="/api/v1/auth/twitter"
