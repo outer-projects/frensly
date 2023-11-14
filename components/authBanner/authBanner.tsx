@@ -18,14 +18,12 @@ import { useRouter } from "next/router";
 import useDarkMode from "use-dark-mode";
 
 const AuthBanner = observer(() => {
-  const { address, authStatus, frensly, user, checkAuth, setAuthorize } =
+  const { address, authStatus, frensly, user, checkAuth, setInit } =
     useInjection(Web3Store);
   const { setActive, sendInviteCode } = useInjection(UserStore);
-  const { setInit } = useInjection(Web3Store);
   const [title, setTitle] = useState("");
   const [invite, setInvite] = useState("");
   const [stage, setStage] = useState("");
-  const darkMode = useDarkMode(false);
   const [codeEntered, setCodeEntered] = useState(false);
   const [opacity, setOpacity] = useState(false);
   const [activeCode, setActiveCode] = useState(false);
@@ -34,6 +32,10 @@ const AuthBanner = observer(() => {
   useEffect(() => {
     if (user?.account && !address) {
       setStage("Connect wallet");
+    } else if (user && !user?.account) {
+      setStage("Connect");
+    } else if (user?.account) {
+      setStage("Init");
     }
     // else if (!user) {
     //   setStage("Authorization");
@@ -43,11 +45,7 @@ const AuthBanner = observer(() => {
     //   let code = localStorage.getItem("invite");
     //
     // }
-    else if (user && !user?.account) {
-      setStage("Connect");
-    } else if (user?.account) {
-      setStage("Init");
-    }
+
     let code = localStorage.getItem("invite");
     if (code) {
       postCode(code);

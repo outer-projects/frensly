@@ -17,6 +17,7 @@ import Footer from "./footer";
 import header from "./header.module.scss";
 import classNames from "classnames";
 import { useRouter } from "next/router";
+import { useWalletClient } from "wagmi";
 
 const Wrapper = observer(({ children }: any) => {
   const {
@@ -27,11 +28,12 @@ const Wrapper = observer(({ children }: any) => {
     setUser,
     needToChangeWallet,
     setNeedChangeWallet,
-
+    setSigner,
     setAuthSummaryCheck,
     init,
     setInit,
   } = useInjection(Web3Store);
+
   const isInit = async () => {
     // console.log(address, user?.account?.address);
     if (address?.toLowerCase() !== user?.account?.address) {

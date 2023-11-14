@@ -20,9 +20,8 @@ const ConnectButtonCustom = observer(
       setAddress,
       setUserBalance,
       user,
-      auth,
+      sign,
       authSummaryCheck,
-      setAuthorize,
     } = useInjection(Web3Store);
     const router = useRouter();
     return (
@@ -151,7 +150,7 @@ const ConnectButtonCustom = observer(
                       </div>
                     ) : (
                       <button
-                        onClick={auth}
+                        onClick={sign}
                         type="button"
                         className={classNames(
                           style.connect__button,

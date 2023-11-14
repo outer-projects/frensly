@@ -29,11 +29,12 @@ export class Web3Store {
   @observable web3?: Web3;
   @observable socketWeb3?: Web3;
   @observable fee: number = 0;
-  @observable authorizeOpen: boolean  = false;
+  @observable authorizeOpen: boolean = false;
   @observable blockInterface: boolean = false;
   @observable frensly?: any = undefined;
   @observable authStatus: AuthenticationStatus = "unauthenticated";
   @observable needToChangeWallet: boolean = false;
+  @observable checked: boolean = false;
   public constructor(private readonly rootStore: RootStore) {
     makeObservable(this);
   }
@@ -79,7 +80,8 @@ export class Web3Store {
   @action setSigner = (signer?: WalletClient | null, unsupported?: boolean) => {
     this.signer = signer;
     this.unsupported = unsupported;
-    if (signer) {
+    if (signer && !this.checked) {
+      this.checked = true;
       this.getBalance();
     }
   };
@@ -101,7 +103,7 @@ export class Web3Store {
     //   }, 500);
     // });
   };
-  @action auth = async () => {
+  @action sign = async () => {
     try {
       const { data } = await axios.get(prefix + `eauth/${this.address}`, {
         withCredentials: true,
@@ -118,9 +120,7 @@ export class Web3Store {
         // console.log(message, signature);
         const res = await axios.get(
           prefix +
-            `eauth/${data?.toString().trim()}/${signature
-              ?.toString()
-              .trim()}`,
+            `eauth/${data?.toString().trim()}/${signature?.toString().trim()}`,
           { withCredentials: true }
         );
         // console.log(res.data);
@@ -171,7 +171,7 @@ export class Web3Store {
       this.subscribeProvider();
       this.checkAuth().then((res) => {
         if (!res) {
-          this.auth();
+          this.sign();
         }
       });
       // let hexbalance =
