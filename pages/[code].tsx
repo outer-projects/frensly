@@ -9,22 +9,29 @@ import { UserStore } from "../stores/UserStore";
 
 const CodePage: NextPage = observer((props) => {
   const { push } = useRouter();
-  useEffect(() => {
-    push("/explore");
-  }, []);
+  // useEffect(() => {
+
+  // }, []);
   const router = useRouter();
-  const { code } = router.query;
-  useEffect(() => {
+  const registerCode = () => {
     if (code && code.includes("fren")) {
       localStorage.setItem("invite", code as string);
     }
+    setTimeout(() => {
+      push("/auth");
+    }, 500);
+  };
+
+  const { code } = router.query;
+  useEffect(() => {
+    registerCode();
   }, [code]);
   const { unreadCount } = useInjection(UserStore);
   return (
     <div className={style.main__page}>
       <Head>
         <title>{unreadCount !== 0 ? `(${unreadCount})` : ""}Frensly</title>
-         <meta
+        <meta
           name="viewport"
           content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
         ></meta>

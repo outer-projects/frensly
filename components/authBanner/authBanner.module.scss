@@ -6,7 +6,12 @@
   align-items: center;
   justify-content: space-between;
   transition: 500ms ease all;
-  height: 100vh;
+  height: calc(100vh  - 150px);
+  margin-top: 75px;
+  @media (max-width: 1000px) {
+    height: calc(100vh - 200px);
+    
+  }
 
 }
 .banner__col {
@@ -139,7 +144,7 @@
     font-size: 40px;
   }
   @media (max-height: 800px) {
-    margin-top: 85px;
+    margin-top: 115px;
   }
 }
 .banner__bottom {

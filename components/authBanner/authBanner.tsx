@@ -41,23 +41,25 @@ const AuthBanner = observer(() => {
     // else if (user && !user?.isKeyConfirmed) {
     //   setStage("Invite");
     //   let code = localStorage.getItem("invite");
-    //   if (code) {
-    //     postCode(code);
-    //   }
+    //
     // }
     else if (user && !user?.account) {
       setStage("Connect");
     } else if (user?.account) {
       setStage("Init");
     }
+    let code = localStorage.getItem("invite");
+    if (code) {
+      postCode(code);
+    }
   }, [user, authStatus, address]);
   // console.log(user, stage, address);
   useEffect(() => {
     switch (stage) {
-      case "Authorization":
-        setTitle("Creator economy onchain");
-        setActive(0);
-        return;
+      // case "Authorization":
+      //   setTitle("Creator economy onchain");
+      //   setActive(0);
+      //   return;
       case "Connect":
         setTitle("You are early!");
         setTitle("Creator economy onchain");
@@ -101,7 +103,7 @@ const AuthBanner = observer(() => {
       });
       const isInit = await frensly.methods.isSharesSubject(address).call();
       localStorage.setItem("auth", "false");
-      router.push('/explore')
+      router.push("/explore");
       setInit(isInit);
     } catch (e) {
       toast.error("Provider error");
@@ -230,24 +232,7 @@ const AuthBanner = observer(() => {
                   </div>
                 </div>
               )}
-              {stage == "Authorization" && (
-                <div
-                 
-                >
-                  {/* <a
-                    href="/api/v1/auth/twitter"
-                    style={{ textDecoration: "none" }}
-                  > */}
-                  <button
-                    className={header.connect__button}
-                    style={{ width: "200px", height: "64px" }}
-                  >
-                    <Twitter color={"black"} />
-                    Authorize
-                  </button>
-                  {/* </a> */}
-                </div>
-              )}
+
               <div
                 className={style.banner__early}
                 style={{ display: stage == "Connect" ? "flex" : "none" }}
