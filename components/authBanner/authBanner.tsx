@@ -12,14 +12,11 @@ import { SeparatedConnect } from "../layout/separatedConnect";
 import Web3Store from "../../stores/Web3Store";
 import ConnectButtonCustom from "../layout/connectButtonCustom";
 import ProgressBar from "../progressBar/progressBar";
-import { toWei } from "web3-utils";
 import { toast } from "react-toastify";
 import { useRouter } from "next/router";
-import Moon from "../svgs/moon";
-import Sun from "../svgs/sun";
+
 import useDarkMode from "use-dark-mode";
-import { ModalStore } from "../../stores/ModalStore";
-import { ModalsEnum } from "../../modals";
+
 const AuthBanner = observer(() => {
   const { address, authStatus, frensly, user, checkAuth, setAuthorize } =
     useInjection(Web3Store);
@@ -48,10 +45,10 @@ const AuthBanner = observer(() => {
     //     postCode(code);
     //   }
     // }
-    else if (user && user?.isKeyConfirmed && !user?.account) {
+    else if (user && !user?.account) {
       setStage("Connect");
-    } else if (user?.account && user?.isKeyConfirmed) {
-      setStage("Connected");
+    } else if (user?.account) {
+      setStage("Init");
     }
   }, [user, authStatus, address]);
   // console.log(user, stage, address);
@@ -70,7 +67,7 @@ const AuthBanner = observer(() => {
       //   setTitle("Creator economy onchain");
       //   setActive(1);
       //   return;
-      case "Connected":
+      case "Init":
         setTitle("Create my pond");
         setActive(2);
         return;
@@ -147,7 +144,7 @@ const AuthBanner = observer(() => {
                   ? style.banner__title__auth
                   : stage == "Connect"
                   ? style.banner__title__connection
-                  : style.banner__title__connected
+                  : style.banner__title__init
               )}
             >
               <img src="../banner_img.svg" className={style.banner__img} />
@@ -181,7 +178,7 @@ const AuthBanner = observer(() => {
                   </div>
                 </>
               )} */}
-              {stage == "Connected" && (
+              {stage == "Init" && (
                 <>
                   <div
                     className={classNames(
@@ -260,7 +257,7 @@ const AuthBanner = observer(() => {
                   The wallet can't be changed
                 </div>
               </div>
-              {stage == "Connected" && (
+              {stage == "Init" && (
                 <div className={style.banner__early}>
                   <button
                     className={header.connect__button}
