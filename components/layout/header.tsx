@@ -36,7 +36,7 @@ const Header = observer(() => {
     { name: "Profile", link: "/profile" },
     { name: "Dashboard", link: "/dashboard/finance" },
   ];
-
+ 
   useEffect(() => {
     getEthCurrency();
     socket.emit("login", (res: any) => {

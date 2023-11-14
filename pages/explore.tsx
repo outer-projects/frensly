@@ -3,8 +3,6 @@ import type { NextPage } from "next";
 import style from "./home.module.scss";
 import Explore from "../components/explore/explore";
 import Head from "next/head";
-import { useContext, useEffect } from "react";
-import { SocketContext } from "../utils/socket";
 import { useInjection } from "inversify-react";
 import { UserStore } from "../stores/UserStore";
 

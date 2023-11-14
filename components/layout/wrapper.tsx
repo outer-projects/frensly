@@ -1,23 +1,17 @@
-import { use, useEffect, useMemo } from "react";
+import { useEffect, useMemo } from "react";
 import Header from "./header";
 import { observer } from "mobx-react";
 import style from "./wrapper.module.scss";
-import home from "../../pages/home.module.scss";
-
 import { useInjection } from "inversify-react";
-import { UserStore } from "../../stores/UserStore";
 import axios, { AxiosRequestConfig } from "axios";
 import Web3Store from "../../stores/Web3Store";
-import { toast } from "react-toastify";
 import { prefix } from "../../utils/config";
-import AuthBanner from "../authBanner/authBanner";
 import ConnectButtonCustom from "./connectButtonCustom";
 import Head from "next/head";
 import Footer from "./footer";
 import header from "./header.module.scss";
 import classNames from "classnames";
 import { useRouter } from "next/router";
-import { useWalletClient } from "wagmi";
 
 const Wrapper = observer(({ children }: any) => {
   const {
@@ -28,7 +22,6 @@ const Wrapper = observer(({ children }: any) => {
     setUser,
     needToChangeWallet,
     setNeedChangeWallet,
-    setSigner,
     setAuthSummaryCheck,
     init,
     setInit,
@@ -65,7 +58,6 @@ const Wrapper = observer(({ children }: any) => {
       router.push("/auth");
     }
   }, []);
-  console.log(ready);
   useEffect(() => {
     if (web3 && address && user?.account && frensly) {
       isInit();

@@ -8,11 +8,13 @@ import { UserStore } from "../stores/UserStore";
 import TypesList from "../components/common/typesList";
 import { useEffect, useState } from "react";
 import { FeedStore } from "../stores/FeedStore";
+import Web3Store from "../stores/Web3Store";
 
 const types = ["Following", "Verified", "Public"];
 
 const FeedPage: NextPage = observer((props) => {
   const { unreadCount } = useInjection(UserStore);
+  const { authSummaryCheck } = useInjection(Web3Store);
   const { feedOffset, feed, activeFeed, setActiveFeed } =
     useInjection(FeedStore);
   const [firstRun, setFirstRun] = useState(false);
@@ -43,7 +45,7 @@ const FeedPage: NextPage = observer((props) => {
       </Head>
       <div className={style.feed__type}>
         <TypesList
-          types={types}
+          types={authSummaryCheck ? types : types.filter((el, i)=> i !== 0)}
           active={activeFeed}
           setActive={setActiveFeed}
         />
