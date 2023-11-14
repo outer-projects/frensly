@@ -1,7 +1,7 @@
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 import { useInjection } from "inversify-react";
 import { observer } from "mobx-react";
-import { useEffect, useState } from "react";
+import { use, useEffect, useState } from "react";
 import Web3Store from "../../stores/Web3Store";
 import { SeparatedConnect } from "./separatedConnect";
 import { useWalletClient } from "wagmi";
@@ -10,6 +10,7 @@ import { addressSlice } from "../../utils/utilities";
 import classNames from "classnames";
 import Link from "next/link";
 import Twitter from "../socials/twitter";
+import { Router, useRouter } from "next/router";
 const ConnectButtonCustom = observer(
   ({ isHeader, isAuth }: { isHeader?: boolean; isAuth?: boolean }) => {
     const {
@@ -23,7 +24,7 @@ const ConnectButtonCustom = observer(
       authSummaryCheck,
       setAuthorize,
     } = useInjection(Web3Store);
-
+    const router = useRouter();
     return (
       <ConnectButton.Custom>
         {({
@@ -82,19 +83,21 @@ const ConnectButtonCustom = observer(
               {(() => {
                 if (!authSummaryCheck && !isAuth) {
                   return (
-                    <div>
-                      <a
-                        href="/api/v1/auth/twitter"
-                        style={{ textDecoration: "none" }}
+                    <div
+                      onClick={() => {
+                        localStorage.setItem("auth", "true");
+                        setTimeout(() => {
+                          router.push("/api/v1/auth/twitter");
+                        }, 500);
+                      }}
+                    >
+                      <button
+                        className={style.connect__button}
+                        style={{ width: "128px", height: "48px" }}
                       >
-                        <button
-                          className={style.connect__button}
-                          style={{ width: "108px", height: "48px" }}
-                        >
-                          <Twitter color={"black"} />
-                          Authorize
-                        </button>
-                      </a>
+                        <Twitter color={"black"} />
+                        Authorize
+                      </button>
                     </div>
                   );
                 }
