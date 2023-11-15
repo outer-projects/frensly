@@ -2,7 +2,6 @@ import { useState } from "react";
 import CreationProgressBar from "./components/creationProgressBar";
 import StageOne from "./stages/stageOne";
 import StageTwo from "./stages/stageTwo";
-import StageThree from "./stages/stageThree";
 
 const Creation = () => {
   const [step, setStep] = useState(0);
@@ -41,8 +40,7 @@ const Creation = () => {
           setTg={setTg}
         />
       )}
-      {step == 1 && <StageTwo setStep={setStep} />}
-      {step == 2 && <StageThree setStep={setStep} />}
+      {step == 1 && <StageTwo name={name} setStep={setStep} />}
     </div>
   );
 };
