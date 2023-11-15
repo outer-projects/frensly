@@ -7,10 +7,11 @@ import { useRouter } from "next/router";
 const AuthPageWrap = observer(({ children }: any) => {
   const { authSummaryCheck } = useInjection(Web3Store);
   const router = useRouter();
+  console.log(authSummaryCheck);
   const checkAuth = () => {
-    if (!authSummaryCheck) {
-      router.push("/explore");
-    }
+    // if (!authSummaryCheck) {
+    //   router.push("/explore");
+    // }
   };
   useEffect(() => {
     let tt = setTimeout(() => {
