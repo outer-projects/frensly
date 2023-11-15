@@ -8,14 +8,15 @@ const AuthPageWrap = observer(({ children }: any) => {
   const { authSummaryCheck } = useInjection(Web3Store);
   const router = useRouter();
   const checkAuth = () => {
-    setTimeout(() => {
-      if (!authSummaryCheck) {
-        router.push("/explore");
-      }
-    }, 500);
+    if (!authSummaryCheck) {
+      router.push("/explore");
+    }
   };
   useEffect(() => {
-    checkAuth();
+    let tt = setTimeout(() => {
+      checkAuth();
+    }, 500);
+    return () => clearTimeout(tt);
   }, []);
   return <div>{children}</div>;
 });

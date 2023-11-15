@@ -8,12 +8,18 @@ import {
   frenslyAbi,
   frenslyContract,
   frenslyContractDev,
+  frenslyContractDevNew,
 } from "../utils/contracts/frensly";
 import { WalletClient } from "wagmi";
 import { AuthenticationStatus } from "@rainbow-me/rainbowkit";
 import axios from "axios";
 import { isDevelopment, prefix } from "../utils/config";
 import { IProfile } from "../types/users";
+import {
+  communityAbi,
+  communityContract,
+  communityContractDev,
+} from "../utils/contracts/community";
 
 @injectable()
 export class Web3Store {
@@ -32,6 +38,8 @@ export class Web3Store {
   @observable authorizeOpen: boolean = false;
   @observable blockInterface: boolean = false;
   @observable frensly?: any = undefined;
+  @observable newFrensly?: any = undefined;
+  @observable community?: any = undefined;
   @observable authStatus: AuthenticationStatus = "unauthenticated";
   @observable needToChangeWallet: boolean = false;
   @observable checked: boolean = false;
@@ -50,10 +58,17 @@ export class Web3Store {
         : process.env.NEXT_PUBLIC_NODE
     );
     this.socketWeb3 = new Web3(process.env.NEXT_PUBLIC_SOCKET_NODE);
-
+    this.community = new this.web3.eth.Contract(
+      communityAbi as any,
+      communityContractDev
+    );
     this.frensly = new this.web3.eth.Contract(
       frenslyAbi as any,
       isDevelopment ? frenslyContractDev : frenslyContract
+    );
+    this.newFrensly = new this.web3.eth.Contract(
+      frenslyAbi as any,
+      isDevelopment ? frenslyContractDev : frenslyContractDevNew
     );
   };
   @action setAuthStatus = (auth: AuthenticationStatus) => {
@@ -163,10 +178,17 @@ export class Web3Store {
           ? (this.signer.transport as any)
           : process.env.NEXT_PUBLIC_NODE
       );
-
       this.frensly = new this.web3.eth.Contract(
         frenslyAbi as any,
         isDevelopment ? frenslyContractDev : frenslyContract
+      );
+      this.newFrensly = new this.web3.eth.Contract(
+        frenslyAbi as any,
+        isDevelopment ? frenslyContractDev : frenslyContractDevNew
+      );
+      this.community = new this.web3.eth.Contract(
+        communityAbi as any,
+        communityContractDev
       );
       this.subscribeProvider();
       this.checkAuth().then((res) => {

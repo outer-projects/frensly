@@ -7,7 +7,7 @@ import RegupRow from "../components/regupRow";
 import classNames from "classnames";
 import header from "../../layout/header.module.scss";
 
-const StageThree = observer(({ setStep }: { setStep: (s: number) => void }) => {
+const Presale = observer(() => {
   const { user } = useInjection(Web3Store);
   return (
     <div className={style.stage__one}>
@@ -27,12 +27,12 @@ const StageThree = observer(({ setStep }: { setStep: (s: number) => void }) => {
             header.connect__button,
             style.stage__one__button
           )}
-          onClick={() => setStep(2)}
+          onClick={() => console.log('object')}
         >
-          Create pre-sale
+          Complete pre-sale
         </button>
       </div>
     </div>
   );
 });
-export default StageThree;
+export default Presale;

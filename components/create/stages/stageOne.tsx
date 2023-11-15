@@ -7,16 +7,42 @@ import TextareaAutosize from "react-textarea-autosize";
 import { useState } from "react";
 import classNames from "classnames";
 import header from "../../layout/header.module.scss";
-const StageOne = observer(({ setStep }: { setStep: (s: number) => void }) => {
-  const { user } = useInjection(Web3Store);
-  const [name, setName] = useState("");
-  const [description, setDescription] = useState("");
-  const [twitter, setTwitter] = useState("");
-  const [webSite, setWebSite] = useState("");
-  const [tg, setTg] = useState("");
-  const [discord, setDiscord] = useState("");
-  const [fee, setFee] = useState(0);
-  const [pricingModel, setPricingModel] = useState(0);
+import { useRouter } from "next/router";
+interface IStageOne {
+  setStep: (step: number) => void;
+  name: string;
+  setName: (name: string) => void;
+  description: string;
+  setDescription: (description: string) => void;
+  twitter: string;
+  setTwitter: (twitter: string) => void;
+  webSite: string;
+  setWebSite: (webSite: string) => void;
+  tg: string;
+  setTg: (tg: string) => void;
+  discord: string;
+  setDiscord: (discord: string) => void;
+  fee: number;
+  setFee: (fee: number) => void;
+  pricingModel: number;
+  setPricingModel: (pricingModel: number) => void;
+  image?: File | null;
+  setImage?: (img: File | null) => void;
+}
+const StageOne = observer((stage: IStageOne) => {
+  const { user, community, address } = useInjection(Web3Store);
+  const router = useRouter()
+  const create = async () => {
+    try {
+      const res = await community.methods.initPond(stage.name).send({
+        from: address,
+      });
+      console.log(res);
+      router.push('/community')
+    } catch (e) {
+      console.log(e);
+    }
+  };
   return (
     <div className={style.stage__one}>
       <div className={style.stage__one__user}>
@@ -27,15 +53,15 @@ const StageOne = observer(({ setStep }: { setStep: (s: number) => void }) => {
       <div className={style.stage__one__col}>
         <input
           placeholder="Name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
+          value={stage.name}
+          onChange={(e) => stage.setName(e.target.value)}
         />
         <TextareaAutosize
           className={style.stage__one__description}
           placeholder="Description"
           minRows={1}
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
+          value={stage.description}
+          onChange={(e) => stage.setDescription(e.target.value)}
         ></TextareaAutosize>
       </div>
       <div className={style.stage__one__row}>
@@ -43,16 +69,16 @@ const StageOne = observer(({ setStep }: { setStep: (s: number) => void }) => {
           <img src="../../icons/X.svg" />
           <input
             placeholder="Twitter"
-            value={twitter}
-            onChange={(e) => setTwitter(e.target.value)}
+            value={stage.twitter}
+            onChange={(e) => stage.setTwitter(e.target.value)}
           />
         </div>
         <div className={style.stage__one__social}>
           <img src="../../icons/web.svg" />
           <input
             placeholder="Web site"
-            value={webSite}
-            onChange={(e) => setWebSite(e.target.value)}
+            value={stage.webSite}
+            onChange={(e) => stage.setWebSite(e.target.value)}
           />
         </div>
       </div>
@@ -61,16 +87,16 @@ const StageOne = observer(({ setStep }: { setStep: (s: number) => void }) => {
           <img src="../../icons/telegram.svg" />
           <input
             placeholder="Tg"
-            value={tg}
-            onChange={(e) => setTg(e.target.value)}
+            value={stage.tg}
+            onChange={(e) => stage.setTg(e.target.value)}
           />
         </div>
         <div className={style.stage__one__social}>
           <img src="../../icons/discord.svg" />
           <input
             placeholder="Discord"
-            value={discord}
-            onChange={(e) => setDiscord(e.target.value)}
+            value={stage.discord}
+            onChange={(e) => stage.setDiscord(e.target.value)}
           />
         </div>
       </div>
@@ -80,10 +106,10 @@ const StageOne = observer(({ setStep }: { setStep: (s: number) => void }) => {
           <div className={style.stage__one__fee__check}>
             <input
               type="radio"
-              checked={fee == 0}
+              checked={stage.fee == 0}
               onChange={(e) => {
                 if (e.target.checked) {
-                  setFee(0);
+                  stage.setFee(0);
                 }
               }}
             />
@@ -92,10 +118,10 @@ const StageOne = observer(({ setStep }: { setStep: (s: number) => void }) => {
           <div className={style.stage__one__fee__check}>
             <input
               type="radio"
-              checked={fee == 1}
+              checked={stage.fee == 1}
               onChange={(e) => {
                 if (e.target.checked) {
-                  setFee(1);
+                  stage.setFee(1);
                 }
               }}
             />
@@ -109,10 +135,10 @@ const StageOne = observer(({ setStep }: { setStep: (s: number) => void }) => {
           <div className={style.stage__one__fee__check}>
             <input
               type="radio"
-              checked={pricingModel == 0}
+              checked={stage.pricingModel == 0}
               onChange={(e) => {
                 if (e.target.checked) {
-                  setPricingModel(0);
+                  stage.setPricingModel(0);
                 }
               }}
             />
@@ -121,10 +147,10 @@ const StageOne = observer(({ setStep }: { setStep: (s: number) => void }) => {
           <div className={style.stage__one__fee__check}>
             <input
               type="radio"
-              checked={pricingModel == 1}
+              checked={stage.pricingModel == 1}
               onChange={(e) => {
                 if (e.target.checked) {
-                  setPricingModel(1);
+                  stage.setPricingModel(1);
                 }
               }}
             />
@@ -138,7 +164,7 @@ const StageOne = observer(({ setStep }: { setStep: (s: number) => void }) => {
             header.connect__button,
             style.stage__one__button
           )}
-          onClick={() => setStep(1)}
+          onClick={create}
         >
           Create
         </button>
@@ -147,7 +173,7 @@ const StageOne = observer(({ setStep }: { setStep: (s: number) => void }) => {
             header.connect__button,
             style.stage__one__button
           )}
-          onClick={() => setStep(1)}
+          onClick={() => stage.setStep(2)}
         >
           Conduct a pre-sale
         </button>

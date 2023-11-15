@@ -6,92 +6,136 @@ import { useState } from "react";
 import finance from "../../finance/finance.module.scss";
 import header from "../../layout/header.module.scss";
 import classNames from "classnames";
-const StageTwo = observer(({ setStep }: { setStep: (s: number) => void }) => {
-  const { user } = useInjection(Web3Store);
-  const [supply, setSupply] = useState("");
-  const [ratio, setRatio] = useState("");
-  const [timeStart, setTimeStart] = useState("");
-  const [timeFinish, setTimeFinish] = useState("");
-  return (
-    <>
-      <div className={style.stage__title}>Presale configurator for</div>
-      <div className={style.stage__one}>
-        <div className={style.stage__one__user}>
-          <img className={style.stage__one__user__avatar} src={user?.avatar} />
-          <div className={style.stage__one__user__name}>
-            {user?.twitterName}
+import { useRouter } from "next/router";
+const StageTwo = observer(
+  ({ setStep, name }: { name: string; setStep: (s: number) => void }) => {
+    const { user, community, address } = useInjection(Web3Store);
+    const [supply, setSupply] = useState("");
+    const [maxAllocation, setMaxAllocation] = useState("");
+    const [ratio, setRatio] = useState("");
+    const [isRestricted, setIsRestricted] = useState(true);
+    const [timeStart, setTimeStart] = useState("");
+    const [timeFinish, setTimeFinish] = useState("");
+    const router = useRouter();
+    console.log(timeFinish, timeStart);
+    const createPresale = async () => {
+      try {
+        const res = await community.methods
+          .initPondPresale(
+            name,
+            isRestricted,
+            timeStart,
+            timeFinish,
+            supply,
+            maxAllocation,
+            ratio
+          )
+          .send({
+            from: address,
+          });
+        console.log(res);
+        router.push("/presale");
+      } catch (e) {
+        console.log(e);
+      }
+    };
+    return (
+      <>
+        <div className={style.stage__title}>Presale configurator for</div>
+        <div className={style.stage__one}>
+          <div className={style.stage__one__user}>
+            <img
+              className={style.stage__one__user__avatar}
+              src={user?.avatar}
+            />
+            <div className={style.stage__one__user__name}>
+              {user?.twitterName}
+            </div>
           </div>
-        </div>
-        <div className={style.stage__one__col}>
-          <input
-            placeholder="Presale supply (shares)"
-            value={supply}
-            style={{ marginTop: "24px" }}
-            onChange={(e) => setSupply(e.target.value)}
-          />
-          <input
-            placeholder="Liquidity ratio"
-            value={ratio}
-            style={{ marginTop: "16px" }}
-            onChange={(e) => setRatio(e.target.value)}
-          />
-        </div>
-
-        <div className={style.stage__one__row}>
-          <div className={style.stage__one__social}>
-            <div className={style.stage__date__title}>Start time </div>
+          <div className={style.stage__one__col}>
             <input
-              type="datetime-local"
-              value={timeStart}
-              style={{ paddingTop: "15px" }}
-              onChange={(e) => setTimeStart(e.target.value)}
+              placeholder="Presale supply (shares)"
+              value={supply}
+              style={{ marginTop: "24px" }}
+              onChange={(e) => setSupply(e.target.value)}
+            />
+            <input
+              placeholder="Liquidity ratio"
+              value={ratio}
+              style={{ marginTop: "16px" }}
+              onChange={(e) => setRatio(e.target.value)}
             />
           </div>
-          <div className={style.stage__one__social}>
-            <div className={style.stage__date__title}>End time </div>
+          <div className={style.stage__one__col}>
             <input
-              type="datetime-local"
-              value={timeFinish}
-              style={{ paddingTop: "15px" }}
-              onChange={(e) => setTimeFinish(e.target.value)}
+              placeholder="Max allocation"
+              value={maxAllocation}
+              style={{ marginTop: "24px" }}
+              onChange={(e) => setMaxAllocation(e.target.value)}
             />
           </div>
-        </div>
-        <div className={classNames(style.stage__one__row, style.stage__values)}>
-          <div
-            className={finance.finance__stat}
-            style={{ width: "49%", marginBottom: "0px" }}
-          >
-            <img src="../icons/Ethereum__grey.svg" />
-            <div>
-              <div className={finance.finance__stat__name}>Portfolio value</div>
-              <div className={finance.finance__stat__value}>0 ETH</div>
+          <div className={style.stage__one__row}>
+            <div className={style.stage__one__social}>
+              <div className={style.stage__date__title}>Start time </div>
+              <input
+                type="datetime-local"
+                value={timeStart}
+                style={{ paddingTop: "15px" }}
+                onChange={(e) => setTimeStart(e.target.value)}
+              />
+            </div>
+            <div className={style.stage__one__social}>
+              <div className={style.stage__date__title}>End time </div>
+              <input
+                type="datetime-local"
+                value={timeFinish}
+                style={{ paddingTop: "15px" }}
+                onChange={(e) => setTimeFinish(e.target.value)}
+              />
             </div>
           </div>
           <div
-            className={finance.finance__stat}
-            style={{ width: "49%", marginBottom: "0px" }}
+            className={classNames(style.stage__one__row, style.stage__values)}
           >
-            <img src="../icons/Ethereum__grey.svg" />
-            <div>
-              <div className={finance.finance__stat__name}>Portfolio value</div>
-              <div className={finance.finance__stat__value}>0 ETH</div>
+            <div
+              className={finance.finance__stat}
+              style={{ width: "49%", marginBottom: "0px" }}
+            >
+              <img src="../icons/Ethereum__grey.svg" />
+              <div>
+                <div className={finance.finance__stat__name}>
+                  Portfolio value
+                </div>
+                <div className={finance.finance__stat__value}>0 ETH</div>
+              </div>
+            </div>
+            <div
+              className={finance.finance__stat}
+              style={{ width: "49%", marginBottom: "0px" }}
+            >
+              <img src="../icons/Ethereum__grey.svg" />
+              <div>
+                <div className={finance.finance__stat__name}>
+                  Portfolio value
+                </div>
+                <div className={finance.finance__stat__value}>0 ETH</div>
+              </div>
             </div>
           </div>
+          <div className={style.stage__one__buttons}>
+            <button
+              className={classNames(
+                header.connect__button,
+                style.stage__one__button
+              )}
+              onClick={() => createPresale()}
+            >
+              Create pre-sale
+            </button>
+          </div>
         </div>
-        <div className={style.stage__one__buttons}>
-          <button
-            className={classNames(
-              header.connect__button,
-              style.stage__one__button
-            )}
-            onClick={() => setStep(2)}
-          >
-            Create pre-sale
-          </button>
-        </div>
-      </div>
-    </>
-  );
-});
+      </>
+    );
+  }
+);
 export default StageTwo;
