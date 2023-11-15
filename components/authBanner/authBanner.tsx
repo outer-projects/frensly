@@ -101,7 +101,7 @@ const AuthBanner = observer(() => {
       });
       const isInit = await frensly.methods.isSharesSubject(address).call();
       localStorage.setItem("auth", "false");
-      router.push("/explore");
+      // router.push("/explore");
       setInit(isInit);
     } catch (e) {
       toast.error("Provider error");
