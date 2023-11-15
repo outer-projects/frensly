@@ -34,7 +34,7 @@ const StageTwo = observer(
             from: address,
           });
         console.log(res);
-        router.push("/presale");
+        router.push("/presale/123");
       } catch (e) {
         console.log(e);
       }

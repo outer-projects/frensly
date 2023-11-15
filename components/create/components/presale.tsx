@@ -6,9 +6,24 @@ import RegupsProgressBar from "../components/regupsProgressBar";
 import RegupRow from "../components/regupRow";
 import classNames from "classnames";
 import header from "../../layout/header.module.scss";
+import { useRouter } from "next/router";
 
 const Presale = observer(() => {
-  const { user } = useInjection(Web3Store);
+  const { user, community, address } = useInjection(Web3Store);
+  const router = useRouter();
+  const { id } = router.query;
+  const complete = async () => {
+    try {
+      const res = await community.methods.finalizePresale(id).send({
+        from: address,
+      });
+      console.log(res);
+      router.push("/community");
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
   return (
     <div className={style.stage__one}>
       <div className={style.stage__one__user}>
@@ -27,7 +42,7 @@ const Presale = observer(() => {
             header.connect__button,
             style.stage__one__button
           )}
-          onClick={() => console.log('object')}
+          onClick={complete}
         >
           Complete pre-sale
         </button>
