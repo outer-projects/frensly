@@ -6,8 +6,9 @@
   align-items: center;
   justify-content: space-between;
   transition: 500ms ease all;
-  height: calc(100vh  - 150px);
-  margin-top: 75px;
+  height: calc(100vh  - 75px);
+  overflow-y: hidden;
+  // margin-top: 75px;
   @media (max-width: 1000px) {
     height: calc(100vh - 200px);
     
@@ -144,7 +145,7 @@
     font-size: 40px;
   }
   @media (max-height: 800px) {
-    margin-top: 115px;
+    margin-top: 75px;
   }
 }
 .banner__bottom {

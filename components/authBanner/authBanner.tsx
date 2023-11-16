@@ -53,10 +53,10 @@ const AuthBanner = observer(() => {
   // console.log(user, stage, address);
   useEffect(() => {
     switch (stage) {
-      // case "Authorization":
-      //   setTitle("Creator economy onchain");
-      //   setActive(0);
-      //   return;
+      case "Authorization":
+        setTitle("Creator economy onchain");
+        setActive(0);
+        return;
       case "Connect":
         setTitle("You are early!");
         setTitle("Creator economy onchain");
@@ -145,9 +145,6 @@ const AuthBanner = observer(() => {
                   ? style.banner__title__connection
                   : style.banner__title__init
               )}
-              onClick={() => {
-                router.push("/api/v1/auth/twitter");
-              }}
             >
               <img src="../banner_img.svg" className={style.banner__img} />
               {title}
@@ -232,7 +229,22 @@ const AuthBanner = observer(() => {
                   </div>
                 </div>
               )}
-
+              {stage == "Authorization" && (
+                <div>
+                  <a
+                    href="/api/v1/auth/twitter"
+                    style={{ textDecoration: "none" }}
+                  >
+                    <button
+                      className={header.connect__button}
+                      style={{ width: "200px", height: "64px" }}
+                    >
+                      <Twitter color={"black"} />
+                      Authorize
+                    </button>
+                  </a>
+                </div>
+              )}
               <div
                 className={style.banner__early}
                 style={{ display: stage == "Connect" ? "flex" : "none" }}
