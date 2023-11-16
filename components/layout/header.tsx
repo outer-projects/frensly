@@ -36,7 +36,7 @@ const Header = observer(() => {
     { name: "Profile", link: "/profile" },
     { name: "Dashboard", link: "/dashboard/finance" },
   ];
- 
+
   useEffect(() => {
     getEthCurrency();
     socket.emit("login", (res: any) => {
@@ -124,19 +124,21 @@ const Header = observer(() => {
                 {darkMode.value && <Moon />}
                 {!darkMode.value && <Sun />}
               </button>
-              {authSummaryCheck && <div
-                ref={ref}
-                style={{ display: "flex", alignItems: "flex-end" }}
-                onClick={() => {
-                  if (unreadCount > 0) {
-                    setNots(!nots);
-                  } else {
-                    router.push("../../notifications");
-                  }
-                }}
-              >
-                <Bell isActive={false} />
-              </div>}
+              {authSummaryCheck && (
+                <div
+                  ref={ref}
+                  style={{ display: "flex", alignItems: "flex-end" }}
+                  onClick={() => {
+                    if (unreadCount > 0) {
+                      setNots(!nots);
+                    } else {
+                      router.push("../../notifications");
+                    }
+                  }}
+                >
+                  <Bell isActive={false} />
+                </div>
+              )}
               <div className={style.header__count__contain}>
                 {unreadCount != 0 && (
                   <div className={style.header__count}>{unreadCount}</div>
@@ -145,7 +147,8 @@ const Header = observer(() => {
             </div>
             {nots && <Notifications />}
           </div>
-          <ConnectButtonCustom isHeader />
+          {/* {console.log(router.asPath)} */}
+          {!router.asPath.includes("auth") && <ConnectButtonCustom isHeader />}
         </div>
       </header>
       <header className={style.header__mobile}>

@@ -36,10 +36,9 @@ const AuthBanner = observer(() => {
       setStage("Connect");
     } else if (user?.account) {
       setStage("Init");
+    } else if (!user) {
+      setStage("Authorization");
     }
-    // else if (!user) {
-    //   setStage("Authorization");
-    // }
     // else if (user && !user?.isKeyConfirmed) {
     //   setStage("Invite");
     //   let code = localStorage.getItem("invite");
@@ -146,6 +145,9 @@ const AuthBanner = observer(() => {
                   ? style.banner__title__connection
                   : style.banner__title__init
               )}
+              onClick={() => {
+                router.push("/api/v1/auth/twitter");
+              }}
             >
               <img src="../banner_img.svg" className={style.banner__img} />
               {title}
