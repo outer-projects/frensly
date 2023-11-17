@@ -1,7 +1,7 @@
 import Head from "next/head";
 import { UserStore } from "../../stores/UserStore";
 import { useInjection } from "inversify-react";
-import style from "./home.module.scss";
+import style from "../home.module.scss";
 import Configuration from "../../components/community/presale";
 import Presale from "../../components/community/presale";
 
