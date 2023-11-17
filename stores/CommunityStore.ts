@@ -22,7 +22,7 @@ export class CommunityStore {
     const formData = new FormData();
 
     try {
-      const res = await axios.post(prefix + "pond/customize" + id, formData);
+      const res = await axios.post(prefix + "pond/customize/" + id, formData);
       console.log(res);
       return res;
     } catch (e) {
