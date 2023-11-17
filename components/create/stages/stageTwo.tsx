@@ -109,18 +109,22 @@ const StageTwo = observer((stage: IStageOne) => {
         [res.logs[0].topics[0], res.logs[0].topics[1], res.logs[0].topics[2]]
       );
       console.log(transaction);
-      updateCommunity({
-        pondId: Number(transaction?.pondId),
-        twitter: stage.twitter,
-        url: stage.webSite,
-        telegram: stage.tg,
-        discord: stage.discord,
-        file: stage.image,
-      }).then((res) => {
-        if (res) {
-          router.push("/community");
-        }
-      });
+      setTimeout(() => {
+        updateCommunity({
+          pondId: Number(transaction?.pondId),
+          twitter: stage.twitter,
+
+          url: stage.webSite,
+
+          telegram: stage.tg,
+          file: stage.image,
+          discord: stage.discord,
+        }).then((res) => {
+          if (res) {
+            router.push("/community");
+          }
+        });
+      }, 3000);
       // router.push("/presale/123");
     } catch (e) {
       console.log(e);
