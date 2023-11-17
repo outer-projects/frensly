@@ -18,12 +18,30 @@ export class CommunityStore {
   public constructor(private readonly rootStore: RootStore) {
     makeObservable(this);
   }
-  updateCommunity = async (id: string, stage: IStageOne) => {
+  updateCommunity = async ({
+    pondId,
+    twitter,
+    url,
+    telegram,
+    discord,
+    file
+  }: {
+    pondId: string;
+    twitter: string;
+    url: string;
+    telegram: string;
+    discord: string;
+    file?: File | null;
+  }) => {
     const formData = new FormData();
-
+    formData.append("pondId", pondId);
+    formData.append("twitter", twitter);
+    formData.append("url", url);
+    formData.append("telegram", telegram);
+    formData.append("discord", discord);
+    formData.append("file", file as Blob);
     try {
-      const res = await axios.post(prefix + "pond/customize/" + id, formData);
-      console.log(res);
+      const res = await axios.post(prefix + "pond/customize", formData);
       return res;
     } catch (e) {
       console.log(e);

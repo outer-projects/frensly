@@ -21,10 +21,6 @@ const Creation = () => {
         <StageOne
           setDescription={setDescription}
           setStep={setStep}
-          pricingModel={pricingModel}
-          setFee={setFee}
-          fee={fee}
-          setPricingModel={setPricingModel}
           setImage={setImage}
           image={image}
           name={name}
@@ -44,10 +40,6 @@ const Creation = () => {
         <StageTwo
           setDescription={setDescription}
           setStep={setStep}
-          pricingModel={pricingModel}
-          setFee={setFee}
-          fee={fee}
-          setPricingModel={setPricingModel}
           setImage={setImage}
           image={image}
           name={name}

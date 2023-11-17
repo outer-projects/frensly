@@ -12,31 +12,26 @@ import axios from "axios";
 import { prefix } from "../../../utils/config";
 import { CommunityStore } from "../../../stores/CommunityStore";
 export interface IStageOne {
-  setStep: (step: number) => void;
+  setStep?: (step: number) => void;
   name: string;
-  setName: (name: string) => void;
+  setName?: (name: string) => void;
   description: string;
-  setDescription: (description: string) => void;
+  setDescription?: (description: string) => void;
   twitter: string;
-  setTwitter: (twitter: string) => void;
+  setTwitter?: (twitter: string) => void;
   webSite: string;
-  setWebSite: (webSite: string) => void;
+  setWebSite?: (webSite: string) => void;
   tg: string;
-  setTg: (tg: string) => void;
+  setTg?: (tg: string) => void;
   discord: string;
-  setDiscord: (discord: string) => void;
-  fee: number;
-  setFee: (fee: number) => void;
-  pricingModel: number;
-  setPricingModel: (pricingModel: number) => void;
+  setDiscord?: (discord: string) => void;
   image?: File | null;
   setImage?: (img: File | null) => void;
 }
 const StageOne = observer((stage: IStageOne) => {
-  const { user, community, address,web3 } = useInjection(Web3Store);
+  const { user, community, address, web3 } = useInjection(Web3Store);
   const { updateCommunity } = useInjection(CommunityStore);
   const router = useRouter();
-
 
   const create = async () => {
     try {
@@ -117,13 +112,20 @@ const StageOne = observer((stage: IStageOne) => {
         [res.logs[0].topics[0], res.logs[0].topics[1], res.logs[0].topics[2]]
       );
       console.log(transaction);
-      updateCommunity(transaction?.pondId as any, stage).then(
-        (res) => {
-          if (res) {
-            router.push("/community");
-          }
+      updateCommunity({
+        pondId: transaction?.pondId as string,
+        twitter: stage.twitter,
+
+        url: stage.webSite,
+
+        telegram: stage.tg,
+        file: stage.image,
+        discord: stage.discord,
+      }).then((res) => {
+        if (res) {
+          router.push("/community");
         }
-      );
+      });
     } catch (e) {
       console.log(e);
     }
@@ -139,14 +141,16 @@ const StageOne = observer((stage: IStageOne) => {
         <input
           placeholder="Name"
           value={stage.name}
-          onChange={(e) => stage.setName(e.target.value)}
+          onChange={(e) => stage.setName && stage.setName(e.target.value)}
         />
         <TextareaAutosize
           className={style.stage__one__description}
           placeholder="Description"
           minRows={1}
           value={stage.description}
-          onChange={(e) => stage.setDescription(e.target.value)}
+          onChange={(e) =>
+            stage.setDescription && stage.setDescription(e.target.value)
+          }
         ></TextareaAutosize>
       </div>
       <div className={style.stage__one__row}>
@@ -155,7 +159,9 @@ const StageOne = observer((stage: IStageOne) => {
           <input
             placeholder="Twitter"
             value={stage.twitter}
-            onChange={(e) => stage.setTwitter(e.target.value)}
+            onChange={(e) =>
+              stage.setTwitter && stage.setTwitter(e.target.value)
+            }
           />
         </div>
         <div className={style.stage__one__social}>
@@ -163,7 +169,9 @@ const StageOne = observer((stage: IStageOne) => {
           <input
             placeholder="Web site"
             value={stage.webSite}
-            onChange={(e) => stage.setWebSite(e.target.value)}
+            onChange={(e) =>
+              stage.setWebSite && stage.setWebSite(e.target.value)
+            }
           />
         </div>
       </div>
@@ -173,7 +181,7 @@ const StageOne = observer((stage: IStageOne) => {
           <input
             placeholder="Tg"
             value={stage.tg}
-            onChange={(e) => stage.setTg(e.target.value)}
+            onChange={(e) => stage.setTg && stage.setTg(e.target.value)}
           />
         </div>
         <div className={style.stage__one__social}>
@@ -181,20 +189,22 @@ const StageOne = observer((stage: IStageOne) => {
           <input
             placeholder="Discord"
             value={stage.discord}
-            onChange={(e) => stage.setDiscord(e.target.value)}
+            onChange={(e) =>
+              stage.setDiscord && stage.setDiscord(e.target.value)
+            }
           />
         </div>
       </div>
-      <div className={style.stage__one__fee}>
+      {/* <div className={style.stage__one__fee}>
         Fee
         <div className={style.stage__one__fee__row}>
           <div className={style.stage__one__fee__check}>
             <input
               type="radio"
-              checked={stage.fee == 0}
+              checked={stage?.fee == 0}
               onChange={(e) => {
                 if (e.target.checked) {
-                  stage.setFee(0);
+                  stage.setFee && stage.setFee(0);
                 }
               }}
             />
@@ -213,8 +223,8 @@ const StageOne = observer((stage: IStageOne) => {
             10%
           </div>
         </div>
-      </div>
-      <div className={style.stage__one__fee}>
+      </div> */}
+      {/* <div className={style.stage__one__fee}>
         Pricing model
         <div className={style.stage__one__fee__row}>
           <div className={style.stage__one__fee__check}>
@@ -242,7 +252,7 @@ const StageOne = observer((stage: IStageOne) => {
             Linear
           </div>
         </div>
-      </div>
+      </div> */}
       <div className={style.stage__one__buttons}>
         <button
           className={classNames(
@@ -258,7 +268,7 @@ const StageOne = observer((stage: IStageOne) => {
             header.connect__button,
             style.stage__one__button
           )}
-          onClick={() => stage.setStep(1)}
+          onClick={() => stage.setStep && stage.setStep(1)}
         >
           Create pre-sale
         </button>
