@@ -1,14 +1,14 @@
 import Link from "next/link";
-import { IProfile } from "../../types/users";
-import style from "./explore.module.scss";
+import { IProfile } from "../../../types/users";
+import style from "../explore.module.scss";
 import { useEffect, useState } from "react";
-import { fromWeiToEth, shortNick } from "../../utils/utilities";
+import { fromWeiToEth, shortNick } from "../../../utils/utilities";
 import { observer } from "mobx-react";
 import { useInjection } from "inversify-react";
-import { UserStore } from "../../stores/UserStore";
-import Web3Store from "../../stores/Web3Store";
-import EthereumSvg from "../svgs/Ethereum";
-import Key from "../svgs/key";
+import { UserStore } from "../../../stores/UserStore";
+import Web3Store from "../../../stores/Web3Store";
+import EthereumSvg from "../../svgs/Ethereum";
+import Key from "../../svgs/key";
 
 const ExploreRow = observer(
   ({ el, isNw, isTVH }: { el: IProfile; isNw: boolean; isTVH: boolean }) => {

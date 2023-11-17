@@ -1,11 +1,11 @@
 import Head from "next/head";
-import { UserStore } from "../stores/UserStore";
+import { UserStore } from "../../stores/UserStore";
 import { useInjection } from "inversify-react";
 import style from "./home.module.scss";
-import Configuration from "../components/community/presale";
-import Presale from "../components/create/components/presale";
+import Configuration from "../../components/community/presale";
+import Presale from "../../components/community/presale";
 
-const PresalePage = () => {
+const CommunityPage = () => {
   const { unreadCount } = useInjection(UserStore);
   return (
     <div className={style.community__page}>
@@ -22,4 +22,4 @@ const PresalePage = () => {
     </div>
   );
 };
-export default PresalePage;
+export default CommunityPage;

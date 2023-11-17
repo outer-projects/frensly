@@ -13,7 +13,7 @@ import { fromWei } from "web3-utils";
 import { fromWeiToEth, toBNJS } from "../../utils/utilities";
 import { observer } from "mobx-react";
 import { UserStore } from "../../stores/UserStore";
-import ExploreRow from "../explore/exploreRow";
+import ExploreRow from "../explore/presonal/exploreRow";
 import FinanceRow from "./financeRow";
 import Sidebar from "./sidebar";
 import EthereumSvg from "../svgs/Ethereum";

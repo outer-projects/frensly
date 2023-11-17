@@ -1,10 +1,14 @@
 import useDarkMode from "use-dark-mode";
-import style from "./configuration.module.scss";
+import style from "./presale.module.scss";
 import header from "../layout/header.module.scss";
 import buy from "../../modals/buy.module.scss";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import classNames from "classnames";
 import SubscriptionProgressBar from "./subscriptionProgressBar";
+import { useInjection } from "inversify-react";
+import { CommunityStore } from "../../stores/CommunityStore";
+import { observer } from "mobx-react";
+import { useRouter } from "next/router";
 const socials = [
   {
     name: "Twitter",
@@ -27,9 +31,16 @@ const socials = [
     link: "https://discord.com/",
   },
 ];
-const Configuration = () => {
+const Presale = observer(() => {
   const darkMode = useDarkMode();
+  const router = useRouter()
+  const {id} = router.query
+  const { getPresale, currentPresale } = useInjection(CommunityStore);
   const [numberOfShares, setNumberOfShares] = useState("");
+  console.log(currentPresale);
+  useEffect(()=>{
+    getPresale(id as string)
+  },[])
   return (
     <div className={style.configuration}>
       <div className={style.first__block}>
@@ -159,5 +170,5 @@ const Configuration = () => {
       </div>
     </div>
   );
-};
-export default Configuration;
+});
+export default Presale;

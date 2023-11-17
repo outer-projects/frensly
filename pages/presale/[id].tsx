@@ -1,10 +1,10 @@
 import Head from "next/head";
-import { UserStore } from "../stores/UserStore";
+import { UserStore } from "../../stores/UserStore";
 import { useInjection } from "inversify-react";
 import style from "./home.module.scss";
-import Configuration from "../components/community/configuration";
+import Presale from "../../components/community/presale";
 
-const Community = () => {
+const PresalePage = () => {
   const { unreadCount } = useInjection(UserStore);
   return (
     <div className={style.community__page}>
@@ -17,8 +17,8 @@ const Community = () => {
           content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
         />
       </Head>
-      <Configuration />
+      <Presale />
     </div>
   );
 };
-export default Community;
+export default PresalePage;

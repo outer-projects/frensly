@@ -185,9 +185,9 @@ const StageOne = observer((stage: IStageOne) => {
             header.connect__button,
             style.stage__one__button
           )}
-          onClick={() => stage.setStep(2)}
+          onClick={() => stage.setStep(1)}
         >
-          Conduct a pre-sale
+          Create pre-sale
         </button>
       </div>
     </div>

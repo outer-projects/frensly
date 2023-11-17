@@ -1,16 +1,15 @@
 import { useEffect, useState } from "react";
-import style from "./explore.module.scss";
+import style from "../explore.module.scss";
 import classNames from "classnames";
 import { observer } from "mobx-react";
 import { useInjection } from "inversify-react";
-import { ExploreStore } from "../../stores/ExploreStore";
+import { ExploreStore } from "../../../stores/ExploreStore";
 import Link from "next/link";
-import { fromWei } from "web3-utils";
-import TypesList from "../common/typesList";
+import TypesList from "../../common/typesList";
 import ExploreRow from "./exploreRow";
 import { InView } from "react-intersection-observer";
-import OneActivity from "../notifications/oneActivity";
-import { shortNick } from "../../utils/utilities";
+import OneActivity from "../../notifications/oneActivity";
+import { shortNick } from "../../../utils/utilities";
 const types = ["Top", "New Users", "Activity", "Net Worth", "TVH"];
 const Explore = observer(() => {
   const [active, setActive] = useState(0);
