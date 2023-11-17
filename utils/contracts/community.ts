@@ -1,4 +1,4 @@
-export const communityContractDev = "0x7D722e58052c45242B877D1abaC8Da9e76CC1208";
+export const communityContractDev = "0xAf8182166008715859892c9f0b8091e47841a7f7";
 export const communityContract = "0x66fA4044757Fb7812EF5b8149649d45d607624E0";
 export const communityAbi = [
   {
