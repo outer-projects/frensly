@@ -26,8 +26,8 @@ const StageTwo = observer((stage: IStageOne) => {
         .initPondPresale(
           stage.name,
           isRestricted,
-          new Date(timeStart).getTime(),
-          new Date(timeFinish).getTime(),
+          new Date(timeStart).getTime()/1000,
+          new Date(timeFinish).getTime()/1000,
           supply * 10 ** 6,
           maxAllocation * 10 ** 6,
           ratio
