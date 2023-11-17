@@ -16,8 +16,8 @@ const StageTwo = observer((stage: IStageOne) => {
   const [maxAllocation, setMaxAllocation] = useState("");
   const [ratio, setRatio] = useState("");
   const [isRestricted, setIsRestricted] = useState(true);
-  const [timeStart, setTimeStart] = useState<any>(0);
-  const [timeFinish, setTimeFinish] = useState<any>(0);
+  const [timeStart, setTimeStart] = useState('');
+  const [timeFinish, setTimeFinish] = useState('');
   const router = useRouter();
   console.log(timeFinish, timeStart);
   const createPresale = async () => {
@@ -26,8 +26,8 @@ const StageTwo = observer((stage: IStageOne) => {
         .initPondPresale(
           stage.name,
           isRestricted,
-          timeStart.getTime(),
-          timeFinish.getTime(),
+          new Date(timeStart).getTime(),
+          new Date(timeFinish).getTime(),
           supply,
           maxAllocation,
           ratio
