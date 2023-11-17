@@ -12,12 +12,12 @@ import { IStageOne } from "./stageOne";
 const StageTwo = observer((stage: IStageOne) => {
   const { user, community, address, web3 } = useInjection(Web3Store);
   const { updateCommunity } = useInjection(CommunityStore);
-  const [supply, setSupply] = useState("");
-  const [maxAllocation, setMaxAllocation] = useState("");
-  const [ratio, setRatio] = useState("");
+  const [supply, setSupply] = useState(0);
+  const [maxAllocation, setMaxAllocation] = useState(0);
+  const [ratio, setRatio] = useState(0);
   const [isRestricted, setIsRestricted] = useState(true);
-  const [timeStart, setTimeStart] = useState('');
-  const [timeFinish, setTimeFinish] = useState('');
+  const [timeStart, setTimeStart] = useState("");
+  const [timeFinish, setTimeFinish] = useState("");
   const router = useRouter();
   console.log(timeFinish, timeStart);
   const createPresale = async () => {
@@ -28,8 +28,8 @@ const StageTwo = observer((stage: IStageOne) => {
           isRestricted,
           new Date(timeStart).getTime(),
           new Date(timeFinish).getTime(),
-          supply,
-          maxAllocation,
+          supply * 10 ** 6,
+          maxAllocation * 10 ** 6,
           ratio
         )
         .send({
@@ -144,22 +144,25 @@ const StageTwo = observer((stage: IStageOne) => {
           <input
             placeholder="Presale supply (shares)"
             value={supply}
+            type="number"
             style={{ marginTop: "24px" }}
-            onChange={(e) => setSupply(e.target.value)}
+            onChange={(e) => setSupply(Number(e.target.value))}
           />
           <input
             placeholder="Liquidity ratio"
             value={ratio}
+            type="number"
             style={{ marginTop: "16px" }}
-            onChange={(e) => setRatio(e.target.value)}
+            onChange={(e) => setRatio(Number(e.target.value))}
           />
         </div>
         <div className={style.stage__one__col}>
           <input
             placeholder="Max allocation"
             value={maxAllocation}
+            type="number"
             style={{ marginTop: "24px" }}
-            onChange={(e) => setMaxAllocation(e.target.value)}
+            onChange={(e) => setMaxAllocation(Number(e.target.value))}
           />
         </div>
         <div className={style.stage__one__row}>
