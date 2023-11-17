@@ -113,7 +113,7 @@ const StageTwo = observer((stage: IStageOne) => {
         updateCommunity({
           pondId: Number(transaction?.pondId),
           twitter: stage.twitter,
-
+          description: stage.description,
           url: stage.webSite,
 
           telegram: stage.tg,

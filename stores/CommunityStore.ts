@@ -24,10 +24,12 @@ export class CommunityStore {
     url,
     telegram,
     discord,
+    description,
     file
   }: {
     pondId: number;
     twitter: string;
+    description: string;
     url: string;
     telegram: string;
     discord: string;
@@ -39,6 +41,7 @@ export class CommunityStore {
     formData.append("url", url);
     formData.append("telegram", telegram);
     formData.append("discord", discord);
+    formData.append("description", description);
     file && formData.append("file", file as Blob);
     try {
       const res = await axios.post(prefix + "pond/customize", formData);
