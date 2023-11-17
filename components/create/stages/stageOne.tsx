@@ -114,7 +114,7 @@ const StageOne = observer((stage: IStageOne) => {
           },
         ],
         res.logs[0].data,
-        [res.logs[0].topics[1], res.logs[0].topics[2], res.logs[0].topics[3]]
+        [res.logs[0].topics[0], res.logs[0].topics[1], res.logs[0].topics[2]]
       );
       console.log(transaction);
       updateCommunity(transaction?.pondId as any, stage).then(
