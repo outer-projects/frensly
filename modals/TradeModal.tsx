@@ -8,8 +8,6 @@ import classNames from "classnames";
 import { ModalStore } from "../stores/ModalStore";
 import { useEffect, useState } from "react";
 import Web3Store from "../stores/Web3Store";
-import { fromWei } from "web3-utils";
-import { toast } from "react-toastify";
 import { fromWeiToEth } from "../utils/utilities";
 import useDarkMode from "use-dark-mode";
 
