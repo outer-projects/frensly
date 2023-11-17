@@ -26,7 +26,7 @@ const AuthPage: NextPage = observer((props) => {
   }, []);
   useEffect(() => {
     if (authSummaryCheck) {
-      push("/explore");
+      push("/explore/personal");
     }
   }, [authSummaryCheck]);
   const { unreadCount } = useInjection(UserStore);

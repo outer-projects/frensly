@@ -31,7 +31,7 @@ const Header = observer(() => {
   const { getMyChats, unread } = useInjection(ChatStore);
   const headerText = [
     { name: "Feed", link: "/feed" },
-    { name: "Explore", link: "/explore" },
+    { name: "Explore", link: "/explore/personal" },
     { name: "Ponds", link: "/ponds" },
     { name: "Profile", link: "/profile" },
     { name: "Dashboard", link: "/dashboard/finance" },

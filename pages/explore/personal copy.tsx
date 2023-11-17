@@ -1,10 +1,10 @@
 import { observer } from "mobx-react";
 import type { NextPage } from "next";
-import style from "./home.module.scss";
-import Explore from "../components/explore/presonal/explore";
+import style from "../home.module.scss";
+import Explore from "../../components/explore/presonal/explore";
 import Head from "next/head";
 import { useInjection } from "inversify-react";
-import { UserStore } from "../stores/UserStore";
+import { UserStore } from "../../stores/UserStore";
 
 const ExplorePage: NextPage = observer((props) => {
   // const socket = useContext(SocketContext);

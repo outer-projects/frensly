@@ -17,7 +17,7 @@ const Footer = observer(() => {
   const { user, authSummaryCheck } = useInjection(Web3Store);
   const headerText = [
     { name: "Feed", link: "/feed" },
-    { name: "Explore", link: "/explore" },
+    { name: "Explore", link: "/explore/personal" },
     { name: "Ponds", link: "/ponds" },
     { name: "Dashboard", link: "/dashboard/finance" },
   ];

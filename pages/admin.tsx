@@ -28,7 +28,7 @@ const Admin = observer(() => {
   const { user } = useInjection(Web3Store);
   useEffect(() => {
     if (user?.role !== "admin") {
-      push("/explore");
+      push("/explore/personal");
     } else {
       getAdminPoints();
     }
