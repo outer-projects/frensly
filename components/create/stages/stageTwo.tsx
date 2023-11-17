@@ -110,7 +110,7 @@ const StageTwo = observer((stage: IStageOne) => {
       );
       console.log(transaction);
       updateCommunity({
-        pondId: transaction?.pondId as string,
+        pondId: Number(transaction?.pondId),
         twitter: stage.twitter,
         url: stage.webSite,
         telegram: stage.tg,

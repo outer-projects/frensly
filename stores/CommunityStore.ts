@@ -26,7 +26,7 @@ export class CommunityStore {
     discord,
     file
   }: {
-    pondId: string;
+    pondId: number;
     twitter: string;
     url: string;
     telegram: string;
@@ -34,7 +34,7 @@ export class CommunityStore {
     file?: File | null;
   }) => {
     const formData = new FormData();
-    formData.append("pondId", pondId);
+    formData.append("pondId", pondId.toString());
     formData.append("twitter", twitter);
     formData.append("url", url);
     formData.append("telegram", telegram);
