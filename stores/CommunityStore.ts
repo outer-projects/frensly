@@ -39,7 +39,7 @@ export class CommunityStore {
     formData.append("url", url);
     formData.append("telegram", telegram);
     formData.append("discord", discord);
-    formData.append("file", file as Blob);
+    file && formData.append("file", file as Blob);
     try {
       const res = await axios.post(prefix + "pond/customize", formData);
       return res;

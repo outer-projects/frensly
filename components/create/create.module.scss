@@ -62,6 +62,7 @@
 .upload__icon {
   position: absolute;
   margin-top: 35px;
+  pointer-events: none;
 }
 .upload__show {
   width: 100px;

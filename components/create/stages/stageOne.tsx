@@ -138,7 +138,7 @@ const StageOne = observer((stage: IStageOne) => {
         <img className={style.stage__one__user__avatar} src={user?.avatar} />
         <div className={style.stage__one__user__name}>{user?.twitterName}</div>
       </div>
-      <Upload />
+      <Upload image={stage.image} setImage={stage.setImage}/>
       <div className={style.stage__one__col}>
         <input
           placeholder="Name"
