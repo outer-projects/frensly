@@ -62,12 +62,12 @@ const Finance = observer(() => {
   const [keysReady, setKeysReady] = useState(false);
   const [claimValue, setClaimValue] = useState("0");
   const router = useRouter();
-  const { user, frensly, address, checkAuth } = useInjection(Web3Store);
+  const { user, frensly,newFrensly, address, checkAuth } = useInjection(Web3Store);
   const { shares, holders, getShares, getHolders, portfolioValue, getKeys } =
     useInjection(UserStore);
   const claim = async () => {
     try {
-      const res = await frensly.methods.claim().send({
+      const res = await newFrensly.methods.claim().send({
         from: address,
       });
       // console.log(res);
@@ -89,7 +89,7 @@ const Finance = observer(() => {
   }, [activeMob]);
   const getClaim = async () => {
     try {
-      const res = await frensly.methods.availableToClaim(address).call();
+      const res = await newFrensly.methods.availableToClaim(address).call();
       // console.log("availableToClaim: ", res);
       setClaimValue(res);
     } catch (e) {

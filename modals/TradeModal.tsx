@@ -21,7 +21,7 @@ interface modalProps {
 
 export const TradeModal = observer(({ key, data, idx }: modalProps) => {
   const modalStore = useInjection(ModalStore);
-  const { frensly, address, checkAuth } = useInjection(Web3Store);
+  const { frensly,newFrensly, address, checkAuth } = useInjection(Web3Store);
   const [priceOfOne, setPriceOfOne] = useState("0");
   const [count, setCount] = useState(0);
   const sell = async () => {
@@ -34,7 +34,7 @@ export const TradeModal = observer(({ key, data, idx }: modalProps) => {
   };
   const checkPrice = async (num: number) => {
     try {
-      const res = await frensly.methods
+      const res = await newFrensly.methods
         .getSellPriceAfterFee(
           data.user?.account?.address || data.user?.address,
           Number(num) * 10 ** 6
@@ -48,16 +48,16 @@ export const TradeModal = observer(({ key, data, idx }: modalProps) => {
     }
   };
   useEffect(() => {
-    if (frensly) {
+    if (newFrensly) {
       checkAndUpdatePriceOfOne();
       ownCount();
     }
-  }, [frensly]);
+  }, [newFrensly]);
   const darkMode = useDarkMode();
 
   const ownCount = async () => {
     try {
-      const res = await frensly.methods
+      const res = await newFrensly.methods
         .sharesBalance(
           data?.user?.account?.address || data.user?.address,
           address

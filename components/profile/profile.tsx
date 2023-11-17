@@ -19,7 +19,7 @@ import EthereumSvg from "../svgs/Ethereum";
 import useDarkMode from "use-dark-mode";
 const Profile = observer(() => {
   const modalStore = useInjection(ModalStore);
-  const { user, frensly, address } = useInjection(Web3Store);
+  const { user, frensly, address,newFrensly} = useInjection(Web3Store);
   const { getMyChats, myChats } = useInjection(ChatStore);
   const [userChat, setUserChat] = useState<any>(undefined);
   const {
@@ -46,7 +46,7 @@ const Profile = observer(() => {
   };
   const checkPrice = async () => {
     try {
-      const res = await frensly.methods
+      const res = await newFrensly.methods
         .getBuyPriceAfterFee(profileUser?.account?.address, Number(1) * 10 ** 6)
         .call();
       // console.log(res);
@@ -65,7 +65,7 @@ const Profile = observer(() => {
   };
   const ownCount = async () => {
     try {
-      const res = await frensly.methods
+      const res = await newFrensly.methods
         .sharesBalance(profileUser?.account?.address, address)
         .call();
       // console.log(res);
@@ -76,7 +76,7 @@ const Profile = observer(() => {
   };
   const hasYourSharesCount = async () => {
     try {
-      const res = await frensly.methods
+      const res = await newFrensly.methods
         .sharesBalance(address, profileUser?.account?.address)
         .call();
       // console.log(res);

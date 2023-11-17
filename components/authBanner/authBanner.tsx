@@ -18,7 +18,7 @@ import { useRouter } from "next/router";
 import useDarkMode from "use-dark-mode";
 
 const AuthBanner = observer(() => {
-  const { address, authStatus, frensly, user, checkAuth, setInit } =
+  const { address, authStatus, frensly, newFrensly, user, checkAuth, setInit } =
     useInjection(Web3Store);
   const { setActive, sendInviteCode } = useInjection(UserStore);
   const [title, setTitle] = useState("");
@@ -95,10 +95,10 @@ const AuthBanner = observer(() => {
     if (address?.toLowerCase() !== user?.account?.address)
       return toast.error("Address is not assigned to this account");
     try {
-      await frensly.methods.initShares().send({
+      await newFrensly.methods.initShares().send({
         from: address,
       });
-      const isInit = await frensly.methods.isSharesSubject(address).call();
+      const isInit = await newFrensly.methods.isSharesSubject(address).call();
       localStorage.setItem("auth", "false");
       // router.push("/explore");
       setInit(isInit);
