@@ -33,7 +33,7 @@ export interface IStageOne {
   setImage?: (img: File | null) => void;
 }
 const StageOne = observer((stage: IStageOne) => {
-  const { user, community, address } = useInjection(Web3Store);
+  const { user, community, address,web3 } = useInjection(Web3Store);
   const { updateCommunity } = useInjection(CommunityStore);
   const router = useRouter();
 
@@ -44,7 +44,80 @@ const StageOne = observer((stage: IStageOne) => {
         from: address,
       });
       console.log(res);
-      updateCommunity(res.events.PondCreated.returnValues.pondId, stage).then(
+      let transaction = web3?.eth.abi.decodeLog(
+        [
+          {
+            indexed: true,
+            internalType: "uint256",
+            name: "pondId",
+            type: "uint256",
+          },
+          {
+            indexed: true,
+            internalType: "address",
+            name: "creator",
+            type: "address",
+          },
+          {
+            indexed: false,
+            internalType: "string",
+            name: "name",
+            type: "string",
+          },
+          {
+            indexed: false,
+            internalType: "bool",
+            name: "isPresale",
+            type: "bool",
+          },
+          {
+            indexed: false,
+            internalType: "bool",
+            name: "isRestricted",
+            type: "bool",
+          },
+          {
+            indexed: false,
+            internalType: "uint256",
+            name: "presaleStart",
+            type: "uint256",
+          },
+          {
+            indexed: false,
+            internalType: "uint256",
+            name: "presaleEnd",
+            type: "uint256",
+          },
+          {
+            indexed: false,
+            internalType: "uint256",
+            name: "presaleGoal",
+            type: "uint256",
+          },
+          {
+            indexed: false,
+            internalType: "uint256",
+            name: "maxAllocation",
+            type: "uint256",
+          },
+          {
+            indexed: false,
+            internalType: "uint256",
+            name: "presalePrice",
+            type: "uint256",
+          },
+          {
+            indexed: false,
+            internalType: "uint256",
+            name: "liquidityFee",
+            type: "uint256",
+          },
+        ],
+        res.logs[0].data,
+        [res.logs[0].topics[1], res.logs[0].topics[2], res.logs[0].topics[3]]
+      );
+      console.log(transaction);
+      updateCommunity(transaction?.pondId as any, stage).then(
         (res) => {
           if (res) {
             router.push("/community");
