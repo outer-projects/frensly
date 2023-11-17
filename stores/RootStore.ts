@@ -7,6 +7,7 @@ import { ExploreStore } from "./ExploreStore";
 import { FeedStore } from "./FeedStore";
 import { ChatStore } from "./ChatStore";
 import { AdminStore } from "./AdminStore";
+import { CommunityStore } from "./CommunityStore";
 
 export class RootStore {
   public userStore: UserStore;
@@ -17,6 +18,7 @@ export class RootStore {
   public feedStore: FeedStore;
   public adminStore: AdminStore;
   public chatStore: ChatStore;
+  public communityStore: CommunityStore;
   public constructor() {
     this.userStore = new UserStore(this);
     this.modalStore = new ModalStore(this);
@@ -25,6 +27,7 @@ export class RootStore {
     this.feedStore = new FeedStore(this);
     this.adminStore = new AdminStore(this);
     this.chatStore = new ChatStore(this);
+    this.communityStore = new CommunityStore(this);
     this.container = new Container();
     this.container.bind(UserStore).toConstantValue(this.userStore);
     this.container.bind(ModalStore).toConstantValue(this.modalStore);
@@ -33,6 +36,7 @@ export class RootStore {
     this.container.bind(FeedStore).toConstantValue(this.feedStore);
     this.container.bind(ChatStore).toConstantValue(this.chatStore);
     this.container.bind(AdminStore).toConstantValue(this.adminStore);
+    this.container.bind(CommunityStore).toConstantValue(this.communityStore);
     this.container.bind(Container).toConstantValue(this.container);
   }
 }

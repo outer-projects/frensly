@@ -10,7 +10,8 @@ import header from "../../layout/header.module.scss";
 import { useRouter } from "next/router";
 import axios from "axios";
 import { prefix } from "../../../utils/config";
-interface IStageOne {
+import { CommunityStore } from "../../../stores/CommunityStore";
+export interface IStageOne {
   setStep: (step: number) => void;
   name: string;
   setName: (name: string) => void;
@@ -33,32 +34,17 @@ interface IStageOne {
 }
 const StageOne = observer((stage: IStageOne) => {
   const { user, community, address } = useInjection(Web3Store);
+  const { updateCommunity } = useInjection(CommunityStore);
   const router = useRouter();
 
-  const updateCommunity = async (id: string) => {
-    const formData = new FormData();
-    formData.append("description", stage.description);
-    formData.append("twitter", stage.twitter);
-    formData.append("url", stage.webSite);
-    formData.append("telegram", stage.tg);
-    formData.append("discord", stage.discord);
-    formData.append("image", stage.image as Blob);
-    try {
-      const res = await axios.post(prefix + "pond/customize" + id, formData);
-      console.log(res);
-      return res;
-    } catch (e) {
-      console.log(e);
-      return false;
-    }
-  };
+
   const create = async () => {
     try {
       const res = await community.methods.initPond(stage.name).send({
         from: address,
       });
       console.log(res);
-      updateCommunity(res.events.PondCreated.returnValues.pondId).then(
+      updateCommunity(res.events.PondCreated.returnValues.pondId, stage).then(
         (res) => {
           if (res) {
             router.push("/community");

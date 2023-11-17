@@ -7,9 +7,12 @@ import finance from "../../finance/finance.module.scss";
 import header from "../../layout/header.module.scss";
 import classNames from "classnames";
 import { useRouter } from "next/router";
+import { CommunityStore } from "../../../stores/CommunityStore";
+import { IStageOne } from "./stageOne";
 const StageTwo = observer(
-  ({ setStep, name }: { name: string; setStep: (s: number) => void }) => {
+  (stage:IStageOne) => {
     const { user, community, address } = useInjection(Web3Store);
+    const { updateCommunity } = useInjection(CommunityStore);
     const [supply, setSupply] = useState("");
     const [maxAllocation, setMaxAllocation] = useState("");
     const [ratio, setRatio] = useState("");
@@ -22,7 +25,7 @@ const StageTwo = observer(
       try {
         const res = await community.methods
           .initPondPresale(
-            name,
+            stage.name,
             isRestricted,
             timeStart,
             timeFinish,
@@ -34,6 +37,13 @@ const StageTwo = observer(
             from: address,
           });
         console.log(res);
+        updateCommunity(res.events.PondCreated.returnValues.pondId, stage).then(
+          (res) => {
+            if (res) {
+              router.push("/community");
+            }
+          }
+        );
         router.push("/presale/123");
       } catch (e) {
         console.log(e);

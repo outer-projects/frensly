@@ -40,7 +40,29 @@ const Creation = () => {
           setTg={setTg}
         />
       )}
-      {step == 1 && <StageTwo name={name} setStep={setStep} />}
+      {step == 1 && (
+        <StageTwo
+          setDescription={setDescription}
+          setStep={setStep}
+          pricingModel={pricingModel}
+          setFee={setFee}
+          fee={fee}
+          setPricingModel={setPricingModel}
+          setImage={setImage}
+          image={image}
+          name={name}
+          setName={setName}
+          discord={discord}
+          setDiscord={setDiscord}
+          description={description}
+          twitter={twitter}
+          setTwitter={setTwitter}
+          webSite={webSite}
+          setWebSite={setWebSite}
+          tg={tg}
+          setTg={setTg}
+        />
+      )}
     </div>
   );
 };
