@@ -44,7 +44,7 @@ const StageTwo = observer(
             }
           }
         );
-        router.push("/presale/123");
+        // router.push("/presale/123");
       } catch (e) {
         console.log(e);
       }
