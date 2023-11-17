@@ -1,5 +1,5 @@
 import useDarkMode from "use-dark-mode";
-import style from "./configuration.module.scss";
+import style from "./community.module.scss";
 import header from "../layout/header.module.scss";
 import buy from "../../modals/buy.module.scss";
 import { useEffect, useState } from "react";

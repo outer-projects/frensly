@@ -27,7 +27,7 @@ const ExplorePage: NextPage = observer((props) => {
     <div className={style.explore__page}>
       <Head>
         <title>
-          {unreadCount !== 0 ? `(${unreadCount})` : ""} Personal | Frensly
+          {unreadCount !== 0 ? `(${unreadCount})` : ""} Launchpad | Frensly
         </title>
         <meta
           name="viewport"

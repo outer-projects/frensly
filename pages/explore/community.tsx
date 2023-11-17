@@ -5,6 +5,10 @@ import Explore from "../../components/explore/presonal/explore";
 import Head from "next/head";
 import { useInjection } from "inversify-react";
 import { UserStore } from "../../stores/UserStore";
+import ExploreList from "../../components/explore/exploreList";
+import Community from "../../components/community/community";
+import CommunityList from "../../components/explore/community/communityLIst";
+
 
 const ExplorePage: NextPage = observer((props) => {
   // const socket = useContext(SocketContext);
@@ -26,14 +30,15 @@ const ExplorePage: NextPage = observer((props) => {
     <div className={style.explore__page}>
       <Head>
         <title>
-          {unreadCount !== 0 ? `(${unreadCount})` : ""} Explore | Frensly
+          {unreadCount !== 0 ? `(${unreadCount})` : ""} Community | Frensly
         </title>
         <meta
           name="viewport"
           content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
         />
       </Head>
-      <Explore />
+      <ExploreList/>
+      <CommunityList />
     </div>
   );
 });

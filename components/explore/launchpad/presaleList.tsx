@@ -1,8 +1,8 @@
 import { observer } from "mobx-react";
 import { useEffect } from "react";
-import { CommunityStore } from "../../stores/CommunityStore";
+import { CommunityStore } from "../../../stores/CommunityStore";
 import { useInjection } from "inversify-react";
-import CommunityListItem from "./communityListItem";
+
 import PresaleListItem from "./presaleListItem";
 
 const PresaleList = observer(() => {

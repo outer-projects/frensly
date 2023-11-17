@@ -1,4 +1,11 @@
 @import "../../styles/_vars.sass";
+.explore__list {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 8px;
+  margin-left: -24px;
+}
 .explore__list__item {
   display: flex;
   align-items: center;
@@ -7,9 +14,10 @@
   padding-right: 24px;
   padding-top: 8px;
   padding-bottom: 8px;
-  border: 1px solid transparent;
+  border-bottom: 1px solid transparent;
   color: var(--text-shade);
   font-family: "DMSans";
+  cursor: pointer;
   font-size: 16px;
   font-style: normal;
   font-weight: bold;
@@ -21,11 +29,11 @@
   }
 }
 .explore__list__item__active {
-  border: 1px solid $green;
-  color: var(--text-main);
+  border-bottom: 1px solid $green !important;
+  color: var(--text-main) !important;
   img {
     margin-right: 8px;
-    filter: invert(0);
+    filter: invert(0) !important;
   }
 }
 .profile__follow {
