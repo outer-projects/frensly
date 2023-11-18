@@ -1,5 +1,13 @@
 import style from "../create/create.module.scss";
-const SubscriptionProgressBar = ({ progress }: { progress: number }) => {
+const SubscriptionProgressBar = ({
+  progress,
+  supply,
+  goal,
+}: {
+  progress: number;
+  supply: number;
+  goal: number;
+}) => {
   return (
     <div
       className={style.progress__bar__contain}
@@ -12,8 +20,8 @@ const SubscriptionProgressBar = ({ progress }: { progress: number }) => {
         ></div>
       </div>
       <div className={style.progress__bar__info}>
-        <div className={style.progress__bar__text}>32.44 shares</div>
-        <div className={style.progress__bar__text}>Total 50 Shares</div>
+        <div className={style.progress__bar__text}>{supply} shares</div>
+        <div className={style.progress__bar__text}>Total {goal} shares</div>
       </div>
     </div>
   );

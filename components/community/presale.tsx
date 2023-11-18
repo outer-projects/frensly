@@ -9,39 +9,59 @@ import { useInjection } from "inversify-react";
 import { CommunityStore } from "../../stores/CommunityStore";
 import { observer } from "mobx-react";
 import { useRouter } from "next/router";
+import Link from "next/link";
+import { fromWeiToEth, getDateTime } from "../../utils/utilities";
+import Countdown from "react-countdown";
 const socials = [
   {
-    name: "Twitter",
+    name: "twitter",
     icon: "../../icons/X.svg",
     link: "https://twitter.com/",
   },
   {
-    name: "Discord",
+    name: "discord",
     icon: "../../icons/discord.svg",
     link: "https://discord.com/",
   },
   {
-    name: "Telegram",
+    name: "telegram",
     icon: "../../icons/telegram.svg",
     link: "https://t.me/",
   },
   {
-    name: "Website",
+    name: "url",
     icon: "../../icons/web.svg",
     link: "https://discord.com/",
   },
 ];
 const Presale = observer(() => {
   const darkMode = useDarkMode();
-  const router = useRouter()
-  const {id} = router.query
+  const router = useRouter();
+  const { id } = router.query;
   console.log(id);
   const { getPresale, currentPresale } = useInjection(CommunityStore);
   const [numberOfShares, setNumberOfShares] = useState("");
   console.log(currentPresale);
-  useEffect(()=>{
-    if(id) getPresale(id as string)
-  },[id])
+  useEffect(() => {
+    if (id) getPresale(id as string);
+  }, [id]);
+  const Completionist = () => <span>Finished!</span>;
+  const renderer = ({ days, hours, minutes, seconds, completed }: any) => {
+    if (completed) {
+      // Render a completed state
+      return <Completionist />;
+    } else {
+      // Render a countdown
+      return (
+        <div className={style.time}>
+          <span>{days}</span>
+          <span>{hours}</span>
+          <span>{minutes}</span>
+          <span>{seconds}</span>
+        </div>
+      );
+    }
+  };
   return (
     <div className={style.configuration}>
       <div className={style.first__block}>
@@ -57,36 +77,40 @@ const Presale = observer(() => {
             <div>back</div>
           </div>
 
-          <img src="../Avatar.svg" />
-          <div className={style.configuration__top__title}>Community name</div>
+          <img src={currentPresale?.image} />
+          <div className={style.configuration__top__title}>
+            {currentPresale?.name}
+          </div>
         </div>
         <div className={style.configuration__wrapper}>
           <div className={style.configuration__info}>
             <div className={style.configuration__user}>
               <img
-                src="../Avatar.svg"
+                src={currentPresale?.creator?.profile?.avatar}
                 className={style.configuration__user__avatar}
               />
-              <div className={style.configuration__user__name}>USER</div>
+              <div className={style.configuration__user__name}>
+                {currentPresale?.creator?.profile?.twitterName}
+              </div>
               <div className={style.configuration__user__socials}>
-                {socials.map((social) => {
+                {socials.map((social, i) => {
+                  let link = social.link + currentPresale[social.name];
                   return (
-                    <div className={style.configuration__user__social}>
-                      <img src={social.icon} />
-                    </div>
+                    <Link href={link}>
+                      <div
+                        key={i}
+                        style={{ cursor: "pointer" }}
+                        className={style.configuration__user__social}
+                      >
+                        <img src={social.icon} />
+                      </div>
+                    </Link>
                   );
                 })}
               </div>
             </div>
             <div className={style.configuration__text}>
-              Welcome to the world of digital art revolution! Our NFT platform
-              provides a unique opportunity for creators to tokenize and
-              monetize their digital artwork. By leveraging blockchain
-              technology, we ensure the authenticity, ownership, and scarcity of
-              each digital collectible, empowering artists and collectors alike.
-              Join us in redefining the art market and embracing the limitless
-              possibilities of non-fungible tokens (NFTs) 🎨💻🚀 #DigitalArt
-              #NFTCommunity
+              {currentPresale?.description}
             </div>
           </div>
           <div className={style.configuration__col}>
@@ -94,19 +118,53 @@ const Presale = observer(() => {
               <div className={style.configuration__row__title}>
                 Community shares name
               </div>
-              <div className={style.configuration__row__value}>0xFrog</div>
+              <div className={style.configuration__row__value}>
+                {currentPresale.handle}
+              </div>
             </div>
             <div className={style.configuration__row}>
               <div className={style.configuration__row__title}>
-                Community shares name
+                Presale supply
+              </div>
+              <div className={style.configuration__row__value}>
+                {Number(currentPresale?.presaleGoal) / 10 ** 6} shares
+              </div>
+            </div>
+            <div className={style.configuration__row}>
+              <div className={style.configuration__row__title}>
+                Liquidity ratio
               </div>
               <div className={style.configuration__row__value}>0xFrog</div>
             </div>
             <div className={style.configuration__row}>
-              <div className={style.configuration__row__title}>
-                Community shares name
+              <div className={style.configuration__row__title}>Start time</div>
+              <div className={style.configuration__row__value}>
+                {getDateTime(currentPresale?.presaleStart)}
               </div>
-              <div className={style.configuration__row__value}>0xFrog</div>
+            </div>
+            <div className={style.configuration__row}>
+              <div className={style.configuration__row__title}>End time</div>
+              <div className={style.configuration__row__value}>
+                {getDateTime(currentPresale?.presaleEnd)}
+              </div>
+            </div>
+            <div className={style.configuration__row}>
+              <div className={style.configuration__row__title}>
+                Price per 1 share
+              </div>
+              <div className={style.configuration__row__value}>
+                {fromWeiToEth(currentPresale?.presalePrice)}
+              </div>
+            </div>
+            <div className={style.configuration__row}>
+              <div className={style.configuration__row__title}>Fee</div>
+              <div className={style.configuration__row__value}>5%</div>
+            </div>
+            <div className={style.configuration__row}>
+              <div className={style.configuration__row__title}>Creator</div>
+              <div className={style.configuration__row__value}>
+                {currentPresale?.creator?.profile?.twitterName}
+              </div>
             </div>
           </div>
         </div>
@@ -115,12 +173,21 @@ const Presale = observer(() => {
         <div className={style.second__block__top}>
           <div className={style.subscription}>Subscription Starts</div>
           <div className={style.time}>
-            <span>01</span>
-            <span>01</span>
-            <span>01</span>
-            <span>01</span>
+            <Countdown
+              date={new Date(currentPresale?.presaleEnd)}
+              renderer={renderer}
+            />
           </div>
-          <SubscriptionProgressBar progress={20} />
+          <SubscriptionProgressBar
+            supply={Number(currentPresale?.supply) / 10 ** 6}
+            goal={Number(currentPresale?.presaleGoal) / 10 ** 6}
+            progress={Number(
+              (
+                Number(currentPresale?.supply) /
+                Number(currentPresale?.presaleGoal)
+              ).toFixed(0)
+            )}
+          />
           <div className={buy.buy__amount} style={{ margin: "0px" }}>
             <div className={buy.buy__amount__title}>Amount (max: 0 BNB)</div>
             <div className={buy.buy__amount__input}>
@@ -145,7 +212,7 @@ const Presale = observer(() => {
               style.configuration__button
             )}
           >
-            Connect wallet
+            BUY
           </div>
         </div>
         <div className={style.configuration__col__second}>

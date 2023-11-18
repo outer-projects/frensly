@@ -39,6 +39,7 @@
     "react": "^18.2.0",
     "react-app-rewired": "^2.2.1",
     "react-copy-to-clipboard": "^5.1.0",
+    "react-countdown": "^2.3.5",
     "react-detect-click-outside": "^1.1.7",
     "react-dom": "^18.2.0",
     "react-gaussian-blur": "^1.0.6",
