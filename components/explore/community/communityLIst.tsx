@@ -11,6 +11,7 @@ import { InView } from "react-intersection-observer";
 import OneActivity from "../../notifications/oneActivity";
 import { shortNick } from "../../../utils/utilities";
 import { CommunityStore } from "../../../stores/CommunityStore";
+import CommunityRow from "./communityRow";
 const types = ["Top", "New Community"];
 const CommunityList = observer(() => {
   const [active, setActive] = useState(0);
@@ -99,12 +100,12 @@ const CommunityList = observer(() => {
       <div className={style.explore__types__row}>
         <TypesList types={types} setActive={setActive} active={active} />
       </div>
-      {(active <= 1 || active == 3 || active == 4) && (
+      {(
         <div className={style.explore__users__col}>
           {communityList?.map((el: any, i: number) => {
             return (
               <div>
-                <ExploreRow el={el} key={i} isTVH={false} isNw={false} />
+                <CommunityRow el={el} key={i} isTVH={false} isNw={false} />
                 {/* {currentUserList == "new" && i !== 0 && i % 19 == 0 && (
                   <InView
                     as="div"

@@ -10,7 +10,7 @@ import Web3Store from "../../../stores/Web3Store";
 import EthereumSvg from "../../svgs/Ethereum";
 import Key from "../../svgs/key";
 
-const ExploreRow = observer((el: any) => {
+const CommunityRow = observer((el: any) => {
   const [usdPrice, setUsdPrice] = useState(0);
   const { user } = useInjection(Web3Store);
   const { getPriceInUsd, ethCurrency } = useInjection(UserStore);
@@ -63,4 +63,4 @@ const ExploreRow = observer((el: any) => {
     </Link>
   );
 });
-export default ExploreRow;
+export default CommunityRow;

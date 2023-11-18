@@ -383,6 +383,10 @@
   .row__8 {
     width: 71px;
     color: #5D5FEF;
+    cursor: pointer;
+    &:hover {
+      text-decoration: underline;
+    }
   }
 }
 
