@@ -7,10 +7,13 @@ import Web3Store from "../../stores/Web3Store";
 export const SeparatedConnect = observer(
   ({ cssClassProps }: { cssClassProps?: any }) => {
     const { openConnectModal } = useConnectModal();
-    const {user} = useInjection(Web3Store)
+    const { user } = useInjection(Web3Store);
     return (
       <button
-        onClick={openConnectModal}
+        onClick={() => {
+          localStorage.setItem("auth", "false")
+          openConnectModal && openConnectModal();
+        }}
         type="button"
         className={classNames(
           style.connect__button,
@@ -18,8 +21,10 @@ export const SeparatedConnect = observer(
           user?.account && style.connect__light
         )}
       >
-        {!user?.account && <img src="../../icons/MetaMask.svg" style={{ marginTop: "0px" }} />}
-        {user?.account ? "Connect wallet" : "Sign the message123"}
+        {!user?.account && (
+          <img src="../../icons/MetaMask.svg" style={{ marginTop: "0px" }} />
+        )}
+        {user?.account ? "Connect wallet" : "Sign the message"}
       </button>
     );
   }
