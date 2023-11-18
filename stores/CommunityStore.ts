@@ -48,7 +48,7 @@ export class CommunityStore {
     formData.append("description", description);
     formData.append("name", name);
     formData.append("handle", handle);
-
+    console.log(file);
     file && formData.append("file", file as Blob);
     try {
       const res = await axios.post(prefix + "pond/customize", formData);
