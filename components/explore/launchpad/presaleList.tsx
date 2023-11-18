@@ -68,9 +68,9 @@ const PresaleList = observer(() => {
           <div className={style.row__7}>Time to start</div>
           <div className={style.row__8}></div>
         </div>
-        <PresaleListItem/>
-        {presaleList.map((el) => {
-          return <PresaleListItem presale={el} />;
+        {/* <PresaleListItem/> */}
+        {presaleList.map((el, i) => {
+          return <PresaleListItem presale={el} key={i} />;
         })}
       </div>
     </div>
