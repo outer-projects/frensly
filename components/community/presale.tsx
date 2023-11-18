@@ -119,7 +119,7 @@ const Presale = observer(() => {
                 Community shares name
               </div>
               <div className={style.configuration__row__value}>
-                {currentPresale.handle}
+                {currentPresale?.handle}
               </div>
             </div>
             <div className={style.configuration__row}>
