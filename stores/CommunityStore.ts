@@ -25,8 +25,12 @@ export class CommunityStore {
     telegram,
     discord,
     description,
-    file
+    file,
+    name,
+    handle
   }: {
+    name: string;
+    handle: string;
     pondId: number;
     twitter: string;
     description: string;
@@ -42,6 +46,9 @@ export class CommunityStore {
     formData.append("telegram", telegram);
     formData.append("discord", discord);
     formData.append("description", description);
+    formData.append("name", name);
+    formData.append("handle", handle);
+
     file && formData.append("file", file as Blob);
     try {
       const res = await axios.post(prefix + "pond/customize", formData);
@@ -78,8 +85,8 @@ export class CommunityStore {
   getCommunityList = async () => {
     try {
       const res = await axios.get(prefix + "pond/public");
-
-      this.communityList = res.data;
+      console.log(res.data.ponds);
+      this.communityList = res.data.ponds;
     } catch (e) {
       console.log(e);
       return false;

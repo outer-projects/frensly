@@ -15,6 +15,8 @@ export interface IStageOne {
   setStep?: (step: number) => void;
   name: string;
   setName?: (name: string) => void;
+  handle: string;
+  setHandle?: (name: string) => void;
   description: string;
   setDescription?: (description: string) => void;
   twitter: string;
@@ -27,6 +29,7 @@ export interface IStageOne {
   setDiscord?: (discord: string) => void;
   image?: File | null;
   setImage?: (img: File | null) => void;
+
 }
 const StageOne = observer((stage: IStageOne) => {
   const { user, community, address, web3 } = useInjection(Web3Store);
@@ -35,7 +38,7 @@ const StageOne = observer((stage: IStageOne) => {
 
   const create = async () => {
     try {
-      const res = await community.methods.initPond(stage.name).send({
+      const res = await community.methods.initPond().send({
         from: address,
       });
       console.log(res);
@@ -118,7 +121,8 @@ const StageOne = observer((stage: IStageOne) => {
           twitter: stage.twitter,
           description: stage.description,
           url: stage.webSite,
-
+          name: stage.name,
+          handle: stage.handle as string,
           telegram: stage.tg,
           file: stage.image,
           discord: stage.discord,
@@ -127,7 +131,7 @@ const StageOne = observer((stage: IStageOne) => {
             router.push("/community");
           }
         });
-      }, 3000);
+      }, 1000);
     } catch (e) {
       console.log(e);
     }
@@ -141,9 +145,14 @@ const StageOne = observer((stage: IStageOne) => {
       <Upload image={stage.image} setImage={stage.setImage}/>
       <div className={style.stage__one__col}>
         <input
-          placeholder="Name"
+          placeholder="Display name"
           value={stage.name}
           onChange={(e) => stage.setName && stage.setName(e.target.value)}
+        />
+         <input
+          placeholder="Uniq name"
+          value={stage.handle}
+          onChange={(e) => stage.setHandle && stage.setHandle(e.target.value)}
         />
         <TextareaAutosize
           className={style.stage__one__description}

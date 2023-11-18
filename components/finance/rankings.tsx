@@ -223,7 +223,7 @@ const Rankings = observer(() => {
         </div>
         <div className={style.finance}>
           <User stage="rankings" />
-          {!closeContest && (
+          {/* {!closeContest && (
             <div className={style.contest}>
               <div className={style.contest__title}>
                 🐸 Contest
@@ -248,7 +248,7 @@ const Rankings = observer(() => {
                 your per-hour points X2 for 8 hours!
               </div>
             </div>
-          )}
+          )} */}
           <div className={style.finance__invite}>
             <div>Rankings</div>
             <div>Top #{pointsInfo?.place}</div>

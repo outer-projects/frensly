@@ -10,7 +10,7 @@ import Community from "../../components/community/community";
 import CommunityList from "../../components/explore/community/communityLIst";
 
 
-const ExplorePage: NextPage = observer((props) => {
+const CommunityPage: NextPage = observer((props) => {
   // const socket = useContext(SocketContext);
   // const startListening = async () => {
   //   socket.on("join", () => {
@@ -43,4 +43,4 @@ const ExplorePage: NextPage = observer((props) => {
   );
 });
 
-export default ExplorePage;
+export default CommunityPage;

@@ -6,8 +6,9 @@ import Head from "next/head";
 import { useInjection } from "inversify-react";
 import { UserStore } from "../../stores/UserStore";
 import ExploreList from "../../components/explore/exploreList";
+import PresaleList from "../../components/explore/launchpad/presaleList";
 
-const ExplorePage: NextPage = observer((props) => {
+const LaunchpadPage: NextPage = observer((props) => {
   // const socket = useContext(SocketContext);
   // const startListening = async () => {
   //   socket.on("join", () => {
@@ -24,7 +25,7 @@ const ExplorePage: NextPage = observer((props) => {
   // }, []);
   const { unreadCount } = useInjection(UserStore);
   return (
-    <div className={style.explore__page}>
+    <div className={style.launchpad__page}>
       <Head>
         <title>
           {unreadCount !== 0 ? `(${unreadCount})` : ""} Launchpad | Frensly
@@ -35,9 +36,9 @@ const ExplorePage: NextPage = observer((props) => {
         />
       </Head>
       <ExploreList/>
-      <Explore />
+      <PresaleList/>
     </div>
   );
 });
 
-export default ExplorePage;
+export default LaunchpadPage;

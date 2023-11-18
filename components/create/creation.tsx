@@ -12,7 +12,7 @@ const Creation = () => {
   const [tg, setTg] = useState("");
   const [discord, setDiscord] = useState("");
   const [fee, setFee] = useState(0);
-  const [pricingModel, setPricingModel] = useState(0);
+  const [handle, setHandle] = useState('');
   const [image, setImage] = useState<null | File>(null);
   return (
     <div>
@@ -34,6 +34,8 @@ const Creation = () => {
           setWebSite={setWebSite}
           tg={tg}
           setTg={setTg}
+          handle={handle}
+          setHandle={setHandle}
         />
       )}
       {step == 1 && (
@@ -53,6 +55,8 @@ const Creation = () => {
           setWebSite={setWebSite}
           tg={tg}
           setTg={setTg}
+          handle={handle}
+          setHandle={setHandle}
         />
       )}
     </div>

@@ -24,10 +24,9 @@ const StageTwo = observer((stage: IStageOne) => {
     try {
       const res = await community.methods
         .initPondPresale(
-          stage.name,
           isRestricted,
-          new Date(timeStart).getTime()/1000,
-          new Date(timeFinish).getTime()/1000,
+          new Date(timeStart).getTime() / 1000,
+          new Date(timeFinish).getTime() / 1000,
           supply * 10 ** 6,
           maxAllocation * 10 ** 6,
           ratio
@@ -115,7 +114,8 @@ const StageTwo = observer((stage: IStageOne) => {
           twitter: stage.twitter,
           description: stage.description,
           url: stage.webSite,
-
+          name: stage.name,
+          handle: stage.handle as string,
           telegram: stage.tg,
           file: stage.image,
           discord: stage.discord,
@@ -124,7 +124,7 @@ const StageTwo = observer((stage: IStageOne) => {
             router.push("/community");
           }
         });
-      }, 3000);
+      }, 1000);
       // router.push("/presale/123");
     } catch (e) {
       console.log(e);
@@ -185,7 +185,7 @@ const StageTwo = observer((stage: IStageOne) => {
             />
           </div>
         </div>
-        <div className={classNames(style.stage__one__row, style.stage__values)}>
+        {/* <div className={classNames(style.stage__one__row, style.stage__values)}>
           <div
             className={finance.finance__stat}
             style={{ width: "49%", marginBottom: "0px" }}
@@ -206,7 +206,7 @@ const StageTwo = observer((stage: IStageOne) => {
               <div className={finance.finance__stat__value}>0 ETH</div>
             </div>
           </div>
-        </div>
+        </div> */}
         <div className={style.stage__one__buttons}>
           <button
             className={classNames(

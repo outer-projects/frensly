@@ -62,7 +62,8 @@ const Finance = observer(() => {
   const [keysReady, setKeysReady] = useState(false);
   const [claimValue, setClaimValue] = useState("0");
   const router = useRouter();
-  const { user, frensly,newFrensly, address, checkAuth } = useInjection(Web3Store);
+  const { user, frensly, newFrensly, address, checkAuth } =
+    useInjection(Web3Store);
   const { shares, holders, getShares, getHolders, portfolioValue, getKeys } =
     useInjection(UserStore);
   const claim = async () => {
@@ -200,6 +201,15 @@ const Finance = observer(() => {
               })}
             </div>
           )}
+          <button
+            className={classNames(
+              header.connect__button,
+              style.finance__claim__community
+            )}
+            onClick={()=>{router.push("/communities/create")}}
+          >
+            Create community
+          </button>
           <div className={style.finance__title__second}>
             Available for claim
           </div>

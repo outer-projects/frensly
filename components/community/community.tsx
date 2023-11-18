@@ -44,7 +44,7 @@ const Community = observer(() => {
   return (
     <div className={style.configuration}>
       <div className={style.first__block}>
-        <div className={style.configuration__top}>
+        {/* <div className={style.configuration__top}>
           <div className={style.configuration__back}>
             <img
               src={"../../icons/arrow_back.svg"}
@@ -58,7 +58,7 @@ const Community = observer(() => {
 
           <img src="../Avatar.svg" />
           <div className={style.configuration__top__title}>Community name</div>
-        </div>
+        </div> */}
         <div className={style.configuration__wrapper}>
           <div className={style.configuration__info}>
             <div className={style.configuration__user}>
@@ -110,7 +110,7 @@ const Community = observer(() => {
           </div>
         </div>
       </div>
-      <div className={style.second__block}>
+      {/* <div className={style.second__block}>
         <div className={style.second__block__top}>
           <div className={style.subscription}>Subscription Starts</div>
           <div className={style.time}>
@@ -167,7 +167,7 @@ const Community = observer(() => {
             <div className={style.configuration__row__value}>0xFrog</div>
           </div>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 });

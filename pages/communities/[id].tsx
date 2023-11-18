@@ -4,6 +4,7 @@ import { useInjection } from "inversify-react";
 import style from "../home.module.scss";
 import Configuration from "../../components/community/presale";
 import Presale from "../../components/community/presale";
+import Community from "../../components/community/community";
 
 const CommunityPage = () => {
   const { unreadCount } = useInjection(UserStore);
@@ -18,7 +19,7 @@ const CommunityPage = () => {
           content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
         />
       </Head>
-      <Presale />
+      <Community />
     </div>
   );
 };

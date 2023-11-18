@@ -7,7 +7,7 @@ import { useInjection } from "inversify-react";
 import { UserStore } from "../../stores/UserStore";
 import ExploreList from "../../components/explore/exploreList";
 
-const ExplorePage: NextPage = observer((props) => {
+const PersonalPage: NextPage = observer((props) => {
   // const socket = useContext(SocketContext);
   // const startListening = async () => {
   //   socket.on("join", () => {
@@ -40,4 +40,4 @@ const ExplorePage: NextPage = observer((props) => {
   );
 });
 
-export default ExplorePage;
+export default PersonalPage;

@@ -1,9 +1,9 @@
 import Head from "next/head";
-import { UserStore } from "../stores/UserStore";
+import { UserStore } from "../../stores/UserStore";
 import { useInjection } from "inversify-react";
-import style from "./home.module.scss";
-import Creation from "../components/create/creation";
-import AuthPageWrap from "../components/layout/authPageWrap";
+import style from "../home.module.scss";
+import Creation from "../../components/create/creation";
+import AuthPageWrap from "../../components/layout/authPageWrap";
 const Create = () => {
   const { unreadCount } = useInjection(UserStore);
   return (
