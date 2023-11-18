@@ -58,12 +58,6 @@ const StageOne = observer((stage: IStageOne) => {
           },
           {
             indexed: false,
-            internalType: "string",
-            name: "name",
-            type: "string",
-          },
-          {
-            indexed: false,
             internalType: "bool",
             name: "isPresale",
             type: "bool",
