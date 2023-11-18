@@ -15,7 +15,8 @@ const StageTwo = observer((stage: IStageOne) => {
   const [supply, setSupply] = useState(0);
   const [maxAllocation, setMaxAllocation] = useState(0);
   const [ratio, setRatio] = useState(0);
-  const [isRestricted, setIsRestricted] = useState(true);
+  // const [isRestricted, setIsRestricted] = useState(true);
+  
   const [timeStart, setTimeStart] = useState("");
   const [timeFinish, setTimeFinish] = useState("");
   const router = useRouter();
@@ -24,7 +25,7 @@ const StageTwo = observer((stage: IStageOne) => {
     try {
       const res = await community.methods
         .initPondPresale(
-          isRestricted,
+          true,
           new Date(timeStart).getTime() / 1000,
           new Date(timeFinish).getTime() / 1000,
           supply * 10 ** 6,

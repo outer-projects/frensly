@@ -1,6 +1,6 @@
 import style from "../explore.module.scss";
 
-const PresaleListItem = () => {
+const PresaleListItem = (el:any) => {
   return (
     <div className={style.presale__table__row}>
       <div className={style.row__1}><img src="../avatar.svg"/></div>

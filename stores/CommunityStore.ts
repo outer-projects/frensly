@@ -95,8 +95,9 @@ export class CommunityStore {
   getPresaleList = async () => {
     try {
       const res = await axios.get(prefix + "pond/presales");
+      console.log(res.data);
 
-      this.presaleList = res.data;
+      this.presaleList = res.data.ponds;
     } catch (e) {
       console.log(e);
       return false;
