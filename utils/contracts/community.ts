@@ -564,13 +564,6 @@ export const communityAbi = [
     type: "function",
   },
   {
-    inputs: [
-      {
-        internalType: "string",
-        name: "name",
-        type: "string",
-      },
-    ],
     name: "initPond",
     outputs: [],
     stateMutability: "nonpayable",
@@ -578,11 +571,6 @@ export const communityAbi = [
   },
   {
     inputs: [
-      {
-        internalType: "string",
-        name: "name",
-        type: "string",
-      },
       {
         internalType: "bool",
         name: "isRestricted",

@@ -171,7 +171,7 @@ const StageTwo = observer((stage: IStageOne) => {
             <input
               type="datetime-local"
               value={timeStart}
-              style={{ paddingTop: "15px" }}
+              style={{ paddingTop: "15px", paddingLeft: "16px" }}
               onChange={(e) => setTimeStart(e.target.value)}
             />
           </div>
@@ -180,7 +180,7 @@ const StageTwo = observer((stage: IStageOne) => {
             <input
               type="datetime-local"
               value={timeFinish}
-              style={{ paddingTop: "15px" }}
+              style={{ paddingTop: "15px", paddingLeft: "16px" }}
               onChange={(e) => setTimeFinish(e.target.value)}
             />
           </div>
