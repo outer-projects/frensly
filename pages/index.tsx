@@ -10,6 +10,7 @@ import { UserStore } from "../stores/UserStore";
 const Home: NextPage = observer((props) => {
   const { push } = useRouter();
   useEffect(() => {
+    console.log("index?");
     push("/explore/personal");
   }, []);
   const { unreadCount } = useInjection(UserStore);

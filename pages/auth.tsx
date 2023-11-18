@@ -26,6 +26,7 @@ const AuthPage: NextPage = observer((props) => {
   }, []);
   useEffect(() => {
     if (authSummaryCheck) {
+      console.log("auth?");
       push("/explore/personal");
     }
   }, [authSummaryCheck]);
