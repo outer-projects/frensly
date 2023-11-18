@@ -60,7 +60,7 @@ export class CommunityStore {
   };
   getCommunity = async (id: string) => {
     try {
-      const res = await axios.get(prefix + "pond/" + id);
+      const res = await axios.get(prefix + "pond/get/" + id);
       console.log(res);
       this.currentCommunity = res.data;
     } catch (e) {
@@ -70,7 +70,7 @@ export class CommunityStore {
   };
   getPresale = async (id: string) => {
     try {
-      const presale = await axios.get(prefix + "pond/" + id);
+      const presale = await axios.get(prefix + "pond/get/" + id);
       const whitelist = await axios.get(
         prefix + "pond/whitelist/applications/" + id
       );
