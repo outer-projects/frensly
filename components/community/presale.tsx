@@ -45,7 +45,7 @@ const Presale = observer(() => {
   useEffect(() => {
     if (id) getPresale(id as string);
   }, [id]);
-  const Completionist = () => <span>Finished!</span>;
+  const Completionist = () => <div>Finished!</div>;
   const renderer = ({ days, hours, minutes, seconds, completed }: any) => {
     if (completed) {
       // Render a completed state
