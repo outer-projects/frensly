@@ -35,12 +35,13 @@ const Presale = observer(() => {
   const darkMode = useDarkMode();
   const router = useRouter()
   const {id} = router.query
+  console.log(id);
   const { getPresale, currentPresale } = useInjection(CommunityStore);
   const [numberOfShares, setNumberOfShares] = useState("");
   console.log(currentPresale);
   useEffect(()=>{
-    getPresale(id as string)
-  },[])
+    if(id) getPresale(id as string)
+  },[id])
   return (
     <div className={style.configuration}>
       <div className={style.first__block}>

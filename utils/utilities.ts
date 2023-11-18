@@ -33,6 +33,44 @@ export const fromWeiToEth = (num: string | BigNumber, fixed?: number) => {
   }
 };
 BN.config({ EXPONENTIAL_AT: 100 });
+export const timeToDate = (time: string) => {
+  const to = Date.parse(time);
+  const dateNow = Date.now();
+  var d = Math.abs(dateNow - to) / 1000;
+  var r: ITime = {
+    year: 0,
+    month: 0,
+    week: 0,
+    day: 0,
+    hour: 0,
+    minute: 0,
+    second: 0,
+  };
+  var s: ITime = {
+    year: 31536000,
+    month: 2592000,
+    week: 604800,
+    day: 86400,
+    hour: 3600,
+    minute: 60,
+    second: 1,
+  };
+
+  Object.keys(s).forEach(function (key) {
+    //@ts-ignore
+    r[key] = Math.floor(d / s[key]);
+    //@ts-ignore
+    d -= r[key] * s[key];
+  });
+
+  if (r.year !== 0) return r.year + "y";
+  if (r.month !== 0) return r.month + "m";
+  if (r.week !== 0) return r.week + "w";
+  if (r.day !== 0) return r.day + "d";
+  if (r.hour !== 0) return r.hour + "h";
+  if (r.minute !== 0) return r.minute + "m";
+  if (r.second !== 0) return r.second + "s";
+};
 export const timePassed = (time: string) => {
   const from = Date.parse(time);
   const dateNow = Date.now();
@@ -102,6 +140,12 @@ export const ipfsGateway = (cid?: string) => {
     let handleCid = cid.replace("ipfs://", "").replace("ipfs:/", "");
     return `https://loot.mypinata.cloud/ipfs/${handleCid}?${com}pinataGatewayToken=tda9_4KZmY8KtgTMaz5LQ3fGHhh_WEfdRzJowpHsF_2t7VTU2zHsjskO7-PWCZoV`;
   } else return "";
+};
+
+export const getDateTime = (date: any) => {
+  const dd = new Date(date).getTime();
+  // console.log("%chelper.ts line:32 dd", "color: #007acc;", dd, date);
+  return DateTime.fromMillis(dd).toFormat("yyyy LLL dd hh:mm a");
 };
 export const getDate = (date: any) => {
   const dd = new Date(date).getTime();

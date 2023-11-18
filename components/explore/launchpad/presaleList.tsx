@@ -7,13 +7,32 @@ import PresaleListItem from "./presaleListItem";
 import classNames from "classnames";
 import TypesList from "../../common/typesList";
 const types = ["Upcoming", "Ended"];
+export const StatusesEnum = {
+  incoming: "INCOMING",
+  ongoing: "ONGOING",
+  failed: "FAILED",
+  public: "PUBLIC",
+};
+
+
 const PresaleList = observer(() => {
   const { getPresaleList, presaleList } = useInjection(CommunityStore);
   const [search, setSearch] = useState("");
   const [active, setActive] = useState(0);
+  useEffect(() => {
+    if(active === 0){
+      getPresaleList(StatusesEnum.incoming);
+    } else if (active == 1) {
+      getPresaleList(StatusesEnum.ongoing);
+    } else if (active == 2) {
+      getPresaleList(StatusesEnum.failed);
+    } else if (active == 3) {
+      getPresaleList(StatusesEnum.public);
+    }
+  }, [active]);
   const [outline, setOutline] = useState(false);
   useEffect(() => {
-    getPresaleList();
+    getPresaleList(status);
   }, []);
   const saveInput = () => {
     // searchUsers(search);
@@ -61,10 +80,10 @@ const PresaleList = observer(() => {
         <div className={style.presale__table__head}>
           <div className={style.row__1}>Image</div>
           <div className={style.row__2}>Name</div>
-          <div className={style.row__3}>Number of shares</div>
-          <div className={style.row__4}>Hardcap</div>
+          <div className={style.row__3}>Current supply</div>
           <div className={style.row__5}>Cost per share</div>
           <div className={style.row__6}>Status</div>
+          <div className={style.row__7}>Time to start</div>
           <div className={style.row__7}>Time to start</div>
           <div className={style.row__8}></div>
         </div>

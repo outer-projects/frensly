@@ -10,7 +10,7 @@ import Web3Store from "../../../stores/Web3Store";
 import EthereumSvg from "../../svgs/Ethereum";
 import Key from "../../svgs/key";
 
-const CommunityRow = observer((el: any) => {
+const CommunityRow = observer(({el}: any) => {
   const [usdPrice, setUsdPrice] = useState(0);
   const { user } = useInjection(Web3Store);
   const { getPriceInUsd, ethCurrency } = useInjection(UserStore);
@@ -24,7 +24,7 @@ const CommunityRow = observer((el: any) => {
     <Link href={"/communities/" + el?.handle}>
       <div className={style.explore__user}>
         <div className={style.explore__user__left}>
-          <img src={el?.avatar} />
+          <img src={el?.image} />
           <div className={style.explore__user__left__text}>
             <div className={style.explore__user__share}>
               {/* @ts-ignore */}

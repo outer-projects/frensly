@@ -6,7 +6,7 @@ import { IAccount, IProfile } from "../types/users";
 import axios from "axios";
 import { prefix } from "../utils/config";
 import { IStageOne } from "../components/create/stages/stageOne";
-
+import { StatusesEnum } from "../components/explore/launchpad/presaleList";
 @injectable()
 export class CommunityStore {
   @observable topUsersList: IProfile[] = [];
@@ -27,7 +27,7 @@ export class CommunityStore {
     description,
     file,
     name,
-    handle
+    handle,
   }: {
     name: string;
     handle: string;
@@ -60,7 +60,7 @@ export class CommunityStore {
   };
   getCommunity = async (id: string) => {
     try {
-      const res = await axios.get(prefix + "pond" + id);
+      const res = await axios.get(prefix + "pond/" + id);
       console.log(res);
       this.currentCommunity = res.data;
     } catch (e) {
@@ -70,7 +70,7 @@ export class CommunityStore {
   };
   getPresale = async (id: string) => {
     try {
-      const presale = await axios.get(prefix + "pond" + id);
+      const presale = await axios.get(prefix + "pond/" + id);
       const whitelist = await axios.get(
         prefix + "pond/whitelist/applications/" + id
       );
@@ -92,7 +92,7 @@ export class CommunityStore {
       return false;
     }
   };
-  getPresaleList = async () => {
+  getPresaleList = async (status:string) => {
     try {
       const res = await axios.get(prefix + "pond/presales");
       console.log(res.data);

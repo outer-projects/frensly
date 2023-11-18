@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { fromWeiToEth } from "../../../utils/utilities";
+import { fromWeiToEth, getDate, getDateTime } from "../../../utils/utilities";
 import style from "../explore.module.scss";
 
 const PresaleListItem = ({presale}: any) => {
@@ -10,11 +10,11 @@ const PresaleListItem = ({presale}: any) => {
       </div>
       <div className={style.row__2}>{presale?.name}</div>
       <div className={style.row__3}>{Number(presale?.supply) / 10 ** 6}</div>
-      <div className={style.row__4}>Hardcap</div>
       <div className={style.row__5}>{fromWeiToEth(presale?.price)}</div>
       <div className={style.row__6}>Status</div>
-      <div className={style.row__7}>Time to start</div>
-      <Link href={"/presale/" + presale?.handle}>
+      <div className={style.row__7}>{getDateTime(presale.presaleStart)}</div>
+      <div className={style.row__7}>{getDateTime(presale.presaleEnd)}</div>
+      <Link href={"/presales/" + presale?.handle}>
         <div className={style.row__8}>View</div>
       </Link>
     </div>
