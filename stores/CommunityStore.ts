@@ -62,7 +62,7 @@ export class CommunityStore {
     try {
       const res = await axios.get(prefix + "pond/get/" + id);
       console.log(res);
-      this.currentCommunity = res.data;
+      this.currentCommunity = res.data.pond;
     } catch (e) {
       console.log(e);
       return false;
@@ -75,7 +75,7 @@ export class CommunityStore {
         prefix + "pond/whitelist/applications/" + id
       );
       console.log(presale);
-      this.currentPresale = presale.data;
+      this.currentPresale = presale.data.pond;
       this.currentWhitelist = whitelist.data;
     } catch (e) {
       console.log(e);
