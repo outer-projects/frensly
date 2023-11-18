@@ -116,12 +116,6 @@ export const communityAbi = [
       },
       {
         indexed: false,
-        internalType: "string",
-        name: "name",
-        type: "string",
-      },
-      {
-        indexed: false,
         internalType: "bool",
         name: "isPresale",
         type: "bool",
