@@ -382,7 +382,8 @@
   }
   .row__8 {
     width: 71px;
-    color: #5D5FEF;
+    color: #5D5FEF!important;
+    text-decoration: none;
     cursor: pointer;
     &:hover {
       text-decoration: underline;
