@@ -94,7 +94,7 @@ const Presale = observer(() => {
               </div>
               <div className={style.configuration__user__socials}>
                 {socials.map((social, i) => {
-                  let link = social.link + currentPresale[social.name];
+                  let link = currentPresale ? social.link + currentPresale[social.name] : ''
                   return (
                     <Link href={link}>
                       <div
