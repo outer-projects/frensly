@@ -8,7 +8,7 @@ import {
   frenslyAbi,
   frenslyContract,
   frenslyContractDev,
-  frenslyContractDevNew,
+  // frenslyContractDevNew,
 } from "../utils/contracts/frensly";
 import { WalletClient } from "wagmi";
 import { AuthenticationStatus } from "@rainbow-me/rainbowkit";
@@ -66,10 +66,10 @@ export class Web3Store {
       frenslyAbi as any,
       isDevelopment ? frenslyContractDev : frenslyContract
     );
-    this.newFrensly = new this.web3.eth.Contract(
-      frenslyAbi as any,
-      isDevelopment ? frenslyContractDev : frenslyContractDevNew
-    );
+    // this.newFrensly = new this.web3.eth.Contract(
+    //   frenslyAbi as any,
+    //   isDevelopment ? frenslyContractDev : frenslyContractDevNew
+    // );
   };
   @action setAuthStatus = (auth: AuthenticationStatus) => {
     this.authStatus = auth;
@@ -182,10 +182,10 @@ export class Web3Store {
         frenslyAbi as any,
         isDevelopment ? frenslyContractDev : frenslyContract
       );
-      this.newFrensly = new this.web3.eth.Contract(
-        frenslyAbi as any,
-        isDevelopment ? frenslyContractDev : frenslyContractDevNew
-      );
+      // this.newFrensly = new this.web3.eth.Contract(
+      //   frenslyAbi as any,
+      //   isDevelopment ? frenslyContractDev : frenslyContractDevNew
+      // );
       this.community = new this.web3.eth.Contract(
         communityAbi as any,
         communityContractDev
