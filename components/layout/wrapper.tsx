@@ -39,8 +39,8 @@ const Wrapper = observer(({ children }: any) => {
     }
   };
   const ready = useMemo(
-    () => !needToChangeWallet && init && user?.account,
-    [needToChangeWallet, init, user?.account]
+    () => init && user?.account,
+    [init, user?.account]
   );
 
   const router = useRouter();
