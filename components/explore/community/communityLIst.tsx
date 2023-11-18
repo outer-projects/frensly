@@ -100,13 +100,13 @@ const CommunityList = observer(() => {
       <div className={style.explore__types__row}>
         <TypesList types={types} setActive={setActive} active={active} />
       </div>
-      {(
-        <div className={style.explore__users__col}>
-          {communityList?.map((el: any, i: number) => {
-            return (
-              <div>
-                <CommunityRow el={el} key={i} isTVH={false} isNw={false} />
-                {/* {currentUserList == "new" && i !== 0 && i % 19 == 0 && (
+
+      <div className={style.explore__users__col}>
+        {communityList?.map((el: any, i: number) => {
+          return (
+            <div>
+              <CommunityRow el={el} key={i} isTVH={false} isNw={false} />
+              {/* {currentUserList == "new" && i !== 0 && i % 19 == 0 && (
                   <InView
                     as="div"
                     triggerOnce
@@ -118,11 +118,11 @@ const CommunityList = observer(() => {
                     }}
                   ></InView>
                 )} */}
-              </div>
-            );
-          })}
-        </div>
-      )}
+            </div>
+          );
+        })}
+      </div>
+
       {active == 2 && (
         <div className={style.explore__users__col}>
           {/* {globalActivity?.map((el, i) => {

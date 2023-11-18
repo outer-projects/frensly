@@ -16,7 +16,7 @@ const CommunityRow = observer((el: any) => {
   const { getPriceInUsd, ethCurrency } = useInjection(UserStore);
   useEffect(() => {
     if (el && ethCurrency !== 0) {
-      setUsdPrice(getPriceInUsd(el?.currentPrice));
+      setUsdPrice(getPriceInUsd(el?.price));
     }
   }, [el, ethCurrency]);
 
@@ -32,7 +32,7 @@ const CommunityRow = observer((el: any) => {
                 (u) =>
                   u.subject == el._id && Number(u.amount) >= 1000000
               )?.length >= 1 && <Key />} */}
-              <div>{Number(el?.sharesAmount) / 10 ** 6} share</div>
+              <div>{Number(el?.supply) / 10 ** 6} share</div>
             </div>
             <div className={style.explore__user__name}>
               <div>{shortNick(el?.handle)}</div>
@@ -54,7 +54,7 @@ const CommunityRow = observer((el: any) => {
         <div className={style.explore__user__right}>
           <div className={style.explore__user__price}>
             <EthereumSvg />
-            {fromWeiToEth(el?.currentPrice) + " ETH"}
+            {fromWeiToEth(el?.price) + " ETH"}
           </div>
 
           <div className={style.explore__user__balance__usd}>${usdPrice}</div>
