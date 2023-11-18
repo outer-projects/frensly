@@ -115,6 +115,7 @@
   display: flex;
   justify-content: center;
   background: var(--header);
+  align-self: flex-start;
   border-bottom: 1px solid var(--header-bottom);
   padding-bottom: 19px;
   width: 100vw;

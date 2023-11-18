@@ -361,6 +361,11 @@
   border-radius: 32px;
   .row__1 {
     width: 81px;
+    img {
+      width: 40px;
+      height: 40px;
+      border-radius: 100%;
+    }
   }
   .row__2 {
     width: 141px;
