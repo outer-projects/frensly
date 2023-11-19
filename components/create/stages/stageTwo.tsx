@@ -12,9 +12,9 @@ import { IStageOne } from "./stageOne";
 const StageTwo = observer((stage: IStageOne) => {
   const { user, community, address, web3 } = useInjection(Web3Store);
   const { updateCommunity } = useInjection(CommunityStore);
-  const [supply, setSupply] = useState(0);
-  const [maxAllocation, setMaxAllocation] = useState(0);
-  const [ratio, setRatio] = useState(0);
+  const [supply, setSupply] = useState('');
+  const [maxAllocation, setMaxAllocation] = useState('');
+  const [ratio, setRatio] = useState('');
   // const [isRestricted, setIsRestricted] = useState(true);
   
   const [timeStart, setTimeStart] = useState("");
@@ -28,8 +28,8 @@ const StageTwo = observer((stage: IStageOne) => {
           true,
           new Date(timeStart).getTime() / 1000,
           new Date(timeFinish).getTime() / 1000,
-          supply * 10 ** 6,
-          maxAllocation * 10 ** 6,
+          Number(supply) * 10 ** 6,
+          Number(maxAllocation) * 10 ** 6,
           ratio
         )
         .send({
@@ -139,25 +139,45 @@ const StageTwo = observer((stage: IStageOne) => {
           <input
             placeholder="Presale supply (shares)"
             value={supply}
-            type="number"
+            type="text"
             style={{ marginTop: "24px" }}
-            onChange={(e) => setSupply(Number(e.target.value))}
+            // onChange={(e) => setSupply(Number(e.target.value))}
+            onChange={(e) => {
+              if (!isNaN(Number(e.target.value)) || e.target.value == ".") {
+                setSupply(e.target.value);
+              } else if (e.target.value == "") {
+                setSupply("");
+              }
+            }}
           />
           <input
             placeholder="Liquidity ratio"
             value={ratio}
-            type="number"
+            type="text"
             style={{ marginTop: "16px" }}
-            onChange={(e) => setRatio(Number(e.target.value))}
+            onChange={(e) => {
+              if (!isNaN(Number(e.target.value)) || e.target.value == ".") {
+                setRatio(e.target.value);
+              } else if (e.target.value == "") {
+                setRatio("");
+              }
+            }}
           />
         </div>
         <div className={style.stage__one__col}>
           <input
             placeholder="Max allocation"
             value={maxAllocation}
-            type="number"
+            type="text"
+            onChange={(e) => {
+              if (!isNaN(Number(e.target.value)) || e.target.value == ".") {
+                setMaxAllocation(e.target.value);
+              } else if (e.target.value == "") {
+                setMaxAllocation("");
+              }
+            }}
             style={{ marginTop: "24px" }}
-            onChange={(e) => setMaxAllocation(Number(e.target.value))}
+            // onChange={(e) => setMaxAllocation(Number(e.target.value))}
           />
         </div>
         <div className={style.stage__one__row}>

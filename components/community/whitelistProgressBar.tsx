@@ -1,5 +1,5 @@
-import style from "../create.module.scss";
-const RegupsProgressBar = ({ progress }: { progress: number }) => {
+import style from "../create/create.module.scss";
+const WhitelistProgressBar = ({ progress }: { progress: number }) => {
   return (
     <div className={style.progress__bar__contain}>
       <div className={style.progress__bar}>
@@ -15,4 +15,4 @@ const RegupsProgressBar = ({ progress }: { progress: number }) => {
     </div>
   );
 };
-export default RegupsProgressBar;
+export default WhitelistProgressBar;
