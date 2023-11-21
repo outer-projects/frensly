@@ -106,8 +106,6 @@ const Presale = observer(
         Number(currentPresale?.supply) < Number(currentPresale?.presaleGoal)
       ) {
         setPresaleTimeStatus("finished");
-        // Render a completed state
-        return <Finalize />;
       } else {
         // Render a countdown
         return (
@@ -266,11 +264,10 @@ const Presale = observer(
         <div className={style.second__block}>
           <div className={style.second__block__top}>
             <div className={style.subscription}>
-              Presale{" "}
               {presaleTimeStatus == "started"
-                ? "is finishing in"
+                ? "Presale is finishing in"
                 : presaleTimeStatus == "not started"
-                ? "is starting in"
+                ? "Presale is starting in"
                 : ""}
             </div>
             <div className={style.time}>
@@ -279,11 +276,13 @@ const Presale = observer(
                   date={new Date(currentPresale?.presaleStart)}
                   renderer={renderer}
                 />
-              ) : (
+              ) : presaleTimeStatus == "started" ? (
                 <Countdown
                   date={new Date(currentPresale?.presaleEnd)}
                   renderer={renderer}
                 />
+              ) : (
+                <Finalize />
               )}
             </div>
             <SubscriptionProgressBar
