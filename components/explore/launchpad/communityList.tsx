@@ -11,13 +11,15 @@ import { InView } from "react-intersection-observer";
 import OneActivity from "../../notifications/oneActivity";
 import { shortNick } from "../../../utils/utilities";
 import { CommunityStore } from "../../../stores/CommunityStore";
+import { UserStore } from "../../../stores/UserStore";
 const types = ["Top", "New Community"];
 const Community = observer(() => {
   const [active, setActive] = useState(0);
   const [search, setSearch] = useState("");
   const [outline, setOutline] = useState(false);
-
-  const { communityList, getCommunityList } = useInjection(CommunityStore);
+  const { wrapperBottom } = useInjection(UserStore);
+  const { communityList, getCommunityList, updateCommunityList } =
+    useInjection(CommunityStore);
   // const saveInput = () => {
   //   searchUsers(search);
   // };
@@ -29,9 +31,14 @@ const Community = observer(() => {
     };
     return clear();
   };
-  useEffect(()=>{
+  useEffect(() => {
     getCommunityList();
-  },[])
+  }, []);
+  useEffect(() => {
+    if (wrapperBottom && communityList.length >= 20) {
+      updateCommunityList();
+    }
+  }, [wrapperBottom]);
   // useEffect(() => {
   //   searchDeb(saveInput, 700);
   // }, [search]);
@@ -104,12 +111,7 @@ const Community = observer(() => {
           {communityList?.map((el: any, i: number) => {
             return (
               <div>
-                <ExploreRow
-                  el={el}
-                  key={i}
-                  isTVH={false}
-                  isNw={false}
-                />
+                <ExploreRow el={el} key={i} isTVH={false} isNw={false} />
                 {/* {currentUserList == "new" && i !== 0 && i % 19 == 0 && (
                   <InView
                     as="div"

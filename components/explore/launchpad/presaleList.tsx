@@ -53,7 +53,7 @@ const PresaleList = observer(() => {
     // searchUsers(search);
   };
   useEffect(() => {
-    if (wrapperBottom) {
+    if (wrapperBottom && presaleList.length >= 20) {
       updatePresale();
     }
   }, [wrapperBottom]);

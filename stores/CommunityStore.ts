@@ -16,6 +16,7 @@ export class CommunityStore {
   @observable presaleList: any[] = [];
   @observable presaleOffset: number = 0;
   @observable communityList: any[] = [];
+  @observable communityOffset: number = 0;
   public constructor(private readonly rootStore: RootStore) {
     makeObservable(this);
   }
@@ -86,11 +87,11 @@ export class CommunityStore {
   getCommunityList = async () => {
     try {
       const res = await axios.get(
-        prefix + `pond/search?limit=0&offset=20&statuses=public`
+        prefix + `pond/search?offset=0&limit=20&statuses=PUBLIC`
       );
       console.log(res.data);
-      this.presaleOffset = 20;
-      this.presaleList = res.data.ponds;
+      this.communityOffset = 20;
+      this.communityList = res.data.ponds;
     } catch (e) {
       console.log(e);
       return false;
@@ -98,15 +99,15 @@ export class CommunityStore {
   };
   updateCommunityList = async () => {
     const query = new URLSearchParams({
-      offset: this.presaleOffset.toString(),
-      limit: (this.presaleOffset + 20).toString(),
-      statuses: "public",
+      offset: this.communityOffset.toString(),
+      limit: (this.communityOffset + 20).toString(),
+      statuses: "PUBLIC",
     }).toString();
     try {
       const res = await axios.get(prefix + `pond/search?` + query);
       console.log(res.data);
-      this.presaleOffset = this.presaleOffset + 20;
-      this.presaleList = res.data.ponds;
+      this.communityOffset = this.presaleOffset + 20;
+      this.communityList = res.data.ponds;
     } catch (e) {
       console.log(e);
       return false;
@@ -115,7 +116,7 @@ export class CommunityStore {
   getPresaleList = async (status: string) => {
     try {
       const res = await axios.get(
-        prefix + `pond/search?limit=0&offset=20&statuses=${status}`
+        prefix + `pond/search?offset=0&limit=20&statuses=${status}`
       );
       console.log(res.data);
       this.presaleOffset = 20;
