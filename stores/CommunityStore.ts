@@ -87,7 +87,7 @@ export class CommunityStore {
   getCommunityList = async () => {
     try {
       const res = await axios.get(
-        prefix + `pond/search?offset=0&limit=20&statuses=PUBLIC`
+        prefix + `pond/search?offset=0&limit=20&status=PUBLIC`
       );
       console.log(res.data);
       this.communityOffset = 20;
@@ -101,7 +101,7 @@ export class CommunityStore {
     const query = new URLSearchParams({
       offset: this.communityOffset.toString(),
       limit: (this.communityOffset + 20).toString(),
-      statuses: "PUBLIC",
+      status: "PUBLIC",
     }).toString();
     try {
       const res = await axios.get(prefix + `pond/search?` + query);
@@ -116,7 +116,7 @@ export class CommunityStore {
   getPresaleList = async (status: string) => {
     try {
       const res = await axios.get(
-        prefix + `pond/search?offset=0&limit=20&statuses=${status}`
+        prefix + `pond/search?offset=0&limit=20&status=${status}`
       );
       console.log(res.data);
       this.presaleOffset = 20;
@@ -130,7 +130,7 @@ export class CommunityStore {
     const query = new URLSearchParams({
       offset: this.presaleOffset.toString(),
       limit: (this.presaleOffset + 20).toString(),
-      statuses: status,
+      status: status,
     }).toString();
     try {
       const res = await axios.get(prefix + `pond/search?` + query);
