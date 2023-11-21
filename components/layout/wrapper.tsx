@@ -43,7 +43,7 @@ const Wrapper = observer(({ children }: any) => {
 
   const onScroll = (e: any) => {
     if (e?.target) {
-      const { scrollTop, scrollHeight, clientHeight } = e?.target;
+      const { scrollTop, scrollHeight, clientHeight } = e?.target.documentElement;
 
       const isWrapperBottom = scrollTop + clientHeight >= scrollHeight;
       console.log(scrollTop + clientHeight, scrollHeight);

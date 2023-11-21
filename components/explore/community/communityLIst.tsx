@@ -13,16 +13,21 @@ import { shortNick } from "../../../utils/utilities";
 import { CommunityStore } from "../../../stores/CommunityStore";
 import CommunityRow from "./communityRow";
 import { UserStore } from "../../../stores/UserStore";
-const types = ["Top", "New Community"];
+const types = ["Top", "New Communities"];
 const CommunityList = observer(() => {
   const [active, setActive] = useState(0);
   const [search, setSearch] = useState("");
   const [outline, setOutline] = useState(false);
   const { wrapperBottom } = useInjection(UserStore);
-  const { communityList, getCommunityList, updateCommunityList, communitySearch } =
-    useInjection(CommunityStore);
+  const {
+    communityList,
+    getCommunityList,
+    updateCommunityList,
+    communitySearch,
+    getTop
+  } = useInjection(CommunityStore);
   const saveInput = () => {
-    console.log('asd');
+    console.log("asd");
     communitySearch(search);
   };
   const [tt, updateTimeout] = useState<any>(undefined);
@@ -34,10 +39,15 @@ const CommunityList = observer(() => {
     return clear();
   };
   useEffect(() => {
-    getCommunityList();
-  }, []);
+    if (active == 0) {
+      // setSearch("")
+      getTop();
+    } else {
+      getCommunityList();
+    }
+  }, [active]);
   useEffect(() => {
-    if (wrapperBottom && communityList.length >= 20) {
+    if (wrapperBottom && communityList.length >= 20 && active == 1) {
       updateCommunityList();
     }
   }, [wrapperBottom]);
@@ -113,30 +123,6 @@ const CommunityList = observer(() => {
           );
         })}
       </div>
-
-      {active == 2 && (
-        <div className={style.explore__users__col}>
-          {/* {globalActivity?.map((el, i) => {
-            return (
-              <div>
-                <OneActivity activity={el} key={i} />
-                {i !== 0 && i % 19 == 0 && (
-                  <InView
-                    as="div"
-                    triggerOnce
-                    onChange={(inView, entry) => {
-                      if (inView) {
-                        // console.log("inview");
-                        updateGlobalActivity();
-                      }
-                    }}
-                  ></InView>
-                )}
-              </div>
-            );
-          })} */}
-        </div>
-      )}
     </div>
   );
 });

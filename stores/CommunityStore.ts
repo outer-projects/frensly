@@ -9,7 +9,6 @@ import { IStageOne } from "../components/create/stages/stageOne";
 import { StatusesEnum } from "../components/explore/launchpad/presaleList";
 @injectable()
 export class CommunityStore {
-  @observable topUsersList: IProfile[] = [];
   @observable currentCommunity: any = undefined;
   @observable currentPresale: any = undefined;
   @observable currentWhitelist: any[] = [];
@@ -61,6 +60,16 @@ export class CommunityStore {
       return false;
     }
   };
+  getTop = async () => {
+    try {
+      const res = await axios.get(prefix + "pond/top/price");
+      console.log(res.data);
+      this.communityList = res.data.ponds;
+    } catch (e) {
+      console.log(e);
+      return false;
+    }
+  }
   getCommunity = async (id: string) => {
     try {
       const res = await axios.get(prefix + "pond/get/" + id);
