@@ -49,16 +49,22 @@ const Presale = observer(
     const router = useRouter();
     const { id } = router.query;
     const { user } = useInjection(Web3Store);
+    const [presaleTimeStatus, setPresaleTimeStatus] = useState("not started");
     const { currentPresale } = useInjection(CommunityStore);
     const [numberOfShares, setNumberOfShares] = useState("");
     const [statusOfRequest, setStatusOfRequest] = useState("not sended");
 
-    // useEffect(() => {
-    //   if(currentPresale) {
-    //     let total = Number(currentPresale.presalePrice) * Number(numberOfShares)
-    //     setTotal()
-    //   }
-    // }, [currentPresale])
+    useEffect(() => {
+      if (currentPresale) {
+        if (currentPresale.status == "INCOMING") {
+          setPresaleTimeStatus("not started");
+        } else if (currentPresale.status == "ONGOING") {
+          setPresaleTimeStatus("started");
+        } else {
+          setPresaleTimeStatus("finished");
+        }
+      }
+    }, [currentPresale]);
     const sendRequestBuy = async () => {
       try {
         const res = await axios.post(prefix + "pond/whitelist/apply/" + id);
@@ -85,16 +91,21 @@ const Presale = observer(
     );
     const renderer = ({ days, hours, minutes, seconds, completed }: any) => {
       console.log(completed);
-      if (
+      if (completed && presaleTimeStatus == "not started") {
+        setPresaleTimeStatus("started");
+      } else if (
         completed &&
+        presaleTimeStatus == "started" &&
         Number(currentPresale?.supply) >= Number(currentPresale?.presaleGoal)
       ) {
         // Render a completed state
         return <Completionist />;
       } else if (
         completed &&
+        presaleTimeStatus == "started" &&
         Number(currentPresale?.supply) < Number(currentPresale?.presaleGoal)
       ) {
+        setPresaleTimeStatus("finished");
         // Render a completed state
         return <Finalize />;
       } else {
@@ -256,19 +267,24 @@ const Presale = observer(
           <div className={style.second__block__top}>
             <div className={style.subscription}>
               Presale{" "}
-              {currentPresale?.status == "ONGOING"
+              {presaleTimeStatus == "started"
                 ? "is finishing in"
-                : "is starting in"}
+                : presaleTimeStatus == "not started"
+                ? "is starting in"
+                : ""}
             </div>
             <div className={style.time}>
-              <Countdown
-                date={
-                  currentPresale?.status == "ONGOING"
-                    ? new Date(currentPresale?.presaleEnd)
-                    : new Date(currentPresale?.presaleStart)
-                }
-                renderer={renderer}
-              />
+              {presaleTimeStatus == "not started" ? (
+                <Countdown
+                  date={new Date(currentPresale?.presaleStart)}
+                  renderer={renderer}
+                />
+              ) : (
+                <Countdown
+                  date={new Date(currentPresale?.presaleEnd)}
+                  renderer={renderer}
+                />
+              )}
             </div>
             <SubscriptionProgressBar
               supply={Number(currentPresale?.supply) / 10 ** 6}
@@ -330,10 +346,14 @@ const Presale = observer(
                 REQUEST BUY
               </div>
             ) : statusOfRequest == "sended" ? (
-              <div>REQUEST SENDED SUCCSESSFULLY</div>
+              <div className={style.configuration__send}>
+                REQUEST SENDED SUCCSESSFULLY
+              </div>
             ) : (
               <div className={style.configuration__buy}>
-                <div>REQUEST APPROVED</div>
+                <div className={style.configuration__send}>
+                  REQUEST APPROVED
+                </div>
                 <div
                   className={classNames(
                     header.connect__button,
