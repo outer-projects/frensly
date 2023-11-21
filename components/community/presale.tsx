@@ -242,7 +242,7 @@ const Presale = observer(
             />
             <div className={buy.buy__amount} style={{ margin: "0px" }}>
               <div className={buy.buy__amount__title}>
-                Amount (max: {Number(currentPresale.maxAllocation) / 10 ** 6})
+                Amount (max: {Number(currentPresale?.maxAllocation) / 10 ** 6})
               </div>
               <div className={buy.buy__amount__input}>
                 <input
@@ -265,7 +265,7 @@ const Presale = observer(
                   onClick={() => {
                     setNumberOfShares(
                       (
-                        Number(currentPresale.maxAllocation) /
+                        Number(currentPresale?.maxAllocation) /
                         10 ** 6
                       ).toString()
                     );

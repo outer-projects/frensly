@@ -29,7 +29,6 @@ export interface IStageOne {
   setDiscord?: (discord: string) => void;
   image?: File | null;
   setImage?: (img: File | null) => void;
-
 }
 const StageOne = observer((stage: IStageOne) => {
   const { user, community, address, web3 } = useInjection(Web3Store);
@@ -122,7 +121,7 @@ const StageOne = observer((stage: IStageOne) => {
           discord: stage.discord,
         }).then((res) => {
           if (res) {
-            router.push("/community");
+            router.push("/explore/community");
           }
         });
       }, 1000);
@@ -136,14 +135,15 @@ const StageOne = observer((stage: IStageOne) => {
         <img className={style.stage__one__user__avatar} src={user?.avatar} />
         <div className={style.stage__one__user__name}>{user?.twitterName}</div>
       </div>
-      <Upload image={stage.image} setImage={stage.setImage}/>
+      <Upload image={stage.image} setImage={stage.setImage} />
       <div className={style.stage__one__col}>
         <input
           placeholder="Display name"
           value={stage.name}
+          style={{ marginBottom: "16px" }}
           onChange={(e) => stage.setName && stage.setName(e.target.value)}
         />
-         <input
+        <input
           placeholder="Uniq name"
           value={stage.handle}
           onChange={(e) => stage.setHandle && stage.setHandle(e.target.value)}

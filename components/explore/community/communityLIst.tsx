@@ -96,7 +96,7 @@ const CommunityList = observer(() => {
         {communityList?.map((el: any, i: number) => {
           return (
             <div>
-              <CommunityRow el={el} key={i} isTVH={false} isNw={false} />
+              <CommunityRow el={el} key={i} />
               {/* {currentUserList == "new" && i !== 0 && i % 19 == 0 && (
                   <InView
                     as="div"
