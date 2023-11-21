@@ -41,8 +41,9 @@ const Wrapper = observer(({ children }: any) => {
   };
   const ready = useMemo(() => init && user?.account, [init, user?.account]);
   const wrapperRef = useRef() as any;
-  const onScroll = () => {
-    if (wrapperRef.current) {
+  const onScroll = (e:any) => {
+    console.log(e, wrapperRef?.current);
+    if (wrapperRef?.current) {
       const { scrollTop, scrollHeight, clientHeight } = wrapperRef.current;
       const isWrapperBottom = scrollTop + clientHeight >= scrollHeight;
 
