@@ -45,8 +45,9 @@ const Wrapper = observer(({ children }: any) => {
     console.log(e, wrapperRef?.current);
     if (wrapperRef?.current) {
       const { scrollTop, scrollHeight, clientHeight } = wrapperRef.current;
+      
       const isWrapperBottom = scrollTop + clientHeight >= scrollHeight;
-
+      console.log(scrollTop + clientHeight, scrollHeight);
       if (isWrapperBottom) {
         console.log("Reached bottom");
         setWrapperBottom(true);
