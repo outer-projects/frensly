@@ -69,19 +69,44 @@ const Presale = observer(
       }
     };
 
-    const Completionist = () => <div>Finished!</div>;
+    const Completionist = () => <div>Finished successfully!</div>;
+    const Finalize = () => (
+      <div>
+        Presale failed{" "}
+        <button
+          className={classNames(
+            header.connect__button,
+            style.configuration__button
+          )}
+        >
+          Finalize
+        </button>
+      </div>
+    );
     const renderer = ({ days, hours, minutes, seconds, completed }: any) => {
-      if (completed) {
+      if (
+        completed &&
+        Number(currentPresale?.supply) >= Number(currentPresale?.presaleGoal)
+      ) {
         // Render a completed state
         return <Completionist />;
+      } else if (
+        completed &&
+        Number(currentPresale?.supply) < Number(currentPresale?.presaleGoal)
+      ) {
+        // Render a completed state
+        return <Finalize />;
       } else {
         // Render a countdown
         return (
           <div className={style.time}>
-            <span>{days}</span>
-            <span>{hours}</span>
-            <span>{minutes}</span>
-            <span>{seconds}</span>
+            <span>
+              {Number(days) < 10 ? "0" : ""}
+              {days}
+            </span>
+            <span>{Number(hours) < 10 ? "0" : ""}{hours}</span>
+            <span>{Number(minutes) < 10 ? "0" : ""}{minutes}</span>
+            <span>{Number(seconds) < 10 ? "0" : ""}{seconds}</span>
           </div>
         );
       }
@@ -90,7 +115,9 @@ const Presale = observer(
       <div className={style.configuration}>
         <div className={style.first__block}>
           <div className={style.configuration__top}>
-            <div className={style.configuration__back}>
+            <div className={style.configuration__back} onClick={()=>{
+              router.push("../../../presales")
+            }}>
               <img
                 src={"../../icons/arrow_back.svg"}
                 style={{
@@ -214,7 +241,7 @@ const Presale = observer(
         </div>
         <div className={style.second__block}>
           <div className={style.second__block__top}>
-            <div className={style.subscription}>Subscription Starts</div>
+            <div className={style.subscription}>Presale starts in</div>
             <div className={style.time}>
               <Countdown
                 date={new Date(currentPresale?.presaleEnd)}
@@ -224,12 +251,14 @@ const Presale = observer(
             <SubscriptionProgressBar
               supply={Number(currentPresale?.supply) / 10 ** 6}
               goal={Number(currentPresale?.presaleGoal) / 10 ** 6}
-              progress={Number(
-                (
-                  Number(currentPresale?.supply) /
-                  Number(currentPresale?.presaleGoal)
-                ).toFixed(0)
-              ) * 100}
+              progress={
+                Number(
+                  (
+                    Number(currentPresale?.supply) /
+                    Number(currentPresale?.presaleGoal)
+                  ).toFixed(0)
+                ) * 100
+              }
             />
             <div className={buy.buy__amount} style={{ margin: "0px" }}>
               <div className={buy.buy__amount__title}>
