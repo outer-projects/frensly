@@ -278,7 +278,7 @@ const Presale = observer(
                   (
                     Number(currentPresale?.supply) /
                     Number(currentPresale?.presaleGoal)
-                  ).toFixed(0)
+                  ).toFixed(2)
                 ) * 100
               }
             />
