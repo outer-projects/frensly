@@ -11,20 +11,7 @@ import CommunityList from "../../components/explore/community/communityLIst";
 
 
 const CommunityPage: NextPage = observer((props) => {
-  // const socket = useContext(SocketContext);
-  // const startListening = async () => {
-  //   socket.on("join", () => {
-  //     console.log("hi join");
-  //   });
-  //   socket.emit("join");
-  // };
-  // const stopListen = () => {
-  //   socket.off("join");
-  // };
-  // useEffect(() => {
-  //   startListening();
-  //   return () => stopListen();
-  // }, []);
+
   const { unreadCount } = useInjection(UserStore);
   return (
     <div className={style.explore__page}>
