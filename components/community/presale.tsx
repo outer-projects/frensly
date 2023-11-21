@@ -52,7 +52,6 @@ const Presale = observer(
     const { currentPresale } = useInjection(CommunityStore);
     const [numberOfShares, setNumberOfShares] = useState("");
     const [statusOfRequest, setStatusOfRequest] = useState("not sended");
-    console.log(currentPresale);
 
     // useEffect(() => {
     //   if(currentPresale) {
@@ -62,22 +61,14 @@ const Presale = observer(
     // }, [currentPresale])
     const sendRequestBuy = async () => {
       try {
-        const res = await axios.post(prefix + "pond//whitelist/apply/" + id);
+        const res = await axios.post(prefix + "pond/whitelist/apply/" + id);
         console.log(res);
         setStatusOfRequest("sended");
       } catch (error) {
         console.log(error);
       }
     };
-    const checkRequest = async () => {
-      try {
-        const res = await axios.post(prefix + "pond//whitelist/apply/" + id);
-        console.log(res);
-        setStatusOfRequest("sended");
-      } catch (error) {
-        console.log(error);
-      }
-    };
+
     const Completionist = () => <div>Finished!</div>;
     const renderer = ({ days, hours, minutes, seconds, completed }: any) => {
       if (completed) {
@@ -120,7 +111,7 @@ const Presale = observer(
                     style.configuration__button
                   )}
                   onClick={() => {
-                    setOpenWhitelist(true)
+                    setOpenWhitelist(true);
                   }}
                 >
                   Check whitelist
@@ -238,7 +229,7 @@ const Presale = observer(
                   Number(currentPresale?.supply) /
                   Number(currentPresale?.presaleGoal)
                 ).toFixed(0)
-              )}
+              ) * 100}
             />
             <div className={buy.buy__amount} style={{ margin: "0px" }}>
               <div className={buy.buy__amount__title}>
@@ -275,17 +266,36 @@ const Presale = observer(
                 </button>
               </div>
             </div>
-            <div
-              className={classNames(
-                header.connect__button,
-                style.configuration__button
-              )}
-              onClick={() => {
-                sendRequestBuy();
-              }}
-            >
-              REQUEST BUY
-            </div>
+            {statusOfRequest == "not sended" ? (
+              <div
+                className={classNames(
+                  header.connect__button,
+                  style.configuration__button
+                )}
+                onClick={() => {
+                  sendRequestBuy();
+                }}
+              >
+                REQUEST BUY
+              </div>
+            ) : statusOfRequest == "sended" ? (
+              <div>REQUEST SENDED SUCCSESSFULLY</div>
+            ) : (
+              <div className={style.configuration__buy}>
+                <div>REQUEST APPROVED</div>
+                <div
+                  className={classNames(
+                    header.connect__button,
+                    style.configuration__button
+                  )}
+                  onClick={() => {
+                    sendRequestBuy();
+                  }}
+                >
+                  BUY
+                </div>
+              </div>
+            )}
           </div>
           <div className={style.configuration__col__second}>
             <div className={style.configuration__row}>

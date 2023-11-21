@@ -40,11 +40,10 @@ const Wrapper = observer(({ children }: any) => {
     }
   };
   const ready = useMemo(() => init && user?.account, [init, user?.account]);
-  const wrapperRef = useRef() as any;
+
   const onScroll = (e: any) => {
-    console.log(e, wrapperRef?.current);
-    if (wrapperRef?.current) {
-      const { scrollTop, scrollHeight, clientHeight } = wrapperRef.current;
+    if (e?.target) {
+      const { scrollTop, scrollHeight, clientHeight } = e?.target;
 
       const isWrapperBottom = scrollTop + clientHeight >= scrollHeight;
       console.log(scrollTop + clientHeight, scrollHeight);
@@ -98,7 +97,6 @@ const Wrapper = observer(({ children }: any) => {
   }, []);
   return (
     <div
-      ref={wrapperRef}
       className={classNames(style.page__container, ready && style.page__open)}
       onScroll={onScroll}
     >
