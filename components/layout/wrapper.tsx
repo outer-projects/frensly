@@ -1,4 +1,4 @@
-import { useEffect, useMemo } from "react";
+import { useEffect, useMemo, useRef } from "react";
 import Header from "./header";
 import { observer } from "mobx-react";
 import style from "./wrapper.module.scss";
@@ -12,6 +12,7 @@ import Footer from "./footer";
 import header from "./header.module.scss";
 import classNames from "classnames";
 import { useRouter } from "next/router";
+import { UserStore } from "../../stores/UserStore";
 
 const Wrapper = observer(({ children }: any) => {
   const {
@@ -26,7 +27,7 @@ const Wrapper = observer(({ children }: any) => {
     init,
     setInit,
   } = useInjection(Web3Store);
-
+  const { setWrapperBottom } = useInjection(UserStore);
   const isInit = async () => {
     // console.log(address, user?.account?.address);
     if (address?.toLowerCase() !== user?.account?.address) {
@@ -38,11 +39,21 @@ const Wrapper = observer(({ children }: any) => {
       setInit(true);
     }
   };
-  const ready = useMemo(
-    () => init && user?.account,
-    [init, user?.account]
-  );
+  const ready = useMemo(() => init && user?.account, [init, user?.account]);
+  const wrapperRef = useRef() as any;
+  const onScroll = () => {
+    if (wrapperRef.current) {
+      const { scrollTop, scrollHeight, clientHeight } = wrapperRef.current;
+      const isWrapperBottom = scrollTop + clientHeight >= scrollHeight;
 
+      if (isWrapperBottom) {
+        console.log("Reached bottom");
+        setWrapperBottom(true);
+      } else {
+        setWrapperBottom(false);
+      }
+    }
+  };
   const router = useRouter();
   useEffect(() => {
     if (ready) {
@@ -80,7 +91,9 @@ const Wrapper = observer(({ children }: any) => {
   }, []);
   return (
     <div
+      ref={wrapperRef}
       className={classNames(style.page__container, ready && style.page__open)}
+      onScroll={onScroll}
     >
       <div className={classNames(style.page__bg)}></div>
       {!needToChangeWallet && <Header />}

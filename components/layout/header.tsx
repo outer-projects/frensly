@@ -26,7 +26,7 @@ const Header = observer(() => {
   const [nots, setNots] = useState(false);
   const [notsMob, setNotsMob] = useState(false);
   const { user, authSummaryCheck } = useInjection(Web3Store);
-  const { getEthCurrency, getUnreadCount, unreadCount } =
+  const { getEthCurrency, getUnreadCount, unreadCount, setWrapperBottom } =
     useInjection(UserStore);
   const { getMyChats, unread } = useInjection(ChatStore);
   const headerText = [
@@ -58,6 +58,7 @@ const Header = observer(() => {
     if (router.asPath) {
       setActive(router.asPath);
       // checkAuth();
+      setWrapperBottom(false);
     }
   }, [router.asPath]);
   const ref = useDetectClickOutside({

@@ -38,6 +38,7 @@ export class UserStore {
   @observable currentProgress: any[] = [];
   @observable finished: boolean = false;
   @observable unlimitedKeys: boolean = false;
+  @observable wrapperBottom: boolean = false;
   @observable holders: {
     user: IAccount;
     amount: string;
@@ -93,6 +94,9 @@ export class UserStore {
       console.log(e);
     }
   };
+  @action setWrapperBottom = (status: boolean) => {
+    this.wrapperBottom = status;
+  };
   @action getPointsTop = async () => {
     try {
       const res = await axios.get(prefix + "user/top/points?limit=0&offset=20");
@@ -110,7 +114,8 @@ export class UserStore {
       const res = await axios.get(prefix + "user/user/refs");
       console.log(res.data);
       this.unlimitedKeys = res.data.refInfo.unlimited;
-      this.inviteLimit = Number(res.data.refInfo.usesLeft) + res.data.refInfo.referrals.length;
+      this.inviteLimit =
+        Number(res.data.refInfo.usesLeft) + res.data.refInfo.referrals.length;
       this.key = res.data.refInfo;
       this.inviter = res.data.inviter;
       this.invited = Number(res.data.refInfo.referrals.length);

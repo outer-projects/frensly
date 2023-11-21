@@ -11,7 +11,7 @@ const PresaleListItem = ({presale}: any) => {
       <div className={style.row__2}>{presale?.name}</div>
       <div className={style.row__3}>{Number(presale?.supply) / 10 ** 6}</div>
       <div className={style.row__5}>{fromWeiToEth(presale?.price)}</div>
-      <div className={style.row__6}>Status</div>
+      <div className={style.row__6}><Link href={'/profile/'+ presale?.creator?.profile?.twitterHandle}>{presale?.creator?.profile?.twitterName}</Link></div>
       <div className={style.row__7}>{getDateTime(presale.presaleStart)}</div>
       <div className={style.row__7}>{getDateTime(presale.presaleEnd)}</div>
       <Link href={"/presales/" + presale?.handle}>

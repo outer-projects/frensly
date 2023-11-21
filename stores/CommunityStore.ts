@@ -14,6 +14,7 @@ export class CommunityStore {
   @observable currentPresale: any = undefined;
   @observable currentWhitelist: any[] = [];
   @observable presaleList: any[] = [];
+  @observable presaleOffset: number = 0;
   @observable communityList: any[] = [];
   public constructor(private readonly rootStore: RootStore) {
     makeObservable(this);
@@ -84,19 +85,56 @@ export class CommunityStore {
   };
   getCommunityList = async () => {
     try {
-      const res = await axios.get(prefix + "pond/public");
-      console.log(res.data.ponds);
-      this.communityList = res.data.ponds;
+      const res = await axios.get(
+        prefix + `pond/search?limit=0&offset=20&statuses=public`
+      );
+      console.log(res.data);
+      this.presaleOffset = 20;
+      this.presaleList = res.data.ponds;
     } catch (e) {
       console.log(e);
       return false;
     }
   };
-  getPresaleList = async (status:string) => {
+  updateCommunityList = async () => {
+    const query = new URLSearchParams({
+      offset: this.presaleOffset.toString(),
+      limit: (this.presaleOffset + 20).toString(),
+      statuses: "public",
+    }).toString();
     try {
-      const res = await axios.get(prefix + "pond/presales");
+      const res = await axios.get(prefix + `pond/search?` + query);
       console.log(res.data);
-
+      this.presaleOffset = this.presaleOffset + 20;
+      this.presaleList = res.data.ponds;
+    } catch (e) {
+      console.log(e);
+      return false;
+    }
+  };
+  getPresaleList = async (status: string) => {
+    try {
+      const res = await axios.get(
+        prefix + `pond/search?limit=0&offset=20&statuses=${status}`
+      );
+      console.log(res.data);
+      this.presaleOffset = 20;
+      this.presaleList = res.data.ponds;
+    } catch (e) {
+      console.log(e);
+      return false;
+    }
+  };
+  updatePresaleList = async (status: string) => {
+    const query = new URLSearchParams({
+      offset: this.presaleOffset.toString(),
+      limit: (this.presaleOffset + 20).toString(),
+      statuses: status,
+    }).toString();
+    try {
+      const res = await axios.get(prefix + `pond/search?` + query);
+      console.log(res.data);
+      this.presaleOffset = this.presaleOffset + 20;
       this.presaleList = res.data.ponds;
     } catch (e) {
       console.log(e);

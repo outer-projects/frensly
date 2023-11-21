@@ -1,42 +1,62 @@
 import { observer } from "mobx-react";
-import { useEffect, useState } from "react";
+import { use, useEffect, useState } from "react";
 import { CommunityStore } from "../../../stores/CommunityStore";
 import { useInjection } from "inversify-react";
 import style from "../explore.module.scss";
 import PresaleListItem from "./presaleListItem";
 import classNames from "classnames";
 import TypesList from "../../common/typesList";
-const types = ["Upcoming", "Ended"];
+import { UserStore } from "../../../stores/UserStore";
+const types = ["Upcoming", "Started", "Ended succesfully", "Failed"];
 export const StatusesEnum = {
   incoming: "INCOMING",
   ongoing: "ONGOING",
-  failed: "FAILED",
   public: "PUBLIC",
+  failed: "FAILED",
 };
 
-
 const PresaleList = observer(() => {
-  const { getPresaleList, presaleList } = useInjection(CommunityStore);
+  const { getPresaleList, presaleList, updatePresaleList } = useInjection(CommunityStore);
+  const { wrapperBottom } = useInjection(UserStore);
   const [search, setSearch] = useState("");
   const [active, setActive] = useState(0);
-  useEffect(() => {
-    if(active === 0){
+  const getPresale = () => {
+    if (active === 0) {
       getPresaleList(StatusesEnum.incoming);
     } else if (active == 1) {
       getPresaleList(StatusesEnum.ongoing);
     } else if (active == 2) {
-      getPresaleList(StatusesEnum.failed);
-    } else if (active == 3) {
       getPresaleList(StatusesEnum.public);
+    } else if (active == 3) {
+      getPresaleList(StatusesEnum.failed);
     }
+  };
+  const updatePresale = () => {
+    if (active === 0) {
+      updatePresaleList(StatusesEnum.incoming);
+    } else if (active == 1) {
+      updatePresaleList(StatusesEnum.ongoing);
+    } else if (active == 2) {
+      updatePresaleList(StatusesEnum.public);
+    } else if (active == 3) {
+      updatePresaleList(StatusesEnum.failed);
+    }
+  };
+  useEffect(() => {
+    getPresale();
   }, [active]);
   const [outline, setOutline] = useState(false);
   useEffect(() => {
-    getPresaleList(status);
+    getPresaleList(StatusesEnum.incoming);
   }, []);
   const saveInput = () => {
     // searchUsers(search);
   };
+  useEffect(() => {
+    if (wrapperBottom) {
+      updatePresale();
+    }
+  }, [wrapperBottom]);
   const [tt, updateTimeout] = useState<any>(undefined);
   const searchDeb = (fn: any, ms: number) => {
     const clear = () => {
@@ -82,9 +102,9 @@ const PresaleList = observer(() => {
           <div className={style.row__2}>Name</div>
           <div className={style.row__3}>Current supply</div>
           <div className={style.row__5}>Cost per share</div>
-          <div className={style.row__6}>Status</div>
+          <div className={style.row__6}>Owner</div>
           <div className={style.row__7}>Time to start</div>
-          <div className={style.row__7}>Time to start</div>
+          <div className={style.row__7}>Time to end</div>
           <div className={style.row__8}></div>
         </div>
         {/* <PresaleListItem/> */}
