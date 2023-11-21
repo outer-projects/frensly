@@ -17,7 +17,7 @@ export class CommunityStore {
   @observable presaleOffset: number = 0;
   @observable communityList: any[] = [];
   @observable communityOffset: number = 0;
-  
+
   public constructor(private readonly rootStore: RootStore) {
     makeObservable(this);
   }
@@ -74,7 +74,8 @@ export class CommunityStore {
   presaleSearch = async (search: string, status: string) => {
     try {
       const res = await axios.get(
-        prefix + `pond/search?offset=0&limit=20&status=${status}&presale=true&search=${search}`
+        prefix +
+          `pond/search?offset=0&limit=20&status=${status}&presale=true&search=${search}`
       );
       console.log(res.data);
       this.presaleList = res.data.ponds;
@@ -82,12 +83,13 @@ export class CommunityStore {
       console.log(e);
       return false;
     }
-  }
+  };
   communitySearch = async (search: string) => {
     console.log("object");
     try {
       const res = await axios.get(
-        prefix + `pond/search?offset=0&limit=20&status=PUBLIC&presale=false&search=${search}`
+        prefix +
+          `pond/search?offset=0&limit=20&status=PUBLIC&presale=false&search=${search}`
       );
       console.log(res.data);
       this.communityList = res.data.ponds;
@@ -95,16 +97,24 @@ export class CommunityStore {
       console.log(e);
       return false;
     }
-  }
+  };
   getPresale = async (id: string) => {
     try {
       const presale = await axios.get(prefix + "pond/get/" + id);
       const whitelist = await axios.get(
         prefix + "pond/whitelist/applications/" + id
       );
+      let wl = whitelist?.data?.pond?.whitelistApplications;
       console.log(presale);
+
       this.currentPresale = presale.data.pond;
-      this.currentWhitelist = whitelist.data;
+      if (wl) {
+        // this.currentWhitelist = wl.filter((el:any)=>{
+        //   return el.status
+        // });
+        console.log(wl);
+        this.currentWhitelist = wl;
+      }
     } catch (e) {
       console.log(e);
       return false;
