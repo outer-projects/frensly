@@ -73,6 +73,7 @@ function MyApp({ Component, pageProps }: AppProps) {
     // eslint-disable-next-line react-hooks/rules-of-hooks
     darkMode = useDarkMode(false, { element: document.documentElement });
   }
+
   return (
     <>
       {loading ? (

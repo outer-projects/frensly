@@ -41,11 +41,11 @@ const Wrapper = observer(({ children }: any) => {
   };
   const ready = useMemo(() => init && user?.account, [init, user?.account]);
   const wrapperRef = useRef() as any;
-  const onScroll = (e:any) => {
+  const onScroll = (e: any) => {
     console.log(e, wrapperRef?.current);
     if (wrapperRef?.current) {
       const { scrollTop, scrollHeight, clientHeight } = wrapperRef.current;
-      
+
       const isWrapperBottom = scrollTop + clientHeight >= scrollHeight;
       console.log(scrollTop + clientHeight, scrollHeight);
       if (isWrapperBottom) {
@@ -56,6 +56,13 @@ const Wrapper = observer(({ children }: any) => {
       }
     }
   };
+  useEffect(() => {
+    window.addEventListener("scroll", onScroll);
+    return () => {
+      window.removeEventListener("scroll", onScroll, false);
+    };
+  }, []);
+
   const router = useRouter();
   useEffect(() => {
     if (ready) {
