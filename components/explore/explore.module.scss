@@ -30,17 +30,23 @@
   font-weight: bold;
   line-height: 24px; /* 150% */
   letter-spacing: -0.16px;
+  .explore__container__img {
+    width: 28px;
+    height: 22px;
+  }
   img {
     margin-right: 8px;
-    filter: invert(0.5);
+    filter: invert(0);
+    // width: 20px;
   }
+  
 }
 .explore__list__item__active {
   border-bottom: 1px solid $green !important;
   color: var(--text-main) !important;
   img {
     margin-right: 8px;
-    filter: invert(0) !important;
+    filter: invert(1) !important;
   }
 }
 .profile__follow {

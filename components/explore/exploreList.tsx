@@ -3,20 +3,23 @@ import style from "./explore.module.scss";
 import { useRouter } from "next/router";
 import classNames from "classnames";
 import useDarkMode from "use-dark-mode";
+import Personal from "../svgs/personal";
+import Launchpad from "../svgs/launchpad";
+import Community from "../svgs/community";
 export const list = [
   {
     title: "Personal shares",
-    img: "../icons/personal.svg",
+    img: "personal",
     link: "/explore/personal",
   },
   {
     title: "Community shares",
-    img: "../icons/community.svg",
+    img: "community",
     link: "/explore/community",
   },
   {
     title: "Launchpad",
-    img: "../icons/launchpad.svg",
+    img: "launchpad",
     link: "/explore/launchpad",
   },
 ];
@@ -37,6 +40,7 @@ const ExploreList = () => {
     <div className={style.explore__list__center}>
       <div className={style.explore__list}>
         {list.map((item, i) => {
+          let color = active !== i ? "#676766" : "#151614";
           return (
             <div
               className={classNames(
@@ -46,15 +50,19 @@ const ExploreList = () => {
               onClick={() => {
                 router.push(item.link);
               }}
-              key={i}
+              key={item.title}
             >
-              <img
-                src={item.img}
+              <div
+                className={style.explore__container__img}
                 style={{
-                  marginRight: "8px",
-                  filter: `invert(${darkMode.value ? "1" : "0"})`,
+                  filter: "invert(" + (darkMode.value ? "1" : "0") + ")",
                 }}
-              />
+              >
+                {" "}
+                {item.img == "personal" && <Personal color={color} />}
+                {item.img == "community" && <Community color={color} />}
+                {item.img == "launchpad" && <Launchpad color={color} />}
+              </div>
               <div>{item.title}</div>
             </div>
           );
