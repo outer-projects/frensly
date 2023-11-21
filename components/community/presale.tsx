@@ -84,6 +84,7 @@ const Presale = observer(
       </div>
     );
     const renderer = ({ days, hours, minutes, seconds, completed }: any) => {
+      console.log(completed);
       if (
         completed &&
         Number(currentPresale?.supply) >= Number(currentPresale?.presaleGoal)
@@ -104,9 +105,18 @@ const Presale = observer(
               {Number(days) < 10 ? "0" : ""}
               {days}
             </span>
-            <span>{Number(hours) < 10 ? "0" : ""}{hours}</span>
-            <span>{Number(minutes) < 10 ? "0" : ""}{minutes}</span>
-            <span>{Number(seconds) < 10 ? "0" : ""}{seconds}</span>
+            <span>
+              {Number(hours) < 10 ? "0" : ""}
+              {hours}
+            </span>
+            <span>
+              {Number(minutes) < 10 ? "0" : ""}
+              {minutes}
+            </span>
+            <span>
+              {Number(seconds) < 10 ? "0" : ""}
+              {seconds}
+            </span>
           </div>
         );
       }
@@ -115,9 +125,12 @@ const Presale = observer(
       <div className={style.configuration}>
         <div className={style.first__block}>
           <div className={style.configuration__top}>
-            <div className={style.configuration__back} onClick={()=>{
-              router.push("../../../presales")
-            }}>
+            <div
+              className={style.configuration__back}
+              onClick={() => {
+                router.push("../../../presales");
+              }}
+            >
               <img
                 src={"../../icons/arrow_back.svg"}
                 style={{
@@ -241,10 +254,19 @@ const Presale = observer(
         </div>
         <div className={style.second__block}>
           <div className={style.second__block__top}>
-            <div className={style.subscription}>Presale starts in</div>
+            <div className={style.subscription}>
+              Presale{" "}
+              {currentPresale.status == "ONGOING"
+                ? "is finishing in"
+                : "is starting in"}
+            </div>
             <div className={style.time}>
               <Countdown
-                date={new Date(currentPresale?.presaleEnd)}
+                date={
+                  currentPresale.status == "ONGOING"
+                    ? new Date(currentPresale?.presaleEnd)
+                    : new Date(currentPresale?.presaleStart)
+                }
                 renderer={renderer}
               />
             </div>
