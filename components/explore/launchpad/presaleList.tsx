@@ -79,7 +79,7 @@ const PresaleList = observer(() => {
   }, [search]);
   return (
     <div className={style.presale__list}>
-      <div className={style.explore__title}>Launchpad</div>
+      <div className={style.explore__title} style={{textAlign:'center'}}>Launchpad</div>
       <div
         className={classNames(
           style.explore__search,

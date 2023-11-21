@@ -12,16 +12,19 @@ import OneActivity from "../../notifications/oneActivity";
 import { shortNick } from "../../../utils/utilities";
 import { CommunityStore } from "../../../stores/CommunityStore";
 import CommunityRow from "./communityRow";
+import { UserStore } from "../../../stores/UserStore";
 const types = ["Top", "New Community"];
 const CommunityList = observer(() => {
   const [active, setActive] = useState(0);
   const [search, setSearch] = useState("");
   const [outline, setOutline] = useState(false);
-
-  const { communityList, getCommunityList } = useInjection(CommunityStore);
-  // const saveInput = () => {
-  //   searchUsers(search);
-  // };
+  const { wrapperBottom } = useInjection(UserStore);
+  const { communityList, getCommunityList, updateCommunityList, communitySearch } =
+    useInjection(CommunityStore);
+  const saveInput = () => {
+    console.log('asd');
+    communitySearch(search);
+  };
   const [tt, updateTimeout] = useState<any>(undefined);
   const searchDeb = (fn: any, ms: number) => {
     const clear = () => {
@@ -33,27 +36,15 @@ const CommunityList = observer(() => {
   useEffect(() => {
     getCommunityList();
   }, []);
-  // useEffect(() => {
-  //   searchDeb(saveInput, 700);
-  // }, [search]);
-  // useEffect(() => {
-  //   if (active == 0) {
-  //     getTopUsers();
-  //   }
-  //   if (active == 1) {
-  //     getNewUsers();
-  //   }
-  //   if (active == 2) {
-  //     getGlobalActivity();
-  //   }
-  //   if (active == 3) {
-  //     getTopNW();
-  //   }
-  //   if (active == 4) {
-  //     getTopTVH();
-  //   }
-  // }, [active]);
-  // console.log(searchResult);
+  useEffect(() => {
+    if (wrapperBottom && communityList.length >= 20) {
+      updateCommunityList();
+    }
+  }, [wrapperBottom]);
+  useEffect(() => {
+    console.log(search);
+    searchDeb(saveInput, 700);
+  }, [search]);
   return (
     <div className={style.explore}>
       <div className={style.explore__title}>Explore</div>
