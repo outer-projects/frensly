@@ -18,9 +18,10 @@ const Community = observer(() => {
   const [search, setSearch] = useState("");
   const [outline, setOutline] = useState(false);
   const { wrapperBottom } = useInjection(UserStore);
-  const { communityList, getCommunityList, updateCommunityList,communitySearch } =
+  const { communityList, getCommunityList, updateCommunityList, communitySearch } =
     useInjection(CommunityStore);
   const saveInput = () => {
+    console.log('asd');
     communitySearch(search);
   };
   const [tt, updateTimeout] = useState<any>(undefined);
@@ -40,6 +41,7 @@ const Community = observer(() => {
     }
   }, [wrapperBottom]);
   useEffect(() => {
+    console.log(search);
     searchDeb(saveInput, 700);
   }, [search]);
   // useEffect(() => {

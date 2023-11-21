@@ -71,10 +71,10 @@ export class CommunityStore {
       return false;
     }
   };
-  presaleSearch = async (search: string) => {
+  presaleSearch = async (search: string, status: string) => {
     try {
       const res = await axios.get(
-        prefix + `pond/search?offset=0&limit=20&status=PUBLIC&presale=true&search=${search}`
+        prefix + `pond/search?offset=0&limit=20&status=${status}&presale=true&search=${search}`
       );
       console.log(res.data);
       this.presaleList = res.data.ponds;
@@ -84,6 +84,7 @@ export class CommunityStore {
     }
   }
   communitySearch = async (search: string) => {
+    console.log("object");
     try {
       const res = await axios.get(
         prefix + `pond/search?offset=0&limit=20&status=PUBLIC&presale=false&search=${search}`

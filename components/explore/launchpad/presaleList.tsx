@@ -50,7 +50,15 @@ const PresaleList = observer(() => {
     getPresaleList(StatusesEnum.incoming);
   }, []);
   const saveInput = () => {
-    presaleSearch(search);
+    if (active === 0) {
+      presaleSearch(search, StatusesEnum.incoming);
+    } else if (active == 1) {
+      presaleSearch(search, StatusesEnum.ongoing);
+    } else if (active == 2) {
+      presaleSearch(search, StatusesEnum.public);
+    } else if (active == 3) {
+      presaleSearch(search, StatusesEnum.failed);
+    }
   };
   useEffect(() => {
     if (wrapperBottom && presaleList.length >= 20) {
