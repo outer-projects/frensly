@@ -16,7 +16,7 @@ export const StatusesEnum = {
 };
 
 const PresaleList = observer(() => {
-  const { getPresaleList, presaleList, updatePresaleList } = useInjection(CommunityStore);
+  const { getPresaleList, presaleList, updatePresaleList,presaleSearch } = useInjection(CommunityStore);
   const { wrapperBottom } = useInjection(UserStore);
   const [search, setSearch] = useState("");
   const [active, setActive] = useState(0);
@@ -50,7 +50,7 @@ const PresaleList = observer(() => {
     getPresaleList(StatusesEnum.incoming);
   }, []);
   const saveInput = () => {
-    // searchUsers(search);
+    presaleSearch(search);
   };
   useEffect(() => {
     if (wrapperBottom && presaleList.length >= 20) {
@@ -109,7 +109,7 @@ const PresaleList = observer(() => {
         </div>
         {/* <PresaleListItem/> */}
         {presaleList.map((el, i) => {
-          return <PresaleListItem presale={el} key={i} />;
+          return <PresaleListItem presale={el} key={el._id} />;
         })}
       </div>
     </div>

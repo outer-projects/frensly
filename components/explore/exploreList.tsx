@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import style from "./explore.module.scss";
 import { useRouter } from "next/router";
 import classNames from "classnames";
+import useDarkMode from "use-dark-mode";
 export const list = [
   {
     title: "Personal shares",
@@ -22,6 +23,7 @@ export const list = [
 const ExploreList = () => {
   const router = useRouter();
   const [active, setActive] = useState(0);
+  const darkMode = useDarkMode();
   useEffect(() => {
     if (router.asPath.includes("personal")) {
       setActive(0);
@@ -44,8 +46,15 @@ const ExploreList = () => {
               onClick={() => {
                 router.push(item.link);
               }}
+              key={i}
             >
-              <img src={item.img} />
+              <img
+                src={item.img}
+                style={{
+                  marginRight: "8px",
+                  filter: `invert(${darkMode.value ? "1" : "0"})`,
+                }}
+              />
               <div>{item.title}</div>
             </div>
           );

@@ -83,7 +83,7 @@ const Header = observer(() => {
         <Link href={"../../feed"}>
           <img src={!darkMode.value ? "../logo.svg" : "../logo_white.svg"} />
         </Link>
-        <div className={style.header__row}>
+        <div className={classNames(style.header__row, !authSummaryCheck && style.header__row__closed)}>
           {headerText.map((el, i) => {
             // console.log(el.link == "/profile");
             if (authSummaryCheck || i <= 1) {

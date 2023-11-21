@@ -18,11 +18,11 @@ const Community = observer(() => {
   const [search, setSearch] = useState("");
   const [outline, setOutline] = useState(false);
   const { wrapperBottom } = useInjection(UserStore);
-  const { communityList, getCommunityList, updateCommunityList } =
+  const { communityList, getCommunityList, updateCommunityList,communitySearch } =
     useInjection(CommunityStore);
-  // const saveInput = () => {
-  //   searchUsers(search);
-  // };
+  const saveInput = () => {
+    communitySearch(search);
+  };
   const [tt, updateTimeout] = useState<any>(undefined);
   const searchDeb = (fn: any, ms: number) => {
     const clear = () => {
@@ -39,9 +39,9 @@ const Community = observer(() => {
       updateCommunityList();
     }
   }, [wrapperBottom]);
-  // useEffect(() => {
-  //   searchDeb(saveInput, 700);
-  // }, [search]);
+  useEffect(() => {
+    searchDeb(saveInput, 700);
+  }, [search]);
   // useEffect(() => {
   //   if (active == 0) {
   //     getTopUsers();

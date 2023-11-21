@@ -16,6 +16,9 @@
     display: none;
   }
 }
+.header__row__closed {
+  justify-content: space-between;
+}
 .header__disable {
   display: flex;
   @media (max-height: 750px) {

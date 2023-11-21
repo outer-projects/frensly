@@ -145,7 +145,7 @@ export const ipfsGateway = (cid?: string) => {
 export const getDateTime = (date: any) => {
   const dd = new Date(date).getTime();
   // console.log("%chelper.ts line:32 dd", "color: #007acc;", dd, date);
-  return DateTime.fromMillis(dd).toFormat("yyyy LLL dd hh:mm a");
+  return DateTime.fromMillis(dd).toFormat("yy LL dd hh:mm a");
 };
 export const getDate = (date: any) => {
   const dd = new Date(date).getTime();

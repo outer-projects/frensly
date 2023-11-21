@@ -58,8 +58,6 @@ const Wrapper = observer(({ children }: any) => {
   useEffect(() => {
     if (ready) {
       setAuthSummaryCheck(true);
-    } else if (needToChangeWallet) {
-      setAuthSummaryCheck(false);
     } else {
       setAuthSummaryCheck(false);
     }
