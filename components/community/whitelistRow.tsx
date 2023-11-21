@@ -1,9 +1,9 @@
 import Link from "next/link";
-import explore from "../../explore/explore.module.scss";
+import explore from "../explore/explore.module.scss";
 import { useEffect, useState } from "react";
 import { observer } from "mobx-react";
-import header from "../../layout/header.module.scss";
-import style from "../create.module.scss";
+import header from "../layout/header.module.scss";
+import style from "../create/create.module.scss";
 import classNames from "classnames";
 const WhitelistRow = observer(() => {
   return (
