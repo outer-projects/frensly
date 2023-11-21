@@ -256,14 +256,14 @@ const Presale = observer(
           <div className={style.second__block__top}>
             <div className={style.subscription}>
               Presale{" "}
-              {currentPresale.status == "ONGOING"
+              {currentPresale?.status == "ONGOING"
                 ? "is finishing in"
                 : "is starting in"}
             </div>
             <div className={style.time}>
               <Countdown
                 date={
-                  currentPresale.status == "ONGOING"
+                  currentPresale?.status == "ONGOING"
                     ? new Date(currentPresale?.presaleEnd)
                     : new Date(currentPresale?.presaleStart)
                 }
