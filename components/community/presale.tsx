@@ -145,8 +145,36 @@ const Presale = observer(
         </button>
       </div>
     );
-    const renderer = ({ days, hours, minutes, seconds, completed }: any) => {
-      console.log(completed);
+    const rendererStart = ({ days, hours, minutes, seconds, completed }: any) => {
+      console.log("finish:" , days, hours, minutes, seconds, completed);
+      if (completed && presaleTimeStatus == "not started") {
+        setPresaleTimeStatus("started");
+      } else {
+        // Render a countdown
+        return (
+          <div className={style.time}>
+            <span>
+              {Number(days) < 10 ? "0" : ""}
+              {days}
+            </span>
+            <span>
+              {Number(hours) < 10 ? "0" : ""}
+              {hours}
+            </span>
+            <span>
+              {Number(minutes) < 10 ? "0" : ""}
+              {minutes}
+            </span>
+            <span>
+              {Number(seconds) < 10 ? "0" : ""}
+              {seconds}
+            </span>
+          </div>
+        );
+      }
+    };
+    const rendererFinish = ({ days, hours, minutes, seconds, completed }: any) => {
+      console.log("finish:" , days, hours, minutes, seconds, completed);
       if (
         completed &&
         presaleTimeStatus == "started" &&
@@ -160,8 +188,6 @@ const Presale = observer(
         Number(currentPresale?.supply) < Number(currentPresale?.presaleGoal)
       ) {
         setPresaleTimeStatus("finished");
-      } else if (completed && presaleTimeStatus == "not started") {
-        setPresaleTimeStatus("started");
       } else {
         // Render a countdown
         return (
@@ -334,12 +360,12 @@ const Presale = observer(
                 {presaleTimeStatus == "not started" ? (
                   <Countdown
                     date={new Date(currentPresale?.presaleStart)}
-                    renderer={renderer}
+                    renderer={rendererStart}
                   />
                 ) : presaleTimeStatus == "started" ? (
                   <Countdown
                     date={new Date(currentPresale?.presaleEnd)}
-                    renderer={renderer}
+                    renderer={rendererFinish}
                   />
                 ) : (
                   <Finalize />
