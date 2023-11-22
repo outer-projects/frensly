@@ -53,6 +53,17 @@ const Presale = observer(
     const [presaleTimeStatus, setPresaleTimeStatus] = useState("");
     const { currentPresale, requestToWl } = useInjection(CommunityStore);
     const [numberOfShares, setNumberOfShares] = useState("");
+    const maxBuy = useMemo(() => {
+      let maxPossible = Number(currentPresale?.maxAllocation) / 10 ** 6;
+      let tokensLeft =
+        Number(currentPresale?.presaleGoal) / 10 ** 6 -
+        Number(currentPresale?.supply) / 10 ** 6;
+      if (maxPossible > tokensLeft) {
+        return maxPossible;
+      } else {
+        return tokensLeft;
+      }
+    }, []);
     const disable = useMemo(() => {
       return (
         Number(numberOfShares) >
@@ -68,7 +79,6 @@ const Presale = observer(
     const [statusOfRequest, setStatusOfRequest] = useState("");
     useEffect(() => {
       if (community && currentPresale) {
-        
         if (requestToWl) {
           setStatusOfRequest("sended");
         } else {
@@ -246,7 +256,11 @@ const Presale = observer(
             <div>back</div>
           </div>
 
-          <img src={currentPresale?.image ? currentPresale?.image : '../Avatar.svg'} />
+          <img
+            src={
+              currentPresale?.image ? currentPresale?.image : "../Avatar.svg"
+            }
+          />
           <div className={style.configuration__top__title}>
             {currentPresale?.name}
             {isCreator && (
@@ -400,8 +414,7 @@ const Presale = observer(
               />
               <div className={buy.buy__amount} style={{ margin: "0px" }}>
                 <div className={buy.buy__amount__title}>
-                  Amount (max: {Number(currentPresale?.maxAllocation) / 10 ** 6}
-                  )
+                  Amount (max: {maxBuy})
                 </div>
                 <div className={buy.buy__amount__input}>
                   <input
@@ -422,12 +435,7 @@ const Presale = observer(
                   <button
                     className={style.max__button}
                     onClick={() => {
-                      setNumberOfShares(
-                        (
-                          Number(currentPresale?.maxAllocation) /
-                          10 ** 6
-                        ).toString()
-                      );
+                      setNumberOfShares(maxBuy.toString());
                     }}
                   >
                     max

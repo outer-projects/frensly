@@ -11,6 +11,7 @@ import { useRouter } from "next/router";
 import axios from "axios";
 import { prefix } from "../../../utils/config";
 import { CommunityStore } from "../../../stores/CommunityStore";
+import { toast } from "react-toastify";
 export interface IStageOne {
   setStep?: (step: number) => void;
   name: string;
@@ -36,6 +37,16 @@ const StageOne = observer((stage: IStageOne) => {
   const router = useRouter();
 
   const create = async () => {
+    if (stage.name == "" || stage.handle == "") {
+      return toast.error("Fill name and handle fields");
+    }
+    if (stage.image == null) {
+      return toast.error("Upload image");
+    
+    }
+    if (stage.handle.includes(' ')) {
+      return toast.error("Handle can't contain spaces");
+    }
     try {
       const res = await community.methods.initPond().send({
         from: address,

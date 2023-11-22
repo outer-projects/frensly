@@ -9,19 +9,38 @@ import classNames from "classnames";
 import { useRouter } from "next/router";
 import { CommunityStore } from "../../../stores/CommunityStore";
 import { IStageOne } from "./stageOne";
+import { toast } from "react-toastify";
 const StageTwo = observer((stage: IStageOne) => {
   const { user, community, address, web3 } = useInjection(Web3Store);
   const { updateCommunity } = useInjection(CommunityStore);
-  const [supply, setSupply] = useState('');
-  const [maxAllocation, setMaxAllocation] = useState('');
-  const [ratio, setRatio] = useState('');
+  const [supply, setSupply] = useState("");
+  const [maxAllocation, setMaxAllocation] = useState("");
+  const [ratio, setRatio] = useState("");
   // const [isRestricted, setIsRestricted] = useState(true);
-  
+
   const [timeStart, setTimeStart] = useState("");
   const [timeFinish, setTimeFinish] = useState("");
   const router = useRouter();
   console.log(timeFinish, timeStart);
   const createPresale = async () => {
+    if (stage.name == "" || stage.handle == "") {
+      return toast.error("Fill name and handle fields");
+    }
+    if (stage.image == null) {
+      return toast.error("Upload image");
+    }
+    if (stage.handle.includes(" ")) {
+      return toast.error("Handle can't contain spaces");
+    }
+    if (maxAllocation >= supply) {
+      return toast.error("Max allocation can't be higher than supply");
+    }
+    if (new Date(timeStart).getTime() > new Date(timeFinish).getTime()) {
+      return toast.error("Start time can't be higher than end time");
+    }
+    if (new Date(timeStart).getTime() < new Date().getTime()) {
+      return toast.error("Start time can't be lower than current time");
+    }
     try {
       const res = await community.methods
         .initPondPresale(
