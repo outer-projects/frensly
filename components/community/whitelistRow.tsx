@@ -15,7 +15,7 @@ const WhitelistRow = observer(
     setAddressUserses,
     addressUser,
     addressUserses,
-    closedAddresses
+    closedAddresses,
   }: {
     user: IProfile;
     addressUser: string;
@@ -25,9 +25,12 @@ const WhitelistRow = observer(
   }) => {
     const { address, community } = useInjection(Web3Store);
     const { communityList } = useInjection(CommunityStore);
-    const add = () =>{
-      setAddressUserses([...addressUserses, addressUser])
-    }
+    const add = () => {
+      setAddressUserses([...addressUserses, addressUser]);
+    };
+    const deleteAddress = () => {
+      setAddressUserses([...addressUserses, addressUser]);
+    };
     return (
       // <Link href={"/profile/" + 123}>
       <div className={explore.explore__user}>
@@ -57,11 +60,14 @@ const WhitelistRow = observer(
             <button
               className={classNames(
                 header.connect__button,
-                style.accept__button
+                style.accept__button,
+                addressUserses.includes(addressUser) && style.accept__button__cancel
               )}
-              onClick={add}
+              onClick={
+                addressUserses.includes(addressUser) ? deleteAddress : add
+              }
             >
-              Accept
+              {addressUserses.includes(addressUser) ? "Cancel" : "Accept"}
             </button>
           ) : (
             <div className={explore.explore__user__name}>Accepted</div>

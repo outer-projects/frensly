@@ -68,6 +68,7 @@ const Presale = observer(
     const [statusOfRequest, setStatusOfRequest] = useState("");
     useEffect(() => {
       if (community && currentPresale) {
+        
         if (requestToWl) {
           setStatusOfRequest("sended");
         } else {

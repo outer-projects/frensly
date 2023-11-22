@@ -167,7 +167,7 @@
   border-top: 1px solid var(--border);
   padding-top: 24px;
   display: flex;
-  flex-direction: row!important;
+  flex-direction: row !important;
 }
 .stage__date__title {
   color: var(--text-shade);
@@ -370,6 +370,9 @@
 .accept__button {
   width: 103px;
   height: 40px;
+}
+.accept__button__cancel {
+  background-color: #ef5da8 !important;
 }
 .accept__bottom {
   display: flex;

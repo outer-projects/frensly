@@ -120,13 +120,16 @@ export class CommunityStore {
       );
       let wl = whitelist?.data?.pond?.whitelistApplications;
       console.log(wl);
-        console.log('123', wl);
+      console.log("123", wl);
       this.currentPresale = presale.data.pond;
       if (wl) {
         this.requestToWl =
           wl.filter((el: any) => {
             console.log(el);
-            return el?.user?.address?.toLowerCase() == address?.toLowerCase();
+            return (
+              el?.user?.address?.toLowerCase() == address?.toLowerCase() &&
+              el.status == "PENDING"
+            );
           }).length > 0;
         console.log(wl);
         this.currentWhitelist = wl;
@@ -160,7 +163,7 @@ export class CommunityStore {
       const res = await axios.get(prefix + `pond/search?` + query);
       console.log(res.data);
       this.communityOffset = this.presaleOffset + 20;
-      this.communityList = [...this.communityList, ...res.data.ponds]
+      this.communityList = [...this.communityList, ...res.data.ponds];
     } catch (e) {
       console.log(e);
       return false;
@@ -190,7 +193,7 @@ export class CommunityStore {
       const res = await axios.get(prefix + `pond/search?` + query);
       console.log(res.data);
       this.presaleOffset = this.presaleOffset + 20;
-      this.presaleList = [...this.presaleList, ...res.data.ponds]
+      this.presaleList = [...this.presaleList, ...res.data.ponds];
     } catch (e) {
       console.log(e);
       return false;
