@@ -70,11 +70,11 @@ export class CommunityStore {
       return false;
     }
   };
-  clearPresale = () =>{
-    this.currentPresale = undefined
-    this.currentWhitelist = []
-    this.requestToWl = false
-  }
+  clearPresale = () => {
+    this.currentPresale = undefined;
+    this.currentWhitelist = [];
+    this.requestToWl = false;
+  };
   getCommunity = async (id: string) => {
     try {
       const res = await axios.get(prefix + "pond/get/" + id);
@@ -112,7 +112,7 @@ export class CommunityStore {
       return false;
     }
   };
-  getPresale = async (id: string, address:string) => {
+  getPresale = async (id: string, address: string) => {
     try {
       const presale = await axios.get(prefix + "pond/get/" + id);
       const whitelist = await axios.get(
@@ -123,10 +123,11 @@ export class CommunityStore {
 
       this.currentPresale = presale.data.pond;
       if (wl) {
-        this.requestToWl = wl.filter((el: any) => {
-          console.log(el);
-          return el?.user?.address?.toLowerCase() == address
-        }).length > 0;
+        this.requestToWl =
+          wl.filter((el: any) => {
+            console.log(el);
+            return el?.user?.address?.toLowerCase() == address?.toLowerCase();
+          }).length > 0;
         console.log(wl);
         this.currentWhitelist = wl;
       }
