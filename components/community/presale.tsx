@@ -187,7 +187,7 @@ const Presale = observer(
       completed,
     }: any) => {
       console.log("finish:", days, hours, minutes, seconds, completed);
-      console.log(Date.now(), new Date(currentPresale?.presaleEnd).getDate());
+      console.log(Date.now(), new Date(currentPresale?.presaleEnd).getMilliseconds());
       if (
         completed &&
         Number(currentPresale?.supply) >= Number(currentPresale?.presaleGoal)
@@ -196,7 +196,7 @@ const Presale = observer(
         return <Completionist />;
       } else if (
         completed &&
-        Date.now() > new Date(currentPresale?.presaleEnd).getDate()
+        Date.now() > new Date(currentPresale?.presaleEnd).getMilliseconds()
       ) {
         setPresaleTimeStatus("finished");
       } else {
