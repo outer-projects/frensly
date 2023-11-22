@@ -25,7 +25,7 @@ const Whitelist = observer(
     const approve = async () => {
       try {
         const res = await community.methods
-          .whitelist(community.pondId, addressUserses)
+          .whitelist(currentPresale.pondId, addressUserses)
           .send({
             from: address,
           });
