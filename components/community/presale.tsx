@@ -2,7 +2,7 @@ import useDarkMode from "use-dark-mode";
 import style from "./presale.module.scss";
 import header from "../layout/header.module.scss";
 import buy from "../../modals/buy.module.scss";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import classNames from "classnames";
 import SubscriptionProgressBar from "./subscriptionProgressBar";
 import { useInjection } from "inversify-react";
@@ -48,12 +48,33 @@ const Presale = observer(
     const darkMode = useDarkMode();
     const router = useRouter();
     const { id } = router.query;
-    const { user } = useInjection(Web3Store);
+    const { user, community, address } = useInjection(Web3Store);
     const [presaleTimeStatus, setPresaleTimeStatus] = useState("not started");
     const { currentPresale } = useInjection(CommunityStore);
     const [numberOfShares, setNumberOfShares] = useState("");
+    const disable = useMemo(() => {
+      return (
+        Number(numberOfShares) >
+          Number(currentPresale?.maxAllocation) / 10 ** 6 ||
+        Number(numberOfShares) >
+          Number(currentPresale?.presaleGoal) / 10 ** 6 ||
+        Number(numberOfShares) < 0 ||
+        Number(currentPresale?.presaleGoal) / 10 ** 6 -
+          Number(currentPresale?.supply) / 10 ** 6 <
+          Number(numberOfShares)
+      );
+    }, []);
     const [statusOfRequest, setStatusOfRequest] = useState("not sended");
-
+    const finalize = async () => {
+      try {
+        const res = await community.methods
+          .finalizePresale(currentPresale.pondId)
+          .send({ from: address });
+        console.log(res);
+      } catch (error) {
+        console.log(error);
+      }
+    };
     useEffect(() => {
       if (currentPresale) {
         if (currentPresale.status == "INCOMING") {
@@ -84,6 +105,7 @@ const Presale = observer(
             header.connect__button,
             style.configuration__button
           )}
+          onClick={finalize}
         >
           Finalize
         </button>
@@ -332,39 +354,44 @@ const Presale = observer(
                 </button>
               </div>
             </div>
-            {statusOfRequest == "not sended" ? (
-              <div
-                className={classNames(
-                  header.connect__button,
-                  style.configuration__button
+            {presaleTimeStatus == "started" && (
+              <>
+                {statusOfRequest == "not sended" ? (
+                  <div
+                    className={classNames(
+                      header.connect__button,
+                      style.configuration__button,
+                      disable && style.configuration__button__disable
+                    )}
+                    onClick={() => {
+                      sendRequestBuy();
+                    }}
+                  >
+                    REQUEST BUY
+                  </div>
+                ) : statusOfRequest == "sended" ? (
+                  <div className={style.configuration__send}>
+                    REQUEST SENDED SUCCSESSFULLY
+                  </div>
+                ) : (
+                  <div className={style.configuration__buy}>
+                    <div className={style.configuration__send}>
+                      REQUEST APPROVED
+                    </div>
+                    <div
+                      className={classNames(
+                        header.connect__button,
+                        style.configuration__button
+                      )}
+                      onClick={() => {
+                        sendRequestBuy();
+                      }}
+                    >
+                      BUY
+                    </div>
+                  </div>
                 )}
-                onClick={() => {
-                  sendRequestBuy();
-                }}
-              >
-                REQUEST BUY
-              </div>
-            ) : statusOfRequest == "sended" ? (
-              <div className={style.configuration__send}>
-                REQUEST SENDED SUCCSESSFULLY
-              </div>
-            ) : (
-              <div className={style.configuration__buy}>
-                <div className={style.configuration__send}>
-                  REQUEST APPROVED
-                </div>
-                <div
-                  className={classNames(
-                    header.connect__button,
-                    style.configuration__button
-                  )}
-                  onClick={() => {
-                    sendRequestBuy();
-                  }}
-                >
-                  BUY
-                </div>
-              </div>
+              </>
             )}
           </div>
           <div className={style.configuration__col__second}>

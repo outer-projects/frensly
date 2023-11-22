@@ -32,6 +32,11 @@
     cursor: pointer;
   }
 }
+.configuration__button__disable {
+  opacity: 0.5;
+  pointer-events: none;
+  
+}
 .configuration__back {
   color: var(--text-shade);
   font-family: "DMSans";
@@ -52,7 +57,7 @@
   //   margin-top: 48px;
   @media (max-width: 730px) {
     transform: translateX(0px);
-    background-color: none;
+    background: none;
     position: relative;
     div {
       display: none;
