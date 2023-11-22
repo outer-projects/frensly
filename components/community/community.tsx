@@ -43,8 +43,10 @@ const Community = observer(() => {
   const [numberOfShares, setNumberOfShares] = useState("");
   const { showModal } = useInjection(ModalStore);
   useEffect(() => {
-    getCommunity(id as string);
-  }, []);
+    if (id) {
+      getCommunity(id as string);
+    }
+  }, [id]);
   const buyShares = () => {
     showModal(ModalsEnum.TradeCommunity, { community: currentCommunity });
   };
@@ -89,7 +91,7 @@ const Community = observer(() => {
             <div className={style.configuration__text}>
               {currentCommunity?.description}
             </div>
-            <button className={style.connect__button} onClick={buyShares}>
+            <button className={header.connect__button} onClick={buyShares}>
               Trade
             </button>
           </div>
