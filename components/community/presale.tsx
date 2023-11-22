@@ -64,7 +64,7 @@ const Presale = observer(
           Number(numberOfShares)
       );
     }, []);
-    const [statusOfRequest, setStatusOfRequest] = useState("not sended");
+    const [statusOfRequest, setStatusOfRequest] = useState("");
     useEffect(() => {
       if (requestToWl) {
         setStatusOfRequest("sended");
@@ -366,19 +366,19 @@ const Presale = observer(
               </div>
 
               <div className={style.time}>
-                {presaleTimeStatus == "not started" ? (
+                {presaleTimeStatus == "not started" && (
                   <Countdown
                     date={new Date(currentPresale?.presaleStart)}
                     renderer={rendererStart}
                   />
-                ) : presaleTimeStatus == "started" ? (
+                )}
+                {presaleTimeStatus == "started" && (
                   <Countdown
                     date={new Date(currentPresale?.presaleEnd)}
                     renderer={rendererFinish}
                   />
-                ) : (
-                  <Finalize />
                 )}
+                {presaleTimeStatus == "finished" && <Finalize />}
               </div>
               <SubscriptionProgressBar
                 supply={Number(currentPresale?.supply) / 10 ** 6}

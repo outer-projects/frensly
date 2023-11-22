@@ -13,7 +13,7 @@ import { CommunityStore } from "../../stores/CommunityStore";
 import SubscriptionProgressBar from "./subscriptionProgressBar";
 const Whitelist = observer(
   ({ setOpenWhitelist }: { setOpenWhitelist: (open: boolean) => void }) => {
-    const { user, community, address } = useInjection(Web3Store);
+    const { community, address } = useInjection(Web3Store);
     const { currentPresale, currentWhitelist } = useInjection(CommunityStore);
     const router = useRouter();
     const darkmode = useDarkMode();
@@ -24,7 +24,7 @@ const Whitelist = observer(
           from: address,
         });
         console.log(res);
-        router.push("/community");
+        router.push("/explore/community");
       } catch (e) {
         console.log(e);
       }
