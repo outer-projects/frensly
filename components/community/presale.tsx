@@ -186,8 +186,6 @@ const Presale = observer(
       seconds,
       completed,
     }: any) => {
-      console.log("finish:", days, hours, minutes, seconds, completed);
-      console.log(Date.now(), new Date(currentPresale?.presaleEnd).getTime());
       if (
         completed &&
         Number(currentPresale?.supply) >= Number(currentPresale?.presaleGoal)
