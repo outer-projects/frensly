@@ -48,8 +48,8 @@ const Presale = observer(
     const darkMode = useDarkMode();
     const router = useRouter();
     const { id } = router.query;
-    const { user, community, address } = useInjection(Web3Store);
-    const [presaleTimeStatus, setPresaleTimeStatus] = useState("not started");
+    const { community, address } = useInjection(Web3Store);
+    const [presaleTimeStatus, setPresaleTimeStatus] = useState("");
     const { currentPresale, requestToWl } = useInjection(CommunityStore);
     const [numberOfShares, setNumberOfShares] = useState("");
     const disable = useMemo(() => {
@@ -431,7 +431,7 @@ const Presale = observer(
               </div>
               {presaleTimeStatus == "started" && (
                 <>
-                  {statusOfRequest == "not sended" ? (
+                  {statusOfRequest == "not sended" && (
                     <div
                       className={classNames(
                         header.connect__button,
@@ -442,11 +442,13 @@ const Presale = observer(
                     >
                       REQUEST BUY
                     </div>
-                  ) : statusOfRequest == "sended" ? (
+                  )}{" "}
+                  {statusOfRequest == "sended" && (
                     <div className={style.configuration__send}>
                       REQUEST SENDED SUCCSESSFULLY
                     </div>
-                  ) : (
+                  )}{" "}
+                  {statusOfRequest == "approved" && (
                     <div className={style.configuration__buy}>
                       <div className={style.configuration__send}>
                         REQUEST APPROVED
@@ -457,6 +459,7 @@ const Presale = observer(
                           style.configuration__button
                         )}
                         onClick={buyPresale}
+                        style={{marginTop:'0px'}}
                       >
                         BUY
                       </div>

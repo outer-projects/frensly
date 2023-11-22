@@ -119,11 +119,12 @@ export class CommunityStore {
         prefix + "pond/whitelist/applications/" + id
       );
       let wl = whitelist?.data?.pond?.whitelistApplications;
-      console.log(presale);
+      console.log(wl);
 
       this.currentPresale = presale.data.pond;
       if (wl) {
         this.requestToWl = wl.filter((el: any) => {
+          console.log(el);
           return el?.user?.address?.toLowerCase() == address
         }).length > 0;
         console.log(wl);
