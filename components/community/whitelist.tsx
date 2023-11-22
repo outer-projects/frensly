@@ -9,9 +9,12 @@ import header from "../layout/header.module.scss";
 import { useRouter } from "next/router";
 import useDarkMode from "use-dark-mode";
 import presale from "./presale.module.scss";
+import { CommunityStore } from "../../stores/CommunityStore";
+import SubscriptionProgressBar from "./subscriptionProgressBar";
 const Whitelist = observer(
   ({ setOpenWhitelist }: { setOpenWhitelist: (open: boolean) => void }) => {
     const { user, community, address } = useInjection(Web3Store);
+    const { currentPresale, currentWhitelist } = useInjection(CommunityStore);
     const router = useRouter();
     const darkmode = useDarkMode();
     const { id } = router.query;
@@ -29,9 +32,12 @@ const Whitelist = observer(
 
     return (
       <div className={style.stage__one}>
-        <div className={classNames(presale.configuration__back)} onClick={()=>{
-          setOpenWhitelist(false)
-        }}>
+        <div
+          className={classNames(presale.configuration__back)}
+          onClick={() => {
+            setOpenWhitelist(false);
+          }}
+        >
           <img
             src={"../../icons/arrow_back.svg"}
             style={{
@@ -42,14 +48,30 @@ const Whitelist = observer(
           <div>back</div>
         </div>
         <div className={style.stage__one__user}>
-          <img className={style.stage__one__user__avatar} src={user?.avatar} />
+          <img
+            className={style.stage__one__user__avatar}
+            src={currentPresale?.image}
+          />
           <div className={style.stage__one__user__name}>
-            {user?.twitterName} presale regups
+            {currentPresale?.name} presale regups
           </div>
-          <WhitelistProgressBar progress={20} />
+          <SubscriptionProgressBar
+            supply={Number(currentPresale?.supply) / 10 ** 6}
+            goal={Number(currentPresale?.presaleGoal) / 10 ** 6}
+            progress={
+              Number(
+                (
+                  Number(currentPresale?.supply) /
+                  Number(currentPresale?.presaleGoal)
+                ).toFixed(2)
+              ) * 100
+            }
+          />
         </div>
         <div className={style.stage__three__col}>
-          <WhitelistRow />
+          {currentWhitelist.map((el, i)=>{
+            return <WhitelistRow user={el.user} key={i}/>
+          })}
         </div>
         <div className={style.stage__one__buttons}>
           <button

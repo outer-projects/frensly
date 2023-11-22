@@ -5,7 +5,8 @@ import { observer } from "mobx-react";
 import header from "../layout/header.module.scss";
 import style from "../create/create.module.scss";
 import classNames from "classnames";
-const WhitelistRow = observer(() => {
+import { IProfile } from "../../types/users";
+const WhitelistRow = observer(({user}:{user:IProfile}) => {
   return (
     // <Link href={"/profile/" + 123}>
       <div className={explore.explore__user}>
@@ -13,7 +14,7 @@ const WhitelistRow = observer(() => {
           <img src={"123"} />
           <div className={explore.explore__user__left__text}>
             <div className={explore.explore__user__name}>
-              <div>twitterName</div>
+              <div>{user.twitterName}</div>
             </div>
             <div className={style.accept__name}>
               <a
@@ -24,7 +25,7 @@ const WhitelistRow = observer(() => {
                   e.stopPropagation();
                 }}
               >
-                @witterHandleF
+                @{user.twitterHandle}
               </a>
             </div>
           </div>
