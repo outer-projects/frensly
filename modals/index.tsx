@@ -6,11 +6,17 @@ import { SellModal } from "./SellModal";
 import { TradeModal } from "./TradeModal";
 import { ImageModal } from "./ImageModal";
 import { DeletePostModal } from "./DeletePostModal";
+import { BuyCommunityModal } from "./BuyCommunityModal";
+import { SellCommunityModal } from "./SellCommunityModal";
+import { TradeCommunityModal } from "./TradeCommunityModal";
 
 export enum ModalsEnum {
   Buy,
+  BuyCommunity,
   Sell,
+  SellCommunity,
   Trade,
+  TradeCommunity,
   DeletePost,
   Image,
 }
@@ -21,6 +27,9 @@ const MODAL_REGISTRY = {
   [ModalsEnum.Trade]: TradeModal,
   [ModalsEnum.Image]: ImageModal,
   [ModalsEnum.DeletePost]: DeletePostModal,
+  [ModalsEnum.BuyCommunity]: BuyCommunityModal,
+  [ModalsEnum.SellCommunity]: SellCommunityModal,
+  [ModalsEnum.TradeCommunity]: TradeCommunityModal,
 };
 
 export const ModalsContainer = observer(() => {

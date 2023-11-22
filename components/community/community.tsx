@@ -9,6 +9,10 @@ import { useInjection } from "inversify-react";
 import { CommunityStore } from "../../stores/CommunityStore";
 import { observer } from "mobx-react";
 import { useRouter } from "next/router";
+import { fromWeiToEth } from "../../utils/utilities";
+import Web3Store from "../../stores/Web3Store";
+import { ModalStore } from "../../stores/ModalStore";
+import { ModalsEnum } from "../../modals";
 const socials = [
   {
     name: "Twitter",
@@ -33,14 +37,17 @@ const socials = [
 ];
 const Community = observer(() => {
   const darkMode = useDarkMode();
-  const router = useRouter()
-  const {id} = router.query
+  const router = useRouter();
+  const { id } = router.query;
   const { getCommunity, currentCommunity } = useInjection(CommunityStore);
   const [numberOfShares, setNumberOfShares] = useState("");
-  console.log(currentCommunity);
-  useEffect(()=>{
-    getCommunity(id as string)
-  },[])
+  const { showModal } = useInjection(ModalStore);
+  useEffect(() => {
+    getCommunity(id as string);
+  }, []);
+  const buyShares = () => {
+    showModal(ModalsEnum.TradeCommunity, { community: currentCommunity });
+  };
   return (
     <div className={style.configuration}>
       <div className={style.first__block}>
@@ -63,10 +70,12 @@ const Community = observer(() => {
           <div className={style.configuration__info}>
             <div className={style.configuration__user}>
               <img
-                src="../Avatar.svg"
+                src={currentCommunity?.image}
                 className={style.configuration__user__avatar}
               />
-              <div className={style.configuration__user__name}>USER</div>
+              <div className={style.configuration__user__name}>
+                {currentCommunity?.name}
+              </div>
               <div className={style.configuration__user__socials}>
                 {socials.map((social) => {
                   return (
@@ -78,34 +87,40 @@ const Community = observer(() => {
               </div>
             </div>
             <div className={style.configuration__text}>
-              Welcome to the world of digital art revolution! Our NFT platform
-              provides a unique opportunity for creators to tokenize and
-              monetize their digital artwork. By leveraging blockchain
-              technology, we ensure the authenticity, ownership, and scarcity of
-              each digital collectible, empowering artists and collectors alike.
-              Join us in redefining the art market and embracing the limitless
-              possibilities of non-fungible tokens (NFTs) 🎨💻🚀 #DigitalArt
-              #NFTCommunity
+              {currentCommunity?.description}
             </div>
+            <button className={style.connect__button} onClick={buyShares}>
+              Trade
+            </button>
           </div>
           <div className={style.configuration__col}>
             <div className={style.configuration__row}>
               <div className={style.configuration__row__title}>
                 Community shares name
               </div>
-              <div className={style.configuration__row__value}>0xFrog</div>
+              <div className={style.configuration__row__value}>
+                {currentCommunity?.handle}
+              </div>
+            </div>
+            <div className={style.configuration__row}>
+              <div className={style.configuration__row__title}>Owner</div>
+              <div className={style.configuration__row__value}>
+                @{currentCommunity?.creator?.profile?.twitterHandle}
+              </div>
             </div>
             <div className={style.configuration__row}>
               <div className={style.configuration__row__title}>
-                Community shares name
+                Current price
               </div>
-              <div className={style.configuration__row__value}>0xFrog</div>
+              <div className={style.configuration__row__value}>
+                {fromWeiToEth(currentCommunity?.price)}
+              </div>
             </div>
             <div className={style.configuration__row}>
-              <div className={style.configuration__row__title}>
-                Community shares name
+              <div className={style.configuration__row__title}>Supply</div>
+              <div className={style.configuration__row__value}>
+                {Number(currentCommunity?.supply) / 10 ** 6}
               </div>
-              <div className={style.configuration__row__value}>0xFrog</div>
             </div>
           </div>
         </div>
