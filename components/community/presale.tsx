@@ -112,7 +112,10 @@ const Presale = observer(
     const buyPresale = async () => {
       try {
         const res = await community.methods
-          .presaleBuyShares(currentPresale.pondId, numberOfShares)
+          .presaleBuyShares(
+            currentPresale.pondId,
+            Number(numberOfShares) * 10 ** 6
+          )
           .send({ from: address });
         console.log(res);
         getPresale(id as string, address as string);
