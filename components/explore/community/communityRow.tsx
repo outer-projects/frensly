@@ -24,7 +24,7 @@ const CommunityRow = observer(({el}: any) => {
     <Link href={"/communities/" + el?.handle}>
       <div className={style.explore__user}>
         <div className={style.explore__user__left}>
-          <img src={el?.image} />
+          <img src={el?.image ? el?.image : '../Avatar.svg'} />
           <div className={style.explore__user__left__text}>
             <div className={style.explore__user__share}>
               {/* @ts-ignore */}
