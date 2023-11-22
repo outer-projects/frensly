@@ -13,17 +13,12 @@ import { observer } from "mobx-react";
 const PresalePage = observer(() => {
   const { unreadCount } = useInjection(UserStore);
   const router = useRouter();
-  const { user, address } = useInjection(Web3Store);
-  const { getPresale, currentPresale, clearPresale } =
+  const { user } = useInjection(Web3Store);
+  const { currentPresale, clearPresale } =
     useInjection(CommunityStore);
-  const { id } = router.query;
   const [isCreator, setIsCreator] = useState(false);
   const [openWhitelist, setOpenWhitelist] = useState(false);
-  useEffect(() => {
-    if (id && address) {
-      getPresale(id as string, address as string);
-    }
-  }, [id, address]);
+
   useEffect(() => {
     return () => {
       clearPresale();
@@ -31,13 +26,13 @@ const PresalePage = observer(() => {
   }, []);
   useEffect(() => {
     if (user && currentPresale) {
-      console.log(
-        "USER111111",
-        user,
-        currentPresale,
-        currentPresale.creator.profile.twitterHandle,
-        user.twitterHandle
-      );
+      // console.log(
+      //   "USER111111",
+      //   user,
+      //   currentPresale,
+      //   currentPresale.creator.profile.twitterHandle,
+      //   user.twitterHandle
+      // );
       setIsCreator(
         currentPresale.creator.profile.twitterHandle == user.twitterHandle
       );

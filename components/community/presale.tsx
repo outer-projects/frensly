@@ -51,8 +51,14 @@ const Presale = observer(
     const { id } = router.query;
     const { community, address } = useInjection(Web3Store);
     const [presaleTimeStatus, setPresaleTimeStatus] = useState("");
-    const { currentPresale, requestToWl } = useInjection(CommunityStore);
+    const { currentPresale, requestToWl, getPresale } =
+      useInjection(CommunityStore);
     const [numberOfShares, setNumberOfShares] = useState("");
+    useEffect(() => {
+      if (id && address) {
+        getPresale(id as string, address as string);
+      }
+    }, [id, address]);
     const maxBuy = useMemo(() => {
       let maxPossible = Number(currentPresale?.maxAllocation) / 10 ** 6;
       let tokensLeft =
@@ -63,7 +69,7 @@ const Presale = observer(
       } else {
         return tokensLeft;
       }
-    }, []);
+    }, [currentPresale]);
     const disable = useMemo(() => {
       return (
         Number(numberOfShares) >
@@ -106,9 +112,10 @@ const Presale = observer(
     const buyPresale = async () => {
       try {
         const res = await community.methods
-          .buyPresale(currentPresale.pondId)
+          .presaleBuyShares(currentPresale.pondId, numberOfShares)
           .send({ from: address });
         console.log(res);
+        getPresale(id as string, address as string);
       } catch (error) {
         console.log(error);
       }
@@ -212,7 +219,9 @@ const Presale = observer(
         completed &&
         Date.now() > new Date(currentPresale?.presaleEnd).getTime()
       ) {
-        setPresaleTimeStatus("finished");
+        getPresale(id as string, address as string).then(() => {
+          setPresaleTimeStatus("finished");
+        });
       } else {
         // Render a countdown
         return (
