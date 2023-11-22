@@ -11,7 +11,7 @@ const Creation = () => {
   const [webSite, setWebSite] = useState("");
   const [tg, setTg] = useState("");
   const [discord, setDiscord] = useState("");
-  const [fee, setFee] = useState(0);
+  const [wl, setWl] = useState(false);
   const [handle, setHandle] = useState('');
   const [image, setImage] = useState<null | File>(null);
   return (

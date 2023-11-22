@@ -99,12 +99,12 @@ const AuthBanner = observer(() => {
         from: address,
       });
       const isInit = await newFrensly.methods.isSharesSubject(address).call();
-      localStorage.setItem("auth", "false");
+      // localStorage.setItem("auth", "false");
       // router.push("/explore");
       setInit(isInit);
     } catch (e) {
       toast.error("Provider error");
-      // console.log(e);
+      console.log(e);
     }
   };
   useEffect(() => {

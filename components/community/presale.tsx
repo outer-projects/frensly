@@ -50,7 +50,7 @@ const Presale = observer(
     const { id } = router.query;
     const { user, community, address } = useInjection(Web3Store);
     const [presaleTimeStatus, setPresaleTimeStatus] = useState("not started");
-    const { currentPresale } = useInjection(CommunityStore);
+    const { currentPresale, requestToWl } = useInjection(CommunityStore);
     const [numberOfShares, setNumberOfShares] = useState("");
     const disable = useMemo(() => {
       return (
@@ -65,6 +65,40 @@ const Presale = observer(
       );
     }, []);
     const [statusOfRequest, setStatusOfRequest] = useState("not sended");
+    useEffect(() => {
+      if (requestToWl) {
+        setStatusOfRequest("sended");
+      } else {
+        checkIsWhitelisted()
+      }
+    }, [requestToWl]);
+    const checkIsWhitelisted = async () => {
+      try {
+        const res = await community.methods.isPondWhitelisted(
+          currentPresale.pondId,
+          address
+        ).call()
+        if (res) {
+          setStatusOfRequest("approved");
+        } else {
+          setStatusOfRequest("not sended");
+        }
+
+        console.log(res);
+      } catch (e) {
+        console.log(e);
+      }
+    };
+    const buyPresale = async () => {
+      try {
+        const res = await community.methods
+          .buyPresale(currentPresale.pondId)
+          .send({ from: address });
+        console.log(res);
+      } catch (error) {
+        console.log(error);
+      }
+    };
     const finalize = async () => {
       try {
         const res = await community.methods
@@ -363,9 +397,7 @@ const Presale = observer(
                       style.configuration__button,
                       disable && style.configuration__button__disable
                     )}
-                    onClick={() => {
-                      sendRequestBuy();
-                    }}
+                    onClick={sendRequestBuy}
                   >
                     REQUEST BUY
                   </div>
@@ -383,9 +415,7 @@ const Presale = observer(
                         header.connect__button,
                         style.configuration__button
                       )}
-                      onClick={() => {
-                        sendRequestBuy();
-                      }}
+                      onClick={buyPresale}
                     >
                       BUY
                     </div>

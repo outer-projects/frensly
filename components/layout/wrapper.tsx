@@ -70,11 +70,11 @@ const Wrapper = observer(({ children }: any) => {
       setAuthSummaryCheck(false);
     }
   }, [ready]);
-  useEffect(() => {
-    if (localStorage.getItem("auth") === "true") {
-      router.push("/auth");
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (localStorage.getItem("auth") === "true") {
+  //     router.push("/auth");
+  //   }
+  // }, []);
   useEffect(() => {
     if (web3 && address && user?.account && frensly) {
       isInit();

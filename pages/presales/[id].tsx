@@ -12,17 +12,17 @@ import Whitelist from "../../components/community/whitelist";
 const PresalePage = () => {
   const { unreadCount } = useInjection(UserStore);
   const router = useRouter();
-  const { user } = useInjection(Web3Store);
+  const { user, address } = useInjection(Web3Store);
   const { getPresale, currentPresale } = useInjection(CommunityStore);
   const { id } = router.query;
   const [isCreator, setIsCreator] = useState(false);
   const [openWhitelist, setOpenWhitelist] = useState(false);
   useEffect(() => {
-    if (id) getPresale(id as string);
+    if (id) getPresale(id as string, address as string);
   }, [id]);
   useEffect(() => {
     if (user && currentPresale) {
-      setIsCreator(currentPresale.creator.profile.twitterId == user.twitterId);
+      setIsCreator(currentPresale.creator.profile.twitterHandle == user.twitterHandle);
     }
   }, [user, currentPresale]);
   return (

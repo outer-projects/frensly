@@ -24,7 +24,7 @@ const CommunityList = observer(() => {
     getCommunityList,
     updateCommunityList,
     communitySearch,
-    getTop
+    getTop,
   } = useInjection(CommunityStore);
   const saveInput = () => {
     console.log("asd");

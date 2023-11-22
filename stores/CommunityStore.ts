@@ -16,7 +16,7 @@ export class CommunityStore {
   @observable presaleOffset: number = 0;
   @observable communityList: any[] = [];
   @observable communityOffset: number = 0;
-
+  @observable requestToWl: boolean = false;
   public constructor(private readonly rootStore: RootStore) {
     makeObservable(this);
   }
@@ -69,7 +69,7 @@ export class CommunityStore {
       console.log(e);
       return false;
     }
-  }
+  };
   getCommunity = async (id: string) => {
     try {
       const res = await axios.get(prefix + "pond/get/" + id);
@@ -107,7 +107,7 @@ export class CommunityStore {
       return false;
     }
   };
-  getPresale = async (id: string) => {
+  getPresale = async (id: string, address:string) => {
     try {
       const presale = await axios.get(prefix + "pond/get/" + id);
       const whitelist = await axios.get(
@@ -118,9 +118,9 @@ export class CommunityStore {
 
       this.currentPresale = presale.data.pond;
       if (wl) {
-        // this.currentWhitelist = wl.filter((el:any)=>{
-        //   return el.status
-        // });
+        this.requestToWl = wl.filter((el: any) => {
+          return el?.user?.address?.toLowerCase() == address
+        }).length > 0;
         console.log(wl);
         this.currentWhitelist = wl;
       }

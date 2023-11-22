@@ -16,7 +16,12 @@ export const StatusesEnum = {
 };
 
 const PresaleList = observer(() => {
-  const { getPresaleList, presaleList, updatePresaleList,presaleSearch } = useInjection(CommunityStore);
+  const {
+    getPresaleList,
+    presaleList,
+    updatePresaleList,
+    presaleSearch,
+  } = useInjection(CommunityStore);
   const { wrapperBottom } = useInjection(UserStore);
   const [search, setSearch] = useState("");
   const [active, setActive] = useState(0);
@@ -79,7 +84,9 @@ const PresaleList = observer(() => {
   }, [search]);
   return (
     <div className={style.presale__list}>
-      <div className={style.explore__title} style={{textAlign:'center'}}>Launchpad</div>
+      <div className={style.explore__title} style={{ textAlign: "center" }}>
+        Launchpad
+      </div>
       <div
         className={classNames(
           style.explore__search,

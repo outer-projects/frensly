@@ -35,7 +35,7 @@
 .configuration__button__disable {
   opacity: 0.5;
   pointer-events: none;
-  
+
 }
 .configuration__back {
   color: var(--text-shade);
@@ -85,6 +85,17 @@
   @media (max-width: 730px) {
     margin-top: 0px;
   }
+}
+
+.configuration__send {
+  text-align: center;
+  color: var(--text-main);
+  font-family: "DMSans";
+  font-size: 16px;
+  font-style: normal;
+  width: 100%;
+  margin-top: 16px;
+  margin-bottom: 16px;
 }
 .configuration__top__title {
   color: var(--text-main);

@@ -11,7 +11,7 @@ export const SeparatedConnect = observer(
     return (
       <button
         onClick={() => {
-          localStorage.setItem("auth", "false")
+          // localStorage.setItem("auth", "false")
           openConnectModal && openConnectModal();
         }}
         type="button"

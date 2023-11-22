@@ -84,7 +84,7 @@ const ConnectButtonCustom = observer(
                   return (
                     <div
                       onClick={() => {
-                        localStorage.setItem("auth", "true");
+                        // localStorage.setItem("auth", "true");
                         setTimeout(() => {
                           router.push("/api/v1/auth/twitter");
                         }, 500);
