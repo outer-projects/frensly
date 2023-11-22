@@ -31,6 +31,7 @@ const PresalePage = () => {
   useEffect(() => {
     if (user && currentPresale) {
       console.log(
+        "USER111111",
         user,
         currentPresale,
         currentPresale.creator.profile.twitterHandle,
