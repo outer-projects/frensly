@@ -10,7 +10,7 @@ import Web3Store from "../../stores/Web3Store";
 import { useInjection } from "inversify-react";
 const WhitelistRow = observer(({ user }: { user: IProfile }) => {
   const { address, community } = useInjection(Web3Store);
-  const [visible, setVisible] = useState(false);
+  const [visible, setVisible] = useState(true);
   const approve = async () => {
     try {
       const res = await community.methods
@@ -18,7 +18,9 @@ const WhitelistRow = observer(({ user }: { user: IProfile }) => {
         .send({
           from: address,
         });
-      setVisible(false);
+      if (res) {
+        setVisible(false);
+      }
     } catch (e) {
       console.log(e);
     }
