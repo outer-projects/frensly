@@ -70,6 +70,11 @@ export class CommunityStore {
       return false;
     }
   };
+  clearPresale = () =>{
+    this.currentPresale = undefined
+    this.currentWhitelist = []
+    this.requestToWl = false
+  }
   getCommunity = async (id: string) => {
     try {
       const res = await axios.get(prefix + "pond/get/" + id);

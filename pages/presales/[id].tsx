@@ -13,18 +13,26 @@ const PresalePage = () => {
   const { unreadCount } = useInjection(UserStore);
   const router = useRouter();
   const { user, address } = useInjection(Web3Store);
-  const { getPresale, currentPresale } = useInjection(CommunityStore);
+  const { getPresale, currentPresale, clearPresale } =
+    useInjection(CommunityStore);
   const { id } = router.query;
   const [isCreator, setIsCreator] = useState(false);
   const [openWhitelist, setOpenWhitelist] = useState(false);
   useEffect(() => {
-    if ((id && address)) {
+    if (id && address) {
       getPresale(id as string, address as string);
     }
   }, [id, address]);
   useEffect(() => {
+    return () => {
+      clearPresale();
+    };
+  }, []);
+  useEffect(() => {
     if (user && currentPresale) {
-      setIsCreator(currentPresale.creator.profile.twitterHandle == user.twitterHandle);
+      setIsCreator(
+        currentPresale.creator.profile.twitterHandle == user.twitterHandle
+      );
     }
   }, [user, currentPresale]);
   return (
