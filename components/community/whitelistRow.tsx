@@ -53,7 +53,7 @@ const WhitelistRow = observer(
         </div>
         <div className={style.accept__bottom}>
           {/* <div className={style.accept__share}>1 share</div> */}
-          {closedAddresses.includes(addressUser) ? (
+          {!closedAddresses.includes(addressUser) ? (
             <button
               className={classNames(
                 header.connect__button,
