@@ -42,13 +42,13 @@ const Wrapper = observer(({ children }: any) => {
   const ready = useMemo(() => init && user?.account, [init, user?.account]);
 
   const onScroll = (e: any) => {
-    if (e?.target) {
+    if (e?.target?.documentElement) {
       const { scrollTop, scrollHeight, clientHeight } = e?.target.documentElement;
 
       const isWrapperBottom = scrollTop + clientHeight >= scrollHeight;
-      console.log(scrollTop + clientHeight, scrollHeight);
+      // console.log(scrollTop + clientHeight, scrollHeight);
       if (isWrapperBottom) {
-        console.log("Reached bottom");
+        // console.log("Reached bottom");
         setWrapperBottom(true);
       } else {
         setWrapperBottom(false);
