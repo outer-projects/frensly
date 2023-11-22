@@ -11,10 +11,12 @@ import useDarkMode from "use-dark-mode";
 import presale from "./presale.module.scss";
 import { CommunityStore } from "../../stores/CommunityStore";
 import SubscriptionProgressBar from "./subscriptionProgressBar";
+import { useEffect } from "react";
 const Whitelist = observer(
   ({ setOpenWhitelist }: { setOpenWhitelist: (open: boolean) => void }) => {
     const { community, address } = useInjection(Web3Store);
-    const { currentPresale, currentWhitelist } = useInjection(CommunityStore);
+    const { currentPresale, currentWhitelist, getPresale } =
+      useInjection(CommunityStore);
     const router = useRouter();
     const darkmode = useDarkMode();
     const { id } = router.query;
@@ -29,7 +31,11 @@ const Whitelist = observer(
         console.log(e);
       }
     };
-
+    useEffect(() => {
+      if ((id && address)) {
+        getPresale(id as string, address as string);
+      }
+    }, [id, address]);
     return (
       <div className={style.stage__one}>
         <div
@@ -69,8 +75,8 @@ const Whitelist = observer(
           />
         </div>
         <div className={style.stage__three__col}>
-          {currentWhitelist.map((el, i)=>{
-            return <WhitelistRow user={el.user} key={i}/>
+          {currentWhitelist.map((el, i) => {
+            return <WhitelistRow user={el.user} key={i} />;
           })}
         </div>
         <div className={style.stage__one__buttons}>

@@ -18,8 +18,10 @@ const PresalePage = () => {
   const [isCreator, setIsCreator] = useState(false);
   const [openWhitelist, setOpenWhitelist] = useState(false);
   useEffect(() => {
-    if (id) getPresale(id as string, address as string);
-  }, [id]);
+    if ((id && address)) {
+      getPresale(id as string, address as string);
+    }
+  }, [id, address]);
   useEffect(() => {
     if (user && currentPresale) {
       setIsCreator(currentPresale.creator.profile.twitterHandle == user.twitterHandle);

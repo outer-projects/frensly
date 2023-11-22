@@ -72,6 +72,7 @@ const Presale = observer(
         checkIsWhitelisted();
       }
     }, [requestToWl]);
+
     const checkIsWhitelisted = async () => {
       try {
         const res = await community.methods
