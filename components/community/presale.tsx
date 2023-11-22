@@ -146,7 +146,7 @@ const Presale = observer(
       </div>
     );
     const rendererStart = ({ days, hours, minutes, seconds, completed }: any) => {
-      console.log("finish:" , days, hours, minutes, seconds, completed);
+      console.log("start:" , days, hours, minutes, seconds, completed);
       if (completed && presaleTimeStatus == "not started") {
         setPresaleTimeStatus("started");
       } else {
