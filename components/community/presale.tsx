@@ -98,6 +98,7 @@ const Presale = observer(
         console.log(error);
       }
     };
+    console.log(presaleTimeStatus)
     const finalize = async () => {
       try {
         const res = await community.methods
@@ -146,9 +147,7 @@ const Presale = observer(
     );
     const renderer = ({ days, hours, minutes, seconds, completed }: any) => {
       console.log(completed);
-      if (completed && presaleTimeStatus == "not started") {
-        setPresaleTimeStatus("started");
-      } else if (
+      if (
         completed &&
         presaleTimeStatus == "started" &&
         Number(currentPresale?.supply) >= Number(currentPresale?.presaleGoal)
@@ -161,6 +160,8 @@ const Presale = observer(
         Number(currentPresale?.supply) < Number(currentPresale?.presaleGoal)
       ) {
         setPresaleTimeStatus("finished");
+      } else if (completed && presaleTimeStatus == "not started") {
+        setPresaleTimeStatus("started");
       } else {
         // Render a countdown
         return (
@@ -232,7 +233,7 @@ const Presale = observer(
                     className={style.configuration__user__avatar}
                   />
                   <div className={style.configuration__user__name}>
-                    {currentPresale?.creator?.profile?.twitterName}
+                    @{currentPresale?.creator?.profile?.twitterHandle}
                   </div>
                   <div className={style.configuration__user__socials}>
                     {socials.map((social, i) => {
@@ -328,6 +329,7 @@ const Presale = observer(
                   ? "Presale is starting in"
                   : ""}
               </div>
+              
               <div className={style.time}>
                 {presaleTimeStatus == "not started" ? (
                   <Countdown
