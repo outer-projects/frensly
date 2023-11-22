@@ -10,24 +10,24 @@ import Web3Store from "../../stores/Web3Store";
 import { useInjection } from "inversify-react";
 import { CommunityStore } from "../../stores/CommunityStore";
 const WhitelistRow = observer(
-  ({ user, addressUser }: { user: IProfile; addressUser: string }) => {
+  ({
+    user,
+    setAddressUserses,
+    addressUser,
+    addressUserses,
+    closedAddresses
+  }: {
+    user: IProfile;
+    addressUser: string;
+    addressUserses: string[];
+    setAddressUserses: (au: string[]) => void;
+    closedAddresses: string[];
+  }) => {
     const { address, community } = useInjection(Web3Store);
     const { communityList } = useInjection(CommunityStore);
-    const [visible, setVisible] = useState(true);
-    const approve = async () => {
-      try {
-        const res = await community.methods
-          .whitelist(community.pondId, addressUser)
-          .send({
-            from: address,
-          });
-        if (res) {
-          setVisible(false);
-        }
-      } catch (e) {
-        console.log(e);
-      }
-    };
+    const add = () =>{
+      setAddressUserses([...addressUserses, addressUser])
+    }
     return (
       // <Link href={"/profile/" + 123}>
       <div className={explore.explore__user}>
@@ -53,13 +53,13 @@ const WhitelistRow = observer(
         </div>
         <div className={style.accept__bottom}>
           {/* <div className={style.accept__share}>1 share</div> */}
-          {visible ? (
+          {closedAddresses.includes(addressUser) ? (
             <button
               className={classNames(
                 header.connect__button,
                 style.accept__button
               )}
-              onClick={approve}
+              onClick={add}
             >
               Accept
             </button>
