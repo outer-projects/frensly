@@ -159,7 +159,7 @@ const Presale = observer(
             <div
               className={style.configuration__back}
               onClick={() => {
-                router.push("../../../presales");
+                router.push("../../../explore/launchpad");
               }}
             >
               <img
