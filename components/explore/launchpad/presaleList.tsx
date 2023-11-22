@@ -16,15 +16,23 @@ export const StatusesEnum = {
 };
 
 const PresaleList = observer(() => {
-  const {
-    getPresaleList,
-    presaleList,
-    updatePresaleList,
-    presaleSearch,
-  } = useInjection(CommunityStore);
+  const { getPresaleList, presaleList, updatePresaleList, presaleSearch } =
+    useInjection(CommunityStore);
   const { wrapperBottom } = useInjection(UserStore);
   const [search, setSearch] = useState("");
   const [active, setActive] = useState(0);
+  const setActiveLocal = (act: number) => {
+    setActive(act);
+    localStorage.setItem("active", act.toString());
+  };
+  const getActive = () => {
+    const act = localStorage.getItem("active");
+    if (act) {
+      setActive(parseInt(act));
+    } else {
+      getPresaleList(StatusesEnum.incoming);
+    }
+  };
   const getPresale = () => {
     if (active === 0) {
       getPresaleList(StatusesEnum.incoming);
@@ -52,7 +60,7 @@ const PresaleList = observer(() => {
   }, [active]);
   const [outline, setOutline] = useState(false);
   useEffect(() => {
-    getPresaleList(StatusesEnum.incoming);
+    getActive();
   }, []);
   const saveInput = () => {
     if (active === 0) {
@@ -109,7 +117,7 @@ const PresaleList = observer(() => {
         />
       </div>
       <div className={style.explore__types__row}>
-        <TypesList types={types} setActive={setActive} active={active} />
+        <TypesList types={types} setActive={setActiveLocal} active={active} />
       </div>
       <div className={style.presale__table}>
         <div className={style.presale__table__head}>

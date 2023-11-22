@@ -209,6 +209,11 @@
   width: 100%;
   margin-top: 8px;
 }
+.stage__one__button__disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
 .stage__one__buttons {
   margin-top: 24px;
   margin-bottom: 0px;

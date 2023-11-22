@@ -117,8 +117,10 @@ const Whitelist = observer(
           <button
             className={classNames(
               header.connect__button,
-              style.stage__one__button
+              style.stage__one__button,
+              addressUserses?.length == 0 && style.stage__one__button__disabled
             )}
+            disabled={addressUserses.length == 0}
             onClick={approve}
           >
             Confirm adding
