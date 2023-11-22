@@ -116,7 +116,7 @@ const StageTwo = observer((stage: IStageOne) => {
           discord: stage.discord,
         }).then((res) => {
           if (res) {
-            router.push("/community");
+            router.push("/explore/launchpad");
           }
         });
       }, 1000);
