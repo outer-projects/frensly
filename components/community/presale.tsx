@@ -67,12 +67,14 @@ const Presale = observer(
     }, []);
     const [statusOfRequest, setStatusOfRequest] = useState("");
     useEffect(() => {
-      if (requestToWl && community && currentPresale) {
-        setStatusOfRequest("sended");
-      } else {
-        checkIsWhitelisted();
+      if (community && currentPresale) {
+        if (requestToWl) {
+          setStatusOfRequest("sended");
+        } else {
+          checkIsWhitelisted();
+        }
       }
-    }, [requestToWl, community,currentPresale]);
+    }, [requestToWl, community, currentPresale]);
 
     const checkIsWhitelisted = async () => {
       try {
@@ -461,7 +463,7 @@ const Presale = observer(
                           style.configuration__button
                         )}
                         onClick={buyPresale}
-                        style={{marginTop:'0px'}}
+                        style={{ marginTop: "0px" }}
                       >
                         BUY
                       </div>
