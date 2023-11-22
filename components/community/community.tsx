@@ -91,7 +91,7 @@ const Community = observer(() => {
             <div className={style.configuration__text}>
               {currentCommunity?.description}
             </div>
-            <button className={header.connect__button} onClick={buyShares}>
+            <button className={classNames(header.connect__button, style.trade__button)} onClick={buyShares}>
               Trade
             </button>
           </div>

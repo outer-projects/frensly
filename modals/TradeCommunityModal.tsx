@@ -24,11 +24,11 @@ export const TradeCommunityModal = observer(({ key, data, idx }: modalProps) => 
   const [count, setCount] = useState(0);
   const sell = async () => {
     modalStore.hideModal(ModalsEnum.TradeCommunity);
-    modalStore.showModal(ModalsEnum.SellCommunity, { user: data.community });
+    modalStore.showModal(ModalsEnum.SellCommunity, { community: data.community });
   };
   const buy = async () => {
     modalStore.hideModal(ModalsEnum.TradeCommunity);
-    modalStore.showModal(ModalsEnum.BuyCommunity, { user: data.community });
+    modalStore.showModal(ModalsEnum.BuyCommunity, { community: data.community });
   };
   const checkPrice = async (num: number) => {
     try {
