@@ -30,6 +30,12 @@ const PresalePage = () => {
   }, []);
   useEffect(() => {
     if (user && currentPresale) {
+      console.log(
+        user,
+        currentPresale,
+        currentPresale.creator.profile.twitterHandle,
+        user.twitterHandle
+      );
       setIsCreator(
         currentPresale.creator.profile.twitterHandle == user.twitterHandle
       );

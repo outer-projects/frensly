@@ -120,7 +120,7 @@ export class CommunityStore {
       );
       let wl = whitelist?.data?.pond?.whitelistApplications;
       console.log(wl);
-
+        console.log('123', wl);
       this.currentPresale = presale.data.pond;
       if (wl) {
         this.requestToWl =
