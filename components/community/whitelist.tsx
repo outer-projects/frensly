@@ -56,7 +56,7 @@ const Whitelist = observer(
         <div className={style.stage__one__user}>
           <img
             className={style.stage__one__user__avatar}
-            src={currentPresale?.image}
+            src={currentPresale?.image ? currentPresale?.image : '../Avatar.svg'}
           />
           <div className={style.stage__one__user__name}>
             {currentPresale?.name} presale regups

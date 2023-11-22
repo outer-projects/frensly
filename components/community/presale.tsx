@@ -245,7 +245,7 @@ const Presale = observer(
             <div>back</div>
           </div>
 
-          <img src={currentPresale?.image} />
+          <img src={currentPresale?.image ? currentPresale?.image : '../Avatar.svg'} />
           <div className={style.configuration__top__title}>
             {currentPresale?.name}
             {isCreator && (
