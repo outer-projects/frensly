@@ -8,61 +8,68 @@ import classNames from "classnames";
 import { IProfile } from "../../types/users";
 import Web3Store from "../../stores/Web3Store";
 import { useInjection } from "inversify-react";
-const WhitelistRow = observer(({ user }: { user: IProfile }) => {
-  const { address, community } = useInjection(Web3Store);
-  const [visible, setVisible] = useState(true);
-  const approve = async () => {
-    try {
-      const res = await community.methods
-        .approveWhitelist(user.twitterHandle)
-        .send({
-          from: address,
-        });
-      if (res) {
-        setVisible(false);
+import { CommunityStore } from "../../stores/CommunityStore";
+const WhitelistRow = observer(
+  ({ user, addressUser }: { user: IProfile; addressUser: string }) => {
+    const { address, community } = useInjection(Web3Store);
+    const { communityList } = useInjection(CommunityStore);
+    const [visible, setVisible] = useState(true);
+    const approve = async () => {
+      try {
+        const res = await community.methods
+          .whitelist(community.pondId, addressUser)
+          .send({
+            from: address,
+          });
+        if (res) {
+          setVisible(false);
+        }
+      } catch (e) {
+        console.log(e);
       }
-    } catch (e) {
-      console.log(e);
-    }
-  };
-  return (
-    // <Link href={"/profile/" + 123}>
-    <div className={explore.explore__user}>
-      <div className={explore.explore__user__left}>
-        <img src={user.avatar} />
-        <div className={explore.explore__user__left__text}>
-          <div className={explore.explore__user__name}>
-            <div>{user.twitterName}</div>
-          </div>
-          <div className={style.accept__name}>
-            <a
-              href={"https://twitter.com/"}
-              target="_blank"
-              rel="noreferrer"
-              onClick={(e) => {
-                e.stopPropagation();
-              }}
-            >
-              @{user.twitterHandle}
-            </a>
+    };
+    return (
+      // <Link href={"/profile/" + 123}>
+      <div className={explore.explore__user}>
+        <div className={explore.explore__user__left}>
+          <img src={user.avatar} />
+          <div className={explore.explore__user__left__text}>
+            <div className={explore.explore__user__name}>
+              <div>{user.twitterName}</div>
+            </div>
+            <div className={style.accept__name}>
+              <a
+                href={"https://twitter.com/"}
+                target="_blank"
+                rel="noreferrer"
+                onClick={(e) => {
+                  e.stopPropagation();
+                }}
+              >
+                @{user.twitterHandle}
+              </a>
+            </div>
           </div>
         </div>
+        <div className={style.accept__bottom}>
+          {/* <div className={style.accept__share}>1 share</div> */}
+          {visible ? (
+            <button
+              className={classNames(
+                header.connect__button,
+                style.accept__button
+              )}
+              onClick={approve}
+            >
+              Accept
+            </button>
+          ) : (
+            <div className={explore.explore__user__name}>Accepted</div>
+          )}
+        </div>
       </div>
-      <div className={style.accept__bottom}>
-        {/* <div className={style.accept__share}>1 share</div> */}
-        {visible ? (
-          <button
-            className={classNames(header.connect__button, style.accept__button)}
-            onClick={approve}
-          >
-            Accept
-          </button>
-        ) : (
-          <div className={explore.explore__user__name}>Accepted</div>
-        )}
-      </div>
-    </div>
-    // </Link>
-  );
-});
+      // </Link>
+    );
+  }
+);
 export default WhitelistRow;

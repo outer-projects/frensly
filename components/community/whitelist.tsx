@@ -76,7 +76,7 @@ const Whitelist = observer(
         </div>
         <div className={style.stage__three__col}>
           {currentWhitelist.map((el, i) => {
-            return <WhitelistRow user={el.user.profile} key={i} />;
+            return <WhitelistRow user={el.user.profile} addressUser={el.user.address} key={i} />;
           })}
         </div>
         <div className={style.stage__one__buttons}>
