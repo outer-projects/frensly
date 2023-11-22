@@ -66,12 +66,12 @@ const Presale = observer(
     }, []);
     const [statusOfRequest, setStatusOfRequest] = useState("");
     useEffect(() => {
-      if (requestToWl && community) {
+      if (requestToWl && community && currentPresale) {
         setStatusOfRequest("sended");
       } else {
         checkIsWhitelisted();
       }
-    }, [requestToWl, community]);
+    }, [requestToWl, community,currentPresale]);
 
     const checkIsWhitelisted = async () => {
       try {
