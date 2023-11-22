@@ -8,8 +8,9 @@ import { CommunityStore } from "../../stores/CommunityStore";
 import { useRouter } from "next/router";
 import Web3Store from "../../stores/Web3Store";
 import Whitelist from "../../components/community/whitelist";
+import { observer } from "mobx-react";
 
-const PresalePage = () => {
+const PresalePage = observer(() => {
   const { unreadCount } = useInjection(UserStore);
   const router = useRouter();
   const { user, address } = useInjection(Web3Store);
@@ -61,5 +62,5 @@ const PresalePage = () => {
       )}
     </div>
   );
-};
+});
 export default PresalePage;
