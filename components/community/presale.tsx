@@ -98,7 +98,7 @@ const Presale = observer(
         console.log(error);
       }
     };
-    console.log(presaleTimeStatus)
+    console.log(presaleTimeStatus);
     const finalize = async () => {
       try {
         const res = await community.methods
@@ -145,8 +145,14 @@ const Presale = observer(
         </button>
       </div>
     );
-    const rendererStart = ({ days, hours, minutes, seconds, completed }: any) => {
-      console.log("start:" , days, hours, minutes, seconds, completed);
+    const rendererStart = ({
+      days,
+      hours,
+      minutes,
+      seconds,
+      completed,
+    }: any) => {
+      console.log("start:", days, hours, minutes, seconds, completed);
       if (completed && presaleTimeStatus == "not started") {
         setPresaleTimeStatus("started");
       } else {
@@ -173,19 +179,24 @@ const Presale = observer(
         );
       }
     };
-    const rendererFinish = ({ days, hours, minutes, seconds, completed }: any) => {
-      console.log("finish:" , days, hours, minutes, seconds, completed);
+    const rendererFinish = ({
+      days,
+      hours,
+      minutes,
+      seconds,
+      completed,
+    }: any) => {
+      console.log("finish:", days, hours, minutes, seconds, completed);
+      console.log(Date.now() > new Date(currentPresale?.presaleEnd).getDate());
       if (
         completed &&
-        presaleTimeStatus == "started" &&
         Number(currentPresale?.supply) >= Number(currentPresale?.presaleGoal)
       ) {
         // Render a completed state
         return <Completionist />;
       } else if (
         completed &&
-        presaleTimeStatus == "started" &&
-        Number(currentPresale?.supply) < Number(currentPresale?.presaleGoal)
+        Date.now() > new Date(currentPresale?.presaleEnd).getDate()
       ) {
         setPresaleTimeStatus("finished");
       } else {
@@ -355,7 +366,7 @@ const Presale = observer(
                   ? "Presale is starting in"
                   : ""}
               </div>
-              
+
               <div className={style.time}>
                 {presaleTimeStatus == "not started" ? (
                   <Countdown
