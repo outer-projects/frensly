@@ -21,7 +21,7 @@ interface modalProps {
 
 export const BuyModal = observer(({ key, data, idx }: modalProps) => {
   const modalStore = useInjection(ModalStore);
-  const { frensly,newFrensly, address, checkAuth } = useInjection(Web3Store);
+  const { frensly, address, checkAuth } = useInjection(Web3Store);
   const [numberOfShares, setNumberOfShares] = useState<number | string>(1);
   const [currentPrice, setCurrentPrice] = useState("0");
   const [priceOfOne, setPriceOfOne] = useState("0");
@@ -33,7 +33,7 @@ export const BuyModal = observer(({ key, data, idx }: modalProps) => {
       return toast.error("Amount is too low");
     try {
       // console.log("currentPrice: ", currentPrice);
-      const res = await newFrensly.methods
+      const res = await frensly.methods
         .buyShares(
           data.user?.account?.address,
           Number(numberOfShares) * 10 ** 6
@@ -53,7 +53,7 @@ export const BuyModal = observer(({ key, data, idx }: modalProps) => {
   const checkPrice = async (num: number) => {
     // console.log("address: ", data.user?.account?.address, "num: ", num, "num*1kk", Number(num) * 10 ** 6);
     try {
-      const res = await newFrensly.methods
+      const res = await frensly.methods
         .getBuyPriceAfterFee(data.user?.account?.address, Number(num) * 10 ** 6)
         .call();
       // console.log("getBuyPriceAfterFee: ", res);
@@ -66,7 +66,7 @@ export const BuyModal = observer(({ key, data, idx }: modalProps) => {
   };
   const ownCount = async () => {
     try {
-      const res = await newFrensly.methods
+      const res = await frensly.methods
         .sharesBalance(data?.user?.account?.address, address)
         .call();
       // console.log(res);
@@ -76,11 +76,11 @@ export const BuyModal = observer(({ key, data, idx }: modalProps) => {
     }
   };
   useEffect(() => {
-    if (newFrensly) {
+    if (frensly) {
       checkAndUpdatePriceOfOne();
       ownCount();
     }
-  }, [newFrensly]);
+  }, [frensly]);
   const checkAndUpdatePriceOfOne = () => {
     checkPrice(1).then((res) => {
       setPriceOfOne(res);

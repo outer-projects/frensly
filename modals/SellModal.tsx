@@ -21,7 +21,7 @@ interface modalProps {
 
 export const SellModal = observer(({ key, data, idx }: modalProps) => {
   const modalStore = useInjection(ModalStore);
-  const { newFrensly, address, checkAuth } = useInjection(Web3Store);
+  const { frensly, address, checkAuth } = useInjection(Web3Store);
   const [numberOfShares, setNumberOfShares] = useState<number | string>(0);
   const [currentPrice, setCurrentPrice] = useState("0");
   const [priceOfOne, setPriceOfOne] = useState("0");
@@ -30,7 +30,7 @@ export const SellModal = observer(({ key, data, idx }: modalProps) => {
     if (Number(numberOfShares) < 0.000001)
       return toast.error("Amount is too low");
     try {
-      const res = await newFrensly.methods
+      const res = await frensly.methods
         .sellShares(
           data.user?.account?.address || data.user?.address,
           Number(numberOfShares) * 10 ** 6
@@ -51,7 +51,7 @@ export const SellModal = observer(({ key, data, idx }: modalProps) => {
 
   const checkPrice = async (num: number) => {
     try {
-      const res = await newFrensly.methods
+      const res = await frensly.methods
         .getSellPriceAfterFee(
           data.user?.account?.address || data.user?.address,
           Number(num) * 10 ** 6
@@ -65,14 +65,14 @@ export const SellModal = observer(({ key, data, idx }: modalProps) => {
     }
   };
   useEffect(() => {
-    if (newFrensly) {
+    if (frensly) {
       checkAndUpdatePriceOfOne();
       ownCount();
     }
-  }, [newFrensly]);
+  }, [frensly]);
   const ownCount = async () => {
     try {
-      const res = await newFrensly.methods
+      const res = await frensly.methods
         .sharesBalance(
           data?.user?.account?.address || data.user?.address,
           address
