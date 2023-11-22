@@ -160,7 +160,7 @@ export class CommunityStore {
       const res = await axios.get(prefix + `pond/search?` + query);
       console.log(res.data);
       this.communityOffset = this.presaleOffset + 20;
-      this.communityList = res.data.ponds;
+      this.communityList = [...this.communityList, ...res.data.ponds]
     } catch (e) {
       console.log(e);
       return false;
@@ -190,7 +190,7 @@ export class CommunityStore {
       const res = await axios.get(prefix + `pond/search?` + query);
       console.log(res.data);
       this.presaleOffset = this.presaleOffset + 20;
-      this.presaleList = res.data.ponds;
+      this.presaleList = [...this.presaleList, ...res.data.ponds]
     } catch (e) {
       console.log(e);
       return false;
