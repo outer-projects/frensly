@@ -15,6 +15,7 @@ import Countdown from "react-countdown";
 import axios from "axios";
 import { prefix } from "../../utils/config";
 import Web3Store from "../../stores/Web3Store";
+import { set } from "store";
 const socials = [
   {
     name: "twitter",
@@ -156,6 +157,7 @@ const Presale = observer(
       console.log("start:", days, hours, minutes, seconds, completed);
       if (completed && presaleTimeStatus == "not started") {
         setPresaleTimeStatus("started");
+        setStatusOfRequest("not sended");
       } else {
         // Render a countdown
         return (
