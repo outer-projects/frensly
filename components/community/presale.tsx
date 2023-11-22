@@ -116,7 +116,7 @@ const Presale = observer(
             currentPresale.pondId,
             Number(numberOfShares) * 10 ** 6
           )
-          .send({ from: address });
+          .send({ from: address, value: currentPresale?.presalePrice });
         console.log(res);
         getPresale(id as string, address as string);
       } catch (error) {

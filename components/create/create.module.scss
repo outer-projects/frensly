@@ -157,9 +157,14 @@
   font-style: normal;
   font-weight: bold;
   line-height: 28px; /* 140% */
+  display: flex;
+  align-items: center;
   letter-spacing: -0.4px;
   @media (max-width: 730px) {
     margin-bottom: 10px;
+  }
+  img {
+    margin-right: 8px;
   }
 }
 .stage__values {

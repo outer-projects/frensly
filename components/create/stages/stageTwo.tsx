@@ -10,6 +10,7 @@ import { useRouter } from "next/router";
 import { CommunityStore } from "../../../stores/CommunityStore";
 import { IStageOne } from "./stageOne";
 import { toast } from "react-toastify";
+import useDarkMode from "use-dark-mode";
 const StageTwo = observer((stage: IStageOne) => {
   const { user, community, address, web3 } = useInjection(Web3Store);
   const { updateCommunity } = useInjection(CommunityStore);
@@ -17,7 +18,7 @@ const StageTwo = observer((stage: IStageOne) => {
   const [maxAllocation, setMaxAllocation] = useState("");
   const [ratio, setRatio] = useState("");
   // const [isRestricted, setIsRestricted] = useState(true);
-
+  const darkMode = useDarkMode();
   const [timeStart, setTimeStart] = useState("");
   const [timeFinish, setTimeFinish] = useState("");
   const router = useRouter();
@@ -146,7 +147,19 @@ const StageTwo = observer((stage: IStageOne) => {
   };
   return (
     <>
-      <div className={style.stage__title}>Presale configurator for</div>
+      <div className={style.stage__title}>
+        <img
+          style={{
+   
+            filter: `invert(${darkMode.value ? "1" : "0"})`,
+          }}
+          onClick={()=>{
+            stage.setStep && stage.setStep(0)
+          }}
+          src="../icons/arrow_back.svg"
+        />
+        Presale configurator for
+      </div>
       <div className={style.stage__one}>
         <div className={style.stage__one__user}>
           <img className={style.stage__one__user__avatar} src={user?.avatar} />
