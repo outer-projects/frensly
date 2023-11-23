@@ -136,7 +136,7 @@ const Community = observer(() => {
               </div>
             </div>
           </div>
-          {<TwitterFeed communityHandle={currentCommunity.handle} />}
+          {currentCommunity?.handle && <TwitterFeed communityHandle={currentCommunity?.handle} />}
         </div>
       </div>
       {/* <div className={style.second__block}>
