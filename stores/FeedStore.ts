@@ -174,7 +174,9 @@ export class FeedStore {
       limit: "30",
     }).toString();
     try {
-      const res = await axios.get(prefix + "pond/posts/" + handle + "?" + query);
+      const res = await axios.get(
+        prefix + "pond/posts/" + handle + "?" + query
+      );
       // console.log(res.data);
       this.setCommunityOffset(30);
       this.communityPosts = res.data.posts;
@@ -297,11 +299,11 @@ export class FeedStore {
     data.media && formdata.append("file", data.media);
     data.gif && data?.gif !== "" && formdata.append("tenor", data.gif);
     try {
-      const res = await axios.post(prefix + "pond/post", formdata);
-      // console.log(res);
-      if (data.handle) {
-        this.communityPosts = [res.data, ...this.communityPosts];
-      }
+      const res = await axios.post(
+        prefix + "pond/post" + data.handle,
+        formdata
+      );
+      this.communityPosts = [res.data, ...this.communityPosts];
       data.originalPost && this.getCurrentPost(data.originalPost);
       return true;
     } catch (e) {
