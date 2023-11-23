@@ -19,7 +19,7 @@ const ChatItem = observer(
     unread,
   }: {
     unread: number;
-    el: IProfile;
+    el: any;
     amount?: string;
     chatId: string;
     messages: any[];
@@ -28,7 +28,9 @@ const ChatItem = observer(
     const { getPriceInUsd, ethCurrency } = useInjection(UserStore);
     useEffect(() => {
       if (el && ethCurrency !== 0) {
-        setUsdPrice(getPriceInUsd(el.account.currentPrice));
+        setUsdPrice(
+          getPriceInUsd(el.account ? el.account.currentPrice : el.price)
+        );
       }
     }, [el, ethCurrency]);
     return (
@@ -40,10 +42,13 @@ const ChatItem = observer(
           )}
         >
           <div className={style.chat__info}>
-            <img className={style.chat__avatar} src={el?.avatar} />
+            <img
+              className={style.chat__avatar}
+              src={el?.avatar ? el?.avatar : el?.image}
+            />
             <div>
               <div className={style.chat__share}>
-                <Key/>
+                <Key />
                 <div>
                   {Number(amount ? amount : el?.account?.sharesAmount) /
                     10 ** 6}{" "}
@@ -51,7 +56,9 @@ const ChatItem = observer(
                 </div>
               </div>
               <div className={style.chat__name}>
-                {shortNick(el?.twitterName)}
+                {shortNick(
+                  el?.twitterName ? el?.twitterName : el?.twitterName.name
+                )}
               </div>
               {messages?.filter((el: any) => el).length > 0 ? (
                 <div className={style.chat__text}>
@@ -78,7 +85,12 @@ const ChatItem = observer(
           <div className={style.chat__price}>
             <div className={style.chat__value}>
               <EthereumSvg />
-              {fromWeiToEth(el?.account?.currentPrice)} ETH
+              {fromWeiToEth(
+                el?.account?.currentPrice
+                  ? el?.account?.currentPrice
+                  : el?.price
+              )}{" "}
+              ETH
             </div>
             <div className={style.chat__dollar}>${usdPrice}</div>
           </div>

@@ -15,10 +15,10 @@ const Chats = observer(() => {
         return (
           <ChatItem
             unread={el.unread}
-            messages={el.room.messages.filter((el:any) => !el?.isHidden)}
-            key={el.room.owner._id}
+            messages={el.room.messages?.filter((el:any) => !el?.isHidden)}
+            key={el.room.owner ? el?.room?.owner?._id : el?.room?.pond?._id}
             chatId={el.room._id}
-            el={el.room.owner}
+            el={el.room.owner ? el.room.owner : el.room.pond}
             amount={el.ownerShareAmount}
           />
         );
