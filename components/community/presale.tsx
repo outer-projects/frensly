@@ -160,13 +160,13 @@ const Presale = observer(
         console.log(error);
       }
     };
-    const getPrice = async (count: number) => {
+    const getPrice = async (count: number, isChangable?:boolean) => {
       console.log(count);
       try {
         const res = await community.methods
           .getBuyPrice(currentPresale.pondId, count)
           .call();
-        if (count == 1000000) {
+        if (!isChangable) {
           setPriceForOne(res);
         } else {
           setPriceForNumber(res);
@@ -477,7 +477,7 @@ const Presale = observer(
                           e.target.value == "."
                         ) {
                           setNumberOfShares(e.target.value);
-                          getPrice(Number(e.target.value) * 10 ** 6);
+                          getPrice(Number(e.target.value) * 10 ** 6, true);
                         } else if (e.target.value == "") {
                           setNumberOfShares("");
                         }
