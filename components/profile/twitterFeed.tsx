@@ -47,6 +47,7 @@ const TwitterFeed = observer(
       setHideRow,
       hideRow,
       getCommunityPosts,
+      updateCommunityPosts,
       communityPosts,
     } = useInjection(FeedStore);
     const { user, authSummaryCheck } = useInjection(Web3Store);
@@ -81,7 +82,7 @@ const TwitterFeed = observer(
       } else if (isPublic) {
         updatePublicFeed();
       } else if (communityHandle) {
-        getCommunityPosts(communityHandle);
+        updateCommunityPosts(communityHandle);
       } else {
         updateFeed();
       }
@@ -108,6 +109,9 @@ const TwitterFeed = observer(
     useEffect(() => {
       if (isFeed) {
         getFeedPosts();
+      }
+      if (communityHandle) {
+        getCommunityPosts(communityHandle);
       }
 
       return () => {

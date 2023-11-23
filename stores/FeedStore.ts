@@ -297,7 +297,7 @@ export class FeedStore {
     data.media && formdata.append("file", data.media);
     data.gif && data?.gif !== "" && formdata.append("tenor", data.gif);
     try {
-      const res = await axios.post(prefix + "social/post", formdata);
+      const res = await axios.post(prefix + "pond/post", formdata);
       // console.log(res);
       if (data.handle) {
         this.communityPosts = [res.data, ...this.communityPosts];
