@@ -126,7 +126,7 @@ const TwitterFeed = observer(
       <div className={classNames(style.twitter__feed, id && style.user__feed)}>
         {(!id || id == user?._id) &&
           (user?.verified || !isFrens) &&
-          authSummaryCheck && <MessageSend id={id} />}
+          authSummaryCheck && <MessageSend id={id} handle={communityHandle} />}
         <div>
           {currentFeed
             .filter((el) => !hideRow.includes(el._id))
