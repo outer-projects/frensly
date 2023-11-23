@@ -56,7 +56,7 @@ const Community = observer(() => {
     if (communityHolders.length > 0) {
       setIsHolder(
         communityHolders.filter(
-          (holder) => holder?.profile?.twitterHandle == user?.twitterHandle
+          (holder) => holder?.user.profile?.twitterHandle == user?.twitterHandle && Number(holder?.amount) >= 1000000
         ).length > 0
       );
     }
