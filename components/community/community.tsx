@@ -49,15 +49,18 @@ const Community = observer(() => {
   useEffect(() => {
     if (id) {
       getCommunity(id as string);
-      getHolders(id as string).then(() => {
-        setIsHolder(
-          communityHolders.some(
-            (holder) => holder?.profile?.twitterHandle == user?.twitterHandle
-          )
-        );
-      });
+      getHolders(id as string);
     }
   }, [id]);
+  useEffect(() => {
+    if (communityHolders.length > 0) {
+      setIsHolder(
+        communityHolders.filter(
+          (holder) => holder?.profile?.twitterHandle == user?.twitterHandle
+        ).length > 0
+      );
+    }
+  }, [communityHolders]);
   const buyShares = () => {
     showModal(ModalsEnum.TradeCommunity, { community: currentCommunity });
   };
@@ -146,7 +149,9 @@ const Community = observer(() => {
           {isHolder ? (
             <TwitterFeed communityHandle={currentCommunity?.handle} />
           ) : (
-            <div className={style.configuration__hide}>Became a holder to see community feed</div>
+            <div className={style.configuration__hide}>
+              Became a holder to see community feed
+            </div>
           )}
         </div>
       </div>
