@@ -57,7 +57,7 @@ const ChatItem = observer(
               </div>
               <div className={style.chat__name}>
                 {shortNick(
-                  el?.twitterName ? el?.twitterName : el?.twitterName.name
+                  el?.twitterName ? el?.twitterName : el?.name
                 )}
               </div>
               {messages?.filter((el: any) => el).length > 0 ? (
