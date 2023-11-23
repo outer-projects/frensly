@@ -11,7 +11,7 @@ const types = ["Upcoming", "Started", "Ended succesfully", "Failed"];
 export const StatusesEnum = {
   incoming: "INCOMING",
   ongoing: "ONGOING",
-  public: "PUBLIC",
+  success: "SUCCESS",
   failed: "FAILED",
 };
 
@@ -20,7 +20,7 @@ const PresaleList = observer(() => {
     useInjection(CommunityStore);
   const { wrapperBottom } = useInjection(UserStore);
   const [search, setSearch] = useState("");
-  const [active, setActive] = useState(0);
+  const [active, setActive] = useState(99);
   const setActiveLocal = (act: number) => {
     setActive(act);
     localStorage.setItem("active", act.toString());
@@ -30,7 +30,7 @@ const PresaleList = observer(() => {
     if (act) {
       setActive(parseInt(act));
     } else {
-      getPresaleList(StatusesEnum.incoming);
+      setActive(0)
     }
   };
   const getPresale = () => {
@@ -39,7 +39,7 @@ const PresaleList = observer(() => {
     } else if (active == 1) {
       getPresaleList(StatusesEnum.ongoing);
     } else if (active == 2) {
-      getPresaleList(StatusesEnum.public);
+      getPresaleList(StatusesEnum.success);
     } else if (active == 3) {
       getPresaleList(StatusesEnum.failed);
     }
@@ -50,13 +50,15 @@ const PresaleList = observer(() => {
     } else if (active == 1) {
       updatePresaleList(StatusesEnum.ongoing);
     } else if (active == 2) {
-      updatePresaleList(StatusesEnum.public);
+      updatePresaleList(StatusesEnum.success);
     } else if (active == 3) {
       updatePresaleList(StatusesEnum.failed);
     }
   };
   useEffect(() => {
-    getPresale();
+    if (active !== 99) {
+      getPresale();
+    }
   }, [active]);
   const [outline, setOutline] = useState(false);
   useEffect(() => {
@@ -68,7 +70,7 @@ const PresaleList = observer(() => {
     } else if (active == 1) {
       presaleSearch(search, StatusesEnum.ongoing);
     } else if (active == 2) {
-      presaleSearch(search, StatusesEnum.public);
+      presaleSearch(search, StatusesEnum.success);
     } else if (active == 3) {
       presaleSearch(search, StatusesEnum.failed);
     }

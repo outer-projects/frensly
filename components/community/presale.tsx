@@ -140,8 +140,10 @@ const Presale = observer(
           setPresaleTimeStatus("not started");
         } else if (currentPresale.status == "ONGOING") {
           setPresaleTimeStatus("started");
-        } else {
-          setPresaleTimeStatus("finished");
+        } else if (currentPresale.status == "FAILED") {
+          setPresaleTimeStatus("failed");
+        } else if (currentPresale.status == "SUCCESS") {
+          setPresaleTimeStatus("success");
         }
       }
     }, [currentPresale]);
@@ -155,8 +157,21 @@ const Presale = observer(
       }
     };
 
-    const Completionist = () => <div>Finished successfully!</div>;
-    const Finalize = () => (
+    const Success = () => (
+      <div>
+        Finished successfully!{" "}
+        <button
+          className={classNames(
+            header.connect__button,
+            style.configuration__button
+          )}
+          onClick={finalize}
+        >
+          Finalize
+        </button>
+      </div>
+    );
+    const Fail = () => (
       <div>
         Presale failed{" "}
         <button
@@ -217,13 +232,14 @@ const Presale = observer(
         Number(currentPresale?.supply) >= Number(currentPresale?.presaleGoal)
       ) {
         // Render a completed state
-        return <Completionist />;
+        setPresaleTimeStatus("success");
+        // return <Completionist />;
       } else if (
         completed &&
         Date.now() > new Date(currentPresale?.presaleEnd).getTime()
       ) {
         getPresale(id as string, address as string).then(() => {
-          setPresaleTimeStatus("finished");
+          setPresaleTimeStatus("failed");
         });
       } else {
         // Render a countdown
@@ -410,7 +426,8 @@ const Presale = observer(
                     renderer={rendererFinish}
                   />
                 )}
-                {presaleTimeStatus == "finished" && <Finalize />}
+                {presaleTimeStatus == "failed" && <Fail />}
+                {presaleTimeStatus == "success" && <Success />}
               </div>
               <SubscriptionProgressBar
                 supply={Number(currentPresale?.supply) / 10 ** 6}
@@ -473,7 +490,7 @@ const Presale = observer(
                       REQUEST SENDED SUCCSESSFULLY
                     </div>
                   )}{" "}
-                  {statusOfRequest == "approved" && (
+                  {statusOfRequest == "approved" && maxBuy !== 0 && (
                     <div className={style.configuration__buy}>
                       <div className={style.configuration__send}>
                         REQUEST APPROVED
