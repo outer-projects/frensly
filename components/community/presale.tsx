@@ -133,6 +133,9 @@ const Presale = observer(
           .finalizePresale(currentPresale.pondId)
           .send({ from: address });
         console.log(res);
+        setTimeout(()=>{
+          getPresale(id as string, address as string);
+        },1000)
       } catch (error) {
         console.log(error);
       }
@@ -446,7 +449,7 @@ const Presale = observer(
                     renderer={rendererFinish}
                   />
                 )}
-                {presaleTimeStatus == "failed" && <Fail />}
+                {presaleTimeStatus == "failed" && !currentPresale.isFinalize && <Fail />}
                 {presaleTimeStatus == "success" && <Success />}
               </div>
               <SubscriptionProgressBar
