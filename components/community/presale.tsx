@@ -48,6 +48,8 @@ const Presale = observer(
   }) => {
     const darkMode = useDarkMode();
     const router = useRouter();
+    const [priceForOne, setPriceForOne] = useState("");
+    const [priceForNumber, setPriceForNumber] = useState("");
     const { id } = router.query;
     const { community, address } = useInjection(Web3Store);
     const [presaleTimeStatus, setPresaleTimeStatus] = useState("");
@@ -90,6 +92,7 @@ const Presale = observer(
         } else {
           checkIsWhitelisted();
         }
+        getPrice(1000000);
       }
     }, [requestToWl, community, currentPresale]);
 
@@ -116,7 +119,7 @@ const Presale = observer(
             currentPresale.pondId,
             Number(numberOfShares) * 10 ** 6
           )
-          .send({ from: address, value: currentPresale?.presalePrice });
+          .send({ from: address, value: priceForNumber });
         console.log(res);
         getPresale(id as string, address as string);
       } catch (error) {
@@ -152,6 +155,20 @@ const Presale = observer(
         const res = await axios.post(prefix + "pond/whitelist/apply/" + id);
         console.log(res);
         setStatusOfRequest("sended");
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    const getPrice = async (count: number) => {
+      try {
+        const res = await community.methods.getPrice(count).call();
+        if(count == 1000000) {
+          setPriceForOne(res);
+        } else {
+          setPriceForNumber(res)
+        }
+        console.log(res);
+        
       } catch (error) {
         console.log(error);
       }
@@ -387,7 +404,7 @@ const Presale = observer(
                     Price per 1 share
                   </div>
                   <div className={style.configuration__row__value}>
-                    {fromWeiToEth(currentPresale?.presalePrice)}
+                    {fromWeiToEth(priceForOne)}
                   </div>
                 </div>
                 <div className={style.configuration__row}>
@@ -457,6 +474,7 @@ const Presale = observer(
                           e.target.value == "."
                         ) {
                           setNumberOfShares(e.target.value);
+                          getPrice(Number(e.target.value) * 10 ** 6);
                         } else if (e.target.value == "") {
                           setNumberOfShares("");
                         }
