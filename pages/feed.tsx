@@ -45,13 +45,21 @@ const FeedPage: NextPage = observer((props) => {
       </Head>
       <div className={style.feed__type}>
         <TypesList
-          types={authSummaryCheck ? types : types.filter((el, i)=> i !== 0)}
+          types={authSummaryCheck ? types : types.filter((el, i) => i !== 0)}
           active={activeFeed}
           setActive={setActiveFeed}
         />
       </div>
-      {activeFeed == 0 && <TwitterFeed isFeed />}
-      {activeFeed == 1 && <TwitterFeed isFeed isFrens />}
+      {activeFeed == 0 && (
+        <TwitterFeed isFeed isFrens={!authSummaryCheck ? true : false} />
+      )}
+      {activeFeed == 1 && (
+        <TwitterFeed
+          isFeed
+          isFrens={!authSummaryCheck ? false : true}
+          isPublic={!authSummaryCheck ? true : false}
+        />
+      )}
       {activeFeed == 2 && <TwitterFeed isFeed isPublic />}
     </div>
   );
