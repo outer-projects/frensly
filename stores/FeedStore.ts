@@ -289,7 +289,7 @@ export class FeedStore {
     text: string;
     originalPost?: string;
     media: File | null;
-    handle?: string;
+    pondId?: number;
     gif?: string;
   }) => {
     const formdata = new FormData();
@@ -298,9 +298,10 @@ export class FeedStore {
     // console.log(data.media);
     data.media && formdata.append("file", data.media);
     data.gif && data?.gif !== "" && formdata.append("tenor", data.gif);
+    data.pondId && formdata.append("pondId", data.pondId.toString());
     try {
       const res = await axios.post(
-        prefix + "pond/post/" + data.handle,
+        prefix + "pond/post",
         formdata
       );
       this.communityPosts = [res.data, ...this.communityPosts];

@@ -14,7 +14,7 @@ import { ChatStore } from "../../stores/ChatStore";
 import GifSearch from "./gitSearch";
 
 const MessageSend = observer(
-  ({ id, handle }: { id?: string; handle?: string }) => {
+  ({ id, pondId }: { id?: string; pondId?: number }) => {
     const [message, setMessage] = useState("");
     const [openMentions, setOpenMentions] = useState(false);
     const [focus, setFocus] = useState(false);
@@ -160,7 +160,7 @@ const MessageSend = observer(
               disabled={message.length == 0 && gif == "" && !image}
               onClick={() => {
                 setOpenMentions(false);
-                if (!handle) {
+                if (!pondId) {
                   addPost({
                     text: message,
                     media: image,
@@ -179,7 +179,7 @@ const MessageSend = observer(
                   addCommunityPost({
                     text: message,
                     media: image,
-                    handle: handle,
+                    pondId: pondId,
                     gif: gif,
                   }).then((res) => {
                     if (res) {

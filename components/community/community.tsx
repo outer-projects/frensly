@@ -154,7 +154,7 @@ const Community = observer(() => {
             </div>
           </div>
           {isHolder ? (
-            <TwitterFeed communityHandle={currentCommunity?.handle} />
+            <TwitterFeed communityHandle={currentCommunity?.handle} pondId={currentCommunity?.pondId}/>
           ) : (
             <div className={style.configuration__hide}>
               Became a holder to see community feed
