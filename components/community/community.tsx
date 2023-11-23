@@ -61,6 +61,7 @@ const Community = observer(() => {
       );
     }
   }, [communityHolders]);
+  console.log(communityHolders);
   const buyShares = () => {
     showModal(ModalsEnum.TradeCommunity, { community: currentCommunity });
   };
@@ -143,6 +144,12 @@ const Community = observer(() => {
               <div className={style.configuration__row__title}>Supply</div>
               <div className={style.configuration__row__value}>
                 {Number(currentCommunity?.supply) / 10 ** 6}
+              </div>
+            </div>
+            <div className={style.configuration__row}>
+              <div className={style.configuration__row__title}>Holders</div>
+              <div className={style.configuration__row__value}>
+                {communityHolders.length}
               </div>
             </div>
           </div>
