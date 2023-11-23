@@ -300,7 +300,7 @@ export class FeedStore {
     data.gif && data?.gif !== "" && formdata.append("tenor", data.gif);
     try {
       const res = await axios.post(
-        prefix + "pond/post" + data.handle,
+        prefix + "pond/post/" + data.handle,
         formdata
       );
       this.communityPosts = [res.data, ...this.communityPosts];

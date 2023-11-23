@@ -29,7 +29,7 @@ const WhitelistRow = observer(
       setAddressUserses([...addressUserses, addressUser]);
     };
     const deleteAddress = () => {
-      setAddressUserses([...addressUserses, addressUser]);
+      setAddressUserses(addressUserses.filter((au) => au !== addressUser));
     };
     return (
       // <Link href={"/profile/" + 123}>
