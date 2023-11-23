@@ -449,7 +449,7 @@ const Presale = observer(
                     renderer={rendererFinish}
                   />
                 )}
-                {presaleTimeStatus == "failed" && !currentPresale.isFinalize && <Fail />}
+                {presaleTimeStatus == "failed" && !currentPresale.isFinalized && <Fail />}
                 {presaleTimeStatus == "success" && <Success />}
               </div>
               <SubscriptionProgressBar
