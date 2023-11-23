@@ -150,6 +150,7 @@ const Presale = observer(
         }
       }
     }, [currentPresale]);
+    console.log(priceForNumber);
     const sendRequestBuy = async () => {
       try {
         const res = await axios.post(prefix + "pond/whitelist/apply/" + id);
@@ -160,6 +161,7 @@ const Presale = observer(
       }
     };
     const getPrice = async (count: number) => {
+      console.log(count);
       try {
         const res = await community.methods.getPrice(count).call();
         if(count == 1000000) {
@@ -167,7 +169,7 @@ const Presale = observer(
         } else {
           setPriceForNumber(res)
         }
-        console.log(res);
+        console.log("171", res);
         
       } catch (error) {
         console.log(error);
