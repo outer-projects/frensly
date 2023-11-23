@@ -163,14 +163,15 @@ const Presale = observer(
     const getPrice = async (count: number) => {
       console.log(count);
       try {
-        const res = await community.methods.getPrice(count).call();
-        if(count == 1000000) {
+        const res = await community.methods
+          .getBuyPrice(currentPresale.pondId, count)
+          .call();
+        if (count == 1000000) {
           setPriceForOne(res);
         } else {
-          setPriceForNumber(res)
+          setPriceForNumber(res);
         }
         console.log("171", res);
-        
       } catch (error) {
         console.log(error);
       }
