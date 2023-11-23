@@ -1,8 +1,25 @@
 import Link from "next/link";
 import { fromWeiToEth, getDate, getDateTime } from "../../../utils/utilities";
 import style from "../explore.module.scss";
+import { observer } from "mobx-react";
+import Web3Store from "../../../stores/Web3Store";
+import { useInjection } from "inversify-react";
+import { CommunityStore } from "../../../stores/CommunityStore";
 
-const PresaleListItem = ({ presale }: any) => {
+const PresaleListItem = observer(({ presale }: any) => {
+  const { community, address } = useInjection(Web3Store);
+  const { getPresaleList } = useInjection(CommunityStore);
+  const finalize = async () => {
+    try {
+      const res = await community.methods
+        .finalizePresale(presale.pondId)
+        .send({ from: address });
+      console.log(res);
+      getPresaleList(presale.status)
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <div className={style.presale__table__row}>
       <div className={style.row__1}>
@@ -18,10 +35,14 @@ const PresaleListItem = ({ presale }: any) => {
       </div>
       <div className={style.row__7}>{getDateTime(presale.presaleStart)}</div>
       <div className={style.row__7}>{getDateTime(presale.presaleEnd)}</div>
-      <Link href={"/presales/" + presale?.handle}>
-        <div className={style.row__8}>View</div>
-      </Link>
+      {presale?.status == "SUCCSESS" || presale.status == "FAILED" ? (
+        <div className={style.row__8} onClick={finalize}>Finalize</div>
+      ) : (
+        <Link href={"/presales/" + presale?.handle}>
+          <div className={style.row__8}>View</div>
+        </Link>
+      )}
     </div>
   );
-};
+});
 export default PresaleListItem;

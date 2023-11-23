@@ -15,6 +15,7 @@ export class CommunityStore {
   @observable presaleList: any[] = [];
   @observable presaleOffset: number = 0;
   @observable communityList: any[] = [];
+  @observable communityHolders: any[] = [];
   @observable communityOffset: number = 0;
   @observable requestToWl: boolean = false;
   public constructor(private readonly rootStore: RootStore) {
@@ -80,6 +81,16 @@ export class CommunityStore {
       const res = await axios.get(prefix + "pond/get/" + id);
       console.log(res);
       this.currentCommunity = res.data.pond;
+    } catch (e) {
+      console.log(e);
+      return false;
+    }
+  };
+  getHolders = async (id: string) => {
+    try {
+      const res = await axios.get(prefix + "pond/holders/" + id);
+      console.log(res);
+      this.communityHolders = res.data;
     } catch (e) {
       console.log(e);
       return false;

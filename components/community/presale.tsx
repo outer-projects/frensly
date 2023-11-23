@@ -441,36 +441,38 @@ const Presale = observer(
                   ) * 100
                 }
               />
-              <div className={buy.buy__amount} style={{ margin: "0px" }}>
-                <div className={buy.buy__amount__title}>
-                  Amount (max: {maxBuy})
+              {presaleTimeStatus == "started" && (
+                <div className={buy.buy__amount} style={{ margin: "0px" }}>
+                  <div className={buy.buy__amount__title}>
+                    Amount (max: {maxBuy})
+                  </div>
+                  <div className={buy.buy__amount__input}>
+                    <input
+                      className={buy.buy__amount__value}
+                      value={numberOfShares}
+                      type="text"
+                      onChange={(e) => {
+                        if (
+                          !isNaN(Number(e.target.value)) ||
+                          e.target.value == "."
+                        ) {
+                          setNumberOfShares(e.target.value);
+                        } else if (e.target.value == "") {
+                          setNumberOfShares("");
+                        }
+                      }}
+                    />
+                    <button
+                      className={style.max__button}
+                      onClick={() => {
+                        setNumberOfShares(maxBuy.toString());
+                      }}
+                    >
+                      max
+                    </button>
+                  </div>
                 </div>
-                <div className={buy.buy__amount__input}>
-                  <input
-                    className={buy.buy__amount__value}
-                    value={numberOfShares}
-                    type="text"
-                    onChange={(e) => {
-                      if (
-                        !isNaN(Number(e.target.value)) ||
-                        e.target.value == "."
-                      ) {
-                        setNumberOfShares(e.target.value);
-                      } else if (e.target.value == "") {
-                        setNumberOfShares("");
-                      }
-                    }}
-                  />
-                  <button
-                    className={style.max__button}
-                    onClick={() => {
-                      setNumberOfShares(maxBuy.toString());
-                    }}
-                  >
-                    max
-                  </button>
-                </div>
-              </div>
+              )}
               {presaleTimeStatus == "started" && (
                 <>
                   {statusOfRequest == "not sended" && (

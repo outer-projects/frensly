@@ -20,12 +20,14 @@ const TwitterFeed = observer(
     isFrens,
     isPublic,
     isFeed,
+    communityHandle,
   }: {
     id?: string;
     isProfile?: boolean;
     isFrens?: boolean;
     isPublic?: boolean;
     isFeed?: boolean;
+    communityHandle?: string;
   }) => {
     const {
       feed,
@@ -44,8 +46,10 @@ const TwitterFeed = observer(
       updateUserPosts,
       setHideRow,
       hideRow,
+      getCommunityPosts,
+      communityPosts,
     } = useInjection(FeedStore);
-    const { user, authSummaryCheck} = useInjection(Web3Store);
+    const { user, authSummaryCheck } = useInjection(Web3Store);
 
     const currentFeed = useMemo(() => {
       if (id) {
@@ -54,10 +58,21 @@ const TwitterFeed = observer(
         return frensFeed;
       } else if (isPublic) {
         return publicFeed;
+      } else if (communityHandle) {
+        return communityPosts;
       } else {
         return feed;
       }
-    }, [id, isFrens, isPublic, userPosts, frensFeed, feed, publicFeed]);
+    }, [
+      id,
+      isFrens,
+      isPublic,
+      userPosts,
+      frensFeed,
+      feed,
+      publicFeed,
+      communityPosts,
+    ]);
     const darkMode = useDarkMode();
     const modalStore = useInjection(ModalStore);
     const updatePosts = () => {
@@ -65,6 +80,8 @@ const TwitterFeed = observer(
         updateFrensFeed();
       } else if (isPublic) {
         updatePublicFeed();
+      } else if (communityHandle) {
+        getCommunityPosts(communityHandle);
       } else {
         updateFeed();
       }
@@ -103,9 +120,9 @@ const TwitterFeed = observer(
     };
     return (
       <div className={classNames(style.twitter__feed, id && style.user__feed)}>
-        {(!id || id == user?._id) && (user?.verified || !isFrens) && (authSummaryCheck) && (
-          <MessageSend id={id} />
-        )}
+        {(!id || id == user?._id) &&
+          (user?.verified || !isFrens) &&
+          authSummaryCheck && <MessageSend id={id} />}
         <div>
           {currentFeed
             .filter((el) => !hideRow.includes(el._id))

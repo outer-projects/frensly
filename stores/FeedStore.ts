@@ -12,12 +12,14 @@ export class FeedStore {
   @observable frensFeed: IPost[] = [];
   @observable publicFeed: IPost[] = [];
   @observable feed: IPost[] = [];
+  @observable communityPosts: IPost[] = [];
   @observable userPosts: IPost[] = [];
   @observable hideRow: string[] = [];
   @observable feedOffset: number = 0;
   @observable feedFrensOffset: number = 0;
   @observable publicOffset: number = 0;
   @observable postOffset: number = 0;
+  @observable communityOffset: number = 0;
   @observable activeFeed: number = 0;
   @observable currentPost?: IPost = undefined;
   constructor(private readonly rootStore: RootStore) {
@@ -117,6 +119,9 @@ export class FeedStore {
   @action clearUserPosts = () => {
     this.userPosts = [];
   };
+  @action clearCommunityPosts = () => {
+    this.communityPosts = [];
+  };
   @action setCurrentPost = (post: any) => {
     this.currentPost = post;
   };
@@ -131,6 +136,9 @@ export class FeedStore {
   };
   @action setPostOffset = (n: number) => {
     this.postOffset = n;
+  };
+  @action setCommunityOffset = (n: number) => {
+    this.communityOffset = n;
   };
   @action updateUserPosts = async (id: string) => {
     const query = new URLSearchParams({
@@ -156,6 +164,34 @@ export class FeedStore {
       // console.log(res.data);
       this.setPostOffset(30);
       this.userPosts = res.data;
+    } catch (e) {
+      console.log(e);
+    }
+  };
+  @action getCommunityPosts = async (handle: string) => {
+    const query = new URLSearchParams({
+      offset: "0",
+      limit: "30",
+    }).toString();
+    try {
+      const res = await axios.get(prefix + "pond/posts/" + handle + "?" + query);
+      // console.log(res.data);
+      this.setCommunityOffset(30);
+      this.communityPosts = res.data;
+    } catch (e) {
+      console.log(e);
+    }
+  };
+  @action updateCommunityPosts = async (id: string) => {
+    const query = new URLSearchParams({
+      offset: this.postOffset.toString(),
+      limit: "30",
+    }).toString();
+    try {
+      const res = await axios.get(prefix + "pond/posts/" + id + "?" + query);
+      // console.log(res.data);
+      this.setCommunityOffset(this.communityOffset + 30);
+      this.communityPosts = [...this.communityPosts, ...res.data];
     } catch (e) {
       console.log(e);
     }
@@ -238,6 +274,33 @@ export class FeedStore {
       }
       if (data.isVerified) {
         this.frensFeed = [res.data, ...this.frensFeed];
+      }
+      data.originalPost && this.getCurrentPost(data.originalPost);
+      return true;
+    } catch (e) {
+      console.log(e);
+      // toast.error('Image is t')
+      return false;
+    }
+  };
+  @action addCommunityPost = async (data: {
+    text: string;
+    originalPost?: string;
+    media: File | null;
+    handle?: string;
+    gif?: string;
+  }) => {
+    const formdata = new FormData();
+    formdata.append("text", data.text);
+    data.originalPost && formdata.append("originalPost", data.originalPost);
+    // console.log(data.media);
+    data.media && formdata.append("file", data.media);
+    data.gif && data?.gif !== "" && formdata.append("tenor", data.gif);
+    try {
+      const res = await axios.post(prefix + "social/post", formdata);
+      // console.log(res);
+      if (data.handle) {
+        this.communityPosts = [res.data, ...this.communityPosts];
       }
       data.originalPost && this.getCurrentPost(data.originalPost);
       return true;

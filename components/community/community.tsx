@@ -13,6 +13,7 @@ import { fromWeiToEth } from "../../utils/utilities";
 import Web3Store from "../../stores/Web3Store";
 import { ModalStore } from "../../stores/ModalStore";
 import { ModalsEnum } from "../../modals";
+import TwitterFeed from "../profile/twitterFeed";
 const socials = [
   {
     name: "Twitter",
@@ -39,17 +40,21 @@ const Community = observer(() => {
   const darkMode = useDarkMode();
   const router = useRouter();
   const { id } = router.query;
-  const { getCommunity, currentCommunity } = useInjection(CommunityStore);
-  const [numberOfShares, setNumberOfShares] = useState("");
+  const { user } = useInjection(Web3Store);
+  const { getCommunity, currentCommunity, getHolders, communityHolders } =
+    useInjection(CommunityStore);
+
   const { showModal } = useInjection(ModalStore);
   useEffect(() => {
     if (id) {
       getCommunity(id as string);
+      getHolders(id as string)
     }
   }, [id]);
   const buyShares = () => {
     showModal(ModalsEnum.TradeCommunity, { community: currentCommunity });
   };
+  console.log(communityHolders);
   return (
     <div className={style.configuration}>
       <div className={style.first__block}>
@@ -91,7 +96,13 @@ const Community = observer(() => {
             <div className={style.configuration__text}>
               {currentCommunity?.description}
             </div>
-            <button className={classNames(header.connect__button, style.trade__button)} onClick={buyShares}>
+            <button
+              className={classNames(
+                header.connect__button,
+                style.trade__button
+              )}
+              onClick={buyShares}
+            >
               Trade
             </button>
           </div>
@@ -125,6 +136,7 @@ const Community = observer(() => {
               </div>
             </div>
           </div>
+          {<TwitterFeed communityHandle={currentCommunity.handle} />}
         </div>
       </div>
       {/* <div className={style.second__block}>

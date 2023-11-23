@@ -55,6 +55,7 @@
 .trade__button {
   height: 40px;
   margin-top: 20px;
+  width: 100%;
 }
 .configuration__top {
   display: flex;
@@ -205,6 +206,7 @@
   font-weight: bold;
   line-height: 20px; /* 142.857% */
   letter-spacing: -0.14px;
+  margin-left: 10px;
 }
 .subscription {
   color: var(--text-main);
