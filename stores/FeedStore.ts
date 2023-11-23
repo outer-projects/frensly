@@ -177,7 +177,7 @@ export class FeedStore {
       const res = await axios.get(prefix + "pond/posts/" + handle + "?" + query);
       // console.log(res.data);
       this.setCommunityOffset(30);
-      this.communityPosts = res.data;
+      this.communityPosts = res.data.posts;
     } catch (e) {
       console.log(e);
     }

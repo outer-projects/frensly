@@ -40,6 +40,7 @@ const Community = observer(() => {
   const darkMode = useDarkMode();
   const router = useRouter();
   const { id } = router.query;
+  const [isHolder, setIsHolder] = useState(false);
   const { user } = useInjection(Web3Store);
   const { getCommunity, currentCommunity, getHolders, communityHolders } =
     useInjection(CommunityStore);
@@ -48,7 +49,13 @@ const Community = observer(() => {
   useEffect(() => {
     if (id) {
       getCommunity(id as string);
-      getHolders(id as string)
+      getHolders(id as string).then(() => {
+        setIsHolder(
+          communityHolders.some(
+            (holder) => holder?.profile?.twitterHandle == user?.twitterHandle
+          )
+        );
+      });
     }
   }, [id]);
   const buyShares = () => {
@@ -136,7 +143,11 @@ const Community = observer(() => {
               </div>
             </div>
           </div>
-          {currentCommunity?.handle && <TwitterFeed communityHandle={currentCommunity?.handle} />}
+          {isHolder ? (
+            <TwitterFeed communityHandle={currentCommunity?.handle} />
+          ) : (
+            <div className={style.configuration__hide}>Became a holder to see community feed</div>
+          )}
         </div>
       </div>
       {/* <div className={style.second__block}>
