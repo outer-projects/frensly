@@ -17,7 +17,7 @@ import UserIcon from "../socials/twitterUI/UserIcon";
 import TypesList from "../common/typesList";
 import { addressSlice, shortNick } from "../../utils/utilities";
 import Key from "../svgs/key";
-export const types = ["Finance", "Referrals", "Airdrop", "Rankings"];
+export const types = ["Finance", "Referrals", "Airdrop", "Rankings", "Communities"];
 const Invite = observer(() => {
   const { user } = useInjection(Web3Store);
   const { getKeys, key, inviteLimit, invited, unlimitedKeys, inviter } =

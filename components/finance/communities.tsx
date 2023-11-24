@@ -14,6 +14,7 @@ import User from "./user";
 import PointsIcon from "../socials/twitterUI/points";
 import FtIcon from "../svgs/ft";
 import Frensly from "../svgs/frensly";
+import CommunityRow from "./exploreRow";
 
 const Communities = observer(() => {
   const [active, setActive] = useState(4);
@@ -60,6 +61,9 @@ const Communities = observer(() => {
                 List of communities you created
               </div>
             </>
+          </div>
+          <div>
+            <CommunityRow el/>
           </div>
         </div>
         <div>
