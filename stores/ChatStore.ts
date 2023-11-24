@@ -86,7 +86,7 @@ export class ChatStore {
       this.messagesleft = n - 50 > 0 ? n - 50 : 0;
       this.messagesOffset = 100;
       this.chat = res.data.room;
-      this.chatAmount = Number(res.data.room.ownerShareAmount) / 10 ** 6;
+      this.chatAmount = Number(res?.data?.room?.ownerShareAmount || res?.data?.room?.profile?.ownerShareAmount) / 10 ** 6;
       this.messages = res.data.room.messages.filter((el: any) => !el?.isHidden);
     } catch (e) {
       console.log(e);

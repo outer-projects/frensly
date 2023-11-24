@@ -33,7 +33,7 @@ const CommunityRow = observer(({ el }: { el: any }) => {
                 </a>
               </span>
             </div>
-            <div className={style.finance__handle}>@{el.twitter}</div>
+            <div className={finance.finance__handle}>@{el.twitter}</div>
           </div>
 
         </div>
