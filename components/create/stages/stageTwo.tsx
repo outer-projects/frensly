@@ -2,7 +2,7 @@ import { observer } from "mobx-react";
 import style from "../create.module.scss";
 import Web3Store from "../../../stores/Web3Store";
 import { useInjection } from "inversify-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import finance from "../../finance/finance.module.scss";
 import header from "../../layout/header.module.scss";
 import classNames from "classnames";
@@ -11,18 +11,35 @@ import { CommunityStore } from "../../../stores/CommunityStore";
 import { IStageOne } from "./stageOne";
 import { toast } from "react-toastify";
 import useDarkMode from "use-dark-mode";
+import { fromWeiToEth } from "../../../utils/utilities";
 const StageTwo = observer((stage: IStageOne) => {
   const { user, community, address, web3 } = useInjection(Web3Store);
   const { updateCommunity } = useInjection(CommunityStore);
   const [supply, setSupply] = useState("");
   const [maxAllocation, setMaxAllocation] = useState("");
   const [ratio, setRatio] = useState("");
-  // const [isRestricted, setIsRestricted] = useState(true);
+  const [price, setPrice] = useState(0);
   const darkMode = useDarkMode();
   const [timeStart, setTimeStart] = useState("");
   const [timeFinish, setTimeFinish] = useState("");
   const router = useRouter();
   console.log(timeFinish, timeStart);
+  const getPrice = async () => {
+    try {
+      const res = await community.methods
+        .calculatePresalePrice(Number(maxAllocation) * 10 ** 6)
+        .call();
+
+      setPrice(fromWeiToEth(res));
+    } catch (e) {
+      console.log(e);
+    }
+  };
+  useEffect(() => {
+    if (maxAllocation != "") {
+      getPrice();
+    }
+  }, [maxAllocation]);
   const createPresale = async () => {
     if (stage.name == "" || stage.handle == "") {
       return toast.error("Fill name and handle fields");
@@ -150,11 +167,10 @@ const StageTwo = observer((stage: IStageOne) => {
       <div className={style.stage__title}>
         <img
           style={{
-   
             filter: `invert(${darkMode.value ? "1" : "0"})`,
           }}
-          onClick={()=>{
-            stage.setStep && stage.setStep(0)
+          onClick={() => {
+            stage.setStep && stage.setStep(0);
           }}
           src="../icons/arrow_back.svg"
         />
@@ -232,15 +248,17 @@ const StageTwo = observer((stage: IStageOne) => {
             />
           </div>
         </div>
-        {/* <div className={classNames(style.stage__one__row, style.stage__values)}>
+        <div className={classNames(style.stage__one__row, style.stage__values)}>
           <div
             className={finance.finance__stat}
             style={{ width: "49%", marginBottom: "0px" }}
           >
             <img src="../icons/Ethereum__grey.svg" />
             <div>
-              <div className={finance.finance__stat__name}>Portfolio value</div>
-              <div className={finance.finance__stat__value}>0 ETH</div>
+              <div className={finance.finance__stat__name}>Hardcap</div>
+              <div className={finance.finance__stat__value}>
+                {price * Number(maxAllocation)}
+              </div>
             </div>
           </div>
           <div
@@ -249,11 +267,11 @@ const StageTwo = observer((stage: IStageOne) => {
           >
             <img src="../icons/Ethereum__grey.svg" />
             <div>
-              <div className={finance.finance__stat__name}>Portfolio value</div>
-              <div className={finance.finance__stat__value}>0 ETH</div>
+              <div className={finance.finance__stat__name}>Presale price</div>
+              <div className={finance.finance__stat__value}>{price} ETH</div>
             </div>
           </div>
-        </div> */}
+        </div>
         <div className={style.stage__one__buttons}>
           <button
             className={classNames(

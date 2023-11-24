@@ -66,7 +66,7 @@ const Presale = observer(
       let tokensLeft =
         Number(currentPresale?.presaleGoal) / 10 ** 6 -
         Number(currentPresale?.supply) / 10 ** 6;
-      if (maxPossible > tokensLeft) {
+      if (maxPossible < tokensLeft) {
         return maxPossible;
       } else {
         return tokensLeft;
