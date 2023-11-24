@@ -16,7 +16,7 @@ import FtIcon from "../svgs/ft";
 import Frensly from "../svgs/frensly";
 
 const Communities = observer(() => {
-  const [active, setActive] = useState(2);
+  const [active, setActive] = useState(4);
 
   const [communitiesReady, setCommunitiesReady] = useState(false);
   const { user } = useInjection(Web3Store);
