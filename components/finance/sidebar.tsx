@@ -42,7 +42,7 @@ const Sidebar = () => {
       title: "My communities",
       link: "/dashboard/communities",
       img: <Community color={darkMode.value ? "white" : "black"}/>,
-      active: false,
+      active: true,
     },
   ];
   return (
