@@ -55,6 +55,15 @@ export class UserStore {
   public constructor(private readonly rootStore: RootStore) {
     makeObservable(this);
   }
+  @action getMyHoldings = async (id: string) => {
+    try {
+      const res = await axios.get(prefix + "pond/held/" + id);
+      console.log(res.data);
+      this.myCommunities = res.data;
+    } catch (e) {
+      console.log(e);
+    }
+  };
   @action getCurrentTier = async () => {
     try {
       const res = await axios.get(prefix + "user/tier/requirements");
@@ -124,11 +133,11 @@ export class UserStore {
       console.log(e);
     }
   };
-  @action getMyCommunities = async (id:string) => {
+  @action getMyCommunities = async (id: string) => {
     try {
       const res = await axios.get(prefix + "pond/created/" + id);
       console.log(res.data);
-      this.myCommunities = res.data.ponds;
+      this.myCommunities = res.data;
     } catch (e) {
       console.log(e);
     }

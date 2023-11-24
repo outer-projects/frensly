@@ -27,7 +27,7 @@ const StageTwo = observer((stage: IStageOne) => {
   const getPrice = async () => {
     try {
       const res = await community.methods
-        .calculatePresalePrice(Number(supply) * 10 ** 10)
+        .calculatePresalePrice(Number(supply) * 10 ** 6)
         .call();
       console.log(res);
       setPrice(fromWeiToEth(res, 8));

@@ -11,17 +11,16 @@ import header from "../layout/header.module.scss";
 import TypesList from "../common/typesList";
 import { types } from "./invite";
 import User from "./user";
-import PointsIcon from "../socials/twitterUI/points";
-import FtIcon from "../svgs/ft";
-import Frensly from "../svgs/frensly";
 import CommunityRow from "./communityRowFinance";
 
 const Communities = observer(() => {
   const [active, setActive] = useState(4);
-
+  const [activeComm, setActiveComm] = useState(0);
+  const commtypes = ["Created", "Holding"];
   const [communitiesReady, setCommunitiesReady] = useState(false);
   const { user } = useInjection(Web3Store);
-  const { getMyCommunities, myCommunities } = useInjection(UserStore);
+  const { getMyCommunities, myCommunities, getMyHoldings } =
+    useInjection(UserStore);
   const router = useRouter();
   useEffect(() => {
     if (active == 0) {
@@ -42,6 +41,7 @@ const Communities = observer(() => {
     if (user && !communitiesReady) {
       setCommunitiesReady(true);
       getMyCommunities(user._id);
+      getMyHoldings(user._id)
     }
   }, [user]);
   return (
@@ -57,13 +57,21 @@ const Communities = observer(() => {
 
             <>
               <div className={style.finance__invite}>Your community</div>
-              <div className={style.finance__invite__text} style={{marginBottom:'0px'}}>
+              <div
+                className={style.finance__invite__text}
+                style={{ marginBottom: "0px" }}
+              >
                 List of communities you created
               </div>
             </>
           </div>
+          <TypesList
+            active={activeComm}
+            setActive={setActiveComm}
+            types={commtypes}
+          />
           <div>
-            <CommunityRow el/>
+            <CommunityRow el />
           </div>
         </div>
         <div>
