@@ -79,6 +79,10 @@
   background: var(--background-row);
   margin-bottom: 12px;
 }
+.finance__handle {
+  width: auto !important;
+  color: var(--text-shade);
+}
 .finance__link {
   border-radius: 16px;
   width: 248px;

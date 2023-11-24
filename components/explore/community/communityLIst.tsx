@@ -3,13 +3,7 @@ import style from "../explore.module.scss";
 import classNames from "classnames";
 import { observer } from "mobx-react";
 import { useInjection } from "inversify-react";
-import { ExploreStore } from "../../../stores/ExploreStore";
-import Link from "next/link";
 import TypesList from "../../common/typesList";
-import ExploreRow from "../presonal/exploreRow";
-import { InView } from "react-intersection-observer";
-import OneActivity from "../../notifications/oneActivity";
-import { shortNick } from "../../../utils/utilities";
 import { CommunityStore } from "../../../stores/CommunityStore";
 import CommunityRow from "./communityRow";
 import { UserStore } from "../../../stores/UserStore";
@@ -42,12 +36,15 @@ const CommunityList = observer(() => {
     if (active == 0) {
       // setSearch("")
       getTop();
+      console.log('top');
     } else {
+      console.log('get');
       getCommunityList();
     }
   }, [active]);
   useEffect(() => {
     if (wrapperBottom && communityList.length >= 20 && active == 1) {
+      console.log('update');
       updateCommunityList();
     }
   }, [wrapperBottom]);

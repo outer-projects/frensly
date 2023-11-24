@@ -1,23 +1,24 @@
 import Link from "next/link";
 import style from "../explore/explore.module.scss";
-import { useEffect, useState } from "react";
+import finance from "./finance.module.scss";
 import { fromWeiToEth, shortNick } from "../../utils/utilities";
 import { observer } from "mobx-react";
 import { useInjection } from "inversify-react";
 import { UserStore } from "../../stores/UserStore";
 import Web3Store from "../../stores/Web3Store";
+import classNames from "classnames";
 
 const CommunityRow = observer(({ el }: { el: any }) => {
   return (
     <Link href={"/communities/" + el.handle}>
-      <div className={style.explore__user} style={{marginLeft:'24px', marginRight:"24px"}}>
+      <div className={classNames(style.explore__user)} style={{marginLeft:'24px', marginRight:"24px", width: 'auto'}}>
         <div className={style.explore__user__left}>
           <img src={el.avatar} />
           <div className={style.explore__user__left__text}>
             
             <div className={style.explore__user__name}>
               <div>
-                {shortNick(el.name)}123 
+                {shortNick(el.name)}
               </div>
               <span>
                 <a
@@ -32,7 +33,7 @@ const CommunityRow = observer(({ el }: { el: any }) => {
                 </a>
               </span>
             </div>
-            <div>@{el.twitter}123</div>
+            <div className={style.finance__handle}>@{el.twitter}</div>
           </div>
 
         </div>

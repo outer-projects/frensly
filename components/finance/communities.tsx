@@ -14,7 +14,7 @@ import User from "./user";
 import PointsIcon from "../socials/twitterUI/points";
 import FtIcon from "../svgs/ft";
 import Frensly from "../svgs/frensly";
-import CommunityRow from "./exploreRow";
+import CommunityRow from "./communityRowFinance";
 
 const Communities = observer(() => {
   const [active, setActive] = useState(4);
