@@ -46,34 +46,35 @@ const Communities = observer(() => {
   return (
     <div className={style.finance__page}>
       <Sidebar />
+      <div className={style.communities__container}>
+        <div className={style.finance__container}>
+          <div className={style.finance__links}>
+            <TypesList active={active} setActive={setActive} types={types} />
+          </div>
+          <div className={style.finance}>
+            <User stage="airdrop" />
 
-      <div className={style.finance__container}>
-        <div className={style.finance__links}>
-          <TypesList active={active} setActive={setActive} types={types} />
+            <>
+              <div className={style.finance__invite}>Your community</div>
+              <div className={style.finance__invite__text}>
+                List of communities you created
+              </div>
+            </>
+          </div>
         </div>
-        <div className={style.finance}>
-          <User stage="airdrop" />
-
-          <>
-            <div className={style.finance__invite}>Your community</div>
-            <div className={style.finance__invite__text}>
-              List of communities you created
-            </div>
-          </>
+        <div>
+          <button
+            className={classNames(
+              header.connect__button,
+              style.finance__claim__community
+            )}
+            onClick={() => {
+              router.push("/communities/create");
+            }}
+          >
+            Create New Community
+          </button>
         </div>
-      </div>
-      <div>
-        <button
-          className={classNames(
-            header.connect__button,
-            style.finance__claim__community
-          )}
-          onClick={() => {
-            router.push("/communities/create");
-          }}
-        >
-          Create New Community
-        </button>
       </div>
     </div>
   );

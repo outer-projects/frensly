@@ -131,6 +131,11 @@
   padding-left: 4px;
   padding-right: 4px;
 }
+.communities__container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 .finance__container {
   background: var(--background-pages);
   border-radius: 32px;
@@ -420,6 +425,7 @@
   width: fit fit-content;
   padding-left: 8px;
   padding-right: 8px;
+  margin-top: 16px;
 }
 .finance__fees {
   color: var(--text-shade);
