@@ -35,7 +35,7 @@ const StageOne = observer((stage: IStageOne) => {
   const { user, community, address, web3 } = useInjection(Web3Store);
   const { updateCommunity } = useInjection(CommunityStore);
   const router = useRouter();
-
+  const [block, setBlock] = useState(false);
   const create = async () => {
     if (stage.name == "" || stage.handle == "") {
       return toast.error("Fill name and handle fields");
@@ -48,6 +48,7 @@ const StageOne = observer((stage: IStageOne) => {
       return toast.error("Handle can't contain spaces");
     }
     try {
+      setBlock(true);
       const res = await community.methods.initPond().send({
         from: address,
       });
@@ -120,6 +121,7 @@ const StageOne = observer((stage: IStageOne) => {
       );
       console.log(transaction);
       setTimeout(() => {
+        setBlock(false);
         updateCommunity({
           pondId: Number(transaction?.pondId),
           twitter: stage.twitter,
@@ -133,10 +135,13 @@ const StageOne = observer((stage: IStageOne) => {
         }).then((res) => {
           if (res) {
             router.push("/explore/community");
+          } else {
+            toast.error("Error");
           }
         });
       }, 1000);
     } catch (e) {
+      setBlock(false);
       console.log(e);
     }
   };
@@ -273,8 +278,10 @@ const StageOne = observer((stage: IStageOne) => {
         <button
           className={classNames(
             header.connect__button,
-            style.stage__one__button
+            style.stage__one__button, 
+            block && style.stage__one__button__disabled
           )}
+          disabled={block}
           onClick={create}
         >
           Create
@@ -282,9 +289,11 @@ const StageOne = observer((stage: IStageOne) => {
         <button
           className={classNames(
             header.connect__button,
-            style.stage__one__button
+            style.stage__one__button,
+            block && style.stage__one__button__disabled
           )}
           onClick={() => stage.setStep && stage.setStep(1)}
+          disabled={block}
         >
           Create pre-sale
         </button>

@@ -35,6 +35,7 @@ export class UserStore {
   @observable followings: IProfile[] = [];
   @observable followers: IProfile[] = [];
   @observable currentRequire: any[] = [];
+  @observable myCommunities: any[] = [];
   @observable currentProgress: any[] = [];
   @observable finished: boolean = false;
   @observable unlimitedKeys: boolean = false;
@@ -119,6 +120,15 @@ export class UserStore {
       this.key = res.data.refInfo;
       this.inviter = res.data.inviter;
       this.invited = Number(res.data.refInfo.referrals.length);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+  @action getMyCommunities = async (id:string) => {
+    try {
+      const res = await axios.get(prefix + "pond/created/" + id);
+      console.log(res.data);
+      this.myCommunities = res.data.ponds;
     } catch (e) {
       console.log(e);
     }

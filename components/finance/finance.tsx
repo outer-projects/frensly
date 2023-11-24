@@ -17,44 +17,8 @@ import ExploreRow from "../explore/presonal/exploreRow";
 import FinanceRow from "./financeRow";
 import Sidebar from "./sidebar";
 import EthereumSvg from "../svgs/Ethereum";
-import ProfileSvg from "../svgs/profile";
-import InviteSvg from "../svgs/invite";
-import AirdropSvg from "../svgs/airdrop";
-import AchivementsSvg from "../svgs/rankings";
-import SettingsSvg from "../svgs/settings";
-export const links = [
-  {
-    title: "My funds",
-    link: "/dashboard/finance",
-    img: <ProfileSvg />,
-    active: true,
-  },
-  {
-    title: "Referrals",
-    link: "/dashboard/invite",
-    img: <InviteSvg />,
-    active: true,
-  },
-  {
-    title: "Airdrop",
-    link: "/dashboard/airdrop",
-    img: <AirdropSvg />,
-    active: true,
-  },
-  {
-    title: "Rankings",
-    link: "/dashboard/rankings",
-    img: <AchivementsSvg />,
-    active: true,
-  },
-  // {
-  //   title: "Settings",
-  //   link: "/dashboard/settings",
-  //   img: <SettingsSvg/>,
-  //   active: false,
-  // },
-];
-const mobTypes = ["Finance", "Referrals", "Airdrop", "Rankings"];
+
+const mobTypes = ["Finance", "Referrals", "Airdrop", "Rankings", "Communities"];
 const types = ["Finance", "Holders", "Holdings"];
 const Finance = observer(() => {
   const [active, setActive] = useState(0);
@@ -86,6 +50,9 @@ const Finance = observer(() => {
     }
     if (activeMob == 3) {
       router.push("/dashboard/rankings");
+    }
+    if (activeMob == 4) {
+      router.push("/dashboard/communities");
     }
   }, [activeMob]);
   const getClaim = async () => {
@@ -201,15 +168,7 @@ const Finance = observer(() => {
               })}
             </div>
           )}
-          <button
-            className={classNames(
-              header.connect__button,
-              style.finance__claim__community
-            )}
-            onClick={()=>{router.push("/communities/create")}}
-          >
-            Create community
-          </button>
+          
           <div className={style.finance__title__second}>
             Available for claim
           </div>

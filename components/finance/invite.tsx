@@ -1,7 +1,6 @@
 import classNames from "classnames";
 import style from "./finance.module.scss";
 import Link from "next/link";
-import { links } from "./finance";
 import explore from "../explore/explore.module.scss";
 import User from "./user";
 import header from "../layout/header.module.scss";
@@ -44,6 +43,9 @@ const Invite = observer(() => {
     }
     if (active == 3) {
       router.push("/dashboard/rankings");
+    }
+    if (active == 4) {
+      router.push("/dashboard/communities");
     }
   }, [active]);
   return (
