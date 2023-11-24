@@ -63,19 +63,18 @@ const Communities = observer(() => {
         </div>
       </div>
       <div>
-
+        <button
+          className={classNames(
+            header.connect__button,
+            style.finance__claim__community
+          )}
+          onClick={() => {
+            router.push("/communities/create");
+          }}
+        >
+          Create New Community
+        </button>
       </div>
-      <button
-        className={classNames(
-          header.connect__button,
-          style.finance__claim__community
-        )}
-        onClick={() => {
-          router.push("/communities/create");
-        }}
-      >
-        Create New Community
-      </button>
     </div>
   );
 });
