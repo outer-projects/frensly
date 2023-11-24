@@ -52,7 +52,7 @@
     display: flex;
     align-items: center;
     white-space: nowrap;
-    
+
     cursor: pointer;
     border-radius: 100px;
     margin-right: 8px;
@@ -61,7 +61,7 @@
     &:hover {
       color: var(--text-main);
     }
-    svg {
+    .explore__container__img {
       display: none;
     }
   }

@@ -27,7 +27,7 @@ const StageTwo = observer((stage: IStageOne) => {
   const getPrice = async () => {
     try {
       const res = await community.methods
-        .calculatePresalePrice(Number(supply) * 10 ** 6)
+        .calculatePresalePrice(Number(supply) * 10 ** 12)
         .call();
       console.log(res);
       setPrice(fromWeiToEth(res));
@@ -36,10 +36,10 @@ const StageTwo = observer((stage: IStageOne) => {
     }
   };
   useEffect(() => {
-    if (maxAllocation != "") {
+    if (supply != "") {
       getPrice();
     }
-  }, [maxAllocation]);
+  }, [supply]);
   console.log(price);
   const createPresale = async () => {
     if (stage.name == "" || stage.handle == "") {
