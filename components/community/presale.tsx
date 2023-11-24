@@ -63,9 +63,11 @@ const Presale = observer(
     }, [id, address]);
     const maxBuy = useMemo(() => {
       let maxPossible = Number(currentPresale?.maxAllocation) / 10 ** 6;
+      console.log("max possible", maxPossible);
       let tokensLeft =
         Number(currentPresale?.presaleGoal) / 10 ** 6 -
         Number(currentPresale?.supply) / 10 ** 6;
+      console.log("tokens left", tokensLeft);
       if (maxPossible < tokensLeft) {
         return maxPossible;
       } else {
@@ -133,9 +135,9 @@ const Presale = observer(
           .finalizePresale(currentPresale.pondId)
           .send({ from: address });
         console.log(res);
-        setTimeout(()=>{
+        setTimeout(() => {
           getPresale(id as string, address as string);
-        },1000)
+        }, 1000);
       } catch (error) {
         console.log(error);
       }
@@ -163,7 +165,7 @@ const Presale = observer(
         console.log(error);
       }
     };
-    const getPrice = async (count: number, isChangable?:boolean) => {
+    const getPrice = async (count: number, isChangable?: boolean) => {
       console.log(count);
       try {
         const res = await community.methods
@@ -449,7 +451,8 @@ const Presale = observer(
                     renderer={rendererFinish}
                   />
                 )}
-                {presaleTimeStatus == "failed" && !currentPresale.isFinalized && <Fail />}
+                {presaleTimeStatus == "failed" &&
+                  !currentPresale.isFinalized && <Fail />}
                 {presaleTimeStatus == "success" && <Success />}
               </div>
               <SubscriptionProgressBar
