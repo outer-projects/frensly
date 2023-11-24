@@ -18,7 +18,7 @@ const Chats = observer(() => {
             messages={el.room.messages?.filter((el:any) => !el?.isHidden)}
             key={el.room.owner ? el?.room?.owner?._id : el?.room?.pond?._id}
             chatId={el.room._id}
-            el={el.room.owner ? el.room.owner : el.room.pond}
+            el={el.room.pond ? el.room.pond : el.room.owner}
             amount={el.ownerShareAmount}
           />
         );

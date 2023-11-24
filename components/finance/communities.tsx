@@ -57,7 +57,7 @@ const Communities = observer(() => {
 
             <>
               <div className={style.finance__invite}>Your community</div>
-              <div className={style.finance__invite__text}>
+              <div className={style.finance__invite__text} style={{marginBottom:'0px'}}>
                 List of communities you created
               </div>
             </>

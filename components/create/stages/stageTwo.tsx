@@ -27,10 +27,10 @@ const StageTwo = observer((stage: IStageOne) => {
   const getPrice = async () => {
     try {
       const res = await community.methods
-        .calculatePresalePrice(Number(supply) * 10 ** 12)
+        .calculatePresalePrice(Number(supply) * 10 ** 10)
         .call();
       console.log(res);
-      setPrice(fromWeiToEth(res));
+      setPrice(fromWeiToEth(res, 8));
     } catch (e) {
       console.log(e);
     }
@@ -184,6 +184,16 @@ const StageTwo = observer((stage: IStageOne) => {
             {user?.twitterName}
           </div>
         </div>
+        <div className={finance.finance__title__second}>Pre-sale settings </div>
+        <div
+          className={classNames(
+            finance.finance__subtitle,
+            finance.finance__fees
+          )}
+        >
+          Choose max supply of shares you want to issue Liquidity ratio is fee
+          you get after presale (for example 30%)
+        </div>
         <div className={style.stage__one__col}>
           <input
             placeholder="Presale supply (shares)"
@@ -228,6 +238,16 @@ const StageTwo = observer((stage: IStageOne) => {
             style={{ marginTop: "24px" }}
             // onChange={(e) => setMaxAllocation(Number(e.target.value))}
           />
+        </div>
+        <div className={finance.finance__title__second}>Time </div>
+        <div
+          className={classNames(
+            finance.finance__subtitle,
+            finance.finance__fees
+          )}
+        >
+          Set the start and end time of your presale <br />
+          <span>Max duration of pre-sale is 3 days</span>
         </div>
         <div className={style.stage__one__row}>
           <div className={style.stage__one__social}>

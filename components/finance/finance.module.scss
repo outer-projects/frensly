@@ -505,4 +505,8 @@
       text-decoration: underline;
     }
   }
+  span {
+    color: var(--text-main);
+    font-weight: bold;
+  }
 }

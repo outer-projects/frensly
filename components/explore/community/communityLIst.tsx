@@ -36,21 +36,23 @@ const CommunityList = observer(() => {
     if (active == 0) {
       // setSearch("")
       getTop();
-      console.log('top');
+      console.log("top");
     } else {
-      console.log('get');
+      console.log("get");
       getCommunityList();
     }
   }, [active]);
   useEffect(() => {
     if (wrapperBottom && communityList.length >= 20 && active == 1) {
-      console.log('update');
+      console.log("update");
       updateCommunityList();
     }
   }, [wrapperBottom]);
   useEffect(() => {
-    console.log(search);
-    searchDeb(saveInput, 700);
+    if (search.length !== 0) {
+      console.log(search);
+      searchDeb(saveInput, 700);
+    }
   }, [search]);
   return (
     <div className={style.explore}>
