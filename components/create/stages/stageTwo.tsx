@@ -27,9 +27,9 @@ const StageTwo = observer((stage: IStageOne) => {
   const getPrice = async () => {
     try {
       const res = await community.methods
-        .calculatePresalePrice(Number(maxAllocation) * 10 ** 6)
+        .calculatePresalePrice(Number(supply) * 10 ** 6)
         .call();
-
+      console.log(res);
       setPrice(fromWeiToEth(res));
     } catch (e) {
       console.log(e);
@@ -40,6 +40,7 @@ const StageTwo = observer((stage: IStageOne) => {
       getPrice();
     }
   }, [maxAllocation]);
+  console.log(price);
   const createPresale = async () => {
     if (stage.name == "" || stage.handle == "") {
       return toast.error("Fill name and handle fields");
@@ -257,7 +258,7 @@ const StageTwo = observer((stage: IStageOne) => {
             <div>
               <div className={finance.finance__stat__name}>Hardcap</div>
               <div className={finance.finance__stat__value}>
-                {price * Number(maxAllocation)}
+                {price * Number(supply)}
               </div>
             </div>
           </div>
