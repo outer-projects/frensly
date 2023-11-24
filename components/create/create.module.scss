@@ -94,6 +94,11 @@
     justify-content: center;
   }
 }
+.stage__one__create {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
 .stage__one {
   background-color: var(--background-pages);
   padding: 24px;
@@ -104,6 +109,7 @@
   @media (max-width: 700px) {
     padding: 8px;
     min-width: 90vw;
+    width: 90vw;
   }
 }
 .stage__one__col {

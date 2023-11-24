@@ -79,7 +79,7 @@ export class ChatStore {
     }).toString();
     try {
       const res = await axios.get(
-        prefix + "chat/room/test/" + id + "/?" + query
+        prefix + "chat/room/" + id + "/?" + query
       );
       // console.log("chat:", res.data);
       const n = Number(res.data.total);
@@ -102,7 +102,7 @@ export class ChatStore {
     }).toString();
     try {
       const res = await axios.get(
-        prefix + "chat/room/test/" + id + "/?" + query
+        prefix + "chat/room/" + id + "/?" + query
       );
       // console.log("chat:", res.data);
       let n = this.messagesleft;

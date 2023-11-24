@@ -2,7 +2,7 @@ import { useState } from "react";
 import CreationProgressBar from "./components/creationProgressBar";
 import StageOne from "./stages/stageOne";
 import StageTwo from "./stages/stageTwo";
-
+import style from "./create.module.scss";
 const Creation = () => {
   const [step, setStep] = useState(0);
   const [name, setName] = useState("");
@@ -15,7 +15,7 @@ const Creation = () => {
   const [handle, setHandle] = useState('');
   const [image, setImage] = useState<null | File>(null);
   return (
-    <div>
+    <div className={style.stage__one__create}>
       <CreationProgressBar step={step} />
       {step == 0 && (
         <StageOne
