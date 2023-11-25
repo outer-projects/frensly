@@ -61,12 +61,13 @@ const Presale = observer(
         getPresale(id as string, address as string);
       }
     }, [id, address]);
+    const supply = useMemo(() => {
+      return (Number(currentPresale?.supply) - 1000000) / 10 ** 6;
+    }, [currentPresale]);
     const maxBuy = useMemo(() => {
       let maxPossible = Number(currentPresale?.maxAllocation) / 10 ** 6;
       console.log("max possible", maxPossible);
-      let tokensLeft =
-        Number(currentPresale?.presaleGoal) / 10 ** 6 -
-        Number(currentPresale?.supply) / 10 ** 6;
+      let tokensLeft = Number(currentPresale?.presaleGoal) / 10 ** 6 - supply;
       console.log("tokens left", tokensLeft);
       if (maxPossible < tokensLeft) {
         return maxPossible;
@@ -81,8 +82,7 @@ const Presale = observer(
         Number(numberOfShares) >
           Number(currentPresale?.presaleGoal) / 10 ** 6 ||
         Number(numberOfShares) < 0 ||
-        Number(currentPresale?.presaleGoal) / 10 ** 6 -
-          Number(currentPresale?.supply) / 10 ** 6 <
+        Number(currentPresale?.presaleGoal) / 10 ** 6 - supply <
           Number(numberOfShares)
       );
     }, []);
@@ -254,7 +254,7 @@ const Presale = observer(
     }: any) => {
       if (
         completed &&
-        Number(currentPresale?.supply) >= Number(currentPresale?.presaleGoal)
+        supply >= Number(currentPresale?.presaleGoal)
       ) {
         // Render a completed state
         setPresaleTimeStatus("success");
@@ -456,13 +456,13 @@ const Presale = observer(
                 {presaleTimeStatus == "success" && <Success />}
               </div>
               <SubscriptionProgressBar
-                supply={Number(currentPresale?.supply) / 10 ** 6}
+                supply={supply}
                 goal={Number(currentPresale?.presaleGoal) / 10 ** 6}
                 progress={
                   Number(
                     (
-                      Number(currentPresale?.supply) /
-                      Number(currentPresale?.presaleGoal)
+                      supply /
+                      Number(currentPresale?.presaleGoal) / 10 ** 6
                     ).toFixed(2)
                   ) * 100
                 }
