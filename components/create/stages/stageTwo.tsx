@@ -32,9 +32,8 @@ const StageTwo = observer((stage: IStageOne) => {
       console.log(res);
       setPrice(
         fromWeiToEth(
-          toBNJS(res as string)
-            .multipliedBy(10 ** 6)
-            // .toFixed(2)
+          toBNJS(res as string).multipliedBy(10 ** 6)
+          // .toFixed(2)
         )
       );
     } catch (e) {
@@ -284,7 +283,9 @@ const StageTwo = observer((stage: IStageOne) => {
             <div>
               <div className={finance.finance__stat__name}>Hardcap</div>
               <div className={finance.finance__stat__value}>
-                {price * Number(supply)}
+                {price * Number(supply) +
+                  ((price * Number(supply)) / 100) * Number(ratio)}{" "}
+                ETH
               </div>
             </div>
           </div>
@@ -295,7 +296,9 @@ const StageTwo = observer((stage: IStageOne) => {
             <img src="../icons/Ethereum__grey.svg" />
             <div>
               <div className={finance.finance__stat__name}>Presale price</div>
-              <div className={finance.finance__stat__value}>{price} ETH</div>
+              <div className={finance.finance__stat__value}>
+                {price + (price / 100) * Number(ratio)} ETH
+              </div>
             </div>
           </div>
         </div>
