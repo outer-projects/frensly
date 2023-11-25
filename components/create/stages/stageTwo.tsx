@@ -11,7 +11,7 @@ import { CommunityStore } from "../../../stores/CommunityStore";
 import { IStageOne } from "./stageOne";
 import { toast } from "react-toastify";
 import useDarkMode from "use-dark-mode";
-import { fromWeiToEth } from "../../../utils/utilities";
+import { fromWeiToEth, toBNJS } from "../../../utils/utilities";
 const StageTwo = observer((stage: IStageOne) => {
   const { user, community, address, web3 } = useInjection(Web3Store);
   const { updateCommunity } = useInjection(CommunityStore);
@@ -30,7 +30,13 @@ const StageTwo = observer((stage: IStageOne) => {
         .calculatePresalePrice(Number(supply) * 10 ** 6)
         .call();
       console.log(res);
-      setPrice(fromWeiToEth(res, 8));
+      setPrice(
+        fromWeiToEth(
+          toBNJS(res as string)
+            .multipliedBy(10 ** 6)
+            // .toFixed(2)
+        )
+      );
     } catch (e) {
       console.log(e);
     }
