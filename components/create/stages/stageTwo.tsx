@@ -12,10 +12,13 @@ import { IStageOne } from "./stageOne";
 import { toast } from "react-toastify";
 import useDarkMode from "use-dark-mode";
 import { fromWeiToEth, toBNJS } from "../../../utils/utilities";
+import axios from "axios";
+import { prefix } from "../../../utils/config";
 const StageTwo = observer((stage: IStageOne) => {
   const { user, community, address, web3 } = useInjection(Web3Store);
   const { updateCommunity } = useInjection(CommunityStore);
   const [supply, setSupply] = useState("");
+  const [block, setBlock] = useState(false);
   const [maxAllocation, setMaxAllocation] = useState("");
   const [ratio, setRatio] = useState("");
   const [price, setPrice] = useState(0);
@@ -23,7 +26,8 @@ const StageTwo = observer((stage: IStageOne) => {
   const [timeStart, setTimeStart] = useState("");
   const [timeFinish, setTimeFinish] = useState("");
   const router = useRouter();
-  console.log(timeFinish, timeStart);
+  // console.log(timeFinish, timeStart);
+
   const getPrice = async () => {
     try {
       const res = await community.methods
@@ -47,6 +51,7 @@ const StageTwo = observer((stage: IStageOne) => {
   }, [supply]);
   console.log(price);
   const createPresale = async () => {
+    setBlock(true)
     if (stage.name == "" || stage.handle == "") {
       return toast.error("Fill name and handle fields");
     }
@@ -159,12 +164,16 @@ const StageTwo = observer((stage: IStageOne) => {
           discord: stage.discord,
         }).then((res) => {
           if (res) {
+            setBlock(false)
             router.push("/explore/launchpad");
+          } else {
+            setBlock(false)
           }
         });
       }, 1000);
       // router.push("/presale/123");
     } catch (e) {
+      setBlock(false)
       console.log(e);
     }
   };
@@ -306,9 +315,11 @@ const StageTwo = observer((stage: IStageOne) => {
           <button
             className={classNames(
               header.connect__button,
-              style.stage__one__button
+              style.stage__one__button,
+              block && style.stage__one__button__disabled
             )}
             onClick={() => createPresale()}
+            disabled={block}
           >
             Create pre-sale
           </button>

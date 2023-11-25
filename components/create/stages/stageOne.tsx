@@ -4,7 +4,7 @@ import Web3Store from "../../../stores/Web3Store";
 import { useInjection } from "inversify-react";
 import Upload from "../components/upload";
 import TextareaAutosize from "react-textarea-autosize";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import classNames from "classnames";
 import header from "../../layout/header.module.scss";
 import { useRouter } from "next/router";
@@ -35,16 +35,42 @@ const StageOne = observer((stage: IStageOne) => {
   const { user, community, address, web3 } = useInjection(Web3Store);
   const { updateCommunity } = useInjection(CommunityStore);
   const router = useRouter();
+  const [isAvailable, setIsAvailable] = useState(false); // [true, false, false
   const [block, setBlock] = useState(false);
+  const checkHandle = async () => {
+    try {
+      const res = await axios.get(prefix + `pond/check/` + stage.handle);
+      console.log(res);
+      setIsAvailable(res.data.available);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+  const [tt, updateTimeout] = useState<any>(undefined);
+  const searchDeb = (fn: any, ms: number) => {
+    const clear = () => {
+      clearTimeout(tt);
+      updateTimeout(setTimeout(fn, ms));
+    };
+    return clear();
+  };
+
+  useEffect(() => {
+    if (stage.handle.length !== 0) {
+      searchDeb(checkHandle, 700);
+    }
+  }, [stage.handle]);
   const create = async () => {
     if (stage.name == "" || stage.handle == "") {
       return toast.error("Fill name and handle fields");
     }
     if (stage.image == null) {
       return toast.error("Upload image");
-    
     }
-    if (stage.handle.includes(' ')) {
+    if (!isAvailable) {
+      return toast.error("Handle is taken by another user");
+    }
+    if (stage.handle.includes(" ")) {
       return toast.error("Handle can't contain spaces");
     }
     try {
@@ -121,7 +147,6 @@ const StageOne = observer((stage: IStageOne) => {
       );
       console.log(transaction);
       setTimeout(() => {
-        setBlock(false);
         updateCommunity({
           pondId: Number(transaction?.pondId),
           twitter: stage.twitter,
@@ -134,8 +159,10 @@ const StageOne = observer((stage: IStageOne) => {
           discord: stage.discord,
         }).then((res) => {
           if (res) {
+            setBlock(false);
             router.push("/explore/community");
           } else {
+            setBlock(false);
             toast.error("Error");
           }
         });
@@ -162,6 +189,7 @@ const StageOne = observer((stage: IStageOne) => {
         <input
           placeholder="Uniq name"
           value={stage.handle}
+          maxLength={15}
           onChange={(e) => stage.setHandle && stage.setHandle(e.target.value)}
         />
         <TextareaAutosize
@@ -278,7 +306,7 @@ const StageOne = observer((stage: IStageOne) => {
         <button
           className={classNames(
             header.connect__button,
-            style.stage__one__button, 
+            style.stage__one__button,
             block && style.stage__one__button__disabled
           )}
           disabled={block}
