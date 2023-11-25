@@ -5,7 +5,7 @@ import Sidebar from "./sidebar";
 import { observer } from "mobx-react";
 import { useInjection } from "inversify-react";
 import Web3Store from "../../stores/Web3Store";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { UserStore } from "../../stores/UserStore";
 import header from "../layout/header.module.scss";
 import TypesList from "../common/typesList";
@@ -19,9 +19,16 @@ const Communities = observer(() => {
   const commtypes = ["Created", "Holding"];
   const [communitiesReady, setCommunitiesReady] = useState(false);
   const { user } = useInjection(Web3Store);
-  const { getMyCommunities, myCommunities, getMyHoldings } =
+  const { getMyCommunities, myCommunities, getMyHoldings, myHoldings } =
     useInjection(UserStore);
   const router = useRouter();
+  const current = useMemo(() => {
+    if (activeComm == 0) {
+      return myCommunities;
+    } else {
+      return myHoldings;
+    }
+  }, [activeComm]);
   useEffect(() => {
     if (active == 0) {
       router.push("/dashboard/finance");
@@ -36,7 +43,8 @@ const Communities = observer(() => {
       router.push("/dashboard/rankings");
     }
   }, [active]);
-  console.log(myCommunities);
+  console.log(current);
+  
   useEffect(() => {
     if (user && !communitiesReady) {
       setCommunitiesReady(true);
@@ -73,7 +81,12 @@ const Communities = observer(() => {
             />
           </div>
           <div className={style.finance__communities}>
-            <CommunityRow el />
+            {
+              current?.map((el, i) => {
+                return <CommunityRow key={i}el={el.pond} amount={el.amount} />;
+              })
+            }
+            {/* <CommunityRow el /> */}
           </div>
         </div>
         <div>

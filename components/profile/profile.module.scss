@@ -89,6 +89,9 @@
 .twitter__active {
   border: 1px solid $green !important;
 }
+.disable {
+  display: none;
+}
 .profile__buttons {
   display: flex;
   justify-content: space-between;

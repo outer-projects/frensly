@@ -8,7 +8,7 @@ import { UserStore } from "../../stores/UserStore";
 import Web3Store from "../../stores/Web3Store";
 import classNames from "classnames";
 
-const CommunityRow = observer(({ el }: { el: any }) => {
+const CommunityRow = observer(({ el, amount }: { el: any, amount:string }) => {
   return (
     <Link href={"/communities/" + el.handle}>
       <div className={classNames(style.explore__user)} style={{marginLeft:'24px', marginRight:"24px", width: 'auto'}}>
@@ -39,7 +39,7 @@ const CommunityRow = observer(({ el }: { el: any }) => {
         </div>
         <div className={style.explore__user__right}>
           <div className={style.explore__user__price}>
-            <div>{Number(el?.supply) / 10 ** 6} share</div>
+            <div>{Number(amount) / 10 ** 6} share</div>
           </div>
         </div>
       </div>

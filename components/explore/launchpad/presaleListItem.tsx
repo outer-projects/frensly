@@ -5,9 +5,10 @@ import { observer } from "mobx-react";
 import Web3Store from "../../../stores/Web3Store";
 import { useInjection } from "inversify-react";
 import { CommunityStore } from "../../../stores/CommunityStore";
+import classNames from "classnames";
 
 const PresaleListItem = observer(({ presale }: any) => {
-  const { community, address } = useInjection(Web3Store);
+  const { community, address, authSummaryCheck } = useInjection(Web3Store);
   const { getPresaleList } = useInjection(CommunityStore);
   const finalize = async () => {
     try {
@@ -39,7 +40,7 @@ const PresaleListItem = observer(({ presale }: any) => {
         <div className={style.row__8} onClick={finalize}>Finalize</div>
       ) : (
         <Link href={"/presales/" + presale?.handle}>
-          <div className={style.row__8}>View</div>
+          <div className={classNames(style.row__8, !authSummaryCheck && style.disable)}>View</div>
         </Link>
       )}
     </div>

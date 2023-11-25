@@ -35,7 +35,7 @@ const socials = [
   {
     name: "url",
     icon: "../../icons/web.svg",
-    link: "https://discord.com/",
+    link: "",
   },
 ];
 const Presale = observer(

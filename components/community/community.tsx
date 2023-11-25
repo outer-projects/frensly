@@ -14,6 +14,7 @@ import Web3Store from "../../stores/Web3Store";
 import { ModalStore } from "../../stores/ModalStore";
 import { ModalsEnum } from "../../modals";
 import TwitterFeed from "../profile/twitterFeed";
+import Link from "next/link";
 const socials = [
   {
     name: "Twitter",
@@ -31,9 +32,9 @@ const socials = [
     link: "https://t.me/",
   },
   {
-    name: "Website",
+    name: "url",
     icon: "../../icons/web.svg",
-    link: "https://discord.com/",
+    link: "",
   },
 ];
 const Community = observer(() => {
@@ -41,7 +42,7 @@ const Community = observer(() => {
   const router = useRouter();
   const { id } = router.query;
   const [isHolder, setIsHolder] = useState(false);
-  const { user } = useInjection(Web3Store);
+  const { user, authSummaryCheck } = useInjection(Web3Store);
   const { getCommunity, currentCommunity, getHolders, communityHolders } =
     useInjection(CommunityStore);
 
@@ -56,7 +57,9 @@ const Community = observer(() => {
     if (communityHolders.length > 0) {
       setIsHolder(
         communityHolders.filter(
-          (holder) => holder?.user.profile?.twitterHandle == user?.twitterHandle && Number(holder?.amount) >= 1000000
+          (holder) =>
+            holder?.user.profile?.twitterHandle == user?.twitterHandle &&
+            Number(holder?.amount) >= 1000000
         ).length > 0
       );
     }
@@ -95,11 +98,20 @@ const Community = observer(() => {
                 {currentCommunity?.name}
               </div>
               <div className={style.configuration__user__socials}>
-                {socials.map((social) => {
+                {socials.map((social, i) => {
+                  let link = currentCommunity
+                    ? social.link + currentCommunity[social.name]
+                    : "";
                   return (
-                    <div className={style.configuration__user__social}>
-                      <img src={social.icon} />
-                    </div>
+                    <Link href={link}>
+                      <div
+                        key={i}
+                        style={{ cursor: "pointer" }}
+                        className={style.configuration__user__social}
+                      >
+                        <img src={social.icon} />
+                      </div>
+                    </Link>
                   );
                 })}
               </div>
@@ -107,15 +119,17 @@ const Community = observer(() => {
             <div className={style.configuration__text}>
               {currentCommunity?.description}
             </div>
-            <button
-              className={classNames(
-                header.connect__button,
-                style.trade__button
-              )}
-              onClick={buyShares}
-            >
-              Trade
-            </button>
+            {authSummaryCheck && (
+              <button
+                className={classNames(
+                  header.connect__button,
+                  style.trade__button
+                )}
+                onClick={buyShares}
+              >
+                Trade
+              </button>
+            )}
           </div>
           <div className={style.configuration__col}>
             <div className={style.configuration__row}>
@@ -154,7 +168,10 @@ const Community = observer(() => {
             </div>
           </div>
           {isHolder ? (
-            <TwitterFeed communityHandle={currentCommunity?.handle} pondId={currentCommunity?.pondId}/>
+            <TwitterFeed
+              communityHandle={currentCommunity?.handle}
+              pondId={currentCommunity?.pondId}
+            />
           ) : (
             <div className={style.configuration__hide}>
               Became a holder to see community feed

@@ -35,6 +35,7 @@ export class UserStore {
   @observable followings: IProfile[] = [];
   @observable followers: IProfile[] = [];
   @observable currentRequire: any[] = [];
+  @observable myHoldings: any[] = [];
   @observable myCommunities: any[] = [];
   @observable currentProgress: any[] = [];
   @observable finished: boolean = false;
@@ -59,7 +60,7 @@ export class UserStore {
     try {
       const res = await axios.get(prefix + "pond/held/" + id);
       console.log(res.data);
-      this.myCommunities = res.data;
+      this.myHoldings = res.data;
     } catch (e) {
       console.log(e);
     }

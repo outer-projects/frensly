@@ -19,7 +19,7 @@ import EthereumSvg from "../svgs/Ethereum";
 import useDarkMode from "use-dark-mode";
 const Profile = observer(() => {
   const modalStore = useInjection(ModalStore);
-  const { user, frensly, address} = useInjection(Web3Store);
+  const { user, frensly, address ,authSummaryCheck} = useInjection(Web3Store);
   const { getMyChats, myChats } = useInjection(ChatStore);
   const [userChat, setUserChat] = useState<any>(undefined);
   const {
@@ -28,7 +28,7 @@ const Profile = observer(() => {
     clearProfileUser,
     follow,
     setCurrentType,
-    getPriceInUsd,
+    
   } = useInjection(UserStore);
   const router = useRouter();
   const darkMode = useDarkMode();
@@ -182,7 +182,7 @@ const Profile = observer(() => {
                 </div>
               </div>
             </div>{" "}
-            <div className={style.profile__buttons}>
+            <div className={classNames(style.profile__buttons, !authSummaryCheck && style.disable)}>
               {!isMyProfile && (
                 <button
                   className={classNames(
@@ -375,7 +375,7 @@ const Profile = observer(() => {
                   Posts
                 </div>
               </div>
-              <div className={style.profile__buttons__bottom}>
+              <div className={classNames(style.profile__buttons__bottom, !authSummaryCheck && style.disable)}>
                 <Link href={`/activity/${profileUser?.twitterId}`}>
                   <button
                     className={style.profile__light__button}
