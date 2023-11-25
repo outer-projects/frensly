@@ -11,7 +11,7 @@ const OneChatPage: NextPage = observer((props) => {
   const { unreadCount } = useInjection(UserStore);
   return (
     <AuthPageWrap>
-      <div className={style.chat__page}>
+      <div>
         <Head>
           <title>
             {unreadCount !== 0 ? `(${unreadCount})` : ""} Chat | Frensly

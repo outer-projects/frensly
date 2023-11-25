@@ -474,6 +474,15 @@
     height: 24px;
   }
 }
+.finance__communities {
+  max-height: 200px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+.finance__types {
+  margin-left: 24px;
+  margin-bottom: 24px;
+}
 .finance__stats {
   margin-top: 16px;
 }

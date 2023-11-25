@@ -207,7 +207,7 @@ const Chat = observer(() => {
                   <div className={style.openchat__shares}> per 1 share</div>
                 </div>
               </div>
-              <div className={style.openchat__row}>
+              <div className={classNames(style.openchat__row, style.openchat__disable)}>
                 <div className={style.openchat__holders}>
                   <div
                     className={style.openchat__shares}

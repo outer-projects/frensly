@@ -41,7 +41,7 @@ const Communities = observer(() => {
     if (user && !communitiesReady) {
       setCommunitiesReady(true);
       getMyCommunities(user._id);
-      getMyHoldings(user._id)
+      getMyHoldings(user._id);
     }
   }, [user]);
   return (
@@ -65,12 +65,14 @@ const Communities = observer(() => {
               </div>
             </>
           </div>
-          <TypesList
-            active={activeComm}
-            setActive={setActiveComm}
-            types={commtypes}
-          />
-          <div>
+          <div className={style.finance__types}>
+            <TypesList
+              active={activeComm}
+              setActive={setActiveComm}
+              types={commtypes}
+            />
+          </div>
+          <div className={style.finance__communities}>
             <CommunityRow el />
           </div>
         </div>

@@ -11,7 +11,7 @@ const PondsPage: NextPage = observer((props) => {
   const { unreadCount } = useInjection(UserStore);
   return (
     <AuthPageWrap>
-      <div className={style.explore__page}>
+      <div>
         <Head>
           <title>
             {unreadCount !== 0 ? `(${unreadCount})` : ""} Ponds | Frensly
