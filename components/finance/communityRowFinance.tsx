@@ -13,7 +13,7 @@ const CommunityRow = observer(({ el, amount }: { el: any, amount:string }) => {
     <Link href={"/communities/" + el.handle}>
       <div className={classNames(style.explore__user)} style={{marginLeft:'24px', marginRight:"24px", width: 'auto'}}>
         <div className={style.explore__user__left}>
-          <img src={el.avatar} />
+          <img src={el.image} />
           <div className={style.explore__user__left__text}>
             
             <div className={style.explore__user__name}>
@@ -33,7 +33,7 @@ const CommunityRow = observer(({ el, amount }: { el: any, amount:string }) => {
                 </a>
               </span>
             </div>
-            <div className={finance.finance__handle}>@{el.twitter}</div>
+            <div className={finance.finance__handle}>@{el.handle}</div>
           </div>
 
         </div>

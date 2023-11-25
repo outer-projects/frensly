@@ -35,7 +35,7 @@ const CommunityRow = observer(({el}: any) => {
               <div>{Number(el?.supply) / 10 ** 6} share</div>
             </div>
             <div className={style.explore__user__name}>
-              <div>{shortNick(el?.handle)}</div>
+              <div>{shortNick(el?.name)}</div>
               <span>
                 <a
                   href={"https://twitter.com/" + el?.twitter}
@@ -45,7 +45,7 @@ const CommunityRow = observer(({el}: any) => {
                     e.stopPropagation();
                   }}
                 >
-                  @{el?.name}
+                  @{el?.handle}
                 </a>
               </span>
             </div>
