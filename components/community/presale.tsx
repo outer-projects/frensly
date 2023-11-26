@@ -56,9 +56,14 @@ const Presale = observer(
     const { currentPresale, requestToWl, getPresale } =
       useInjection(CommunityStore);
     const [numberOfShares, setNumberOfShares] = useState("");
+    const presaleUpdated = () => {
+      setInterval(() => {
+        getPresale(id as string, address as string);
+      }, 30000);
+    };
     useEffect(() => {
       if (id && address) {
-        getPresale(id as string, address as string);
+        presaleUpdated();
       }
     }, [id, address]);
     const supply = useMemo(() => {
@@ -252,10 +257,7 @@ const Presale = observer(
       seconds,
       completed,
     }: any) => {
-      if (
-        completed &&
-        supply >= Number(currentPresale?.presaleGoal)
-      ) {
+      if (completed && supply >= Number(currentPresale?.presaleGoal)) {
         // Render a completed state
         setPresaleTimeStatus("success");
         // return <Completionist />;
@@ -349,7 +351,12 @@ const Presale = observer(
                         ? social.link + currentPresale[social.name]
                         : "";
                       return (
-                        <a href={link.includes("https://") ? link : "https://"+link} target="_blank">
+                        <a
+                          href={
+                            link.includes("https://") ? link : "https://" + link
+                          }
+                          target="_blank"
+                        >
                           <div
                             key={i}
                             style={{ cursor: "pointer" }}
@@ -462,7 +469,8 @@ const Presale = observer(
                   Number(
                     (
                       supply /
-                      Number(currentPresale?.presaleGoal) / 10 ** 6
+                      Number(currentPresale?.presaleGoal) /
+                      10 ** 6
                     ).toFixed(2)
                   ) * 100
                 }
