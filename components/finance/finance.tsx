@@ -25,8 +25,9 @@ const Finance = observer(() => {
   const [activeMob, setActiveMob] = useState(0);
   const [keysReady, setKeysReady] = useState(false);
   const [claimValue, setClaimValue] = useState("0");
+  const [claimValueCommunity, setClaimValueCommunity] = useState("0");
   const router = useRouter();
-  const { user, frensly,  address, checkAuth } =
+  const { user, frensly,  address, checkAuth, community } =
     useInjection(Web3Store);
   const { shares, holders, getShares, getHolders, portfolioValue, getKeys } =
     useInjection(UserStore);
@@ -37,6 +38,17 @@ const Finance = observer(() => {
       });
       // console.log(res);
       setClaimValue("0");
+    } catch (e) {
+      console.log(e);
+    }
+  };
+  const claimCommunity = async () => {
+    try {
+      const res = await community.methods.claim().send({
+        from: address,
+      });
+      // console.log(res);
+      setClaimValueCommunity("0");
     } catch (e) {
       console.log(e);
     }
@@ -64,6 +76,15 @@ const Finance = observer(() => {
       console.log(e);
     }
   };
+  const getClaimCommunity = async () => {
+    try {
+      const res = await community.methods.availableToClaim(address).call();
+      // console.log("availableToClaim: ", res);
+      setClaimValueCommunity(res);
+    } catch (e) {
+      console.log(e);
+    }
+  };
   useEffect(() => {
     if (user && !keysReady) {
       setKeysReady(true);
@@ -73,10 +94,11 @@ const Finance = observer(() => {
     }
   }, [user]);
   useEffect(() => {
-    if (frensly) {
+    if (frensly && community) {
       getClaim();
+      getClaimCommunity()
     }
-  }, [frensly]);
+  }, [frensly, community]);
   useEffect(() => {
     checkAuth();
   }, []);
@@ -170,12 +192,12 @@ const Finance = observer(() => {
           )}
           
           <div className={style.finance__title__second}>
-            Available for claim
+            Personal claim
           </div>
           <div
             className={classNames(style.finance__subtitle, style.finance__fees)}
           >
-            Claim your fees{" "}
+            Claim your fees from personal shares{" "}
           </div>
           <div className={style.finance__row}>
             <div className={style.finance__claim__value}>
@@ -188,6 +210,29 @@ const Finance = observer(() => {
                 style.finance__claim__button
               )}
               onClick={claim}
+            >
+              Claim
+            </button>
+          </div>
+          <div className={style.finance__title__second}>
+            Community claim
+          </div>
+          <div
+            className={classNames(style.finance__subtitle, style.finance__fees)}
+          >
+            Claim your fees from community shares{" "}
+          </div>
+          <div className={style.finance__row}>
+            <div className={style.finance__claim__value}>
+              <EthereumSvg />
+              {fromWeiToEth(claimValue, 8)} ETH
+            </div>
+            <button
+              className={classNames(
+                header.connect__button,
+                style.finance__claim__button
+              )}
+              onClick={claimCommunity}
             >
               Claim
             </button>
