@@ -10,7 +10,7 @@ import { CommunityStore } from "../../stores/CommunityStore";
 import { observer } from "mobx-react";
 import { useRouter } from "next/router";
 import Link from "next/link";
-import { fromWeiToEth, getDateTime } from "../../utils/utilities";
+import { fromWeiToEth, getDateTime, titleSlice } from "../../utils/utilities";
 import Countdown from "react-countdown";
 import axios from "axios";
 import { prefix } from "../../utils/config";
@@ -315,7 +315,7 @@ const Presale = observer(
             }
           />
           <div className={style.configuration__top__title}>
-            {currentPresale?.name}
+            {titleSlice(currentPresale?.name)}
             {isCreator && (
               <button
                 className={classNames(
@@ -349,7 +349,7 @@ const Presale = observer(
                         ? social.link + currentPresale[social.name]
                         : "";
                       return (
-                        <Link href={link}>
+                        <a href={link.includes("https://") ? link : "https://"+link} target="_blank">
                           <div
                             key={i}
                             style={{ cursor: "pointer" }}
@@ -357,7 +357,7 @@ const Presale = observer(
                           >
                             <img src={social.icon} />
                           </div>
-                        </Link>
+                        </a>
                       );
                     })}
                   </div>

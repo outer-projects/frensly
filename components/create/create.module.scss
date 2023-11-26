@@ -285,6 +285,9 @@
         align-self: flex-start;
         transform: translateY(-70%);
         margin-left: 15px;
+        @media (max-width:616px) {
+          transform: translateX(-5px) translateY(0%);
+        }
       }
     }
     img {
@@ -327,7 +330,6 @@
         align-items: flex-start;
         img {
           align-self: flex-start;
-          transform: translateY(-70%);
           margin-left: 15px;
         }
       }

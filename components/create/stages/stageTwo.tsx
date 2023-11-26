@@ -51,7 +51,7 @@ const StageTwo = observer((stage: IStageOne) => {
   }, [supply]);
   console.log(price);
   const createPresale = async () => {
-    setBlock(true)
+    setBlock(true);
     if (stage.name == "" || stage.handle == "") {
       return toast.error("Fill name and handle fields");
     }
@@ -164,16 +164,16 @@ const StageTwo = observer((stage: IStageOne) => {
           discord: stage.discord,
         }).then((res) => {
           if (res) {
-            setBlock(false)
+            setBlock(false);
             router.push("/explore/launchpad");
           } else {
-            setBlock(false)
+            setBlock(false);
           }
         });
       }, 1000);
       // router.push("/presale/123");
     } catch (e) {
-      setBlock(false)
+      setBlock(false);
       console.log(e);
     }
   };
@@ -292,8 +292,12 @@ const StageTwo = observer((stage: IStageOne) => {
             <div>
               <div className={finance.finance__stat__name}>Hardcap</div>
               <div className={finance.finance__stat__value}>
-                {price * Number(supply) +
-                  ((price * Number(supply)) / 100) * Number(ratio)}{" "}
+                {Number(
+                  (
+                    price * Number(supply) +
+                    ((price * Number(supply)) / 100) * Number(ratio)
+                  ).toFixed(8)
+                )}{" "}
                 ETH
               </div>
             </div>
@@ -306,7 +310,7 @@ const StageTwo = observer((stage: IStageOne) => {
             <div>
               <div className={finance.finance__stat__name}>Presale price</div>
               <div className={finance.finance__stat__value}>
-                {price + (price / 100) * Number(ratio)} ETH
+                {Number((price + (price / 100) * Number(ratio)).toFixed(8))} ETH
               </div>
             </div>
           </div>

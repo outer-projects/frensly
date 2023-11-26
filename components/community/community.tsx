@@ -103,7 +103,12 @@ const Community = observer(() => {
                     ? social.link + currentCommunity[social.name]
                     : "";
                   return (
-                    <Link href={link}>
+                    <a
+                      href={
+                        link.includes("https://") ? link : "https://" + link
+                      }
+                      target="_blank"
+                    >
                       <div
                         key={i}
                         style={{ cursor: "pointer" }}
@@ -111,7 +116,7 @@ const Community = observer(() => {
                       >
                         <img src={social.icon} />
                       </div>
-                    </Link>
+                    </a>
                   );
                 })}
               </div>

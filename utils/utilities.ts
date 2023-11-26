@@ -125,6 +125,11 @@ export const USDEthPair = async () => {
     console.log(e);
   }
 };
+export const titleSlice = (title: string | undefined) => {
+  if (!title) return "title";
+  if (title.length > 20) return title.slice(0, 20) + "...";
+  return title;
+};
 export const addressSlice = (address: string | undefined) => {
   if (!address) return "0000...0000";
   return (
