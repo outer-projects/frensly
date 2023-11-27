@@ -69,6 +69,7 @@ export const TradeModal = observer(({ key, data, idx }: modalProps) => {
   };
   const checkAndUpdatePriceOfOne = () => {
     checkPrice(1).then((res) => {
+      console.log(res);
       setPriceOfOne(res);
     });
   };
