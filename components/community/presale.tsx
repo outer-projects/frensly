@@ -155,8 +155,8 @@ const Presale = observer(
           setPresaleTimeStatus("started");
         } else if (currentPresale.status == "FAILED") {
           setPresaleTimeStatus("failed");
-        } else if (currentPresale.status == "SUCCESS") {
-          setPresaleTimeStatus("success");
+        } else if (currentPresale.status == "PUBLIC") {
+          setPresaleTimeStatus("public");
         }
       }
     }, [currentPresale]);
@@ -259,7 +259,7 @@ const Presale = observer(
     }: any) => {
       if (completed && supply >= Number(currentPresale?.presaleGoal)) {
         // Render a completed state
-        setPresaleTimeStatus("success");
+        setPresaleTimeStatus("public");
         // return <Completionist />;
       } else if (
         completed &&
@@ -460,7 +460,7 @@ const Presale = observer(
                 )}
                 {presaleTimeStatus == "failed" &&
                   !currentPresale.isFinalized && <Fail />}
-                {presaleTimeStatus == "success" && <Success />}
+                {presaleTimeStatus == "public" && <Success />}
               </div>
               <SubscriptionProgressBar
                 supply={supply}

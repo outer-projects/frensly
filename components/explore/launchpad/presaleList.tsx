@@ -11,7 +11,7 @@ const types = ["Upcoming", "Started", "Ended succesfully", "Failed"];
 export const StatusesEnum = {
   incoming: "INCOMING",
   ongoing: "ONGOING",
-  success: "SUCCESS",
+  success: "PUBLIC",
   failed: "FAILED",
 };
 
