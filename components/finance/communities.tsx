@@ -48,8 +48,8 @@ const Communities = observer(() => {
   useEffect(() => {
     if (user && !communitiesReady) {
       setCommunitiesReady(true);
-      getMyCommunities(user._id);
-      getMyHoldings(user._id);
+      getMyCommunities(user.account._id);
+      getMyHoldings(user.account._id);
     }
   }, [user]);
   return (
