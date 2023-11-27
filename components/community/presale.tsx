@@ -59,10 +59,11 @@ const Presale = observer(
     const presaleUpdated = () => {
       setInterval(() => {
         getPresale(id as string, address as string);
-      }, 30000);
+      }, 60000);
     };
     useEffect(() => {
       if (id && address) {
+        getPresale(id as string, address as string);
         presaleUpdated();
       }
     }, [id, address]);
@@ -469,8 +470,7 @@ const Presale = observer(
                   Number(
                     (
                       supply /
-                      Number(currentPresale?.presaleGoal) /
-                      10 ** 6
+                      (Number(currentPresale?.presaleGoal) / 10 ** 6)
                     ).toFixed(2)
                   ) * 100
                 }
