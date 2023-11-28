@@ -55,16 +55,21 @@ const Presale = observer(
     const [presaleTimeStatus, setPresaleTimeStatus] = useState("");
     const { currentPresale, requestToWl, getPresale } =
       useInjection(CommunityStore);
+    const [int, setInt] = useState<any>(null);
     const [numberOfShares, setNumberOfShares] = useState("");
-    const presaleUpdated = () => {
-      setInterval(() => {
-        getPresale(id as string, address as string);
-      }, 60000);
-    };
+    useEffect(()=>{
+      return ()=>{
+        clearInterval(int)
+      }
+    },[])
     useEffect(() => {
       if (id && address) {
         getPresale(id as string, address as string);
-        presaleUpdated();
+        setInt(
+          setInterval(() => {
+            getPresale(id as string, address as string);
+          }, 60000)
+        );
       }
     }, [id, address]);
     const supply = useMemo(() => {
