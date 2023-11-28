@@ -45,7 +45,7 @@ const Whitelist = observer(
     },[currentWhitelist])
     const complete = async () => {
       try {
-        const res = await community.methods.finalizePresale(id).send({
+        const res = await community.methods.finalizePresale(currentPresale.pondId).send({
           from: address,
         });
         console.log(res);

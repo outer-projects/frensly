@@ -137,7 +137,7 @@ const Presale = observer(
         console.log(error);
       }
     };
-    console.log(presaleTimeStatus);
+
     const finalize = async () => {
       try {
         const res = await community.methods
@@ -166,7 +166,7 @@ const Presale = observer(
         }
       }
     }, [currentPresale]);
-    console.log(priceForNumber);
+
     const sendRequestBuy = async () => {
       try {
         const res = await axios.post(prefix + "pond/whitelist/apply/" + id);
