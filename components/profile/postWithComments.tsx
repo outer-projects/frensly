@@ -89,7 +89,7 @@ const PostWithComments = observer(() => {
             style={{ fontFamily: "DMSans" }}
           >
             {(mentionSearch.length == 0 ? topFive : mentionSearch)
-              .filter((el) => el.twitterId !== user?.twitterId)
+              .filter((el) => el?.twitterId !== user?.twitterId)
 
               .map((el: any, i: number) => {
                 return (
