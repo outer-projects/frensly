@@ -22,6 +22,7 @@ const TwitterFeed = observer(
     isFeed,
     communityHandle,
     pondId,
+    isOwner
   }: {
     id?: string;
     isProfile?: boolean;
@@ -30,6 +31,7 @@ const TwitterFeed = observer(
     isFeed?: boolean;
     pondId?: number;
     communityHandle?: string;
+    isOwner?: boolean
   }) => {
     const {
       feed,
@@ -121,14 +123,13 @@ const TwitterFeed = observer(
         clearUserPosts();
       };
     }, []);
-    const hide = (id: string) => {
-      setHideRow(id);
-    };
+
     return (
       <div className={classNames(style.twitter__feed, id && style.user__feed)}>
         {(!id || id == user?._id) &&
           (user?.verified || !isFrens) &&
-          authSummaryCheck && <MessageSend id={id} pondId={pondId} />}
+          authSummaryCheck && !communityHandle && <MessageSend id={id} />}
+          {communityHandle && isOwner && <MessageSend pondId={pondId} />}
         <div>
           {currentFeed
             .filter((el) => !hideRow.includes(el._id))

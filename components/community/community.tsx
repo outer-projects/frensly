@@ -2,7 +2,7 @@ import useDarkMode from "use-dark-mode";
 import style from "./community.module.scss";
 import header from "../layout/header.module.scss";
 import buy from "../../modals/buy.module.scss";
-import { useEffect, useState } from "react";
+import { use, useEffect, useState } from "react";
 import classNames from "classnames";
 import SubscriptionProgressBar from "./subscriptionProgressBar";
 import { useInjection } from "inversify-react";
@@ -42,10 +42,19 @@ const Community = observer(() => {
   const router = useRouter();
   const { id } = router.query;
   const [isHolder, setIsHolder] = useState(false);
+  const [isOwner, setIsOwner] = useState(false);
   const { user, authSummaryCheck } = useInjection(Web3Store);
   const { getCommunity, currentCommunity, getHolders, communityHolders } =
     useInjection(CommunityStore);
-
+  useEffect(() => {
+    if (currentCommunity) {
+      if (
+        currentCommunity.creator.profile.twitterHandle == user?.twitterHandle
+      ) {
+        setIsOwner(true);
+      }
+    }
+  }, [currentCommunity]);
   const { showModal } = useInjection(ModalStore);
   useEffect(() => {
     if (id) {
@@ -176,6 +185,7 @@ const Community = observer(() => {
             <TwitterFeed
               communityHandle={currentCommunity?.handle}
               pondId={currentCommunity?.pondId}
+              isOwner={isOwner}
             />
           ) : (
             <div className={style.configuration__hide}>

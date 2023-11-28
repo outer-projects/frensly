@@ -83,7 +83,7 @@ const Communities = observer(() => {
           <div className={style.finance__communities}>
             {
               current?.map((el, i) => {
-                return <CommunityRow key={i}el={el.pond ? el.pond : el} amount={el.amount} />;
+                return <CommunityRow key={i}el={el.pond ? el.pond : el} amount={el.amount ? el.amount : el.supply} />;
               })
             }
             {/* <CommunityRow el /> */}
