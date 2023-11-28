@@ -161,7 +161,7 @@ const Presale = observer(
           setPresaleTimeStatus("failed");
         } else if (currentPresale.status == "PUBLIC") {
           setPresaleTimeStatus("public");
-        } else if (currentPresale.status == "PUBLIC") {
+        } else if (currentPresale.status == "SUCCESS") {
           setPresaleTimeStatus("success");
         }
       }
