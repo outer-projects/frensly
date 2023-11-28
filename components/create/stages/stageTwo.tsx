@@ -51,7 +51,6 @@ const StageTwo = observer((stage: IStageOne) => {
   }, [supply]);
   console.log(price);
   const createPresale = async () => {
-    setBlock(true);
     if (stage.name == "" || stage.handle == "") {
       return toast.error("Fill name and handle fields");
     }
@@ -71,6 +70,7 @@ const StageTwo = observer((stage: IStageOne) => {
       return toast.error("Start time can't be lower than current time");
     }
     try {
+      setBlock(true);
       const res = await community.methods
         .initPondPresale(
           true,
