@@ -403,7 +403,7 @@ const Presale = observer(
                     Liquidity fee
                   </div>
                   <div className={style.configuration__row__value}>
-                    {fromWeiToEth(currentPresale?.liquidityFee)} ETH
+                    {currentPresale?.liquidityFee} %
                   </div>
                 </div>
                 <div className={style.configuration__row}>
