@@ -50,7 +50,6 @@ const TwitterFeed = observer(
       updateUserPosts,
       setHideRow,
       hideRow,
-      getCommunityPosts,
       updateCommunityPosts,
       communityPosts,
     } = useInjection(FeedStore);
@@ -114,10 +113,6 @@ const TwitterFeed = observer(
       if (isFeed) {
         getFeedPosts();
       }
-      if (communityHandle) {
-        getCommunityPosts(communityHandle);
-      }
-
       return () => {
         setPostOffset(0);
         clearUserPosts();

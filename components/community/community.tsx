@@ -15,6 +15,7 @@ import { ModalStore } from "../../stores/ModalStore";
 import { ModalsEnum } from "../../modals";
 import TwitterFeed from "../profile/twitterFeed";
 import Link from "next/link";
+import { FeedStore } from "../../stores/FeedStore";
 const socials = [
   {
     name: "twitter",
@@ -44,6 +45,7 @@ const Community = observer(() => {
   const [isHolder, setIsHolder] = useState(false);
   const [isOwner, setIsOwner] = useState(false);
   const { user, authSummaryCheck } = useInjection(Web3Store);
+  const { getCommunityPosts } = useInjection(FeedStore);
   const { getCommunity, currentCommunity, getHolders, communityHolders } =
     useInjection(CommunityStore);
   useEffect(() => {
@@ -60,6 +62,7 @@ const Community = observer(() => {
     if (id) {
       getCommunity(id as string);
       getHolders(id as string);
+      getCommunityPosts(id as string);
     }
   }, [id]);
   useEffect(() => {
@@ -105,28 +108,29 @@ const Community = observer(() => {
                 {currentCommunity?.name}
               </div>
               <div className={style.configuration__user__socials}>
-                {currentCommunity && socials.map((social, i) => {
-                  let link = currentCommunity
-                    ? social.link + currentCommunity[social.name]
-                    : "";
-                  if (currentCommunity[social.name] == undefined) return null;
-                  return (
-                    <a
-                      href={
-                        link.includes("https://") ? link : "https://" + link
-                      }
-                      target="_blank"
-                      key={i}
-                    >
-                      <div
-                        style={{ cursor: "pointer" }}
-                        className={style.configuration__user__social}
+                {currentCommunity &&
+                  socials.map((social, i) => {
+                    let link = currentCommunity
+                      ? social.link + currentCommunity[social.name]
+                      : "";
+                    if (currentCommunity[social.name] == undefined) return null;
+                    return (
+                      <a
+                        href={
+                          link.includes("https://") ? link : "https://" + link
+                        }
+                        target="_blank"
+                        key={i}
                       >
-                        <img src={social.icon} />
-                      </div>
-                    </a>
-                  );
-                })}
+                        <div
+                          style={{ cursor: "pointer" }}
+                          className={style.configuration__user__social}
+                        >
+                          <img src={social.icon} />
+                        </div>
+                      </a>
+                    );
+                  })}
               </div>
             </div>
             <div className={style.configuration__text}>
