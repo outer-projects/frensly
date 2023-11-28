@@ -151,6 +151,10 @@
   line-height: 18px; /* 150% */
   letter-spacing: -0.12px;
   word-wrap: break-word;
+  width: 487px;
+  @media (max-width: 930px) {
+    width: 100%;
+  }
 }
 .configuration__info {
   padding: 24px;

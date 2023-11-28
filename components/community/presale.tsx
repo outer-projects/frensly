@@ -536,9 +536,9 @@ const Presale = observer(
                   )}{" "}
                   {statusOfRequest == "approved" && maxBuy !== 0 && (
                     <div className={style.configuration__buy}>
-                      <div className={style.configuration__send}>
+                      {/* <div className={style.configuration__send}>
                         REQUEST APPROVED
-                      </div>
+                      </div> */}
                       <div
                         className={classNames(
                           header.connect__button,
