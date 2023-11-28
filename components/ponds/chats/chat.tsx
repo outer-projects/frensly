@@ -145,7 +145,7 @@ const Chat = observer(() => {
                       className={style.openchat__user__name}
                       style={{ cursor: "pointer" }}
                     >
-                      <Link href={"../../profile/" + chat?.profile.twitterId}>
+                      <Link href={chat?.profile.twitterId ? "../../profile/" + chat?.profile.twitterId : "../../communities/" + chat?.pond?.handle}>
                         {chat?.profile?.twitterName}
                       </Link>
 
@@ -165,7 +165,7 @@ const Chat = observer(() => {
                   </div>
                 </div>
                 <div className={style.openchat__user__right}>
-                  <Link href={"../../activity/" + chat?.profile?.twitterId}>
+                  {chat?.profile?.twitterId && <Link href={"../../activity/" + chat?.profile?.twitterId}>
                     <button
                       className={classNames(
                         header.connect__button,
@@ -174,7 +174,7 @@ const Chat = observer(() => {
                     >
                       Info
                     </button>
-                  </Link>
+                  </Link>}
                   <button
                     className={classNames(
                       header.connect__button,
@@ -207,7 +207,7 @@ const Chat = observer(() => {
                   <div className={style.openchat__shares}> per 1 share</div>
                 </div>
               </div>
-              <div className={classNames(style.openchat__row, style.openchat__disable)}>
+              <div className={classNames(style.openchat__row, !chat?.profile.twitterId && style.openchat__disable)}>
                 <div className={style.openchat__holders}>
                   <div
                     className={style.openchat__shares}

@@ -237,9 +237,9 @@
     margin-top: 0px;
   }
 }
-// .openchat__row {
-  
-// }
+.openchat__disable {
+  display: none!important; 
+}
 .openchat__row {
   display: flex;
   align-items: center;
@@ -263,6 +263,7 @@
   margin-top: 32px;
   width: 616px;
   height: calc(100vh - 110px);
+  overflow: hidden;
   @media (max-width: 616px) {
     width: 100vw;
   }
