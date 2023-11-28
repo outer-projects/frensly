@@ -17,17 +17,17 @@ import TwitterFeed from "../profile/twitterFeed";
 import Link from "next/link";
 const socials = [
   {
-    name: "Twitter",
+    name: "twitter",
     icon: "../../icons/X.svg",
     link: "https://twitter.com/",
   },
   {
-    name: "Discord",
+    name: "discord",
     icon: "../../icons/discord.svg",
     link: "https://discord.com/",
   },
   {
-    name: "Telegram",
+    name: "telegram",
     icon: "../../icons/telegram.svg",
     link: "https://t.me/",
   },
@@ -105,7 +105,7 @@ const Community = observer(() => {
                 {currentCommunity?.name}
               </div>
               <div className={style.configuration__user__socials}>
-                {socials.map((social, i) => {
+                {currentCommunity && socials.map((social, i) => {
                   let link = currentCommunity
                     ? social.link + currentCommunity[social.name]
                     : "";
