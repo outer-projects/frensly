@@ -352,10 +352,12 @@ const Presale = observer(
                     @{currentPresale?.creator?.profile?.twitterHandle}
                   </div>
                   <div className={style.configuration__user__socials}>
-                    {socials.map((social, i) => {
+                    {currentPresale && socials.map((social, i) => {
                       let link = currentPresale
                         ? social.link + currentPresale[social.name]
                         : "";
+                      if (currentPresale[social.name] == undefined)
+                        return null;
                       return (
                         <a
                           href={
