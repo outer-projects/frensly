@@ -59,6 +59,14 @@ const OneNotificationPage = observer(
               <div>
                 <div className={style.nots__one__text}>
                   {shortNick(notification?.account?.profile?.twitterName)}{" "}
+                  {(notification?.type == "POND_SUCCESS" ||
+                    notification?.type == "POND_FAIL") && (
+                    <span>
+                      <Link href={"/communities/" + notification?.pond.handle}>
+                        {shortNick(notification?.pond.name)}
+                      </Link>{" "}
+                    </span>
+                  )}
                   {getActivity(
                     notification?.type,
                     notification?.source?.originalPost
@@ -99,7 +107,9 @@ const OneNotificationPage = observer(
             {notification?.type == "LIKE" && (
               <img src="../icons/twitterUI/Heart__grey.svg" />
             )}
-            {notification?.type == "FOLLOW" && <img src="../icons/Plus.svg" style={{filter: "invert(0.5)"}} />}
+            {notification?.type == "FOLLOW" && (
+              <img src="../icons/Plus.svg" style={{ filter: "invert(0.5)" }} />
+            )}
           </div>
           {notification?.price && (
             <div className={style.nots__one__price__page__mobile}>
