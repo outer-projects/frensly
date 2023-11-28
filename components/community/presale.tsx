@@ -569,7 +569,7 @@ const Presale = observer(
               </div>
               <div className={style.configuration__row}>
                 <div className={style.configuration__row__title}>Max allocation</div>
-                <div className={style.configuration__row__value}>{maxBuy}</div>
+                <div className={style.configuration__row__value}>{Number(currentPresale?.maxAllocation) / 10 ** 6}</div>
               </div>
               {/* <div className={style.configuration__row}>
             <div className={style.configuration__row__title}>

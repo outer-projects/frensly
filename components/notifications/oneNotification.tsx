@@ -38,7 +38,7 @@ const OneNotification = observer(({ notification }: { notification: any }) => {
       notification?.type == "SELL" ||
       notification?.type == "OWN_SELL" ||
       notification?.type == "INIT" ||
-      notification?.type == "FOLLOW" || 
+      notification?.type == "FOLLOW" ||
       notification?.type == "POND_SELL" ||
       notification?.type == "POND_BUY",
     [notification]
@@ -62,6 +62,18 @@ const OneNotification = observer(({ notification }: { notification: any }) => {
         <div>
           <div className={style.nots__one__text}>
             {shortNick(notification?.account?.profile?.twitterName)}
+            {(notification?.type == "POND_SUCCESS" ||
+              notification?.type == "POND_FAIL") && (
+              <span>
+                <Link
+                  href={
+                    "/communities/" + notification?.pond.handle
+                  }
+                >
+                  {shortNick(notification?.pond.name)}
+                </Link>{" "}
+              </span>
+            )}
             {getActivity(
               notification?.type,
               notification?.source?.originalPost

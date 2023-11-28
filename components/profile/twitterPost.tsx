@@ -57,7 +57,7 @@ const TwitterPost = observer(
     isOnePostPage,
     isProfile,
   }: {
-    post: IPost;
+    post: any;
     isComment?: boolean;
     isRepost?: boolean;
     isOnePostPage?: boolean;
@@ -104,12 +104,12 @@ const TwitterPost = observer(
       setDeleted(post.isDeleted);
       setRepostAvailable(user?.twitterId !== post?.user?.twitterId);
 
-      if (post.likes.filter((el) => el == user?._id).length != 0) {
+      if (post.likes.filter((el:any) => el == user?._id).length != 0) {
         setIsActiveLike(true);
       } else {
         setIsActiveLike(false);
       }
-      if (post.reposts.filter((el) => el == user?._id).length != 0) {
+      if (post.reposts.filter((el:any) => el == user?._id).length != 0) {
         setIsActiveRepost(true);
       }
     }, []);
@@ -192,7 +192,7 @@ const TwitterPost = observer(
                 ) : (
                   <div style={{ width: "11px" }} />
                 )}
-                <Link href={post?.user?.twitterId ? '/profile/' + post?.user?.twitterId: "/communities/" + post?.pond?.handle}>
+                <Link href={post?.user?.twitterId ? '/profile/' + post?.user?.twitterId: "/communities/" + post?.profile?.twitterHandle}>
                   <img
                     className={style.twitter__avatar}
                     src={post?.user?.avatar ? post?.user?.avatar : post?.pond?.preview}
@@ -201,9 +201,9 @@ const TwitterPost = observer(
               </div>
               <div>
                 <div className={style.twitter__row}>
-                  <Link href={post?.user?.twitterId ? '/profile/' + post?.user?.twitterId: "/communities/" + post?.pond?.handle}>
+                  <Link href={post?.user?.twitterId ? '/profile/' + post?.user?.twitterId: "/communities/" + post?.profile?.twitterHandle}>
                     <div className={style.twitter__name}>
-                      {post?.user?.twitterName ? post?.user?.twitterName : post?.pond?.name}
+                      {post?.user?.twitterName ? post?.user?.twitterName : post?.profile?.twitterHandle}
                     </div>
                   </Link>
                   <a

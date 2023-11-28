@@ -43,9 +43,9 @@ export const getActivity = (type: string, isOriginalPost?: string) => {
     case "WHITELIST_REJECT":
       return " rejected your request to join the pond";
     case "POND_SUCCESS":
-      return " has been successfully completed";
+      return " presale has been successfully completed";
     case "POND_FAIL":
-      return " has failed";
+      return " presale has failed";
     case "MENTION":
       return " tagged you in";
     case "FOLLOW":
@@ -73,6 +73,7 @@ const OneActivity = ({ activity }: { activity: any }) => {
                   {shortNick(activity?.account?.profile?.twitterName)}
                 </Link>{" "}
               </span>
+             
               {getActivity(activity?.type, activity?.source?.originalPost)}{" "}
               {activity?.type !== "INIT" && Number(activity?.amount) / 10 ** 6}{" "}
               {activity?.type !== "INIT" &&
