@@ -87,12 +87,12 @@ const Whitelist = observer(
             {currentPresale?.name} presale regups
           </div>
           <SubscriptionProgressBar
-            supply={Number(currentPresale?.supply) / 10 ** 6}
+            supply={(Number(currentPresale?.supply) - 10 ** 6) / 10 ** 6}
             goal={Number(currentPresale?.presaleGoal) / 10 ** 6}
             progress={
               Number(
                 (
-                  Number(currentPresale?.supply) /
+                  (Number(currentPresale?.supply) - 10 ** 6) /
                   Number(currentPresale?.presaleGoal)
                 ).toFixed(2)
               ) * 100
@@ -131,6 +131,7 @@ const Whitelist = observer(
               style.stage__one__button
             )}
             onClick={complete}
+            disabled={Number(currentPresale?.supply) - 10 ** 6 != Number(currentPresale?.presaleGoal)}
           >
             Complete pre-sale
           </button>
