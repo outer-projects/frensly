@@ -161,6 +161,8 @@ const Presale = observer(
           setPresaleTimeStatus("failed");
         } else if (currentPresale.status == "PUBLIC") {
           setPresaleTimeStatus("public");
+        } else if (currentPresale.status == "PUBLIC") {
+          setPresaleTimeStatus("success");
         }
       }
     }, [currentPresale]);
@@ -468,7 +470,7 @@ const Presale = observer(
                 )}
                 {presaleTimeStatus == "failed" &&
                   !currentPresale.isFinalized && <Fail />}
-                {presaleTimeStatus == "public" && <Success />}
+                {presaleTimeStatus == "success" && <Success />}
               </div>
               <SubscriptionProgressBar
                 supply={supply}
@@ -531,7 +533,7 @@ const Presale = observer(
                   )}{" "}
                   {statusOfRequest == "sended" && (
                     <div className={style.configuration__send}>
-                      REQUEST SENDED SUCCSESSFULLY
+                      REQUEST SENDED SUCCESSFULLY
                     </div>
                   )}{" "}
                   {statusOfRequest == "approved" && maxBuy !== 0 && (
@@ -564,6 +566,10 @@ const Presale = observer(
               <div className={style.configuration__row}>
                 <div className={style.configuration__row__title}>Sale Type</div>
                 <div className={style.configuration__row__value}>Public</div>
+              </div>
+              <div className={style.configuration__row}>
+                <div className={style.configuration__row__title}>Max allocation</div>
+                <div className={style.configuration__row__value}>{maxBuy}</div>
               </div>
               {/* <div className={style.configuration__row}>
             <div className={style.configuration__row__title}>

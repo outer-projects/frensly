@@ -10,7 +10,7 @@ import { UserStore } from "../../../stores/UserStore";
 const types = ["Upcoming", "Started", "Ended succesfully", "Failed"];
 export const StatusesEnum = {
   incoming: "INCOMING",
-  ongoing: "SUCCSESS&status=ONGOING",
+  ongoing: "SUCCESS&status=ONGOING",
   success: "PUBLIC",
   failed: "FAILED",
 };

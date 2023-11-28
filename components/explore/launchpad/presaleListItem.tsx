@@ -36,7 +36,7 @@ const PresaleListItem = observer(({ presale }: any) => {
       </div>
       <div className={style.row__7}>{getDateTime(presale.presaleStart)}</div>
       <div className={style.row__7}>{getDateTime(presale.presaleEnd)}</div>
-      {presale?.status == "SUCCSESS" || presale.status == "FAILED" ? (
+      {presale?.status == "SUCCESS" || presale.status == "FAILED" ? (
         <div className={style.row__8} onClick={finalize}>Finalize</div>
       ) : (
         <Link href={"/presales/" + presale?.handle}>
