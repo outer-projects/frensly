@@ -8,21 +8,21 @@ export interface IAccount {
   networth: string;
   holderNetworth: string;
   currentPrice: string;
-  profile: IProfile; //профиль с неймами и прочей хуитой
-  history: IHistory[][]; //все действия юзера
-  sharesAmount: string; //сколько шеров этого юзера существует
-  subjectFee: number; //% комсы в юзера
-  holderFee: number; //акционерная комса
-  holderFeeClaimed: string; //сколько юзер заклеймил акционерной комсы
-  subjectFeeClaimed: string; //сколько комсы с трейдов его шерами отправилось юзеру
-  holderFeeDistributed: string; //сколько комсы с трейдов его шерами отправилось его акционерам
-  totalVolume: string; //тотал вольюм трейдинга
+  profile: IProfile;
+  history: IHistory[][]; 
+  sharesAmount: string;
+  subjectFee: number;
+  holderFee: number;
+  holderFeeClaimed: string;
+  subjectFeeClaimed: string; 
+  holderFeeDistributed: string; 
+  totalVolume: string; 
   _id: string;
   othersShares: {
-    //шеры которые холдит
-    subject: string; //кого холдит
-    amount: string; //сколько
-    isEligible: boolean; //получает ли акционерную комсу
+ 
+    subject: string; 
+    amount: string; 
+    isEligible: boolean; 
   }[];
 }
 export interface IProfile {
@@ -56,14 +56,28 @@ export enum HistoryTypes {
   INIT = "INIT",
   ELIGIBLE = "ELIGIBLE",
   NON_ELIGIBLE = "NON_ELIGIBLE",
+  COMMENT = "COMMENT",
+  REPOST = "REPOST",
+  MENTION = "MENTION",
+  REPLY = "REPLY",
+  LIKE = "LIKE",
+  FOLLOW = "FOLLOW",
+  POND_CREATION = "POND_CREATION",
+  POND_BUY = "POND_BUY",
+  POND_SELL = "POND_SELL",
+  WHITELIST_REQUEST = "WHITELIST_REQUEST",
+  WHITELIST_ACCEPT = "WHITELIST_ACCEPT",
+  WHITELIST_REJECT = "WHITELIST_REJECT",
+  POND_SUCCESS = "POND_SUCCESS",
+  POND_FAIL = "POND_FAIL",
 }
 
 export interface IHistory extends Document {
-  //история хуйни
+
   date: Date;
-  type: HistoryTypes; //тип события
-  price: string; //за сколько
-  amount: string; //сколько шеров
-  subject: IAccount[]; //кого покупали
-  account: IAccount[]; //кто покупал
+  type: HistoryTypes; 
+  price: string; 
+  amount: string; 
+  subject: IAccount[]; 
+  account: IAccount[]; 
 }
