@@ -319,7 +319,7 @@ const Presale = observer(
 
           <img
             src={
-              currentPresale?.image ? currentPresale?.image : "../Avatar.svg"
+              currentPresale?.preview ? currentPresale?.preview : "../Avatar.svg"
             }
           />
           <div className={style.configuration__top__title}>

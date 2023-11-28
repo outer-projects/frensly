@@ -123,7 +123,7 @@ export const BuyCommunityModal = observer(({ key, data, idx }: modalProps) => {
           </div>
           <div className={style.buy__user}>
             <div className={style.buy__user__left}>
-              <img className={style.buy__avatar} src={data.community.image} />
+              <img className={style.buy__avatar} src={data.community.preview} />
               <div className={style.buy__user__left__text}>
                 <div className={style.buy__user__name}>
                   {data.community.name}

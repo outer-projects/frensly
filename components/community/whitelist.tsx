@@ -80,7 +80,7 @@ const Whitelist = observer(
           <img
             className={style.stage__one__user__avatar}
             src={
-              currentPresale?.image ? currentPresale?.image : "../../Avatar.svg"
+              currentPresale?.preview ? currentPresale?.preview : "../../Avatar.svg"
             }
           />
           <div className={style.stage__one__user__name}>

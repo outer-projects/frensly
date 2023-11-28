@@ -13,7 +13,7 @@ const CommunityRow = observer(({ el, amount }: { el: any, amount:string }) => {
     <Link href={"/communities/" + el.handle}>
       <div className={classNames(style.explore__user)} style={{marginLeft:'24px', marginRight:"24px", width: 'auto'}}>
         <div className={style.explore__user__left}>
-          <img src={el.image} />
+          <img src={el.preview} />
           <div className={style.explore__user__left__text}>
             
             <div className={style.explore__user__name}>

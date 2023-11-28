@@ -44,7 +44,7 @@ const ChatItem = observer(
           <div className={style.chat__info}>
             <img
               className={style.chat__avatar}
-              src={el?.avatar ? el?.avatar : el?.image}
+              src={el?.avatar ? el?.avatar : el?.preview}
             />
             <div>
               <div className={style.chat__share}>

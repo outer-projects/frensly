@@ -18,7 +18,7 @@ export const ImageModal = observer(({ key, data, idx }: modalProps) => {
   return (
     <ModalContainer heading={""} modalKey={key} idx={idx}>
       <div className={style.image__container}>
-        <img className={style.image} src={data.image} />
+        <img className={style.preview} src={data.preview} />
         <img
           className={style.close}
           src="../icons/Close.svg"

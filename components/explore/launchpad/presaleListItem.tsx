@@ -24,7 +24,7 @@ const PresaleListItem = observer(({ presale }: any) => {
   return (
     <div className={style.presale__table__row}>
       <div className={style.row__1}>
-        <img src={presale?.image ? presale?.image : "../Avatar.svg"} />
+        <img src={presale?.preview ? presale?.preview : "../Avatar.svg"} />
       </div>
       <div className={style.row__2}>{presale?.name}</div>
       <div className={style.row__3}>{Number(presale?.supply) / 10 ** 6}</div>
