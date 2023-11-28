@@ -38,7 +38,9 @@ const OneNotification = observer(({ notification }: { notification: any }) => {
       notification?.type == "SELL" ||
       notification?.type == "OWN_SELL" ||
       notification?.type == "INIT" ||
-      notification?.type == "FOLLOW",
+      notification?.type == "FOLLOW" || 
+      notification?.type == "POND_SELL" ||
+      notification?.type == "POND_BUY",
     [notification]
   );
   const linkTo = useMemo(() => {
