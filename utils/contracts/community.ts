@@ -1,5 +1,5 @@
-export const communityContractDev = "0xff4B2AfD76DE9Eb9EB003cf0229Ec2306eD378cC";
-export const communityContract = "0xff4B2AfD76DE9Eb9EB003cf0229Ec2306eD378cC";
+export const communityContractDev = "0x10aC57676ba0D45EE45f70383A3Da3F42136895c";
+export const communityContract = "0x10aC57676ba0D45EE45f70383A3Da3F42136895c";
 export const communityAbi = [
   {
     inputs: [
