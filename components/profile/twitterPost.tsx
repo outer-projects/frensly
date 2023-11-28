@@ -162,6 +162,7 @@ const TwitterPost = observer(
         }
       });
     };
+    console.log("post",post);
     return (
       <>
         {!deleted ? (
