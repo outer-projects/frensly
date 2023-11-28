@@ -55,21 +55,19 @@ const Presale = observer(
     const [presaleTimeStatus, setPresaleTimeStatus] = useState("");
     const { currentPresale, requestToWl, getPresale } =
       useInjection(CommunityStore);
-    const [int, setInt] = useState<any>(null);
+
     const [numberOfShares, setNumberOfShares] = useState("");
-    useEffect(()=>{
-      return ()=>{
-        clearInterval(int)
-      }
-    },[])
+    useEffect(() => {
+      let int = setInterval(() => {
+        getPresale(id as string, address as string);
+      }, 60000);
+      return () => {
+        clearInterval(int);
+      };
+    }, []);
     useEffect(() => {
       if (id && address) {
         getPresale(id as string, address as string);
-        setInt(
-          setInterval(() => {
-            getPresale(id as string, address as string);
-          }, 60000)
-        );
       }
     }, [id, address]);
     const supply = useMemo(() => {
@@ -319,7 +317,9 @@ const Presale = observer(
 
           <img
             src={
-              currentPresale?.preview ? currentPresale?.preview : "../Avatar.svg"
+              currentPresale?.preview
+                ? currentPresale?.preview
+                : "../Avatar.svg"
             }
           />
           <div className={style.configuration__top__title}>

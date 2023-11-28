@@ -63,15 +63,13 @@ const Community = observer(() => {
     }
   }, [id]);
   useEffect(() => {
-    if (communityHolders.length > 0) {
-      setIsHolder(
-        communityHolders.filter(
-          (holder) =>
-            holder?.user.profile?.twitterHandle == user?.twitterHandle &&
-            Number(holder?.amount) >= 1000000
-        ).length > 0
-      );
-    }
+    setIsHolder(
+      communityHolders.filter(
+        (holder) =>
+          holder?.user.profile?.twitterHandle == user?.twitterHandle &&
+          Number(holder?.amount) >= 1000000
+      ).length > 0
+    );
   }, [communityHolders]);
   console.log(communityHolders);
   const buyShares = () => {
@@ -111,15 +109,16 @@ const Community = observer(() => {
                   let link = currentCommunity
                     ? social.link + currentCommunity[social.name]
                     : "";
+                  if (currentCommunity[social.name] == undefined) return null;
                   return (
                     <a
                       href={
                         link.includes("https://") ? link : "https://" + link
                       }
                       target="_blank"
+                      key={i}
                     >
                       <div
-                        key={i}
                         style={{ cursor: "pointer" }}
                         className={style.configuration__user__social}
                       >

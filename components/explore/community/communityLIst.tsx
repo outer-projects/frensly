@@ -104,8 +104,8 @@ const CommunityList = observer(() => {
       <div className={style.explore__users__col}>
         {communityList?.map((el: any, i: number) => {
           return (
-            <div>
-              <CommunityRow el={el} key={el._id} />
+            <div key={el._id}>
+              <CommunityRow el={el}  />
               {/* {currentUserList == "new" && i !== 0 && i % 19 == 0 && (
                   <InView
                     as="div"
