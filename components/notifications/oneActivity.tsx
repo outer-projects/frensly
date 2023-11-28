@@ -30,7 +30,22 @@ export const getActivity = (type: string, isOriginalPost?: string) => {
       } else {
         return " answered to your comment";
       }
-
+    case "POND_CREATION":
+      return " created a pond";
+    case "POND_BUY":
+      return " bought shares in your pond";
+    case "POND_SELL":
+      return " sold shares in your pond";
+    case "WHITELIST_REQUEST":
+      return " requested to join your pond";
+    case "WHITELIST_ACCEPT":
+      return " accepted your request to join the pond";
+    case "WHITELIST_REJECT":
+      return " rejected your request to join the pond";
+    case "POND_SUCCESS":
+      return " has been successfully completed";
+    case "POND_FAIL":
+      return " has failed";
     case "MENTION":
       return " tagged you in";
     case "FOLLOW":
@@ -97,7 +112,7 @@ const OneActivity = ({ activity }: { activity: any }) => {
           activity?.type.includes("SELL") && style.activiy__one__price__sell
         )}
       >
-        <EthereumSvg/>
+        <EthereumSvg />
         {fromWeiToEth(activity.price)} ETH
       </div>
     </div>

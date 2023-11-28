@@ -9,7 +9,7 @@ export interface IAccount {
   holderNetworth: string;
   currentPrice: string;
   profile: IProfile;
-  history: IHistory[][]; 
+  history: IHistory[]; 
   sharesAmount: string;
   subjectFee: number;
   holderFee: number;
