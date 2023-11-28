@@ -145,7 +145,7 @@ const Chat = observer(() => {
                       className={style.openchat__user__name}
                       style={{ cursor: "pointer" }}
                     >
-                      <Link href={chat?.profile.twitterId ? "../../profile/" + chat?.profile.twitterId : "../../communities/" + chat?.pond?.handle}>
+                      <Link href={chat?.profile.twitterId ? "../../profile/" + chat?.profile.twitterId : "../../communities/" + chat?.profile?.twitterHandle}>
                         {chat?.profile?.twitterName}
                       </Link>
 
