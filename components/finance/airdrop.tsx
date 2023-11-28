@@ -38,7 +38,7 @@ const Airdrop = observer(() => {
       router.push("/dashboard/rankings");
     }
     if (active == 4) {
-      router.push("/dashboard/community");
+      router.push("/dashboard/communities");
     }
   }, [active]);
   useEffect(() => {

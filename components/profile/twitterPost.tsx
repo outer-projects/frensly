@@ -200,7 +200,7 @@ const TwitterPost = observer(
               </div>
               <div>
                 <div className={style.twitter__row}>
-                  <Link href={"/profile/" + post?.user.twitterId}>
+                  <Link href={post?.user.twitterId.includes('-') ? '/communities/' + post?.user?.twitterHandle: "/profile/" + post?.user.twitterId}>
                     <div className={style.twitter__name}>
                       {post?.user?.twitterName}
                     </div>

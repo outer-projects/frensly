@@ -28,7 +28,7 @@ const Communities = observer(() => {
     } else {
       return myHoldings;
     }
-  }, [activeComm]);
+  }, [activeComm,myCommunities,myHoldings]);
   useEffect(() => {
     if (active == 0) {
       router.push("/dashboard/finance");
