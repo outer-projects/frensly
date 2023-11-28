@@ -8,7 +8,8 @@ export interface IPost extends Document {
   isRepost: boolean; //понятно
   isDeleted: boolean;
   reposts: string[];
-  _id:string
+  pond?: any;
+  _id: string;
   originalPost: IPost; //если isRepost - ссылка ог поста, если !isRepost - ссылка на пост к которому этот пост является комментом, если нет - ог пост
   likes: string[]; //список людей которые лайкнули
   comments: IPost[]; //список комментов
