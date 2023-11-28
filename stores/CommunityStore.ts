@@ -7,6 +7,7 @@ import axios from "axios";
 import { prefix } from "../utils/config";
 import { IStageOne } from "../components/create/stages/stageOne";
 import { StatusesEnum } from "../components/explore/launchpad/presaleList";
+import { communityContract } from "../utils/contracts/community";
 @injectable()
 export class CommunityStore {
   @observable currentCommunity: any = undefined;
@@ -50,6 +51,7 @@ export class CommunityStore {
     formData.append("discord", discord);
     formData.append("description", description);
     formData.append("name", name);
+    formData.append("contract", communityContract);
     formData.append("handle", handle);
     console.log(file);
     file && formData.append("file", file as Blob);
