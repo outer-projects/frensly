@@ -345,38 +345,41 @@ const Presale = observer(
           <div className={style.first__block}>
             <div className={style.configuration__wrapper}>
               <div className={style.configuration__info}>
+                <img
+                  src={currentPresale?.creator?.profile?.avatar}
+                  className={style.configuration__user__avatar}
+                />
                 <div className={style.configuration__user}>
-                  <img
-                    src={currentPresale?.creator?.profile?.avatar}
-                    className={style.configuration__user__avatar}
-                  />
                   <div className={style.configuration__user__name}>
                     @{currentPresale?.creator?.profile?.twitterHandle}
                   </div>
                   <div className={style.configuration__user__socials}>
-                    {currentPresale && socials.map((social, i) => {
-                      let link = currentPresale
-                        ? social.link + currentPresale[social.name]
-                        : "";
-                      if (currentPresale[social.name] == undefined)
-                        return null;
-                      return (
-                        <a
-                          href={
-                            link.includes("https://") ? link : "https://" + link
-                          }
-                          target="_blank"
-                        >
-                          <div
-                            key={i}
-                            style={{ cursor: "pointer" }}
-                            className={style.configuration__user__social}
+                    {currentPresale &&
+                      socials.map((social, i) => {
+                        let link = currentPresale
+                          ? social.link + currentPresale[social.name]
+                          : "";
+                        if (currentPresale[social.name] == undefined)
+                          return null;
+                        return (
+                          <a
+                            href={
+                              link.includes("https://")
+                                ? link
+                                : "https://" + link
+                            }
+                            target="_blank"
                           >
-                            <img src={social.icon} />
-                          </div>
-                        </a>
-                      );
-                    })}
+                            <div
+                              key={i}
+                              style={{ cursor: "pointer" }}
+                              className={style.configuration__user__social}
+                            >
+                              <img src={social.icon} />
+                            </div>
+                          </a>
+                        );
+                      })}
                   </div>
                 </div>
                 <div className={style.configuration__text}>
@@ -568,8 +571,12 @@ const Presale = observer(
                 <div className={style.configuration__row__value}>Public</div>
               </div>
               <div className={style.configuration__row}>
-                <div className={style.configuration__row__title}>Max allocation</div>
-                <div className={style.configuration__row__value}>{Number(currentPresale?.maxAllocation) / 10 ** 6}</div>
+                <div className={style.configuration__row__title}>
+                  Max allocation
+                </div>
+                <div className={style.configuration__row__value}>
+                  {Number(currentPresale?.maxAllocation) / 10 ** 6}
+                </div>
               </div>
               {/* <div className={style.configuration__row}>
             <div className={style.configuration__row__title}>
