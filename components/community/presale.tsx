@@ -550,7 +550,7 @@ const Presale = observer(
                           style.configuration__button
                         )}
                         onClick={buyPresale}
-                        style={{ marginTop: "0px" }}
+                        // style={{ marginTop: "0px" }}
                       >
                         BUY
                       </div>
