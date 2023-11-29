@@ -32,6 +32,7 @@ export class CommunityStore {
     file,
     name,
     handle,
+    preview
   }: {
     name: string;
     handle: string;
@@ -42,6 +43,7 @@ export class CommunityStore {
     telegram: string;
     discord: string;
     file?: File | null;
+    preview?: File | null;
   }) => {
     const formData = new FormData();
     formData.append("pondId", pondId.toString());
@@ -54,6 +56,7 @@ export class CommunityStore {
     formData.append("contract", communityContract);
     formData.append("handle", handle);
     console.log(file);
+    preview && formData.append("preview", preview as Blob);
     file && formData.append("file", file as Blob);
     try {
       const res = await axios.post(prefix + "pond/customize", formData);

@@ -14,6 +14,7 @@ const Creation = () => {
   const [wl, setWl] = useState(false);
   const [handle, setHandle] = useState('');
   const [image, setImage] = useState<null | File>(null);
+  const [preview, setPreview] = useState<null | File>(null);
   return (
     <div className={style.stage__one__create}>
       <CreationProgressBar step={step} />
@@ -22,6 +23,8 @@ const Creation = () => {
           setDescription={setDescription}
           setStep={setStep}
           setImage={setImage}
+          setPreview={setPreview}
+          preview={preview}
           image={image}
           name={name}
           setName={setName}
@@ -44,6 +47,8 @@ const Creation = () => {
           setStep={setStep}
           setImage={setImage}
           image={image}
+          setPreview={setPreview}
+          preview={preview}
           name={name}
           setName={setName}
           discord={discord}

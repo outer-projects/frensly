@@ -8,7 +8,7 @@ const SubscriptionProgressBar = ({
   supply: number;
   goal: number;
 }) => {
-  console.log(progress, supply, goal);
+  // console.log(progress, supply, goal);
   return (
     <div
       className={style.progress__bar__contain}

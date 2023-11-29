@@ -29,7 +29,9 @@ export interface IStageOne {
   discord: string;
   setDiscord?: (discord: string) => void;
   image?: File | null;
+  preview?: File | null;
   setImage?: (img: File | null) => void;
+  setPreview?: (img: File | null) => void;
 }
 const StageOne = observer((stage: IStageOne) => {
   const { user, community, address, web3 } = useInjection(Web3Store);
@@ -69,6 +71,10 @@ const StageOne = observer((stage: IStageOne) => {
     }
     if (stage.image.size <= 50000000) {
       return toast.error("Image size must be less than 50mb");
+    }
+    
+    if (stage?.preview && stage?.preview.size <= 50000000) {
+      return toast.error("Preview size must be less than 50mb");
     }
     if (!isAvailable) {
       return toast.error("Handle is taken by another user");
@@ -181,7 +187,8 @@ const StageOne = observer((stage: IStageOne) => {
         <img className={style.stage__one__user__avatar} src={user?.avatar} />
         <div className={style.stage__one__user__name}>{user?.twitterName}</div>
       </div>
-      <Upload image={stage.image} setImage={stage.setImage} />
+      <Upload image={stage.image} setImage={stage.setImage} text={'Upload avatar'} />
+      <Upload image={stage.preview} setImage={stage.setPreview} text={'Upload cover'}  />
       <div className={style.stage__one__col}>
         <input
           placeholder="Display name"

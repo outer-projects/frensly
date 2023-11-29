@@ -156,7 +156,7 @@ const Community = observer(() => {
                   Shares supply
                 </div>
                 <div className={style.configuration__row__value}>
-                  {currentCommunity?.handle}
+                  {Number(currentCommunity?.supply) / 10 ** 6}
                 </div>
               </div>
               <div
