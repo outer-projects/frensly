@@ -103,33 +103,36 @@ const Community = observer(() => {
                 src={currentCommunity?.preview}
                 className={style.configuration__user__preview}
               />
-              <div className={style.configuration__user__name}>
-                {currentCommunity?.name}
-              </div>
-              <div className={style.configuration__user__socials}>
-                {currentCommunity &&
-                  socials.map((social, i) => {
-                    let link = currentCommunity
-                      ? social.link + currentCommunity[social.name]
-                      : "";
-                    if (currentCommunity[social.name] == undefined) return null;
-                    return (
-                      <a
-                        href={
-                          link.includes("https://") ? link : "https://" + link
-                        }
-                        target="_blank"
-                        key={i}
-                      >
-                        <div
-                          style={{ cursor: "pointer" }}
-                          className={style.configuration__user__social}
+              <div className={style.configuration__user__items}>
+                <div className={style.configuration__user__name}>
+                  {currentCommunity?.name}
+                </div>
+                <div className={style.configuration__user__socials}>
+                  {currentCommunity &&
+                    socials.map((social, i) => {
+                      let link = currentCommunity
+                        ? social.link + currentCommunity[social.name]
+                        : "";
+                      if (currentCommunity[social.name] == undefined)
+                        return null;
+                      return (
+                        <a
+                          href={
+                            link.includes("https://") ? link : "https://" + link
+                          }
+                          target="_blank"
+                          key={i}
                         >
-                          <img src={social.icon} />
-                        </div>
-                      </a>
-                    );
-                  })}
+                          <div
+                            style={{ cursor: "pointer" }}
+                            className={style.configuration__user__social}
+                          >
+                            <img src={social.icon} />
+                          </div>
+                        </a>
+                      );
+                    })}
+                </div>
               </div>
             </div>
             <div className={style.configuration__text}>

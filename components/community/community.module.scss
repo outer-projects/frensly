@@ -120,6 +120,13 @@
     border-top-right-radius: 32px;
     border-top-left-radius: 32px;
   }
+  .configuration__user__items {
+    position: absolute;
+    margin-top: 50px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
   .configuration__user__name {
     color: var(--text-main);
     font-family: "DMSans";
