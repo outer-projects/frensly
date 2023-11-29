@@ -141,14 +141,7 @@ const Community = observer(() => {
               </div>
             </div>
             <div className={style.configuration__text}>
-              {currentCommunity?.description} Welcome to the world of digital
-              art revolution! Our NFT platform provides a unique opportunity for
-              creators to tokenize and monetize their digital artwork. By
-              leveraging blockchain technology, we ensure the authenticity,
-              ownership, and scarcity of each digital collectible, empowering
-              artists and collectors alike. Join us in redefining the art market
-              and embracing the limitless possibilities of non-fungible tokens
-              (NFTs) 🎨💻🚀 #DigitalArt #NFTCommunity
+              {currentCommunity?.description}
             </div>
           </div>
           <div className={style.configuration__col}>
@@ -163,7 +156,7 @@ const Community = observer(() => {
                   Shares supply
                 </div>
                 <div className={style.configuration__row__value}>
-                  {currentCommunity?.handle}qwe
+                  {currentCommunity?.handle}
                 </div>
               </div>
               <div
@@ -182,7 +175,7 @@ const Community = observer(() => {
               <div className={style.configuration__row__inside}>
                 <div className={style.configuration__row__title}>Holders</div>
                 <div className={style.configuration__row__value}>
-                  {currentCommunity?.handle}qwe
+                  {currentCommunity?.handle}
                 </div>
               </div>
               <div className={style.configuration__row__inside}>
@@ -225,7 +218,7 @@ const Community = observer(() => {
               >
                 <div className={style.configuration__row__title}>Price</div>
                 <div className={style.configuration__row__value}>
-                  {currentCommunity?.price}qwe
+                  {currentCommunity?.price}
                 </div>
               </div>
               <div
@@ -236,7 +229,7 @@ const Community = observer(() => {
               >
                 <div className={style.configuration__row__title}>Marketcap</div>
                 <div className={style.configuration__row__value}>
-                  @{currentCommunity?.creator?.profile?.twitterHandle}12312
+                  @{currentCommunity?.creator?.profile?.twitterHandle}
                 </div>
               </div>
             </div>
