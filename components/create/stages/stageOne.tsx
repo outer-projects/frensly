@@ -13,7 +13,7 @@ import { prefix } from "../../../utils/config";
 import { CommunityStore } from "../../../stores/CommunityStore";
 import { toast } from "react-toastify";
 import { socials } from "../../community/community";
-import community from "../../community/community.module.scss";
+import communityStyle from "../../community/community.module.scss";
 export interface IStageOne {
   setStep?: (step: number) => void;
   name: string;
@@ -185,19 +185,19 @@ const StageOne = observer((stage: IStageOne) => {
   };
   return (
     <div className={style.stage__one}>
-      <div className={community.configuration__user}>
+      <div className={communityStyle.configuration__user}>
         {stage.preview && (
           <img
             src={URL.createObjectURL(stage.preview)}
-            className={community.configuration__user__preview}
+            className={communityStyle.configuration__user__preview}
           />
         )}
-        <div className={community.configuration__user__items}>
-          <div className={community.configuration__user__name}>
+        <div className={communityStyle.configuration__user__items}>
+          <div className={communityStyle.configuration__user__name}>
             {stage.image && <img src={URL.createObjectURL(stage.image)} />}
             {stage.name}
           </div>
-          <div className={community.configuration__user__socials}>
+          <div className={communityStyle.configuration__user__socials}>
             {socials.map((social, i) => {
               // if (currentCommunity[social.name] == undefined)
               //   return null;
@@ -207,7 +207,7 @@ const StageOne = observer((stage: IStageOne) => {
                     cursor: "pointer",
                     filter: "brightness(0%)",
                   }}
-                  className={community.configuration__user__social}
+                  className={communityStyle.configuration__user__social}
                 >
                   <img src={social.icon} />
                 </div>
