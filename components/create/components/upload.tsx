@@ -10,6 +10,7 @@ const Upload = ({image, setImage}:{image?:File|null,setImage?:any}) => {
           <input
             type="file"
             className={style.upload__input__active}
+            accept=".jpg,.jpeg,.png"
             onChange={(e) => e.target.files && setImage && setImage(e?.target?.files[0])}
           />
           <img src="../icons/upload.svg" className={style.upload__icon} />
