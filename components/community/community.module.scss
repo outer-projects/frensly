@@ -65,10 +65,14 @@
   flex-direction: column;
   align-items: center;
 }
+.chat__button {
+  background: none;
+  border: 1px solid $green;
+}
 .trade__button {
-  height: 40px;
+  height: 56px;
   margin-top: 20px;
-  width: 100%;
+  width: 48%;
 }
 .configuration__top {
   display: flex;
@@ -133,6 +137,11 @@
   line-height: 18px; /* 150% */
   letter-spacing: -0.12px;
   word-wrap: break-word;
+}
+.configuration__buttons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 .configuration__info {
   // padding: 24px;

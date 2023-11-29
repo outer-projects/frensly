@@ -14,7 +14,6 @@ import Web3Store from "../../stores/Web3Store";
 import { ModalStore } from "../../stores/ModalStore";
 import { ModalsEnum } from "../../modals";
 import TwitterFeed from "../profile/twitterFeed";
-import Link from "next/link";
 import { FeedStore } from "../../stores/FeedStore";
 const socials = [
   {
@@ -136,17 +135,30 @@ const Community = observer(() => {
             <div className={style.configuration__text}>
               {currentCommunity?.description}
             </div>
-            {authSummaryCheck && (
-              <button
-                className={classNames(
-                  header.connect__button,
-                  style.trade__button
-                )}
-                onClick={buyShares}
-              >
-                Trade
-              </button>
-            )}
+            <div className={style.configuration__buttons}>
+              {authSummaryCheck && (
+                <button
+                  className={classNames(
+                    header.connect__button,
+                    style.chat__button
+                  )}
+                  onClick={buyShares}
+                >
+                  Chat
+                </button>
+              )}
+              {authSummaryCheck && (
+                <button
+                  className={classNames(
+                    header.connect__button,
+                    style.trade__button
+                  )}
+                  onClick={buyShares}
+                >
+                  Trade
+                </button>
+              )}
+            </div>
           </div>
           <div className={style.configuration__col}>
             <div className={style.configuration__row}>
