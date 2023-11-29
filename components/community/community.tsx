@@ -15,6 +15,7 @@ import { ModalStore } from "../../stores/ModalStore";
 import { ModalsEnum } from "../../modals";
 import TwitterFeed from "../profile/twitterFeed";
 import { FeedStore } from "../../stores/FeedStore";
+import TypesList from "../common/typesList";
 const socials = [
   {
     name: "twitter",
@@ -37,12 +38,13 @@ const socials = [
     link: "",
   },
 ];
+const types = ["Feed", "Activity", "Holders"];
 const Community = observer(() => {
-  const darkMode = useDarkMode();
   const router = useRouter();
   const { id } = router.query;
   const [isHolder, setIsHolder] = useState(false);
   const [isOwner, setIsOwner] = useState(false);
+  const [activeFeed, setActiveFeed] = useState(0);
   const { user, authSummaryCheck } = useInjection(Web3Store);
   const { getCommunityPosts } = useInjection(FeedStore);
   const { getCommunity, currentCommunity, getHolders, communityHolders } =
@@ -105,100 +107,167 @@ const Community = observer(() => {
               />
               <div className={style.configuration__user__items}>
                 <div className={style.configuration__user__name}>
-                  <img src={currentCommunity?.avatar}/>
-                  {currentCommunity?.name}
+                  <img src={currentCommunity?.avatar} />
+                  {currentCommunity?.name}123123
                 </div>
                 <div className={style.configuration__user__socials}>
-                  {currentCommunity &&
-                    socials.map((social, i) => {
-                      let link = currentCommunity
-                        ? social.link + currentCommunity[social.name]
-                        : "";
-                      if (currentCommunity[social.name] == undefined)
-                        return null;
-                      return (
-                        <a
-                          href={
-                            link.includes("https://") ? link : "https://" + link
-                          }
-                          target="_blank"
-                          key={i}
+                  {socials.map((social, i) => {
+                    let link = currentCommunity
+                      ? social.link + currentCommunity[social.name]
+                      : "";
+                    // if (currentCommunity[social.name] == undefined)
+                    //   return null;
+                    return (
+                      <a
+                        href={
+                          link.includes("https://") ? link : "https://" + link
+                        }
+                        target="_blank"
+                        key={i}
+                      >
+                        <div
+                          style={{
+                            cursor: "pointer",
+                            filter: "brightness(0%)",
+                          }}
+                          className={style.configuration__user__social}
                         >
-                          <div
-                            style={{ cursor: "pointer" }}
-                            className={style.configuration__user__social}
-                          >
-                            <img src={social.icon} />
-                          </div>
-                        </a>
-                      );
-                    })}
+                          <img src={social.icon} />
+                        </div>
+                      </a>
+                    );
+                  })}
                 </div>
               </div>
             </div>
             <div className={style.configuration__text}>
-              {currentCommunity?.description}
-            </div>
-            <div className={style.configuration__buttons}>
-              {authSummaryCheck && (
-                <button
-                  className={classNames(
-                    header.connect__button,
-                    style.chat__button
-                  )}
-                  onClick={buyShares}
-                >
-                  Chat
-                </button>
-              )}
-              {authSummaryCheck && (
-                <button
-                  className={classNames(
-                    header.connect__button,
-                    style.trade__button
-                  )}
-                  onClick={buyShares}
-                >
-                  Trade
-                </button>
-              )}
+              {currentCommunity?.description} Welcome to the world of digital
+              art revolution! Our NFT platform provides a unique opportunity for
+              creators to tokenize and monetize their digital artwork. By
+              leveraging blockchain technology, we ensure the authenticity,
+              ownership, and scarcity of each digital collectible, empowering
+              artists and collectors alike. Join us in redefining the art market
+              and embracing the limitless possibilities of non-fungible tokens
+              (NFTs) 🎨💻🚀 #DigitalArt #NFTCommunity
             </div>
           </div>
           <div className={style.configuration__col}>
             <div className={style.configuration__row}>
-              <div className={style.configuration__row__title}>
-                Community shares name
+              <div
+                className={classNames(
+                  style.configuration__row__inside,
+                  style.configuration__top
+                )}
+              >
+                <div className={style.configuration__row__title}>
+                  Shares supply
+                </div>
+                <div className={style.configuration__row__value}>
+                  {currentCommunity?.handle}qwe
+                </div>
               </div>
-              <div className={style.configuration__row__value}>
-                {currentCommunity?.handle}
-              </div>
-            </div>
-            <div className={style.configuration__row}>
-              <div className={style.configuration__row__title}>Owner</div>
-              <div className={style.configuration__row__value}>
-                @{currentCommunity?.creator?.profile?.twitterHandle}
-              </div>
-            </div>
-            <div className={style.configuration__row}>
-              <div className={style.configuration__row__title}>
-                Current price
-              </div>
-              <div className={style.configuration__row__value}>
-                {fromWeiToEth(currentCommunity?.price)}
-              </div>
-            </div>
-            <div className={style.configuration__row}>
-              <div className={style.configuration__row__title}>Supply</div>
-              <div className={style.configuration__row__value}>
-                {Number(currentCommunity?.supply) / 10 ** 6}
+              <div
+                className={classNames(
+                  style.configuration__row__inside,
+                  style.configuration__top
+                )}
+              >
+                <div className={style.configuration__row__title}>My shares</div>
+                <div className={style.configuration__row__value}>
+                  @{currentCommunity?.creator?.profile?.twitterHandle}12312
+                </div>
               </div>
             </div>
             <div className={style.configuration__row}>
-              <div className={style.configuration__row__title}>Holders</div>
-              <div className={style.configuration__row__value}>
-                {communityHolders.length}
+              <div className={style.configuration__row__inside}>
+                <div className={style.configuration__row__title}>Holders</div>
+                <div className={style.configuration__row__value}>
+                  {currentCommunity?.handle}qwe
+                </div>
+              </div>
+              <div className={style.configuration__row__inside}>
+                <div className={style.configuration__row__title}>Volume</div>
+                <div className={style.configuration__row__value}>
+                  @{currentCommunity?.creator?.profile?.twitterHandle}12312
+                </div>
               </div>
             </div>
+            <div className={style.configuration__row}>
+              <div
+                className={classNames(
+                  style.configuration__row__inside,
+                  style.configuration__bottom
+                )}
+              >
+                <div className={style.configuration__row__title}>TVH</div>
+                <div className={style.configuration__row__value}>
+                  {currentCommunity?.handle}qwe
+                </div>
+              </div>
+              <div
+                className={classNames(
+                  style.configuration__row__inside,
+                  style.configuration__bottom
+                )}
+              >
+                <div className={style.configuration__row__title}>Creator</div>
+                <div className={style.configuration__row__value}>
+                  @{currentCommunity?.creator?.profile?.twitterHandle}12312
+                </div>
+              </div>
+            </div>
+            <div className={style.configuration__row}>
+              <div
+                className={classNames(
+                  style.configuration__row__inside,
+                  style.configuration__last
+                )}
+              >
+                <div className={style.configuration__row__title}>Price</div>
+                <div className={style.configuration__row__value}>
+                  {currentCommunity?.handle}qwe
+                </div>
+              </div>
+              <div
+                className={classNames(
+                  style.configuration__row__inside,
+                  style.configuration__last
+                )}
+              >
+                <div className={style.configuration__row__title}>Marketcap</div>
+                <div className={style.configuration__row__value}>
+                  @{currentCommunity?.creator?.profile?.twitterHandle}12312
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className={style.configuration__buttons}>
+            {/* {authSummaryCheck && ( */}
+            <button
+              className={classNames(header.connect__button, style.chat__button)}
+              onClick={buyShares}
+            >
+              Chat
+            </button>
+            {/* )} */}
+            {/* {authSummaryCheck && ( */}
+            <button
+              className={classNames(
+                header.connect__button,
+                style.trade__button
+              )}
+              onClick={buyShares}
+            >
+              Trade
+            </button>
+            {/* )} */}
+          </div>
+          <div className={style.configuration__type}>
+            <TypesList
+              types={types}
+              active={activeFeed}
+              setActive={setActiveFeed}
+            />
           </div>
           {isHolder ? (
             <TwitterFeed

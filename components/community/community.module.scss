@@ -16,7 +16,7 @@
 .configuration__hide {
   width: 100%;
   text-align: center;
-  margin-top: 16px;
+  margin-top: 32px;
   margin-bottom: 16px;
   color: var(--text-shade);
   font-family: "DMSans";
@@ -29,10 +29,15 @@
 }
 .configuration__user__socials {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   margin-top: 16px;
+  height: 72px;
   margin-bottom: 16px;
+  border-radius: 24px;
+  background: linear-gradient(119deg, #fff 0%, rgba(255, 255, 255, 0) 106.02%);
+  backdrop-filter: blur(5.699999809265137px);
+  width: 172px;
   .configuration__user__social {
     margin-right: 4px;
     margin-left: 4px;
@@ -70,28 +75,15 @@
   background: none;
   border: 1px solid $green;
   margin-top: 20px;
-  width: 48%;
+  width: 40%;
   color: var(--text-main);
 }
 .trade__button {
   height: 56px;
   margin-top: 20px;
-  width: 48%;
+  width: 40%;
 }
-.configuration__top {
-  display: flex;
-  align-items: center;
-  margin-top: 32px;
-  img {
-    width: 40px;
-    height: 40px;
-    border-radius: 100%;
-    margin-right: 16px;
-  }
-  @media (max-width: 730px) {
-    margin-top: 0px;
-  }
-}
+
 .configuration__top__title {
   color: var(--text-main);
   font-family: "Syne";
@@ -122,25 +114,36 @@
   }
   .configuration__user__items {
     position: absolute;
-    margin-top: 50px;
+    margin-top: 85px;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
     width: 100%;
- 
+    max-width: 616px;
+    padding: 10px;
   }
   .configuration__user__name {
-    color: var(--text-main);
+    color: $black;
     font-family: "DMSans";
+    
     font-size: 20px;
     font-style: normal;
-    font-weight: 500;
+    font-weight: bold;
     line-height: 28px; /* 140% */
     letter-spacing: -0.2px;
     margin-top: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 24px;
+    height: 72px;
+    width: 172px;
+    background: linear-gradient(119deg, #fff 0%, rgba(255, 255, 255, 0) 106.02%);
+    backdrop-filter: blur(5.699999809265137px);
     img {
       width: 48px;
       height: 48px;
+      border-radius: 100%;
       margin-right: 8px;
     }
   }
@@ -155,15 +158,22 @@
   line-height: 18px; /* 150% */
   letter-spacing: -0.12px;
   word-wrap: break-word;
+  margin-top: 24px;
+  padding-left: 36px;
+  padding-right: 36px;
 }
 .configuration__buttons {
   display: flex;
   justify-content: space-around;
   align-items: center;
+  margin-bottom: 56px;
+}
+.configuration__type {
+  margin-left: 24px;
 }
 .configuration__info {
   // padding: 24px;
-  border-bottom: 1px solid var(--border);
+  // border-bottom: 1px solid var(--border);
   margin-bottom: 24px;
   @media (max-width: 700px) {
     padding: 8px;
@@ -217,6 +227,20 @@
   height: 48px;
   margin-top: 32px;
 }
+.configuration__row__inside {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 50%;
+  background: var(--background-row);
+  height: 32px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 16px;
+  padding-right: 16px;
+  margin-right: 10px;
+  margin-left: 10px;
+}
 .configuration__row {
   display: flex;
   justify-content: space-between;
@@ -224,16 +248,28 @@
   margin-right: 16px;
   align-items: center;
   border-radius: 16px;
-  background: var(--background-row);
-  padding-left: 16px;
-  padding-right: 16px;
-  margin-bottom: 8px;
-  height: 40px;
+}
+.configuration__top {
+  border-top-right-radius: 16px;
+  border-top-left-radius: 16px;
+  padding-top: 8px;
+}
+.configuration__bottom {
+  border-bottom-right-radius: 16px;
+  border-bottom-left-radius: 16px;
+  padding-bottom: 8px;
+}
+.configuration__last {
+  border-radius: 16px;
+  height: 42px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  margin-top: 16px;
 }
 .configuration__row__title {
   color: var(--text-shade);
   font-family: "DMSans";
-  font-size: 14px;
+  font-size: 16px;
   font-style: normal;
   font-weight: 400;
   line-height: 20px; /* 142.857% */
@@ -242,9 +278,9 @@
 .configuration__row__value {
   color: var(--text-main);
   font-family: "DMSans";
-  font-size: 14px;
+  font-size: 16px;
   font-style: normal;
-  font-weight: bold;
+  font-weight: 400;
   line-height: 20px; /* 142.857% */
   letter-spacing: -0.14px;
   margin-left: 10px;
