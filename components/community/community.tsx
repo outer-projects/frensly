@@ -108,7 +108,7 @@ const Community = observer(() => {
               <div className={style.configuration__user__items}>
                 <div className={style.configuration__user__name}>
                   <img src={currentCommunity?.avatar} />
-                  {currentCommunity?.name}123123
+                  {currentCommunity?.name}
                 </div>
                 <div className={style.configuration__user__socials}>
                   {socials.map((social, i) => {
@@ -174,7 +174,7 @@ const Community = observer(() => {
               >
                 <div className={style.configuration__row__title}>My shares</div>
                 <div className={style.configuration__row__value}>
-                  @{currentCommunity?.creator?.profile?.twitterHandle}12312
+                  @{currentCommunity?.creator?.profile?.twitterHandle}
                 </div>
               </div>
             </div>
@@ -188,7 +188,7 @@ const Community = observer(() => {
               <div className={style.configuration__row__inside}>
                 <div className={style.configuration__row__title}>Volume</div>
                 <div className={style.configuration__row__value}>
-                  @{currentCommunity?.creator?.profile?.twitterHandle}12312
+                  @{currentCommunity?.creator?.profile?.twitterHandle}
                 </div>
               </div>
             </div>
@@ -201,7 +201,7 @@ const Community = observer(() => {
               >
                 <div className={style.configuration__row__title}>TVH</div>
                 <div className={style.configuration__row__value}>
-                  {currentCommunity?.handle}qwe
+                  {currentCommunity?.handle}
                 </div>
               </div>
               <div
@@ -212,7 +212,7 @@ const Community = observer(() => {
               >
                 <div className={style.configuration__row__title}>Creator</div>
                 <div className={style.configuration__row__value}>
-                  @{currentCommunity?.creator?.profile?.twitterHandle}12312
+                  @{currentCommunity?.creator?.profile?.twitterHandle}
                 </div>
               </div>
             </div>
@@ -225,7 +225,7 @@ const Community = observer(() => {
               >
                 <div className={style.configuration__row__title}>Price</div>
                 <div className={style.configuration__row__value}>
-                  {currentCommunity?.handle}qwe
+                  {currentCommunity?.price}qwe
                 </div>
               </div>
               <div
