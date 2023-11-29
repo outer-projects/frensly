@@ -16,7 +16,7 @@ import { ModalsEnum } from "../../modals";
 import TwitterFeed from "../profile/twitterFeed";
 import { FeedStore } from "../../stores/FeedStore";
 import TypesList from "../common/typesList";
-const socials = [
+export const socials = [
   {
     name: "twitter",
     icon: "../../icons/X.svg",

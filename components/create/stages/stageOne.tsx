@@ -12,6 +12,8 @@ import axios from "axios";
 import { prefix } from "../../../utils/config";
 import { CommunityStore } from "../../../stores/CommunityStore";
 import { toast } from "react-toastify";
+import { socials } from "../../community/community";
+import community from "../../community/community.module.scss";
 export interface IStageOne {
   setStep?: (step: number) => void;
   name: string;
@@ -72,7 +74,7 @@ const StageOne = observer((stage: IStageOne) => {
     if (stage.image.size <= 50000000) {
       return toast.error("Image size must be less than 50mb");
     }
-    
+
     if (stage?.preview && stage?.preview.size <= 50000000) {
       return toast.error("Preview size must be less than 50mb");
     }
@@ -183,12 +185,47 @@ const StageOne = observer((stage: IStageOne) => {
   };
   return (
     <div className={style.stage__one}>
-      <div className={style.stage__one__user}>
-        <img className={style.stage__one__user__avatar} src={user?.avatar} />
-        <div className={style.stage__one__user__name}>{user?.twitterName}</div>
+      <div className={community.configuration__user}>
+        {stage.preview && (
+          <img
+            src={URL.createObjectURL(stage.preview)}
+            className={community.configuration__user__preview}
+          />
+        )}
+        <div className={community.configuration__user__items}>
+          <div className={community.configuration__user__name}>
+            {stage.image && <img src={URL.createObjectURL(stage.image)} />}
+            {stage.name}
+          </div>
+          <div className={community.configuration__user__socials}>
+            {socials.map((social, i) => {
+              // if (currentCommunity[social.name] == undefined)
+              //   return null;
+              return (
+                <div
+                  style={{
+                    cursor: "pointer",
+                    filter: "brightness(0%)",
+                  }}
+                  className={community.configuration__user__social}
+                >
+                  <img src={social.icon} />
+                </div>
+              );
+            })}
+          </div>
+        </div>
       </div>
-      <Upload image={stage.image} setImage={stage.setImage} text={'Upload avatar'} />
-      <Upload image={stage.preview} setImage={stage.setPreview} text={'Upload cover'}  />
+      <Upload
+        image={stage.image}
+        setImage={stage.setImage}
+        text={"Upload avatar"}
+      />
+      <Upload
+        image={stage.preview}
+        setImage={stage.setPreview}
+        text={"Upload cover"}
+      />
       <div className={style.stage__one__col}>
         <input
           placeholder="Display name"
