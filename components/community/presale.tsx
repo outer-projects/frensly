@@ -513,6 +513,7 @@ const Presale = observer(
                       className={style.max__button}
                       onClick={() => {
                         setNumberOfShares(maxBuy.toString());
+                        getPrice(Number(maxBuy) * 10 ** 6, true);
                       }}
                     >
                       max
