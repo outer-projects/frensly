@@ -181,7 +181,7 @@ const Community = observer(() => {
               <div className={style.configuration__row__inside}>
                 <div className={style.configuration__row__title}>Volume</div>
                 <div className={style.configuration__row__value}>
-                  @{currentCommunity?.creator?.profile?.twitterHandle}
+                  {fromWeiToEth(currentCommunity?.totalVolume)}
                 </div>
               </div>
             </div>
