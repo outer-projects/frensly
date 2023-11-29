@@ -218,7 +218,7 @@ const Community = observer(() => {
               >
                 <div className={style.configuration__row__title}>Price</div>
                 <div className={style.configuration__row__value}>
-                  {currentCommunity?.price}
+                  {fromWeiToEth(currentCommunity?.price)}
                 </div>
               </div>
               <div
