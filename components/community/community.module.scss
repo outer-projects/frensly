@@ -126,6 +126,8 @@
     display: flex;
     justify-content: space-around;
     align-items: center;
+    width: 100%;
+ 
   }
   .configuration__user__name {
     color: var(--text-main);
@@ -136,6 +138,11 @@
     line-height: 28px; /* 140% */
     letter-spacing: -0.2px;
     margin-top: 8px;
+    img {
+      width: 48px;
+      height: 48px;
+      margin-right: 8px;
+    }
   }
 }
 .configuration__text {

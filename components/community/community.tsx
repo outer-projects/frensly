@@ -105,6 +105,7 @@ const Community = observer(() => {
               />
               <div className={style.configuration__user__items}>
                 <div className={style.configuration__user__name}>
+                  <img src={currentCommunity?.avatar}/>
                   {currentCommunity?.name}
                 </div>
                 <div className={style.configuration__user__socials}>
