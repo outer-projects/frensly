@@ -192,7 +192,7 @@ const TwitterPost = observer(
                 ) : (
                   <div style={{ width: "11px" }} />
                 )}
-                <Link href={post?.user?.twitterId ? '/profile/' + post?.user?.twitterId: "/communities/" + post?.profile?.twitterHandle}>
+                <Link href={post?.user?.twitterId ? '/profile/' + post?.user?.twitterId: "/communities/" + post?.pond?.handle}>
                   <img
                     className={style.twitter__avatar}
                     src={post?.user?.avatar ? post?.user?.avatar : post?.pond?.preview}
@@ -201,9 +201,9 @@ const TwitterPost = observer(
               </div>
               <div>
                 <div className={style.twitter__row}>
-                  <Link href={post?.user?.twitterId ? '/profile/' + post?.user?.twitterId: "/communities/" + post?.profile?.twitterHandle}>
+                  <Link href={post?.user?.twitterId ? '/profile/' + post?.user?.twitterId: "/communities/" + post?.pond?.handle}>
                     <div className={style.twitter__name}>
-                      {post?.user?.twitterName ? post?.user?.twitterName : post?.profile?.twitterHandle}
+                      {post?.user?.twitterName ? post?.user?.twitterName : post?.pond?.handle}
                     </div>
                   </Link>
                   <a
