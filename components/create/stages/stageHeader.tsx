@@ -2,13 +2,27 @@ import { IStageOne } from "./stageOne";
 import style from "../create.module.scss";
 import { socials } from "../../community/community";
 import communityStyle from "../../community/community.module.scss";
+import { use, useEffect, useMemo, useState } from "react";
 
-const StageHeader = ({stage}:{stage:IStageOne}) => {
+const StageHeader = ({ stage }: { stage: IStageOne }) => {
+  const cover = useMemo(() => {
+    if (stage.cover) {
+      return URL.createObjectURL(stage.cover);
+    }
+    return "";
+  }, [stage.cover]);
+  const image = useMemo(() => {
+    if (stage.cover) {
+      return URL.createObjectURL(stage.cover);
+    }
+    return "";
+  }, [stage.image]);
+  useEffect(() => {}, [stage]);
   return (
     <div className={communityStyle.configuration__user}>
       {stage.cover ? (
         <img
-          src={URL.createObjectURL(stage.cover)}
+          src={cover}
           className={communityStyle.configuration__user__cover}
         />
       ) : (
@@ -21,7 +35,7 @@ const StageHeader = ({stage}:{stage:IStageOne}) => {
       )}
       <div className={communityStyle.configuration__user__items}>
         <div className={communityStyle.configuration__user__name}>
-          {stage.image && <img src={URL.createObjectURL(stage.image)} />}
+          {stage.image && <img src={image} />}
           <div>{stage.name}</div>
         </div>
         <div className={communityStyle.configuration__user__socials}>
