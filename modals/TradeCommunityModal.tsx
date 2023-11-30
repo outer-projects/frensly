@@ -46,11 +46,11 @@ export const TradeCommunityModal = observer(({ key, data, idx }: modalProps) => 
     }
   };
   useEffect(() => {
-    if (community) {
+    if (community && data.community) {
       checkAndUpdatePriceOfOne();
       ownCount();
     }
-  }, [community]);
+  }, [community, data.community]);
   const darkMode = useDarkMode();
 
   const ownCount = async () => {

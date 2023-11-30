@@ -76,11 +76,11 @@ export const BuyModal = observer(({ key, data, idx }: modalProps) => {
     }
   };
   useEffect(() => {
-    if (frensly) {
+    if (frensly && data.user) {
       checkAndUpdatePriceOfOne();
       ownCount();
     }
-  }, [frensly]);
+  }, [frensly, data.user]);
   const checkAndUpdatePriceOfOne = () => {
     checkPrice(1).then((res) => {
       setPriceOfOne(res);

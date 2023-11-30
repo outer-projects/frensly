@@ -120,6 +120,11 @@
     align-self: flex-start;
   }
 }
+.configuration__row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 .configuration__user {
   width: 100%;
   display: flex;
@@ -137,7 +142,7 @@
     font-family: "DMSans";
     font-size: 20px;
     font-style: normal;
-    font-weight: 500;
+    font-weight: bold;
     line-height: 28px; /* 140% */
     letter-spacing: -0.2px;
     margin-top: 8px;
@@ -196,7 +201,7 @@
   margin-right: 24px;
   @media (max-width: 930px) {
     margin-right: 0px;
-    max-width: 360px;
+    max-width: 460px;
     padding-left: 20px;
     padding-right: 20px;
   }
@@ -213,7 +218,7 @@
 .configuration__button {
   width: 100%;
   height: 48px;
-  margin-top: 32px!important;
+  margin-top: 32px !important;
 }
 .configuration__button__wl {
   width: 100%;

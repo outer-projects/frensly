@@ -46,11 +46,11 @@ export const TradeModal = observer(({ key, data, idx }: modalProps) => {
     }
   };
   useEffect(() => {
-    if (frensly) {
+    if (frensly && data.user) {
       checkAndUpdatePriceOfOne();
       ownCount();
     }
-  }, [frensly]);
+  }, [frensly, data.user]);
   const darkMode = useDarkMode();
 
   const ownCount = async () => {

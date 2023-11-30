@@ -186,16 +186,23 @@ const StageOne = observer((stage: IStageOne) => {
   return (
     <div className={style.stage__one}>
       <div className={communityStyle.configuration__user}>
-        {stage.preview && (
+        {stage.preview ? (
           <img
             src={URL.createObjectURL(stage.preview)}
             className={communityStyle.configuration__user__preview}
           />
+        ) : (
+          <div className={style.configuration__cover}>
+            <div className={style.configuration__cover__title}>Cover</div>
+            <div className={style.configuration__size}>
+              Recommended size 1920x648{" "}
+            </div>
+          </div>
         )}
         <div className={communityStyle.configuration__user__items}>
           <div className={communityStyle.configuration__user__name}>
             {stage.image && <img src={URL.createObjectURL(stage.image)} />}
-            {stage.name}
+            <div>{stage.name}</div>
           </div>
           <div className={communityStyle.configuration__user__socials}>
             {socials.map((social, i) => {
@@ -208,6 +215,7 @@ const StageOne = observer((stage: IStageOne) => {
                     filter: "brightness(0%)",
                   }}
                   className={communityStyle.configuration__user__social}
+                  key={i}
                 >
                   <img src={social.icon} />
                 </div>
@@ -216,16 +224,18 @@ const StageOne = observer((stage: IStageOne) => {
           </div>
         </div>
       </div>
-      <Upload
-        image={stage.image}
-        setImage={stage.setImage}
-        text={"Upload avatar"}
-      />
-      <Upload
-        image={stage.preview}
-        setImage={stage.setPreview}
-        text={"Upload cover"}
-      />
+      <div className={style.stage__row}>
+        <Upload
+          image={stage.image}
+          setImage={stage.setImage}
+          text={"Upload avatar"}
+        />
+        <Upload
+          image={stage.preview}
+          setImage={stage.setPreview}
+          text={"Upload cover"}
+        />
+      </div>
       <div className={style.stage__one__col}>
         <input
           placeholder="Display name"

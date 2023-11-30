@@ -12,23 +12,7 @@ const Upload = ({
 }) => {
   return (
     <>
-      {image ? (
-        <div className={style.upload}>
-          <input
-            type="file"
-            className={style.upload__input__active}
-            accept=".jpg,.jpeg,.png"
-            onChange={(e) =>
-              e.target.files && setImage && setImage(e?.target?.files[0])
-            }
-          />
-          <img src="../icons/upload.svg" className={style.upload__icon} />
-          <img
-            className={style.upload__show}
-            src={URL.createObjectURL(image)}
-          />
-        </div>
-      ) : (
+      {
         <div className={style.upload}>
           <input
             type="file"
@@ -42,7 +26,7 @@ const Upload = ({
             {text}{" "}
           </button>
         </div>
-      )}
+      }
     </>
   );
 };

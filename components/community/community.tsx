@@ -108,7 +108,7 @@ const Community = observer(() => {
               <div className={style.configuration__user__items}>
                 <div className={style.configuration__user__name}>
                   <img src={currentCommunity?.avatar} />
-                  {currentCommunity?.name}
+                  <div>{currentCommunity?.name}</div>
                 </div>
                 <div className={style.configuration__user__socials}>
                   {socials.map((social, i) => {
@@ -238,7 +238,9 @@ const Community = observer(() => {
             {/* {authSummaryCheck && ( */}
             <button
               className={classNames(header.connect__button, style.chat__button)}
-              onClick={buyShares}
+              onClick={()=>{
+                router.push(`/ponds/${currentCommunity?._id}`)
+              }}
             >
               Chat
             </button>
