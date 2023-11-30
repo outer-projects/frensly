@@ -122,12 +122,12 @@ const Community = observer(() => {
                 />
               ) : (
                 <div className={stage__style.configuration__cover}>
-                  <div className={stage__style.configuration__cover__title}>
+                  {/* <div className={stage__style.configuration__cover__title}>
                     Cover
                   </div>
                   <div className={stage__style.configuration__size}>
                     Recommended size 1920x648{" "}
-                  </div>
+                  </div> */}
                 </div>
               )}
               <div className={style.configuration__user__items}>
