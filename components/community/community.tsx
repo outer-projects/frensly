@@ -254,7 +254,13 @@ const Community = observer(() => {
               >
                 <div className={style.configuration__row__title}>Marketcap</div>
                 <div className={style.configuration__row__value}>
-                  @{currentCommunity?.creator?.profile?.twitterHandle}
+                  {fromWeiToEth(
+                    (
+                      Number(currentCommunity?.price) *
+                      (Number(currentCommunity.supply) / 10 ** 6)
+                    ).toString()
+                  )}{" "}
+                  ETH
                 </div>
               </div>
             </div>
@@ -289,17 +295,18 @@ const Community = observer(() => {
               setActive={setActiveFeed}
             />
           </div>
-          {activeFeed == 0 && isHolder ? (
-            <TwitterFeed
-              communityHandle={currentCommunity?.handle}
-              pondId={currentCommunity?.pondId}
-              isOwner={isOwner}
-            />
-          ) : (
-            <div className={style.configuration__hide}>
-              Became a holder to see community feed
-            </div>
-          )}
+          {activeFeed == 0 &&
+            (isHolder ? (
+              <TwitterFeed
+                communityHandle={currentCommunity?.handle}
+                pondId={currentCommunity?.pondId}
+                isOwner={isOwner}
+              />
+            ) : (
+              <div className={style.configuration__hide}>
+                Became a holder to see community feed
+              </div>
+            ))}
           {activeFeed == 1 && (
             <div className={style.configuration__holders}>
               {communityHistory.map((history, i) => {
