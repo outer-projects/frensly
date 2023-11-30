@@ -43,13 +43,20 @@ const types = ["Feed", "Activity", "Holders"];
 const Community = observer(() => {
   const router = useRouter();
   const { id } = router.query;
+  const [myAmount, setMyAmount] = useState(0);
   const [isHolder, setIsHolder] = useState(false);
   const [isOwner, setIsOwner] = useState(false);
   const [activeFeed, setActiveFeed] = useState(0);
   const { user, authSummaryCheck } = useInjection(Web3Store);
   const { getCommunityPosts } = useInjection(FeedStore);
-  const { getCommunity, currentCommunity, getHolders, communityHolders } =
-    useInjection(CommunityStore);
+  const {
+    getCommunity,
+    currentCommunity,
+    getHolders,
+    communityHolders,
+    getHistory,
+    communityHistory,
+  } = useInjection(CommunityStore);
   useEffect(() => {
     if (currentCommunity) {
       if (
@@ -63,6 +70,7 @@ const Community = observer(() => {
   useEffect(() => {
     if (id) {
       getCommunity(id as string);
+      getHistory(id as string);
       getHolders(id as string);
       getCommunityPosts(id as string);
     }
@@ -74,6 +82,11 @@ const Community = observer(() => {
           holder?.user.profile?.twitterHandle == user?.twitterHandle &&
           Number(holder?.amount) >= 1000000
       ).length > 0
+    );
+    setMyAmount(
+      communityHolders.filter(
+        (holder) => holder?.user.profile?.twitterHandle == user?.twitterHandle
+      )[0]?.amount
     );
   }, [communityHolders]);
   console.log(communityHolders);
@@ -109,7 +122,9 @@ const Community = observer(() => {
                 />
               ) : (
                 <div className={stage__style.configuration__cover}>
-                  <div className={stage__style.configuration__cover__title}>Cover</div>
+                  <div className={stage__style.configuration__cover__title}>
+                    Cover
+                  </div>
                   <div className={stage__style.configuration__size}>
                     Recommended size 1920x648{" "}
                   </div>
@@ -177,7 +192,7 @@ const Community = observer(() => {
               >
                 <div className={style.configuration__row__title}>My shares</div>
                 <div className={style.configuration__row__value}>
-                  @{currentCommunity?.creator?.profile?.twitterHandle}
+                  {myAmount && Number(myAmount) / 10 ** 6}
                 </div>
               </div>
             </div>
@@ -185,13 +200,13 @@ const Community = observer(() => {
               <div className={style.configuration__row__inside}>
                 <div className={style.configuration__row__title}>Holders</div>
                 <div className={style.configuration__row__value}>
-                  {currentCommunity?.handle}
+                  {communityHolders?.length}
                 </div>
               </div>
               <div className={style.configuration__row__inside}>
                 <div className={style.configuration__row__title}>Volume</div>
                 <div className={style.configuration__row__value}>
-                  {fromWeiToEth(currentCommunity?.totalVolume)}
+                  {fromWeiToEth(currentCommunity?.totalVolume)} ETH
                 </div>
               </div>
             </div>
@@ -204,7 +219,7 @@ const Community = observer(() => {
               >
                 <div className={style.configuration__row__title}>TVH</div>
                 <div className={style.configuration__row__value}>
-                  {currentCommunity?.handle}
+                  {currentCommunity?.tvh}
                 </div>
               </div>
               <div
@@ -228,7 +243,7 @@ const Community = observer(() => {
               >
                 <div className={style.configuration__row__title}>Price</div>
                 <div className={style.configuration__row__value}>
-                  {fromWeiToEth(currentCommunity?.price)}
+                  {fromWeiToEth(currentCommunity?.price)} ETH
                 </div>
               </div>
               <div
@@ -274,7 +289,7 @@ const Community = observer(() => {
               setActive={setActiveFeed}
             />
           </div>
-          {isHolder ? (
+          {activeFeed == 0 && isHolder ? (
             <TwitterFeed
               communityHandle={currentCommunity?.handle}
               pondId={currentCommunity?.pondId}
@@ -283,6 +298,27 @@ const Community = observer(() => {
           ) : (
             <div className={style.configuration__hide}>
               Became a holder to see community feed
+            </div>
+          )}
+          {activeFeed == 1 && (
+            <div className={style.configuration__holders}>
+              {communityHistory.map((history, i) => {
+                console.log(history);
+                return (
+                  <div key={i} className={style.configuration__history}>
+                    123
+                  </div>
+                );
+              })}
+            </div>
+          )}
+          {activeFeed == 2 && (
+            <div className={style.configuration__holders}>
+              {communityHolders.map((holder, i) => {
+                // return <div key={i}>{}</div>;
+                console.log(holder);
+                return <div>123</div>;
+              })}
             </div>
           )}
         </div>
