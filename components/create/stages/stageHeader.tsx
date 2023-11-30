@@ -12,12 +12,12 @@ const StageHeader = ({ stage }: { stage: IStageOne }) => {
     return "";
   }, [stage.cover]);
   const image = useMemo(() => {
-    if (stage.cover) {
-      return URL.createObjectURL(stage.cover);
+    if (stage.image) {
+      return URL.createObjectURL(stage.image);
     }
     return "";
   }, [stage.image]);
-  useEffect(() => {}, [stage]);
+
   return (
     <div className={communityStyle.configuration__user}>
       {stage.cover ? (
