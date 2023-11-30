@@ -71,11 +71,11 @@ const StageOne = observer((stage: IStageOne) => {
     if (stage.image == null) {
       return toast.error("Upload image");
     }
-    if (stage.image.size <= 50000000) {
+    if (stage.image.size >= 50000000) {
       return toast.error("Image size must be less than 50mb");
     }
 
-    if (stage?.cover && stage?.cover.size <= 50000000) {
+    if (stage?.cover && stage?.cover.size >= 50000000) {
       return toast.error("Banner size must be less than 50mb");
     }
     if (!isAvailable) {
