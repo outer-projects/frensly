@@ -436,8 +436,10 @@
   }
 }
 .community__textarea {
-  padding-left: 80px !important;
-  width: 100% !important;
+  @media (max-width: 930px) {
+    padding-left: 10px !important;
+    width: 100% !important;
+  }
 }
 .community__add {
   margin-left: 25px !important;

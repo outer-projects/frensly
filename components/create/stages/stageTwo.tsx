@@ -162,7 +162,7 @@ const StageTwo = observer((stage: IStageOne) => {
           telegram: stage.tg,
           file: stage.image,
           discord: stage.discord,
-          preview: stage.preview,
+          preview: stage.cover,
         }).then((res) => {
           if (res) {
             setBlock(false);

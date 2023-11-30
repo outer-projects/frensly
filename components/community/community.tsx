@@ -1,5 +1,6 @@
 import useDarkMode from "use-dark-mode";
 import style from "./community.module.scss";
+import stage__style from "../create/create.module.scss";
 import header from "../layout/header.module.scss";
 import buy from "../../modals/buy.module.scss";
 import { use, useEffect, useState } from "react";
@@ -101,13 +102,22 @@ const Community = observer(() => {
         <div className={style.configuration__wrapper}>
           <div className={style.configuration__info}>
             <div className={style.configuration__user}>
-              <img
-                src={currentCommunity?.preview}
-                className={style.configuration__user__preview}
-              />
+              {currentCommunity?.cover ? (
+                <img
+                  src={URL.createObjectURL(currentCommunity?.cover)}
+                  className={style.configuration__user__cover}
+                />
+              ) : (
+                <div className={stage__style.configuration__cover}>
+                  <div className={stage__style.configuration__cover__title}>Cover</div>
+                  <div className={stage__style.configuration__size}>
+                    Recommended size 1920x648{" "}
+                  </div>
+                </div>
+              )}
               <div className={style.configuration__user__items}>
                 <div className={style.configuration__user__name}>
-                  <img src={currentCommunity?.image} />
+                  <img src={currentCommunity?.preview} />
                   <div>{currentCommunity?.name}</div>
                 </div>
                 <div className={style.configuration__user__socials}>
@@ -238,8 +248,8 @@ const Community = observer(() => {
             {/* {authSummaryCheck && ( */}
             <button
               className={classNames(header.connect__button, style.chat__button)}
-              onClick={()=>{
-                router.push(`/ponds/${currentCommunity?._id}`)
+              onClick={() => {
+                router.push(`/ponds/${currentCommunity?._id}`);
               }}
             >
               Chat
