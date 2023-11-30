@@ -128,15 +128,13 @@
 .configuration__user {
   width: 100%;
   display: flex;
-  // flex-direction: column;
-  position: absolute;
-  justify-content: space-between;
+  flex-direction: column;
   align-items: center;
-  // .configuration__user__avatar {
-  //   width: 40px;
-  //   height: 40px;
-  //   border-radius: 100%;
-  // }
+  .configuration__user__avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 100%;
+  }
   .configuration__user__name {
     color: var(--text-main);
     font-family: "DMSans";
