@@ -26,15 +26,20 @@ import useDarkMode from "use-dark-mode";
 export const tagGet = (text: string) => {
   var tagRegex = /(?<=^|\s)@(\w+)/g;
   // console.log(text);
-  return text
-    .replaceAll(">", "")
-    .replaceAll("<", "")
-    // .replaceAll("@", "")
-    .replace(tagRegex, function (url) {
-      return `<span ><a href="/profile/${url.replace('@','')}" style="color: #a6d000!important; cursor: pointer; font-weight: bold">${url}</a></span>`;
-    })
-    .replaceAll("{", "")
-    .replaceAll("}", "");
+  return (
+    text
+      .replaceAll(">", "")
+      .replaceAll("<", "")
+      // .replaceAll("@", "")
+      .replace(tagRegex, function (url) {
+        return `<span ><a href="/profile/${url.replace(
+          "@",
+          ""
+        )}" style="color: #a6d000!important; cursor: pointer; font-weight: bold">${url}</a></span>`;
+      })
+      .replaceAll("{", "")
+      .replaceAll("}", "")
+  );
 };
 export function linkify(text: string) {
   var urlRegex =
@@ -70,10 +75,9 @@ const TwitterPost = observer(
     const darkMode = useDarkMode();
     const mentions = useMemo(() => {
       const text = post?.text.match(/(?<=^|\s)@(\w+)/g);
-      const result = text ? text.map((s: any) => s.replace('@', '')) : [];
+      const result = text ? text.map((s: any) => s.replace("@", "")) : [];
       return result;
     }, []);
-
 
     const modalStore = useInjection(ModalStore);
     const { user } = useInjection(Web3Store);
@@ -104,12 +108,12 @@ const TwitterPost = observer(
       setDeleted(post.isDeleted);
       setRepostAvailable(user?.twitterId !== post?.user?.twitterId);
 
-      if (post.likes.filter((el:any) => el == user?._id).length != 0) {
+      if (post.likes.filter((el: any) => el == user?._id).length != 0) {
         setIsActiveLike(true);
       } else {
         setIsActiveLike(false);
       }
-      if (post.reposts.filter((el:any) => el == user?._id).length != 0) {
+      if (post.reposts.filter((el: any) => el == user?._id).length != 0) {
         setIsActiveRepost(true);
       }
     }, []);
@@ -129,7 +133,7 @@ const TwitterPost = observer(
     // };
     useEffect(() => {
       if (mentions && mentions.length !== 0 && !mentionsUpdated) {
-        setMentionsUpdated(true)
+        setMentionsUpdated(true);
         // getIds();
       }
     }, [mentions]);
@@ -148,7 +152,7 @@ const TwitterPost = observer(
         post: post,
         setDeleted: setDeleted,
         isOnePostPage: isOnePostPage,
-        postText: post.text
+        postText: post.text,
       });
     };
     const repost = () => {
@@ -162,7 +166,7 @@ const TwitterPost = observer(
         }
       });
     };
-    console.log("post",post);
+    console.log("post", post);
     return (
       <>
         {!deleted ? (
@@ -192,29 +196,52 @@ const TwitterPost = observer(
                 ) : (
                   <div style={{ width: "11px" }} />
                 )}
-                <Link href={post?.user?.twitterId ? '/profile/' + post?.user?.twitterId: "/communities/" + post?.pond?.handle}>
+                <Link
+                  href={
+                    post?.user?.twitterId
+                      ? "/profile/" + post?.user?.twitterId
+                      : "/communities/" + post?.pond?.handle
+                  }
+                >
                   <img
                     className={style.twitter__avatar}
-                    src={post?.user?.avatar ? post?.user?.avatar : post?.pond?.preview}
+                    src={
+                      post?.user?.avatar
+                        ? post?.user?.avatar
+                        : post?.pond?.preview
+                    }
                   />
                 </Link>
               </div>
               <div>
                 <div className={style.twitter__row}>
-                  <Link href={post?.user?.twitterId ? '/profile/' + post?.user?.twitterId: "/communities/" + post?.pond?.handle}>
+                  <Link
+                    href={
+                      post?.user?.twitterId
+                        ? "/profile/" + post?.user?.twitterId
+                        : "/communities/" + post?.pond?.handle
+                    }
+                  >
                     <div className={style.twitter__name}>
-                      {post?.user?.twitterName ? post?.user?.twitterName : post?.pond?.handle}
+                      {post?.user?.twitterName
+                        ? post?.user?.twitterName
+                        : post?.pond?.handle}
                     </div>
                   </Link>
                   <a
                     target="_blank"
-                    rel="nereferrer"
                     style={{ display: "flex", alignItems: "center" }}
-                    href={"https://twitter.com/" + post?.user?.twitterHandle ? post?.user?.twitterHandle : post?.pond?.twitter}
+                    href={
+                      "https://twitter.com/" + post?.user?.twitterHandle
+                        ? post?.user?.twitterHandle
+                        : post?.pond?.twitter
+                    }
+                    className={style.twitter__nickname}
                   >
-                    <div className={style.twitter__nickname}>
-                      @{post?.user?.twitterHandle ? post?.user?.twitterHandle : post?.pond?.twitter}
-                    </div>
+                    @
+                    {post?.user?.twitterHandle
+                      ? post?.user?.twitterHandle
+                      : post?.pond?.twitter}
                   </a>
                   <div className={style.twitter__time}>
                     {timePassed(post?.date)}
