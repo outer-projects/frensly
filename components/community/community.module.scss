@@ -122,6 +122,10 @@
     width: 100%;
     max-width: 616px;
     padding: 20px;
+    @media (max-width: 930px) {
+      max-width: 430px;
+      
+    }
   }
   .configuration__user__name {
     color: $black;
@@ -218,6 +222,12 @@
     padding-left: 0px;
     padding-right: 0px;
   }
+  @media (max-width: 400px) {
+    margin-right: 0px;
+    width: 360px;
+    padding-left: 0px;
+    padding-right: 0px;
+  }
 }
 .configuration__col__second {
   background-color: var(--background-pages);
@@ -246,6 +256,10 @@
   padding-right: 16px;
   margin-right: 10px;
   margin-left: 10px;
+  @media (max-width: 930px) {
+   width: 100%;
+   margin-left: 0px;
+  }
 }
 .configuration__row {
   display: flex;
@@ -254,17 +268,29 @@
   margin-right: 16px;
   align-items: center;
   border-radius: 16px;
-
+  @media (max-width: 930px) {
+    flex-direction: column;
+    align-items: flex-start;
+    
+  }
 }
 .configuration__top {
   border-top-right-radius: 16px;
   border-top-left-radius: 16px;
   padding-top: 8px;
+  @media (max-width: 930px) {
+    border-top-right-radius: 0px;
+    border-top-left-radius: 0px;
+   }
 }
 .configuration__bottom {
   border-bottom-right-radius: 16px;
   border-bottom-left-radius: 16px;
   padding-bottom: 8px;
+  @media (max-width: 930px) {
+    border-bottom-right-radius: 0px;
+    border-bottom-left-radius: 0px;
+   }
 }
 .configuration__last {
   border-radius: 16px;
