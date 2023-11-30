@@ -350,6 +350,8 @@
   font-weight: bold;
   line-height: 32px;
   letter-spacing: -0.48px;
+  padding-left: 24px;
+  padding-right: 24px;
   margin-top: 40px;
 }
 .finance__claim__value {
@@ -508,6 +510,8 @@
   line-height: 20px;
   font-weight: 400;
   letter-spacing: -0.14px;
+  padding-left: 24px;
+  padding-right: 24px;
   a {
     color: var(--text-shade);
     &:hover {

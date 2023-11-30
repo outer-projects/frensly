@@ -14,6 +14,7 @@ import useDarkMode from "use-dark-mode";
 import { fromWeiToEth, toBNJS } from "../../../utils/utilities";
 import axios from "axios";
 import { prefix } from "../../../utils/config";
+import StageHeader from "./stageHeader";
 const StageTwo = observer((stage: IStageOne) => {
   const { user, community, address, web3 } = useInjection(Web3Store);
   const { updateCommunity } = useInjection(CommunityStore);
@@ -193,12 +194,7 @@ const StageTwo = observer((stage: IStageOne) => {
         Presale configurator for
       </div>
       <div className={style.stage__one}>
-        <div className={style.stage__one__user}>
-          <img className={style.stage__one__user__avatar} src={user?.avatar} />
-          <div className={style.stage__one__user__name}>
-            {user?.twitterName}
-          </div>
-        </div>
+        <StageHeader stage={stage} />
         <div className={finance.finance__title__second}>Pre-sale settings </div>
         <div
           className={classNames(
