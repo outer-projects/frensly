@@ -258,7 +258,7 @@ const Community = observer(() => {
                   {fromWeiToEth(
                     (
                       Number(currentCommunity?.price) *
-                      (Number(currentCommunity.supply) / 10 ** 6)
+                      (Number(currentCommunity?.supply) / 10 ** 6)
                     ).toString()
                   )}{" "}
                   ETH
