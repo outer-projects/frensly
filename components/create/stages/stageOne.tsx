@@ -62,12 +62,36 @@ const StageOne = observer((stage: IStageOne) => {
     };
     return clear();
   };
-  useEffect(()=>{
-    return ()=>{
-      socket.emit("leaveMonitor")
-      socket.off("newPond")
-    }
-  },[])
+  useEffect(() => {
+    socket.on("newPond", (pond: any) => {
+      console.log("pond: ", pond);
+      // getAllNotifications();
+
+      updateCommunity({
+        pondId: Number(pond.pondId),
+        twitter: stage.twitter,
+        description: stage.description,
+        url: stage.webSite,
+        name: stage.name,
+        handle: stage.handle as string,
+        telegram: stage.tg,
+        file: stage.image,
+        discord: stage.discord,
+      }).then((res) => {
+        if (res) {
+          setBlock(false);
+          router.push("/explore/community");
+        } else {
+          setBlock(false);
+          toast.error("Error");
+        }
+      });
+    });
+    return () => {
+      socket.emit("leaveMonitor");
+      socket.off("newPond");
+    };
+  }, []);
   useEffect(() => {
     if (stage.handle.length !== 0) {
       searchDeb(checkHandle, 700);
@@ -94,6 +118,7 @@ const StageOne = observer((stage: IStageOne) => {
       return toast.error("Handle can't contain spaces");
     }
     try {
+      socket.emit("pondMonitor");
       setBlock(true);
       const res = await community.methods.initPond().send({
         from: address,
@@ -165,33 +190,6 @@ const StageOne = observer((stage: IStageOne) => {
         res.logs[0].data,
         [res.logs[0].topics[0], res.logs[0].topics[1], res.logs[0].topics[2]]
       );
-      socket.emit("pondMonitor");
-      socket.on("newPond", (pond: any) => {
-        console.log("pond: ", pond, transaction?.pondId);
-        // getAllNotifications();
-        if (pond.pondId == transaction?.pondId) {
-          updateCommunity({
-            pondId: Number(transaction?.pondId),
-            twitter: stage.twitter,
-            description: stage.description,
-            url: stage.webSite,
-            name: stage.name,
-            handle: stage.handle as string,
-            telegram: stage.tg,
-            file: stage.image,
-            discord: stage.discord,
-          }).then((res) => {
-            
-            if (res) {
-              setBlock(false);
-              router.push("/explore/community");
-            } else {
-              setBlock(false);
-              toast.error("Error");
-            }
-          });
-        }
-      });
     } catch (e) {
       setBlock(false);
       console.log(e);
