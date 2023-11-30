@@ -17,6 +17,7 @@ import { ModalsEnum } from "../../modals";
 import TwitterFeed from "../profile/twitterFeed";
 import { FeedStore } from "../../stores/FeedStore";
 import TypesList from "../common/typesList";
+import HoldersRow from "./holdersRow";
 export const socials = [
   {
     name: "twitter",
@@ -324,7 +325,13 @@ const Community = observer(() => {
               {communityHolders.map((holder, i) => {
                 // return <div key={i}>{}</div>;
                 console.log(holder);
-                return <div>123</div>;
+                return (
+                  <HoldersRow
+                    key={i}
+                    amount={holder.amount}
+                    user={holder.user.profile}
+                  />
+                );
               })}
             </div>
           )}
