@@ -4,7 +4,7 @@ import Web3Store from "../../../stores/Web3Store";
 import { useInjection } from "inversify-react";
 import Upload from "../components/upload";
 import TextareaAutosize from "react-textarea-autosize";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import classNames from "classnames";
 import header from "../../layout/header.module.scss";
 import { useRouter } from "next/router";
@@ -15,6 +15,7 @@ import { toast } from "react-toastify";
 import { socials } from "../../community/community";
 import communityStyle from "../../community/community.module.scss";
 import StageHeader from "./stageHeader";
+import { SocketContext, socket } from "../../../utils/socket";
 export interface IStageOne {
   setStep?: (step: number) => void;
   name: string;
@@ -40,8 +41,10 @@ const StageOne = observer((stage: IStageOne) => {
   const { user, community, address, web3 } = useInjection(Web3Store);
   const { updateCommunity } = useInjection(CommunityStore);
   const router = useRouter();
+
   const [isAvailable, setIsAvailable] = useState(false); // [true, false, false
   const [block, setBlock] = useState(false);
+  const socket = useContext(SocketContext);
   const checkHandle = async () => {
     try {
       const res = await axios.get(prefix + `pond/check/` + stage.handle);
@@ -59,7 +62,12 @@ const StageOne = observer((stage: IStageOne) => {
     };
     return clear();
   };
-
+  useEffect(()=>{
+    return ()=>{
+      socket.emit("leaveMonitor")
+      socket.off("newPond")
+    }
+  },[])
   useEffect(() => {
     if (stage.handle.length !== 0) {
       searchDeb(checkHandle, 700);
@@ -157,28 +165,33 @@ const StageOne = observer((stage: IStageOne) => {
         res.logs[0].data,
         [res.logs[0].topics[0], res.logs[0].topics[1], res.logs[0].topics[2]]
       );
-      console.log(transaction);
-      setTimeout(() => {
-        updateCommunity({
-          pondId: Number(transaction?.pondId),
-          twitter: stage.twitter,
-          description: stage.description,
-          url: stage.webSite,
-          name: stage.name,
-          handle: stage.handle as string,
-          telegram: stage.tg,
-          file: stage.image,
-          discord: stage.discord,
-        }).then((res) => {
-          if (res) {
-            setBlock(false);
-            router.push("/explore/community");
-          } else {
-            setBlock(false);
-            toast.error("Error");
-          }
-        });
-      }, 1000);
+      socket.emit("pondMonitor");
+      socket.on("newPond", (pond: any) => {
+        console.log("pond: ", pond, transaction?.pondId);
+        // getAllNotifications();
+        if (pond.pondId == transaction?.pondId) {
+          updateCommunity({
+            pondId: Number(transaction?.pondId),
+            twitter: stage.twitter,
+            description: stage.description,
+            url: stage.webSite,
+            name: stage.name,
+            handle: stage.handle as string,
+            telegram: stage.tg,
+            file: stage.image,
+            discord: stage.discord,
+          }).then((res) => {
+            
+            if (res) {
+              setBlock(false);
+              router.push("/explore/community");
+            } else {
+              setBlock(false);
+              toast.error("Error");
+            }
+          });
+        }
+      });
     } catch (e) {
       setBlock(false);
       console.log(e);
