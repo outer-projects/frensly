@@ -232,9 +232,10 @@ const TwitterPost = observer(
                     target="_blank"
                     style={{ display: "flex", alignItems: "center" }}
                     href={
-                      "https://twitter.com/" + post?.user?.twitterHandle
+                      "https://twitter.com/" +
+                      (post?.user?.twitterHandle
                         ? post?.user?.twitterHandle
-                        : post?.pond?.twitter
+                        : post?.pond?.twitter)
                     }
                     className={style.twitter__nickname}
                   >
