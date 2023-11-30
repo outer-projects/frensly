@@ -96,7 +96,8 @@ const MessageSend = observer(
             placeholder="What is happening?"
             className={classNames(
               style.twitter__textarea,
-              focus && style.twitter__active
+              focus && style.twitter__active,
+              pondId && style.community__textarea
             )}
             onBlur={() => {
               setFocus(false);
@@ -128,7 +129,12 @@ const MessageSend = observer(
             }}
           />
           {gifMenu && <GifSearch reverse={false} setGif={setGif} />}
-          <div className={style.twitter__add}>
+          <div
+            className={classNames(
+              style.twitter__add,
+              pondId && style.community__textarea
+            )}
+          >
             <input
               type="file"
               accept=".jpg,.jpeg,.webm,.png, .gif"
