@@ -345,11 +345,11 @@ const Presale = observer(
           <div className={style.first__block}>
             <div className={style.configuration__wrapper}>
               <div className={style.configuration__info}>
-                <img
-                  src={currentPresale?.creator?.profile?.avatar}
-                  className={style.configuration__user__avatar}
-                />
                 <div className={style.configuration__user}>
+                  <img
+                    src={currentPresale?.creator?.profile?.avatar}
+                    className={style.configuration__user__avatar}
+                  />
                   <div className={style.configuration__user__name}>
                     @{currentPresale?.creator?.profile?.twitterHandle}
                   </div>
