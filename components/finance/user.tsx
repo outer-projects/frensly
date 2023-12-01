@@ -6,6 +6,7 @@ import { addressSlice } from "../../utils/utilities";
 import { UserStore } from "../../stores/UserStore";
 import { useEffect } from "react";
 import EthereumSvg from "../svgs/Ethereum";
+import classNames from "classnames";
 
 const User = observer(({ stage }: { stage: string }) => {
   const { user, balance } = useInjection(Web3Store);
@@ -40,7 +41,7 @@ const User = observer(({ stage }: { stage: string }) => {
               <span>@{user?.twitterHandle}</span>
             </a>
           </div>
-          <div className={style.finance__subtitle}>
+          <div className={classNames(style.finance__subtitle, style.finance__address)}>
             <a
               href={`https://basescan.org/address/${user?.account?.address}`}
               target="_blank"
@@ -57,7 +58,7 @@ const User = observer(({ stage }: { stage: string }) => {
               <EthereumSvg />
               {balance}
             </div>
-            <div className={style.finance__subtitle}>Wallet balance</div>
+            <div className={classNames(style.finance__subtitle, style.finance__wb)}>Wallet balance</div>
           </div>
         </div>
       )}
