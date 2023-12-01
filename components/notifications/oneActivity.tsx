@@ -34,9 +34,9 @@ export const getActivity = (type: string, isOriginalPost?: string) => {
     case "POND_CREATION":
       return "Pond has been created - ";
     case "POND_BUY":
-      return " bought shares in pond ";
+      return " bought  ";
     case "POND_SELL":
-      return " sold shares in pond ";
+      return " sold  ";
     case "WHITELIST_REQUEST":
       return " requested to join pond ";
     case "WHITELIST_ACCEPT":
@@ -61,14 +61,10 @@ const OneActivity = ({ activity }: { activity: any }) => {
     () =>
       activity?.type == "POND_CREATION" ||
       activity?.type == "POND_BUY" ||
-      activity?.type == "POND_SELL" ||
-      activity?.type == "WHITELIST_REQUEST" ||
-      activity?.type == "WHITELIST_ACCEPT" ||
-      activity?.type == "WHITELIST_REJECT" ||
-      activity?.type == "POND_SUCCESS" ||
-      activity?.type == "POND_FAIL",
+      activity?.type == "POND_SELL",
     [activity]
   );
+
   return (
     <div className={style.activity__one__container}>
       <div className={style.activity__one}>
@@ -87,7 +83,9 @@ const OneActivity = ({ activity }: { activity: any }) => {
                 </Link>{" "}
               </span>
               {getActivity(activity?.type, activity?.source?.originalPost)}{" "}
-              {activity?.type !== "INIT" && Number(activity?.amount) / 10 ** 6}{" "}
+              {activity?.type !== "INIT" &&
+                activity?.type !== "POND_CREATION" &&
+                Number(activity?.amount) / 10 ** 6}{" "}
               {activity?.type !== "INIT" &&
                 activity?.type !== "OWN_BUY" &&
                 activity?.type !== "OWN_SELL" && (
@@ -101,7 +99,7 @@ const OneActivity = ({ activity }: { activity: any }) => {
                 )}
               {(activity?.type == "OWN_BUY" || activity?.type == "OWN_SELL") &&
                 "my shares"}
-                {isPond && <div>{activity?.pond?.name}</div>}
+              {isPond && <span>shares in pond {activity?.pond?.name}</span>}
             </div>
             <div className={style.nots__one__info}>
               <div className={style.activiy__one__time}>
