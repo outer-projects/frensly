@@ -37,7 +37,7 @@ export const BuyCommunityModal = observer(({ key, data, idx }: modalProps) => {
       // console.log("currentPrice: ", currentPrice);
       const res = await community.methods
         .buyShares(
-          currentCommunity.pondId,
+          data.community.pondId,
           Number(numberOfShares) * 10 ** 6
         )
         .send({
@@ -56,7 +56,7 @@ export const BuyCommunityModal = observer(({ key, data, idx }: modalProps) => {
     // console.log("address: ", data.user?.account?.address, "num: ", num, "num*1kk", Number(num) * 10 ** 6);
     try {
       const res = await community.methods
-        .getBuyPriceAfterFee(currentCommunity.pondId, Number(num) * 10 ** 6)
+        .getBuyPriceAfterFee(data.community.pondId, Number(num) * 10 ** 6)
         .call();
       // console.log("getBuyPriceAfterFee: ", res);
       return res;
@@ -69,7 +69,7 @@ export const BuyCommunityModal = observer(({ key, data, idx }: modalProps) => {
   const ownCount = async () => {
     try {
       const res = await community.methods
-        .sharesBalance(currentCommunity.pondId, address)
+        .sharesBalance(data.community.pondId, address)
         .call();
       // console.log(res);
       setCount(Number(res) / 10 ** 6);
@@ -78,11 +78,11 @@ export const BuyCommunityModal = observer(({ key, data, idx }: modalProps) => {
     }
   };
   useEffect(() => {
-    if (community) {
+    if (data.community) {
       checkAndUpdatePriceOfOne();
       ownCount();
     }
-  }, [community]);
+  }, [data.community]);
   const checkAndUpdatePriceOfOne = () => {
     checkPrice(1).then((res) => {
       setPriceOfOne(res);
@@ -123,10 +123,10 @@ export const BuyCommunityModal = observer(({ key, data, idx }: modalProps) => {
           </div>
           <div className={style.buy__user}>
             <div className={style.buy__user__left}>
-              <img className={style.buy__avatar} src={data.community.preview} />
+              <img className={style.buy__avatar} src={data?.community?.preview || data?.community?.avatar} />
               <div className={style.buy__user__left__text}>
                 <div className={style.buy__user__name}>
-                  {data.community.name}
+                  {data?.community?.name || data.community?.twitterName}
                 </div>
                 <div className={style.buy__own}>You own {count} shares</div>
               </div>
