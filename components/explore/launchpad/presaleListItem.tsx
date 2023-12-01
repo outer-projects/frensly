@@ -28,7 +28,7 @@ const PresaleListItem = observer(({ presale }: any) => {
       </div>
       <div className={style.row__2}>{presale?.name}</div>
       <div className={style.row__3}>{Number(presale?.supply) / 10 ** 6}</div>
-      <div className={style.row__5}>{fromWeiToEth(presale?.price)}</div>
+      <div className={style.row__5}>{fromWeiToEth(presale?.price, 8)}</div>
       <div className={style.row__6}>
         <Link href={"/profile/" + presale?.creator?.profile?.twitterHandle}>
           {presale?.creator?.profile?.twitterName}

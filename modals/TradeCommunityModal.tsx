@@ -33,7 +33,7 @@ export const TradeCommunityModal = observer(({ key, data, idx }: modalProps) => 
   const checkPrice = async (num: number) => {
     try {
       const res = await community.methods
-        .getSellPriceAfterFee(
+        .getBuyPriceAfterFee(
           data.community.pondId,
           Number(num) * 10 ** 6
         )

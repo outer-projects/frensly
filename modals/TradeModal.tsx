@@ -33,10 +33,7 @@ export const TradeModal = observer(({ key, data, idx }: modalProps) => {
   const checkPrice = async (num: number) => {
     try {
       const res = await frensly.methods
-        .getSellPriceAfterFee(
-          data.user?.account?.address || data.user?.address,
-          Number(num) * 10 ** 6
-        )
+        .getBuyPriceAfterFee(data.user?.account?.address, Number(num) * 10 ** 6)
         .call();
       // console.log(res);
       return res;
