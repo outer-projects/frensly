@@ -138,8 +138,8 @@ const PresaleList = observer(() => {
           <div className={style.row__3}>Current supply</div>
           <div className={style.row__5}>Cost per share</div>
           <div className={style.row__6}>Owner</div>
-          <div className={style.row__7}>Start time</div>
-          <div className={style.row__7}>End time</div>
+          {status == "ONGOING" && <div className={style.row__7}>Start time</div>}
+          {status == "INCOMING" && <div className={style.row__7}>End time</div>}
           <div className={style.row__8}></div>
         </div>
         {/* <PresaleListItem/> */}
