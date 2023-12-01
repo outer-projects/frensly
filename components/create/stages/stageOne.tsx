@@ -86,6 +86,7 @@ const StageOne = observer((stage: IStageOne) => {
         handle: stage.handle as string,
         telegram: stage.tg,
         file: stage.image,
+        cover: stage.cover,
         discord: stage.discord,
       }).then((res) => {
         if (res) {
