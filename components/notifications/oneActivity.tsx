@@ -70,8 +70,8 @@ const OneActivity = ({ activity }: { activity: any }) => {
       <div className={style.activity__one}>
         <div className={style.activity__one__left}>
           <div className={style.activiy__one__users}>
-            <img src={activity?.account?.profile?.avatar} />
-            <img src={activity?.subject?.profile?.avatar} />
+          {activity?.account && <img src={activity?.account?.profile?.avatar} />}
+            {activity?.subject && <img src={activity?.subject?.profile?.avatar} />}
           </div>
           <div>
             <div className={style.nots__one__text}>
