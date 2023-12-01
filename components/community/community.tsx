@@ -18,6 +18,8 @@ import TwitterFeed from "../profile/twitterFeed";
 import { FeedStore } from "../../stores/FeedStore";
 import TypesList from "../common/typesList";
 import HoldersRow from "./holdersRow";
+import Link from "next/link";
+import OneActivity from "../notifications/oneActivity";
 export const socials = [
   {
     name: "twitter",
@@ -118,7 +120,7 @@ const Community = observer(() => {
             <div className={style.configuration__user}>
               {currentCommunity?.cover ? (
                 <img
-                  src={URL.createObjectURL(currentCommunity?.cover)}
+                  src={currentCommunity?.cover}
                   className={style.configuration__user__cover}
                 />
               ) : (
@@ -231,7 +233,14 @@ const Community = observer(() => {
               >
                 <div className={style.configuration__row__title}>Creator</div>
                 <div className={style.configuration__row__value}>
-                  @{currentCommunity?.creator?.profile?.twitterHandle}
+                  <Link
+                    href={
+                      "/profile/" +
+                      currentCommunity?.creator?.profile?.twitterHandle
+                    }
+                  >
+                    @{currentCommunity?.creator?.profile?.twitterHandle}
+                  </Link>
                 </div>
               </div>
             </div>
@@ -268,14 +277,19 @@ const Community = observer(() => {
           </div>
           <div className={style.configuration__buttons}>
             {/* {authSummaryCheck && ( */}
-            <button
-              className={classNames(header.connect__button, style.chat__button)}
-              onClick={() => {
-                router.push(`/ponds/${currentCommunity?._id}`);
-              }}
-            >
-              Chat
-            </button>
+            <Link href={`/ponds/${currentCommunity?._id}`}>
+              <button
+                className={classNames(
+                  header.connect__button,
+                  style.chat__button
+                )}
+                // onClick={() => {
+                //   router.push(`/ponds/${currentCommunity?._id}`);
+                // }}
+              >
+                Chat
+              </button>
+            </Link>
             {/* )} */}
             {/* {authSummaryCheck && ( */}
             <button
@@ -312,11 +326,7 @@ const Community = observer(() => {
             <div className={style.configuration__holders}>
               {communityHistory.map((history, i) => {
                 console.log(history);
-                return (
-                  <div key={i} className={style.configuration__history}>
-                    123
-                  </div>
-                );
+                return <OneActivity activity={history} key={history._id} />;
               })}
             </div>
           )}

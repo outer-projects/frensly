@@ -8,6 +8,7 @@ import {
 import style from "./notifications.module.scss";
 import Link from "next/link";
 import EthereumSvg from "../svgs/Ethereum";
+import { useMemo } from "react";
 export const getActivity = (type: string, isOriginalPost?: string) => {
   switch (type) {
     case "BUY":
@@ -31,21 +32,21 @@ export const getActivity = (type: string, isOriginalPost?: string) => {
         return " answered to your comment";
       }
     case "POND_CREATION":
-      return " created a pond";
+      return "Pond has been created - ";
     case "POND_BUY":
-      return " bought shares in your pond";
+      return " bought shares in pond ";
     case "POND_SELL":
-      return " sold shares in your pond";
+      return " sold shares in pond ";
     case "WHITELIST_REQUEST":
-      return " requested to join your pond";
+      return " requested to join pond ";
     case "WHITELIST_ACCEPT":
-      return " accepted your request to join the pond";
+      return "Accepted request to join the pond ";
     case "WHITELIST_REJECT":
-      return " rejected your request to join the pond";
+      return "Rejected request to join the pond ";
     case "POND_SUCCESS":
-      return " presale has been successfully completed";
+      return "Presale has been successfully completed in ";
     case "POND_FAIL":
-      return " presale has failed";
+      return "Presale has failed in ";
     case "MENTION":
       return " tagged you in";
     case "FOLLOW":
@@ -56,6 +57,18 @@ export const getActivity = (type: string, isOriginalPost?: string) => {
   }
 };
 const OneActivity = ({ activity }: { activity: any }) => {
+  const isPond = useMemo(
+    () =>
+      activity?.type == "POND_CREATION" ||
+      activity?.type == "POND_BUY" ||
+      activity?.type == "POND_SELL" ||
+      activity?.type == "WHITELIST_REQUEST" ||
+      activity?.type == "WHITELIST_ACCEPT" ||
+      activity?.type == "WHITELIST_REJECT" ||
+      activity?.type == "POND_SUCCESS" ||
+      activity?.type == "POND_FAIL",
+    [activity]
+  );
   return (
     <div className={style.activity__one__container}>
       <div className={style.activity__one}>
@@ -73,7 +86,6 @@ const OneActivity = ({ activity }: { activity: any }) => {
                   {shortNick(activity?.account?.profile?.twitterName)}
                 </Link>{" "}
               </span>
-             
               {getActivity(activity?.type, activity?.source?.originalPost)}{" "}
               {activity?.type !== "INIT" && Number(activity?.amount) / 10 ** 6}{" "}
               {activity?.type !== "INIT" &&
@@ -89,6 +101,7 @@ const OneActivity = ({ activity }: { activity: any }) => {
                 )}
               {(activity?.type == "OWN_BUY" || activity?.type == "OWN_SELL") &&
                 "my shares"}
+                {isPond && <div>{activity?.pond?.name}</div>}
             </div>
             <div className={style.nots__one__info}>
               <div className={style.activiy__one__time}>

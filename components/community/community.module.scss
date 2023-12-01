@@ -322,6 +322,13 @@
   line-height: 20px; /* 142.857% */
   letter-spacing: -0.14px;
   margin-left: 10px;
+  a {
+    color: var(--text-main);
+    text-decoration: none;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
 }
 .subscription {
   color: var(--text-main);

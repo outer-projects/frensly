@@ -106,7 +106,7 @@ export class CommunityStore {
     try {
       const res = await axios.get(prefix + "pond/history/" + id);
       console.log(res);
-      this.communityHolders = res.data.pond.holders;
+      this.communityHistory = res.data.historyItems;
     } catch (e) {
       console.log(e);
       return false;
