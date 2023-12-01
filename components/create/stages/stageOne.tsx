@@ -41,7 +41,8 @@ const StageOne = observer((stage: IStageOne) => {
   const { user, community, address, web3 } = useInjection(Web3Store);
   const { updateCommunity } = useInjection(CommunityStore);
   const router = useRouter();
-
+  const [contractPondId, setContractPondId] = useState<number | null>(null);
+  const [backendPondId, setBackendPondId] = useState<number | null>(null);
   const [isAvailable, setIsAvailable] = useState(false); // [true, false, false
   const [block, setBlock] = useState(false);
   const socket = useContext(SocketContext);
@@ -63,6 +64,9 @@ const StageOne = observer((stage: IStageOne) => {
     return clear();
   };
   useEffect(() => {
+    socket.on("newPond", (pond: any) => {
+      setBackendPondId(Number(pond.pondId));
+    });
     return () => {
       socket.emit("leaveMonitor");
       socket.off("newPond");
@@ -73,6 +77,34 @@ const StageOne = observer((stage: IStageOne) => {
       searchDeb(checkHandle, 700);
     }
   }, [stage.handle]);
+  useEffect(() => {
+    if (backendPondId && contractPondId) {
+      createPond();
+    }
+  }, [backendPondId, contractPondId]);
+  const createPond = async () => {
+    if (backendPondId == contractPondId) {
+      updateCommunity({
+        pondId: Number(contractPondId),
+        twitter: stage.twitter,
+        description: stage.description,
+        url: stage.webSite,
+        name: stage.name,
+        handle: stage.handle as string,
+        telegram: stage.tg,
+        file: stage.image,
+        discord: stage.discord,
+      }).then((res) => {
+        if (res) {
+          setBlock(false);
+          router.push("/explore/community");
+        } else {
+          setBlock(false);
+          toast.error("Error");
+        }
+      });
+    }
+  };
   const create = async () => {
     if (stage.name == "" || stage.handle == "") {
       return toast.error("Fill name and handle fields");
@@ -167,31 +199,7 @@ const StageOne = observer((stage: IStageOne) => {
         res.logs[0].data,
         [res.logs[0].topics[0], res.logs[0].topics[1], res.logs[0].topics[2]]
       );
-      socket.on("newPond", (pond: any) => {
-        console.log("pond: ", pond);
-        // getAllNotifications();
-        if (transaction?.pondId == pond.pondId) {
-          updateCommunity({
-            pondId: Number(pond.pondId),
-            twitter: stage.twitter,
-            description: stage.description,
-            url: stage.webSite,
-            name: stage.name,
-            handle: stage.handle as string,
-            telegram: stage.tg,
-            file: stage.image,
-            discord: stage.discord,
-          }).then((res) => {
-            if (res) {
-              setBlock(false);
-              router.push("/explore/community");
-            } else {
-              setBlock(false);
-              toast.error("Error");
-            }
-          });
-        }
-      });
+      setContractPondId(Number(transaction?.pondId));
     } catch (e) {
       setBlock(false);
       console.log(e);
