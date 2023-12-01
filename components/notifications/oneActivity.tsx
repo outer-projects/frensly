@@ -32,7 +32,7 @@ export const getActivity = (type: string, isOriginalPost?: string) => {
         return " answered to your comment";
       }
     case "POND_CREATION":
-      return "Pond has been created - ";
+      return " created a pond ";
     case "POND_BUY":
       return " bought  ";
     case "POND_SELL":
@@ -99,7 +99,7 @@ const OneActivity = ({ activity }: { activity: any }) => {
                 )}
               {(activity?.type == "OWN_BUY" || activity?.type == "OWN_SELL") &&
                 "my shares"}
-              {isPond && <span>shares in pond {activity?.pond?.name}</span>}
+              {isPond && <span>{activity.type !== "POND_CREATION" && "shares in pond "} {activity?.pond?.name}</span>}
             </div>
             <div className={style.nots__one__info}>
               <div className={style.activiy__one__time}>
