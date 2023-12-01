@@ -21,6 +21,7 @@ const PresaleList = observer(() => {
   const { wrapperBottom } = useInjection(UserStore);
   const [search, setSearch] = useState("");
   const [active, setActive] = useState(99);
+  const [status, setStatus] = useState("");
   const setActiveLocal = (act: number) => {
     setActive(act);
     localStorage.setItem("active", act.toString());
@@ -58,6 +59,15 @@ const PresaleList = observer(() => {
   useEffect(() => {
     if (active !== 99) {
       getPresale();
+    }
+    if(active == 0){
+      setStatus('INCOMING')
+    } else if(active == 1){
+      setStatus('ONGOING')
+    } else if(active == 2){
+      setStatus('PUBLIC')
+    } else if(active == 3){
+      setStatus('FAILED')
     }
   }, [active]);
   const [outline, setOutline] = useState(false);
@@ -134,7 +144,7 @@ const PresaleList = observer(() => {
         </div>
         {/* <PresaleListItem/> */}
         {presaleList.map((el, i) => {
-          return <PresaleListItem presale={el} key={el._id} />;
+          return <PresaleListItem presale={el} key={el._id} status={status} />;
         })}
       </div>
     </div>

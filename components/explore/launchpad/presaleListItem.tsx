@@ -9,14 +9,15 @@ import classNames from "classnames";
 import { useState } from "react";
 import Countdown from "react-countdown";
 
-const PresaleListItem = observer(({ presale }: any) => {
+const PresaleListItem = observer(({ presale, status }: any) => {
   const { community, address, authSummaryCheck } = useInjection(Web3Store);
   const { getPresaleList } = useInjection(CommunityStore);
   const [hide, setHide] = useState(false);
+  const [finished, setFinished] = useState(false);
   const rendererStart = ({ days, hours, minutes, seconds, completed }: any) => {
     if (
       completed &&
-      presale.status == "INCOMING" &&
+      status == "INCOMING" &&
       Date.now() > new Date(presale?.presaleStart).getTime()
     ) {
       setHide(true);
@@ -26,18 +27,15 @@ const PresaleListItem = observer(({ presale }: any) => {
         <div className={style.time}>
           <span>
             {Number(days) < 10 ? "0" : ""}
-            {days}
-            {" "}:
+            {days} :
           </span>
           <span>
             {Number(hours) < 10 ? "0" : ""}
-            {hours}
-            {" "}:
+            {hours} :
           </span>
           <span>
             {Number(minutes) < 10 ? "0" : ""}
-            {minutes}
-            {" "}:
+            {minutes} :
           </span>
           <span>
             {Number(seconds) < 10 ? "0" : ""}
@@ -56,33 +54,29 @@ const PresaleListItem = observer(({ presale }: any) => {
   }: any) => {
     if (
       completed &&
-      presale.status == "INCOMING" &&
+      status == "INCOMING" &&
       Date.now() > new Date(presale?.presaleStart).getTime()
     ) {
-      setHide(true);
+      setFinished(true);
     } else {
       // Render a countdown
       return (
         <div className={style.time}>
           <span>
             {Number(days) < 10 ? "0" : ""}
-            {days}
-            {" "}:
+            {days} :
           </span>
           <span>
             {Number(hours) < 10 ? "0" : ""}
-            {hours}
-            {" "}:
+            {hours} :
           </span>
           <span>
             {Number(minutes) < 10 ? "0" : ""}
-            {minutes}
-            {" "}:
+            {minutes} :
           </span>
           <span>
             {Number(seconds) < 10 ? "0" : ""}
-            {seconds}
-            {" "}:
+            {seconds} :
           </span>
         </div>
       );
@@ -94,7 +88,7 @@ const PresaleListItem = observer(({ presale }: any) => {
         .finalizePresale(presale.pondId)
         .send({ from: address });
       console.log(res);
-      getPresaleList(presale.status);
+      getPresaleList(status);
     } catch (error) {
       console.log(error);
     }
@@ -117,21 +111,22 @@ const PresaleListItem = observer(({ presale }: any) => {
       </div>
       <div className={style.row__7}>
         {" "}
-        {presale.status == "ONGOING" && (
+        {status == "ONGOING" && (
           <Countdown
             date={new Date(presale?.presaleStart)}
             renderer={rendererStart}
           />
         )}
-        {presale.status == "INCOMING" && (
+        {status == "INCOMING" && (
           <Countdown
             date={new Date(presale?.presaleEnd)}
             renderer={rendererFinish}
           />
         )}
+        {status == "INCOMING" && finished && <>Finished</>}
       </div>
       {/* <div className={style.row__7}>{getDateTime(presale.presaleEnd)}</div> */}
-      {presale?.status == "SUCCESS" || presale.status == "FAILED" ? (
+      {status == "SUCCESS" || status == "FAILED" ? (
         <div className={style.row__8} onClick={finalize}>
           Finalize
         </div>
