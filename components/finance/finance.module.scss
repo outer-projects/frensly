@@ -81,7 +81,13 @@
 }
 .finance__handle {
   width: auto !important;
-  color: var(--text-shade);
+  a{
+    color: var(--text-shade);
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+  
 }
 .finance__link {
   border-radius: 16px;

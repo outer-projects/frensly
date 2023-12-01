@@ -307,15 +307,15 @@
       text-decoration: underline;
     }
   }
-  a {
+  span {
     margin-left: 4px;
     font-size: 14px;
     font-family: "DMSans";
     font-weight: 400;
     color: var(--text-shade);
-    &:hover {
-      text-decoration: underline;
-    }
+    // &:hover {
+    //   text-decoration: underline;
+    // }
   }
   @media (max-width: 616px) {
     flex-direction: column;
