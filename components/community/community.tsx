@@ -278,7 +278,7 @@ const Community = observer(() => {
           <div className={style.configuration__buttons}>
             {/* {authSummaryCheck && ( */}
             {isHolder &&<Link
-              href={`/ponds/${currentCommunity?._id}`}
+              href={`/ponds/${currentCommunity?.chat}`}
               style={{ width: "40%" }}
             >
               <button
