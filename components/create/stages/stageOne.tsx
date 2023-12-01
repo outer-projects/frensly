@@ -63,7 +63,6 @@ const StageOne = observer((stage: IStageOne) => {
     return clear();
   };
   useEffect(() => {
-    
     return () => {
       socket.emit("leaveMonitor");
       socket.off("newPond");
@@ -96,30 +95,7 @@ const StageOne = observer((stage: IStageOne) => {
     }
     try {
       socket.emit("pondMonitor");
-      socket.on("newPond", (pond: any) => {
-        console.log("pond: ", pond);
-        // getAllNotifications();
-  
-        updateCommunity({
-          pondId: Number(pond.pondId),
-          twitter: stage.twitter,
-          description: stage.description,
-          url: stage.webSite,
-          name: stage.name,
-          handle: stage.handle as string,
-          telegram: stage.tg,
-          file: stage.image,
-          discord: stage.discord,
-        }).then((res) => {
-          if (res) {
-            setBlock(false);
-            router.push("/explore/community");
-          } else {
-            setBlock(false);
-            toast.error("Error");
-          }
-        });
-      });
+
       setBlock(true);
       const res = await community.methods.initPond().send({
         from: address,
@@ -191,6 +167,31 @@ const StageOne = observer((stage: IStageOne) => {
         res.logs[0].data,
         [res.logs[0].topics[0], res.logs[0].topics[1], res.logs[0].topics[2]]
       );
+      socket.on("newPond", (pond: any) => {
+        console.log("pond: ", pond);
+        // getAllNotifications();
+        if (transaction?.pondId == pond.pondId) {
+          updateCommunity({
+            pondId: Number(pond.pondId),
+            twitter: stage.twitter,
+            description: stage.description,
+            url: stage.webSite,
+            name: stage.name,
+            handle: stage.handle as string,
+            telegram: stage.tg,
+            file: stage.image,
+            discord: stage.discord,
+          }).then((res) => {
+            if (res) {
+              setBlock(false);
+              router.push("/explore/community");
+            } else {
+              setBlock(false);
+              toast.error("Error");
+            }
+          });
+        }
+      });
     } catch (e) {
       setBlock(false);
       console.log(e);
