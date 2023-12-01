@@ -24,11 +24,39 @@ const StageTwo = observer((stage: IStageOne) => {
   const [ratio, setRatio] = useState("");
   const [price, setPrice] = useState(0);
   const darkMode = useDarkMode();
+  const [contractPondId, setContractPondId] = useState<number | null>(null);
   const [timeStart, setTimeStart] = useState("");
   const [timeFinish, setTimeFinish] = useState("");
   const router = useRouter();
   // console.log(timeFinish, timeStart);
-
+  useEffect(() => {
+    if (stage.backendPondId && contractPondId) {
+      createPond();
+    }
+  }, [stage.backendPondId, contractPondId]);
+  const createPond = async () => {
+    if (stage.backendPondId == contractPondId) {
+      updateCommunity({
+        pondId: Number(contractPondId),
+        twitter: stage.twitter,
+        description: stage.description,
+        url: stage.webSite,
+        name: stage.name,
+        handle: stage.handle as string,
+        telegram: stage.tg,
+        file: stage.image,
+        discord: stage.discord,
+      }).then((res) => {
+        if (res) {
+          setBlock(false);
+          router.push("/explore/launchpad");
+        } else {
+          setBlock(false);
+          toast.error("Error");
+        }
+      });
+    }
+  };
   const getPrice = async () => {
     try {
       const res = await community.methods
@@ -152,27 +180,7 @@ const StageTwo = observer((stage: IStageOne) => {
         [res.logs[0].topics[0], res.logs[0].topics[1], res.logs[0].topics[2]]
       );
       console.log(transaction);
-      setTimeout(() => {
-        updateCommunity({
-          pondId: Number(transaction?.pondId),
-          twitter: stage.twitter,
-          description: stage.description,
-          url: stage.webSite,
-          name: stage.name,
-          handle: stage.handle as string,
-          telegram: stage.tg,
-          file: stage.image,
-          discord: stage.discord,
-          preview: stage.cover,
-        }).then((res) => {
-          if (res) {
-            setBlock(false);
-            router.push("/explore/launchpad");
-          } else {
-            setBlock(false);
-          }
-        });
-      }, 1000);
+      setContractPondId(Number(transaction?.pondId));
       // router.push("/presale/123");
     } catch (e) {
       setBlock(false);

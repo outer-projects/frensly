@@ -36,13 +36,14 @@ export interface IStageOne {
   cover?: File | null;
   setImage?: (img: File | null) => void;
   setCover?: (img: File | null) => void;
+  backendPondId?: number | null;
 }
 const StageOne = observer((stage: IStageOne) => {
   const { user, community, address, web3 } = useInjection(Web3Store);
   const { updateCommunity } = useInjection(CommunityStore);
   const router = useRouter();
   const [contractPondId, setContractPondId] = useState<number | null>(null);
-  const [backendPondId, setBackendPondId] = useState<number | null>(null);
+
   const [isAvailable, setIsAvailable] = useState(false); // [true, false, false
   const [block, setBlock] = useState(false);
   const socket = useContext(SocketContext);
@@ -63,27 +64,19 @@ const StageOne = observer((stage: IStageOne) => {
     };
     return clear();
   };
-  useEffect(() => {
-    socket.on("newPond", (pond: any) => {
-      setBackendPondId(Number(pond.pondId));
-    });
-    return () => {
-      socket.emit("leaveMonitor");
-      socket.off("newPond");
-    };
-  }, []);
+
   useEffect(() => {
     if (stage.handle.length !== 0) {
       searchDeb(checkHandle, 700);
     }
   }, [stage.handle]);
   useEffect(() => {
-    if (backendPondId && contractPondId) {
+    if (stage.backendPondId && contractPondId) {
       createPond();
     }
-  }, [backendPondId, contractPondId]);
+  }, [stage.backendPondId, contractPondId]);
   const createPond = async () => {
-    if (backendPondId == contractPondId) {
+    if (stage.backendPondId == contractPondId) {
       updateCommunity({
         pondId: Number(contractPondId),
         twitter: stage.twitter,
