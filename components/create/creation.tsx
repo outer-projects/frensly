@@ -4,7 +4,9 @@ import StageOne from "./stages/stageOne";
 import StageTwo from "./stages/stageTwo";
 import style from "./create.module.scss";
 import { SocketContext } from "../../utils/socket";
-const Creation = () => {
+import { observable } from "mobx";
+import { observer } from "mobx-react";
+const Creation = observer(() => {
   const [step, setStep] = useState(0);
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
@@ -14,14 +16,18 @@ const Creation = () => {
   const [discord, setDiscord] = useState("");
   const socket = useContext(SocketContext);
   const [wl, setWl] = useState(false);
-  const [handle, setHandle] = useState('');
+  const [handle, setHandle] = useState("");
   const [image, setImage] = useState<null | File>(null);
   const [backendPondId, setBackendPondId] = useState<number | null>(null);
   const [cover, setCover] = useState<null | File>(null);
   useEffect(() => {
-    socket.on("newPond", (pond: any) => {
-      setBackendPondId(Number(pond.pondId));
-    });
+    if (socket) {
+      socket.on("newPond", (pond: any) => {
+        setBackendPondId(Number(pond.pondId));
+      });
+    }
+  }, [socket]);
+  useEffect(() => {
     return () => {
       socket.emit("leaveMonitor");
       socket.off("newPond");
@@ -80,5 +86,5 @@ const Creation = () => {
       )}
     </div>
   );
-};
+});
 export default Creation;

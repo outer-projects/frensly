@@ -181,7 +181,9 @@ const StageTwo = observer((stage: IStageOne) => {
       );
       console.log(transaction);
       setContractPondId(Number(transaction?.pondId));
-      // router.push("/presale/123");
+      setTimeout(() => {
+        createPond();
+      }, 3000);
     } catch (e) {
       setBlock(false);
       console.log(e);
