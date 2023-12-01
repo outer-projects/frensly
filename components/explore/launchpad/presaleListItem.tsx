@@ -125,7 +125,7 @@ const PresaleListItem = observer(({ presale, status }: any) => {
           />
         </div>
       )}
-      {status == "INCOMING" && finished && (
+      {status == "ONGOING" && finished && (
         <div className={style.row__7}>Finished</div>
       )}
       {/* <div className={style.row__7}>{getDateTime(presale.presaleEnd)}</div> */}
