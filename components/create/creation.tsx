@@ -23,6 +23,7 @@ const Creation = observer(() => {
   useEffect(() => {
     if (socket) {
       socket.on("newPond", (pond: any) => {
+        console.log(pond);
         setBackendPondId(Number(pond.pondId));
       });
     }
@@ -65,7 +66,6 @@ const Creation = observer(() => {
           setDescription={setDescription}
           setStep={setStep}
           setImage={setImage}
-          backendPondId={backendPondId}
           image={image}
           setCover={setCover}
           cover={cover}
@@ -82,6 +82,7 @@ const Creation = observer(() => {
           setTg={setTg}
           handle={handle}
           setHandle={setHandle}
+          backendPondId={backendPondId}
         />
       )}
     </div>
