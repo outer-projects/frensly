@@ -181,9 +181,9 @@ const StageTwo = observer((stage: IStageOne) => {
       );
       console.log(transaction);
       setContractPondId(Number(transaction?.pondId));
-      setTimeout(() => {
-        createPond();
-      }, 3000);
+      // setTimeout(() => {
+      //   createPond();
+      // }, 3000);
     } catch (e) {
       setBlock(false);
       console.log(e);

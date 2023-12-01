@@ -108,23 +108,26 @@ const PresaleListItem = observer(({ presale, status }: any) => {
         <Link href={"/profile/" + presale?.creator?.profile?.twitterHandle}>
           {presale?.creator?.profile?.twitterName}
         </Link>
-      </div>
-      <div className={style.row__7}>
-        {" "}
-        {status == "ONGOING" && (
+      </div>{" "}
+      {status == "ONGOING" && (
+        <div className={style.row__7}>
           <Countdown
             date={new Date(presale?.presaleStart)}
             renderer={rendererStart}
           />
-        )}
-        {status == "INCOMING" && (
+        </div>
+      )}
+      {status == "INCOMING" && (
+        <div className={style.row__7}>
           <Countdown
             date={new Date(presale?.presaleEnd)}
             renderer={rendererFinish}
           />
-        )}
-        {status == "INCOMING" && finished && <>Finished</>}
-      </div>
+        </div>
+      )}
+      {status == "INCOMING" && finished && (
+        <div className={style.row__7}>Finished</div>
+      )}
       {/* <div className={style.row__7}>{getDateTime(presale.presaleEnd)}</div> */}
       {status == "SUCCESS" || status == "FAILED" ? (
         <div className={style.row__8} onClick={finalize}>
