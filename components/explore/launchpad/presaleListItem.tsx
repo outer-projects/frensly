@@ -27,15 +27,15 @@ const PresaleListItem = observer(({ presale, status }: any) => {
         <div className={style.time}>
           <span>
             {Number(days) < 10 ? "0" : ""}
-            {days} :
+            {days} : {" "}
           </span>
           <span>
             {Number(hours) < 10 ? "0" : ""}
-            {hours} :
+            {hours} : {" "}
           </span>
           <span>
             {Number(minutes) < 10 ? "0" : ""}
-            {minutes} :
+            {minutes} : {" "}
           </span>
           <span>
             {Number(seconds) < 10 ? "0" : ""}
@@ -54,8 +54,8 @@ const PresaleListItem = observer(({ presale, status }: any) => {
   }: any) => {
     if (
       completed &&
-      status == "INCOMING" &&
-      Date.now() > new Date(presale?.presaleStart).getTime()
+      status == "ONGOING" &&
+      Date.now() > new Date(presale?.presaleEnd).getTime()
     ) {
       setFinished(true);
     } else {
@@ -64,19 +64,19 @@ const PresaleListItem = observer(({ presale, status }: any) => {
         <div className={style.time}>
           <span>
             {Number(days) < 10 ? "0" : ""}
-            {days} :
+            {days} : {" "}
           </span>
           <span>
             {Number(hours) < 10 ? "0" : ""}
-            {hours} :
+            {hours} : {" "}
           </span>
           <span>
             {Number(minutes) < 10 ? "0" : ""}
-            {minutes} :
+            {minutes} : {" "}
           </span>
           <span>
             {Number(seconds) < 10 ? "0" : ""}
-            {seconds} :
+            {seconds}
           </span>
         </div>
       );
@@ -109,7 +109,7 @@ const PresaleListItem = observer(({ presale, status }: any) => {
           {presale?.creator?.profile?.twitterName}
         </Link>
       </div>{" "}
-      {status == "ONGOING" && (
+      {status == "INCOMING" && (
         <div className={style.row__7}>
           <Countdown
             date={new Date(presale?.presaleStart)}
@@ -117,7 +117,7 @@ const PresaleListItem = observer(({ presale, status }: any) => {
           />
         </div>
       )}
-      {status == "INCOMING" && (
+      {status == "ONGOING" && (
         <div className={style.row__7}>
           <Countdown
             date={new Date(presale?.presaleEnd)}
