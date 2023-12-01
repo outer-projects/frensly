@@ -2,7 +2,7 @@ import { observer } from "mobx-react";
 import style from "../create.module.scss";
 import Web3Store from "../../../stores/Web3Store";
 import { useInjection } from "inversify-react";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import finance from "../../finance/finance.module.scss";
 import header from "../../layout/header.module.scss";
 import classNames from "classnames";
@@ -15,6 +15,7 @@ import { fromWeiToEth, toBNJS } from "../../../utils/utilities";
 import axios from "axios";
 import { prefix } from "../../../utils/config";
 import StageHeader from "./stageHeader";
+import { SocketContext } from "../../../utils/socket";
 const StageTwo = observer((stage: IStageOne) => {
   const { user, community, address, web3 } = useInjection(Web3Store);
   const { updateCommunity } = useInjection(CommunityStore);
@@ -28,12 +29,13 @@ const StageTwo = observer((stage: IStageOne) => {
   const [timeStart, setTimeStart] = useState("");
   const [timeFinish, setTimeFinish] = useState("");
   const router = useRouter();
-  // console.log(timeFinish, timeStart);
+  const socket = useContext(SocketContext);
   useEffect(() => {
     if (stage.backendPondId && contractPondId) {
       createPond();
     }
   }, [stage.backendPondId, contractPondId]);
+  console.log(stage.backendPondId, contractPondId);
   const createPond = async () => {
     if (stage.backendPondId == contractPondId) {
       updateCommunity({
@@ -89,7 +91,7 @@ const StageTwo = observer((stage: IStageOne) => {
     if (stage.handle.includes(" ")) {
       return toast.error("Handle can't contain spaces");
     }
-    if (maxAllocation >= supply) {
+    if (Number(maxAllocation) >= Number(supply)) {
       return toast.error("Max allocation can't be higher than supply");
     }
     if (new Date(timeStart).getTime() > new Date(timeFinish).getTime()) {
@@ -99,6 +101,7 @@ const StageTwo = observer((stage: IStageOne) => {
       return toast.error("Start time can't be lower than current time");
     }
     try {
+      socket.emit("pondMonitor");
       setBlock(true);
       const res = await community.methods
         .initPondPresale(

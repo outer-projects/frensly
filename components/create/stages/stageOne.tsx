@@ -64,7 +64,7 @@ const StageOne = observer((stage: IStageOne) => {
     };
     return clear();
   };
-
+  console.log(stage.backendPondId, contractPondId);
   useEffect(() => {
     if (stage.handle.length !== 0) {
       searchDeb(checkHandle, 700);

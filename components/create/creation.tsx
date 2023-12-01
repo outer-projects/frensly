@@ -22,6 +22,7 @@ const Creation = observer(() => {
   const [cover, setCover] = useState<null | File>(null);
   useEffect(() => {
     if (socket) {
+      console.log(socket);
       socket.on("newPond", (pond: any) => {
         console.log(pond);
         setBackendPondId(Number(pond.pondId));
