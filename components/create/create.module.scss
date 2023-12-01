@@ -3,6 +3,7 @@
 .progress {
   display: flex;
   width: 616px;
+  justify-content: center;
   margin-bottom: 32px;
   margin-top: 40px;
   @media (max-width: 616px) {

@@ -193,7 +193,7 @@ const Community = observer(() => {
               >
                 <div className={style.configuration__row__title}>My shares</div>
                 <div className={style.configuration__row__value}>
-                  {myAmount && Number(myAmount) / 10 ** 6}
+                  {myAmount ? Number(myAmount) / 10 ** 6 : 0}
                 </div>
               </div>
             </div>
@@ -220,7 +220,7 @@ const Community = observer(() => {
               >
                 <div className={style.configuration__row__title}>TVH</div>
                 <div className={style.configuration__row__value}>
-                  {currentCommunity?.tvh}
+                  {currentCommunity?.tvh} $
                 </div>
               </div>
               <div

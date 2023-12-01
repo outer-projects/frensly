@@ -111,10 +111,10 @@ export const SellCommunityModal = observer(({ key, data, idx }: modalProps) => {
           </div>
           <div className={style.buy__user}>
             <div className={style.buy__user__left}>
-              <img className={style.buy__avatar} src={data?.community?.preview} />
+              <img className={style.buy__avatar} src={data?.community?.preview || data?.community?.avatar} />
               <div className={style.buy__user__left__text}>
                 <div className={style.buy__user__name}>
-                  {data?.community?.name}
+                  {data?.community?.name || data?.community?.twitterName}
                 </div>
                 <div className={style.buy__own}>You own {count} shares</div>
               </div>

@@ -145,7 +145,14 @@ const Chat = observer(() => {
                       className={style.openchat__user__name}
                       style={{ cursor: "pointer" }}
                     >
-                      <Link href={chat?.profile.twitterId ? "../../profile/" + chat?.profile.twitterId : "../../communities/" + chat?.profile?.twitterHandle}>
+                      <Link
+                        href={
+                          chat?.profile.twitterId
+                            ? "../../profile/" + chat?.profile.twitterId
+                            : "../../communities/" +
+                              chat?.profile?.twitterHandle
+                        }
+                      >
                         {chat?.profile?.twitterName}
                       </Link>
 
@@ -165,26 +172,34 @@ const Chat = observer(() => {
                   </div>
                 </div>
                 <div className={style.openchat__user__right}>
-                  {chat?.profile?.twitterId && <Link href={"../../activity/" + chat?.profile?.twitterId}>
-                    <button
-                      className={classNames(
-                        header.connect__button,
-                        style.openchat__button__info
-                      )}
-                    >
-                      Info
-                    </button>
-                  </Link>}
+                  {chat?.profile?.twitterId && (
+                    <Link href={"../../activity/" + chat?.profile?.twitterId}>
+                      <button
+                        className={classNames(
+                          header.connect__button,
+                          style.openchat__button__info
+                        )}
+                      >
+                        Info
+                      </button>
+                    </Link>
+                  )}
                   <button
                     className={classNames(
                       header.connect__button,
                       style.openchat__button
                     )}
-                    onClick={() =>
-                      modalStore.showModal(ModalsEnum.Trade, {
-                        user: chat?.profile,
-                      })
-                    }
+                    onClick={() => {
+                      if (chat?.profile.twitterId) {
+                        modalStore.showModal(ModalsEnum.Trade, {
+                          user: chat?.profile,
+                        });
+                      } else {
+                        modalStore.showModal(ModalsEnum.TradeCommunity, {
+                          community: chat?.profile,
+                        });
+                      }
+                    }}
                   >
                     Trade
                   </button>
@@ -207,7 +222,12 @@ const Chat = observer(() => {
                   <div className={style.openchat__shares}> per 1 share</div>
                 </div>
               </div>
-              <div className={classNames(style.openchat__row, !chat?.profile.twitterId && style.openchat__disable)}>
+              <div
+                className={classNames(
+                  style.openchat__row,
+                  !chat?.profile.twitterId && style.openchat__disable
+                )}
+              >
                 <div className={style.openchat__holders}>
                   <div
                     className={style.openchat__shares}
@@ -255,7 +275,11 @@ const Chat = observer(() => {
             )}
             <div className={classNames(style.openchat, style.openchat__bottom)}>
               <div className={style.openchat__messages} ref={messagesEndRef}>
-                {messages.length==0 && <div className={style.openchat__empty}>No messages yet. Be first!</div>}
+                {messages.length == 0 && (
+                  <div className={style.openchat__empty}>
+                    No messages yet. Be first!
+                  </div>
+                )}
                 {messages
                   ?.map((el, i) => {
                     return (
