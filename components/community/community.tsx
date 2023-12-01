@@ -277,19 +277,23 @@ const Community = observer(() => {
           </div>
           <div className={style.configuration__buttons}>
             {/* {authSummaryCheck && ( */}
-            <Link href={`/ponds/${currentCommunity?._id}`}>
+            {isHolder &&<Link
+              href={`/ponds/${currentCommunity?._id}`}
+              style={{ width: "40%" }}
+            >
               <button
                 className={classNames(
                   header.connect__button,
                   style.chat__button
                 )}
+                style={{width:'100%'}}
                 // onClick={() => {
                 //   router.push(`/ponds/${currentCommunity?._id}`);
                 // }}
               >
                 Chat
               </button>
-            </Link>
+            </Link>}
             {/* )} */}
             {/* {authSummaryCheck && ( */}
             <button
@@ -297,6 +301,7 @@ const Community = observer(() => {
                 header.connect__button,
                 style.trade__button
               )}
+              style={{ width: isHolder ? "40%" : "100%" }}
               onClick={buyShares}
             >
               Trade
