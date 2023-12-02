@@ -138,7 +138,7 @@ const PresaleListItem = observer(({ presale, status }: any) => {
           <div
             className={classNames(
               style.row__8,
-              !authSummaryCheck && style.disable
+              // !authSummaryCheck && style.disable
             )}
           >
             View

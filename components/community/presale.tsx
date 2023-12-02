@@ -53,21 +53,25 @@ const Presale = observer(
     const { id } = router.query;
     const { community, address } = useInjection(Web3Store);
     const [presaleTimeStatus, setPresaleTimeStatus] = useState("");
-    const { currentPresale, requestToWl, getPresale } =
+    const { currentPresale, requestToWl, getPresale, getWl } =
       useInjection(CommunityStore);
 
     const [numberOfShares, setNumberOfShares] = useState("");
     useEffect(() => {
       let int = setInterval(() => {
-        getPresale(id as string, address as string);
+        getPresale(id as string);
+        getWl(id as string, address as string);
       }, 60000);
       return () => {
         clearInterval(int);
       };
     }, []);
     useEffect(() => {
+      if (id) {
+        getPresale(id as string);
+      }
       if (id && address) {
-        getPresale(id as string, address as string);
+        getWl(id as string, address as string);
       }
     }, [id, address]);
     const supply = useMemo(() => {
@@ -132,7 +136,10 @@ const Presale = observer(
           )
           .send({ from: address, value: priceForNumber });
         console.log(res);
-        getPresale(id as string, address as string);
+        getPresale(id as string);
+        if (address) {
+          getWl(id as string, address as string);
+        }
       } catch (error) {
         console.log(error);
       }
@@ -145,7 +152,10 @@ const Presale = observer(
           .send({ from: address });
         console.log(res);
         setTimeout(() => {
-          getPresale(id as string, address as string);
+          getPresale(id as string);
+          if (address) {
+            getWl(id as string, address as string);
+          }
         }, 1000);
       } catch (error) {
         console.log(error);
@@ -271,7 +281,10 @@ const Presale = observer(
         completed &&
         Date.now() > new Date(currentPresale?.presaleEnd).getTime()
       ) {
-        getPresale(id as string, address as string).then(() => {
+        if(address) {
+          getWl(id as string, address as string)
+        }
+        getPresale(id as string).then(() => {
           setPresaleTimeStatus("failed");
         });
       } else {
