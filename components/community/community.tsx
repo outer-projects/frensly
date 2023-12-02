@@ -143,8 +143,8 @@ const Community = observer(() => {
                     let link = currentCommunity
                       ? social.link + currentCommunity[social.name]
                       : "";
-                    // if (currentCommunity[social.name] == undefined)
-                    //   return null;
+                    if (currentCommunity[social.name] == undefined)
+                      return null;
                     return (
                       <a
                         href={
