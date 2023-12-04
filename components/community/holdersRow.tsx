@@ -1,14 +1,8 @@
-import Link from "next/link";
 import explore from "../explore/explore.module.scss";
-import { useEffect, useState } from "react";
 import { observer } from "mobx-react";
-import header from "../layout/header.module.scss";
 import style from "../create/create.module.scss";
-import classNames from "classnames";
 import { IProfile } from "../../types/users";
-import Web3Store from "../../stores/Web3Store";
-import { useInjection } from "inversify-react";
-import { CommunityStore } from "../../stores/CommunityStore";
+
 const HoldersRow = observer(
   ({ user, amount }: { user: IProfile; amount: string }) => {
     return (
