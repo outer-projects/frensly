@@ -188,9 +188,12 @@ const StageTwo = observer((stage: IStageOne) => {
       );
       console.log(transaction);
       setContractPondId(Number(transaction?.pondId));
-      // setTimeout(() => {
-      //   createPond();
-      // }, 3000);
+      setTimeout(() => {
+        setBlock(false);
+        toast.error(
+          "Transaction takes too long, please change rpc provider and try again"
+        );
+      }, 15000);
     } catch (e) {
       setBlock(false);
       console.log(e);
