@@ -1,8 +1,8 @@
 import "../styles/main.scss";
 import type { AppProps } from "next/app";
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { RootStore } from "../stores/RootStore";
-import { Provider, useInjection } from "inversify-react";
+import { Provider } from "inversify-react";
 import { ModalsContainer } from "../modals";
 import "react-toastify/dist/ReactToastify.css";
 import React, { Suspense } from "react";

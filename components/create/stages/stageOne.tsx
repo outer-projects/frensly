@@ -194,6 +194,12 @@ const StageOne = observer((stage: IStageOne) => {
         [res.logs[0].topics[0], res.logs[0].topics[1], res.logs[0].topics[2]]
       );
       setContractPondId(Number(transaction?.pondId));
+      setTimeout(() => {
+        setBlock(false);
+        toast.error(
+          "Transaction takes too long, please change rpc provider and try again"
+        );
+      }, 15000);
     } catch (e) {
       setBlock(false);
       console.log(e);

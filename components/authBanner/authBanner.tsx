@@ -18,7 +18,7 @@ import { useRouter } from "next/router";
 import useDarkMode from "use-dark-mode";
 
 const AuthBanner = observer(() => {
-  const { address, authStatus, frensly, user, checkAuth, setInit } =
+  const { address, authStatus, frensly, user, checkAuth, setInit,frenslyNotConnected } =
     useInjection(Web3Store);
   const { setActive, sendInviteCode } = useInjection(UserStore);
   const [title, setTitle] = useState("");
@@ -98,7 +98,7 @@ const AuthBanner = observer(() => {
       await frensly.methods.initShares().send({
         from: address,
       });
-      const isInit = await frensly.methods.isSharesSubject(address).call();
+      const isInit = await frenslyNotConnected.methods.isSharesSubject(address).call();
       // localStorage.setItem("auth", "false");
       // router.push("/explore");
       setInit(isInit);

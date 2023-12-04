@@ -51,7 +51,7 @@ const Presale = observer(
     const [priceForOne, setPriceForOne] = useState("");
     const [priceForNumber, setPriceForNumber] = useState("");
     const { id } = router.query;
-    const { community, address } = useInjection(Web3Store);
+    const { community, address, communityNotConnected } = useInjection(Web3Store);
     const [presaleTimeStatus, setPresaleTimeStatus] = useState("");
     const { currentPresale, requestToWl, getPresale, getWl } =
       useInjection(CommunityStore);
@@ -113,7 +113,7 @@ const Presale = observer(
 
     const checkIsWhitelisted = async () => {
       try {
-        const res = await community.methods
+        const res = await communityNotConnected.methods
           .isPondWhitelisted(currentPresale.pondId, address)
           .call();
         if (res) {
@@ -189,7 +189,7 @@ const Presale = observer(
     const getPrice = async (count: number, isChangable?: boolean) => {
       console.log(count);
       try {
-        const res = await community.methods
+        const res = await communityNotConnected.methods
           .getBuyPrice(currentPresale.pondId, count)
           .call();
         if (!isChangable) {

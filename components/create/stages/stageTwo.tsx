@@ -17,7 +17,7 @@ import { prefix } from "../../../utils/config";
 import StageHeader from "./stageHeader";
 import { SocketContext } from "../../../utils/socket";
 const StageTwo = observer((stage: IStageOne) => {
-  const { user, community, address, web3 } = useInjection(Web3Store);
+  const { user, community, address, web3, communityNotConnected } = useInjection(Web3Store);
   const { updateCommunity } = useInjection(CommunityStore);
   const [supply, setSupply] = useState("");
   const [block, setBlock] = useState(false);
@@ -62,7 +62,7 @@ const StageTwo = observer((stage: IStageOne) => {
   };
   const getPrice = async () => {
     try {
-      const res = await community.methods
+      const res = await communityNotConnected.methods
         .calculatePresalePrice(Number(supply) * 10 ** 6)
         .call();
       console.log(res);

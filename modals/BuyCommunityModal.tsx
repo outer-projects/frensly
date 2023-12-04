@@ -22,7 +22,7 @@ interface modalProps {
 
 export const BuyCommunityModal = observer(({ key, data, idx }: modalProps) => {
   const modalStore = useInjection(ModalStore);
-  const { community, address, checkAuth } = useInjection(Web3Store);
+  const { community, address, checkAuth, communityNotConnected } = useInjection(Web3Store);
   const { currentCommunity } = useInjection(CommunityStore);
   const [numberOfShares, setNumberOfShares] = useState<number | string>(1);
   const [currentPrice, setCurrentPrice] = useState("0");
@@ -55,7 +55,7 @@ export const BuyCommunityModal = observer(({ key, data, idx }: modalProps) => {
   const checkPrice = async (num: number) => {
     // console.log("address: ", data.user?.account?.address, "num: ", num, "num*1kk", Number(num) * 10 ** 6);
     try {
-      const res = await community.methods
+      const res = await communityNotConnected.methods
         .getBuyPriceAfterFee(data.community.pondId, Number(num) * 10 ** 6)
         .call();
       // console.log("getBuyPriceAfterFee: ", res);
@@ -68,7 +68,7 @@ export const BuyCommunityModal = observer(({ key, data, idx }: modalProps) => {
   };
   const ownCount = async () => {
     try {
-      const res = await community.methods
+      const res = await communityNotConnected.methods
         .sharesBalance(data.community.pondId, address)
         .call();
       // console.log(res);
