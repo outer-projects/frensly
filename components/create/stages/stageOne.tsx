@@ -100,6 +100,9 @@ const StageOne = observer((stage: IStageOne) => {
     }
   };
   const create = async () => {
+    if(!address) {
+      return toast.error("Connect wallet")
+    }
     if (stage.name == "" || stage.handle == "") {
       return toast.error("Fill name and handle fields");
     }

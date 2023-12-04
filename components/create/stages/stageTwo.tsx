@@ -83,6 +83,9 @@ const StageTwo = observer((stage: IStageOne) => {
   }, [supply]);
   console.log(price);
   const createPresale = async () => {
+    if(!address) {
+      return toast.error("Connect wallet")
+    }
     if (stage.name == "" || stage.handle == "") {
       return toast.error("Fill name and handle fields");
     }
