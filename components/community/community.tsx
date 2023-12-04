@@ -139,7 +139,7 @@ const Community = observer(() => {
                   <div>{currentCommunity?.name}</div>
                 </div>
                 <div className={style.configuration__user__socials}>
-                  {socials.map((social, i) => {
+                  {currentCommunity && socials.map((social, i) => {
                     let link = currentCommunity
                       ? social.link + currentCommunity[social.name]
                       : "";
