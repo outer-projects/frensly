@@ -107,6 +107,12 @@ const StageTwo = observer((stage: IStageOne) => {
     try {
       socket.emit("pondMonitor");
       setBlock(true);
+      let tt = setTimeout(() => {
+        setBlock(false);
+        toast.error(
+          "Transaction takes too long, please change rpc provider and try again"
+        );
+      }, 15000);
       const res = await community.methods
         .initPondPresale(
           true,
@@ -188,12 +194,8 @@ const StageTwo = observer((stage: IStageOne) => {
       );
       console.log(transaction);
       setContractPondId(Number(transaction?.pondId));
-      setTimeout(() => {
-        setBlock(false);
-        toast.error(
-          "Transaction takes too long, please change rpc provider and try again"
-        );
-      }, 15000);
+      clearTimeout(tt);
+      
     } catch (e) {
       setBlock(false);
       console.log(e);
