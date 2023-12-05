@@ -176,10 +176,9 @@ export class Web3Store {
   };
   @action getBalance = async () => {
     try {
+      this.signer && console.log(this.signer.transport);
       this.web3 = new Web3(
-        this.signer && !this.unsupported
-          ? (this.signer.transport as any)
-          : process.env.NEXT_PUBLIC_NODE
+        window.ethereum || (isDevelopment ? "https://bsc-testnet.publicnode.com" : "https://mainnet.base.org") 
       );
       this.frensly = new this.web3.eth.Contract(
         frenslyAbi as any,
@@ -191,7 +190,7 @@ export class Web3Store {
       // );
       this.community = new this.web3.eth.Contract(
         communityAbi as any,
-        communityContractDev
+        isDevelopment ? communityContractDev : communityContract
       );
       this.subscribeProvider();
       this.checkAuth().then((res) => {
