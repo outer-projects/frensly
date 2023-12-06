@@ -365,7 +365,7 @@ const StageOne = observer((stage: IStageOne) => {
             style.stage__one__button,
             block && style.stage__one__button__disabled
           )}
-          onClick={() => stage.setStep && stage.setStep(1)}
+          // onClick={() => stage.setStep && stage.setStep(1)}
           disabled={block}
         >
           Create pre-sale

@@ -94,7 +94,7 @@ const Communities = observer(() => {
           </div>
           <div className={style.finance}>
             <>
-              <div className={style.finance__invite} style={{marginTop:'24px'}}>Create new community</div>
+              <div className={style.finance__invite}>Create new community</div>
               <div
                 className={style.finance__invite__text}
                 style={{ marginBottom: "0px" }}
@@ -103,7 +103,10 @@ const Communities = observer(() => {
                 launch date and whitelist
               </div>
             </>
-            <div className={classNames(style.invite__code)}>
+            <div
+              className={classNames(style.invite__code)}
+              style={{ marginTop: "24px" }}
+            >
               <div>
                 <div>Community pond</div>
               </div>
@@ -115,9 +118,7 @@ const Communities = observer(() => {
             </div>
             <div className={classNames(style.invite__code)}>
               <div>
-                <div className={style.invite__code}>
-                  <div>Pre-sale community</div>
-                </div>
+                <div>Pre-sale community</div>
               </div>
 
               <div className={style.finance__comm__button}>Create pre-sale</div>
