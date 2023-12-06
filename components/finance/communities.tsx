@@ -92,36 +92,36 @@ const Communities = observer(() => {
             })}
             {/* <CommunityRow el /> */}
           </div>
-          <>
-            <div className={style.finance__invite}>Create new community</div>
-            <div
-              className={style.finance__invite__text}
-              style={{ marginBottom: "0px" }}
-            >
-              You can choose between standard community or pre-sale with launch
-              date and whitelist
-            </div>
-          </>
-          <div className={classNames(style.invite__code)}>
-            <div>
-              <div className={style.invite__code}>
+          <div className={style.finance}>
+            <>
+              <div className={style.finance__invite} style={{marginTop:'24px'}}>Create new community</div>
+              <div
+                className={style.finance__invite__text}
+                style={{ marginBottom: "0px" }}
+              >
+                You can choose between standard community or pre-sale with
+                launch date and whitelist
+              </div>
+            </>
+            <div className={classNames(style.invite__code)}>
+              <div>
                 <div>Community pond</div>
               </div>
-            </div>
-            <div>
-              <div className={style.finance__comm__button} >
-                Create community
+              <div>
+                <div className={style.finance__comm__button}>
+                  Create community
+                </div>
               </div>
             </div>
-          </div>
-          <div className={classNames(style.invite__code)}>
-            <div>
-              <div className={style.invite__code}>
-                <div>Pre-sale community</div>
+            <div className={classNames(style.invite__code)}>
+              <div>
+                <div className={style.invite__code}>
+                  <div>Pre-sale community</div>
+                </div>
               </div>
-            </div>
 
-            <div className={style.finance__comm__button}>Create pre-sale</div>
+              <div className={style.finance__comm__button}>Create pre-sale</div>
+            </div>
           </div>
         </div>
       </div>
