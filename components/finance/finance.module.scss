@@ -14,6 +14,16 @@
     margin-top: 0px;
   }
 }
+.finance__comm__button {
+  border-radius: 100px;
+  background: $green;
+  height: 40px;
+  color: $black;
+  font-family: "DMSans";
+  font-size: 16px;
+  font-style: normal;
+  font-weight: bold;
+}
 .contest {
   border-radius: 16px;
   background: rgba(166, 208, 0, 0.2);
@@ -81,13 +91,12 @@
 }
 .finance__handle {
   width: auto !important;
-  a{
+  a {
     color: var(--text-shade);
     &:hover {
       text-decoration: underline;
     }
   }
-  
 }
 .finance__link {
   border-radius: 16px;
@@ -530,8 +539,8 @@
   }
 }
 .finance__wb {
-  padding-right: 0px!important;
+  padding-right: 0px !important;
 }
 .finance__address {
-  padding-left: 0px!important;
+  padding-left: 0px !important;
 }

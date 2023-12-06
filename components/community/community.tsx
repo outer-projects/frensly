@@ -50,7 +50,7 @@ const Community = observer(() => {
   const [isHolder, setIsHolder] = useState(false);
   const [isOwner, setIsOwner] = useState(false);
   const [activeFeed, setActiveFeed] = useState(0);
-  const { user, authSummaryCheck } = useInjection(Web3Store);
+  const { user } = useInjection(Web3Store);
   const { getCommunityPosts } = useInjection(FeedStore);
   const {
     getCommunity,

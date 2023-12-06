@@ -28,7 +28,7 @@ const Communities = observer(() => {
     } else {
       return myHoldings;
     }
-  }, [activeComm,myCommunities,myHoldings]);
+  }, [activeComm, myCommunities, myHoldings]);
   useEffect(() => {
     if (active == 0) {
       router.push("/dashboard/finance");
@@ -44,7 +44,7 @@ const Communities = observer(() => {
     }
   }, [active]);
   console.log(current);
-  
+
   useEffect(() => {
     if (user && !communitiesReady) {
       setCommunitiesReady(true);
@@ -81,26 +81,42 @@ const Communities = observer(() => {
             />
           </div>
           <div className={style.finance__communities}>
-            {
-              current?.map((el, i) => {
-                return <CommunityRow key={el?.pond?._id ? el?.pond?._id : el?._id}el={el.pond ? el.pond : el} amount={el.amount ? el.amount : el.supply} />;
-              })
-            }
+            {current?.map((el, i) => {
+              return (
+                <CommunityRow
+                  key={el?.pond?._id ? el?.pond?._id : el?._id}
+                  el={el.pond ? el.pond : el}
+                  amount={el.amount ? el.amount : el.supply}
+                />
+              );
+            })}
             {/* <CommunityRow el /> */}
           </div>
         </div>
-        <div>
-          <button
-            className={classNames(
-              header.connect__button,
-              style.finance__claim__community
-            )}
-            onClick={() => {
-              router.push("/communities/create");
-            }}
+        <>
+          <div className={style.finance__invite}>Create new community</div>
+          <div
+            className={style.finance__invite__text}
+            style={{ marginBottom: "0px" }}
           >
-            Create New Community
-          </button>
+            You can choose between standard community or pre-sale with launch
+            date and whitelist
+          </div>
+        </>
+        <div className={classNames(style.invite__code)}>
+          <div>
+            <div className={style.invite__code__left}>Community pond</div>
+          </div>
+          <div>
+            <div className={style.finance__comm__button}>Create community</div>
+          </div>
+        </div>
+        <div className={classNames(style.invite__code)}>
+          <div>
+            <div className={style.invite__code__left}>Pre-sale community</div>
+          </div>
+
+          <div className={style.finance__comm__button}>Create pre-sale</div>
         </div>
       </div>
     </div>
