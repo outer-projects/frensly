@@ -55,7 +55,7 @@ const ConnectButtonCustom = observer(
 
           useEffect(() => {
             setConnected(connected as boolean);
-            // console.log("object");
+            console.log("account:", account);
             if (connected) {
               setAddress(account);
               setUserBalance(account.displayBalance as string);
