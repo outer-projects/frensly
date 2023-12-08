@@ -8,7 +8,7 @@ import { UserStore } from "../../stores/UserStore";
 import Web3Store from "../../stores/Web3Store";
 import classNames from "classnames";
 
-const CommunityRow = observer(({ el, amount }: { el: any; amount: string }) => {
+const CommunityRow = observer(({ el, amount, isOwner }: { el: any; amount: string, isOwner:boolean }) => {
   return (
     <>
       {el.handle ? (
@@ -46,13 +46,12 @@ const CommunityRow = observer(({ el, amount }: { el: any; amount: string }) => {
           </div>
         </Link>
       ) : (
-        <Link href={"/communities/update/" + el.pondId}>
+        <Link href={isOwner ? "/communities/update/" + el.pondId : ''}>
           {" "}
           <div
-            className={classNames(style.explore__user)}
-            style={{ marginLeft: "24px", marginRight: "24px", width: "auto" }}
+            className={classNames(style.explore__user, style.explore__user__empty)}
           >
-            Pond is not setted up yet. Click to set up.
+            Pond is not setted up yet. {isOwner ? 'Click to set up.' : ''}
           </div>
         </Link>
       )}

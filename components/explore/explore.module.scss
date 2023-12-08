@@ -217,6 +217,15 @@
 .disable {
   display: none;
 }
+.explore__user__empty {
+  margin-left: 24px;
+  margin-right: 24px;
+  width: auto;
+  height: 58px;
+  color: var(--text-main);
+  font-family: "DMSans";
+  font-size: 16px;
+}
 .explore__user {
   width: 100%;
   display: flex;
@@ -327,7 +336,7 @@
       }
     }
   }
-  
+
   @media (max-width: 616px) {
     flex-direction: column;
     align-items: flex-start;

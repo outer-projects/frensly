@@ -175,6 +175,7 @@ const Communities = observer(() => {
                   key={el?.pond?._id ? el?.pond?._id : el?._id}
                   el={el.pond ? el.pond : el}
                   amount={el.amount ? el.amount : el.supply}
+                  isOwner={active == 0}
                 />
               );
             })}

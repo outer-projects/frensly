@@ -10,7 +10,7 @@ import Web3Store from "../../../stores/Web3Store";
 import EthereumSvg from "../../svgs/Ethereum";
 import Key from "../../svgs/key";
 
-const CommunityRow = observer(({el}: any) => {
+const CommunityRow = observer(({el, isOwner}: any) => {
   const [usdPrice, setUsdPrice] = useState(0);
   const { user } = useInjection(Web3Store);
   const { getPriceInUsd, ethCurrency } = useInjection(UserStore);
