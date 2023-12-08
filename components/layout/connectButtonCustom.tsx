@@ -21,6 +21,8 @@ const ConnectButtonCustom = observer(
       setUserBalance,
       user,
       sign,
+      setNeedChangeWallet,
+      address,
       authSummaryCheck,
     } = useInjection(Web3Store);
     const router = useRouter();
@@ -56,6 +58,11 @@ const ConnectButtonCustom = observer(
           useEffect(() => {
             setConnected(connected as boolean);
             console.log("account:", account);
+            if (address?.toLowerCase() !== account?.address?.toLowerCase()) {
+              setNeedChangeWallet(true);
+            } else {
+              setNeedChangeWallet(false);
+            }
             if (connected) {
               setAddress(account);
               setUserBalance(account.displayBalance as string);
