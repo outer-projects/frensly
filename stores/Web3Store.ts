@@ -32,7 +32,7 @@ export class Web3Store {
   @observable user?: IProfile;
   @observable signer?: WalletClient | null = undefined;
   @observable balance: string = "0";
-  @observable web3?: any;
+  @observable web3?: Web3;
   @observable socketWeb3?: Web3;
   @observable fee: number = 0;
   @observable authorizeOpen: boolean = false;
@@ -105,7 +105,7 @@ export class Web3Store {
     }
   };
   @action subscribeProvider = () => {
-    this.web3?.on("accountsChanged", () => {
+    this.web3?.currentProvider?.on("accountsChanged", () => {
       if (
         this.address?.toLowerCase() == this.user?.account?.address.toLowerCase()
       ) {

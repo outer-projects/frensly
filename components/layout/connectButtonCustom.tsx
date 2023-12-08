@@ -58,7 +58,13 @@ const ConnectButtonCustom = observer(
           useEffect(() => {
             setConnected(connected as boolean);
             console.log("account:", account);
-            
+            // if (
+            //   user?.account?.address.toLowerCase() !== account?.address?.toLowerCase()
+            // ) {
+            //   setNeedChangeWallet(true);
+            // } else {
+            //   setNeedChangeWallet(false);
+            // }
             if (connected) {
               setAddress(account);
               setUserBalance(account.displayBalance as string);
