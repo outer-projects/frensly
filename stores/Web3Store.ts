@@ -109,7 +109,7 @@ export class Web3Store {
     this.web3?.currentProvider?.on("accountsChanged", (account) => {
       console.log("change",account, this.address?.toLowerCase(), this.user?.account?.address.toLowerCase());
       if (
-        account[0] == this.user?.account?.address.toLowerCase()
+        account[0].toLowerCase() == this.user?.account?.address.toLowerCase()
       ) {
         // console.log("wallet wrong?");
         this.needToChangeWallet = false;
