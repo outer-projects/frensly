@@ -106,8 +106,8 @@ export class Web3Store {
   };
   @action subscribeProvider = () => {
     console.log("subscribeProvider");
-    this.web3?.currentProvider?.on("accountsChanged", () => {
-      console.log("change", this.address?.toLowerCase(), this.user?.account?.address.toLowerCase());
+    this.web3?.currentProvider?.on("accountsChanged", (account) => {
+      console.log("change",account, this.address?.toLowerCase(), this.user?.account?.address.toLowerCase());
       if (
         this.address?.toLowerCase() == this.user?.account?.address.toLowerCase()
       ) {
