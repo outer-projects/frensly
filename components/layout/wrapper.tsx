@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import Header from "./header";
 import { observer } from "mobx-react";
 import style from "./wrapper.module.scss";
@@ -26,7 +26,9 @@ const Wrapper = observer(({ children }: any) => {
     setAuthSummaryCheck,
     init,
     setInit,
+    getBalance,
   } = useInjection(Web3Store);
+  const [check, setCheck] = useState(false);
   const { setWrapperBottom } = useInjection(UserStore);
   const isInit = async () => {
     // console.log(address, user?.account?.address);
@@ -37,13 +39,17 @@ const Wrapper = observer(({ children }: any) => {
     }
     if (user?.account?.isInitialized) {
       setInit(true);
+      setTimeout(() => {
+        getBalance();
+      }, 1000);
     }
   };
   const ready = useMemo(() => init && user?.account, [init, user?.account]);
 
   const onScroll = (e: any) => {
     if (e?.target?.documentElement) {
-      const { scrollTop, scrollHeight, clientHeight } = e?.target.documentElement;
+      const { scrollTop, scrollHeight, clientHeight } =
+        e?.target.documentElement;
 
       const isWrapperBottom = scrollTop + clientHeight >= scrollHeight;
       // console.log(scrollTop + clientHeight, scrollHeight);
@@ -76,7 +82,8 @@ const Wrapper = observer(({ children }: any) => {
   //   }
   // }, []);
   useEffect(() => {
-    if (web3 && address && user?.account && frensly) {
+    if (web3 && address && user?.account && frensly && !check) {
+      setCheck(true);
       isInit();
       // getNotifications();
     }

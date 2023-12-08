@@ -19,7 +19,7 @@ const Communities = observer(() => {
   const commtypes = ["Created", "Holding"];
   const [communitiesReady, setCommunitiesReady] = useState(false);
   const [contractPondId,setContractPondId] = useState<number|null>(null);
-  const { user, community, web3, address } = useInjection(Web3Store);
+  const { user, community, web3, address, getBalance } = useInjection(Web3Store);
   const { getMyCommunities, myCommunities, getMyHoldings, myHoldings } =
     useInjection(UserStore);
   const router = useRouter();

@@ -98,6 +98,7 @@ export class Web3Store {
   @action setSigner = (signer?: WalletClient | null, unsupported?: boolean) => {
     this.signer = signer;
     this.unsupported = unsupported;
+    console.log(signer, !this.checked);
     if (signer && !this.checked) {
       this.checked = true;
       this.getBalance();
