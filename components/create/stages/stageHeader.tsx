@@ -2,7 +2,7 @@ import { IStageOne } from "./stageOne";
 import style from "../create.module.scss";
 import { socials } from "../../community/community";
 import communityStyle from "../../community/community.module.scss";
-import { use, useEffect, useMemo, useState } from "react";
+import { useMemo } from "react";
 
 const StageHeader = ({ stage }: { stage: IStageOne }) => {
   const cover = useMemo(() => {

@@ -16,50 +16,25 @@ import axios from "axios";
 import { prefix } from "../../../utils/config";
 import StageHeader from "./stageHeader";
 import { SocketContext } from "../../../utils/socket";
-const StageTwo = observer((stage: IStageOne) => {
+const StageTwo = observer(() => {
   const { user, community, address, web3, communityNotConnected } = useInjection(Web3Store);
-  const { updateCommunity } = useInjection(CommunityStore);
   const [supply, setSupply] = useState("");
   const [block, setBlock] = useState(false);
   const [maxAllocation, setMaxAllocation] = useState("");
   const [ratio, setRatio] = useState("");
   const [price, setPrice] = useState(0);
-  const darkMode = useDarkMode();
   const [contractPondId, setContractPondId] = useState<number | null>(null);
   const [timeStart, setTimeStart] = useState("");
   const [timeFinish, setTimeFinish] = useState("");
   const router = useRouter();
   const socket = useContext(SocketContext);
   useEffect(() => {
-    if (stage.backendPondId && contractPondId) {
-      createPond();
+    if (contractPondId) {
+      router.push("/communities/update/" + contractPondId);
     }
-  }, [stage.backendPondId, contractPondId]);
-  console.log(stage.backendPondId, contractPondId);
-  const createPond = async () => {
-    if (stage.backendPondId == contractPondId) {
-      updateCommunity({
-        pondId: Number(contractPondId),
-        twitter: stage.twitter,
-        description: stage.description,
-        url: stage.webSite,
-        name: stage.name,
-        handle: stage.handle as string,
-        telegram: stage.tg,
-        file: stage.image,
-        cover: stage.cover,
-        discord: stage.discord,
-      }).then((res) => {
-        if (res) {
-          setBlock(false);
-          router.push("/explore/launchpad");
-        } else {
-          setBlock(false);
-          toast.error("Error");
-        }
-      });
-    }
-  };
+  }, [contractPondId]);
+  console.log(contractPondId);
+
   const getPrice = async () => {
     try {
       const res = await communityNotConnected.methods
@@ -85,15 +60,6 @@ const StageTwo = observer((stage: IStageOne) => {
   const createPresale = async () => {
     if(!address) {
       return toast.error("Connect wallet")
-    }
-    if (stage.name == "" || stage.handle == "") {
-      return toast.error("Fill name and handle fields");
-    }
-    if (stage.image == null) {
-      return toast.error("Upload image");
-    }
-    if (stage.handle.includes(" ")) {
-      return toast.error("Handle can't contain spaces");
     }
     if (Number(maxAllocation) >= Number(supply)) {
       return toast.error("Max allocation can't be higher than supply");
@@ -203,20 +169,8 @@ const StageTwo = observer((stage: IStageOne) => {
   };
   return (
     <>
-      <div className={style.stage__title}>
-        <img
-          style={{
-            filter: `invert(${darkMode.value ? "1" : "0"})`,
-          }}
-          onClick={() => {
-            stage.setStep && stage.setStep(0);
-          }}
-          src="../icons/arrow_back.svg"
-        />
-        Presale configurator for
-      </div>
       <div className={style.stage__one}>
-        <StageHeader stage={stage} />
+        {/* <StageHeader stage={stage} /> */}
         <div className={finance.finance__title__second}>Pre-sale settings </div>
         <div
           className={classNames(

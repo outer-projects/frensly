@@ -12,10 +12,9 @@ import axios from "axios";
 import { prefix } from "../../../utils/config";
 import { CommunityStore } from "../../../stores/CommunityStore";
 import { toast } from "react-toastify";
-import { socials } from "../../community/community";
-import communityStyle from "../../community/community.module.scss";
 import StageHeader from "./stageHeader";
 import { SocketContext, socket } from "../../../utils/socket";
+
 export interface IStageOne {
   setStep?: (step: number) => void;
   name: string;
@@ -39,10 +38,10 @@ export interface IStageOne {
   backendPondId?: number | null;
 }
 const StageOne = observer((stage: IStageOne) => {
-  const { user, community, address, web3 } = useInjection(Web3Store);
+  const { address } = useInjection(Web3Store);
   const { updateCommunity } = useInjection(CommunityStore);
   const router = useRouter();
-  const [contractPondId, setContractPondId] = useState<number | null>(null);
+  const { id } = router.query;
 
   const [isAvailable, setIsAvailable] = useState(false); // [true, false, false
   const [block, setBlock] = useState(false);
@@ -64,21 +63,41 @@ const StageOne = observer((stage: IStageOne) => {
     };
     return clear();
   };
-  console.log(stage.backendPondId, contractPondId);
   useEffect(() => {
     if (stage.handle.length !== 0) {
       searchDeb(checkHandle, 700);
     }
   }, [stage.handle]);
-  useEffect(() => {
-    if (stage.backendPondId && contractPondId) {
-      createPond();
-    }
-  }, [stage.backendPondId, contractPondId]);
+  // useEffect(() => {
+  //   if (stage.backendPondId) {
+  //     createPond();
+  //   }
+  // }, [stage.backendPondId]);
   const createPond = async () => {
-    if (stage.backendPondId == contractPondId) {
+    if(!address) {
+      return toast.error("Connect wallet")
+    }
+    if (stage.name == "" || stage.handle == "") {
+      return toast.error("Fill name and handle fields");
+    }
+    if (stage.image == null) {
+      return toast.error("Upload image");
+    }
+    if (stage.image.size >= 50000000) {
+      return toast.error("Image size must be less than 50mb");
+    }
+    if (stage?.cover && stage?.cover.size >= 50000000) {
+      return toast.error("Banner size must be less than 50mb");
+    }
+    if (!isAvailable) {
+      return toast.error("Handle is taken by another user");
+    }
+    if (stage.handle.includes(" ")) {
+      return toast.error("Handle can't contain spaces");
+    }
+    if (stage.backendPondId) {
       updateCommunity({
-        pondId: Number(contractPondId),
+        pondId: Number(id),
         twitter: stage.twitter,
         description: stage.description,
         url: stage.webSite,
@@ -99,116 +118,7 @@ const StageOne = observer((stage: IStageOne) => {
       });
     }
   };
-  const create = async () => {
-    if(!address) {
-      return toast.error("Connect wallet")
-    }
-    if (stage.name == "" || stage.handle == "") {
-      return toast.error("Fill name and handle fields");
-    }
-    if (stage.image == null) {
-      return toast.error("Upload image");
-    }
-    if (stage.image.size >= 50000000) {
-      return toast.error("Image size must be less than 50mb");
-    }
-
-    if (stage?.cover && stage?.cover.size >= 50000000) {
-      return toast.error("Banner size must be less than 50mb");
-    }
-    if (!isAvailable) {
-      return toast.error("Handle is taken by another user");
-    }
-    if (stage.handle.includes(" ")) {
-      return toast.error("Handle can't contain spaces");
-    }
-    try {
-      socket.emit("pondMonitor");
-
-      setBlock(true);
-      let tt = setTimeout(() => {
-        setBlock(false);
-        toast.error(
-          "Transaction takes too long, please change rpc provider and try again"
-        );
-      }, 15000);
-      const res = await community.methods.initPond().send({
-        from: address,
-      });
-      console.log(res);
-      let transaction = web3?.eth.abi.decodeLog(
-        [
-          {
-            indexed: true,
-            internalType: "uint256",
-            name: "pondId",
-            type: "uint256",
-          },
-          {
-            indexed: true,
-            internalType: "address",
-            name: "creator",
-            type: "address",
-          },
-          {
-            indexed: false,
-            internalType: "bool",
-            name: "isPresale",
-            type: "bool",
-          },
-          {
-            indexed: false,
-            internalType: "bool",
-            name: "isRestricted",
-            type: "bool",
-          },
-          {
-            indexed: false,
-            internalType: "uint256",
-            name: "presaleStart",
-            type: "uint256",
-          },
-          {
-            indexed: false,
-            internalType: "uint256",
-            name: "presaleEnd",
-            type: "uint256",
-          },
-          {
-            indexed: false,
-            internalType: "uint256",
-            name: "presaleGoal",
-            type: "uint256",
-          },
-          {
-            indexed: false,
-            internalType: "uint256",
-            name: "maxAllocation",
-            type: "uint256",
-          },
-          {
-            indexed: false,
-            internalType: "uint256",
-            name: "presalePrice",
-            type: "uint256",
-          },
-          {
-            indexed: false,
-            internalType: "uint256",
-            name: "liquidityFee",
-            type: "uint256",
-          },
-        ],
-        res.logs[0].data,
-        [res.logs[0].topics[0], res.logs[0].topics[1], res.logs[0].topics[2]]
-      );
-      setContractPondId(Number(transaction?.pondId));
-      clearTimeout(tt);
-    } catch (e) {
-      setBlock(false);
-      console.log(e);
-    }
-  };
+  
   return (
     <div className={style.stage__one}>
       <StageHeader stage={stage} />
@@ -355,7 +265,7 @@ const StageOne = observer((stage: IStageOne) => {
             block && style.stage__one__button__disabled
           )}
           disabled={block}
-          onClick={create}
+          onClick={createPond}
         >
           Create
         </button>

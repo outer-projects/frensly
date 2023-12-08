@@ -18,7 +18,8 @@ const Communities = observer(() => {
   const [activeComm, setActiveComm] = useState(0);
   const commtypes = ["Created", "Holding"];
   const [communitiesReady, setCommunitiesReady] = useState(false);
-  const { user } = useInjection(Web3Store);
+  const [contractPondId,setContractPondId] = useState<number|null>(null);
+  const { user, community, web3, address } = useInjection(Web3Store);
   const { getMyCommunities, myCommunities, getMyHoldings, myHoldings } =
     useInjection(UserStore);
   const router = useRouter();
@@ -29,6 +30,12 @@ const Communities = observer(() => {
       return myHoldings;
     }
   }, [activeComm, myCommunities, myHoldings]);
+  useEffect(() => {
+    if(contractPondId){
+      router.push("/communities/update/"+contractPondId);
+    }
+  },[contractPondId])
+
   useEffect(() => {
     if (active == 0) {
       router.push("/dashboard/finance");
@@ -44,7 +51,88 @@ const Communities = observer(() => {
     }
   }, [active]);
   console.log(current);
+  const create = async () => {
 
+    try {
+      const res = await community.methods.initPond().send({
+        from: address,
+      });
+      console.log(res);
+      let transaction = web3?.eth.abi.decodeLog(
+        [
+          {
+            indexed: true,
+            internalType: "uint256",
+            name: "pondId",
+            type: "uint256",
+          },
+          {
+            indexed: true,
+            internalType: "address",
+            name: "creator",
+            type: "address",
+          },
+          {
+            indexed: false,
+            internalType: "bool",
+            name: "isPresale",
+            type: "bool",
+          },
+          {
+            indexed: false,
+            internalType: "bool",
+            name: "isRestricted",
+            type: "bool",
+          },
+          {
+            indexed: false,
+            internalType: "uint256",
+            name: "presaleStart",
+            type: "uint256",
+          },
+          {
+            indexed: false,
+            internalType: "uint256",
+            name: "presaleEnd",
+            type: "uint256",
+          },
+          {
+            indexed: false,
+            internalType: "uint256",
+            name: "presaleGoal",
+            type: "uint256",
+          },
+          {
+            indexed: false,
+            internalType: "uint256",
+            name: "maxAllocation",
+            type: "uint256",
+          },
+          {
+            indexed: false,
+            internalType: "uint256",
+            name: "presalePrice",
+            type: "uint256",
+          },
+          {
+            indexed: false,
+            internalType: "uint256",
+            name: "liquidityFee",
+            type: "uint256",
+          },
+        ],
+        res.logs[0].data,
+        [res.logs[0].topics[0], res.logs[0].topics[1], res.logs[0].topics[2]]
+      );
+      setContractPondId(Number(transaction?.pondId));
+    } catch (e) {
+
+      console.log(e);
+    }
+  };
+  const createPresale = () => {
+    router.push("/communities/create-presale");
+  };
   useEffect(() => {
     if (user && !communitiesReady) {
       setCommunitiesReady(true);
@@ -111,7 +199,7 @@ const Communities = observer(() => {
                 <div>Community pond</div>
               </div>
               <div>
-                <div className={style.finance__comm__button}>
+                <div className={style.finance__comm__button} onClick={create}>
                   Create community
                 </div>
               </div>
@@ -121,7 +209,7 @@ const Communities = observer(() => {
                 <div>Pre-sale community</div>
               </div>
 
-              <div className={style.finance__comm__button}>Create pre-sale</div>
+              <div className={style.finance__comm__button} onClick={createPresale}>Create pre-sale</div>
             </div>
           </div>
         </div>
