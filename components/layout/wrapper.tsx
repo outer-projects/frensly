@@ -31,7 +31,7 @@ const Wrapper = observer(({ children }: any) => {
   const [check, setCheck] = useState(false);
   const { setWrapperBottom } = useInjection(UserStore);
   const isInit = async () => {
-    // console.log(address, user?.account?.address);
+    console.log("address, user",address, user?.account?.address);
     if (address?.toLowerCase() !== user?.account?.address) {
       setNeedChangeWallet(true);
     } else {
