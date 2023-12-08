@@ -1,10 +1,7 @@
-import { useContext, useEffect, useState } from "react";
-import CreationProgressBar from "./components/creationProgressBar";
+import { useContext, useState } from "react";
 import StageOne from "./stages/stageOne";
-import StageTwo from "./stages/stageTwo";
 import style from "./create.module.scss";
 import { SocketContext } from "../../utils/socket";
-import { observable } from "mobx";
 import { observer } from "mobx-react";
 const Creation = observer(() => {
   const [name, setName] = useState("");
@@ -16,23 +13,8 @@ const Creation = observer(() => {
   const socket = useContext(SocketContext);
   const [handle, setHandle] = useState("");
   const [image, setImage] = useState<null | File>(null);
-  const [backendPondId, setBackendPondId] = useState<number | null>(null);
   const [cover, setCover] = useState<null | File>(null);
-  useEffect(() => {
-    if (socket) {
-      console.log(socket);
-      socket.on("newPond", (pond: any) => {
-        console.log(pond);
-        setBackendPondId(Number(pond.pondId));
-      });
-    }
-  }, [socket]);
-  useEffect(() => {
-    return () => {
-      socket.emit("leaveMonitor");
-      socket.off("newPond");
-    };
-  }, []);
+
   return (
     <div className={style.stage__one__create}>
       {/* <CreationProgressBar step={step} /> */}
@@ -56,7 +38,6 @@ const Creation = observer(() => {
         setTg={setTg}
         handle={handle}
         setHandle={setHandle}
-        backendPondId={backendPondId}
       />
     </div>
   );

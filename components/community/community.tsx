@@ -92,11 +92,11 @@ const Community = observer(() => {
       )[0]?.amount
     );
   }, [communityHolders]);
-  console.log(communityHolders);
+  
   const buyShares = () => {
     showModal(ModalsEnum.TradeCommunity, { community: currentCommunity });
   };
-  console.log(communityHolders);
+
   return (
     <div className={style.configuration}>
       <div className={style.first__block}>

@@ -22,7 +22,7 @@ const Upload = ({
             }
           />
           <button className={style.upload__button}>
-            <img src="../icons/upload.svg" style={{ marginRight: "8px" }} />
+            <img src="../../icons/upload.svg" style={{ marginRight: "8px" }} />
             {text}{" "}
           </button>
         </div>

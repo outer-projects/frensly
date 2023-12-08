@@ -95,7 +95,7 @@ const StageOne = observer((stage: IStageOne) => {
     if (stage.handle.includes(" ")) {
       return toast.error("Handle can't contain spaces");
     }
-    if (stage.backendPondId) {
+    if (id) {
       updateCommunity({
         pondId: Number(id),
         twitter: stage.twitter,

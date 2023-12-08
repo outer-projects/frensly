@@ -7,15 +7,10 @@ import finance from "../../finance/finance.module.scss";
 import header from "../../layout/header.module.scss";
 import classNames from "classnames";
 import { useRouter } from "next/router";
-import { CommunityStore } from "../../../stores/CommunityStore";
-import { IStageOne } from "./stageOne";
-import { toast } from "react-toastify";
-import useDarkMode from "use-dark-mode";
+import { toast } from "react-toastify";;
 import { fromWeiToEth, toBNJS } from "../../../utils/utilities";
-import axios from "axios";
-import { prefix } from "../../../utils/config";
-import StageHeader from "./stageHeader";
 import { SocketContext } from "../../../utils/socket";
+
 const StageTwo = observer(() => {
   const { user, community, address, web3, communityNotConnected } = useInjection(Web3Store);
   const [supply, setSupply] = useState("");
