@@ -153,7 +153,8 @@ const StageTwo = observer(() => {
         res.logs[0].data,
         [res.logs[0].topics[0], res.logs[0].topics[1], res.logs[0].topics[2]]
       );
-      console.log(transaction);
+      // console.log(transaction)
+      localStorage.setItem("type", "presale");
       setContractPondId(Number(transaction?.pondId));
       clearTimeout(tt);
       
@@ -290,7 +291,7 @@ const StageTwo = observer(() => {
               style.stage__one__button,
               block && style.stage__one__button__disabled
             )}
-            onClick={() => createPresale()}
+            onClick={createPresale}
             disabled={block}
           >
             Create pre-sale

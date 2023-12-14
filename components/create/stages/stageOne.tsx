@@ -74,8 +74,8 @@ const StageOne = observer((stage: IStageOne) => {
   //   }
   // }, [stage.backendPondId]);
   const createPond = async () => {
-    if(!address) {
-      return toast.error("Connect wallet")
+    if (!address) {
+      return toast.error("Connect wallet");
     }
     if (stage.name == "" || stage.handle == "") {
       return toast.error("Fill name and handle fields");
@@ -109,8 +109,20 @@ const StageOne = observer((stage: IStageOne) => {
         discord: stage.discord,
       }).then((res) => {
         if (res) {
-          setBlock(false);
-          router.push("/explore/community");
+          setTimeout(() => {
+            setBlock(false);
+            let type = localStorage.getItem("type");
+            if (type == "community") {
+              localStorage.removeItem("type");
+              router.push("/communities/" + stage.handle);
+            } else if (type == "presale") {
+              localStorage.removeItem("type");
+              router.push("/presales/" + stage.handle);
+            } else {
+              localStorage.removeItem("type");
+              router.push("/explore/community");
+            }
+          }, 1000);
         } else {
           setBlock(false);
           toast.error("Error");
@@ -118,7 +130,7 @@ const StageOne = observer((stage: IStageOne) => {
       });
     }
   };
-  
+
   return (
     <div className={style.stage__one}>
       <StageHeader stage={stage} />

@@ -124,6 +124,7 @@ const Communities = observer(() => {
         res.logs[0].data,
         [res.logs[0].topics[0], res.logs[0].topics[1], res.logs[0].topics[2]]
       );
+      localStorage.setItem("type", "community");
       setContractPondId(Number(transaction?.pondId));
     } catch (e) {
 
@@ -131,6 +132,7 @@ const Communities = observer(() => {
     }
   };
   const createPresale = () => {
+    
     router.push("/communities/create-presale");
   };
   useEffect(() => {
