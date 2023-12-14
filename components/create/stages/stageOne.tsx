@@ -269,7 +269,7 @@ const StageOne = observer((stage: IStageOne) => {
         >
           Create
         </button>
-        <button
+        {/* <button
           className={classNames(
             header.connect__button,
             style.stage__one__button,
@@ -279,7 +279,7 @@ const StageOne = observer((stage: IStageOne) => {
           disabled={block}
         >
           Create pre-sale
-        </button>
+        </button> */}
       </div>
     </div>
   );
