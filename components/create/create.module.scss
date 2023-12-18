@@ -142,8 +142,8 @@
     justify-content: center;
   }
   @media (max-width: 616px) {
-    margin-top: 12px;
-    margin-bottom: 12px;
+    margin-top: 32px;
+    margin-bottom: 16px;
     
   }
 }
@@ -163,7 +163,7 @@
   @media (max-width: 700px) {
     // padding: 8px;
     min-width: 90vw;
-    width: 90vw;
+    width: calc(100vw - 16px);
   }
 }
 .stage__one__col {

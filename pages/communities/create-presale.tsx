@@ -9,7 +9,7 @@ const Create = () => {
   const { unreadCount } = useInjection(UserStore);
   return (
     <AuthPageWrap>
-      <div className={style.explore__page}>
+      <div className={style.create__page}>
         <Head>
           <title>
             {unreadCount !== 0 ? `(${unreadCount})` : ""} Create | Frensly
