@@ -7,6 +7,7 @@ export default function Document() {
         <link rel="icon" href="/logo_icon.svg" />
         <link rel="icon" type="image/png" href="/logo_icon.svg" />
         <link rel="icon" type="image/png" href="/logo_icon.svg" />
+        <link rel="manifest" href="/manifest.json" />
         <link rel="apple-touch-icon" href="/logo_icon.svg" />
       </Head>
       <body>
@@ -16,4 +17,3 @@ export default function Document() {
     </Html>
   );
 }
-
