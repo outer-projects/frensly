@@ -56,7 +56,7 @@ const Whitelist = observer(
     };
     useEffect(() => {
       if (id && address) {
-        getPresale(id as string, address as string);
+        getPresale(id as string);
       }
     }, [id, address]);
     return (
