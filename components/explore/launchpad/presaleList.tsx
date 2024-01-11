@@ -1,5 +1,5 @@
 import { observer } from "mobx-react";
-import { use, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { CommunityStore } from "../../../stores/CommunityStore";
 import { useInjection } from "inversify-react";
 import style from "../explore.module.scss";

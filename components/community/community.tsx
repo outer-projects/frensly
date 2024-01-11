@@ -3,7 +3,7 @@ import style from "./community.module.scss";
 import stage__style from "../create/create.module.scss";
 import header from "../layout/header.module.scss";
 import buy from "../../modals/buy.module.scss";
-import { use, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import classNames from "classnames";
 import SubscriptionProgressBar from "./subscriptionProgressBar";
 import { useInjection } from "inversify-react";

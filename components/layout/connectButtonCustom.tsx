@@ -1,7 +1,7 @@
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 import { useInjection } from "inversify-react";
 import { observer } from "mobx-react";
-import { use, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Web3Store from "../../stores/Web3Store";
 import { SeparatedConnect } from "./separatedConnect";
 import { useWalletClient } from "wagmi";
