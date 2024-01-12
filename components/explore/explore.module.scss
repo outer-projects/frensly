@@ -335,6 +335,12 @@
         text-decoration: underline;
       }
     }
+    .explore__user__link {
+      margin-left: 4px;
+      @media (max-width: 616px) {
+        margin-left: 0px!important;
+      }
+    }
   }
 
   @media (max-width: 616px) {

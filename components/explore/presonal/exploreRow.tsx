@@ -37,11 +37,12 @@ const ExploreRow = observer(
               </div>
               <div className={style.explore__user__name}>
                 <div>{shortNick(el.twitterName)}</div>
-                <span>
+                <span className={style.explore__user__link}>
                   <a
                     href={"https://twitter.com/" + el.twitterHandle}
                     target="_blank"
                     rel="noreferrer"
+                    className={style.explore__user__link}
                     onClick={(e) => {
                       e.stopPropagation();
                     }}

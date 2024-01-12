@@ -1,43 +1,43 @@
 {
-    "name": "Frensly",
-    "short_name": "Frensly",
-    "theme_color": "#2196f3",
-    "background_color": "#2196f3",
-    "display": "standalone",
-    "orientation": "portrait",
-    "scope": "/",
-    "start_url": "/",
-    "icons": [
-      {
-        "src": "logo/icon48.png",
-        "sizes": "48x48",
-        "type": "image/png",
-        "purpose": "maskable any"
-      },
-      {
-        "src": "logo/icon72.png",
-        "sizes": "72x72",
-        "type": "image/png",
-        "purpose": "maskable any"
-      },
-      {
-        "src": "logo/icon96.png",
-        "sizes": "96x96",
-        "type": "image/png",
-        "purpose": "maskable any"
-      },
-      {
-        "src": "logo/icon128.png",
-        "sizes": "128x128",
-        "type": "image/png",
-        "purpose": "maskable any"
-      },
-      {
-        "src": "logo/icon144.png",
-        "sizes": "144x144",
-        "type": "image/png",
-        "purpose": "maskable any"
-      }
-    ],
-    "splash_pages": null
-  }
+  "name": "Frensly",
+  "short_name": "Frensly",
+  "theme_color": "#F8F8F8",
+  "background_color": "#F8F8F8",
+  "display": "standalone",
+  "orientation": "portrait",
+  "scope": "/",
+  "start_url": "/",
+  "icons": [
+    {
+      "src": "logo/icon48.png",
+      "sizes": "48x48",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "logo/icon72.png",
+      "sizes": "72x72",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "logo/icon96.png",
+      "sizes": "96x96",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "logo/icon128.png",
+      "sizes": "128x128",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "logo/icon144.png",
+      "sizes": "144x144",
+      "type": "image/png",
+      "purpose": "maskable any"
+    }
+  ],
+  "splash_pages": null
+}
