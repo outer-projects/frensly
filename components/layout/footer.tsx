@@ -82,7 +82,7 @@ const Footer = observer(() => {
                 console.log(el);
                 return <div>{el[0] + ":" + el[1]}</div>;
               })}
-              <>isPWA: " {pwa}</>
+              <>isPWA: {pwa.toString()}</>
             </div>
           </footer>
         </div>
