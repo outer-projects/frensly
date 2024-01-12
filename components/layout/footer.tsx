@@ -37,6 +37,8 @@ const Footer = observer(() => {
     }
   }, [router.asPath]);
   console.log("deviceType", deviceDetect(getUA), deviceType);
+  const isPWA = document.querySelector('[name="apple-mobile-web-app-capable"]') ||
+              document.querySelector('[name="mobile-web-app-capable"]');
   return (
     <>
       {!disabled && (
@@ -72,6 +74,7 @@ const Footer = observer(() => {
               }
             })}
             <div>
+              <>{isPWA ? isPWA : ''}</>
             {Object.entries(deviceDetect(getUA)).map((el) => {
               console.log(el);
               return <div>{el[0] + ":" + el[1]}</div>;

@@ -16,7 +16,6 @@ import { ChatStore } from "../../stores/ChatStore";
 import useDarkMode from "use-dark-mode";
 import Moon from "../svgs/moon";
 import Sun from "../svgs/sun";
-import {deviceDetect, deviceType} from 'react-device-detect';
 
 const Header = observer(() => {
   const router = useRouter();
