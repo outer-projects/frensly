@@ -16,6 +16,7 @@ import { ChatStore } from "../../stores/ChatStore";
 import useDarkMode from "use-dark-mode";
 import Moon from "../svgs/moon";
 import Sun from "../svgs/sun";
+import {deviceDetect, deviceType} from 'react-device-detect';
 
 const Header = observer(() => {
   const router = useRouter();
@@ -80,10 +81,16 @@ const Header = observer(() => {
       )}
     >
       <header className={style.header}>
+        
         <Link href={"../../feed"}>
           <img src={!darkMode.value ? "../logo.svg" : "../logo_white.svg"} />
         </Link>
-        <div className={classNames(style.header__row, !authSummaryCheck && style.header__row__closed)}>
+        <div
+          className={classNames(
+            style.header__row,
+            !authSummaryCheck && style.header__row__closed
+          )}
+        >
           {headerText.map((el, i) => {
             // console.log(el.link == "/profile");
             if (authSummaryCheck || i <= 1) {
@@ -129,15 +136,13 @@ const Header = observer(() => {
                 <div
                   ref={ref}
                   style={{ display: "flex", alignItems: "flex-end" }}
-                  onClick={() => {
-                    if (unreadCount > 0) {
-                      setNots(!nots);
-                    } else {
-                      router.push("../../notifications");
-                    }
-                  }}
                 >
-                  <Bell isActive={false} />
+                  <Bell
+                    isActive={false}
+                    notsMob={notsMob}
+                    setNotsMob={setNotsMob}
+                    unreadCount={unreadCount}
+                  />
                 </div>
               )}
               <div className={style.header__count__contain}>
@@ -155,16 +160,7 @@ const Header = observer(() => {
       <header className={style.header__mobile}>
         <ConnectButtonCustom isHeader />
         <div className={style.header__user}>
-          <div
-            onClick={() => {
-              if (unreadCount > 0) {
-                setNotsMob(!notsMob);
-              } else {
-                router.push("../../notifications");
-              }
-            }}
-            style={{ cursor: "pointer" }}
-          >
+          <div style={{ cursor: "pointer" }}>
             <div style={{ display: "flex", alignItems: "flex-end" }}>
               <button
                 className={classNames(style.theme__btn)}
@@ -173,7 +169,14 @@ const Header = observer(() => {
                 {darkMode.value && <Moon />}
                 {!darkMode.value && <Sun />}
               </button>
-              {authSummaryCheck && <Bell isActive={false} />}
+              {authSummaryCheck && (
+                <Bell
+                  isActive={false}
+                  notsMob={notsMob}
+                  setNotsMob={setNotsMob}
+                  unreadCount={unreadCount}
+                />
+              )}
 
               {unreadCount != 0 && (
                 <div className={style.header__count}>{unreadCount}</div>

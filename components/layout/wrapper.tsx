@@ -13,6 +13,7 @@ import header from "./header.module.scss";
 import classNames from "classnames";
 import { useRouter } from "next/router";
 import { UserStore } from "../../stores/UserStore";
+import { deviceDetect, deviceType } from "react-device-detect";
 
 const Wrapper = observer(({ children }: any) => {
   const {
@@ -63,6 +64,7 @@ const Wrapper = observer(({ children }: any) => {
   };
   useEffect(() => {
     window.addEventListener("scroll", onScroll);
+   
     return () => {
       window.removeEventListener("scroll", onScroll, false);
     };
@@ -81,6 +83,7 @@ const Wrapper = observer(({ children }: any) => {
   //     router.push("/auth");
   //   }
   // }, []);
+
   useEffect(() => {
     if (web3 && address && user?.account && frensly && !check) {
       setCheck(true);

@@ -1,7 +1,20 @@
+import { useRouter } from "next/router";
+import { useState } from "react";
 import useDarkMode from "use-dark-mode";
 
-const Bell = ({ isActive }: { isActive: boolean }) => {
+const Bell = ({
+  isActive,
+  unreadCount,
+  notsMob,
+  setNotsMob,
+}: {
+  isActive: boolean;
+  unreadCount: number;
+  notsMob: boolean;
+  setNotsMob: (b:boolean) => void;
+}) => {
   const darkMode = useDarkMode();
+  const router = useRouter();
   return (
     <svg
       width="24"
@@ -9,6 +22,13 @@ const Bell = ({ isActive }: { isActive: boolean }) => {
       viewBox="0 0 24 24"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
+      onClick={() => {
+        if (unreadCount > 0) {
+          setNotsMob(!notsMob);
+        } else {
+          router.push("../../notifications");
+        }
+      }}
     >
       <path
         d="M12 1.19995C7.51798 1.19995 4.70001 4.59943 4.70001 8.49995C4.70001 8.81074 4.71081 9.11915 4.7206 9.39878C4.72473 9.51674 4.72868 9.62965 4.73157 9.73538C4.74177 10.1095 4.74016 10.4232 4.70587 10.7089C4.64252 11.2366 4.46864 11.6823 3.96203 12.145L3.94864 12.1572L3.93582 12.17C2.99406 13.1118 2.59805 14.1642 2.9826 15.2112C3.32746 16.1501 4.22282 16.8256 5.16357 17.3048C7.08642 18.2842 9.90911 18.7999 12 18.7999C14.0909 18.7999 16.9136 18.2842 18.8364 17.3048C19.7772 16.8256 20.6726 16.1501 21.0174 15.2112C21.402 14.1642 21.0059 13.1118 20.0642 12.17L20.0514 12.1572L20.038 12.145C19.5314 11.6823 19.3575 11.2366 19.2942 10.7089C19.2599 10.4232 19.2582 10.1095 19.2685 9.73539C19.2713 9.62967 19.2753 9.51684 19.2794 9.39889C19.2892 9.11931 19.3 8.81068 19.3 8.49995C19.3 4.59943 16.482 1.19995 12 1.19995Z"
