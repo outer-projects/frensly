@@ -14,6 +14,7 @@ import classNames from "classnames";
 import { useRouter } from "next/router";
 import { UserStore } from "../../stores/UserStore";
 import { deviceDetect, deviceType } from "react-device-detect";
+import useDarkMode from "use-dark-mode";
 
 const Wrapper = observer(({ children }: any) => {
   const {
@@ -31,6 +32,14 @@ const Wrapper = observer(({ children }: any) => {
   } = useInjection(Web3Store);
   const [check, setCheck] = useState(false);
   const { setWrapperBottom } = useInjection(UserStore);
+  const darkMode = useDarkMode()
+  useEffect(()=>{
+    if(darkMode.value && document) {
+      document.querySelector('meta[name="theme-color"]')?.setAttribute('content', '#123456');
+    } else if(!darkMode.value) {
+      document.querySelector('meta[name="theme-color"]')?.setAttribute('content', '#ffffff');
+    }
+  },[darkMode.value])
   const isInit = async () => {
     console.log("address, user",address, user?.account?.address);
     if (address?.toLowerCase() !== user?.account?.address) {
