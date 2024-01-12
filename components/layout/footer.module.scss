@@ -5,7 +5,7 @@
   top: auto;
   width: 100vw;
   left: 0;
-  height: 95px;
+  height: 85px;
   background: var(--background-row);
   display: none;
   @media (max-width: 1000px) {
@@ -14,10 +14,10 @@
 }
 .footer__mobile {
   display: flex;
-  height: 95px;
+  height: 85px;
   justify-content: space-around;
   align-items: flex-start;
-  margin-top: 20px;
+  margin-top: 15px;
 }
 .footer__link {
   border-radius: 100px;
