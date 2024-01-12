@@ -20,8 +20,8 @@ const DeviceDetect = ({ children }: any) => {
   }, []);
   return (
     <>
-      {!checkPWA && children}
-      {checkPWA && pwa ? children : <DownloadPWA />}
+      {/* {!checkPWA && children} */}
+      {!checkPWA || (checkPWA && pwa) ? children : <DownloadPWA />}
     </>
   );
 };
