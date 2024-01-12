@@ -8,7 +8,7 @@ import Link from "next/link";
 import { useInjection } from "inversify-react";
 import Web3Store from "../../stores/Web3Store";
 import { ChatStore } from "../../stores/ChatStore";
-import { deviceDetect, deviceType, getUA } from "react-device-detect";
+import { osName } from "react-device-detect";
 
 const Footer = observer(() => {
   const router = useRouter();
@@ -36,11 +36,7 @@ const Footer = observer(() => {
     } else {
       setDisabled(false);
     }
-    if (window.matchMedia("(display-mode: standalone)").matches) {
-      setPWA(true);
-    } else {
-      setPWA(false);
-    }
+
   }, [router.asPath]);
 
   return (
@@ -77,13 +73,7 @@ const Footer = observer(() => {
                 );
               }
             })}
-            <div>
-              {Object.entries(deviceDetect(getUA)).map((el) => {
-                console.log(el);
-                return <div>{el[0] + ":" + el[1]}</div>;
-              })}
-              <>isPWA: {pwa.toString()}</>
-            </div>
+            
           </footer>
         </div>
       )}

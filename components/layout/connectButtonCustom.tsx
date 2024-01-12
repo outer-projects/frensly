@@ -100,7 +100,7 @@ const ConnectButtonCustom = observer(
                       }}
                     >
                       <button
-                        className={style.connect__button}
+                        className={classNames(style.connect__button, style.connect__mob)}
                         style={{ width: "128px", height: "48px" }}
                       >
                         <Twitter color={"black"} />

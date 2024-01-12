@@ -267,3 +267,14 @@
     cursor: default;
   }
 }
+.connect__mob {
+  @media (max-width:616px) {
+    background: none;
+    font-weight: 400;
+    border: 1px solid $green;
+    height: 36px!important;
+    svg {
+      display: none!important;
+    }
+  }
+}
