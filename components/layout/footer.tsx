@@ -78,7 +78,7 @@ const Footer = observer(() => {
               }
             })}
             <div>
-              <>{"isPWA: " pwa}</>
+              <>{"isPWA: " , pwa}</>
               {Object.entries(deviceDetect(getUA)).map((el) => {
                 console.log(el);
                 return <div>{el[0] + ":" + el[1]}</div>;
