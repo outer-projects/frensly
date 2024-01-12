@@ -35,9 +35,11 @@ const Wrapper = observer(({ children }: any) => {
   const darkMode = useDarkMode()
   useEffect(()=>{
     if(darkMode.value && document) {
-      document.querySelector('meta[name="theme-color"]')?.setAttribute('content', '#123456');
+      document.querySelector('meta[name="theme_color"]')?.setAttribute('content', '#123456');
+      document.querySelector('meta[name="background_color"]')?.setAttribute('content', '#123456');
     } else if(!darkMode.value) {
-      document.querySelector('meta[name="theme-color"]')?.setAttribute('content', '#ffffff');
+      document.querySelector('meta[name="theme_color"]')?.setAttribute('content', '#ffffff');
+      document.querySelector('meta[name="background_color"]')?.setAttribute('content', '#123456');
     }
   },[darkMode.value])
   const isInit = async () => {
