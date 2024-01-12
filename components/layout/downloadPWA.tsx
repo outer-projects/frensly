@@ -38,7 +38,8 @@ function DownloadPWA() {
               className="img-3"
             />
             <div className="div-5">
-              Choose <span style={{ fontWeight: 700 }}>'Add to Home Screen'</span>{" "}
+              Choose <span style={{ fontWeight: 700 }}>'Add to Home Screen'</span>{" "}or{" "}
+              <span style={{ fontWeight: 700 }}>'Install app'</span>{" "}
               in the options.
             </div>
           </span>
@@ -135,7 +136,7 @@ function DownloadPWA() {
           background-color: var(--Black-3, #f8f8f8);
           display: flex;
           margin-top: 49px;
-          justify-content: space-between;
+          justify-content: flex-start;
           gap: 10px;
           padding: 13px 17px;
         }
@@ -151,14 +152,12 @@ function DownloadPWA() {
           color: var(--Black, #151614);
           letter-spacing: -0.16px;
           align-self: center;
-          flex-grow: 1;
-          white-space: nowrap;
           margin: auto 0;
           font: 400 16px/24px DM Sans, -apple-system, Roboto, Helvetica,
             sans-serif;
         }
         .span-4 {
-          justify-content: space-between;
+          justify-content: flex-start;
           align-items: start;
           border-radius: 16px;
           background-color: var(--Black-3, #f8f8f8);
@@ -168,12 +167,9 @@ function DownloadPWA() {
           padding: 10px 14px;
         }
         .img-3 {
-          aspect-ratio: 1;
-          object-fit: contain;
-          object-position: center;
-          width: 31px;
+          width: 31px!important;
+          height: 31px!important;
           overflow: hidden;
-          max-width: 100%;
         }
         .div-6 {
           color: var(--Black, #151614);
