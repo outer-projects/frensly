@@ -14,7 +14,7 @@ const Footer = observer(() => {
   const router = useRouter();
   const { unread } = useInjection(ChatStore);
   const [active, setActive] = useState("");
-  const [pwa, setPWA] = useState(false)
+  const [pwa, setPWA] = useState(false);
   const [disabled, setDisabled] = useState(false);
   const { user, authSummaryCheck } = useInjection(Web3Store);
   const headerText = [
@@ -37,9 +37,9 @@ const Footer = observer(() => {
       setDisabled(false);
     }
     if (window.matchMedia("(display-mode: standalone)").matches) {
-      setPWA(true)
+      setPWA(true);
     } else {
-      setPWA(false)
+      setPWA(false);
     }
   }, [router.asPath]);
 
@@ -78,11 +78,11 @@ const Footer = observer(() => {
               }
             })}
             <div>
-              <>isPWA: " {pwa}</>
               {Object.entries(deviceDetect(getUA)).map((el) => {
                 console.log(el);
                 return <div>{el[0] + ":" + el[1]}</div>;
               })}
+              <>isPWA: " {pwa}</>
             </div>
           </footer>
         </div>
