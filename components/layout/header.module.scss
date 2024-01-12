@@ -273,7 +273,7 @@
     font-weight: 400;
     border: 1px solid $green;
     height: 36px!important;
-    color: var(--text-main);
+    color: var(--text-main)!important;
     svg {
       display: none!important;
     }
