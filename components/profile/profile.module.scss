@@ -549,6 +549,10 @@
   svg {
     margin-right: 5px;
   }
+  // @media (max-width: 616px) 
+  // {
+  //   margin-bottom: 16px;
+  // }
 }
 .twitter__one__post__top {
   margin-top: 16px !important;
@@ -808,7 +812,6 @@
   border-bottom: 1px solid var(--border);
   @media (max-width: 616px) {
     margin-left: 0px;
-    margin-top: 50px;
     margin-right: 0px;
     justify-content: flex-start;
   }
