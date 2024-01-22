@@ -39,8 +39,8 @@ export class Web3Store {
   @observable blockInterface: boolean = false;
   @observable frensly?: any = undefined;
   @observable frenslyNotConnected?: any = undefined;
-  // @observable community?: any = undefined;
-  // @observable communityNotConnected?: any = undefined;
+  @observable community?: any = undefined;
+  @observable communityNotConnected?: any = undefined;
   @observable authStatus: AuthenticationStatus = "unauthenticated";
   @observable needToChangeWallet: boolean = false;
   @observable checked: boolean = false;
