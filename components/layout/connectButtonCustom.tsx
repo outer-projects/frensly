@@ -100,7 +100,10 @@ const ConnectButtonCustom = observer(
                       }}
                     >
                       <button
-                        className={classNames(style.connect__button, style.connect__mob)}
+                        className={classNames(
+                          style.connect__button,
+                          style.connect__mob
+                        )}
                         style={{ width: "128px", height: "48px" }}
                       >
                         <Twitter color={"black"} />
@@ -119,7 +122,8 @@ const ConnectButtonCustom = observer(
                       type="button"
                       className={classNames(
                         style.connect__button,
-                        user?.account && style.connect__light
+                        user?.account && style.connect__light,
+                        style.connect__mob
                       )}
                     >
                       {!isHeader && (
@@ -163,7 +167,8 @@ const ConnectButtonCustom = observer(
                         type="button"
                         className={classNames(
                           style.connect__button,
-                          user?.account && style.connect__light
+                          user?.account && style.connect__light,
+                          style.connect__mob
                         )}
                       >
                         <img

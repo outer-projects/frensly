@@ -21,6 +21,11 @@
     margin-bottom: 50px;
   }
 }
+.feed__unauth {
+  @media (max-width: 1000px) {
+    margin-top: 70px !important;
+  }
+}
 .chat__page {
   display: flex;
   flex-direction: column;

@@ -10,6 +10,7 @@ import ExploreRow from "./exploreRow";
 import { InView } from "react-intersection-observer";
 import OneActivity from "../../notifications/oneActivity";
 import { shortNick } from "../../../utils/utilities";
+import Web3Store from "../../../stores/Web3Store";
 const types = ["Top", "New Users", "Activity", "Net Worth", "TVH"];
 const Explore = observer(() => {
   const [active, setActive] = useState(0);
@@ -36,6 +37,7 @@ const Explore = observer(() => {
   const saveInput = () => {
     searchUsers(search);
   };
+  const { authSummaryCheck } = useInjection(Web3Store);
   const [tt, updateTimeout] = useState<any>(undefined);
   const searchDeb = (fn: any, ms: number) => {
     const clear = () => {
@@ -68,7 +70,7 @@ const Explore = observer(() => {
   // console.log(searchResult);
   return (
     <div className={style.explore}>
-      <div className={style.explore__title}>Explore</div>
+      <div className={classNames(style.explore__title, !authSummaryCheck && style.explore__unauth)}>Explore</div>
       <div className={style.explore__users__wrapper}>
         <div className={style.explore__users__row}>
           {(search.length !== 0 && searchResult.length !== 0

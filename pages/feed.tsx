@@ -9,6 +9,7 @@ import TypesList from "../components/common/typesList";
 import { useEffect, useState } from "react";
 import { FeedStore } from "../stores/FeedStore";
 import Web3Store from "../stores/Web3Store";
+import classNames from "classnames";
 
 const types = ["Following", "Verified", "Public"];
 
@@ -43,7 +44,7 @@ const FeedPage: NextPage = observer((props) => {
           content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
         ></meta>
       </Head>
-      <div className={style.feed__type}>
+      <div className={classNames(style.feed__type,!authSummaryCheck && style.feed__unauth)}>
         <TypesList
           types={authSummaryCheck ? types : types.filter((el, i) => i !== 0)}
           active={activeFeed}

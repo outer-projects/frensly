@@ -12,6 +12,11 @@
   justify-content: center;
   width: 100%;
 }
+.explore__unauth {
+  @media (max-width: 1000px) {
+    margin-top: 70px !important;
+  }
+}
 .explore__list__item {
   display: flex;
   align-items: center;
