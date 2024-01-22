@@ -216,7 +216,7 @@ const Finance = observer(() => {
           </div>
           {/* <div className={style.finance__title__second}>
             Community claim
-          </div> */}
+          </div>
           <div
             className={classNames(style.finance__subtitle, style.finance__fees)}
           >
@@ -236,7 +236,7 @@ const Finance = observer(() => {
             >
               Claim
             </button>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>
