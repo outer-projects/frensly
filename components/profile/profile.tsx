@@ -30,6 +30,7 @@ const Profile = observer(() => {
     setCurrentType,
     
   } = useInjection(UserStore);
+  console.log("authSummaryCheck",authSummaryCheck);
   const router = useRouter();
   const darkMode = useDarkMode();
   const [isMyProfile, setIsMyProfile] = useState(false);
@@ -182,7 +183,7 @@ const Profile = observer(() => {
                 </div>
               </div>
             </div>{" "}
-            <div className={classNames(style.profile__buttons, !authSummaryCheck && style.disable)}>
+            {<div className={classNames(style.profile__buttons, !authSummaryCheck && style.disable)}>
               {!isMyProfile && (
                 <button
                   className={classNames(
@@ -223,7 +224,7 @@ const Profile = observer(() => {
               >
                 Trade
               </button>
-            </div>
+            </div>}
             <div
               className={classNames(style.profile__text, style.profile__share)}
             >
