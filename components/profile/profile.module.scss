@@ -90,7 +90,7 @@
   border: 1px solid $green !important;
 }
 .disable {
-  display: none;
+  display: none!important;
 }
 .profile__buttons {
   display: flex;
