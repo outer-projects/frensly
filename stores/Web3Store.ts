@@ -39,8 +39,8 @@ export class Web3Store {
   @observable blockInterface: boolean = false;
   @observable frensly?: any = undefined;
   @observable frenslyNotConnected?: any = undefined;
-  @observable community?: any = undefined;
-  @observable communityNotConnected?: any = undefined;
+  // @observable community?: any = undefined;
+  // @observable communityNotConnected?: any = undefined;
   @observable authStatus: AuthenticationStatus = "unauthenticated";
   @observable needToChangeWallet: boolean = false;
   @observable checked: boolean = false;
@@ -57,14 +57,14 @@ export class Web3Store {
       isDevelopment ? "https://bsc-testnet.publicnode.com" : "https://mainnet.base.org"
     );
     this.socketWeb3 = new Web3(process.env.NEXT_PUBLIC_SOCKET_NODE);
-    this.community = new this.web3.eth.Contract(
-      communityAbi as any,
-      communityContractDev
-    );
-    this.communityNotConnected = new this.web3.eth.Contract(
-      communityAbi as any,
-      communityContractDev
-    );
+    // this.community = new this.web3.eth.Contract(
+    //   communityAbi as any,
+    //   communityContractDev
+    // );
+    // this.communityNotConnected = new this.web3.eth.Contract(
+    //   communityAbi as any,
+    //   communityContractDev
+    // );
     this.frensly = new this.web3.eth.Contract(
       frenslyAbi as any,
       isDevelopment ? frenslyContractDev : frenslyContract
@@ -191,10 +191,10 @@ export class Web3Store {
       //   frenslyAbi as any,
       //   isDevelopment ? frenslyContractDev : frenslyContractDevNew
       // );
-      this.community = new this.web3.eth.Contract(
-        communityAbi as any,
-        isDevelopment ? communityContractDev : communityContract
-      );
+      // this.community = new this.web3.eth.Contract(
+      //   communityAbi as any,
+      //   isDevelopment ? communityContractDev : communityContract
+      // );
       this.subscribeProvider();
       this.checkAuth().then((res) => {
         if (!res) {

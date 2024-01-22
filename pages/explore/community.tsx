@@ -24,8 +24,8 @@ const CommunityPage: NextPage = observer((props) => {
           content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
         />
       </Head>
-      <ExploreList />
-      <CommunityList />
+      {/* <ExploreList /> */}
+      {/* <CommunityList /> */}
     </div>
   );
 });

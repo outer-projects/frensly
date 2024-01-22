@@ -50,11 +50,11 @@ const PresalePage = observer(() => {
         />
       </Head>
 
-      {!openWhitelist ? (
+      {/* {!openWhitelist ? (
         <Presale isCreator={isCreator} setOpenWhitelist={setOpenWhitelist} />
       ) : (
         <Whitelist setOpenWhitelist={setOpenWhitelist} />
-      )}
+      )} */}
     </div>
   );
 });

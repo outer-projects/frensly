@@ -38,12 +38,12 @@ const Sidebar = () => {
       img: <AchivementsSvg />,
       active: true,
     },
-    {
-      title: "My communities",
-      link: "/dashboard/communities",
-      img: <Community color={darkMode.value ? "white" : "black"}/>,
-      active: true,
-    },
+    // {
+    //   title: "My communities",
+    //   link: "/dashboard/communities",
+    //   img: <Community color={darkMode.value ? "white" : "black"}/>,
+    //   active: true,
+    // },
   ];
   return (
     <div className={style.finance__side}>

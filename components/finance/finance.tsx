@@ -18,7 +18,7 @@ import FinanceRow from "./financeRow";
 import Sidebar from "./sidebar";
 import EthereumSvg from "../svgs/Ethereum";
 
-const mobTypes = ["Finance", "Referrals", "Airdrop", "Rankings", "Communities"];
+const mobTypes = ["Finance", "Referrals", "Airdrop", "Rankings"];
 const types = ["Finance", "Holders", "Holdings"];
 const Finance = observer(() => {
   const [active, setActive] = useState(0);
@@ -214,9 +214,9 @@ const Finance = observer(() => {
               Claim
             </button>
           </div>
-          <div className={style.finance__title__second}>
+          {/* <div className={style.finance__title__second}>
             Community claim
-          </div>
+          </div> */}
           <div
             className={classNames(style.finance__subtitle, style.finance__fees)}
           >

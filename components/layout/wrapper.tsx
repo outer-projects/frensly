@@ -33,15 +33,15 @@ const Wrapper = observer(({ children }: any) => {
   const [check, setCheck] = useState(false);
   const { setWrapperBottom } = useInjection(UserStore);
   const darkMode = useDarkMode()
-  useEffect(()=>{
-    if(darkMode.value && document) {
-      document.querySelector('meta[name="theme_color"]')?.setAttribute('content', '#123456');
-      document.querySelector('meta[name="background_color"]')?.setAttribute('content', '#123456');
-    } else if(!darkMode.value) {
-      document.querySelector('meta[name="theme_color"]')?.setAttribute('content', '#ffffff');
-      document.querySelector('meta[name="background_color"]')?.setAttribute('content', '#ffffff');
-    }
-  },[darkMode.value])
+  // useEffect(()=>{
+  //   if(darkMode.value && document) {
+  //     document.querySelector('meta[name="theme_color"]')?.setAttribute('content', '#123456');
+  //     document.querySelector('meta[name="background_color"]')?.setAttribute('content', '#123456');
+  //   } else if(!darkMode.value) {
+  //     document.querySelector('meta[name="theme_color"]')?.setAttribute('content', '#ffffff');
+  //     document.querySelector('meta[name="background_color"]')?.setAttribute('content', '#ffffff');
+  //   }
+  // },[darkMode.value])
   const isInit = async () => {
     console.log("address, user",address, user?.account?.address);
     if (address?.toLowerCase() !== user?.account?.address) {
