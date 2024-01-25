@@ -90,7 +90,7 @@
   border: 1px solid $green !important;
 }
 .disable {
-  display: none!important;
+  display: none !important;
 }
 .profile__buttons {
   display: flex;
@@ -549,7 +549,7 @@
   svg {
     margin-right: 5px;
   }
-  // @media (max-width: 616px) 
+  // @media (max-width: 616px)
   // {
   //   margin-bottom: 16px;
   // }
@@ -558,7 +558,7 @@
   margin-top: 16px !important;
   border-bottom: 0px !important;
   @media (max-width: 750px) {
-    margin-top: 50px!important;
+    margin-top: 50px !important;
     padding-bottom: 20px;
     border-bottom: 3px solid var(--border) !important;
     margin-bottom: 20px;
@@ -801,6 +801,20 @@
     padding-bottom: 100px;
     border-radius: 0px;
     min-height: 100vh;
+  }
+}
+.twitter__one__post__header {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  width: calc(100vw - 40px);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--border);
+  .twitter__one__post__title {
+    align-self: center;
+    justify-self: center;
   }
 }
 .twitter__one__post {
