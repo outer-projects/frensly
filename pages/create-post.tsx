@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import style from "./profile.module.scss";
+import style from "../components/profile/profile.module.scss";
 import useDarkMode from "use-dark-mode";
 import classNames from "classnames";
 import TextareaAutosize from "react-textarea-autosize";
