@@ -85,6 +85,29 @@
     margin-bottom: 50px;
   }
 }
+.create__post {
+  background-color: $green;
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 100px;
+  top: auto;
+  bottom: 50px;
+  left: auto;
+  right: 50px;
+  img {
+    width: 45px;
+    margin-top: 4px;
+    height: 45px;
+  }
+  @media (max-width: 750px) {
+    bottom: 100px;
+    right: 20px;
+  }
+}
 .feed__page {
   display: flex;
   flex-direction: column;

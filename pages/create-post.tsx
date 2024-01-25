@@ -1,21 +1,30 @@
 import { useRouter } from "next/router";
 import style from "../components/profile/profile.module.scss";
+import header from "../components/layout/header.module.scss";
 import useDarkMode from "use-dark-mode";
 import classNames from "classnames";
 import TextareaAutosize from "react-textarea-autosize";
+import home from "./home.module.scss";
 import { useEffect, useState } from "react";
 import { ExploreStore } from "../stores/ExploreStore";
 import write from "../components/ponds/ponds.module.scss";
 import { useInjection } from "inversify-react";
 import Web3Store from "../stores/Web3Store";
 import { observer } from "mobx-react";
+import GifSearch from "../components/profile/gitSearch";
+import { FeedStore } from "../stores/FeedStore";
 const CreatePost = observer(() => {
   const router = useRouter();
   //dark mode
   const [message, setMessage] = useState("");
   const darkMode = useDarkMode();
+  const [gif, setGif] = useState("");
+  const [gifMenu, setGifMenu] = useState(false);
+  const [image, setImage] = useState<File | null>(null);
   const { searchUsers, mentionSearch, getTopFive, topFive } =
     useInjection(ExploreStore);
+  const { addPost, currentPost} =
+    useInjection(FeedStore);
   const [openMentions, setOpenMentions] = useState(false);
   const [ment, setMent] = useState("");
   const saveInput = () => {
@@ -42,7 +51,7 @@ const CreatePost = observer(() => {
   };
   const { user } = useInjection(Web3Store);
   return (
-    <div>
+    <div className={home.main__page}>
       <div className={style.twitter__one__post__header}>
         <img
           src={"../../icons/arrow_back.svg"}
@@ -105,6 +114,59 @@ const CreatePost = observer(() => {
             })}
         </div>
       )}
+      <div className={style.twitter__textarea__comment}>
+        {/* {gifMenu && <GifSearch reverse={false} setGif={setGif} />} */}
+        <div
+          className={classNames(
+            // style.twitter__add__comment,
+            style.twitter__add
+          )}
+        >
+          <input
+            type="file"
+            accept=".jpg,.jpeg,.webm,.png, .gif"
+            className={style.twitter__send__img}
+            onChange={(e) => e?.target?.files && setImage(e?.target?.files[0])}
+          />
+
+          <img src="../../icons/ImageAdd.svg" />
+          {/* <img
+            src="../../icons/gifAdd.svg"
+            onClick={() => {
+              setGifMenu(!gifMenu);
+            }}
+          /> */}
+        </div>
+        <div
+          className={classNames(
+            style.twitter__button
+            // style.twitter__button__comment
+          )}
+        >
+          <button
+            className={classNames(
+              header.connect__button,
+              style.twitter__post
+              // style.twitter__post__comment
+            )}
+            disabled={message.length == 0 && gif == "" && !image}
+            onClick={() => {
+              setOpenMentions(false);
+              addPost({
+                text: message,
+                media: image,
+                gif: gif,
+              }).then((res) => {
+                if (res) {
+                  router.push('/feed')
+                }
+              });
+            }}
+          >
+            Post
+          </button>
+        </div>
+      </div>
     </div>
   );
 });

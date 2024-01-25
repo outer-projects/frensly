@@ -75,12 +75,12 @@ const Header = observer(() => {
     <div
       className={classNames(
         style.header__container,
-        (active.includes("/ponds/") || active.includes("/posts/")) &&
-          style.header__disable
+        active.includes("/ponds/") ||
+          active.includes("/posts/") ||
+          (active.includes("/create-post") && style.header__disable)
       )}
     >
       <header className={style.header}>
-        
         <Link href={"../../feed"}>
           <img src={!darkMode.value ? "../logo.svg" : "../logo_white.svg"} />
         </Link>

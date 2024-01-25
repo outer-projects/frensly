@@ -383,6 +383,34 @@
   align-self: flex-start;
   transform: translateY(-49px);
 }
+.create__textarea {
+  margin-left: 24px;
+  margin-right: 24px;
+  width: 100%;
+  border-radius: 16px;
+  width: 100vw;
+  padding: 16px;
+  padding-left: 65px;
+  min-height: 72px;
+  border: 1px solid transparent;
+  outline: none;
+  background: none;
+  margin-top:60px;
+  color: var(--text-main);
+  font-family: "DMSans";
+  font-size: 16px;
+  line-height: 36px; /* 150% */
+  letter-spacing: -0.16px;
+  &::placeholder {
+    color: #b4b4b3;
+  }
+  @media (max-width: 616px) {
+    margin-left: 0px;
+    margin-right: 0px;
+    padding-left: 25px;
+    width: calc(100vw - 16px);
+  }
+}
 .twitter__post {
   width: 81px;
   height: 40px;

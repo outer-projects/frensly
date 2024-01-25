@@ -40,7 +40,7 @@ const GifSearch = observer(
       }
     }, [search]);
     return (
-      <div className={classNames(style.gif__menu, reverse && style.gif__menu__reverse)}>
+      <div className={classNames(style.gif__menu, reverse && style.gif__menu__reverse)} >
         <div
           className={classNames(
             explore.explore__search,

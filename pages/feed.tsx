@@ -68,11 +68,11 @@ const FeedPage: NextPage = observer((props) => {
         />
       )}
       {activeFeed == 2 && <TwitterFeed isFeed isPublic />}
-      <Link href={"/create-post"}>
-        <div className={style.create__post}>
+      <div className={style.create__post}>
+        <Link href={"/create-post"}>
           <img src="../plus.svg" style={{ filter: "invert(1)" }}></img>
-        </div>
-      </Link>
+        </Link>{" "}
+      </div>
     </div>
   );
 });
