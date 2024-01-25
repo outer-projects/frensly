@@ -88,7 +88,6 @@
 .create__post {
   background-color: $green;
   position: fixed;
-  display: flex;
   justify-content: center;
   align-items: center;
   width: 30px;
@@ -98,12 +97,14 @@
   bottom: 50px;
   left: auto;
   right: 50px;
+  display: none;
   img {
     width: 45px;
     margin-top: 4px;
     height: 45px;
   }
   @media (max-width: 750px) {
+    display: flex;
     bottom: 100px;
     right: 20px;
   }
