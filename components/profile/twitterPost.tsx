@@ -179,7 +179,7 @@ const TwitterPost = observer(
             >
               <div style={{ display: "flex", alignItems: "center" }}>
                 {isOnePostPage ? (
-                  <div className={style.twitter__one__post__header}>
+                  <>
                     <img
                       src={"../../icons/arrow_back.svg"}
                       style={{
@@ -191,9 +191,27 @@ const TwitterPost = observer(
                           ? router.back()
                           : router.push("/posts/" + post.originalPost);
                       }}
+                      className={style.twitter__one__post__header__back}
                     />
-                    <div className={style.twitter__one__post__title}>Post</div>
-                  </div>
+                    <div className={style.twitter__one__post__header}>
+                      <img
+                        src={"../../icons/arrow_back.svg"}
+                        style={{
+                          marginRight: "8px",
+                          filter: `invert(${darkMode.value ? "1" : "0"})`,
+                        }}
+                        onClick={() => {
+                          !isComment
+                            ? router.back()
+                            : router.push("/posts/" + post.originalPost);
+                        }}
+                      />
+                      <div className={style.twitter__one__post__title}>
+                        Post
+                      </div>
+                    </div>
+                    
+                  </>
                 ) : isComment ? (
                   <div style={{ width: "32px" }} />
                 ) : (
