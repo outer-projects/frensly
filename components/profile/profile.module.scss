@@ -384,7 +384,7 @@
   transform: translateY(-49px);
 }
 .create__textarea {
-  margin-left: 24px;
+  margin-left: 48px;
   margin-right: 24px;
   width: 100%;
   border-radius: 16px;
@@ -395,7 +395,7 @@
   border: 1px solid transparent;
   outline: none;
   background: none;
-  margin-top:60px;
+  margin-top: 0px;
   color: var(--text-main);
   font-family: "DMSans";
   font-size: 16px;
@@ -843,7 +843,7 @@
   top: 20px;
   left: 20px;
   width: calc(100vw - 40px);
-  display: flex;
+  display: none;
   justify-content: space-between;
   font-family: "DMSans";
   align-items: center;
@@ -856,6 +856,9 @@
     transform: translateX(-50%);
     align-self: center;
     justify-self: center;
+  }
+  @media (max-width: 750px) {
+    display: flex;
   }
 }
 .twitter__one__post {
