@@ -10,6 +10,7 @@ import { useEffect, useState } from "react";
 import { FeedStore } from "../stores/FeedStore";
 import Web3Store from "../stores/Web3Store";
 import classNames from "classnames";
+import Link from "next/link";
 
 const types = ["Following", "Verified", "Public"];
 
@@ -34,7 +35,7 @@ const FeedPage: NextPage = observer((props) => {
   }, [feed, feedOffset]);
 
   return (
-    <div className={style.explore__page}>
+    <div className={style.feed__page}>
       <Head>
         <title>
           {unreadCount !== 0 ? `(${unreadCount})` : ""} Feed | Frensly
@@ -44,7 +45,12 @@ const FeedPage: NextPage = observer((props) => {
           content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
         ></meta>
       </Head>
-      <div className={classNames(style.feed__type,!authSummaryCheck && style.feed__unauth)}>
+      <div
+        className={classNames(
+          style.feed__type,
+          !authSummaryCheck && style.feed__unauth
+        )}
+      >
         <TypesList
           types={authSummaryCheck ? types : types.filter((el, i) => i !== 0)}
           active={activeFeed}
@@ -62,6 +68,11 @@ const FeedPage: NextPage = observer((props) => {
         />
       )}
       {activeFeed == 2 && <TwitterFeed isFeed isPublic />}
+      <Link href={"/create-post"}>
+        <div className={style.create__post}>
+          <img src="../plus.svg" style={{ filter: "invert(1)" }}></img>
+        </div>
+      </Link>
     </div>
   );
 });

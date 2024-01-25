@@ -210,7 +210,6 @@ const TwitterPost = observer(
                         Post
                       </div>
                     </div>
-                    
                   </>
                 ) : isComment ? (
                   <div style={{ width: "32px" }} />
@@ -270,19 +269,21 @@ const TwitterPost = observer(
                   </div>
                 </div>
 
-                <div
-                  className={classNames(
-                    style.twitter__text
-                    // isComment && style.twitter__text__comm
-                  )}
-                >
-                  {/* @ts-ignore */}
+                <Link href={`/posts/${post._id}`}>
                   <div
-                    dangerouslySetInnerHTML={{
-                      __html: linkify(tagGet(post.text)),
-                    }}
-                  ></div>
-                </div>
+                    className={classNames(
+                      style.twitter__text
+                      // isComment && style.twitter__text__comm
+                    )}
+                  >
+                    {/* @ts-ignore */}
+                    <div
+                      dangerouslySetInnerHTML={{
+                        __html: linkify(tagGet(post.text)),
+                      }}
+                    ></div>
+                  </div>
+                </Link>
 
                 {post.media && (
                   <img

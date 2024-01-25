@@ -85,6 +85,18 @@
     margin-bottom: 50px;
   }
 }
+.feed__page {
+  display: flex;
+  flex-direction: column;
+  width: 616px;
+  min-height: calc(100vh - 150px);
+  @media (max-width: 616px) {
+    max-width: calc(100% - 0px);
+    margin-top: 24px;
+    margin-left: 0px;
+    margin-bottom: 50px;
+  }
+}
 .explore__row {
   display: flex;
   justify-content: space-between;

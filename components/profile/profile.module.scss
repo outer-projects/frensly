@@ -428,7 +428,7 @@
   position: relative;
   @media (max-width: 750px) {
     position: fixed;
-    bottom: 0px;
+    bottom: 65px;
     left: 0;
     background: var(--background-row);
     width: 100vw;
@@ -560,7 +560,7 @@
   @media (max-width: 750px) {
     margin-top: 50px !important;
     padding-bottom: 20px;
-    margin-left: 24px !important;
+    // margin-left: 24px !important;
     border-bottom: 3px solid var(--border) !important;
     margin-bottom: 20px;
   }
