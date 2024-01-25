@@ -29,8 +29,8 @@ const Footer = observer(() => {
       setActive(router.asPath);
     }
     if (
-      router.asPath.includes("/ponds/") ||
-      router.asPath.includes("/posts/")
+      router.asPath.includes("/ponds/") 
+      // router.asPath.includes("/posts/")
     ) {
       setDisabled(true);
     } else {
