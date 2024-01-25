@@ -560,6 +560,7 @@
   @media (max-width: 750px) {
     margin-top: 50px !important;
     padding-bottom: 20px;
+    margin-left: 24px !important;
     border-bottom: 3px solid var(--border) !important;
     margin-bottom: 20px;
   }
@@ -804,10 +805,9 @@
   }
 }
 .twitter__one__post__header__back {
-  display: block;
+  opacity: 1;
   @media (max-width: 750px) {
-    display: none;
-    margin-left: 32px;
+    opacity: 0;
   }
 }
 .twitter__one__post__header {
@@ -817,6 +817,7 @@
   width: calc(100vw - 40px);
   display: flex;
   justify-content: space-between;
+  font-family: "DMSans";
   align-items: center;
   // border-bottom: 1px solid var(--border);
   .twitter__one__post__title {
