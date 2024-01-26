@@ -68,7 +68,8 @@ const CreatePost = observer(() => {
       <TextareaAutosize
         value={message}
         style={{ resize: "none" }}
-        placeholder=""
+        placeholder="What is happening?"
+        autoFocus
         className={classNames(style.create__textarea)}
         onChange={(e: any) => {
           // console.log(e.key)

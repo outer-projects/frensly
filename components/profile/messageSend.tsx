@@ -93,11 +93,12 @@ const MessageSend = observer(
           <TextareaAutosize
             value={message}
             style={{ resize: "none" }}
-            placeholder=""
+            placeholder="What is happening?"
             className={classNames(
               style.twitter__textarea,
               focus && style.twitter__active,
-              pondId && style.community__textarea
+              pondId && style.community__textarea,
+              style.twitter__textarea__feed
             )}
             onBlur={() => {
               setFocus(false);
