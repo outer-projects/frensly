@@ -133,7 +133,8 @@ const MessageSend = observer(
           <div
             className={classNames(
               style.twitter__add,
-              pondId && style.community__textarea
+              pondId && style.community__textarea,
+              style.twitter__add__feed
             )}
           >
             <input

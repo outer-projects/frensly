@@ -380,6 +380,11 @@
     }
   }
 }
+.twitter__add__feed {
+  @media (max-width: 750px) {
+    display: none!important;
+  }
+}
 .twitter__add__comment {
   margin-left: 74px;
   width: 50px;
