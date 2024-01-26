@@ -303,7 +303,7 @@ const TwitterPost = observer(
                   className={classNames(
                     style.twitter__interact,
                     isComment && style.twitter__interact__comment,
-                    isOnePostPage && style.twitter__interact__one__post
+                    // isOnePostPage && style.twitter__interact__one__post
                   )}
                 >
                   {
