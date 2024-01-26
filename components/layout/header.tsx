@@ -75,9 +75,10 @@ const Header = observer(() => {
     <div
       className={classNames(
         style.header__container,
-        active.includes("/ponds/") ||
+        (active.includes("/ponds/") ||
           active.includes("/posts/") ||
-          (active.includes("/create-post") && style.header__disable)
+          active.includes("/create-post")) &&
+          style.header__disable
       )}
     >
       <header className={style.header}>

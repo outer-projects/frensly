@@ -13,6 +13,9 @@
     }
   }
 }
+.twitter__interact__one__post {
+  margin-bottom: 40px !important;
+}
 .profile {
   margin-top: 32px;
   width: 616px;
@@ -769,6 +772,9 @@
   white-space: pre-wrap;
   @media (max-width: 600px) {
     width: calc(100vw - 100px);
+  }
+  div {
+    color: var(--text-post)!important;
   }
 }
 // .twitter__text__comm {
