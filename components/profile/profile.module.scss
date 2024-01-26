@@ -433,6 +433,11 @@
     cursor: default;
   }
 }
+.twitter__button__feed {
+  @media (max-width: 750px) {
+    display: none;
+  }
+}
 .twitter__button {
   width: 100%;
   display: flex;
@@ -458,7 +463,7 @@
   position: relative;
   @media (max-width: 750px) {
     position: fixed;
-    bottom: 65px;
+    bottom: 0px;
     left: 0;
     background: var(--background-row);
     width: 100vw;
@@ -611,7 +616,6 @@
   }
   @media (max-width: 616px) {
     margin-bottom: 70px !important;
-
   }
 }
 .profile__title {
@@ -783,7 +787,7 @@
     width: calc(100vw - 100px);
   }
   div {
-    color: var(--text-post)!important;
+    color: var(--text-post) !important;
   }
 }
 // .twitter__text__comm {

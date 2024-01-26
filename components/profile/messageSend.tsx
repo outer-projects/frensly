@@ -158,7 +158,7 @@ const MessageSend = observer(
               }}
             />
           </div>
-          <div className={classNames(style.twitter__button)}>
+          <div className={classNames(style.twitter__button,style.twitter__button__feed)}>
             <button
               className={classNames(
                 header.connect__button,
