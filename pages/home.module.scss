@@ -90,8 +90,8 @@
   position: fixed;
   justify-content: center;
   align-items: center;
-  width: 30px;
-  height: 30px;
+  width: 50px;
+  height: 50px;
   border-radius: 100px;
   top: auto;
   bottom: 50px;
@@ -99,9 +99,9 @@
   right: 50px;
   display: none;
   img {
-    width: 45px;
-    margin-top: 4px;
-    height: 45px;
+    width: 80px;
+    margin-top: 5px;
+    height: 80px;
   }
   @media (max-width: 750px) {
     display: flex;
