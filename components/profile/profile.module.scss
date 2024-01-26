@@ -435,7 +435,7 @@
 }
 .twitter__button__feed {
   @media (max-width: 750px) {
-    display: none;
+    display: none!important;
   }
 }
 .twitter__button {
