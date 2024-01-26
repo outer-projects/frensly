@@ -604,6 +604,10 @@
   &:last-child {
     margin-bottom: 24px;
   }
+  @media (max-width: 616px) {
+    margin-bottom: 100px !important;
+
+  }
 }
 .profile__title {
   color: #23262f;
