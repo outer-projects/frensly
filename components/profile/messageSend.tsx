@@ -93,7 +93,7 @@ const MessageSend = observer(
           <TextareaAutosize
             value={message}
             style={{ resize: "none" }}
-            placeholder="What is happening?"
+            placeholder=""
             className={classNames(
               style.twitter__textarea,
               focus && style.twitter__active,

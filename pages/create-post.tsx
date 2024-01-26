@@ -68,7 +68,7 @@ const CreatePost = observer(() => {
       <TextareaAutosize
         value={message}
         style={{ resize: "none" }}
-        placeholder="What is happening?"
+        placeholder=""
         className={classNames(style.create__textarea)}
         onChange={(e: any) => {
           // console.log(e.key)
